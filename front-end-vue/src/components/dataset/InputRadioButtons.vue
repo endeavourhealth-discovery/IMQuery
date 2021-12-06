@@ -1,6 +1,6 @@
 <template>
   <ul class="radio-button-list non-selectable">
-    <li v-for="item in items" :key="item.id" class="radio-button-list__item">
+    <li v-for="item in items" :key="item.id" class="radio-button-list__item hover:shadow-sm">
       <input
         type="radio"
         :value="item.id"
@@ -92,7 +92,7 @@ ul {
   font-size: 16px;
   font-weight: 700;
   padding: 16px 16px 16px 56px;
-  border: 1px solid #0d89ec; /*purple #9b6fb6 */
+  /* border: 1px solid #0d89ec; /*purple #9b6fb6 */
   border-radius: 4px;
   color: #0d89ec; /* purple #554565 */
   width: 100%;
@@ -104,7 +104,7 @@ ul {
 .radio-button:checked + .radio-button__label {
   background-color: #edf7ff; /* light purple #f6f3f9 */
   color: #0d89ec; /*purple  #590f85 */
-  border: 2px solid #0d89ec; /* purple #590f85*/
+  border: 1px solid #0d89ec; /* purple #590f85*/
 }
 
 .radio-button__label,
@@ -117,12 +117,12 @@ ul {
 }
 .radio-button__label {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   padding: 16px 16px 16px 56px;
-  border: 1px solid #ced4da; /* purple #9b6fb6 */
+   border: 1px solid transparent;/* light #ced4da;  purple #9b6fb6 */
 
   border-radius: 4px;
-  color: #112950; /* ligher black #554565 */
+  color: #374151; /* darker: 112950 ligher black #554565 */
   width: 100%;
   cursor: pointer;
   position: relative;
@@ -173,11 +173,15 @@ ul {
 }
 
 .radio-button__label:hover:before {
+  border: 1px solid #ced4da !important; /*purple #590f85 */
+}
+
+.radio-button:checked + .radio-button__label:hover:before {
   border: 2px solid #0d89ec !important; /*purple #590f85 */
 }
 
 .radio-button__label:hover {
-  border: 1px solid #0d89ec;
-  background-color: #edf7ff; /*#f6f3f9*/
+  border: 1px solid #ced4da;
+  background-color: white; /*#edf7ff*/
 }
 </style>

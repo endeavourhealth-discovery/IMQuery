@@ -48,6 +48,8 @@
         <div v-show="sideNavActiveItem == 'Sources'" class="pt-8 pl-14 pr-10">
           <div class="flex justify-between">
             <InputDescription :description="inputMeta.sources" />
+
+            <!-- Button: New List  -->
             <RoundButton
               class="h-10 p-2 px-3 text-xl font-regular shadow-sm"
               :rounded="false"
@@ -72,8 +74,9 @@
               </span>
               
             </RoundButton>
+                <!-- /Button: New List  -->
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col">
 
 
           <InputRadioButtons
@@ -316,7 +319,7 @@ export default defineComponent({
         //   placeholder: "",
         // },
         sources: {
-          title: "Selected Sources",
+          title: "Sources",
           explanation:
             "<b>Tip</b><br>Select a lists of organisations that publish the health records you want data from. <br><br> <b>Example</b><br> A list describes a group of organisations that share similar characteristics such as a Postcode, Commissioner, Organisation Type and more. ",
           placeholder: "",
