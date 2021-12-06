@@ -1,0 +1,23 @@
+{
+  "name": "aws_lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda Functions for IM Search",
+  "main": "app.js",
+  "scripts": {
+    "compile": "tsc"
+  },
+  "author": "Endeavour",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.84",
+    "@types/node": "^16.11.6",
+    "aws-sdk": "^2.1015.0",
+    "loadash": "^1.0.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "meilisearch": "^0.22.1",
+    "tslib": "^2.3.1",
+    "uuid": "^8.3.2"
+  }
+}

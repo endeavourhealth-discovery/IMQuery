@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "CommonJS",
+    "strict": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "removeComments": true,
+    "lib": ["esnext"],
+    "types": ["node"]
+  },
+  "compileOnSave": true,
+  "include": [
+    "src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+  
+}
