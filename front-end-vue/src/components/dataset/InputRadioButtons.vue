@@ -1,6 +1,6 @@
 <template>
   <ul class="radio-button-list non-selectable">
-    <li v-for="item in items" :key="item.id" class="radio-button-list__item hover:shadow-sm">
+    <li v-for="item in items" :key="item.id" class="radio-button-list__item hover:shadow-base">
       <input
         type="radio"
         :value="item.id"

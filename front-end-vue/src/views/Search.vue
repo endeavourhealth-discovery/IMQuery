@@ -67,8 +67,50 @@
       v-if="activePageName == 'SearchResults'"
       class="page"
     >
-      <!-- Searchbox  -->
       <div class="header flex items-center w-full">
+        <!-- Menu Toggler  -->
+        <RoundButton
+          class="h-10 ml-4"
+          :rounded="false"
+          :showRing="true"
+          backgroundColor="white"
+          hoverBackgroundColor="gray-50"
+          borderColor="white"
+          hoverBorderColor="gray-300"
+          hoverTextColor="gray-700"
+          focusTextColor="blue-600"
+          textColor="gray-700"
+          ringColor="blue-600"
+        >
+          <HeroIcon
+            class="mx-2"
+            strokewidth="2"
+            width="24"
+            height="24"
+            icon="menu"
+          />
+        </RoundButton>
+        <!-- / Menu Toggler  -->
+
+        <!-- Branding  -->
+        <div class="flex app-branding">
+          <img class="app-logo inline" src="app-icon.png" alt="" />
+          <div class="relative app-title inline-flex flex-col">
+            <div
+              class="relative app-title-top font-medium text-gray-600"
+            >
+              Resolution
+            </div>
+            <div
+              class="relative app-title-bottom  font-bold text-black"
+            >
+              Data Studio
+            </div>
+          </div>
+        </div>
+        <!-- / Branding  -->
+
+        <!-- Searchbox  -->
         <Searchbox
           class="searchbox-top mb-2"
           v-model="searchString"
@@ -128,7 +170,10 @@
         <!-- /Tab: Search  -->
 
         <!-- Tab: Data  -->
-        <DataStudio v-show="activeTabName == 'Data Studio'" class="tab-content " />
+        <DataStudio
+          v-show="activeTabName == 'Data Studio'"
+          class="tab-content "
+        />
         <!-- /Tab: Data  -->
 
         <!-- Tab: Explore  -->
@@ -140,7 +185,7 @@
 
         <!-- Tab: Organisations  -->
         <OrganisationBrowser
-          v-show="activeTabName == 'Organisations'"
+          v-show="activeTabName == 'Sources'"
           class="tab-content"
         />
         <!-- /Tab: Organisations  -->
@@ -237,7 +282,7 @@ export default defineComponent({
         },
         {
           index: 3,
-          name: "Organisations",
+          name: "Sources",
           icon: "office_building",
           visible: true,
         },
@@ -466,10 +511,34 @@ export default defineComponent({
   max-width: 55rem;
 }
 
+.app-branding {
+  margin-left: 15px;
+  margin-right: 50px;
+}
+
+.app-logo {
+  padding-top: 3px;
+}
+
+.app-title {
+  margin-left: 5px;
+}
+
+.app-title-top {
+  top: 1px;
+  font-size: 11px;
+}
+
+.app-title-bottom {
+  top: -4px;
+    font-size: 20px;
+}
+
 .header {
-  padding-left: 150px;
-  padding-top: 10px;
-  border-bottom: solid 2px #dde1e2;
+  padding-left: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: solid 1px #dde1e2;
 }
 
 .results {

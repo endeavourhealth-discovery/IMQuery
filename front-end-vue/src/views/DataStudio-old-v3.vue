@@ -1,27 +1,27 @@
 <template>
   <!-- Content Wrapper -->
-  <div class="wrapper flex w-full h-full bg-white">
+  <div class="wrapper  flex w-full h-full bg-gray-50">
     <!-- Sidenav  -->
-    <div
-      class="wrapper-sidenav bg-white drop-shadow flex flex-col align-center "
-    >
-      <div class="flex justify-center align-center">
-        <RoundButton
-          class="w-10 h-10 my-5"
-          :rounded="true"
-          :showRing="true"
-          backgroundColor="blue-500"
-          hoverBackgroundColor="blue-600"
-          textColor="white"
-          ringColor="blue-600"
-          v-tooltip.right="'<b> Add </b>'"
-          @click="activeView = 'Add'"
-        >
-          <HeroIcon strokewidth="2" width="20" height="20" icon="plus" />
-        </RoundButton>
-      </div>
+    <div class="wrapper-sidenav flex flex-col align-center px-5">
+      <div class="editor-nav rounded-xl bg-white w-16 drop-shadow">
+        <div class="flex justify-center align-center">
+          <RoundButton
+            class="w-10 h-10 my-5"
+            :rounded="true"
+            :showRing="true"
+            backgroundColor="blue-500"
+            hoverBackgroundColor="blue-600"
+            textColor="white"
+            ringColor="blue-600"
+            v-tooltip.right="'<b> Add </b>'"
+            @click="activeView = 'Add'"
+          >
+            <HeroIcon strokewidth="2" width="20" height="20" icon="plus" />
+          </RoundButton>
+        </div>
 
-      <VerticalButtonGroup :items="sideNavItems" v-model="activeView" />
+        <VerticalButtonGroup :items="sideNavItems" v-model="activeView" />
+      </div>
     </div>
 
     <!-- Sidenav  -->
@@ -171,25 +171,22 @@ export default defineComponent({
 
 .section-center {
   /* position: absolute; */
-  /* margin-left: 10px; */
-  /* margin-top: 15px; */
-  /* margin-right: 15px; */
+  margin-left: 10px;
+  margin-top: 15px;
+  margin-right: 15px;
   /* bottom: 15px; */
   width: 100%;
   max-width: 1000px;
   /* box-shadow: rgb(207 210 218) 0px 0px 6px; */ /* lighter shadow   */
-  /* box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3); */
-  border-right: 1px solid #dde1e2;
+  box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3);
 }
 
 .drop-shadow {
-  border-right: 1px solid #dde1e2;
-  /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
+  border: 1px solid #d0d7de;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
 .wrapper-sidenav {
-  top: 0;
-  bottom: 0;
-  width: 70px;
+  margin-top: 20vh;
 }
 </style>

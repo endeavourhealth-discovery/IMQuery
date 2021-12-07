@@ -1,7 +1,7 @@
 <template>
   <button
     :class="
-      `non-selectable transition duration-300 ease-in-out flex items-center justify-center rounded-md border border-transparent border-${borderColor} bg-${backgroundColor} hover:bg-${hoverBackgroundColor} hover:text-${hoverTextColor} text-${textColor} focus:bg-${hoverBackgroundColor} focus:text-${focusTextColor} focus:ring-${ringColor}` +
+      `non-selectable transition duration-300 ease-in-out flex items-center justify-center rounded-md border border-transparent border-${borderColor} hover:border-${hoverBorderColor} bg-${backgroundColor} hover:bg-${hoverBackgroundColor} hover:text-${hoverTextColor} text-${textColor} focus:bg-${hoverBackgroundColor} focus:text-${focusTextColor} focus:border-transparent focus:ring-${ringColor}` +
       [ rounded ? ' rounded': '' ] +
       [ showRing ? ' focus:outline-none focus:ring-2 focus:ring-offset-2' :'' ]
     "
@@ -21,6 +21,7 @@ export default defineComponent({
     "showRing",
     "backgroundColor",
     "borderColor",
+    "hoverBorderColor",
     "hoverBackgroundColor",
     "textColor",
     "focusTextColor",

@@ -6,7 +6,7 @@
         <div v-if="index != 0" class="divider"></div>
         <div
           :class="
-            'w-full section-title flex py-2 pl-7 overflow-none transition duration-500 ease-in-out text-gray-600 hover:text-blue-600 hover:bg-gray-200 ' +
+            'w-full section-title flex py-2 pl-7 overflow-none transition duration-500 ease-in-out text-gray-600  hover:bg-gray-200 ' +
               [modelValue == item.name ? 'active text-blue-600' : '']
           "
           @click="$emit('update:modelValue', item.name)"

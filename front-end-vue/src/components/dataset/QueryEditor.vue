@@ -1,6 +1,6 @@
 <template>
   <!-- Editor  -->
-  <div class="query-editor flex flex-col w-full h-full rounded-2xl">
+  <div class="query-editor flex flex-col w-full h-full">
     <!-- Header  -->
     <div
       class="top-nav inline-flex w-full px-5 py-2 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
@@ -399,8 +399,8 @@ export default defineComponent({
 }
 
 .query-editor {
-  border: 1px solid #d0d7de;
-  height: 88%;
+  /* border: 1px solid #d0d7de; */
+  height: 100%;
   widht: 100%;
 }
 
@@ -409,7 +409,7 @@ export default defineComponent({
 }
 
 .top-nav {
-  border-bottom: 2px solid #dfe2e6;
+  border-bottom: 1px solid #dfe2e6;
 }
 
 .query-editor-content {
