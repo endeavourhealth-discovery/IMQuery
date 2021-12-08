@@ -1,14 +1,17 @@
 <template>
   <div class="flex w-full px-3">
-    <!-- Toggler -->
-     <SectionToggler @click="expanded = !expanded" />
-    <!-- / Toggler -->
+    <div class="section-header flex">
+      <!-- Toggler -->
+      <SectionToggler @click="expanded = !expanded" />
+      <!-- / Toggler -->
+
+      <div class="section-title w-full flex h-7 ml-5 outline-none text-black">
+        {{ name }}
+      </div>
+    </div>
 
     <!-- Content -->
     <div class="inline-flex">
-      <div class="content w-full flex h-7 ml-5 outline-nonetext-black">
-        {{name}}
-      </div>
       <div v-show="expanded" class="inline-flex">
         <slot> </slot>
       </div>
@@ -43,9 +46,15 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
-.content {
+.section-title {
   font-size: 14px !important;
-  font-weight: 500;
-  width: 300px;
+  font-weight: 400;
+  width: 200px;
 }
+
+.section-header {
+  padding-top: 6px;
+}
+
+
 </style>

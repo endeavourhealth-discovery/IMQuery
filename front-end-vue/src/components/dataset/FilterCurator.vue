@@ -10,7 +10,7 @@
           <!-- / Toggler -->
           <!-- Title -->
           <div
-            class="title-input w-full inline-flex h-7 ml-5 outline-nonetext-black"
+            class="title-input w-full inline-flex h-7 ml-5 outline-none text-black"
           >
             {{ snippet.name }}
           </div>
@@ -26,18 +26,18 @@
                 'content-input w-full flex flex-col outline-none text-gray-700 text-base'
               "
             >
-              <Section name="Include all health records from">
+              <Section name="Copy all data from">
                 <template v-for="target in snippet.targets" :key="target.iri">
-                  <DatasetWidget class="my-3 ml-5" :target="target">
+                  <DatasetWidget class="mb-1 ml-5" :target="target">
                   </DatasetWidget>
                 </template>
               </Section>
-              <Section name="If">
+              <Section name="Include patients if">
                 <template
                   v-for="criterion in snippet.inclusionCriteria"
                   :key="criterion.id"
                 >
-                  <Widget class="my-3 ml-5" :criterion="criterion"></Widget>
+                  <Widget class="mb-1 ml-5" :criterion="criterion"></Widget>
                 </template>
               </Section>
             </div>
@@ -144,8 +144,8 @@ export default defineComponent({
 }
 
 .title-input {
-  font-size: 16px !important;
-  font-weight: 500;
+  font-size: 17px !important;
+  font-weight: 700;
 }
 
 .widget {

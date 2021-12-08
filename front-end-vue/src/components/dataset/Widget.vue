@@ -1,43 +1,45 @@
 <template>
   <div
-    class="non-selectable widget transition duration-700 easy-in-out bg-white rounded-xl"
+    class="non-selectable widget transition duration-700 easy-in-out bg-white rounded-md hover:shadow-md hover:border-b"
   >
     <div
       :class="
-        'widget-header flex text-black pt-2 pb-3 pl-3 pr-4 rounded-t-xl' +
+        'widget-header flex text-black pt-2 pb-2 pl-2 pr-4 rounded-t-xl' +
           [expanded ? ' border-bottom' : '']
       "
       @click="expanded = !expanded"
     >
       <HeroIcon
-        class="widget-icon ml-1"
-        :icon="[
-          criterion.datamodelEntity.iri == 'im:EpisodeOfCare'
-            ? 'clipboard_copy'
-            : '',
-        ] + [
-          criterion.datamodelEntity.iri == 'im:ProblemOrCondition'
-            ? 'flag'
-            : '',
-        ]"
+        class="widget-icon ml-1 text-gray-500"
+        :icon="
+          [
+            criterion.datamodelEntity.iri == 'im:EpisodeOfCare'
+              ? 'clipboard_copy'
+              : '',
+          ] +
+            [
+              criterion.datamodelEntity.iri == 'im:ProblemOrCondition'
+                ? 'flag'
+                : '',
+            ]
+        "
         strokewidth="2"
         width="16"
         height="16"
       />
       <div
-        class="widget-modifier text-blue-600 ml-3"
-        v-tooltip.bottom="parseTooltipText(criterion.modifier.name)"
+        class="widget-modifier text-blue-600 ml-4 hover:underline"
       >
         {{ criterion.modifier.name }}
       </div>
       <div
-        class="widget-title ml-3"
-        v-tooltip.bottom="criterion.datamodelEntity.iri"
+        class="widget-title ml-2 hover:underline font-medium"
+     
       >
         {{ criterion.datamodelEntity.name }}
       </div>
     </div>
-    <div v-show="expanded" class="widget-content pb-3 pl-5 pt-1 rounded-b-xl">
+    <div v-show="expanded" class="widget-content pb-3 pl-3 rounded-b-xl">
       <template v-for="node in criterion.constraints" :key="node.id">
         <Constraint :node="node" />
       </template>
@@ -52,7 +54,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "Widget",
-  props: ["criterion"],
+  props: ["criterion", "showTooltip"],
   components: {
     HeroIcon,
     Constraint,
@@ -64,17 +66,20 @@ export default defineComponent({
   },
   methods: {
     parseTooltipText(name: string): string {
+      // if (!this.showTooltip) {
+      //   return "";
+      // }
+
       switch (name) {
         case "Latest":
           return "If the latest health record entry matches the filters below it will be included in your dataset";
         case "All":
-          return "If all heatlh record entries match the filters below they will be included in your dataset";
+          return "If all health record entries match the filters below they will be included in your dataset";
         case "Any":
-          return "If any heatlh record entries match the filters below they will all be included in your dataset";
+          return "If any health record entries match the filters below they will all be included in your dataset";
         default:
           return "";
       }
- 
     },
   },
 });
@@ -89,18 +94,28 @@ export default defineComponent({
 }
 
 .widget {
-  border: 1px solid white;
   box-sizing: border-box;
+  border: 1px solid white;
 }
+
+/* .widget-header {
+  border-bottom: 1px solid #dadcde;
+} */
 
 .widget:hover {
   border: 1px solid #d1d5db;
-  box-sizing: border-box;
-}
-.widget:hover .border-bottom  {
-    border-bottom: 1px solid #d1d5db;
+  -webkit-box-shadow: 0 0 0 1px #dadcde;
+  box-shadow: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 0 1px ##dadcde;
+  background-color: white;
+  -webkit-transition: border 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* .widget:hover .widget-header {
+  border-bottom: 1px solid #d1d5db;
+} */
 
 .widget-icon {
   margin-top: 2px;
@@ -108,6 +123,9 @@ export default defineComponent({
   height: auto;
 }
 
+.widget-title {
+ font-size: 14px;
+}
 .widget-content {
   background: white /*#f9fafb*/;
 }
@@ -119,10 +137,10 @@ export default defineComponent({
 .widget-header {
   font-size: 14px !important;
   font-weight: 500;
+  border-bottom: 1px solid transparent;
 }
 
 /* .widget-title {
   width: clamp(300px, 100%, 500px);
 } */
-
 </style>

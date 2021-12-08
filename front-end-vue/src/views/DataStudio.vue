@@ -3,7 +3,7 @@
   <div class="wrapper flex w-full h-full bg-white">
     <!-- Sidenav  -->
     <div
-      class="wrapper-sidenav w-full bg-white drop-shadow flex flex-col align-center "
+      class="wrapper-sidenav w-full bg-white border-right flex flex-col align-center "
     >
       <div class="flex justify-center align-center">
         <RoundButton
@@ -160,6 +160,8 @@ export default defineComponent({
 });
 </script>
 
+
+
 <style scoped>
 .non-selectable {
   -webkit-user-select: none; /* Chrome all / Safari all */
@@ -167,14 +169,6 @@ export default defineComponent({
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
 }
-
-/* .wrapper {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 0;
-} */
 
 .section-center {
   /* position: absolute; */
@@ -189,7 +183,7 @@ export default defineComponent({
   border-right: 1px solid #ecefed;
 }
 
-.drop-shadow {
+.border-right {
   border-right: 1px solid #ecefed;
   /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
 }
@@ -210,7 +204,5 @@ export default defineComponent({
 
 .section-right-nav {
   /* height: 80px; */
-
 }
-
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div class="non-selectable widget pt-1 pb-2 px-3 transition duration-700 easy-in-out bg-white">
-    <div class="widget-header flex text-black">
+    <div class="widget-header flex">
       <HeroIcon
-        class="widget-icon mt-1"
+        class="widget-icon text-gray-500"
         icon="archive"
         strokewidth="2"
-        width="14"
-        height="14"
+        width="20"
+        height="20"
       />
-      <div class="widget-title ml-3" v-tooltip.bottom="target.iri">
-        {{ target.name }}
+      <div class="widget-title ml-4 hover:underline text-black font-medium">
+        {{ target.name }} 
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@ export default defineComponent({
 .widget {
   border: 1px solid transparent;
   box-sizing: border-box;
-  border-radius: 7px;
+  border-radius: 5px;
 }
 
 .widget:hover {
@@ -65,5 +65,6 @@ export default defineComponent({
 .widget-icon {
   width: 20px;
   height: auto;
+  margin-top: 2px;
 }
 </style>
