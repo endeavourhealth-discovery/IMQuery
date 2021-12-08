@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="widget">
     <!-- <div class="divider"></div> -->
     <template v-for="snippet in activeQuery.data.snippets" :key="snippet.id">
       <div class="py-3">
@@ -23,7 +23,7 @@
           <div class="w-full flex">
             <div
               :class="
-                'content-input w-full flex flex-col outline-none text-blue-700 text-base'
+                'content-input w-full flex flex-col outline-none text-gray-700 text-base'
               "
             >
               <Section name="Include all health records from">
@@ -147,6 +147,11 @@ export default defineComponent({
   font-size: 16px !important;
   font-weight: 500;
 }
+
+.widget {
+  width: 100%
+}
+
 </style>
 
 // // [ ] create language nodes on the fly as you type. You can also raw paste

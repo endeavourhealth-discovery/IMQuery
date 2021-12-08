@@ -1,11 +1,11 @@
 <template>
   <div
-    class="tab-buttons overflow-y-hidden overflow-x-auto w-full flex items-center justify-center"
+    class="tab-buttons overflow-y-hidden overflow-x-auto w-full flex"
   >
     <template v-for="item in items" :key="item.id">
       <div
         :class="[
-          'tab-button non-selectable inline-flex items-center justify-center rounded-md py-1 px-2 mr-2 font-regular transition duration-500 ease-in-out text-gray-400 font-normal text-base hover:text-black ',
+          'tab-button non-selectable inline-flex items-center justify-center rounded-md py-1 px-2 mr-2 font-regular transition duration-500 ease-in-out text-gray-400 font-regular text-base hover:text-black ',
           { 'active text-black': modelValue == item.id },
         ]"
       >
@@ -27,7 +27,7 @@
         >
           {{ item.name }}
         </div>
-        <div class="button-close inline-flex ml-2">
+        <div v-if="closable" class="button-close inline-flex ml-2">
           <HeroIcon
             class="text-gray-400 hover:text-red-500"
             strokewidth="2"
@@ -53,7 +53,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "HorizontalNavbar",
-  props: ["items", "modelValue"],
+  props: ["items", "modelValue", "closable"],
   emits: ["update:modelValue", "update:items"],
   components: {
     HeroIcon,
@@ -72,6 +72,7 @@ export default defineComponent({
 /* .tab-button {
   border: solid 1px transparent;
 } */
+
 
 .tab-button.active {
   /* border: solid 1px #d0d7de; */

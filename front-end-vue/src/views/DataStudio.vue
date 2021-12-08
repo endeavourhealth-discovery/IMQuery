@@ -3,7 +3,7 @@
   <div class="wrapper flex w-full h-full bg-white">
     <!-- Sidenav  -->
     <div
-      class="wrapper-sidenav bg-white drop-shadow flex flex-col align-center "
+      class="wrapper-sidenav w-full bg-white drop-shadow flex flex-col align-center "
     >
       <div class="flex justify-center align-center">
         <RoundButton
@@ -17,20 +17,27 @@
           v-tooltip.right="'<b> Add </b>'"
           @click="activeView = 'Add'"
         >
-          <HeroIcon strokewidth="2" width="20" height="20" icon="plus" />
+          <HeroIcon strokewidth="3" width="22" height="22" icon="plus" />
         </RoundButton>
       </div>
 
-      <VerticalButtonGroup :items="sideNavItems" v-model="activeView" />
+      <VerticalButtonGroup :items="availableViews" v-model="activeView" />
     </div>
 
     <!-- Sidenav  -->
 
     <BackgroundCards class="bg-wrapper hidden" />
 
-    <QueryEditor class="section-center" />
+    <QueryEditor class="section-center w-full" />
 
-    <div class="section-right"></div>
+    <div class="section-right w-full">
+      <HorizontalNavPills
+        class="section-right-nav w-full border-bottom px-5 py-3"
+        v-model:items="rightPanelItems"
+        v-model="activeRightPanelItemId"
+        :closable="false"
+      />
+    </div>
   </div>
   <!-- /Content Wrapper -->
 </template>
@@ -50,6 +57,7 @@ import LoggerService from "@/services/LoggerService";
 // import SearchService from "@/services/SearchService";
 // import SearchClient from "@/services/SearchClient";
 // const { MeiliSearch } = require("meilisearch");
+import HorizontalNavPills from "@/components/dataset/HorizontalNavPills.vue";
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
@@ -64,30 +72,14 @@ export default defineComponent({
     VerticalButtonGroup,
     RoundButton,
     HeroIcon,
+    HorizontalNavPills,
   },
   data() {
     return {
       showBackgroundCards: true,
       activeFileIndex: 0,
       activeView: "Edit",
-      openDocuments: [
-        {
-          id: "e33e2650-e2b1-43cb-8cea-8f8725982cfe",
-          index: 0,
-          name: "CHD 005",
-          icon: "translate",
-          visible: true,
-        },
-        {
-          id: "fdbfecff-01fc-45a8-ae85-c8af12a38699",
-          index: 1,
-          name: "DM 005",
-          icon: "translate",
-          visible: true,
-        },
-      ],
-
-      sideNavItems: [
+      availableViews: [
         {
           id: "ba793059-b5b1-457a-84a9-32f3d2c4800b",
           index: 0,
@@ -147,6 +139,21 @@ export default defineComponent({
       ],
 
       isLoading: false,
+      activeRightPanelItemId: "13dba7f7-9d06-4f0a-9c60-cbb4d9518b47",
+      rightPanelItems: [
+        {
+          id: "13dba7f7-9d06-4f0a-9c60-cbb4d9518b47",
+          name: "Suggestions",
+        },
+        {
+          id: "fbb192ca-d2ec-4d82-9228-94e23e5b753f",
+          name: "All",
+        },
+        {
+          id: "f31a59498-a835-4313-8124-22468a709a0c",
+          name: "Favourites",
+        },
+      ],
     };
   },
   methods: {},
@@ -176,14 +183,14 @@ export default defineComponent({
   /* margin-right: 15px; */
   /* bottom: 15px; */
   width: 100%;
-  max-width: 1000px;
+  /* max-width: 1000px; */
   /* box-shadow: rgb(207 210 218) 0px 0px 6px; */ /* lighter shadow   */
   /* box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3); */
-  border-right: 1px solid #dde1e2;
+  border-right: 1px solid #ecefed;
 }
 
 .drop-shadow {
-  border-right: 1px solid #dde1e2;
+  border-right: 1px solid #ecefed;
   /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
 }
 
@@ -192,4 +199,18 @@ export default defineComponent({
   bottom: 0;
   width: 70px;
 }
+
+.section-right {
+  width: 400px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #ecefed;
+}
+
+.section-right-nav {
+  /* height: 80px; */
+
+}
+
 </style>

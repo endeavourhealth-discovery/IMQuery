@@ -5,7 +5,7 @@
     <!-- / Toggler -->
 
     <!-- Content -->
-    <div class="inline-flex flex-col">
+    <div class="inline-flex">
       <div class="content w-full flex h-7 ml-5 outline-nonetext-black">
         {{name}}
       </div>
@@ -46,5 +46,6 @@ export default defineComponent({
 .content {
   font-size: 14px !important;
   font-weight: 500;
+  width: 300px;
 }
 </style>

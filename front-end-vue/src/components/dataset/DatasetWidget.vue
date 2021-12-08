@@ -5,8 +5,8 @@
         class="widget-icon mt-1"
         icon="archive"
         strokewidth="2"
-        width="16"
-        height="16"
+        width="14"
+        height="14"
       />
       <div class="widget-title ml-3" v-tooltip.bottom="target.iri">
         {{ target.name }}
@@ -43,13 +43,14 @@ export default defineComponent({
 }
 
 .widget {
-  border: 1px solid #d1d5db;
+  border: 1px solid transparent;
   box-sizing: border-box;
   border-radius: 7px;
 }
 
 .widget:hover {
-    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    background: white;/* #f9fafb;*/
 }
 
 .drop-shadow {
@@ -59,5 +60,10 @@ export default defineComponent({
 .widget-header {
   font-size: 14px !important;
   font-weight: 500;
+}
+
+.widget-icon {
+  width: 20px;
+  height: auto;
 }
 </style>

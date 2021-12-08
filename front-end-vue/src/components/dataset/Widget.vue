@@ -89,20 +89,27 @@ export default defineComponent({
 }
 
 .widget {
-  border: 1px solid #d1d5db;
+  border: 1px solid white;
   box-sizing: border-box;
 }
 
-.border-bottom {
-  border-bottom: 1px solid #d1d5db;
+.widget:hover {
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
 }
+.widget:hover .border-bottom  {
+    border-bottom: 1px solid #d1d5db;
+}
+
 
 .widget-icon {
   margin-top: 2px;
+  width: 20px;
+  height: auto;
 }
 
 .widget-content {
-  background: #f9fafb;
+  background: white /*#f9fafb*/;
 }
 
 .drop-shadow {
@@ -113,4 +120,9 @@ export default defineComponent({
   font-size: 14px !important;
   font-weight: 500;
 }
+
+/* .widget-title {
+  width: clamp(300px, 100%, 500px);
+} */
+
 </style>

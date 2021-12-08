@@ -1,157 +1,156 @@
 <template>
   <!-- Editor  -->
-  <div class="query-editor flex flex-col w-full h-full">
-    <!-- Header  -->
-    <div
-      class="top-nav inline-flex w-full px-5 py-2 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
-    >
-      <HorizontalNavPills
-        class=""
-        v-model:items="openQueries"
-        v-model="activeQueryId"
-      />
-
-      <RoundButton
-        class="h-10 p-2 pl-3 pr-1 text-xl font-regular"
-        :rounded="false"
-        :showRing="true"
-        backgroundColor="blue-500"
-        hoverBackgroundColor="blue-600"
-        textColor="white"
-        ringColor="blue-600"
+  <div class="query-editor flex w-full h-full">
+    <!-- Middle -->
+    <div class="w-full">
+      <!-- Header  -->
+      <div
+        class="top-nav inline-flex w-full px-5 py-2 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
       >
-        Next
-        <HeroIcon
-          class="ml-1 mt-1"
-          strokewidth="2"
-          width="20"
-          height="20"
-          icon="chevron_right"
-        />
-      </RoundButton>
-    </div>
-    <!-- / Header  -->
-
-    <!-- Body  -->
-
-    <div class="query-editor-body inline-flex h-full w-full">
-      <!-- Left Side  -->
-      <ContentNav
-        class="side-nav inline"
-        :items="sideNavItems"
-        v-model="sideNavActiveItem"
-      />
-      <!-- Left Side  -->
-
-      <!--  Content  -->
-      <div class="bg-white inline query-editor-content rounded-b-2xl">
-        <div v-show="sideNavActiveItem == 'Sources'" class="pt-8 pl-14 pr-10">
-          <div class="flex justify-between">
-            <InputDescription :description="inputMeta.sources" />
-
-            <!-- Button: New List  -->
-            <RoundButton
-              class="h-10 p-2 px-3 text-xl font-regular shadow-sm"
-              :rounded="false"
-              :showRing="true"
-              backgroundColor="white"
-              hoverBackgroundColor="gray-50"
-              borderColor="gray-300"
-              hoverTextColor="gray-700"
-              focusTextColor="blue-600"
-              textColor="gray-700"
-              ringColor="blue-600"
-            >
-              <HeroIcon
-                class="mr-3"
-                strokewidth="2"
-                width="16"
-                height="16"
-                icon="plus"
-              />
-              <span class="text-sm font-medium">
-                New List
-              </span>
-              
-            </RoundButton>
-                <!-- /Button: New List  -->
-          </div>
-          <div class="flex flex-col">
-
-
-          <InputRadioButtons
-            class="w-full max-w-lg mt-7"
-            v-model="selectedOrganisations"
-            :items="radioButtonItems.sources"
-            :multiselect="false"
-          />
-          <MultiSelect
-            v-if="selectedOrganisations.includes('other')"
-            class="w-full max-w-lg multi-large"
-            v-model="selectedOrganisationLists"
-            :options="organisationLists"
-            optionLabel="label"
-            :placeholder="inputMeta.selectedLists.placeholder"
-          />
-            
-          </div>
-
-        </div>
-        <div
-          v-show="sideNavActiveItem == 'Main Data Type'"
-          class="pt-8 pl-14 pr-10"
-        >
-          <InputDescription :description="inputMeta.mainDataType" />
-          <InputRadioButtons
-            class="w-full max-w-lg mt-7"
-            v-model="selectedMainDataType"
-            :items="radioButtonItems.mainDataType"
-            :multiselect="false"
-          />
-        </div>
-
-        <FilterCurator
-          v-show="sideNavActiveItem == 'Steps'"
-          :activeQuery="activeQuery"
-          :openQueries="openQueries"
+        <HorizontalNavPills
+          class="items-center justify-center"
+          v-model:items="openQueries"
+          v-model="activeQueryId"
+          :closable="true"
         />
 
-        <div v-show="sideNavActiveItem == 'Output'">
-          Output
-        </div>
-        <div
-          v-show="sideNavActiveItem == 'Save or Export'"
-          class="pt-8 pl-14 pr-10"
+        <RoundButton
+          class="h-10 p-2 pl-3 pr-1 text-xl font-regular"
+          :rounded="false"
+          :showRing="true"
+          backgroundColor="blue-500"
+          hoverBackgroundColor="blue-600"
+          textColor="white"
+          ringColor="blue-600"
         >
-          <div class="flex justify-between items-center">
-            <InputDescription :description="inputMeta.name" />
-            <div class="w-full max-w-400px">
-              <input
-                class="title-input outline-none mb-5 text-gray-600 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter a name for your dataset."
-                :value="activeQuery.name"
-                @input="updateName($event.target.value)"
-              />
-            </div>
-          </div>
-          <div class="">
-            <InputDescription :description="inputMeta.description" />
-            <div class="w-full">
-              <textarea
-                class="title-input outline-none mb-5 text-gray-600 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter a description for your dataset."
-                :value="activeQuery.description"
-                @input="updateDescription($event.target.value)"
-              />
-            </div>
-          </div>
-        </div>
+          Next
+          <HeroIcon
+            class="ml-1 mt-1"
+            strokewidth="2"
+            width="20"
+            height="20"
+            icon="chevron_right"
+          />
+        </RoundButton>
       </div>
-      <!--  Content  -->
-    </div>
-    <!-- / Body  -->
-  </div>
+      <!-- / Header  -->
 
+      <!-- Body  -->
+
+      <div class="query-editor-body inline-flex h-full w-full">
+        <!--Content Nav -->
+        <ContentNav
+          class="side-nav inline w-full h-full"
+          :items="sideNavItems"
+          v-model="sideNavActiveItem"
+        />
+        <!-- /Content Nav -->
+
+        <!--  Content  -->
+        <div class="bg-white inline query-editor-content rounded-b-2xl">
+          <div v-show="sideNavActiveItem == 'Sources'" class="pt-8 pl-14 pr-10">
+            <div class="flex justify-between max-w-lg">
+              <InputDescription :description="inputMeta.sources" />
+
+              <!-- Button: New List  -->
+              <RoundButton
+                class="h-10 p-2 px-3 text-xl font-regular shadow-sm"
+                :rounded="false"
+                :showRing="true"
+                backgroundColor="white"
+                hoverBackgroundColor="gray-50"
+                borderColor="gray-300"
+                hoverTextColor="gray-700"
+                focusTextColor="blue-600"
+                textColor="gray-700"
+                ringColor="blue-600"
+              >
+                <HeroIcon
+                  class="mr-3"
+                  strokewidth="2"
+                  width="16"
+                  height="16"
+                  icon="plus"
+                />
+                <span class="text-sm font-medium">
+                  New List
+                </span>
+              </RoundButton>
+              <!-- /Button: New List  -->
+            </div>
+            <div class="flex flex-col">
+              <InputRadioButtons
+                class="w-full max-w-lg mt-7"
+                v-model="selectedOrganisations"
+                :items="radioButtonItems.sources"
+                :multiselect="false"
+              />
+              <MultiSelect
+                v-if="selectedOrganisations.includes('other')"
+                class="w-full max-w-lg multi-large"
+                v-model="selectedOrganisationLists"
+                :options="organisationLists"
+                optionLabel="label"
+                :placeholder="inputMeta.selectedLists.placeholder"
+              />
+            </div>
+          </div>
+          <div
+            v-show="sideNavActiveItem == 'Main Data Type'"
+            class="pt-8 pl-14 pr-10"
+          >
+            <InputDescription :description="inputMeta.mainDataType" />
+            <InputRadioButtons
+              class="w-full max-w-lg mt-7"
+              v-model="selectedMainDataType"
+              :items="radioButtonItems.mainDataType"
+              :multiselect="false"
+            />
+          </div>
+
+          <FilterCurator
+            v-show="sideNavActiveItem == 'Steps'"
+            :activeQuery="activeQuery"
+            :openQueries="openQueries"
+          />
+
+          <div v-show="sideNavActiveItem == 'Output'">
+            Output
+          </div>
+          <div
+            v-show="sideNavActiveItem == 'Save or Export'"
+            class="pt-8 pl-14 pr-10"
+          >
+            <div class="flex justify-between items-center">
+              <InputDescription :description="inputMeta.name" />
+              <div class="w-full max-w-400px">
+                <input
+                  class="title-input outline-none mb-5 text-gray-                               600 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  placeholder="Enter a name for your dataset."
+                  :value="activeQuery.name"
+                  @input="updateName($event.target.value)"
+                />
+              </div>
+            </div>
+            <div class="flex justify-between">
+              <InputDescription :description="inputMeta.description" />
+              <div class="w-full max-w-400px h-full max-h-150px">
+                <textarea
+                  class="title-input h-full outline-none mb-5 text-gray-600 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  placeholder="Enter a description for your dataset."
+                  :value="activeQuery.description"
+                  @input="updateDescription($event.target.value)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  Content  -->
+      </div>
+      <!-- / Body  -->
+    </div>
+    <!-- Middle -->
+  </div>
   <!-- Editor  -->
 </template>
 
@@ -401,15 +400,15 @@ export default defineComponent({
 .query-editor {
   /* border: 1px solid #d0d7de; */
   height: 100%;
-  widht: 100%;
+  width: 100%;
 }
 
 .side-nav {
-  width: 230px !important;
+  max-width: 230px !important;
 }
 
 .top-nav {
-  border-bottom: 1px solid #dfe2e6;
+  border-bottom: 1px solid #ecefed;
 }
 
 .query-editor-content {
@@ -427,5 +426,8 @@ export default defineComponent({
 
 .max-w-400px {
   max-width: 400px;
+}
+.max-h-150px {
+  height: 150px;
 }
 </style>

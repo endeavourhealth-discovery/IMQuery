@@ -1,6 +1,6 @@
 <template>
 
-  <div class="non-selectable flex flex-col h-full w-full">
+  <div class="non-selectable flex flex-col">
     <template v-for="(item, index) in items" :key="item.id">
       <template v-if="item.visible">
         <div v-if="index != 0" class="divider"></div>
@@ -56,7 +56,7 @@ export default defineComponent({
 .section-title {
   font-size: 16px !important;
   font-weight: 500;
-  border-right: 2px solid #dfe2e6;
+  border-right: 2px solid #ECEFED;
   padding-right: 40px;
 }
 
@@ -66,12 +66,12 @@ export default defineComponent({
 
 .divider {
   height: 15px;
-  border-right: 2px solid #dfe2e6;
+  border-right: 2px solid #ECEFED;
 }
 
 .divider-full {
   height: 100%;
-  border-right: 2px solid #dfe2e6;
+  border-right: 2px solid #ECEFED;
 }
 
 

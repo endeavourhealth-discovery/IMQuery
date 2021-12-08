@@ -64,7 +64,7 @@ export default defineComponent({
 .tab-button {
   font-size: 14px;
   padding: 0 10px 5px 10px;
-  margin: 0 20px 0 0;
+  /* margin-right: 1%; */
   /* border-bottom: solid 3px transparent; */
 }
 

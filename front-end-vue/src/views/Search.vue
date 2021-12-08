@@ -171,7 +171,7 @@
 
         <!-- Tab: Data  -->
         <DataStudio
-          v-show="activeTabName == 'Data Studio'"
+          v-show="activeTabName == 'Data'"
           class="tab-content "
         />
         <!-- /Tab: Data  -->
@@ -260,7 +260,7 @@ export default defineComponent({
       isLoading: false,
       searchString: "",
       activePageName: "SearchResults", //Options #Home #SearchResults
-      activeTabName: "Data Studio",
+      activeTabName: "Data",
       tabs: [
         {
           index: 0,
@@ -270,7 +270,7 @@ export default defineComponent({
         },
         {
           index: 1,
-          name: "Data Studio",
+          name: "Data",
           icon: "newspaper",
           visible: true,
         },
@@ -513,11 +513,13 @@ export default defineComponent({
 
 .app-branding {
   margin-left: 15px;
-  margin-right: 50px;
+  margin-right: clamp(10px, 1%, 20px);
 }
 
 .app-logo {
   padding-top: 3px;
+  width: 40px;
+  height: 40px;
 }
 
 .app-title {
@@ -531,14 +533,14 @@ export default defineComponent({
 
 .app-title-bottom {
   top: -4px;
-    font-size: 20px;
+    font-size: clamp(12px, 100%, 20px);
 }
 
 .header {
   padding-left: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: solid 1px #dde1e2;
+  border-bottom: solid 1px #ECEFED /*#dde1e2;*/
 }
 
 .results {

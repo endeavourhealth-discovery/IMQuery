@@ -63,7 +63,7 @@ export default defineComponent({
 }
 
 .wrapper {
-  border-right: 1px solid #eef0f2;
+  /* border-right: 1px solid #eef0f2; */
 }
 
 </style>
