@@ -28,12 +28,12 @@
             >
               <Section name="Include all health records from">
                 <template v-for="target in snippet.targets" :key="target.iri">
-                  <DatasetWidget
+                  <StepWidget
                     class="my-3 ml-5"
                     :type="target.iri"
                     :name="target.name"
                   >
-                  </DatasetWidget>
+                  </StepWidget>
                 </template>
               </Section>
               <Section name="If">
@@ -64,7 +64,7 @@ import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import Section from "@/components/dataset/Section.vue";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
-import DatasetWidget from "@/components/dataset/Widget.vue";
+import StepWidget from "@/components/dataset/Widget.vue";
 import Widget from "@/components/dataset/Widget.vue";
 const _ = require("lodash");
 import EntityService from "@/services/EntityService";
@@ -72,11 +72,11 @@ import LoggerService from "@/services/LoggerService";
 // import RichInput from "@/components/dataset/RichInput.vue";
 
 export default defineComponent({
-  name: "FilterCurator",
+  name: "StepCurator",
   components: {
     // RoundButton,
     // HeroIcon,
-    DatasetWidget,
+    StepWidget,
     // Widget,
     Section,
     SectionToggler,

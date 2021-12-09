@@ -1,29 +1,31 @@
 <template>
-
   <div class="non-selectable flex flex-col">
     <template v-for="(item, index) in items" :key="item.id">
       <template v-if="item.visible">
         <div v-if="index != 0" class="divider"></div>
         <div
           :class="
-            'w-full section-title flex py-2 pl-7 overflow-none transition duration-500 ease-in-out text-gray-600  hover:bg-gray-200 ' +
-              [modelValue == item.name ? 'active text-blue-600' : '']
+            'w-full section-item flex pl-7 overflow-none transition duration-500 ease-in-out text-gray-500' +
+              [modelValue == item.name ? ' active text-blue-600' : '']
           "
           @click="$emit('update:modelValue', item.name)"
         >
-          <div class="inline">
-            <HeroIcon
-              v-if="item.icon"
-              strokewidth="2"
-              width="24"
-              height="24"
-              :icon="item.icon"
-              :active="modelValue == item.name"
-            />
-          </div>
+          <div class="section-title rounded-md w-full flex py-2 px-3">
+            <div class="inline">
+              <HeroIcon
+                v-if="item.icon"
+                strokewidth="2"
+                width="24"
+                height="24"
+                :icon="item.icon"
+                :active="modelValue == item.name"
+              />
+            </div>
 
-          <div class="inline ml-5">
-            {{ item.name }}
+            <div :class="'inline ml-5 text-black' 
+            +   [modelValue == item.name ? ' active text-blue-600' : '']">
+              {{ item.name }}
+            </div>
           </div>
         </div>
       </template>
@@ -53,26 +55,28 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
-.section-title {
+.section-item {
   font-size: 16px !important;
-  font-weight: 500;
-  border-right: 2px solid #ECEFED;
-  padding-right: 40px;
+  font-weight: 400;
+  border-right: 1px solid #ecefed;
+  padding-right: 20px;
 }
 
-.section-title.active {
+.section-title:hover {
+  background-color: #F6F8FA;
+}
+
+.section-item.active {
   border-right: 2px solid #3b82f6;
 }
 
 .divider {
   height: 15px;
-  border-right: 2px solid #ECEFED;
+  border-right: 1px solid #ecefed;
 }
 
 .divider-full {
   height: 100%;
-  border-right: 2px solid #ECEFED;
+  border-right: 1px solid #ecefed;
 }
-
-
 </style>

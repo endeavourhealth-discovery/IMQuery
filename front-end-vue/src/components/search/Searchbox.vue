@@ -4,7 +4,7 @@
   <!-- "searchbox','w-full','transition','duration-500','ease-in-out','appearance-none','rounded-none','border','border-gray-300','rounded-md','focus:z-10" -->
   <div
     :class="
-      'searchbox relative w-full h-full transition duration-500 ease-in-out appearance-none rounded-none border border-gray-300 rounded-md focus:z-10' +
+      'searchbox relative w-full h-full transition duration-500 ease-in-out appearance-none rounded-none border border-gray-200 hover:border-gray-300 rounded-md focus:z-10' +
         [componentState == 'hover' ? ' hover' : ''] +
         [componentState == 'focus' ? ' focus' : '']
     "

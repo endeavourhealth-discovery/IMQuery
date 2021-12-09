@@ -191,7 +191,7 @@ export default defineComponent({
 .wrapper-sidenav {
   top: 0;
   bottom: 0;
-  width: 70px;
+  width: 90px;
 }
 
 .section-right {

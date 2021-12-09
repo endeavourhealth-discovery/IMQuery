@@ -28,8 +28,8 @@
             >
               <Section name="Copy all data from">
                 <template v-for="target in snippet.targets" :key="target.iri">
-                  <DatasetWidget class="mb-1 ml-5" :target="target">
-                  </DatasetWidget>
+                  <StepWidget class="mb-1 ml-5" :target="target">
+                  </StepWidget>
                 </template>
               </Section>
               <Section name="Include patients if">
@@ -58,7 +58,7 @@ import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import Section from "@/components/dataset/Section.vue";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
-import DatasetWidget from "@/components/dataset/DatasetWidget.vue";
+import StepWidget from "@/components/dataset/StepWidget.vue";
 import Widget from "@/components/dataset/Widget.vue";
 const _ = require("lodash");
 import EntityService from "@/services/EntityService";
@@ -71,7 +71,7 @@ export default defineComponent({
     // RoundButton,
     // HeroIcon,
     Widget,
-    DatasetWidget,
+    StepWidget,
     Section,
     SectionToggler,
   },

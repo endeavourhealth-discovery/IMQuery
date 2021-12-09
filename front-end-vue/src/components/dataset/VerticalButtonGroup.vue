@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper flex flex-col items-center non-selectable transition duration-1000 ease-in-out">
+  <div class="wrapper flex flex-col items-center non-selectable transition duration-5q00 ease-in-out">
     <template v-for="item in items" :key="item.id">
       <!-- divider  -->
       <!-- <div v-if="index == 0"  class="divider-full gray-300"  >

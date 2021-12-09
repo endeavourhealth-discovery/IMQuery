@@ -102,7 +102,7 @@
               Resolution
             </div>
             <div
-              class="relative app-title-bottom  font-bold text-black"
+              class="relative app-title-bottom  font-medium text-black"
             >
               Data Studio
             </div>
@@ -112,7 +112,7 @@
 
         <!-- Searchbox  -->
         <Searchbox
-          class="searchbox-top mb-2"
+          class="searchbox-top mb-1 ml-3"
           v-model="searchString"
           :autocompleteData="autocompleteData"
           @search="showSearchResults()"
@@ -138,7 +138,7 @@
         </RoundButton>
 
         <!-- Tab Buttons  -->
-        <div id="tab-buttons" class="ml-5">
+        <div id="tab-buttons" class="ml-5 mt-1">
           <HorizontalNavbar v-model="activeTabName" :items="tabs" />
         </div>
         <!-- /Tab Buttons -->
@@ -149,7 +149,6 @@
       <div class="page-content">
         <!-- Tab: Search -->
         <div v-show="activeTabName == 'Search'" class="tab-content  flex pt-5">
-          <!-- <div class="w-full max-w-md">Filters Expanded</div> -->
           <div class="results w-full max-w-4xl ">
             <!-- <div>Filter and sort</div> -->
             <template v-if="searchResults && searchResults.length > 0">
@@ -165,7 +164,6 @@
               </div>
             </template>
           </div>
-          <!-- <div class="w-full max-w-md">See also, more info on hovered item</div> -->
         </div>
         <!-- /Tab: Search  -->
 
@@ -527,12 +525,12 @@ export default defineComponent({
 }
 
 .app-title-top {
-  top: 1px;
-  font-size: 11px;
+  top: 2px;
+  font-size: 10px;
 }
 
 .app-title-bottom {
-  top: -4px;
+  top: -5px;
     font-size: clamp(12px, 100%, 20px);
 }
 

@@ -108,7 +108,7 @@
             />
           </div>
 
-          <FilterCurator
+          <StepCurator
             v-show="sideNavActiveItem == 'Steps'"
             :activeQuery="activeQuery"
             :openQueries="openQueries"
@@ -170,7 +170,7 @@ import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 // import RoundButton from "@/components/dataset/RoundButton.vue";
 // import MultiSelect from "primevue/multiselect";
 
-import FilterCurator from "@/components/dataset/FilterCurator.vue";
+import StepCurator from "@/components/dataset/StepCurator.vue";
 
 export default defineComponent({
   name: "QueryEditor",
@@ -179,7 +179,7 @@ export default defineComponent({
     RoundButton,
     HeroIcon,
     HorizontalNavPills,
-    FilterCurator,
+    StepCurator,
     ContentNav,
     InputDescription,
     // InputTextbox,

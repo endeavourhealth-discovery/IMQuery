@@ -1,6 +1,6 @@
 <template>
   <div
-    class="non-selectable widget transition duration-700 easy-in-out bg-white rounded-md hover:shadow-md hover:border-b"
+    class="non-selectable widget transition duration-700 easy-in-out bg-white rounded-mdaaa hover:border-b"
   >
     <div
       :class="
@@ -10,22 +10,11 @@
       @click="expanded = !expanded"
     >
       <HeroIcon
-        class="widget-icon ml-1 text-gray-500"
-        :icon="
-          [
-            criterion.datamodelEntity.iri == 'im:EpisodeOfCare'
-              ? 'clipboard_copy'
-              : '',
-          ] +
-            [
-              criterion.datamodelEntity.iri == 'im:ProblemOrCondition'
-                ? 'flag'
-                : '',
-            ]
-        "
+        class="widget-icon ml-1 text-white bg-red-600"
+        icon="link"
         strokewidth="2"
-        width="16"
-        height="16"
+        width="20"
+        height="20"
       />
       <div
         class="widget-modifier text-blue-600 ml-4 hover:underline"
@@ -138,6 +127,14 @@ export default defineComponent({
   font-size: 14px !important;
   font-weight: 500;
   border-bottom: 1px solid transparent;
+}
+
+.widget-icon {
+  width: 26px;
+  padding: 4px;
+  height: auto;
+  margin-top: 2px;
+  border-radius: 50%;
 }
 
 /* .widget-title {
