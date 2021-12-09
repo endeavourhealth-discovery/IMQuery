@@ -94,7 +94,7 @@ export default createStore({
           mainDataTypeIri: "im:Patient",
           selectedOrganisationsIri: "im:VSET_OrgAllAllowable",
           selectedOrganisationsListIris: [],
-          snippets: [
+          steps: [
             {
               id: "56d94da4-1bd0-4a87-86e9-4d3a74e28060",
               name: "Registered patients",

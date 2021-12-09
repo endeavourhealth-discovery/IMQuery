@@ -8,8 +8,12 @@
       v-show="
         componentState == 'focus' || componentState == 'typing' || isHover
       "
-      class="widget-label inline text-sm font-medium text-gray-600 mb-4
-        "
+      class="widget-label inline text-sm font-medium text-gray-600 mb-4 py-1"
+      @click="
+        componentState == 'focus'
+          ? (componentState = 'default')
+          : (componentState = 'focus')
+      "
     >
       Select a step, query or data service.
     </label>
@@ -203,7 +207,7 @@ export default defineComponent({
 .widget-label {
   position: absolute;
   background: #fff;
-  margin-top: -18px;
+  margin-top: -25px;
   width: calc(100%);
   z-index: 9;
   cursor: default;

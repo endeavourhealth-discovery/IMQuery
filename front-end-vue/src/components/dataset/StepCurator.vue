@@ -1,7 +1,7 @@
 <template>
   <div class="widget">
     <!-- <div class="divider"></div> -->
-    <template v-for="snippet in activeQuery.data.snippets" :key="snippet.id">
+    <template v-for="step in activeQuery.data.steps" :key="step.id">
       <div class="py-3">
         <!-- Header -->
         <div class="section-title flex w-full px-3 items-center">
@@ -12,7 +12,7 @@
           <div
             class="title-input w-full inline-flex h-7 ml-5 outline-none text-black"
           >
-            {{ snippet.name }}
+            {{ step.name }}
           </div>
           <!-- /Title -->
         </div>
@@ -27,17 +27,18 @@
               "
             >
               <Section name="Copy all data from">
-                <template v-for="item in snippet.copy" :key="item.iri">
+                <template v-for="item in step.copy" :key="item.iri">
                   <EntityWidget class="mb-1 ml-5" :modelValue="item">
                   </EntityWidget>
                 </template>
               </Section>
-              <Section name="Include patients if">
+              <Section v-if="step.inclusionCriteria.length" name="Include patients if">
                 <template
-                  v-for="criterion in snippet.inclusionCriteria"
+                  v-for="criterion in step.inclusionCriteria"
                   :key="criterion.id"
                 >
                   <Widget class="mb-1 ml-5" :criterion="criterion"></Widget>
+                  
                 </template>
               </Section>
             </div>
