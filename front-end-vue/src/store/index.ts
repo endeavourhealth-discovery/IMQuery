@@ -100,7 +100,7 @@ export default createStore({
               name: "Registered patients",
               searchterms: ["registered", "actively registered", "currently registered", "GMS register"],
               keyword: "Include all healthrecords from",
-              targets: [
+              copy: [
                 {
                   name: "Discovery Data Service",
                   iri: "im:DDS",

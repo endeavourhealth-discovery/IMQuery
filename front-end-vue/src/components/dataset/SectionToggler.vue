@@ -1,6 +1,6 @@
 <template>
   <RoundButton
-    class="section-toggler non-selectable w-5 h-5"
+    class="section-toggler non-selectable w-8 h-8 hover:bg-gray-100 p-1"
     :rounded="true"
     :showRing="true"
     backgroundColor="white"

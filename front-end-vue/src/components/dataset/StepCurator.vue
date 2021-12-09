@@ -4,7 +4,7 @@
     <template v-for="snippet in activeQuery.data.snippets" :key="snippet.id">
       <div class="py-3">
         <!-- Header -->
-        <div class="section-title flex w-full px-3">
+        <div class="section-title flex w-full px-3 items-center">
           <!-- Toggler -->
           <SectionToggler @click="expanded = !expanded" />
           <!-- / Toggler -->
@@ -27,8 +27,8 @@
               "
             >
               <Section name="Copy all data from">
-                <template v-for="target in snippet.targets" :key="target.iri">
-                  <EntityWidget class="mb-1 ml-5" :target="target">
+                <template v-for="item in snippet.copy" :key="item.iri">
+                  <EntityWidget class="mb-1 ml-5" :modelValue="item">
                   </EntityWidget>
                 </template>
               </Section>
@@ -126,8 +126,8 @@ export default defineComponent({
 }
 
 .title-input {
-  font-size: 17px !important;
-  font-weight: 700;
+  font-size: 16px !important;
+  font-weight: 600;
 }
 
 .widget {
