@@ -16,15 +16,10 @@
         width="20"
         height="20"
       />
-      <div
-        class="widget-modifier text-blue-600 ml-4 hover:underline"
-      >
+      <div class="widget-modifier text-blue-600 ml-4 hover:underline">
         {{ criterion.modifier.name }}
       </div>
-      <div
-        class="widget-title ml-2 hover:underline font-medium"
-     
-      >
+      <div class="widget-title ml-2 hover:underline font-medium">
         {{ criterion.datamodelEntity.name }}
       </div>
     </div>
@@ -113,7 +108,7 @@ export default defineComponent({
 }
 
 .widget-title {
- font-size: 14px;
+  font-size: 14px;
 }
 .widget-content {
   background: white /*#f9fafb*/;

@@ -32,14 +32,34 @@
                   </EntityWidget>
                 </template>
               </Section>
-              <Section v-if="step.inclusionCriteria.length" name="Include patients if">
-                <template
+              <Section
+                v-if="step.inclusionCriteria.length"
+                name="Include patients if"
+              >
+                <div
+                  class="flex flex-col"
                   v-for="criterion in step.inclusionCriteria"
                   :key="criterion.id"
                 >
-                  <Widget class="mb-1 ml-5" :criterion="criterion"></Widget>
-                  
-                </template>
+                  <div>
+                    <EntityWidget
+                      class="mb-1 ml-5 inline"
+                      :modelValue="criterion.datamodelEntity"
+                    ></EntityWidget>
+                  </div>
+
+                  <div
+                    v-show="expanded"
+                    class="widget-content inline bg-white pb-3 pl-3 rounded-b-xl"
+                  >
+                    <template
+                      v-for="node in criterion.constraints"
+                      :key="node.id"
+                    >
+                      <Constraint :node="node" />
+                    </template>
+                  </div>
+                </div>
               </Section>
             </div>
           </div>
@@ -64,6 +84,8 @@ import Widget from "@/components/dataset/Widget.vue";
 const _ = require("lodash");
 import EntityService from "@/services/EntityService";
 import LoggerService from "@/services/LoggerService";
+import Constraint from "@/components/dataset/Constraint.vue";
+
 // import RichInput from "@/components/dataset/RichInput.vue";
 
 export default defineComponent({
@@ -71,10 +93,11 @@ export default defineComponent({
   components: {
     // RoundButton,
     // HeroIcon,
-    Widget,
+    // Widget,
     EntityWidget,
     Section,
     SectionToggler,
+    Constraint,
   },
   emit: ["update:activeQuery", "update:openQueries", "update:name"],
   props: ["activeQuery", "openQueries"],
@@ -131,9 +154,9 @@ export default defineComponent({
   font-weight: 600;
 }
 
-.widget {
+/* .widget {
   width: 100%;
-}
+} */
 </style>
 
 // // [ ] create language nodes on the fly as you type. You can also raw paste

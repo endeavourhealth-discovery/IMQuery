@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mt-1 relative non-selectable widget"
+    class="widget mt-1 relative non-selectable "
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >
@@ -20,7 +20,7 @@
     <button
       type="button"
       :class="
-        'widget-button relative w-full bg-white rounded-md px-3 pb-2 text-left border border-transparent cursor-default outline-none sm:text-sm' +
+        'widget-button relative bg-white rounded-md px-3 pb-2 text-left border border-transparent cursor-default outline-none sm:text-sm' +
           [isHover ? ' hover shadow-sm' : ''] +
           [componentState == 'focus' ? ' focus shadow-sm' : ''] +
           [componentState == 'typing' ? ' typing shadow-sm' : '']
@@ -153,14 +153,22 @@ export default defineComponent({
   },
   methods: {
     getIconMeta(iri: string): any {
-      if (
-        this.$store.state.datamodel.some((entity: any) => entity.iri == iri)
-      ) {
-        return { icon: "link", class: " bg-red-600" };
-      } else if (iri == "im:DDS") {
+      if (iri == "im:DDS") {
         return { icon: "cloud", class: " bg-green-600" };
+      } else if (iri.split(":")[0] == "dds") {
+        if (iri.split(":")[1].substring(0, 4) == "Step") {
+          return { icon: "puzzle", class: " bg-indigo-600" }; //if it is a step
+        } else {
+          return { icon: "database", class: " bg-yellow-600" }; //if it is a query
+        }
+      } else if (
+        this.$store.state.prefetched_datamodel.some(
+          (entity: any) => entity.iri == iri
+        )
+      ) {
+        return { icon: "link", class: " bg-red-600" }; //if datamodel entity
       } else {
-        return "database";
+        return { icon: "document", class: " bg-gray-500" }; //if unknown entity
       }
     },
 
@@ -174,8 +182,9 @@ export default defineComponent({
       //   return this.autocompleteData.hits.slice(0, _maxHits);
       // }
       */
+
       let _maxHits = 5;
-      return this.$store.state.datamodel.slice(0, _maxHits);
+      return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
     },
   },
 });
@@ -207,7 +216,7 @@ export default defineComponent({
 .widget-label {
   position: absolute;
   background: #fff;
-  margin-top: -25px;
+  margin-top: -24px;
   width: calc(100%);
   z-index: 9;
   cursor: default;
