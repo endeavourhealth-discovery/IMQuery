@@ -40,7 +40,7 @@
               'widget-icon text-white ' +
                 [target.iri == 'im:DDS' ? 'bg-green-600' : 'bg-indigo-600']
             "
-            :icon="[target.iri == 'im:DDS' ? 'database' : 'puzzle']"
+            :icon="[target.iri == 'im:DDS' ? 'cloud' : 'puzzle']"
             strokewidth="2"
             width="20"
             height="20"
@@ -125,7 +125,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
-  name: "StepWidget",
+  name: "EntityWidget",
   props: ["target"],
   components: {
     HeroIcon,

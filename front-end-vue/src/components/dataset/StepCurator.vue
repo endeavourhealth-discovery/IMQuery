@@ -28,8 +28,8 @@
             >
               <Section name="Copy all data from">
                 <template v-for="target in snippet.targets" :key="target.iri">
-                  <StepWidget class="mb-1 ml-5" :target="target">
-                  </StepWidget>
+                  <EntityWidget class="mb-1 ml-5" :target="target">
+                  </EntityWidget>
                 </template>
               </Section>
               <Section name="Include patients if">
@@ -58,7 +58,7 @@ import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import Section from "@/components/dataset/Section.vue";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
-import StepWidget from "@/components/dataset/StepWidget.vue";
+import EntityWidget from "@/components/dataset/EntityWidget.vue";
 import Widget from "@/components/dataset/Widget.vue";
 const _ = require("lodash");
 import EntityService from "@/services/EntityService";
@@ -66,12 +66,12 @@ import LoggerService from "@/services/LoggerService";
 // import RichInput from "@/components/dataset/RichInput.vue";
 
 export default defineComponent({
-  name: "FilterCurator",
+  name: "StepCurator",
   components: {
     // RoundButton,
     // HeroIcon,
     Widget,
-    StepWidget,
+    EntityWidget,
     Section,
     SectionToggler,
   },
@@ -79,7 +79,6 @@ export default defineComponent({
   props: ["activeQuery", "openQueries"],
   data() {
     return {
-      dataModelProperties: [] as any[],
       expanded: true,
       document: [
         //move this to vuex ASAP.
@@ -98,30 +97,13 @@ export default defineComponent({
       ],
     };
   },
-  async mounted() {
-    await this.getDataModelProperties("http://endhealth.info/im#EpisodeOfCare");
-  },
+
   methods: {
     updateName(name: string): void {
       let newActiveQuery = this.activeQuery;
       newActiveQuery.name = name;
       console.log(newActiveQuery);
       this.$emit("update:activeQuery", newActiveQuery);
-    },
-    async getDataModelProperties(iri: string) {
-      await EntityService.getDataModelProperties(iri)
-        .then((res) => {
-          this.dataModelProperties = res.data;
-          console.log("datamodel fetched " + iri + " :", res.data);
-        })
-        .catch((err) => {
-          this.$toast.add(
-            LoggerService.error(
-              "Failed to get data model properties from server",
-              err
-            )
-          );
-        });
     },
   },
 });
@@ -149,9 +131,8 @@ export default defineComponent({
 }
 
 .widget {
-  width: 100%
+  width: 100%;
 }
-
 </style>
 
 // // [ ] create language nodes on the fly as you type. You can also raw paste

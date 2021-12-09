@@ -63,6 +63,7 @@ import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
+import EntityService from "@/services/EntityService";
 
 export default defineComponent({
   name: "DataStudio",
@@ -156,11 +157,35 @@ export default defineComponent({
       ],
     };
   },
-  methods: {},
+  async mounted() {
+    await this.$store.dispatch("fetchDatamodel");
+  },
+  methods: {
+    async getEntitySummary(iri: string): Promise<any> {
+      await EntityService.getEntitySummary(iri)
+        .then((res) => {
+          console.log("summary fetched " + iri + " :", res.data);
+
+          this.$store.state.datamodel.map((entity: any) => {
+            if ((entity.iri = iri)) {
+              entity.summary = res.data;
+            }
+          });
+
+          return res.data;
+        })
+        .catch((err) => {
+          this.$toast.add(
+            LoggerService.error(
+              "Failed to get data model properties from server",
+              err
+            )
+          );
+        });
+    },
+  },
 });
 </script>
-
-
 
 <style scoped>
 .non-selectable {

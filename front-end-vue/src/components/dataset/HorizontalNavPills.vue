@@ -1,7 +1,6 @@
 <template>
-  <div
-    class="tab-buttons overflow-y-hidden overflow-x-auto w-full flex"
-  >
+
+  <div class="tab-buttons overflow-y-hidden overflow-x-auto w-full flex">
     <template v-for="item in items" :key="item.id">
       <div
         :class="[
@@ -73,13 +72,9 @@ export default defineComponent({
   border: solid 1px transparent;
 } */
 
-
 .tab-button.active {
   /* border: solid 1px #d0d7de; */
   /* background-color: #F9FAFB; */
   color: #000000;
 }
-
-
-
 </style>

@@ -531,7 +531,7 @@ export default defineComponent({
 
 .app-title-bottom {
   top: -5px;
-    font-size: clamp(12px, 100%, 20px);
+    font-size: 18px;
 }
 
 .header {

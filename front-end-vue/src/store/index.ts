@@ -327,6 +327,7 @@ export default createStore({
         }
       },
     ],
+    datamodel: [] as any[],
   },
   mutations: {
     updateConceptIri(state, conceptIri) {
@@ -397,6 +398,24 @@ export default createStore({
       if (_activeIndex != -1) {
         state.openQueries[_activeIndex] = activeQuery;
       }
+    },
+    addDataModelItem(state, item) {
+      state.datamodel.push(item);
+    },
+    updateDatamodelProperties(state, payload) {
+      state.datamodel.forEach((entity: any) => {
+        if (entity.iri == payload.iri) {
+          entity.properties = payload.data;
+        }
+      });
+    },
+    updateDatamodelSummary(state, payload) {
+      state.datamodel.forEach((entity: any) => {
+        if (entity.iri == payload.iri) {
+          entity.summary = payload.data;
+        }
+      });
+
     }
   },
   actions: {
@@ -460,6 +479,74 @@ export default createStore({
         }
       });
       return result;
+    },
+    async fetchDatamodel({ commit }) {
+      const datamodelIris = [
+        // "http://endhealth.info/im#Activity",
+        // "http://endhealth.info/im#Event",
+        // "http://endhealth.info/im#Patient",
+        "http://endhealth.info/im#AllergyIntoleranceAndAdverseReaction",
+        "http://endhealth.info/im#CarePlan",
+        "http://endhealth.info/im#DiagnosticReport",
+        "http://endhealth.info/im#Encounter",
+        "http://endhealth.info/im#AccidentAndEmergencyEncounter",
+        "http://endhealth.info/im#CriticalCareEncounter",
+        "http://endhealth.info/im#HospitalAdmission",
+        "http://endhealth.info/im#HospitalDischarge",
+        "http://endhealth.info/im#HospitalInpatientStay",
+        "http://endhealth.info/im#HospitalOutpatientEncounter",
+        "http://endhealth.info/im#EpisodeOfCare",
+        "http://endhealth.info/im#Immunisation",
+        "http://endhealth.info/im#MedicationOrder",
+        "http://endhealth.info/im#Observation",
+        "http://endhealth.info/im#ProblemOrCondition",
+        "http://endhealth.info/im#Procedure",
+        "http://endhealth.info/im#ReferralRequestOrProcedureRequest",
+        "http://endhealth.info/im#Appointment",
+      ];
+
+      datamodelIris.forEach(async (iri: string) => {
+        commit("addDataModelItem", {
+          iri: iri,
+          summary: {},
+          properties: {},
+        });
+
+        await EntityService.getDataModelProperties(iri)
+          .then((res) => {
+            commit("updateDatamodelProperties", {
+              iri: iri,
+              data: res.data
+            });
+          })
+          .catch((err) => {
+            console.log(
+              "Failed to get data model properties from server",
+              err
+            );
+          }
+          );
+        await EntityService.getEntitySummary(iri)
+          .then((res) => {
+            console.log("datamodel summary fetched " + iri + " :", res.data);
+            commit("updateDatamodelSummary", {
+              iri: iri,
+              data: res.data
+            });
+          })
+          .catch((err) => {
+            console.log(
+              "Failed to get data model properties from server",
+              err
+            );
+          }
+          );
+
+
+      });
+      // this.getEntitySummary(iri);
+      // this.getDataModelProperties(iri);
+
     }
   },
   modules: {}
