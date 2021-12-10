@@ -224,6 +224,7 @@ import QueryTable from "@/components/dataset/QueryTable.vue";
 
 import Searchbox from "@/components/search/Searchbox.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
+import RoundButton from "@/components/dataset/RoundButton.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import ProgressBar from "@/components/search/ProgressBar.vue";
@@ -231,7 +232,7 @@ import ProgressBar from "@/components/search/ProgressBar.vue";
 import SearchService from "@/services/SearchService";
 import SearchClient from "@/services/SearchClient";
 import DataStudio from "./DataStudio.vue";
-import RoundButton from "@/components/dataset/RoundButton.vue";
+
 import OrganisationBrowser from "@/components/dataset/OrganisationBrowser.vue";
 // import Dataset from "@/components/dataset/Dataset.ts";
 

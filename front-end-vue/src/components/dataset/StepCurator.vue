@@ -1,7 +1,7 @@
 <template>
   <div class="widget">
     <!-- <div class="divider"></div> -->
-    <template v-for="step in activeQuery.data.steps" :key="step.id">
+    <template v-for="(step, index1) in activeQuery.data.steps" :key="step.id">
       <div class="py-3">
         <!-- Header -->
         <div class="section-title flex w-full px-3 items-center">
@@ -27,8 +27,14 @@
               "
             >
               <Section name="Copy all data from">
-                <template v-for="item in step.copy" :key="item.iri">
-                  <EntityWidget class="mb-1 ml-5" :modelValue="item">
+                <template v-for="(item, index2) in step.copy" :key="item.iri">
+                  <EntityWidget
+                    :propertyPath="`data.steps[${index1}].copy[${index2}]`"
+                    :stepIri="step.iri"
+                    type="query"
+                    class="mb-1"
+                    :modelValue="item"
+                  >
                   </EntityWidget>
                 </template>
               </Section>
@@ -38,14 +44,21 @@
               >
                 <div
                   class="flex flex-col"
-                  v-for="criterion in step.inclusionCriteria"
+                  v-for="(criterion, index3) in step.inclusionCriteria"
                   :key="criterion.id"
                 >
-                  <div>
-                    <EntityWidget
-                      class="mb-1 ml-5 inline"
-                      :modelValue="criterion.datamodelEntity"
-                    ></EntityWidget>
+                  <div class="flex">
+                    <div>
+                      <EntityWidget
+                       :propertyPath="`data.steps[${index1}].inclusionCriteria[${index3}].datamodelEntity`"
+                        :stepIri="step.iri"
+                        type="datamodel"
+                        class="mb-1 inline"
+                        :modelValue="criterion.datamodelEntity"
+                      ></EntityWidget>
+                    </div>
+
+                    <KeywordWidget class="inline" modelValue="latest" />
                   </div>
 
                   <div
@@ -85,7 +98,7 @@ const _ = require("lodash");
 import EntityService from "@/services/EntityService";
 import LoggerService from "@/services/LoggerService";
 import Constraint from "@/components/dataset/Constraint.vue";
-
+import KeywordWidget from "@/components/dataset/KeywordWidget.vue";
 // import RichInput from "@/components/dataset/RichInput.vue";
 
 export default defineComponent({
@@ -98,6 +111,7 @@ export default defineComponent({
     Section,
     SectionToggler,
     Constraint,
+    KeywordWidget,
   },
   emit: ["update:activeQuery", "update:openQueries", "update:name"],
   props: ["activeQuery", "openQueries"],
@@ -152,6 +166,17 @@ export default defineComponent({
 .title-input {
   font-size: 16px !important;
   font-weight: 600;
+}
+
+.widget-content {
+  padding-left: 53px;
+}
+
+.non-selectable {
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
 }
 
 /* .widget {

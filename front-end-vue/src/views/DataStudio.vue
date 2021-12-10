@@ -164,8 +164,7 @@ export default defineComponent({
     async getEntitySummary(iri: string): Promise<any> {
       await EntityService.getEntitySummary(iri)
         .then((res) => {
-          console.log("summary fetched " + iri + " :", res.data);
-
+          // console.log("summary fetched " + iri + " :", res.data);
           this.$store.state.datamodel.map((entity: any) => {
             if ((entity.iri = iri)) {
               entity.summary = res.data;

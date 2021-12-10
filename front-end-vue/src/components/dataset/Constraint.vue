@@ -1,5 +1,5 @@
 <template>
-  <div v-if="node.children">
+  <div class="non-selectable" v-if="node.children">
     <template v-if="node.itemType == 'item'">
       <div class="row flex pt-2 pr-5">
         <div

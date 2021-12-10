@@ -15,12 +15,12 @@
           : (componentState = 'focus')
       "
     >
-      Select a step, query or data service.
+      Select a source, query or step:
     </label>
     <button
       type="button"
       :class="
-        'widget-button relative bg-white rounded-md px-3 pb-2 text-left border border-transparent cursor-default outline-none sm:text-sm' +
+        'widget-button relative bg-white rounded-md pl-3 pr-2 pb-2 text-left border border-transparent cursor-default outline-none sm:text-sm' +
           [isHover ? ' hover shadow-sm' : ''] +
           [componentState == 'focus' ? ' focus shadow-sm' : ''] +
           [componentState == 'typing' ? ' typing shadow-sm' : '']
@@ -32,7 +32,7 @@
       "
       @blur="isHover ? null : (componentState = 'default')"
     >
-      <div class="flex items-center justify between">
+      <div class="button-content flex items-center justify between">
         <span class="flex items-center">
           <HeroIcon
             :class="
@@ -52,7 +52,7 @@
           v-show="
             componentState == 'focus' || componentState == 'typing' || isHover
           "
-          class="widget-icon text-gray- ml-3"
+          class="widget-icon text-gray- ml-2"
           icon="selector"
           strokewidth="2"
           width="20"
@@ -90,6 +90,7 @@
           :key="entity.iri"
           class="trelative ext-gray-900 cursor-default select-none relative py-2 pl-3 pr-12 hover:bg-gray-100"
           role="option"
+          @click="updateEntity(entity)"
         >
           <div class="flex items-center">
             <HeroIcon
@@ -103,7 +104,13 @@
             <div
               class="widget-title ml-4 block truncate text-black font-medium rounded-t-md"
             >
-              {{ entity.summary.name.replace("(record type)", "") }}
+              <template v-if="type == 'query'">
+                {{ entity.name }}
+              </template>
+
+              <template v-else-if="type == 'datamodel'">
+                {{ entity.summary.name.replace("(record type)", "") }}
+              </template>
             </div>
           </div>
 
@@ -140,7 +147,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "EntityWidget",
-  props: ["modelValue"],
+  props: ["modelValue", "type", "stepIri", "propertyPath"],
   emits: ["update:modelValue"],
   components: {
     HeroIcon,
@@ -171,20 +178,38 @@ export default defineComponent({
         return { icon: "document", class: " bg-gray-500" }; //if unknown entity
       }
     },
+    updateEntity(entity: any): void {
+        this.$store.commit("updateEntity", {...entity, propertyPath: this.propertyPath});
+    },
 
     filteredEntities(): any {
-      /* Todo: add filter so specific datamodels are suggested based on search term and other restrictions
-      // if (this.autocompleteData && this.autocompleteData.hits.length > 0) {
-      //   let _maxHits =
-      //     this.autocompleteData.hits.length < 5
-      //       ? this.autocompleteData.hits.length
-      //       : 5;
-      //   return this.autocompleteData.hits.slice(0, _maxHits);
-      // }
-      */
-
       let _maxHits = 5;
-      return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
+
+      if (this.type == "query") {
+        let _steps = this.$store.state.openQueries.filter(
+          (query: any) => query.id == this.$store.state.activeQueryId
+        )[0].data.steps;
+        let _queries = this.$store.state.openQueries.slice(
+          0,
+          this.$store.state.openQueries.length < _maxHits
+            ? this.$store.state.openQueries.length - 1
+            : 2
+        );
+        let _sources = [{ iri: "im:DDS", name: "Discovery Data Service" }];
+        let _dataEntities = [..._steps, ..._queries, ..._sources];
+
+        //returns everything except for currently Iri of currently selected item and current step (to avoid an infinite loop)
+        let _filterArray = [this.stepIri, this.modelValue.iri];
+        let _filteredDataEntities = _dataEntities.filter(
+          (entity: any) => !_filterArray.includes(entity.iri)
+        );
+
+        // console.log("_filteredDataEntities", _filteredDataEntities);
+
+        return _filteredDataEntities;
+      } else if (this.type == "datamodel") {
+        return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
+      }
     },
   },
 });
@@ -196,6 +221,10 @@ export default defineComponent({
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
+}
+
+.button-content {
+  padding-top: 1px;
 }
 
 .widget-buton {

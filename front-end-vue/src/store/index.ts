@@ -11,6 +11,7 @@ import { IM } from "@/vocabulary/IM";
 import { ConceptSummary } from "@/models/search/ConceptSummary";
 import { ConceptReference } from "@/models/TTConcept/ConceptReference";
 import axios from "axios";
+const _ = require("lodash");
 
 export default createStore({
   // update stateType.ts when adding new state!
@@ -73,12 +74,13 @@ export default createStore({
       {
         id: "06523b6c-d9dd-4aae-baca-a0c5afbf44da",
         name: "Untitled Dataset",
+        iri: "dds:QRI_Untitled1",
         description: "The percentage of patients with diabetes, on the register, and a history of CVD (excluding haemorrhagic stroke) who are currently treated with a statin.",
         data: {
           mainDataTypeIri: "im:Patient",
           selectedOrganisations: "",
           selectedOrganisationLists: [],
-          snippets: [],
+          steps: [],
           output: [],
           export: {
             format: "",
@@ -239,6 +241,7 @@ export default createStore({
             {
               id: "e55d01bb-8e14-4256-ac0e-de74bb0a047d",
               name: "Diagnosis of CHD",
+              iri: "dds:Step_DiagnosisCHD",
               searchterms: ["chd"],
               keyword: "Include all healthrecords from",
               copy: [
@@ -315,12 +318,13 @@ export default createStore({
       {
         id: "0c14d146-964e-4e42-bcb5-2999f345f1f7",
         name: "DM0023",
+        iri: "dds:QRI_QOF_DM023",
         description: "The percentage of patients with diabetes, on the register, and a history of CVD (excluding haemorrhagic stroke) who are currently treated with a statin.",
         data: {
           mainDataTypeIri: "im:Patient",
           selectedOrganisations: "",
           selectedOrganisationLists: [],
-          snippets: [],
+          steps: [],
           output: [],
           export: {
             format: "",
@@ -4200,6 +4204,23 @@ export default createStore({
         }
       });
 
+    },
+    updateEntity(state, payload) {
+      //active query
+      let _activeQueryIndex = -1;
+      for (let i = 0; i < state.openQueries.length - 1; i++) {
+        if (state.openQueries[i].id == state.activeQueryId) {
+          _activeQueryIndex = i;
+        }
+      }
+
+      if (_activeQueryIndex != -1) {
+        _.set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".name", payload.name)
+        _.set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".iri", payload.iri)
+      }
+
+      // console.log("committed", payload);
+
     }
   },
   actions: {
@@ -4312,7 +4333,7 @@ export default createStore({
           );
         await EntityService.getEntitySummary(iri)
           .then((res) => {
-            console.log("datamodel summary fetched " + iri + " :", res.data);
+            // console.log("datamodel summary fetched " + iri + " :", res.data);
             commit("updateDatamodelSummary", {
               iri: iri,
               data: res.data
