@@ -2,7 +2,7 @@
   <div class="flex w-full px-3">
     <div class="section-header flex">
       <!-- Toggler -->
-      <SectionToggler @click="expanded = !expanded" />
+      <SectionToggler :expanded="expanded" @click="expanded = !expanded" />
       <!-- / Toggler -->
 
       <div class="section-title w-full flex h-7 ml-5 outline-none text-black">
@@ -55,6 +55,4 @@ export default defineComponent({
 .section-header {
   padding-top: 6px;
 }
-
-
 </style>
