@@ -14,6 +14,7 @@
         textColor="blue-600"
         ringColor="white"
         @blur="expanded = false"
+        @click="expanded = false"
       >
         {{ modelValue }}
       </RoundButton>
