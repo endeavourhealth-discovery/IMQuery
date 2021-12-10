@@ -11,7 +11,11 @@
             @click="
               expandedSteps.includes(step.id)
                 ? (expandedSteps = expandedSteps.filter(
+<<<<<<< HEAD
                     (item: any) => item != step.id
+=======
+                    (item: any) => item.id == step.id
+>>>>>>> 8e5091e10d43d4ff44d7b9bc757a12d8ac3e76c4
                   ))
                 : expandedSteps.push(step.id)
             "
