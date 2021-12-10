@@ -218,13 +218,32 @@ export default defineComponent({
         let _sources = [{ iri: "im:DDS", name: "Discovery Data Service" }];
         let _dataEntities = [..._steps, ..._queries, ..._sources];
 
-        //returns everything except for currently Iri of currently selected item and current step (to avoid an infinite loop)
+        //returns everything except for:
+        // 1. currently Iri of currently selected item (modelValue)
+        // 2. current step (to avoid an infinite loop)
+
         let _filterArray = [this.stepIri, this.modelValue.iri];
+
+        // 3. a step referencing itself in .copy attribute of step.
+        _steps.forEach((step: any) => {
+          step.copy.forEach((copy: any) => {
+            if (copy.iri == this.stepIri) {
+              _filterArray.push(step.iri);
+            }
+          });
+        });
+
+        console.log("_filterArray: ", _filterArray);
+
+        //         _selfReferencingSteps.forEach((item: any) => {
+        // _filterArray.push()
+        //         });
+
         let _filteredDataEntities = _dataEntities.filter(
           (entity: any) => !_filterArray.includes(entity.iri)
         );
 
-        // console.log("_filteredDataEntities", _filteredDataEntities);
+        console.log("_filteredDataEntities: ", _filteredDataEntities);
 
         return _filteredDataEntities;
       } else if (this.type == "datamodel") {
@@ -245,7 +264,6 @@ export default defineComponent({
 
 .button-content {
   padding-top: 3px;
-
 }
 
 .widget-buton {
@@ -257,7 +275,7 @@ export default defineComponent({
 .widget-button.focus,
 .widget-button.hover,
 .widget-button.typing {
-    min-width: 175px;
+  min-width: 175px;
   border-left: 1px solid rgb(207, 210, 218);
   border-right: 1px solid rgb(207, 210, 218);
   border-bottom: 1px solid rgb(207, 210, 218);
