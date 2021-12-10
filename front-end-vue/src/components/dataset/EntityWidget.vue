@@ -244,8 +244,8 @@ export default defineComponent({
 }
 
 .button-content {
-  padding-top: 1px;
-  min-width: 175px;
+  padding-top: 3px;
+
 }
 
 .widget-buton {
@@ -257,6 +257,7 @@ export default defineComponent({
 .widget-button.focus,
 .widget-button.hover,
 .widget-button.typing {
+    min-width: 175px;
   border-left: 1px solid rgb(207, 210, 218);
   border-right: 1px solid rgb(207, 210, 218);
   border-bottom: 1px solid rgb(207, 210, 218);

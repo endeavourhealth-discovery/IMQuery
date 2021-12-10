@@ -2,7 +2,7 @@
   <div class="relative inline-block text-left" @click="expanded = !expanded">
     <div class="">
       <RoundButton
-        class="h-10 ml-4 non-selectable hover:underline"
+        class="h-10 ml-2 non-selectable hover:underline"
         :rounded="false"
         :showRing="true"
         backgroundColor="white"
