@@ -6,7 +6,16 @@
         <!-- Header -->
         <div class="section-title flex w-full px-3 items-center">
           <!-- Toggler -->
-          <SectionToggler @click="expanded = !expanded" />
+          <SectionToggler
+            :expanded="expandedSteps.includes(step.id)"
+            @click="
+              expandedSteps.includes(step.id)
+                ? (expandedSteps = expandedSteps.filter(
+                    (item: any) => item.id == step.id
+                  ))
+                : expandedSteps.push(step.id)
+            "
+          />
           <!-- / Toggler -->
           <!-- Title -->
           <div
@@ -19,7 +28,7 @@
         <!-- /Header -->
 
         <!-- Content -->
-        <div v-show="expanded" class="pt-3 px-3">
+        <div v-show="expandedSteps.includes(step.id)" class="pt-3 px-3">
           <div class="w-full flex">
             <div
               :class="
@@ -50,7 +59,9 @@
                   <div class="flex">
                     <div>
                       <EntityWidget
-                       :propertyPath="`data.steps[${index1}].inclusionCriteria[${index3}].datamodelEntity`"
+                        :propertyPath="
+                          `data.steps[${index1}].inclusionCriteria[${index3}].datamodelEntity`
+                        "
                         :stepIri="step.iri"
                         type="datamodel"
                         class="mb-1 inline"
@@ -117,7 +128,7 @@ export default defineComponent({
   props: ["activeQuery", "openQueries"],
   data() {
     return {
-      expanded: true,
+      expandedSteps: [] as any[],
       document: [
         //move this to vuex ASAP.
         {

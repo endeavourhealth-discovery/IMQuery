@@ -6,7 +6,6 @@
     backgroundColor="white"
     hoverBackgroundColor="white"
     ringColor="blue-600"
-    @click="expanded = !expanded"
   >
     <HeroIcon
       :class="expanded ? ' text-gray-400' : 'text-blue-500'"
@@ -25,16 +24,17 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "SectionToggler",
-  props: [""],
+  props: ["expanded"],
+  emits: ["toggle"],
   components: {
     RoundButton,
     HeroIcon,
   },
-  data() {
-    return {
-      expanded: true,
-    };
-  },
+  // data() {
+  //   return {
+  //     expanded: true,
+  //   };
+  // },
 });
 </script>
 

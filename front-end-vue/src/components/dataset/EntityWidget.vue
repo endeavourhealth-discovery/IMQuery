@@ -233,17 +233,13 @@ export default defineComponent({
           });
         });
 
-        console.log("_filterArray: ", _filterArray);
-
-        //         _selfReferencingSteps.forEach((item: any) => {
-        // _filterArray.push()
-        //         });
+        // console.log("_filterArray: ", _filterArray);
 
         let _filteredDataEntities = _dataEntities.filter(
           (entity: any) => !_filterArray.includes(entity.iri)
         );
 
-        console.log("_filteredDataEntities: ", _filteredDataEntities);
+        // console.log("_filteredDataEntities: ", _filteredDataEntities);
 
         return _filteredDataEntities;
       } else if (this.type == "datamodel") {
