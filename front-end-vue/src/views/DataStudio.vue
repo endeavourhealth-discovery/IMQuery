@@ -159,6 +159,7 @@ export default defineComponent({
   },
   async mounted() {
     await this.$store.dispatch("fetchDatamodel");
+      // console.log("datamodel fetched: ", this.$store.state.datamodel);
   },
   methods: {
     async getEntitySummary(iri: string): Promise<any> {

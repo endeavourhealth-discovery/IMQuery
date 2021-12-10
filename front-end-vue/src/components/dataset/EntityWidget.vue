@@ -15,7 +15,7 @@
           : (componentState = 'focus')
       "
     >
-      Select a source, query or step:
+      {{ getPrompt() }}
     </label>
     <button
       type="button"
@@ -45,7 +45,13 @@
           />
 
           <div class="widget-title ml-4 block truncate text-black font-medium">
-            {{ modelValue.name }}
+            <template v-if="type == 'query'">
+              {{ modelValue.name }}
+            </template>
+
+            <template v-else-if="type == 'datamodel'">
+              {{ modelValue.name.replace("(record type)", "") }}
+            </template>
           </div>
         </span>
         <HeroIcon
@@ -159,6 +165,16 @@ export default defineComponent({
     };
   },
   methods: {
+    getPrompt(): string {
+      switch (this.type) {
+        case "query":
+          return "Select a source, query or step:";
+        case "datamodel":
+          return "Select a health record type:";
+        default:
+          return "Select an item";
+      }
+    },
     getIconMeta(iri: string): any {
       if (iri == "im:DDS") {
         return { icon: "cloud", class: " bg-green-600" };
@@ -179,7 +195,11 @@ export default defineComponent({
       }
     },
     updateEntity(entity: any): void {
-        this.$store.commit("updateEntity", {...entity, propertyPath: this.propertyPath});
+      this.$store.commit("updateEntity", {
+        ...entity,
+        propertyPath: this.propertyPath,
+      });
+      this.componentState = "default";
     },
 
     filteredEntities(): any {
@@ -225,6 +245,7 @@ export default defineComponent({
 
 .button-content {
   padding-top: 1px;
+  min-width: 175px;
 }
 
 .widget-buton {

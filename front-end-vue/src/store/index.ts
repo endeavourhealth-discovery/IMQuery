@@ -336,6 +336,7 @@ export default createStore({
     prefetched_datamodel: [
       {
         iri: "http://endhealth.info/im#AllergyIntoleranceAndAdverseReaction",
+        name: "Allergy, intolerance and adverse reaction  (record type)",
         summary: {
           name: "Allergy, intolerance and adverse reaction  (record type)",
           iri: "http://endhealth.info/im#AllergyIntoleranceAndAdverseReaction",
@@ -498,8 +499,9 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#CarePlan",
+        name: "Care plan (record type)",
         summary: {
-          name: "Care plan  (record type)",
+          name: "Care plan (record type)",
           iri: "http://endhealth.info/im#CarePlan",
           description:
             "A dynamic document that notes the plan regarding the care of a patient. As in the document structure they tend to specialise and thus this highlights only the generic sections.",
@@ -711,6 +713,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#DiagnosticReport",
+        name: "Diagnostic report  (record type)",
         summary: {
           name: "Diagnostic report  (record type)",
           iri: "http://endhealth.info/im#DiagnosticReport",
@@ -869,6 +872,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#Encounter",
+        name: "Encounter (record type)",
         summary: {
           name: "Encounter (record type)",
           iri: "http://endhealth.info/im#Encounter",
@@ -1077,6 +1081,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#AccidentAndEmergencyEncounter",
+        name: "Accident and emergency encounter (record type)",
         summary: {
           name: "Accident and emergency encounter (record type)",
           iri: "http://endhealth.info/im#AccidentAndEmergencyEncounter",
@@ -1372,6 +1377,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#CriticalCareEncounter",
+        name: "Critical care encounter (record type)",
         summary: {
           name: "Critical care encounter (record type)",
           iri: "http://endhealth.info/im#CriticalCareEncounter",
@@ -1637,6 +1643,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#HospitalAdmission",
+        name: "Hospital admission (record type)",
         summary: {
           name: "Hospital admission (record type)",
           iri: "http://endhealth.info/im#HospitalAdmission",
@@ -1941,6 +1948,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#HospitalDischarge",
+        name: "Hospital discharge (record type)",
         summary: {
           name: "Hospital discharge (record type)",
           iri: "http://endhealth.info/im#HospitalDischarge",
@@ -2219,6 +2227,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#HospitalInpatientStay",
+        name: "Hospital inpatient stay (record type)",
         summary: {
           name: "Hospital inpatient stay (record type)",
           iri: "http://endhealth.info/im#HospitalInpatientStay",
@@ -2480,6 +2489,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#HospitalOutpatientEncounter",
+        name: "Hospital outpatient encounter (record type)",
         summary: {
           name: "Hospital outpatient encounter (record type)",
           iri: "http://endhealth.info/im#HospitalOutpatientEncounter",
@@ -2754,6 +2764,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#EpisodeOfCare",
+        name: "Episode of care  (record type)",
         summary: {
           name: "Episode of care  (record type)",
           iri: "http://endhealth.info/im#EpisodeOfCare",
@@ -2891,6 +2902,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#Immunisation",
+        name: "Immunisation  (record type)",
         summary: {
           name: "Immunisation  (record type)",
           iri: "http://endhealth.info/im#Immunisation",
@@ -3078,6 +3090,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#MedicationOrder",
+        name: "Medication order  (record type)",
         summary: {
           name: "Medication order  (record type)",
           iri: "http://endhealth.info/im#MedicationOrder",
@@ -3265,6 +3278,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#Observation",
+        name: "Observation (record type)",
         summary: {
           name: "Observation (record type)",
           iri: "http://endhealth.info/im#Observation",
@@ -3368,6 +3382,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#ProblemOrCondition",
+        name: "Problem or condition  (record type)",
         summary: {
           name: "Problem or condition  (record type)",
           iri: "http://endhealth.info/im#ProblemOrCondition",
@@ -3512,6 +3527,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#Procedure",
+        name: "Procedure  (record type)",
         summary: {
           name: "Procedure  (record type)",
           iri: "http://endhealth.info/im#Procedure",
@@ -3694,6 +3710,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#ReferralRequestOrProcedureRequest",
+        name: "Referral Request or procedure request  (record type)",
         summary: {
           name: "Referral Request or procedure request  (record type)",
           iri: "http://endhealth.info/im#ReferralRequestOrProcedureRequest",
@@ -3929,6 +3946,7 @@ export default createStore({
       },
       {
         iri: "http://endhealth.info/im#Appointment",
+        name: "Appointment  (record type)",
         summary: {
           name: "Appointment  (record type)",
           iri: "http://endhealth.info/im#Appointment",
@@ -4116,6 +4134,8 @@ export default createStore({
         ],
       },
     ],
+    
+    
   },
   mutations: {
     updateConceptIri(state, conceptIri) {
@@ -4201,6 +4221,7 @@ export default createStore({
       state.datamodel.forEach((entity: any) => {
         if (entity.iri == payload.iri) {
           entity.summary = payload.data;
+          entity.name = payload.data.name;
         }
       });
 
@@ -4219,7 +4240,7 @@ export default createStore({
         _.set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".iri", payload.iri)
       }
 
-      // console.log("committed", payload);
+      console.log("committed payload", payload);
 
     }
   },
@@ -4313,6 +4334,7 @@ export default createStore({
       datamodelIris.forEach(async (iri: string) => {
         commit("addDataModelItem", {
           iri: iri,
+          name: "",
           summary: {},
           properties: {},
         });
@@ -4349,8 +4371,8 @@ export default createStore({
 
 
       });
-      // this.getEntitySummary(iri);
-      // this.getDataModelProperties(iri);
+
+    
 
     }
   },
