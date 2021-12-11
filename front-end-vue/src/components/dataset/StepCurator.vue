@@ -69,7 +69,7 @@
                       ></EntityWidget>
                     </div>
 
-                    <KeywordWidget class="inline" modelValue="latest" />
+                    <KeywordWidget class="inline" :modelValue="criterion.modifier.name" />
                   </div>
 
                   <div

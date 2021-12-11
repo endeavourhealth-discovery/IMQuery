@@ -5,10 +5,11 @@
     :showRing="true"
     backgroundColor="white"
     hoverBackgroundColor="white"
+    borderColor="gray-300"
     ringColor="blue-600"
   >
     <HeroIcon
-      :class="expanded ? ' text-gray-400' : 'text-blue-500'"
+      :class="expanded ? ' text-gray-400' : 'text-gray-600'"
       :icon="expanded ? 'chevron_down' : 'chevron_right'"
       strokewidth="2"
       width="20"
@@ -50,4 +51,5 @@ export default defineComponent({
   font-size: 14px !important;
   font-weight: 500;
 }
+
 </style>

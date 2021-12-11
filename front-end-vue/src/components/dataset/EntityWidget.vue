@@ -94,7 +94,7 @@
         <li
           v-for="entity in filteredEntities()"
           :key="entity.iri"
-          class="trelative ext-gray-900 cursor-default select-none relative py-2 pl-3 pr-12 hover:bg-gray-100"
+          class="relative ext-gray-900 cursor-default select-none relative py-2 pl-3 pr-12 hover:bg-gray-100"
           role="option"
           @click="updateEntity(entity)"
         >
@@ -177,21 +177,21 @@ export default defineComponent({
     },
     getIconMeta(iri: string): any {
       if (iri == "im:DDS") {
-        return { icon: "cloud", class: " bg-green-600" };
+        return { icon: "cloud", class: " text-green-600" };
       } else if (iri.split(":")[0] == "dds") {
         if (iri.split(":")[1].substring(0, 4) == "Step") {
-          return { icon: "puzzle", class: " bg-indigo-600" }; //if it is a step
+          return { icon: "puzzle", class: " text-indigo-600" }; //if it is a step
         } else {
-          return { icon: "database", class: " bg-yellow-600" }; //if it is a query
+          return { icon: "database", class: " text-yellow-600" }; //if it is a query
         }
       } else if (
         this.$store.state.prefetched_datamodel.some(
           (entity: any) => entity.iri == iri
         )
       ) {
-        return { icon: "link", class: " bg-red-600" }; //if datamodel entity
+        return { icon: "link", class: " text-red-600" }; //if datamodel entity
       } else {
-        return { icon: "document", class: " bg-gray-500" }; //if unknown entity
+        return { icon: "document", class: " text-gray-500" }; //if unknown entity
       }
     },
     updateEntity(entity: any): void {
@@ -203,8 +203,8 @@ export default defineComponent({
     },
 
     filteredEntities(): any {
+      
       let _maxHits = 5;
-
       if (this.type == "query") {
         let _steps = this.$store.state.openQueries.filter(
           (query: any) => query.id == this.$store.state.activeQueryId
@@ -213,7 +213,7 @@ export default defineComponent({
           0,
           this.$store.state.openQueries.length < _maxHits
             ? this.$store.state.openQueries.length - 1
-            : 2
+            : _maxHits
         );
         let _sources = [{ iri: "im:DDS", name: "Discovery Data Service" }];
         let _dataEntities = [..._steps, ..._queries, ..._sources];

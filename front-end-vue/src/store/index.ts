@@ -118,7 +118,7 @@ export default createStore({
                   id: "6fa641ee-cb6b-4137-b510-6b314ff3e353",
                   modifier: {
                     iri: "im:modifier_latest",
-                    name: "Latest",
+                    name: "latest",
                   },
                   datamodelEntity: {
                     iri: "http://endhealth.info/im#EpisodeOfCare",
@@ -259,7 +259,7 @@ export default createStore({
                   id: "e2f19e1c-e31e-414d-9815-6e4d8e282290",
                   modifier: {
                     iri: "im:modifier_any",
-                    name: "Any",
+                    name: "any",
                   },
                   datamodelEntity: {
                     iri: "http://endhealth.info/im#ProblemOrCondition",

@@ -1,9 +1,9 @@
 <template>
   <button
     :class="
-      `non-selectable transition duration-300 ease-in-out flex items-center justify-center rounded-md border border-transparent border-${borderColor} hover:border-${hoverBorderColor} bg-${backgroundColor} hover:bg-${hoverBackgroundColor} hover:text-${hoverTextColor} text-${textColor} focus:bg-${hoverBackgroundColor} focus:text-${focusTextColor} focus:border-transparent focus:ring-${ringColor}` +
+      `non-selectable roundbutton transition duration-300 ease-in-out flex items-center justify-center rounded-md border border-${borderColor} bg-${backgroundColor} hover:bg-${hoverBackgroundColor} hover:text-${hoverTextColor} text-${textColor} focus:bg-${hoverBackgroundColor} focus:bg-${focusBackgroundColor} focus:text-${focusTextColor} focus:border-transparent focus:ring-${ringColor}` +
       [ rounded ? ' rounded': '' ] +
-      [ showRing ? ' focus:outline-none focus:ring-2 focus:ring-offset-2' :'' ]
+      [ showRing ? ' focus:outline-none focus:ring-2 focus:ring-offset-2' :'' ] 
     "
     @click="$emit('click')"
   >
@@ -21,10 +21,11 @@ export default defineComponent({
     "showRing",
     "backgroundColor",
     "borderColor",
-    "hoverBorderColor",
+    // "hoverBorderColor",
     "hoverBackgroundColor",
     "textColor",
     "focusTextColor",
+    "focusBackgroundColor",
     "ringColor",
     "hoverTextColor"
   ],
@@ -43,4 +44,14 @@ export default defineComponent({
 .rounded {
   border-radius: 50%;
 }
+
+/* .roundbutton {
+  border: 1px solid transparent;
+} */
+
+/* .roundbutton:hover{
+  border-color: rgb(207, 210, 218);
+  box-shadow: rgb(207, 210, 218) 0px 0px 6px;
+} */
+
 </style>

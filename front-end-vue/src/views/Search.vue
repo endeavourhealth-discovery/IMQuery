@@ -20,7 +20,7 @@
         class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium"
       >
         <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
-        <img class="search-logo mb-10" src="search-icon.png" alt="" />
+        <img class="search-logo mb-10" src="home-icon.png" alt="" />
       </div>
       <!-- /Brand  -->
 
@@ -74,11 +74,11 @@
           :rounded="false"
           :showRing="true"
           backgroundColor="white"
-          hoverBackgroundColor="gray-50"
+          hoverBackgroundColor="white"
           borderColor="white"
-          hoverBorderColor="gray-300"
-          hoverTextColor="gray-700"
+          hoverTextColor="blue-600"
           focusTextColor="blue-600"
+          focusBackgroundColor="white"
           textColor="gray-700"
           ringColor="blue-600"
         >
@@ -93,8 +93,8 @@
         <!-- / Menu Toggler  -->
 
         <!-- Branding  -->
-        <div class="flex app-branding">
-          <img class="app-logo inline" src="app-icon.png" alt="" />
+        <div class="flex app-branding non-selectable">
+          <img class="app-logo inline" src="app-icon-svg.svg" alt="" />
           <div class="relative app-title inline-flex flex-col">
             <div
               class="relative app-title-top font-medium text-gray-600"
@@ -258,7 +258,7 @@ export default defineComponent({
       // definition: typeof Dataset,
       isLoading: false,
       searchString: "",
-      activePageName: "SearchResults", //Options #Home #SearchResults
+      activePageName: "Home", //Options #Home #SearchResults
       activeTabName: "Data",
       tabs: [
         {
@@ -429,7 +429,7 @@ export default defineComponent({
 
 <style scoped>
 .search-logo {
-  width: 100px;
+  width: 250px;
   height: auto;
 }
 
@@ -516,9 +516,10 @@ export default defineComponent({
 }
 
 .app-logo {
-  padding-top: 3px;
-  width: 40px;
-  height: 40px;
+ margin-top: 5px;
+ margin-right: 3px;
+  width: 31px;
+  height: 26px;
 }
 
 .app-title {
