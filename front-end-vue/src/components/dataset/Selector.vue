@@ -4,19 +4,7 @@
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >
-    <label
-      v-show="
-        componentState == 'focus' || componentState == 'typing' || isHover
-      "
-      class="widget-label inline text-sm font-medium text-gray-600 mb-4 py-1"
-      @click="
-        componentState == 'focus'
-          ? (componentState = 'default')
-          : (componentState = 'focus')
-      "
-    >
-      {{ getPrompt() }}
-    </label>
+  
     <button
       type="button"
       :class="
@@ -72,6 +60,14 @@
       v-show="componentState == 'focus' || componentState == 'typing'"
       class="autocomplete absolute z-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none"
     >
+      <label
+      v-show="
+        componentState == 'focus' || componentState == 'typing' || isHover
+      "
+      class="inline text-sm font-medium text-gray-600 mb-4 py-1"
+    >
+      {{ getPrompt() }}
+    </label>
       <div class="relative searchbox flex w-full overflow-none py-2">
         <HeroIcon
           class="widget-icon text-gray- ml-3"
@@ -152,7 +148,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
-  name: "EntityWidget",
+  name: "Selector",
   props: ["modelValue", "type", "stepIri", "propertyPath"],
   emits: ["update:modelValue"],
   components: {
@@ -180,7 +176,7 @@ export default defineComponent({
         return { icon: "cloud", class: " text-green-600" };
       } else if (iri.split(":")[0] == "dds") {
         if (iri.split(":")[1].substring(0, 4) == "Step") {
-          return { icon: "puzzle", class: " text-indigo-600" }; //if it is a step
+          return { icon: "template", class: " text-indigo-600" }; //if it is a step
         } else {
           return { icon: "database", class: " text-yellow-600" }; //if it is a query
         }
@@ -189,9 +185,9 @@ export default defineComponent({
           (entity: any) => entity.iri == iri
         )
       ) {
-        return { icon: "link", class: " text-red-600" }; //if datamodel entity
+        return { icon: "document_text", class: " text-red-600" }; //if datamodel entity
       } else {
-        return { icon: "document", class: " text-gray-500" }; //if unknown entity
+        return { icon: "document_text", class: " text-gray-500" }; //if unknown entity
       }
     },
     updateEntity(entity: any): void {

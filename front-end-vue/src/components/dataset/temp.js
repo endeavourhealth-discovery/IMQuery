@@ -28,12 +28,12 @@
             >
               <Section name="Include all health records from">
                 <template v-for="target in snippet.targets" :key="target.iri">
-                  <EntityWidget
+                  <Selector
                     class="my-3 ml-5"
                     :type="target.iri"
                     :name="target.name"
                   >
-                  </EntityWidget>
+                  </Selector>
                 </template>
               </Section>
               <Section name="If">
@@ -64,7 +64,7 @@ import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import Section from "@/components/dataset/Section.vue";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
-import EntityWidget from "@/components/dataset/Widget.vue";
+import Selector from "@/components/dataset/Widget.vue";
 import Widget from "@/components/dataset/Widget.vue";
 const _ = require("lodash");
 import EntityService from "@/services/EntityService";
@@ -76,7 +76,7 @@ export default defineComponent({
   components: {
     // RoundButton,
     // HeroIcon,
-    EntityWidget,
+    Selector,
     // Widget,
     Section,
     SectionToggler,

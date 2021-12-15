@@ -16,7 +16,7 @@
       <!-- Brand  -->
 
       <div
-        id="brand"
+
         class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium"
       >
         <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
@@ -93,8 +93,8 @@
         <!-- / Menu Toggler  -->
 
         <!-- Branding  -->
-        <div class="flex app-branding non-selectable">
-          <img class="app-logo inline" src="app-icon-svg.svg" alt="" />
+        <div class="flex app-branding non-selectable" @click="activePageName = 'Home'">
+          <img class="app-logo inline" src="app-icon.png" alt="" />
           <div class="relative app-title inline-flex flex-col">
             <div
               class="relative app-title-top font-medium text-gray-600"
@@ -258,7 +258,7 @@ export default defineComponent({
       // definition: typeof Dataset,
       isLoading: false,
       searchString: "",
-      activePageName: "Home", //Options #Home #SearchResults
+      activePageName: "SearchResults", //Options #Home #SearchResults
       activeTabName: "Data",
       tabs: [
         {

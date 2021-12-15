@@ -37,14 +37,14 @@
             >
               <Section name="Copy all data from">
                 <template v-for="(item, index2) in step.copy" :key="item.iri">
-                  <EntityWidget
+                  <Selector
                     :propertyPath="`data.steps[${index1}].copy[${index2}]`"
                     :stepIri="step.iri"
                     type="query"
                     class="mb-1"
                     :modelValue="item"
                   >
-                  </EntityWidget>
+                  </Selector>
                 </template>
               </Section>
               <Section
@@ -58,7 +58,7 @@
                 >
                   <div class="flex">
                     <div>
-                      <EntityWidget
+                      <Selector
                         :propertyPath="
                           `data.steps[${index1}].inclusionCriteria[${index3}].datamodelEntity`
                         "
@@ -66,7 +66,7 @@
                         type="datamodel"
                         class="mb-1 inline"
                         :modelValue="criterion.datamodelEntity"
-                      ></EntityWidget>
+                      ></Selector>
                     </div>
 
                     <KeywordWidget class="inline" :modelValue="criterion.modifier.name" />
@@ -103,7 +103,7 @@ import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import Section from "@/components/dataset/Section.vue";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
-import EntityWidget from "@/components/dataset/EntityWidget.vue";
+import Selector from "@/components/dataset/Selector.vue";
 import Widget from "@/components/dataset/Widget.vue";
 const _ = require("lodash");
 import EntityService from "@/services/EntityService";
@@ -118,7 +118,7 @@ export default defineComponent({
     // RoundButton,
     // HeroIcon,
     // Widget,
-    EntityWidget,
+    Selector,
     Section,
     SectionToggler,
     Constraint,

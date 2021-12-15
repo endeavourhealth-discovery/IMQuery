@@ -94,30 +94,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: Home,
-    redirect: { name: "Dashboard" },
+    component: Search,
+    // redirect: { name: "Dashboard" },
     meta: {
       requiresLicense: true
-    },
-    children: [
-      {
-        path: "",
-        name: "Dashboard",
-        alias: ["/home", "/dashboard"],
-        component: Dashboard,
-        meta: {
-          requiresLicense: true
-        }
-      },
-      {
-        path: "/concept/:selectedIri",
-        name: "Concept",
-        component: Datamodel,
-        meta: {
-          requiresLicense: true
-        }
-      }
-    ]
+    }
   },
   {
     path: "/editor",
@@ -161,22 +142,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "Search",
     component: Search,
   },
-  // {
-  //   path: "/dataset",
-  //   name: "Datasets",
-  //   component: DatasetBrowser,
-  //   meta: {
-  //     requiresAuth: false
-  //   }
-  // },
-  // {
-  //   path: "/wizard",
-  //   name: "DatasetWizard",
-  //   component: DatasetWizard,
-  //   meta: {
-  //     requiresAuth: false
-  //   }
-  // },
   {
     path: "/workflow",
     name: "Workflow",

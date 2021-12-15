@@ -14,7 +14,7 @@
       <input
         type="text"
         class="relative transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900 font-medium rounded-md focus:outline-none"
-        placeholder="Type to Search for Data, Apps and Websites"
+        placeholder="Type to Search for Data, Apps and Resources"
         :value="modelValue"
         @input="onInput('update:modelValue', $event)"
         @keyup.enter="onEnter($event)"
