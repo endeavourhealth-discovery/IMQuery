@@ -55,6 +55,7 @@ export default defineComponent({
 
 .tab-buttons {
   width: 100%;
+  margin-left: 2px;
   /* margin-top: 10px; */
   padding-bottom: 2px;
   text-align: center;

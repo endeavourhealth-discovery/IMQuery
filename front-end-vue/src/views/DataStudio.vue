@@ -3,7 +3,7 @@
   <div class="wrapper flex w-full h-full bg-white">
     <!-- Sidenav  -->
     <div
-      class="wrapper-sidenav w-full bg-white border-right flex flex-col align-center "
+      class="wrapper-sidenav w-full bg-white flex flex-col align-center "
     >
       <div class="flex justify-center align-center">
         <RoundButton

@@ -2,13 +2,28 @@
   <!-- Editor  -->
   <div class="query-editor flex w-full h-full">
     <!-- Middle -->
-    <div class="w-full">
+    <div class="w-full flex">
+
+        <!--Content Nav -->
+        <ContentNav
+          class="side-nav inline w-full h-full"
+          :items="sideNavItems"
+          v-model="sideNavActiveItem"
+        />
+        <!-- /Content Nav -->
+
+
+        <div class="flex flex-col w-full h-full">
+
+
+
+
       <!-- Header  -->
       <div
         class="top-nav inline-flex w-full px-5 py-2 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
       >
         <HorizontalNavPills
-          class="items-center justify-center"
+          class="mx-auto"
           v-model:items="openQueries"
           v-model="activeQueryId"
           :closable="true"
@@ -38,13 +53,7 @@
       <!-- Body  -->
 
       <div class="query-editor-body inline-flex h-full w-full">
-        <!--Content Nav -->
-        <ContentNav
-          class="side-nav inline w-full h-full"
-          :items="sideNavItems"
-          v-model="sideNavActiveItem"
-        />
-        <!-- /Content Nav -->
+
 
         <!--  Content  -->
         <div class="bg-white inline query-editor-content rounded-b-2xl">
@@ -148,6 +157,11 @@
         <!--  Content  -->
       </div>
       <!-- / Body  -->
+
+
+        </div>
+
+
     </div>
     <!-- Middle -->
   </div>
@@ -407,9 +421,9 @@ export default defineComponent({
   max-width: 230px !important;
 }
 
-.top-nav {
+/* .top-nav {
   border-bottom: 1px solid #ecefed;
-}
+} */
 
 .query-editor-content {
   flex-grow: 1;

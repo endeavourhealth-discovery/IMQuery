@@ -1,14 +1,13 @@
 <template>
   <div
-    class="widget mt-1 relative non-selectable "
+    class="widget relative non-selectable "
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >
-  
     <button
       type="button"
       :class="
-        'widget-button relative bg-white rounded-md pl-3 pr-2 pb-2 text-left border border-transparent cursor-default outline-none sm:text-sm' +
+        'widget-button relative bg-white rounded-md text-left border border-transparent cursor-default outline-none sm:text-sm' +
           [isHover ? ' hover shadow-sm' : ''] +
           [componentState == 'focus' ? ' focus shadow-sm' : ''] +
           [componentState == 'typing' ? ' typing shadow-sm' : '']
@@ -42,16 +41,6 @@
             </template>
           </div>
         </span>
-        <HeroIcon
-          v-show="
-            componentState == 'focus' || componentState == 'typing' || isHover
-          "
-          class="widget-icon text-gray- ml-2"
-          icon="selector"
-          strokewidth="2"
-          width="20"
-          height="20"
-        />
       </div>
     </button>
 
@@ -61,13 +50,13 @@
       class="autocomplete absolute z-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none"
     >
       <label
-      v-show="
-        componentState == 'focus' || componentState == 'typing' || isHover
-      "
-      class="inline text-sm font-medium text-gray-600 mb-4 py-1"
-    >
-      {{ getPrompt() }}
-    </label>
+        v-show="
+          componentState == 'focus' || componentState == 'typing' || isHover
+        "
+        class="inline text-sm font-medium text-gray-600 mb-4 py-1"
+      >
+        {{ getPrompt() }}
+      </label>
       <div class="relative searchbox flex w-full overflow-none py-2">
         <HeroIcon
           class="widget-icon text-gray- ml-3"
@@ -199,7 +188,6 @@ export default defineComponent({
     },
 
     filteredEntities(): any {
-      
       let _maxHits = 5;
       if (this.type == "query") {
         let _steps = this.$store.state.openQueries.filter(
@@ -268,10 +256,12 @@ export default defineComponent({
 .widget-button.hover,
 .widget-button.typing {
   min-width: 175px;
-  border-left: 1px solid rgb(207, 210, 218);
+  border: 1px solid rgb(207, 210, 218);
+  border-radius: 5px;
+  /* border-left: 1px solid rgb(207, 210, 218);
   border-right: 1px solid rgb(207, 210, 218);
-  border-bottom: 1px solid rgb(207, 210, 218);
-  border-radius: 0 0 5px 5px;
+  border-bottom: 1px solid rgb(207, 210, 218); */
+  /* border-radius: 0 0 5px 5px; */
 }
 
 .widget-label {

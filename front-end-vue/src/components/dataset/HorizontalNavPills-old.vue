@@ -1,30 +1,28 @@
 <template>
-  <div
-    class="tab-buttons overflow-y-hidden overflow-x-auto flex items-center justify-center group rounded-lg bg-gray-50 hover:bg-gray-100"
-  >
+
+  <div class="tab-buttons overflow-y-hidden overflow-x-auto w-full flex">
     <template v-for="item in items" :key="item.id">
-      <button
-        @click="$emit('update:modelValue', item.id)"
-        type="button"
+      <div
         :class="[
-          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base hover:text-black',
-          { ' text-black bg-white shadow-sm': modelValue == item.id },
+          'tab-button non-selectable inline-flex items-center justify-center rounded-md py-1 px-2 mr-2 font-regular transition duration-500 ease-in-out text-gray-400 font-regular text-base hover:text-black ',
+          { 'active text-black': modelValue == item.id },
         ]"
       >
         <!-- Icon -->
         <div class="inline-flex">
           <HeroIcon
-          :class="[modelValue == item.id ? ' text-yellow-500' : ' text-gray-500']"
+            v-if="item.icon"
             strokewidth="2"
             width="24"
             height="24"
-            :icon="'database'"
+            :icon="item.icon"
+            :active="modelValue == item.id"
           />
         </div>
 
         <div
-          class="inline-flex text-base font-medium ml-2"
-        
+          class="inline-flex text-base font-medium"
+          @click="$emit('update:modelValue', item.id)"
         >
           {{ item.name }}
         </div>
@@ -43,7 +41,7 @@
             "
           />
         </div>
-      </button>
+      </div>
     </template>
   </div>
 </template>
@@ -70,9 +68,9 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
-.tab-buttons {
-  padding: 3px 3px;
-}
+/* .tab-button {
+  border: solid 1px transparent;
+} */
 
 .tab-button.active {
   /* border: solid 1px #d0d7de; */

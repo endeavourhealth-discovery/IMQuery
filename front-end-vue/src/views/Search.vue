@@ -9,68 +9,21 @@
 
     <!-- Page: Home -->
     <div
-      id="page-home"
-      v-if="activePageName == 'Home'"
+      v-if="activePageName == 'PageName'"
       class="page flex flex-col items-center justify-center"
     >
       <!-- Brand  -->
-
-      <div
-
-        class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium"
-      >
-        <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
-        <img class="search-logo mb-10" src="home-icon.png" alt="" />
-      </div>
-      <!-- /Brand  -->
-
-      <!-- Searchbox  -->
-      <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm">
-        <Searchbox
-          class="w-full"
-          v-model="searchString"
-          :autocompleteData="autocompleteData"
-          @search="showSearchResults()"
-        />
-        <button
-          class="transition duration-200 ease-in-out group ml-3 py-2 px-4 border border-transparent rounded-md text-white bg-blue-500 hover:bg-blue-600 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
-          @click="showSearchResults()"
-        >
-          <HeroIcon
-            class=""
-            strokewidth="2"
-            width="24"
-            height="24"
-            icon="search"
-          />
-        </button>
-      </div>
-      <!-- /Searchbox  -->
-
-      <!-- Examples  -->
-      <div
-        id="examples"
-        class="non-selectable max-w-3xl my-7 text-gray-900 text-lg"
-        @click="onTry('sbp and hr for diabetics with htn and stroke')"
-      >
-        <a class="mr-3 font-bold">Try </a>
-        <b>sbp</b> and <b>hr</b> for <b>diabetics</b> with <b>htn</b> and
-        <b>stroke</b>
-      </div>
-      <!-- /Examples  -->
     </div>
     <!-- /Page: Home -->
 
     <!-- Page: Results -->
-    <div
-      id="page-results"
-      v-if="activePageName == 'SearchResults'"
-      class="page"
-    >
-      <div class="header flex items-center w-full">
+    <div id="page-main" v-if="activePageName == 'Main'" class="page">
+      <div :class="'header flex items-center w-full b-bottom' +
+              [activeTabName == 'Home' ? ' justify-center' : ' ']" >
         <!-- Menu Toggler  -->
         <RoundButton
-          class="h-10 ml-4"
+          v-if="activeTabName != 'Home'"
+          class="h-10 ml-4 invisible"
           :rounded="false"
           :showRing="true"
           backgroundColor="white"
@@ -93,17 +46,19 @@
         <!-- / Menu Toggler  -->
 
         <!-- Branding  -->
-        <div class="flex app-branding non-selectable" @click="activePageName = 'Home'">
+        <div
+          v-if="activeTabName != 'Home'"
+          :class="
+            'flex app-branding non-selectable ' +
+              [activeTabName == 'Home' ? ' invisible' : ' ']
+          "
+        >
           <img class="app-logo inline" src="app-icon.png" alt="" />
           <div class="relative app-title inline-flex flex-col">
-            <div
-              class="relative app-title-top font-medium text-gray-600"
-            >
+            <div class="relative app-title-top font-medium text-gray-600">
               Resolution
             </div>
-            <div
-              class="relative app-title-bottom  font-medium text-black"
-            >
+            <div class="relative app-title-bottom  font-medium text-black">
               Data Studio
             </div>
           </div>
@@ -112,33 +67,18 @@
 
         <!-- Searchbox  -->
         <Searchbox
-          class="searchbox-top mb-1 ml-3"
+          v-if="activeTabName != 'Home'"
+          :class="
+            'searchbox-top mb-1 ml-3' +
+              [activeTabName == 'Home' ? ' invisible' : '']
+          "
           v-model="searchString"
           :autocompleteData="autocompleteData"
           @search="showSearchResults()"
         />
 
-        <RoundButton
-          class="h-10 w-10 mx-3 px-2 text-xl font-regular mb-2"
-          :rounded="false"
-          :showRing="true"
-          backgroundColor="blue-500"
-          hoverBackgroundColor="blue-600"
-          textColor="white"
-          ringColor="blue-600"
-          @click="showSearchResults()"
-        >
-          <HeroIcon
-            class=""
-            strokewidth="2"
-            width="20"
-            height="20"
-            icon="search"
-          />
-        </RoundButton>
-
         <!-- Tab Buttons  -->
-        <div id="tab-buttons" class="ml-5 mt-1">
+        <div id="tab-buttons" :class="[activeTabName == 'Home' ? 'ml-5 mt-1' : '']">
           <HorizontalNavbar v-model="activeTabName" :items="tabs" />
         </div>
         <!-- /Tab Buttons -->
@@ -147,8 +87,49 @@
 
       <!-- Tabs -->
       <div class="page-content">
+        <!-- Tab: Home -->
+        <div
+          v-show="activeTabName == 'Home'"
+          class="tab-content flex pt-5 flex flex-col items-center justify-center"
+        >
+          <div
+            class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium"
+          >
+            <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
+            <img class="search-logo mb-10" src="home-icon.png" alt="" />
+          </div>
+          <!-- /Brand  -->
+
+          <!-- Searchbox  -->
+          <div
+            id="searchbox-main"
+            class="mx-auto w-full max-w-3xl flex px-5-sm"
+          >
+            <Searchbox
+              class="w-full mx-auto searchbox-main"
+              v-model="searchString"
+              :autocompleteData="autocompleteData"
+              @search="showSearchResults()"
+            />
+          </div>
+          <!-- /Searchbox  -->
+
+          <!-- Examples  -->
+          <div
+            id="examples"
+            class="non-selectable max-w-3xl my-7 text-gray-900 text-lg"
+            @click="onTry('sbp and hr for diabetics with htn and stroke')"
+          >
+            <a class="mr-3 font-bold">Try </a>
+            <b>sbp</b> and <b>hr</b> for <b>diabetics</b> with <b>htn</b> and
+            <b>stroke</b>
+          </div>
+          <!-- /Examples  -->
+        </div>
+        <!-- /Tab: Home -->
+
         <!-- Tab: Search -->
-        <div v-show="activeTabName == 'Search'" class="tab-content  flex pt-5">
+        <div v-show="activeTabName == 'Results'" class="tab-content  flex pt-5">
           <div class="results w-full max-w-4xl ">
             <!-- <div>Filter and sort</div> -->
             <template v-if="searchResults && searchResults.length > 0">
@@ -168,10 +149,7 @@
         <!-- /Tab: Search  -->
 
         <!-- Tab: Data  -->
-        <DataStudio
-          v-show="activeTabName == 'Data'"
-          class="tab-content "
-        />
+        <DataStudio v-show="activeTabName == 'Data'" class="tab-content " />
         <!-- /Tab: Data  -->
 
         <!-- Tab: Explore  -->
@@ -258,35 +236,41 @@ export default defineComponent({
       // definition: typeof Dataset,
       isLoading: false,
       searchString: "",
-      activePageName: "SearchResults", //Options #Home #SearchResults
+      activePageName: "Main", //Options #Home #SearchResults
       activeTabName: "Data",
       tabs: [
         {
           index: 0,
-          name: "Search",
-          icon: "search",
+          name: "Home",
+          icon: "home",
           visible: true,
         },
         {
           index: 1,
+          name: "Results",
+          icon: "search",
+          visible: true,
+        },
+        {
+          index: 2,
           name: "Data",
           icon: "newspaper",
           visible: true,
         },
         {
-          index: 2,
+          index: 3,
           name: "Explore",
           icon: "globe",
           visible: false,
         },
         {
-          index: 3,
+          index: 4,
           name: "Sources",
           icon: "office_building",
           visible: true,
         },
         {
-          index: 4,
+          index: 5,
           name: "Dictionary",
           icon: "bookOpen",
           visible: true,
@@ -406,8 +390,8 @@ export default defineComponent({
             this.searchResults = (this.searchData as any).data.searchResults;
             // alert(this.searchResults.length);
           }
-          this.activePageName = "SearchResults";
-          this.activeTabName = "Search";
+          this.activePageName = "Main";
+          this.activeTabName = "Results";
         });
       }
     },
@@ -516,8 +500,8 @@ export default defineComponent({
 }
 
 .app-logo {
- margin-top: 5px;
- margin-right: 3px;
+  margin-top: 5px;
+  margin-right: 3px;
   width: 31px;
   height: 26px;
 }
@@ -533,20 +517,23 @@ export default defineComponent({
 
 .app-title-bottom {
   top: -5px;
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .header {
   padding-left: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: solid 1px #ECEFED /*#dde1e2;*/
+}
+
+.b-bottom {
+  border-bottom: solid 1px #ecefed; /*#dde1e2;*/
 }
 
 .results {
   margin-left: 140px;
 }
-
+.searchbox-main,
 .searchbox-top {
   width: 100%;
   max-width: 400px;
