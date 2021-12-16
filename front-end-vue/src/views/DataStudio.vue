@@ -50,6 +50,8 @@
       <QueryEditor
         class="section-center w-full"
         :sideNavActiveItem="sideNavActiveItem"
+        @previous="handlePrevious()"
+        @next="handleNext()"
       />
     </template>
     <template v-else-if="sideNavActiveItem == 'Library'">
@@ -59,7 +61,6 @@
       View Data
     </template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
-
   </div>
   <!-- /Content Wrapper -->
 </template>
@@ -165,22 +166,22 @@ export default defineComponent({
         },
       ],
       sideNavActiveItem: "Sources",
-      sideNavItems: {
-        search: {
+      sideNavItems: [
+        {
           id: "074b7d3e-2519-4bed-bdf4-84f90f46de46",
           name: "Library",
           icon: "search",
           visible: true,
           children: [],
         },
-        view: {
+        {
           id: "b160ce1e-1bd3-4172-914a-ea127af6a756",
           name: "View Data",
           icon: "cube_transparent",
           visible: true,
           children: [],
         },
-        help: {
+        {
           id: "dbb23c7f-7f8a-4457-ad60-9096e9de3eb7",
           name: "Get Help",
           icon: "question_mark_circle",
@@ -188,44 +189,43 @@ export default defineComponent({
           children: [],
           seperator: true,
         },
-        sources: {
+        {
           id: "65308e3e-a381-4c3b-b41a-08a674a35531",
           name: "Sources",
           icon: "office_building",
           visible: true,
           children: [],
         },
-        mainDataType: {
+        {
           id: "ac43dd48-3bf8-4be9-87fb-045c1f245277",
           name: "Main Data Type",
           icon: "collection",
           visible: true,
           children: [],
         },
-        filters: {
+        {
           id: "1cece6bf-2bf5-448b-b3c3-3c578ce4412b",
           name: "Steps",
           icon: "template",
           visible: true,
           children: [],
         },
-        output: {
+        {
           id: "af92a57b-9d1e-45db-a783-eaaf00970e23",
           name: "Output",
           icon: "cube",
           visible: true,
           children: [],
         },
-        request: {
+        {
           id: "c813a2cb-2edd-4e42-a1d0-097e68a941e6",
           name: "Save or Export",
           icon: "download",
           visible: true,
           children: [],
         },
-      },
+      ],
       isLoading: false,
-
     };
   },
   async mounted() {
@@ -253,6 +253,21 @@ export default defineComponent({
             )
           );
         });
+    },
+    handlePrevious(): void {
+      for (let i = 4; i < this.sideNavItems.length; i++) {
+        if (this.sideNavItems[i].name == this.sideNavActiveItem) {
+          this.sideNavActiveItem = this.sideNavItems[i - 1].name;
+        }
+      }
+    },
+    handleNext(): void {
+      for (let i = 3; i < this.sideNavItems.length - 1; i++) {
+        if (this.sideNavItems[i].name == this.sideNavActiveItem) {
+          this.sideNavActiveItem = this.sideNavItems[i + 1].name;
+        return;
+        }
+      }
     },
   },
 });
