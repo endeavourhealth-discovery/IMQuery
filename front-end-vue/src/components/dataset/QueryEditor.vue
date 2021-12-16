@@ -3,16 +3,12 @@
   <div class="query-editor flex w-full h-full">
     <!-- Middle -->
     <div class="w-full flex">
-     
-
       <div class="flex flex-col w-full h-full">
         <!-- Header  -->
         <div
-          class="top-nav relative inline-flex justify-between w-full px-5 pt-5 pb-10 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
+          class="top-nav  inline-flex justify-between w-full px-5 pt-5 pb-10 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
         >
-        <div class="empty-space">
-
-        </div>
+          <div class="empty-space"></div>
           <HorizontalNavPills
             class="nav"
             v-model:items="openQueries"
@@ -38,7 +34,7 @@
             <button
               class="inline-flex items-center  hover:shadow-lg pt-1 pl-3 pr-2 pb-1 rounded-r-md  bg-white text-sm font-medium duration-500 ease-in-out bg-blue-500 hover:bg-blue-700 text-white"
             >
-            Next
+              Next
               <HeroIcon
                 class="ml-2"
                 strokewidth="2"
@@ -48,7 +44,6 @@
               />
             </button>
           </div>
-
         </div>
         <!-- / Header  -->
 
@@ -112,7 +107,10 @@
               class="pt-8 pl-14 pr-10 "
             >
               <div class="flex flex-col w-full max-w-2xl mx-auto">
-                <InputDescription class="w-full max-w-2xl" :description="inputMeta.mainDataType" />
+                <InputDescription
+                  class="w-full max-w-2xl"
+                  :description="inputMeta.mainDataType"
+                />
                 <InputRadioButtons
                   class="w-full max-w-lg mx-auto mt-7"
                   v-model="selectedMainDataType"
@@ -164,6 +162,15 @@
       </div>
     </div>
     <!-- Middle -->
+
+    <div class="section-right w-full">
+      <HorizontalNav
+        class="section-right-nav w-full border-bottom px-5 py-3"
+        v-model:items="rightPanelItems"
+        v-model="activeRightPanelItemId"
+        :closable="false"
+      />
+    </div>
   </div>
   <!-- Editor  -->
 </template>
@@ -179,6 +186,7 @@ import HorizontalNavPills from "@/components/dataset/HorizontalNavPills.vue";
 import InputDescription from "@/components/dataset/InputDescription.vue";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 // import InputTextbox from "@/components/dataset/InputTextbox.vue";
+import HorizontalNav from "@/components/dataset/HorizontalNav.vue";
 
 // import RoundButton from "@/components/dataset/RoundButton.vue";
 // import MultiSelect from "primevue/multiselect";
@@ -196,6 +204,7 @@ export default defineComponent({
     InputDescription,
     // InputTextbox,
     InputRadioButtons,
+    HorizontalNav,
     // MultiSelect,
   },
   props: ["sideNavActiveItem", "sideNavItems"],
@@ -311,6 +320,21 @@ export default defineComponent({
           placeholder: "Select Lists from the Dropdown",
         },
       },
+      activeRightPanelItemId: "13dba7f7-9d06-4f0a-9c60-cbb4d9518b47",
+      rightPanelItems: [
+        {
+          id: "13dba7f7-9d06-4f0a-9c60-cbb4d9518b47",
+          name: "Suggestions",
+        },
+        {
+          id: "fbb192ca-d2ec-4d82-9228-94e23e5b753f",
+          name: "All",
+        },
+        {
+          id: "f31a59498-a835-4313-8124-22468a709a0c",
+          name: "Favourites",
+        },
+      ],
     };
   },
   computed: {
@@ -385,7 +409,7 @@ export default defineComponent({
 
 .top-nav {
   z-index: 2;
- /* border-bottom: 1px solid #ecefed; */
+  /* border-bottom: 1px solid #ecefed; */
 }
 
 .query-editor-content {
@@ -405,11 +429,9 @@ export default defineComponent({
   max-width: 400px;
 }
 
-
 .max-h-150px {
   height: 150px;
 }
-
 
 .nav-buttons {
   right: 30px;
@@ -421,5 +443,10 @@ export default defineComponent({
 
 .top-nav .nav {
   height: 40px;
+}
+
+.section-right {
+  width: 400px;
+    border-left: 1px solid #ecefed;
 }
 </style>

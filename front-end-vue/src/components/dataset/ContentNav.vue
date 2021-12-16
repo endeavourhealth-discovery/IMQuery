@@ -10,8 +10,12 @@
           "
           @click="$emit('update:modelValue', item.name)"
         >
-          <div :class="'section-title w-full flex py-2 px-3' + 
-           [modelValue == item.name ? ' text-blue-600' : '']">
+          <div
+            :class="
+              'section-title w-full flex py-2 px-3' +
+                [modelValue == item.name ? ' text-blue-600' : '']
+            "
+          >
             <div class="inline">
               <HeroIcon
                 v-if="item.icon"
@@ -23,12 +27,18 @@
               />
             </div>
 
-            <div v-if="expanded" :class="'inline ml-5 text-black' 
-            +   [modelValue == item.name ? ' text-blue-600' : '']">
+            <div
+              v-if="expanded"
+              :class="
+                'inline ml-5 text-black' +
+                  [modelValue == item.name ? ' text-blue-600' : '']
+              "
+            >
               {{ item.name }}
             </div>
           </div>
         </div>
+        <div v-if="item.seperator" class="separator"></div>
       </template>
     </template>
     <div class="divider-full"></div>
@@ -56,7 +66,6 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
-
 .section-item {
   font-size: 16px !important;
   font-weight: 400;
@@ -64,8 +73,14 @@ export default defineComponent({
   /* padding-right: 20px; */
 }
 
+.separator {
+  padding-top: 10px;
+  border-right: 1px solid #ecefed;
+  border-bottom: 1px solid #ecefed;
+}
+
 .section-item:hover {
-  background-color: #F6F8FA;
+  background-color: #f6f8fa;
 }
 
 /* .section-item.active .section-title {

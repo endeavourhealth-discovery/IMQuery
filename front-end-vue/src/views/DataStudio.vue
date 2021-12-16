@@ -1,10 +1,11 @@
 <template>
   <!-- Content Wrapper -->
-  <div class="wrapper flex w-full h-full bg-white">
+  <div class="wrapper relative flex w-full h-full bg-white">
     <!-- Sidenav  -->
-    <div class="wrapper-sidenav w-full bg-white flex flex-col align-center"
-    @mouseenter="expanded = true"
-    @mouseleave="expanded = false"
+    <div
+      class="wrapper-sidenav w-full bg-white flex flex-col align-center"
+      @mouseenter="expanded = true"
+      @mouseleave="expanded = false"
     >
       <div class="flex justify-center align-center border-right">
         <RoundButton
@@ -37,16 +38,28 @@
 
     <BackgroundCards class="bg-wrapper hidden" />
 
-    <QueryEditor class="section-center w-full" :sideNavActiveItem="sideNavActiveItem" />
-
-    <div class="section-right w-full">
-      <HorizontalNav
-        class="section-right-nav w-full border-bottom px-5 py-3"
-        v-model:items="rightPanelItems"
-        v-model="activeRightPanelItemId"
-        :closable="false"
+    <template
+      v-if="
+        sideNavActiveItem == 'Sources' ||
+          sideNavActiveItem == 'Main Data Type' ||
+          sideNavActiveItem == 'Steps' ||
+          sideNavActiveItem == 'Output' ||
+          sideNavActiveItem == 'Save or Export'
+      "
+    >
+      <QueryEditor
+        class="section-center w-full"
+        :sideNavActiveItem="sideNavActiveItem"
       />
-    </div>
+    </template>
+    <template v-else-if="sideNavActiveItem == 'Library'">
+      <DatasetBrowser class="section-center w-full"
+    /></template>
+    <template v-else-if="sideNavActiveItem == 'View Data'">
+      View Data
+    </template>
+    <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
+
   </div>
   <!-- /Content Wrapper -->
 </template>
@@ -66,7 +79,6 @@ import LoggerService from "@/services/LoggerService";
 // import SearchService from "@/services/SearchService";
 // import SearchClient from "@/services/SearchClient";
 // const { MeiliSearch } = require("meilisearch");
-import HorizontalNav from "@/components/dataset/HorizontalNav.vue";
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
@@ -74,6 +86,7 @@ import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
+import DatasetBrowser from "@/views/DatasetBrowser.vue";
 
 export default defineComponent({
   name: "DataStudio",
@@ -83,8 +96,9 @@ export default defineComponent({
     // VerticalButtonGroup,
     RoundButton,
     HeroIcon,
-    HorizontalNav,
-    ContentNav
+    // HorizontalNav,
+    ContentNav,
+    DatasetBrowser,
   },
   data() {
     return {
@@ -138,7 +152,7 @@ export default defineComponent({
           index: 5,
           name: "Help",
           title: "Get Help",
-          icon: "question_mark_cricle",
+          icon: "question_mark_circle",
           visible: true,
         },
         {
@@ -153,71 +167,65 @@ export default defineComponent({
       sideNavActiveItem: "Sources",
       sideNavItems: {
         search: {
-          id: "c1a1c191-11e1-4864-8305-286292486e15",
-          name: "Search Library",
+          id: "074b7d3e-2519-4bed-bdf4-84f90f46de46",
+          name: "Library",
           icon: "search",
           visible: true,
           children: [],
         },
+        view: {
+          id: "b160ce1e-1bd3-4172-914a-ea127af6a756",
+          name: "View Data",
+          icon: "cube_transparent",
+          visible: true,
+          children: [],
+        },
+        help: {
+          id: "dbb23c7f-7f8a-4457-ad60-9096e9de3eb7",
+          name: "Get Help",
+          icon: "question_mark_circle",
+          visible: true,
+          children: [],
+          seperator: true,
+        },
         sources: {
-          id: "fde56326-f646-45cc-9fa2-97e294d192da",
+          id: "65308e3e-a381-4c3b-b41a-08a674a35531",
           name: "Sources",
           icon: "office_building",
           visible: true,
           children: [],
         },
         mainDataType: {
-          id: "f1e2cde5-2c4a-4411-862f-3ed2f9ed2c15",
+          id: "ac43dd48-3bf8-4be9-87fb-045c1f245277",
           name: "Main Data Type",
           icon: "collection",
           visible: true,
           children: [],
         },
         filters: {
-          id: "b3b0368b-8dfe-496b-8697-c3dfb6756b6b",
+          id: "1cece6bf-2bf5-448b-b3c3-3c578ce4412b",
           name: "Steps",
           icon: "template",
           visible: true,
           children: [],
         },
         output: {
-          id: "b51ccc58-91da-4cf1-bcfb-a77256af7ccb",
+          id: "af92a57b-9d1e-45db-a783-eaaf00970e23",
           name: "Output",
           icon: "cube",
           visible: true,
           children: [],
         },
         request: {
-          id: "9a326f4e-67a7-4331-a4ad-ba075fba8e6d",
+          id: "c813a2cb-2edd-4e42-a1d0-097e68a941e6",
           name: "Save or Export",
           icon: "download",
           visible: true,
           children: [],
         },
-        view: {
-          id: "e1c3a8c1-96ad-475f-a5b2-18426e0c8ff6",
-          name: "View Data",
-          icon: "cube_transparent",
-          visible: true,
-          children: [],
-        },
       },
       isLoading: false,
-      activeRightPanelItemId: "13dba7f7-9d06-4f0a-9c60-cbb4d9518b47",
-      rightPanelItems: [
-        {
-          id: "13dba7f7-9d06-4f0a-9c60-cbb4d9518b47",
-          name: "Suggestions",
-        },
-        {
-          id: "fbb192ca-d2ec-4d82-9228-94e23e5b753f",
-          name: "All",
-        },
-        {
-          id: "f31a59498-a835-4313-8124-22468a709a0c",
-          name: "Favourites",
-        },
-      ],
+
     };
   },
   async mounted() {
@@ -264,6 +272,7 @@ export default defineComponent({
   /* margin-top: 15px; */
   /* margin-right: 15px; */
   /* bottom: 15px; */
+  margin-left: 60px;
   width: 100%;
   /* max-width: 1000px; */
   /* box-shadow: rgb(207 210 218) 0px 0px 6px; */ /* lighter shadow   */
@@ -277,14 +286,15 @@ export default defineComponent({
 }
 
 .wrapper-sidenav {
+  position: absolute;
   top: 0;
   bottom: 0;
-  width: 80px;
+  width: 60px;
+  z-index: 999;
 }
 
-
 .wrapper-sidenav:hover {
-  width: 325px;
+  width: 250px;
 }
 
 .section-right {

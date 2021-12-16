@@ -4,11 +4,41 @@
   <!-- /General UI -->
 
   <!-- Content Wrapper -->
-  <main >
+  <main id="main-container">
     <!-- Page: Home -->
     <div id="home-page" v-if="activePage == 'home'" class="page">
+      <!-- Searchbar -->
+      <div id="search-bar">
+        <InputText
+          id="search-bar-input"
+          type="text"
+          placeholder="Search"
+          v-model="searchInputText"
+          v-tooltip.bottom="
+            'Enter search terms to find queries by name or description'
+          "
+        />
+        <Button
+          icon="pi pi-sliders-h"
+          class="p-ml-3 p-button-secondary p-button-outlined"
+          v-tooltip.bottom="'Filter search results'"
+          @click="toggleFilterOverlay"
+        />
+        <OverlayPanel id="filter-overlay" ref="filter-overlay">
+          <div class="overlay-title">Filters</div>
+
+          <div class="filter-container p-d-flex p-flex-column">
+            <div class="p-my-2">
+              <div>Tags</div>
+              <Chips class="p-my-2" v-model="filterTags" />
+            </div>
+          </div>
+        </OverlayPanel>
+      </div>
+      <!-- /Searchbar -->
+
       <!-- Tabs Header  -->
-      <!-- <div id="tab-buttons">
+      <div id="tab-buttons">
         <div
           :class="[
             'tab-button',
@@ -34,7 +64,7 @@
           <font-awesome-icon style="margin-right: 10px" icon="book" />
           Dataset Library
         </div>
-      </div> -->
+      </div>
       <!-- /Tabs Header -->
 
       <!-- Tab: My Queries  -->
@@ -69,36 +99,6 @@
             />
           </div>
 
-          <!-- Searchbar -->
-          <div >
-            <InputText
-              id="search-bar-input"
-              type="text"
-              placeholder="Search"
-              v-model="searchInputText"
-              v-tooltip.bottom="
-                'Enter search terms to find queries by name or description'
-              "
-            />
-            <Button
-              icon="pi pi-sliders-h"
-              class="p-ml-3 p-button-secondary p-button-outlined"
-              v-tooltip.bottom="'Filter search results'"
-              @click="toggleFilterOverlay"
-            />
-            <OverlayPanel id="filter-overlay" ref="filter-overlay">
-              <div class="overlay-title">Filters</div>
-
-              <div class="filter-container p-d-flex p-flex-column">
-                <div class="p-my-2">
-                  <div>Tags</div>
-                  <Chips class="p-my-2" v-model="filterTags" />
-                </div>
-              </div>
-            </OverlayPanel>
-          </div>
-          <!-- /Searchbar -->
-
           <div class="p-d-inline">
             <Button
               label="Share"
@@ -112,11 +112,13 @@
           <div class="p-d-flex p-flex-column">
             <Button
               label="New Dataset"
+             
               class="p-button-primary p-button-outlined button-medium p-mx-2 p-mb-2"
               @click="handleNewDataset"
             />
             <Button
               label="Import Existing Dataset"
+             
               class="p-button-primary p-button-outlined button-medium p-mx-2"
               @click="handleImportDataset"
             />
@@ -133,6 +135,7 @@
           :searchstring="searchInputText"
           :filtertags="filterTags"
         />
+      
 
         <!-- /Content  -->
       </div>
@@ -151,13 +154,17 @@
     <!-- /Page: Home -->
 
     <!-- Page: New Query -->
-    <div id="new-query-page" v-if="activePage == 'new-query'" class="page">
+    <div
+      id="new-query-page"
+      v-if="activePage == 'new-query'"
+      class="page"
+    >
       <!-- Header -->
       <div class="button-toolbar p-d-flex p-jc-between p-ai-center">
         <div class="p-d-inline"></div>
 
         <div class="title p-d-inline">
-          Alternative Page 2 - Empty / Not in use
+          Alternative Page 2 - Empty / Not in use 
         </div>
 
         <Button
@@ -169,6 +176,7 @@
       </div>
       <!-- /Header -->
     </div>
+
 
     <!-- /Tab: New Query -->
   </main>
@@ -217,10 +225,10 @@ export default defineComponent({
   async mounted() {
     this.$store.commit("updateSelectedEntityType", "DatasetBrowser");
     this.$store.commit("updateSideNavHierarchyFocus", {
-      name: "Datasets",
-      fullName: "Datasets",
-      iri: "http://endhealth.info/im#Dataset",
-    });
+          name: "Datasets",
+          fullName: "Datasets",
+          iri: "http://endhealth.info/im#Dataset"
+        });
   },
   methods: {
     toggleAddOverlay(event: any): void {
@@ -230,7 +238,8 @@ export default defineComponent({
       (this.$refs["filter-overlay"] as any).toggle(event);
     },
     handleNewDataset(): void {
-      this.$router.push({ name: "DatasetWizard" });
+       this.$router.push({ name: "DatasetWizard" })
+      
     },
     deleteSelected(): void {
       (this.$refs["querytable"] as any).deleteSelected();
@@ -251,17 +260,16 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
-main {
-  /* margin: 0.5rem; */
-  padding: 0 10px 0 100px;
-  /* padding-left: 6rem; */
-  /* height: calc(100vh - 1rem); */
-  height: 100%;
+
+#main-container {
+  margin: 0.5rem;
+  padding: 2rem;
+  height: calc(100vh - 1rem);
   width: 100%;
   overflow-y: auto;
   /* background-color: #F8F9FB; */
-  background-color: #ffffff;
-  /* border: 1px solid #dde1e2; */
+  background-color: #FFFFFF;
+  border: 1px solid #dde1e2;
 }
 
 .page {

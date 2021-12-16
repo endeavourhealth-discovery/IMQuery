@@ -133,7 +133,7 @@ export default defineComponent({
           index: 5,
           name: "Help",
           title: "Get Help",
-          icon: "question_mark_cricle",
+          icon: "question_mark_circle",
           visible: true,
         },
         {
