@@ -24,10 +24,10 @@
           />
 
           <div
-            class="nav-buttons relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+            class="nav-buttons absolute z-1 inline-flex rounded-md shadow-sm -space-x-px"
           >
             <button
-              class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-500 hover:text-white"
+              class="inline-flex items-center p-1 pr-2 pb-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-500 hover:text-white"
             >
               <HeroIcon
                 class="ml-1 mt-1"
@@ -38,7 +38,7 @@
               />
             </button>
             <button
-              class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-500 hover:text-white"
+              class="inline-flex items-center p-1 pr-2 pb-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-500 hover:text-white"
             >
               <HeroIcon
                 class="ml-1 mt-1"
@@ -139,7 +139,7 @@
                 <InputDescription :description="inputMeta.name" />
                 <div class="w-full max-w-400px">
                   <input
-                    class="title-input outline-none mb-5 text-gray-                               600 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    class="title-input outline-none mb-5 text-gray-600 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Enter a name for your dataset."
                     :value="activeQuery.name"
                     @input="updateName($event.target.value)"
@@ -150,7 +150,7 @@
                 <InputDescription :description="inputMeta.description" />
                 <div class="w-full max-w-400px h-full max-h-150px">
                   <textarea
-                    class="title-input h-full outline-none mb-5 text-gray-600 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    class="title-input h-full outline-none mb-5 text-gray-600 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Enter a description for your dataset."
                     :value="activeQuery.description"
                     @input="updateDescription($event.target.value)"
@@ -447,7 +447,6 @@ export default defineComponent({
 }
 
 .nav-buttons {
-  display: absolute;
-  right: 10px;
+  right: 30px;
 }
 </style>

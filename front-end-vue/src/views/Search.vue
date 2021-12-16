@@ -18,12 +18,12 @@
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <div :class="'header flex items-center w-full b-bottom' +
-              [activeTabName == 'Home' ? ' justify-center' : ' ']" >
+      <div :class="'header relative flex items-center justify-center w-full b-bottom' +
+              [activeTabName == 'Home' ? ' ' : ' ']" >
         <!-- Menu Toggler  -->
         <RoundButton
           v-if="activeTabName != 'Home'"
-          class="h-10 ml-4 invisible"
+          class="absolute h-10 ml-4 invisible"
           :rounded="false"
           :showRing="true"
           backgroundColor="white"
@@ -49,17 +49,17 @@
         <div
           v-if="activeTabName != 'Home'"
           :class="
-            'flex app-branding non-selectable ' +
+            'app-branding absolute flex  non-selectable ' +
               [activeTabName == 'Home' ? ' invisible' : ' ']
           "
         >
           <img class="app-logo inline" src="app-icon.png" alt="" />
           <div class="relative app-title inline-flex flex-col">
-            <div class="relative app-title-top font-medium text-gray-600">
+            <!-- <div class="relative app-title-top font-medium text-gray-600">
               Resolution
-            </div>
+            </div> -->
             <div class="relative app-title-bottom  font-medium text-black">
-              Data Studio
+                Resolution
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
         <Searchbox
           v-if="activeTabName != 'Home'"
           :class="
-            'searchbox-top mb-1 ml-3' +
+            'searchbox-top absolute' +
               [activeTabName == 'Home' ? ' invisible' : '']
           "
           v-model="searchString"
@@ -78,7 +78,7 @@
         />
 
         <!-- Tab Buttons  -->
-        <div id="tab-buttons" :class="[activeTabName == 'Home' ? 'ml-5 mt-1' : '']">
+        <div :class="'header-nav relative h-full flex flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
           <HorizontalNavbar v-model="activeTabName" :items="tabs" />
         </div>
         <!-- /Tab Buttons -->
@@ -495,36 +495,32 @@ export default defineComponent({
 }
 
 .app-branding {
-  margin-left: 15px;
-  margin-right: clamp(10px, 1%, 20px);
+  /* margin-left: 15px;
+  margin-right: clamp(10px, 1%, 20px); */
+  top: 11px;
+  left: 75px;
 }
 
 .app-logo {
-  margin-top: 5px;
+  
   margin-right: 3px;
   width: 31px;
   height: 26px;
 }
 
-.app-title {
-  margin-left: 5px;
-}
-
-.app-title-top {
-  top: 2px;
-  font-size: 10px;
-}
 
 .app-title-bottom {
-  top: -5px;
-  font-size: 18px;
+  left: 10px;
+  top: -4px;
+  font-size: 22px;
 }
 
 .header {
   padding-left: 0px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  height: 50px;
 }
+
+
 
 .b-bottom {
   border-bottom: solid 1px #ecefed; /*#dde1e2;*/
@@ -539,4 +535,10 @@ export default defineComponent({
   max-width: 400px;
   height: 40px;
 }
+
+.searchbox-top {
+  position: absolute;
+    left: 250px;
+}
+
 </style>

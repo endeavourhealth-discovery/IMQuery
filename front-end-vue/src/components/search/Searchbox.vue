@@ -4,7 +4,7 @@
   <!-- "searchbox','w-full','transition','duration-500','ease-in-out','appearance-none','rounded-none','border','border-gray-300','rounded-md','focus:z-10" -->
   <div
     :class="
-      'searchbox relative w-full h-full transition duration-500 ease-in-out appearance-none rounded-none border border-gray-200 hover:border-gray-300 rounded-md focus:z-10' +
+      'searchbox relative w-full h-full transition duration-500 ease-in-out appearance-none border border-gray-200 hover:border-gray-300 rounded-md focus:z-10' +
         [componentState == 'hover' ? ' hover' : ''] +
         [componentState == 'focus' ? ' focus' : '']
     "
@@ -47,7 +47,7 @@
         @click="$emit('update:modelValue', '')"
       >
         <HeroIcon
-          class="text-gray-600 hover:text-red-500 mr-3"
+          class="bg-white text-gray-600 hover:text-red-500 mr-3"
           strokewidth="2"
           width="24"
           height="24"
