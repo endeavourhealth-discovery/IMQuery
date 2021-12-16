@@ -26,8 +26,7 @@
       >
         <!-- Menu Toggler  -->
         <RoundButton
-          v-if="activeTabName != 'Home'"
-          class="absolute h-10 ml-4 invisible"
+          class="menu-toggler absolute h-10 ml-4"
           :rounded="false"
           :showRing="true"
           backgroundColor="white"
@@ -523,6 +522,11 @@ export default defineComponent({
 
 .max-w-55rem {
   max-width: 55rem;
+}
+
+.menu-toggler {
+    top: 12px;
+  left: 0px;
 }
 
 .app-branding {

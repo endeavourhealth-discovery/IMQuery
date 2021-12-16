@@ -5,12 +5,13 @@
         <div v-if="index != 0" class="divider"></div>
         <div
           :class="
-            'w-full section-item flex pl-7 overflow-none transition duration-500 ease-in-out text-gray-500' +
+            'w-full section-item flex pl-2 overflow-none transition duration-500 ease-in-out text-gray-500' +
               [modelValue == item.name ? ' active text-blue-600' : '']
           "
           @click="$emit('update:modelValue', item.name)"
         >
-          <div class="section-title rounded-md w-full flex py-2 px-3">
+          <div :class="'section-title w-full flex py-2 px-3' + 
+           [modelValue == item.name ? ' text-blue-600' : '']">
             <div class="inline">
               <HeroIcon
                 v-if="item.icon"
@@ -22,8 +23,8 @@
               />
             </div>
 
-            <div :class="'inline ml-5 text-black' 
-            +   [modelValue == item.name ? ' active text-blue-600' : '']">
+            <div v-if="expanded" :class="'inline ml-5 text-black' 
+            +   [modelValue == item.name ? ' text-blue-600' : '']">
               {{ item.name }}
             </div>
           </div>
@@ -40,7 +41,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "ContentNav",
-  props: ["items", "modelValue"],
+  props: ["items", "modelValue", "expanded"],
   components: {
     HeroIcon,
   },
@@ -55,16 +56,21 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
+
 .section-item {
   font-size: 16px !important;
   font-weight: 400;
   border-right: 1px solid #ecefed;
-  padding-right: 20px;
+  /* padding-right: 20px; */
 }
 
-.section-title:hover {
+.section-item:hover {
   background-color: #F6F8FA;
 }
+
+/* .section-item.active .section-title {
+  color: #3b82f6;
+} */
 
 .section-item.active {
   border-right: 2px solid #3b82f6;

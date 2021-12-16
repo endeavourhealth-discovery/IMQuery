@@ -2,36 +2,44 @@
   <!-- Content Wrapper -->
   <div class="wrapper flex w-full h-full bg-white">
     <!-- Sidenav  -->
-    <div
-      class="wrapper-sidenav w-full bg-white flex flex-col align-center "
+    <div class="wrapper-sidenav w-full bg-white flex flex-col align-center"
+    @mouseenter="expanded = true"
+    @mouseleave="expanded = false"
     >
-      <div class="flex justify-center align-center">
+      <div class="flex justify-center align-center border-right">
         <RoundButton
-          class="w-10 h-10 my-5"
+          class="w-10 h-10 my-5 "
           :rounded="true"
           :showRing="true"
           backgroundColor="blue-500"
           hoverBackgroundColor="blue-600"
           textColor="white"
           ringColor="blue-600"
-          v-tooltip.right="'<b> Add </b>'"
+          v-tooltip.right="'<b> Create </b>'"
           @click="activeView = 'Add'"
         >
           <HeroIcon strokewidth="3" width="22" height="22" icon="plus" />
         </RoundButton>
       </div>
 
-      <VerticalButtonGroup :items="availableViews" v-model="activeView" />
+      <!-- <VerticalButtonGroup :items="availableViews" v-model="activeView" /> -->
+      <!--Content Nav -->
+      <ContentNav
+        class="inline w-full h-full"
+        :expanded="expanded"
+        :items="sideNavItems"
+        v-model="sideNavActiveItem"
+      />
+      <!-- /Content Nav -->
     </div>
 
     <!-- Sidenav  -->
 
     <BackgroundCards class="bg-wrapper hidden" />
 
-    <QueryEditor class="section-center w-full" />
+    <QueryEditor class="section-center w-full" :sideNavActiveItem="sideNavActiveItem" />
 
     <div class="section-right w-full">
-
       <HorizontalNav
         class="section-right-nav w-full border-bottom px-5 py-3"
         v-model:items="rightPanelItems"
@@ -65,19 +73,22 @@ import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
+import ContentNav from "@/components/dataset/ContentNav.vue";
 
 export default defineComponent({
   name: "DataStudio",
   components: {
     QueryEditor,
     BackgroundCards,
-    VerticalButtonGroup,
+    // VerticalButtonGroup,
     RoundButton,
     HeroIcon,
     HorizontalNav,
+    ContentNav
   },
   data() {
     return {
+      expanded: false,
       showBackgroundCards: true,
       activeFileIndex: 0,
       activeView: "Edit",
@@ -139,7 +150,58 @@ export default defineComponent({
           visible: false,
         },
       ],
-
+      sideNavActiveItem: "Sources",
+      sideNavItems: {
+        search: {
+          id: "c1a1c191-11e1-4864-8305-286292486e15",
+          name: "Search Library",
+          icon: "search",
+          visible: true,
+          children: [],
+        },
+        sources: {
+          id: "fde56326-f646-45cc-9fa2-97e294d192da",
+          name: "Sources",
+          icon: "office_building",
+          visible: true,
+          children: [],
+        },
+        mainDataType: {
+          id: "f1e2cde5-2c4a-4411-862f-3ed2f9ed2c15",
+          name: "Main Data Type",
+          icon: "collection",
+          visible: true,
+          children: [],
+        },
+        filters: {
+          id: "b3b0368b-8dfe-496b-8697-c3dfb6756b6b",
+          name: "Steps",
+          icon: "template",
+          visible: true,
+          children: [],
+        },
+        output: {
+          id: "b51ccc58-91da-4cf1-bcfb-a77256af7ccb",
+          name: "Output",
+          icon: "cube",
+          visible: true,
+          children: [],
+        },
+        request: {
+          id: "9a326f4e-67a7-4331-a4ad-ba075fba8e6d",
+          name: "Save or Export",
+          icon: "download",
+          visible: true,
+          children: [],
+        },
+        view: {
+          id: "e1c3a8c1-96ad-475f-a5b2-18426e0c8ff6",
+          name: "View Data",
+          icon: "cube_transparent",
+          visible: true,
+          children: [],
+        },
+      },
       isLoading: false,
       activeRightPanelItemId: "13dba7f7-9d06-4f0a-9c60-cbb4d9518b47",
       rightPanelItems: [
@@ -160,7 +222,7 @@ export default defineComponent({
   },
   async mounted() {
     await this.$store.dispatch("fetchDatamodel");
-      // console.log("datamodel fetched: ", this.$store.state.datamodel);
+    // console.log("datamodel fetched: ", this.$store.state.datamodel);
   },
   methods: {
     async getEntitySummary(iri: string): Promise<any> {
@@ -217,7 +279,12 @@ export default defineComponent({
 .wrapper-sidenav {
   top: 0;
   bottom: 0;
-  width: 90px;
+  width: 80px;
+}
+
+
+.wrapper-sidenav:hover {
+  width: 325px;
 }
 
 .section-right {

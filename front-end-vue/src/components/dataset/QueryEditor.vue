@@ -3,13 +3,7 @@
   <div class="query-editor flex w-full h-full">
     <!-- Middle -->
     <div class="w-full flex">
-      <!--Content Nav -->
-      <ContentNav
-        class="side-nav inline w-full h-full"
-        :items="sideNavItems"
-        v-model="sideNavActiveItem"
-      />
-      <!-- /Content Nav -->
+     
 
       <div class="flex flex-col w-full h-full">
         <!-- Header  -->
@@ -181,7 +175,6 @@ import { ref, onMounted, defineComponent } from "vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
-import ContentNav from "@/components/dataset/ContentNav.vue";
 import HorizontalNavPills from "@/components/dataset/HorizontalNavPills.vue";
 import InputDescription from "@/components/dataset/InputDescription.vue";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
@@ -200,12 +193,12 @@ export default defineComponent({
     HeroIcon,
     HorizontalNavPills,
     StepCurator,
-    ContentNav,
     InputDescription,
     // InputTextbox,
     InputRadioButtons,
     // MultiSelect,
   },
+  props: ["sideNavActiveItem", "sideNavItems"],
   data() {
     return {
       activeView: "Edit", // #Add #Edit #Convert #Search #Suggestions #Help
@@ -218,44 +211,7 @@ export default defineComponent({
           label: "All GP practices commissioned by NEL CCG",
         },
       ],
-      sideNavActiveItem: "Sources",
-      sideNavItems: {
-        sources: {
-          id: "fde56326-f646-45cc-9fa2-97e294d192da",
-          name: "Sources",
-          icon: "office_building",
-          visible: true,
-          children: [],
-        },
-        mainDataType: {
-          id: "f1e2cde5-2c4a-4411-862f-3ed2f9ed2c15",
-          name: "Main Data Type",
-          icon: "collection",
-          visible: true,
-          children: [],
-        },
-        filters: {
-          id: "b3b0368b-8dfe-496b-8697-c3dfb6756b6b",
-          name: "Steps",
-          icon: "template",
-          visible: true,
-          children: [],
-        },
-        output: {
-          id: "b51ccc58-91da-4cf1-bcfb-a77256af7ccb",
-          name: "Output",
-          icon: "cube",
-          visible: true,
-          children: [],
-        },
-        request: {
-          id: "9a326f4e-67a7-4331-a4ad-ba075fba8e6d",
-          name: "Save or Export",
-          icon: "download",
-          visible: true,
-          children: [],
-        },
-      },
+
       radioButtonItems: {
         mainDataType: [
           {
