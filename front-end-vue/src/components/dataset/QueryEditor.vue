@@ -30,21 +30,23 @@
             class="nav-buttons z-1 inline-flex rounded-md shadow-sm -space-x-px"
           >
             <button
-              class="inline-flex items-center p-1 pr-2 pb-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-500 hover:text-white"
+              class="inline-flex items-center hover:shadow-lg pt-1 pl-2 pr-3 pb-1 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-700 hover:text-white"
             >
               <HeroIcon
-                class="ml-1 mt-1"
+                class="mr-1"
                 strokewidth="2"
                 width="20"
                 height="20"
                 icon="chevron_left"
               />
+              Previous
             </button>
             <button
-              class="inline-flex items-center p-1 pr-2 pb-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-500 hover:text-white"
+              class="inline-flex items-center  hover:shadow-lg pt-1 pl-3 pr-2 pb-1 rounded-r-md  bg-white text-sm font-medium duration-500 ease-in-out bg-blue-500 hover:bg-blue-700 text-white"
             >
+            Next
               <HeroIcon
-                class="ml-1 mt-1"
+                class="ml-2"
                 strokewidth="2"
                 width="20"
                 height="20"

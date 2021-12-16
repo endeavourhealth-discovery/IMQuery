@@ -1,20 +1,20 @@
 <template>
   <div
-    class="tab-buttons overflow-y-hidden overflow-x-auto flex items-center justify-center group rounded-lg bg-white hover:bg-gray-100"
+    class="tab-buttons transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center group rounded-lg bg-white hover:bg-gray-100"
   >
     <template v-for="item in items" :key="item.id">
       <button
         @click="$emit('update:modelValue', item.id)"
         type="button"
         :class="
-          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base text-gray-400 hover:text-gray-900 border border-transparent' +
-         [ modelValue == item.id ? ' active bg-white border-gray-300' : '']"
+          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md  font-regular text-base text-gray-400 hover:text-gray-900 border border-transparent' +
+         [ modelValue == item.id ? ' active bg-white border-gray-300 shadow-sm ' : '']"
       >
         <!-- Icon -->
         <div class="inline-flex">
           <HeroIcon
-          :class="[modelValue == item.id ? ' text-cyan-400' : ' text-gray-500']"
-             :icon="[modelValue == item.id ? 'eye' : 'database']"
+          :class="[modelValue == item.id ? ' text-yellow-500' : ' text-gray-500']"
+             :icon="[modelValue == item.id ? 'database' : 'database']"
             strokewidth="2"
             width="24"
             height="24"

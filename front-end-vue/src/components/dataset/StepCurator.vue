@@ -148,12 +148,12 @@ export default defineComponent({
   },
 
   methods: {
-    updateName(name: string): void {
-      let newActiveQuery = this.activeQuery;
-      newActiveQuery.name = name;
-      console.log(newActiveQuery);
-      this.$emit("update:activeQuery", newActiveQuery);
-    },
+    // updateName(name: string): void {
+    //   let newActiveQuery = this.activeQuery;
+    //   newActiveQuery.name = name;
+    //   console.log(newActiveQuery);
+    //   this.$emit("update:activeQuery", newActiveQuery);
+    // },
   },
 });
 </script>
