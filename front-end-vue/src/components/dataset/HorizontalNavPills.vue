@@ -1,14 +1,14 @@
 <template>
   <div
-    class="tab-buttons overflow-y-hidden overflow-x-auto flex items-center justify-center group rounded-lg bg-gray-50 hover:bg-gray-100"
+    class="tab-buttons overflow-y-hidden overflow-x-auto flex items-center justify-center group rounded-lg bg-white hover:bg-gray-100"
   >
     <template v-for="item in items" :key="item.id">
       <button
         @click="$emit('update:modelValue', item.id)"
         type="button"
         :class="
-          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base text-gray-400 hover:text-gray-900' +
-         [ modelValue == item.id ? ' active bg-white' : '']"
+          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base text-gray-400 hover:text-gray-900 border border-transparent' +
+         [ modelValue == item.id ? ' active bg-white border-gray-300' : '']"
       >
         <!-- Icon -->
         <div class="inline-flex">
@@ -70,7 +70,7 @@ export default defineComponent({
 }
 
 .tab-buttons {
-  padding: 2px 2px;
+  padding: 10px 3px;
 
 }
 
