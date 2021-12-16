@@ -101,6 +101,34 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: "/oldhome",
+    name: "oldhome",
+    component: Home,
+    redirect: { name: "Dashboard" },
+    meta: {
+      requiresLicense: true
+    },
+    children: [
+      {
+        path: "",
+        name: "Dashboard",
+        alias: ["/home", "/dashboard"],
+        component: Dashboard,
+        meta: {
+          requiresLicense: true
+        }
+      },
+      {
+        path: "/concept/:selectedIri",
+        name: "Concept",
+        component: Datamodel,
+        meta: {
+          requiresLicense: true
+        }
+      }
+    ]
+  },
+  {
     path: "/editor",
     name: "Editor",
     component: Editor,

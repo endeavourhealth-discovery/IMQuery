@@ -70,7 +70,7 @@ export default defineComponent({
 }
 
 .tab-buttons {
-  padding: 3px 3px;
+  padding: 2px 2px;
 
 }
 
@@ -81,6 +81,11 @@ export default defineComponent({
 .button-close {
     margin-top: 2px;
     margin-left: 10px;
+}
+
+
+.tab-buttons .tab-button:not(:last-child){
+margin-right: 5px;
 }
 
 </style>

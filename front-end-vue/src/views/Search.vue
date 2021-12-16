@@ -18,8 +18,12 @@
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <div :class="'header relative flex items-center justify-center w-full b-bottom' +
-              [activeTabName == 'Home' ? ' ' : ' ']" >
+      <div
+        :class="
+          'header relative flex items-center justify-center w-full b-bottom' +
+            [activeTabName == 'Home' ? ' ' : ' ']
+        "
+      >
         <!-- Menu Toggler  -->
         <RoundButton
           v-if="activeTabName != 'Home'"
@@ -59,7 +63,7 @@
               Resolution
             </div> -->
             <div class="relative app-title-bottom  font-medium text-black">
-                Resolution
+              Resolution
             </div>
           </div>
         </div>
@@ -78,10 +82,18 @@
         />
 
         <!-- Tab Buttons  -->
-        <div :class="'header-nav relative h-full flex flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
+        <div
+          :class="
+            'header-nav relative h-full flex flex-col justify-center' +
+              [activeTabName == 'Home' ? '' : '']
+          "
+        >
           <HorizontalNavbar v-model="activeTabName" :items="tabs" />
         </div>
         <!-- /Tab Buttons -->
+        <div class="header-right">
+          <UserWidget :modelValue="userMeta" />
+        </div>
       </div>
       <!-- /Searchbox  -->
 
@@ -188,6 +200,7 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
+import { mapState } from "vuex";
 
 import ConfirmDialog from "primevue/confirmdialog";
 import LoggerService from "@/services/LoggerService";
@@ -203,6 +216,7 @@ import QueryTable from "@/components/dataset/QueryTable.vue";
 import Searchbox from "@/components/search/Searchbox.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
+import UserWidget from "@/components/dataset/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import ProgressBar from "@/components/search/ProgressBar.vue";
@@ -230,10 +244,17 @@ export default defineComponent({
     DataStudio,
     RoundButton,
     OrganisationBrowser,
+    UserWidget,
   },
   data() {
     return {
       // definition: typeof Dataset,
+      userMeta: {
+        username: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
       isLoading: false,
       searchString: "",
       activePageName: "Main", //Options #Home #SearchResults
@@ -289,7 +310,17 @@ export default defineComponent({
       tableHeight: 600,
     };
   },
+  computed: mapState(["currentUser", "isLoggedIn"]),
   async mounted() {
+    await this.$store.dispatch("authenticateCurrentUser");
+
+    if (this.currentUser && this.isLoggedIn) {
+      this.userMeta.username = this.currentUser.username;
+      this.userMeta.firstName = this.currentUser.firstName;
+      this.userMeta.lastName = this.currentUser.lastName;
+      this.userMeta.email = this.currentUser.email;
+    }
+
     //ensures sidebar is focused on search Icon
     this.$store.commit("updateSelectedEntityType", "Search");
     this.$store.commit("updateSideNavHierarchyFocus", {
@@ -502,12 +533,10 @@ export default defineComponent({
 }
 
 .app-logo {
-  
   margin-right: 3px;
   width: 31px;
   height: 26px;
 }
-
 
 .app-title-bottom {
   left: 10px;
@@ -520,7 +549,10 @@ export default defineComponent({
   height: 60px;
 }
 
-
+.header-right {
+  position: absolute;
+  right: 50px;
+}
 
 .b-bottom {
   border-bottom: solid 1px #ecefed; /*#dde1e2;*/
@@ -538,7 +570,6 @@ export default defineComponent({
 
 .searchbox-top {
   position: absolute;
-    left: 250px;
+  left: 250px;
 }
-
 </style>

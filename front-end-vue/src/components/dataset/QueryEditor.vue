@@ -65,7 +65,7 @@
               v-show="sideNavActiveItem == 'Sources'"
               class="pt-8 pl-14 pr-10"
             >
-              <div class="flex justify-between max-w-lg mx-auto">
+              <div class="flex justify-between max-w-2xl mx-auto">
                 <InputDescription :description="inputMeta.sources" />
 
                 <!-- Button: New List  -->
@@ -115,10 +115,10 @@
               v-show="sideNavActiveItem == 'Main Data Type'"
               class="pt-8 pl-14 pr-10 "
             >
-              <div class="flex flex-col max-w-lg mx-auto">
-                <InputDescription :description="inputMeta.mainDataType" />
+              <div class="flex flex-col w-full max-w-2xl mx-auto">
+                <InputDescription class="w-full max-w-2xl" :description="inputMeta.mainDataType" />
                 <InputRadioButtons
-                  class="w-full max-w-lg mt-7"
+                  class="w-full max-w-lg mx-auto mt-7"
                   v-model="selectedMainDataType"
                   :items="radioButtonItems.mainDataType"
                   :multiselect="false"
@@ -138,7 +138,7 @@
               v-show="sideNavActiveItem == 'Save or Export'"
               class="pt-8 pl-14 pr-10"
             >
-              <div class="flex justify-between items-center">
+              <div class="flex justify-between items-center max-w-2xl mx-auto">
                 <InputDescription :description="inputMeta.name" />
                 <div class="w-full max-w-400px">
                   <input
@@ -149,7 +149,7 @@
                   />
                 </div>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between max-w-2xl mx-auto">
                 <InputDescription :description="inputMeta.description" />
                 <div class="w-full max-w-400px h-full max-h-150px">
                   <textarea
@@ -426,7 +426,7 @@ export default defineComponent({
 }
 
 .top-nav {
-  
+  z-index: 2;
  /* border-bottom: 1px solid #ecefed; */
 }
 
@@ -446,6 +446,8 @@ export default defineComponent({
 .max-w-400px {
   max-width: 400px;
 }
+
+
 .max-h-150px {
   height: 150px;
 }
