@@ -1,11 +1,11 @@
 <template>
-  <div class="tab-buttons font-medium">
+  <div class="tab-buttons font-medium h-full flex  justify-end">
     <template v-for="item in items">
       <div
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex flex-row items-center justify-center transition duration-500 ease-in-out text-gray-600 hover:text-blue-500 ',
+          'tab-button non-selectable inline-flex items-center mt-2 border border-transparent justify-center transition duration-500 ease-in-out text-gray-600 hover:text-blue-500 ',
           { active: modelValue == item.name },
         ]"
         @click="$emit('update:modelValue', item.name)"
@@ -55,9 +55,6 @@ export default defineComponent({
 
 .tab-buttons {
   width: 100%;
-  margin-left: 2px;
-  /* margin-top: 10px; */
-  padding-bottom: 2px;
   text-align: center;
 
 }
@@ -71,6 +68,7 @@ export default defineComponent({
 
 .tab-button.active {
   color: #3b82f6;
+  border-bottom: 2px solid #3b82f6;
   /* border-bottom: solid 2px #3b82f6; */
 }
 </style>

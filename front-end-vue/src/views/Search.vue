@@ -497,7 +497,7 @@ export default defineComponent({
 .app-branding {
   /* margin-left: 15px;
   margin-right: clamp(10px, 1%, 20px); */
-  top: 11px;
+  top: 16px;
   left: 75px;
 }
 
@@ -517,7 +517,7 @@ export default defineComponent({
 
 .header {
   padding-left: 0px;
-  height: 50px;
+  height: 60px;
 }
 
 

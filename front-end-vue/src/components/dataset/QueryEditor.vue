@@ -14,17 +14,20 @@
       <div class="flex flex-col w-full h-full">
         <!-- Header  -->
         <div
-          class="top-nav relative inline-flex w-full px-5 pt-5 pb-10 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
+          class="top-nav relative inline-flex justify-between w-full px-5 pt-5 pb-10 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
         >
+        <div class="empty-space">
+
+        </div>
           <HorizontalNavPills
-            class="mx-auto"
+            class="nav"
             v-model:items="openQueries"
             v-model="activeQueryId"
             :closable="true"
           />
 
           <div
-            class="nav-buttons absolute z-1 inline-flex rounded-md shadow-sm -space-x-px"
+            class="nav-buttons z-1 inline-flex rounded-md shadow-sm -space-x-px"
           >
             <button
               class="inline-flex items-center p-1 pr-2 pb-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-500 hover:text-white"
@@ -422,9 +425,10 @@ export default defineComponent({
   max-width: 230px !important;
 }
 
-/* .top-nav {
-  border-bottom: 1px solid #ecefed;
-} */
+.top-nav {
+  
+ /* border-bottom: 1px solid #ecefed; */
+}
 
 .query-editor-content {
   flex-grow: 1;
@@ -446,7 +450,16 @@ export default defineComponent({
   height: 150px;
 }
 
+
 .nav-buttons {
   right: 30px;
+  height: 40px;
+}
+.empty-space {
+  width: 70px;
+}
+
+.top-nav .nav {
+  height: 40px;
 }
 </style>
