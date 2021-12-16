@@ -6,15 +6,14 @@
       <button
         @click="$emit('update:modelValue', item.id)"
         type="button"
-        :class="[
-          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base text-gray-400 hover:text-gray-900',
-          { ' text-gray-900 bg-white shadow-sm': modelValue == item.id },
-        ]"
+        :class="
+          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base text-gray-400 hover:text-gray-900' +
+         [ modelValue == item.id ? ' active bg-white' : '']"
       >
         <!-- Icon -->
         <div class="inline-flex">
           <HeroIcon
-          :class="[modelValue == item.id ? ' text-blue-500' : ' text-gray-500']"
+          :class="[modelValue == item.id ? ' text-cyan-400' : ' text-gray-500']"
              :icon="[modelValue == item.id ? 'eye' : 'database']"
             strokewidth="2"
             width="24"
@@ -75,6 +74,9 @@ export default defineComponent({
 
 }
 
+.tab-button.active {
+  color: black;
+}
 
 .button-close {
     margin-top: 2px;
