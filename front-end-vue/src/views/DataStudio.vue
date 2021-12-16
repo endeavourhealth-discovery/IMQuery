@@ -31,7 +31,8 @@
     <QueryEditor class="section-center w-full" />
 
     <div class="section-right w-full">
-      <HorizontalNavPills
+
+      <HorizontalNav
         class="section-right-nav w-full border-bottom px-5 py-3"
         v-model:items="rightPanelItems"
         v-model="activeRightPanelItemId"
@@ -57,7 +58,7 @@ import LoggerService from "@/services/LoggerService";
 // import SearchService from "@/services/SearchService";
 // import SearchClient from "@/services/SearchClient";
 // const { MeiliSearch } = require("meilisearch");
-import HorizontalNavPills from "@/components/dataset/HorizontalNavPills.vue";
+import HorizontalNav from "@/components/dataset/HorizontalNav.vue";
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
@@ -73,7 +74,7 @@ export default defineComponent({
     VerticalButtonGroup,
     RoundButton,
     HeroIcon,
-    HorizontalNavPills,
+    HorizontalNav,
   },
   data() {
     return {

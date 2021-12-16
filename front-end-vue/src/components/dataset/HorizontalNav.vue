@@ -51,7 +51,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
-  name: "HorizontalNavbar",
+  name: "HorizontalNav.",
   props: ["items", "modelValue", "closable"],
   emits: ["update:modelValue", "update:items"],
   components: {

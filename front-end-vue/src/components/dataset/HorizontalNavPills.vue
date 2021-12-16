@@ -7,18 +7,18 @@
         @click="$emit('update:modelValue', item.id)"
         type="button"
         :class="[
-          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base hover:text-black',
-          { ' text-black bg-white shadow-sm': modelValue == item.id },
+          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md transition duration-500 ease-in-out font-regular text-base text-gray-400 hover:text-gray-900',
+          { ' text-gray-900 bg-white shadow-sm': modelValue == item.id },
         ]"
       >
         <!-- Icon -->
         <div class="inline-flex">
           <HeroIcon
-          :class="[modelValue == item.id ? ' text-yellow-500' : ' text-gray-500']"
+          :class="[modelValue == item.id ? ' text-blue-500' : ' text-gray-500']"
+             :icon="[modelValue == item.id ? 'eye' : 'database']"
             strokewidth="2"
             width="24"
             height="24"
-            :icon="'database'"
           />
         </div>
 
@@ -28,7 +28,7 @@
         >
           {{ item.name }}
         </div>
-        <div v-if="closable" class="button-close inline-flex ml-2">
+        <div v-if="closable" class="button-close inline-flex">
           <HeroIcon
             class="text-gray-400 hover:text-red-500"
             strokewidth="2"
@@ -72,11 +72,13 @@ export default defineComponent({
 
 .tab-buttons {
   padding: 3px 3px;
+
 }
 
-.tab-button.active {
-  /* border: solid 1px #d0d7de; */
-  /* background-color: #F9FAFB; */
-  color: #000000;
+
+.button-close {
+    margin-top: 2px;
+    margin-left: 10px;
 }
+
 </style>
