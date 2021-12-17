@@ -7,16 +7,15 @@
     @mouseleave="isHover = false"
   >
     <RoundButton
-      class="title non-selectable px-2 transition duration-500 ease-in-out shadow-sm"
+      class="title non-selectable px-2 transition duration-500 ease-in-out shadow-sm ring ring-blue-600"
       :rounded="true"
-      :showRing="true"
+      :showRing="false"
       focusTextColor="white"
       textColor="gray-500"
       hoverTextColor="white"
       backgroundColor="white"
       hoverBackgroundColor="blue-600"
-      borderColor="gray-300"
-      ringColor="blue-600"
+      borderColor="blue-600"
       @blur="isHover ? null : [(expanded = false)]"
     >
       {{
