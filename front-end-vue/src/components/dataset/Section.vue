@@ -2,7 +2,7 @@
   <div class="flex w-full px-3">
     <div class="section-header flex">
       <!-- Toggler -->
-      <SectionToggler :expanded="expanded" @click="expanded = !expanded" />
+      <!-- <SectionToggler :expanded="expanded" @click="expanded = !expanded" /> -->
       <!-- / Toggler -->
 
       <div class="section-title w-full flex h-7 ml-5 outline-none text-black">
@@ -28,7 +28,7 @@ export default defineComponent({
   name: "Section",
   props: ["name"],
   components: {
-    SectionToggler,
+    // SectionToggler,
   },
   data() {
     return {

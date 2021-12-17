@@ -44,7 +44,8 @@
           sideNavActiveItem == 'Main Data Type' ||
           sideNavActiveItem == 'Steps' ||
           sideNavActiveItem == 'Output' ||
-          sideNavActiveItem == 'Save or Export'
+          sideNavActiveItem == 'Save or Export' || 
+          sideNavActiveItem == 'View Data'
       "
     >
       <QueryEditor
@@ -57,9 +58,6 @@
     <template v-else-if="sideNavActiveItem == 'Library'">
       <DatasetBrowser class="section-center w-full"
     /></template>
-    <template v-else-if="sideNavActiveItem == 'View Data'">
-      View Data
-    </template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
   </div>
   <!-- /Content Wrapper -->
@@ -165,7 +163,7 @@ export default defineComponent({
           visible: false,
         },
       ],
-      sideNavActiveItem: "Sources",
+      sideNavActiveItem: "Steps",
       sideNavItems: [
         {
           id: "074b7d3e-2519-4bed-bdf4-84f90f46de46",
@@ -174,13 +172,7 @@ export default defineComponent({
           visible: true,
           children: [],
         },
-        {
-          id: "b160ce1e-1bd3-4172-914a-ea127af6a756",
-          name: "View Data",
-          icon: "cube_transparent",
-          visible: true,
-          children: [],
-        },
+
         {
           id: "dbb23c7f-7f8a-4457-ad60-9096e9de3eb7",
           name: "Get Help",
@@ -224,6 +216,13 @@ export default defineComponent({
           visible: true,
           children: [],
         },
+                {
+          id: "b160ce1e-1bd3-4172-914a-ea127af6a756",
+          name: "View Data",
+          icon: "cube_transparent",
+          visible: true,
+          children: [],
+        },
       ],
       isLoading: false,
     };
@@ -255,14 +254,14 @@ export default defineComponent({
         });
     },
     handlePrevious(): void {
-      for (let i = 4; i < this.sideNavItems.length; i++) {
+      for (let i = 3; i < this.sideNavItems.length; i++) {
         if (this.sideNavItems[i].name == this.sideNavActiveItem) {
           this.sideNavActiveItem = this.sideNavItems[i - 1].name;
         }
       }
     },
     handleNext(): void {
-      for (let i = 3; i < this.sideNavItems.length - 1; i++) {
+      for (let i = 2; i < this.sideNavItems.length - 1; i++) {
         if (this.sideNavItems[i].name == this.sideNavActiveItem) {
           this.sideNavActiveItem = this.sideNavItems[i + 1].name;
         return;

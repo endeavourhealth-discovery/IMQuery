@@ -53,7 +53,7 @@
         v-show="
           componentState == 'focus' || componentState == 'typing' || isHover
         "
-        class="inline text-sm font-medium text-gray-600 mb-4 py-1"
+        class="inline text-sm font-medium text-gray-600 mb-4 pl-4"
       >
         {{ getPrompt() }}
       </label>
@@ -243,7 +243,7 @@ export default defineComponent({
 }
 
 .button-content {
-  padding-top: 3px;
+  padding: 3px 10px 3px 5px;
 }
 
 .widget-buton {

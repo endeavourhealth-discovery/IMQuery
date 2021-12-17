@@ -1,97 +1,98 @@
 <template>
-  <div class="widget">
-    <!-- <div class="divider"></div> -->
-    <template v-for="(step, index1) in activeQuery.data.steps" :key="step.id">
-      <div class="py-3">
-        <!-- Header -->
-        <div class="section-title flex w-full px-3 items-center">
-          <!-- Toggler -->
-          <SectionToggler
-            :expanded="expandedSteps.includes(step.id)"
-            @click="
-              expandedSteps.includes(step.id)
-                ? (expandedSteps = expandedSteps.filter(
-                    (item: any) => item != step.id
-                  ))
-                : expandedSteps.push(step.id)
-            "
-          />
-          <!-- / Toggler -->
-          <!-- Title -->
-          <div
-            class="title-input w-full inline-flex h-7 ml-5 outline-none text-black"
-          >
-            {{ step.name }}
-          </div>
-          <!-- /Title -->
-        </div>
-        <!-- /Header -->
+  <div class="w-full h-full">
+    <!-- Description -->
+    <div class="header flex justify-center">
+      <slot> </slot>
+    </div>
+    <!-- /Description -->
 
-        <!-- Content -->
-        <div v-show="expandedSteps.includes(step.id)" class="pt-3 px-3">
-          <div class="w-full flex">
-            <div
-              :class="
-                'content-input w-full flex flex-col outline-none text-gray-700 text-base'
-              "
-            >
-              <Section name="Copy all data from">
-                <template v-for="(item, index2) in step.copy" :key="item.iri">
-                  <Selector
-                    :propertyPath="`data.steps[${index1}].copy[${index2}]`"
-                    :stepIri="step.iri"
-                    type="query"
-                    class="mb-1"
-                    :modelValue="item"
-                  >
-                  </Selector>
-                </template>
-              </Section>
-              <Section
-                v-if="step.inclusionCriteria.length"
-                name="Include patients if"
-              >
-                <div
-                  class="flex flex-col"
-                  v-for="(criterion, index3) in step.inclusionCriteria"
-                  :key="criterion.id"
-                >
-                  <div class="flex">
-                    <div>
-                      <Selector
-                        :propertyPath="
-                          `data.steps[${index1}].inclusionCriteria[${index3}].datamodelEntity`
-                        "
-                        :stepIri="step.iri"
-                        type="datamodel"
-                        class="mb-1 inline"
-                        :modelValue="criterion.datamodelEntity"
-                      ></Selector>
-                    </div>
-
-                    <KeywordWidget class="inline" :modelValue="criterion.modifier.name" />
-                  </div>
-
-                  <div
-                    v-show="expandedSteps.includes(step.id)"
-                    class="widget-content inline bg-white pb-3 pl-3 rounded-b-xl"
-                  >
-                    <template
-                      v-for="node in criterion.constraints"
-                      :key="node.id"
-                    >
-                      <Constraint :node="node" />
-                    </template>
-                  </div>
-                </div>
-              </Section>
+    <!-- Steps -->
+    <div class="w-full h-full wrapper-steps pt-20">
+      <div class="steps">
+        <template
+          v-for="(step, index1) in activeQuery.data.steps"
+          :key="step.id"
+        >
+          <section class="item text-gray-900 w-full flex">
+            <div class="flex flex-col h-full">
+              <input class="step-title outline-none" :value="step.name" />
             </div>
-          </div>
-        </div>
-        <!-- Content -->
+            <section class="step-content">
+              <ul>
+                <li class=" px-3 w-full flex">
+                  <div
+                    :class="
+                      'content-input w-full flex flex-col outline-none text-gray-700 text-base'
+                    "
+                  >
+                    <Section name="Copy all data from">
+                      <template
+                        v-for="(item, index2) in step.copy"
+                        :key="item.iri"
+                      >
+                        <Selector
+                          :propertyPath="
+                            `data.steps[${index1}].copy[${index2}]`
+                          "
+                          :stepIri="step.iri"
+                          type="query"
+                          class="mb-1"
+                          :modelValue="item"
+                        >
+                        </Selector>
+                      </template>
+                    </Section>
+                    <Section
+                      v-if="step.inclusionCriteria.length"
+                      name="Include patients if"
+                    >
+                      <div
+                        class="flex flex-col"
+                        v-for="(criterion, index3) in step.inclusionCriteria"
+                        :key="criterion.id"
+                      >
+                        <div class="flex">
+                          <div>
+                            <Selector
+                              :propertyPath="
+                                `data.steps[${index1}].inclusionCriteria[${index3}].datamodelEntity`
+                              "
+                              :stepIri="step.iri"
+                              type="datamodel"
+                              class="mb-1 inline"
+                              :modelValue="criterion.datamodelEntity"
+                            ></Selector>
+                          </div>
+
+                          <KeywordWidget
+                            class="inline"
+                            :modelValue="criterion.modifier.name"
+                          />
+                        </div>
+
+                        <div
+                          v-show="expandedSteps.includes(step.id)"
+                          class="widget-content inline bg-white pb-3 pl-3 rounded-b-xl"
+                        >
+                          <template
+                            v-for="node in criterion.constraints"
+                            :key="node.id"
+                          >
+                            <Constraint :node="node" />
+                          </template>
+                        </div>
+                      </div>
+                    </Section>
+                  </div>
+                </li>
+              </ul>
+              <!-- Content -->
+            </section>
+          </section>
+        </template>
       </div>
-      <div class="divider"></div>
-    </template>
+    </div>
+    <!-- Steps -->
   </div>
 </template>
 
@@ -102,7 +103,7 @@ import { mapState } from "vuex";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import Section from "@/components/dataset/Section.vue";
-import SectionToggler from "@/components/dataset/SectionToggler.vue";
+// import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import Selector from "@/components/dataset/Selector.vue";
 import Widget from "@/components/dataset/Widget.vue";
 const _ = require("lodash");
@@ -120,7 +121,7 @@ export default defineComponent({
     // Widget,
     Selector,
     Section,
-    SectionToggler,
+    // SectionToggler,
     Constraint,
     KeywordWidget,
   },
@@ -146,15 +147,6 @@ export default defineComponent({
       ],
     };
   },
-
-  methods: {
-    // updateName(name: string): void {
-    //   let newActiveQuery = this.activeQuery;
-    //   newActiveQuery.name = name;
-    //   console.log(newActiveQuery);
-    //   this.$emit("update:activeQuery", newActiveQuery);
-    // },
-  },
 });
 </script>
 
@@ -174,7 +166,7 @@ export default defineComponent({
   margin-top: 5px;
 }
 
-.title-input {
+.step-title {
   font-size: 16px !important;
   font-weight: 600;
 }
@@ -183,12 +175,170 @@ export default defineComponent({
   padding-left: 53px;
 }
 
-.non-selectable {
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none; /* Likely future */
+.wrapper-steps {
+  display: flex;
+  overflow-y: auto;
+  /* padding: 0rem 1rem 0rem 1rem; */
+  /* max-height: 715px; */
 }
+
+.steps {
+  position: relative;
+  display: table;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 2rem; */
+}
+
+/* Line on which nodes are drawn  */
+.steps:after {
+  content: "";
+  width: 2px;
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0rem;
+  left: 300px;
+  z-index: 1;
+  background: #c5c5c5;
+}
+
+.steps h3 {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 5rem;
+  color: #888;
+  margin: 0;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+@media (min-width: 62em) {
+  .steps h3 {
+    font-size: 1.1em;
+  }
+}
+
+.steps section.item {
+  position: relative;
+}
+
+/* .steps section.item:first-child section {
+  margin-top: -1.3em;
+  padding-bottom: 0px;
+} */
+
+.steps section.item section {
+  position: relative;
+  padding-bottom: 1.25em;
+  /* margin-bottom: 2.2em; */
+}
+
+.steps section.item section h4 {
+  position: absolute;
+  bottom: 0;
+  font-size: 0.9em;
+  font-weight: 400;
+  line-height: 1.2em;
+  margin: 0;
+  padding: 0 0 0 89px;
+  color: #c5c5c5;
+}
+
+/* @media (min-width: 62em) {
+  .steps section.item section h4 {
+    font-size: 1em;
+  }
+} */
+
+.steps section.item section ul {
+  list-style-type: none;
+  padding: 0 0 0 75px;
+  /* margin: -1.35rem 0 1em; */
+  max-width: 32rem;
+  font-size: 1em;
+}
+/* Node Icon on Line  */
+.steps section.item section ul:first-of-type:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #c5c5c5;
+  border: 2px solid #ffffff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  left: 100px;
+  top: 3px;
+  z-index: 2;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* One Step (section)  */
+.steps section.item section ul li {
+  margin-left: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  /* darker colour: #f1f1f1; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: rgba(136, 136, 136, 0.233);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* @media (min-width: 62em) {
+  .steps section.item section ul {
+    font-size: 1.1em;
+    padding: 0 0 0 81px;
+  }
+} */
+
+/* .steps section.item section ul:last-child {
+  margin-bottom: 0;
+} */
+
+/* Bullet Icon */
+/* .steps section.item section ul li:before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: #000000;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  left: 77px;
+  margin-top: 11px;
+  z-index: 2;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+} */
+
+/* .steps section.item section ul li:not(:first-child) {
+  margin-top: 0.5rem;
+} */
 
 /* .widget {
   width: 100%;

@@ -21,8 +21,8 @@
           >
             <button
               class="inline-flex items-center hover:shadow-lg pt-1 pl-2 pr-3 pb-1 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:border-transparent transition duration-500 ease-in-out hover:bg-blue-700 hover:text-white"
-            
-            @click="$emit('previous')">
+              @click="$emit('previous')"
+            >
               <HeroIcon
                 class="mr-1"
                 strokewidth="2"
@@ -34,7 +34,7 @@
             </button>
             <button
               class="inline-flex items-center  hover:shadow-lg pt-1 pl-3 pr-2 pb-1 rounded-r-md  bg-white text-sm font-medium duration-500 ease-in-out bg-blue-500 hover:bg-blue-700 text-white"
-            @click="$emit('next')"
+              @click="$emit('next')"
             >
               Next
               <HeroIcon
@@ -122,10 +122,16 @@
               </div>
             </div>
             <StepCurator
+            class="w-full h-full"
               v-show="sideNavActiveItem == 'Steps'"
               :activeQuery="activeQuery"
               :openQueries="openQueries"
-            />
+            >
+              <InputDescription
+                class="w-full max-w-2xl"
+                :description="inputMeta.steps_data"
+              />
+            </StepCurator>
 
             <div v-show="sideNavActiveItem == 'Output'">
               Output
@@ -165,7 +171,7 @@
     </div>
     <!-- Middle -->
 
-    <div class="section-right w-full">
+    <div class="section-right w-full hidden">
       <HorizontalNav
         class="section-right-nav w-full border-bottom px-5 py-3"
         v-model:items="rightPanelItems"
@@ -317,6 +323,12 @@ export default defineComponent({
             "<b>Tip</b><br>Select the main health record that is directly related to all the data in your dataset. <br><br><b>Example</b><br> Think of this like your 'main table' of data that is linked to all the other tables in your dataset.",
           placeholder: "",
         },
+        steps_data: {
+          title: "Steps",
+          explanation:
+            '<b>Tip</b><br>Copy existing data from a dataservice or dataset by selecting sources. Then transform the data by applying inclusion and exclusion criteria in a series of steps.  <br><br> To see an example in action, copy a template from the library. <br><br><b>Example 1</b><br> The following research question is a product of three steps <br> 1. "Patients registered at GP practices <br> 2. with a diagnosis of Coronary Heart Disease <br> 3. taking any anti-coagulant or anti-platelet medication"',
+          placeholder: "",
+        },
         selectedLists: {
           title: "Select Lists",
           explanation: "",
@@ -450,6 +462,6 @@ export default defineComponent({
 
 .section-right {
   width: 400px;
-    border-left: 1px solid #ecefed;
+  border-left: 1px solid #ecefed;
 }
 </style>
