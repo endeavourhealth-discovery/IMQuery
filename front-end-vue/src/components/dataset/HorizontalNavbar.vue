@@ -5,8 +5,8 @@
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex items-center mt-2 border border-transparent justify-center transition duration-500 ease-in-out text-gray-600 hover:text-blue-500 ',
-          { active: modelValue == item.name },
+          'tab-button non-selectable inline-flex items-center mt-2 border border-transparent justify-center transition duration-500 ease-in-out text-gray-600 hover:text-blue-500 '
+         + [modelValue == item.name ? ' active text-blue-500' : ''],
         ]"
         @click="$emit('update:modelValue', item.name)"
       >
@@ -67,8 +67,6 @@ export default defineComponent({
 }
 
 .tab-button.active {
-  color: #3b82f6;
-  border-bottom: 2px solid #3b82f6;
-  /* border-bottom: solid 2px #3b82f6; */
+  border-bottom: 2px solid #3b82f6;  /* blue-700 #1d4ed8*/
 }
 </style>

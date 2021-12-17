@@ -6,9 +6,9 @@
       <div class="flex flex-col w-full h-full">
         <!-- Header  -->
         <div
-          class="top-nav  inline-flex justify-between w-full px-5 pt-5 pb-10 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
+          class="top-nav  inline-flex justify-center w-full px-5 pt-5 pb-10 text-2xl font-medium text-gray-500 bg-white rounded-t-2xl"
         >
-          <div class="empty-space"></div>
+          <!-- <div class="empty-space"></div> -->
           <HorizontalNavPills
             class="nav"
             v-model:items="openQueries"
@@ -122,7 +122,8 @@
               </div>
             </div>
             <StepCurator
-            class="w-full h-full"
+              v-if="activeQuery.data.steps.length"
+              class="w-full h-full"
               v-show="sideNavActiveItem == 'Steps'"
               :activeQuery="activeQuery"
               :openQueries="openQueries"
@@ -449,6 +450,7 @@ export default defineComponent({
 }
 
 .nav-buttons {
+  position: absolute;
   right: 30px;
   height: 40px;
 }

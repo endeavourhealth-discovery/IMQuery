@@ -7,19 +7,21 @@
       @mouseenter="expanded = true"
       @mouseleave="expanded = false"
     >
-      <div class="flex justify-center align-center border-right">
+      <div class="flex pl-3 border-right">
         <RoundButton
-          class="w-10 h-10 my-5 "
-          :rounded="true"
+          :class="'button-create ' + [expanded ? ' expanded' : '']"
+          :rounded="false"
           :showRing="true"
           backgroundColor="blue-500"
-          hoverBackgroundColor="blue-600"
+          hoverBackgroundColor="blue-700"
           textColor="white"
           ringColor="blue-600"
-          v-tooltip.right="'<b> Create </b>'"
           @click="activeView = 'Add'"
         >
           <HeroIcon strokewidth="3" width="22" height="22" icon="plus" />
+          <div v-if="expanded" class="ml-4 font-bold text-xl">
+            Create
+          </div>
         </RoundButton>
       </div>
 
@@ -44,7 +46,7 @@
           sideNavActiveItem == 'Main Data Type' ||
           sideNavActiveItem == 'Steps' ||
           sideNavActiveItem == 'Output' ||
-          sideNavActiveItem == 'Save or Export' || 
+          sideNavActiveItem == 'Save or Export' ||
           sideNavActiveItem == 'View Data'
       "
     >
@@ -216,7 +218,7 @@ export default defineComponent({
           visible: true,
           children: [],
         },
-                {
+        {
           id: "b160ce1e-1bd3-4172-914a-ea127af6a756",
           name: "View Data",
           icon: "cube_transparent",
@@ -264,7 +266,7 @@ export default defineComponent({
       for (let i = 2; i < this.sideNavItems.length - 1; i++) {
         if (this.sideNavItems[i].name == this.sideNavActiveItem) {
           this.sideNavActiveItem = this.sideNavItems[i + 1].name;
-        return;
+          return;
         }
       }
     },
@@ -321,5 +323,19 @@ export default defineComponent({
 
 .section-right-nav {
   /* height: 80px; */
+}
+
+.button-create {
+  height: 40px;
+  width: 40px;
+  margin: 20px 0 20px 0;
+  border-radius: 50%;
+  justify-content: start !important;
+  padding-left: 8px;
+}
+
+.button-create.expanded {
+  width: 125px;
+  border-radius: 20px;
 }
 </style>

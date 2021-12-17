@@ -46,13 +46,13 @@
         <!-- Action buttons + Options -->
         <div class="button-toolbar p-pt-5 p-pb-3 p-d-flex p-jc-between">
           <div class="p-d-inline">
-            <Button
+            <!-- <Button
               icon="pi pi-plus"
               class="p-mr-3 button-medium"
               type="button"
               label="Add"
               @click="toggleAddOverlay"
-            />
+            /> -->
             <Button
               icon="pi pi-pencil "
               class="p-mr-3 p-button-outlined p-button-warning button-medium"
