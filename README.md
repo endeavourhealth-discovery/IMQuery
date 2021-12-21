@@ -4,19 +4,33 @@
 ![Unit Tests](https://s3.eu-west-2.amazonaws.com/endeavour-codebuild-output/badges/front-end-vue/unit-test.svg)
 
 
-## Run Frontend (development)
+## Run Frontend 
 
-Checkout from GIT
+### Setup (you only have to do this once) 
 
 `cd frontend-vue`
 
-`npm install` (you only have to do this once)
+`npm install` 
+
+<br>
+
+### Copy the environment.js file and paste your variables within it (you only have to do this once)
+
+`cp environment_example.js environment.js`
+
+<br>
+
+### Run local server
+
+`cd frontend-vue`
 
 `npm run serve`
 
 Navigate your browser to `http://localhost:8081`
 
-The proxy expects the API to be running on localhost:8080
+The proxy expects IM API to be running on localhost:8080
+
+<br>
 
 ## Build Frontend (production)
 
