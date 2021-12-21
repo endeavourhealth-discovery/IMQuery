@@ -12,11 +12,17 @@ Checkout from GIT
 
 `npm install` (you only have to do this once)
 
+Copy the environment.js file and paste your variables within it (you only have to do this once)
+cp environment_example.js environment.js 
+
+
+Run local server
+
 `npm run serve`
 
 Navigate your browser to `http://localhost:8081`
 
-The proxy expects the API to be running on localhost:8080
+The proxy expects IM API to be running on localhost:8080
 
 ## Build Frontend (production)
 
