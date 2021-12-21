@@ -225,6 +225,8 @@ import SearchClient from "@/services/SearchClient";
 import DataStudio from "./DataStudio.vue";
 
 import OrganisationBrowser from "@/components/dataset/OrganisationBrowser.vue";
+
+import { env } from "../../environment.js";
 // import Dataset from "@/components/dataset/Dataset.ts";
 
 var _ = require("lodash");
@@ -311,6 +313,7 @@ export default defineComponent({
   },
   computed: mapState(["currentUser", "isLoggedIn"]),
   async mounted() {
+    this.oss_search("List", "im");
     await this.$store.dispatch("authenticateCurrentUser");
 
     if (this.currentUser && this.isLoggedIn) {
@@ -429,6 +432,19 @@ export default defineComponent({
       this.searchString = searchString;
       this.showSearchResults(searchString);
     },
+    async oss_search(searchString: string, index: string): Promise<any> {
+      this.isLoading = true;
+
+      await SearchService.oss_search(searchString, index)
+        .then((res: any) => {
+          console.log("fetched opensearch results: ", res);
+        })
+        .catch((err: any) => {
+
+          console.log("Could not load opensearch results", err);
+        });
+      this.isLoading = false;
+    },
   },
   watch: {
     // whenever question changes, this function will run
@@ -525,7 +541,7 @@ export default defineComponent({
 }
 
 .menu-toggler {
-    top: 12px;
+  top: 12px;
   left: 0px;
 }
 
