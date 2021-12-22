@@ -23,7 +23,7 @@
         class="relative transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900 font-medium rounded-md focus:outline-none"
         placeholder="Type to Search for Data, Apps and Resources"
         :value="modelValue"
-        @input="onInput('update:modelValue', $event)"
+        @input="onInput($event)"
         @keyup.enter="onEnter($event)"
         @focus="componentState = 'focus'"
         @blur="
@@ -127,7 +127,7 @@ export default defineComponent({
       this.$emit("search");
       this.componentState = "default";
     },
-    onInput(searchString: string, event: any): void {
+    onInput(event: any): void {
       this.$emit("update:modelValue", event.target.value);
     },
     onEnter( event: any): void {

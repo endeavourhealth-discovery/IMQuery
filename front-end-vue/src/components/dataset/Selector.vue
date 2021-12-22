@@ -71,6 +71,7 @@
           placeholder="Type to search"
           @blur="isHover ? null : (componentState = 'default')"
           @focus="componentState = 'typing'"
+          @input="onInput($event)"
         />
       </div>
 
@@ -100,7 +101,7 @@
               </template>
 
               <template v-else-if="type == 'datamodel'">
-                {{ entity.summary.name.replace("(record type)", "") }}
+                {{ entity.name.replace("(record type)", "") }}
               </template>
             </div>
           </div>
@@ -135,6 +136,7 @@
 import { ref, onMounted, defineComponent } from "vue";
 // import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
+import SearchService from "@/services/SearchService";
 
 export default defineComponent({
   name: "Selector",
@@ -147,7 +149,12 @@ export default defineComponent({
     return {
       componentState: "default", // Options #"default", #"hover", #"focus", #""
       isHover: false,
+      isLoading: false,
+      searchResults: [] as any[],
     };
+  },
+  mounted() {
+    this.oss_search_datamodel(this.modelValue.name, "im-old", 5);
   },
   methods: {
     getPrompt(): string {
@@ -227,7 +234,70 @@ export default defineComponent({
 
         return _filteredDataEntities;
       } else if (this.type == "datamodel") {
-        return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
+        // if (this.searchResults.length) {
+        //   let hits = this.searchResults.hits.hits.map((entity: any) => {
+        //     return {
+        //       iri: entity._source.iri,
+        //       name: entity._source.name,
+        //       scheme: entity._source.scheme,
+        //       status: entity._source.status,
+        //       entityType: entity._source.nentityTypeame,
+        //       code: entity._source.code,
+        //     };
+        //   });
+
+        //   return hits;
+        // } 
+          return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
+
+        
+
+      }
+    },
+    async oss_search(
+      searchString: string,
+      index: string,
+      limit: number
+    ): Promise<any> {
+      this.isLoading = true;
+
+      await SearchService.oss_search(searchString, index, limit)
+        .then((res: any) => {
+          this.isLoading = false;
+          console.log("fetched opensearch results: ", res);
+          return res;
+        })
+        .catch((err: any) => {
+          this.isLoading = false;
+          console.log("Could not load opensearch results", err);
+          return err;
+        });
+    },
+    async oss_search_datamodel(
+      searchString: string,
+      index: string,
+      limit: number
+    ): Promise<any> {
+      this.isLoading = true;
+
+      await SearchService.oss_search_datamodel(searchString, index, limit)
+        .then((res: any) => {
+          this.isLoading = false;
+          console.log("fetched opensearch results: ", res.data);
+          this.searchResults = res.data;
+          return res;
+        })
+        .catch((err: any) => {
+          this.isLoading = false;
+          console.log("Could not load opensearch results", err);
+          return err;
+        });
+    },
+    async onInput(event: any): Promise<any> {
+      if (this.type == "query") {
+        return null;
+      } else if (this.type == "datamodel") {
+        this.oss_search_datamodel(event.target.value, "im-old", 5);
       }
     },
   },
