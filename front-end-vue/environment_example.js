@@ -1,6 +1,6 @@
 const env = {
-    oss_endpoint: "",
-    oss_auth_basic: ""
+    oss_url: "",
+    oss_auth_basictoken: ""
 };
 
 export {env};

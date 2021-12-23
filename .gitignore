@@ -11,3 +11,4 @@ target
 *.classpath
 coverage
 node_modules
+output-json
