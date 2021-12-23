@@ -231,6 +231,7 @@ export default defineComponent({
   },
   async mounted() {
     await this.$store.dispatch("fetchDatamodel");
+    await this.$store.dispatch("fetchDatamodelIris");
     // console.log("datamodel fetched: ", this.$store.state.datamodel);
   },
   methods: {

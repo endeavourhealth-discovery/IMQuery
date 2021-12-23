@@ -15,14 +15,13 @@ def updateDocumentsHTTP(index, filename, body):
 
     # Make request
     conn.request("POST", "/" + index + "/_bulk",
-                 body, headers)
+                 body.encode('utf-8'), headers)
 
     # Output the response
     res = conn.getresponse()
     data = res.read()
-    # writeFile("oss response " + filename, body)
     # print("HTTP Response:" + data.decode("utf-8"))
-    print("doc indexed on OpenSearch server: " + filename)
+    print("doc indexed on OpenSearch server: file " + filename)
 
 
 def updateOSSFromFolder(folderpath=None, index="im-test1"):
@@ -112,16 +111,21 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
             if (dbid in dbids_skip):
                 continue
 
-            entityTypes = [{
-                "@id": entityType,
-                "name": entityTypeName
-            }]
+           
 
-            current_index = i
+            
+
             # print(len(results))
             # print(current_index)
             # print(results[current_index + 1][0])
             # print(dbids_skip)
+
+            # add multiple entityType objects to the same array 
+            entityTypes = [{
+                "@id": entityType,
+                "name": entityTypeName
+            }]
+            current_index = i
             while current_index < len(results) -1:
                 if results[current_index][0] == results[current_index + 1][0]:
                     entityTypes.append(
@@ -134,9 +138,8 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
                     current_index += 1
                 else:
                     break
-                    # dbids_skip.append(current_index + 1)
 
-
+            
             searchDoc = {
                 "iri": iri,
                 "name": name,
@@ -159,7 +162,7 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
                 '{ "index": { "_index": "' + index + '", "_id": "' + \
                 str(dbid) + '" } }' + '\n'
             # docuemnt
-            documents = str(documents) + str(searchDoc) + "\n"
+            documents = str(documents) + str(searchDocJSON) + "\n"
 
             total_uploads += 1
 
@@ -175,8 +178,8 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
 
         # increment current_dbid
         if current_dbid == max_dbid:
+            print('update complete - total docs added: ' + str(total_uploads))
             break
-            print('update complete - total docs added: ' + total_uploads)
         elif (current_dbid + increment > total_rows):
             prev_dbid = current_dbid
             current_dbid = max_dbid
@@ -186,18 +189,20 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
 
     mysqldb.close()
 
-    # except:
-    #     print('Error: Unable to fetch data.')
-    # finally:
-    #     mysqldb.close()
 
 
 if __name__ == '__main__':
     print('updating opensearch has started')
     generateDocsFromMySQL(
         databaseName="im3",
-        index="im-test2",
-        outputFolderName="im-test2",
+        index="dev-im1",
+        outputFolderName="dev-im1",
         total_rows=2659160,
         saveFile=True,
-        updateServer=True)
+        updateServer=False)
+    
+    #upload single file 
+    # filename = "C:\\Users\\ahmed\\OneDrive\\Discovery\\IMQuery\\oss\\python-scripts\\output-bulk\\imq-im\\file 1-1000.txt"
+    # file = open(filename, encoding='utf-8', mode='r')
+    # documents_file = file.read()
+    # updateDocumentsHTTP("imq-im", "test", documents_file)

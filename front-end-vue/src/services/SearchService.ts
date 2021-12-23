@@ -30,17 +30,116 @@ export default class SearchService {
       });
   }
 
-  public static async oss_search_datamodel(queryString: string, index: string, limit: number): Promise<AxiosResponse<any>> {
-    return axios.post(`${this.oss_url}/${index}/_search`,
+  public static async oss_search_im(queryString: string, limit: number, entityType?: string): Promise<AxiosResponse<any>> {
+    const q = {
+      bool: {
+        must: [{
+          match: {
+            name: queryString
+          }
+        }],
+        filter: [{
+          bool: {
+            should: [{
+              match_phrase: {
+                "scheme.@id": "http://snomed.info/sct#"
+              }
+            }, {
+              match_phrase: {
+                "scheme.@id": "http://endhealth.info/im#"
+              }
+            }],
+            minimum_should_match: 1
+          }
+        }, {
+          bool: {
+            should: [{
+              match_phrase: {
+                "status.@id": "http://endhealth.info/im#Active"
+              }
+            }, {
+              match_phrase: {
+                "status.@id": "http://endhealth.info/im#Draft"
+              }
+            }],
+            minimum_should_match: 1
+          }
+        }, {
+          bool: {
+            should: [{
+              match_phrase: entityType ? {
+                "entityType.@id": entityType
+              } : null
+            }],
+            minimum_should_match: 1
+          }
+        }]
+      }
+    }
+    return axios.post(`${this.oss_url}/${"dev-im1"}/_search`,
       {
         size: limit,
-        query: { bool: { must: [{ match: { name: queryString } }], filter: [{ bool: { should: [{ match_phrase: { "scheme.@id": "http://snomed.info/sct#" } }, { match_phrase: { "scheme.@id": "http://endhealth.info/im#" } }], minimum_should_match: 1 } }, { bool: { should: [{ match_phrase: { "status.@id": "http://endhealth.info/im#Active" } }, { match_phrase: { "status.@id": "http://endhealth.info/im#Draft" } }], minimum_should_match: 1 } }, { bool: { should: [{ match_phrase: { "entityType.@id": "http://www.w3.org/ns/shacl#NodeShape" } }], minimum_should_match: 1 } }] } }
+        query: q
       }
       ,
       {
         headers: this.oss_headers
       });
-  }
 
+  };
+
+  public static async oss_getDataModelAll(): Promise<AxiosResponse<any>> {
+    const q = {
+      bool: {
+        filter: [{
+          bool: {
+            should: [{
+              match_phrase: {
+                "scheme.@id": "http://snomed.info/sct#"
+              }
+            }, {
+              match_phrase: {
+                "scheme.@id": "http://endhealth.info/im#"
+              }
+            }],
+            minimum_should_match: 1
+          }
+        }, {
+          bool: {
+            should: [{
+              match_phrase: {
+                "status.@id": "http://endhealth.info/im#Active"
+              }
+            }, {
+              match_phrase: {
+                "status.@id": "http://endhealth.info/im#Draft"
+              }
+            }],
+            minimum_should_match: 1
+          }
+        }, {
+          bool: {
+            should: [{
+              match_phrase: {
+                "entityType.@id": "http://www.w3.org/ns/shacl#NodeShape"
+              }
+            }],
+            minimum_should_match: 1
+          }
+        }]
+      }
+    }
+
+    return axios.post(`${this.oss_url}/${"dev-im1"}/_search`,
+      {
+        size: 100,
+        query: q
+      }
+      ,
+      {
+        headers: this.oss_headers
+      });
+
+  };
 
 }
