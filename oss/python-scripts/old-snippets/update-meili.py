@@ -122,7 +122,6 @@ def writeFile(filename, content):
 
 if __name__ == '__main__':
     print('updating meilisearch has started')
-    # update Meili
-    # updateMeiliHTTPFromFile("C:\\Users\\ahmed\\OneDrive\\Discovery\\Search\\Meilisearch\\information model files\OrgDat1.json")
+    # updateOSSFromFolder("C:\\Users\\ahmed\\OneDrive\\Discovery\\Search\\Meilisearch\\information model files")
 
     print('update complete')

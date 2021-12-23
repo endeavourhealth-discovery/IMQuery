@@ -164,10 +164,3 @@ if __name__ == '__main__':
     print('updating opensearch has started')
     generateDocsFromMySQL(databaseName="im3", index="im-test1", outputFolderName="im-test1", total_rows=2659160, saveFile=True, updateServer=True)
     print('update complete')
-
-
-    # update OSS from folder
-    # updateOSSFromFolder("C:\\Users\\ahmed\\OneDrive\\Discovery\\Search\\information model files", "im-test1")
-
-    # update Meili
-    # updateMeiliHTTPFromFile("C:\\Users\\ahmed\\OneDrive\\Discovery\\Search\\Meilisearch\\information model files\OrgDat1.json")
