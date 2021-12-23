@@ -366,7 +366,7 @@ export default defineComponent({
 .widget-button.focus,
 .widget-button.hover,
 .widget-button.typing {
-  min-width: 175px;
+  /* min-width: 175px; */
   border: 1px solid rgb(207, 210, 218);
   border-radius: 5px;
   /* border-left: 1px solid rgb(207, 210, 218);

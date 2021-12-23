@@ -1,7 +1,7 @@
 <template>
-  <div class="non-selectable" v-if="node.children">
+  <div class="w-full non-selectable" v-if="node.children">
     <template v-if="node.itemType == 'item'">
-      <div class="row flex pt-2 pr-5">
+      <div class="w-full flex pt-2 pr-5">
         <div
           class="inline text-black font-semibold hover:underline"
         >

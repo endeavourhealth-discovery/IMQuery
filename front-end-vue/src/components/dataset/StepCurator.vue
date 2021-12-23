@@ -43,11 +43,12 @@
                       </template>
                     </Section>
                     <Section
+                    class=""
                       v-if="step.inclusionCriteria.length"
                       name="Include patients if"
                     >
                       <div
-                        class="flex flex-col"
+                        class="section flex flex-col"
                         v-for="(criterion, index3) in step.inclusionCriteria"
                         :key="criterion.id"
                       >
@@ -71,14 +72,14 @@
                         </div>
 
                         <div
-                          v-show="expandedSteps.includes(step.id)"
-                          class="widget-content inline bg-white pb-3 pl-3 rounded-b-xl"
+                        
+                          class="widget-content w-full inline bg-white pb-3 pl-3 rounded-b-xl"
                         >
                           <template
                             v-for="node in criterion.constraints"
                             :key="node.id"
                           >
-                            <Constraint :node="node" />
+                            <Constraint class="w-full" :node="node" />
                           </template>
                         </div>
                       </div>
@@ -158,6 +159,12 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
+.section { 
+    /* width: 100%; */
+  /* max-width: 400px; */
+  width: 400px;
+}
+
 .divider {
   border-bottom: 1px solid #eef0f2;
 }
@@ -172,6 +179,7 @@ export default defineComponent({
 }
 
 .widget-content {
+
   padding-left: 53px;
 }
 
