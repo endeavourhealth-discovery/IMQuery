@@ -37,7 +37,7 @@
             </template>
 
             <template v-else-if="type == 'datamodel'">
-              {{ modelValue.name.replace("(record type)", "") }}
+              {{ trimName(modelValue.name) }}
             </template>
           </div>
         </span>
@@ -72,13 +72,14 @@
           @blur="isHover ? null : (componentState = 'default')"
           @focus="componentState = 'typing'"
           @input="onInput($event)"
+          v-model="searchInputValue"
         />
       </div>
 
       <ul class="relative mt-1 w-full  text-base  sm:text-sm" role="listbox">
         <!-- One Item   -->
         <li
-          v-for="entity in filteredEntities()"
+          v-for="entity in filteredEntities"
           :key="entity.iri"
           class="relative ext-gray-900 cursor-default select-none relative py-2 pl-3 pr-12 hover:bg-gray-100"
           role="option"
@@ -101,7 +102,8 @@
               </template>
 
               <template v-else-if="type == 'datamodel'">
-                {{ entity.name.replace("(record type)", "") }}
+                <!-- {{ entity.name.replace("(record type)", "") }} -->
+                {{ entity.name }}
               </template>
             </div>
           </div>
@@ -151,68 +153,42 @@ export default defineComponent({
       isHover: false,
       isLoading: false,
       searchResults: [] as any[],
+      searchResults1: [] as any[],
+      searchInputValue: "",
     };
   },
   mounted() {
-    this.oss_search_datamodel(this.modelValue.name, "im-old", 5);
+    this.oss_search_im(
+      this.modelValue.name,
+      5,
+      "http://www.w3.org/ns/shacl#NodeShape"
+    );
   },
-  methods: {
-    getPrompt(): string {
-      switch (this.type) {
-        case "query":
-          return "Select a source, query or step:";
-        case "datamodel":
-          return "Select a health record type:";
-        default:
-          return "Select an item";
-      }
-    },
-    getIconMeta(iri: string): any {
-      if (iri == "im:DDS") {
-        return { icon: "cloud", class: " text-green-600" };
-      } else if (iri.split(":")[0] == "dds") {
-        if (iri.split(":")[1].substring(0, 4) == "Step") {
-          return { icon: "template", class: " text-indigo-600" }; //if it is a step
-        } else {
-          return { icon: "database", class: " text-yellow-600" }; //if it is a query
-        }
-      } else if (
-        this.$store.state.prefetched_datamodel.some(
-          (entity: any) => entity.iri == iri
-        )
-      ) {
-        return { icon: "document_text", class: " text-red-600" }; //if datamodel entity
-      } else {
-        return { icon: "document_text", class: " text-gray-500" }; //if unknown entity
-      }
-    },
-    updateEntity(entity: any): void {
-      this.$store.commit("updateEntity", {
-        ...entity,
-        propertyPath: this.propertyPath,
-      });
-      this.componentState = "default";
-    },
-
+  computed: {
     filteredEntities(): any {
       let _maxHits = 5;
       if (this.type == "query") {
+        // get all steps in current queries
         let _steps = this.$store.state.openQueries.filter(
           (query: any) => query.id == this.$store.state.activeQueryId
         )[0].data.steps;
+
+        // get all currently open queries
         let _queries = this.$store.state.openQueries.slice(
           0,
           this.$store.state.openQueries.length < _maxHits
             ? this.$store.state.openQueries.length - 1
             : _maxHits
         );
+
+        // get all data souries
         let _sources = [{ iri: "im:DDS", name: "Discovery Data Service" }];
+
         let _dataEntities = [..._steps, ..._queries, ..._sources];
 
         //returns everything except for:
         // 1. currently Iri of currently selected item (modelValue)
         // 2. current step (to avoid an infinite loop)
-
         let _filterArray = [this.stepIri, this.modelValue.iri];
 
         // 3. a step referencing itself in .copy attribute of step.
@@ -234,25 +210,73 @@ export default defineComponent({
 
         return _filteredDataEntities;
       } else if (this.type == "datamodel") {
-        // if (this.searchResults.length) {
-        //   let hits = this.searchResults.hits.hits.map((entity: any) => {
-        //     return {
-        //       iri: entity._source.iri,
-        //       name: entity._source.name,
-        //       scheme: entity._source.scheme,
-        //       status: entity._source.status,
-        //       entityType: entity._source.nentityTypeame,
-        //       code: entity._source.code,
-        //     };
-        //   });
+        if (this.searchResults) {
+          // let _hits = this.searchResults;
+          // let _formattedHits = _hits.hits.hits.map((entity: any) => {
+          //   return {
+          //     iri: entity._source.iri,
+          //     name: entity._source.name,
+          //     scheme: entity._source.scheme,
+          //     status: entity._source.status,
+          //     entityType: entity._source.nentityTypeame,
+          //     code: entity._source.code,
+          //   };
+          // });
+          return this.searchResults;
 
-        //   return hits;
-        // } 
+          // return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
+        } else {
           return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
-
-        
-
+        }
+      } else {
+        return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
       }
+    },
+  },
+  methods: {
+    trimName(name: string): string {
+      if (name.includes("(record type)")) {
+        return name.replace("(record type)", "");
+      } else if (name.includes("(record of)")) {
+        return name.replace("(record of)", "");
+      } else {
+        return name;
+      }
+    },
+    getPrompt(): string {
+      switch (this.type) {
+        case "query":
+          return "Select a source, query or step:";
+        case "datamodel":
+          return "Select a health record type:";
+        default:
+          return "Select an item";
+      }
+    },
+    getIconMeta(iri: string): any {
+      if (iri == "im:DDS") {
+        return { icon: "cloud", class: " text-green-600" };
+      } else if (iri.split(":")[0] == "dds") {
+        if (iri.split(":")[1].substring(0, 4) == "Step") {
+          return { icon: "template", class: " text-indigo-600" }; //if it is a step
+        } else {
+          return { icon: "database", class: " text-yellow-600" }; //if it is a query
+        }
+      } else if (
+        this.$store.state.datamodelIris &&
+        this.$store.state.datamodelIris.includes(iri)
+      ) {
+        return { icon: "document_text", class: " text-red-600" }; //if datamodel entity
+      } else {
+        return { icon: "document", class: " text-gray-500" }; //if unknown entity
+      }
+    },
+    updateEntity(entity: any): void {
+      this.$store.commit("updateEntity", {
+        ...entity,
+        propertyPath: this.propertyPath,
+      });
+      this.componentState = "default";
     },
     async oss_search(
       searchString: string,
@@ -273,18 +297,29 @@ export default defineComponent({
           return err;
         });
     },
-    async oss_search_datamodel(
+    async oss_search_im(
       searchString: string,
-      index: string,
-      limit: number
+      limit: number,
+      entityType?: string
     ): Promise<any> {
       this.isLoading = true;
 
-      await SearchService.oss_search_datamodel(searchString, index, limit)
+      await SearchService.oss_search_im(searchString, limit, entityType)
         .then((res: any) => {
           this.isLoading = false;
-          console.log("fetched opensearch results: ", res.data);
-          this.searchResults = res.data;
+          let _formattedHits = res.data.hits.hits.map((entity: any) => {
+            return {
+              id: entity._source.id,
+              iri: entity._source.iri,
+              name: entity._source.name,
+              code: entity._source.code,
+              scheme: entity._source.scheme,
+              entityType: entity._source.entityType,
+              status: entity._source.status,
+            };
+          });
+          // console.log("this.searchResults : ", _formattedHits);
+          this.searchResults = _formattedHits;
           return res;
         })
         .catch((err: any) => {
@@ -297,7 +332,13 @@ export default defineComponent({
       if (this.type == "query") {
         return null;
       } else if (this.type == "datamodel") {
-        this.oss_search_datamodel(event.target.value, "im-old", 5);
+        this.oss_search_im(
+          this.searchInputValue == ""
+            ? this.modelValue.name
+            : event.target.value,
+          5,
+          "http://www.w3.org/ns/shacl#NodeShape"
+        );
       }
     },
   },

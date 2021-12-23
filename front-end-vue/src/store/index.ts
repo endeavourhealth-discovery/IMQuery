@@ -11,6 +11,8 @@ import { IM } from "@/vocabulary/IM";
 import { ConceptSummary } from "@/models/search/ConceptSummary";
 import { ConceptReference } from "@/models/TTConcept/ConceptReference";
 import axios from "axios";
+import SearchClient from "@/services/SearchClient";
+import SearchService from "@/services/SearchService";
 const _ = require("lodash");
 
 export default createStore({
@@ -122,7 +124,7 @@ export default createStore({
                   },
                   datamodelEntity: {
                     iri: "http://endhealth.info/im#EpisodeOfCare",
-                    name: "Registration History"
+                    name: "Episode of Care"
                   },
                   constraints: [
                     {
@@ -333,6 +335,7 @@ export default createStore({
       },
     ],
     datamodel: [] as any[],
+    datamodelIris: [] as any[],
     prefetched_datamodel: [
       {
         iri: "http://endhealth.info/im#AllergyIntoleranceAndAdverseReaction",
@@ -4134,8 +4137,8 @@ export default createStore({
         ],
       },
     ],
-    
-    
+
+
   },
   mutations: {
     updateConceptIri(state, conceptIri) {
@@ -4226,6 +4229,10 @@ export default createStore({
       });
 
     },
+    updateDatamodelIris(state, datamodelIris) {
+      state.datamodelIris = datamodelIris;
+
+    },
     updateEntity(state, payload) {
       //active query
       let _activeQueryIndex = -1;
@@ -4240,7 +4247,7 @@ export default createStore({
         _.set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".iri", payload.iri)
       }
 
-      console.log("committed payload", payload);
+      console.log("updated Entity with payload", payload);
 
     }
   },
@@ -4307,10 +4314,14 @@ export default createStore({
       return result;
     },
     async fetchDatamodel({ commit }) {
+
+      // hardcoded list of datamodel Iris you want to prefetch
       const datamodelIris = [
         // "http://endhealth.info/im#Activity",
         // "http://endhealth.info/im#Event",
         // "http://endhealth.info/im#Patient",
+        // http://endhealth.info/im#HealthRecordEntry
+        "http://endhealth.info/im#Appointment",
         "http://endhealth.info/im#AllergyIntoleranceAndAdverseReaction",
         "http://endhealth.info/im#CarePlan",
         "http://endhealth.info/im#DiagnosticReport",
@@ -4328,7 +4339,7 @@ export default createStore({
         "http://endhealth.info/im#ProblemOrCondition",
         "http://endhealth.info/im#Procedure",
         "http://endhealth.info/im#ReferralRequestOrProcedureRequest",
-        "http://endhealth.info/im#Appointment",
+
       ];
 
       datamodelIris.forEach(async (iri: string) => {
@@ -4372,7 +4383,29 @@ export default createStore({
 
       });
 
-    
+
+
+    },
+    async fetchDatamodelIris({commit}) {
+      //fetch all datamodel Iris and then metadata (properties) from IM API 
+      const datamodelIris = [] as any[];
+      await SearchService.oss_getDataModelAll()
+        .then((res) => {
+          res.data.hits.hits.forEach((entity: any) => {
+            datamodelIris.push(entity._source.iri);
+          });
+
+
+        })
+        .catch((err) => {
+          console.log(
+            "Failed to get data model properties from server",
+            err
+          );
+        }
+        );
+        commit("updateDatamodelIris", datamodelIris);
+
 
     }
   },
