@@ -49,17 +49,10 @@
       v-show="componentState == 'focus' || componentState == 'typing'"
       class="autocomplete absolute z-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none"
     >
-      <label
-        v-show="
-          componentState == 'focus' || componentState == 'typing' || isHover
-        "
-        class="inline text-sm font-medium text-gray-600 mb-4 pl-4"
-      >
-        {{ getPrompt() }}
-      </label>
-      <div class="relative searchbox flex w-full overflow-none py-2">
+  
+      <div class="autocomplete-searchbox relative flex overflow-none py-2 ml-3">
         <HeroIcon
-          class="widget-icon text-gray- ml-3"
+          class="widget-icon text-gray"
           icon="search"
           strokewidth="2"
           width="20"
@@ -75,13 +68,24 @@
           v-model="searchInputValue"
         />
       </div>
+          <div
+        v-show="
+          componentState == 'focus' || componentState == 'typing' || isHover
+        "
+        class="autocomplete-label relative text-sm font-medium text-gray-600"
+      >
+        {{ getPrompt() }}
+      </div>
 
-      <ul class="relative mt-1 w-full  text-base  sm:text-sm" role="listbox">
+      <ul
+        class="autocomplete-results relative mt-1 w-full text-base  sm:text-sm"
+        role="listbox"
+      >
         <!-- One Item   -->
         <li
           v-for="entity in filteredEntities"
           :key="entity.iri"
-          class="relative ext-gray-900 cursor-default select-none relative py-2 pl-3 pr-12 hover:bg-gray-100"
+          class="relative text-gray-900 cursor-default select-none py-2 pl-3 pr-12 hover:bg-gray-100"
           role="option"
           @click="updateEntity(entity)"
         >
@@ -408,8 +412,21 @@ export default defineComponent({
 }
 
 .autocomplete {
-  top: 45px;
   border-color: rgb(207, 210, 218);
   box-shadow: rgb(207, 210, 218) 0px 2px 6px;
 }
+
+.autocomplete-label {
+  /* top: 3px; */
+  margin-top: 10px;
+  margin-left: 14px;
+  /* height: 50px; */
+  /* margin: 10px 0 10px 20px; */
+}
+.autocomplete-searchbox {
+  margin-top: 3px;
+}
+/* .autocomplete-results {
+  margin-top: 6px;
+} */
 </style>

@@ -179,7 +179,6 @@ export default defineComponent({
 }
 
 .widget-content {
-
   padding-left: 53px;
 }
 
@@ -196,6 +195,8 @@ export default defineComponent({
   height: 100%;
   margin-left: auto;
   margin-right: auto;
+      width: 100%;
+    max-width: 1024px;
   /* margin-top: 2rem; */
 }
 
