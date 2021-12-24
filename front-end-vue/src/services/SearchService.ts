@@ -76,7 +76,7 @@ export default class SearchService {
         }]
       }
     }
-    return axios.post(`${this.oss_url}/${"dev-im1"}/_search`,
+    return axios.post(`${this.oss_url}/${env.index_im}/_search`,
       {
         size: limit,
         query: q
@@ -130,7 +130,7 @@ export default class SearchService {
       }
     }
 
-    return axios.post(`${this.oss_url}/${"dev-im1"}/_search`,
+    return axios.post(`${this.oss_url}/${env.index_im}/_search`,
       {
         size: 100,
         query: q

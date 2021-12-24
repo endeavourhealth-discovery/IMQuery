@@ -49,7 +49,6 @@
       v-show="componentState == 'focus' || componentState == 'typing'"
       class="autocomplete absolute z-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none"
     >
-  
       <div class="autocomplete-searchbox relative flex overflow-none py-2 ml-3">
         <HeroIcon
           class="widget-icon text-gray"
@@ -68,13 +67,13 @@
           v-model="searchInputValue"
         />
       </div>
-          <div
+      <div
         v-show="
           componentState == 'focus' || componentState == 'typing' || isHover
         "
         class="autocomplete-label relative text-sm font-medium text-gray-600"
       >
-        {{ getPrompt() }}
+        {{ getPrompt }}
       </div>
 
       <ul
@@ -236,6 +235,20 @@ export default defineComponent({
         return this.$store.state.prefetched_datamodel.slice(0, _maxHits);
       }
     },
+    getPrompt(): string {
+      if (this.searchResults.length) {
+        switch (this.type) {
+          case "query":
+            return "Select a source, query or step:";
+          case "datamodel":
+            return "Select a health record type:";
+          default:
+            return "Select an item";
+        }
+      } else {
+        return "No results were found";
+      }
+    },
   },
   methods: {
     trimName(name: string): string {
@@ -247,16 +260,7 @@ export default defineComponent({
         return name;
       }
     },
-    getPrompt(): string {
-      switch (this.type) {
-        case "query":
-          return "Select a source, query or step:";
-        case "datamodel":
-          return "Select a health record type:";
-        default:
-          return "Select an item";
-      }
-    },
+
     getIconMeta(iri: string): any {
       if (iri == "im:DDS") {
         return { icon: "cloud", class: " text-green-600" };
@@ -345,6 +349,7 @@ export default defineComponent({
         );
       }
     },
+    
   },
 });
 </script>
@@ -417,16 +422,10 @@ export default defineComponent({
 }
 
 .autocomplete-label {
-  /* top: 3px; */
   margin-top: 10px;
   margin-left: 14px;
-  /* height: 50px; */
-  /* margin: 10px 0 10px 20px; */
 }
 .autocomplete-searchbox {
   margin-top: 3px;
 }
-/* .autocomplete-results {
-  margin-top: 6px;
-} */
 </style>

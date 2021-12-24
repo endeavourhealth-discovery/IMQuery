@@ -4,8 +4,8 @@ import glob
 import http.client
 import mysql.connector
 
-
 def updateDocumentsHTTP(index, filename, body):
+
     # client
     conn = http.client.HTTPSConnection(os.environ.get("oss_url"))
     headers = {
@@ -17,32 +17,56 @@ def updateDocumentsHTTP(index, filename, body):
     conn.request("POST", "/" + index + "/_bulk",
                  body.encode('utf-8'), headers)
 
+    # print("doc indexed on OpenSearch server: file " + filename)
+
     # Output the response
     res = conn.getresponse()
     data = res.read()
+    try:
+        data = json.loads(res.read())
+        if data['errors']:
+            writeFile(index, "error-response: " + filename + ".txt" , data)
+            return False
+        else:
+            print("doc indexed on OpenSearch server: file " + filename)
+            return True
+    except:
+        # updateDocumentsHTTP(index, filename, body)
+        # return
+        print("error in JSON parsing")
+        writeFile(index, "error-response " + filename + ".txt", str(data)) 
+        return False
+
     # print("HTTP Response:" + data.decode("utf-8"))
-    print("doc indexed on OpenSearch server: file " + filename)
 
 
-def updateOSSFromFolder(folderpath=None, index="im-test1"):
+def updateOSSFromFolder(index, folderpath=None):
     # only process .JSON files in folder.
-    for filename in glob.glob(os.path.join(folderpath, '*.json')):
+    for filename in glob.glob(os.path.join(folderpath, '*.txt')):
         file = open(filename, encoding='utf-8', mode='r')
         documents_file = file.read()
         print("Updating file: " + filename)
-        documents = json.loads(documents_file)
-        request_body = ""
-        for i in range(1000):
-            request_body = request_body + \
-                '{ "index": { "_index": "' + index + '", "_id": "' + \
-                str(documents[i]["id"]) + '" } }' + '\n'
-            documents[i].pop("id")
-            request_body = request_body + json.dumps(documents[i]) + "\n"
+        # print(documents_file)
+        # documents = json.loads(documents_file)
+        # request_body = ""
+        # for i in range(1000):
+        #     request_body = request_body + \
+        #         '{ "index": { "_index": "' + index + '", "_id": "' + \
+        #         str(documents[i]["id"]) + '" } }' + '\n'
+        #     documents[i].pop("id")
+        #     request_body = request_body + json.dumps(documents[i]) + "\n"
         # print("Update initiated - request body: ", request_body)
-        updateDocumentsHTTP(request_body)
+        updateDocumentsHTTP(index, 'test', documents_file)
         file.close()
-        print("Updated complete: " + filename)
+        print("Updated complete")
 
+
+def updateOSSFromFile(index, filename):
+    # upload single file 
+    file = open(filename, encoding='utf-8', mode='r')
+    documents_file = file.read()
+    while updateDocumentsHTTP(index, "test", documents_file) == False:
+        updateDocumentsHTTP(index, "test", documents_file)
 
 def writeFile(outputFolderName, filename, content):
 
@@ -54,7 +78,8 @@ def writeFile(outputFolderName, filename, content):
 
     with open(outputFolderPath + '/' + filename, "w", encoding="utf-8") as f:
         f.write(content)
-        print("doc saved as file: " + filename)
+        f.close()
+        print("doc saved as: " + filename)
 
 
 def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, index, outputFolderName):
@@ -74,17 +99,18 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
     prev_dbid = 0
     current_dbid = increment
     total_uploads = 0
+    processed_dbids = []
 
     while current_dbid <= total_rows:
 
         statement = """SELECT e.dbid, e.iri, e.name, e.description, e.code, et.type, typ.name, e.scheme, n.name, e.status, stt.name 
                     FROM entity e 
-                    JOIN entity_type et ON et.entity = e.dbid 
+                    LEFT JOIN entity_type et ON et.entity = e.dbid 
                     LEFT JOIN entity typ ON typ.iri = et.type 
-                    JOIN namespace n ON n.iri = e.scheme 
+                    LEFT JOIN namespace n ON n.iri = e.scheme 
                     LEFT JOIN entity stt ON stt.iri = e.status 
-                    WHERE e.dbid <= """ + str(current_dbid) + """
-                    AND e.dbid > """ + str(prev_dbid)
+                    WHERE e.dbid > """ + str(prev_dbid) + """ 
+                    AND e.dbid < """ + str(current_dbid + 1)
 
         mycursor.execute(statement)
         results = mycursor.fetchall()  # fetches all the rows in a result set
@@ -93,7 +119,9 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
         documents = ""
         dbids_skip = []
 
-        for i in range(0, len(results) - 1):
+        total_loop_count = 0
+
+        for i in range(0, len(results)):
 
             dbid = results[i][0]
             iri = results[i][1]
@@ -110,10 +138,6 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
             # skips for loop if dbid is to be skipped (e.g. for multiple joins)
             if (dbid in dbids_skip):
                 continue
-
-           
-
-            
 
             # print(len(results))
             # print(current_index)
@@ -165,10 +189,16 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
             documents = str(documents) + str(searchDocJSON) + "\n"
 
             total_uploads += 1
+            total_loop_count +=1
+        
+        # debugging any missing dbids
+        # print(total_loop_count)
+        # if total_loop_count < 1000:
+            # print(total_loop_count)
+            # print("total loop count less than 1000: " + str(prev_dbid + 1) + "-" + str(current_dbid))
 
         # write document to file
         filename = str(prev_dbid + 1) + "-" + str(current_dbid) + ".txt"
-
         if saveFile:
             writeFile(outputFolderName, "file " + filename, documents)
 
@@ -178,7 +208,8 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
 
         # increment current_dbid
         if current_dbid == max_dbid:
-            print('update complete - total docs added: ' + str(total_uploads))
+            print('update complete - total docs processed: ' + str(total_uploads))
+            print('update complete - processed_dbids count : ' + str(len(processed_dbids)))
             break
         elif (current_dbid + increment > total_rows):
             prev_dbid = current_dbid
@@ -193,16 +224,19 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
 
 if __name__ == '__main__':
     print('updating opensearch has started')
+    index = "dev-im2"
     generateDocsFromMySQL(
         databaseName="im3",
-        index="dev-im1",
-        outputFolderName="dev-im1",
+        index=index,
+        outputFolderName=index,
         total_rows=2659160,
-        saveFile=True,
-        updateServer=False)
+        saveFile=False,
+        updateServer=True)
     
-    #upload single file 
-    # filename = "C:\\Users\\ahmed\\OneDrive\\Discovery\\IMQuery\\oss\\python-scripts\\output-bulk\\imq-im\\file 1-1000.txt"
-    # file = open(filename, encoding='utf-8', mode='r')
-    # documents_file = file.read()
-    # updateDocumentsHTTP("imq-im", "test", documents_file)
+    updateOSSFromFolder(index, "C:\\Users\\ahmed\\OneDrive\\Discovery\\IMQuery\\oss\\python-scripts\\output-bulk\\im")
+    
+    print('updating opensearch has finished')
+    # updateOSSFromFile("dev-im2", "C:\\Users\\ahmed\\OneDrive\\Discovery\\IMQuery\\oss\\python-scripts\\output-bulk\\im\\file 1248001-1249000.txt")
+
+
+
