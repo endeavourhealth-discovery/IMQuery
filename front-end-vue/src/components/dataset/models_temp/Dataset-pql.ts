@@ -26,10 +26,8 @@ export default class Dataset {
         return _response;
     }
     
-    
 
 }
-
 
 
 //create tokens - these are  used as text templates for interpolation and autosuggest.

@@ -88,6 +88,10 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
+import {
+  Query,
+  Examples,
+} from "@/models/query/QueryBuilder";
 
 export default defineComponent({
   name: "DataStudio",
@@ -230,6 +234,8 @@ export default defineComponent({
     };
   },
   async mounted() {
+    const dataset = new Query(Examples.QOF_CHD005 as Query);
+    console.log(dataset.name);
     await this.$store.dispatch("fetchDatamodel");
     await this.$store.dispatch("fetchDatamodelIris");
     // console.log("datamodel fetched: ", this.$store.state.datamodel);

@@ -7,16 +7,17 @@
     @mouseleave="isHover = false"
   >
     <RoundButton
-      class="title non-selectable px-2 transition duration-500 ease-in-out shadow-sm ring ring-blue-600"
+      class="title non-selectable px-2 transition duration-500 ease-in-out shadow-sm ring ring-5"
       :rounded="true"
       :showRing="false"
       focusTextColor="white"
-      textColor="gray-500"
+      textColor="blue-500"
       hoverTextColor="white"
       backgroundColor="white"
       hoverBackgroundColor="blue-600"
       borderColor="blue-600"
       @blur="isHover ? null : [(expanded = false)]"
+      a
     >
       {{
         modelValue.firstName.substring(0, 1) +
@@ -25,9 +26,16 @@
     </RoundButton>
     <div
       v-if="modelValue && expanded"
-      class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+      class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white ring-1 focus:outline-none"
       role="menu"
     >
+      <div class="non-selectable block px-4 py-2 text-sm border-b">
+        <div class="text-black font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
+        <div class="text-gray-700 font-regular">
+          {{ modelValue.email }}
+        </div>
+      </div>
+
       <div
         v-if="isLoggedIn"
         class="non-selectable text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
@@ -141,7 +149,6 @@ export default defineComponent({
   font-size: 16px;
   font-weight: 500;
   z-index: 5;
-  width: 150px;
   border-color: rgb(207, 210, 218);
   box-shadow: rgb(207, 210, 218) 0px 2px 6px;
 }
