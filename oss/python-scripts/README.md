@@ -12,7 +12,7 @@ Change directory
 cd C:\
 ```
 
-create virtual environment (venv = virtual environment, venv_oss = folder name where packages are stored)
+create virtual environment (venv = virtual environment, venv_oss = folder name where project dependencies are stored)
 ```
 python -m venv venv_oss
 ```
@@ -22,8 +22,9 @@ Activate virtual environment from any directory (Windows Command Prompt)
 c:\venv_oss\Scripts\activate.bat
 ```
 
-change directory to the 'python-scripts' folder
-```install requirements
+First, Change directory to the 'python-scripts' folder
+Then, install dependencies (requirements.txt)
+```
 python -m pip install -r requirements.txt
 ```
 
