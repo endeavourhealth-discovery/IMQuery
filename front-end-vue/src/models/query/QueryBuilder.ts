@@ -279,7 +279,7 @@ export class Examples {
         id: 3000000,
         iri: "im:Q_QOF_CHD005",
         name: "QOF CHD005",
-        description: "The percentage of patients registered at a GP practice with coronary heart disease with a record in the preceding 12 months that aspirin, an alternative anti-platelet therapy, or an anti-coagulant is being taken.",
+        description: "The percentage of patients registered at a GP practice with a diagnosis of coronary heart disease with a record in the preceding 12 months that aspirin, an alternative anti-platelet therapy, or an anti-coagulant is being taken.",
         code: null,
         scheme: {
             name: "Discovery",
@@ -300,7 +300,7 @@ export class Examples {
                 rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
                 rdfs: "http://www.w3.org/2000/01/rdf-schema#"
             },
-            meta: {
+            references: {
                 entities: [
                     {
                         id: 703,
@@ -373,9 +373,41 @@ export class Examples {
                         ]
                     },
                     {
+                        id: 3000004,
+                        iri: "http://endhealth.info/im#DDS",
+                        name: "Discovery Data Service",
+                        code: null,
+                        scheme: {
+                            name: "Discovery",
+                            iri: "http://endhealth.info/im#"
+                        },
+                        entityType: [{
+                            name: "Data Service",
+                            iri: "http://endhealth.info/im#DataService"
+                        }],
+                        status: {
+                            name: "Draft",
+                            iri: "http://endhealth.info/im#Draft"
+                        },
+                        searchterms: [
+                            {
+                                iri: "http://endhealth.info/im#Q_Term_61441986-34a1-4380-a6d4-a7133c92c423",
+                                name: "discovery",
+                            },
+                            {
+                                iri: "http://endhealth.info/im#Q_Term_39e4b853-7ccf-4969-a917-625bdcf88f6e7",
+                                name: "data service"
+                            },
+                            {
+                                iri: "http://endhealth.info/im#Q_Term_59d80df9-a7b6-4e0e-b08c-f82acf680af4",
+                                name: "dds"
+                            },
+                        ]
+                    },
+                    {
                         id: 3000001,
-                        name: "Registered patients",
                         iri: "im:Q_Step_RegisteredPatients",
+                        name: "Registered patients",
                         description: "",
                         code: null,
                         scheme: {
@@ -387,8 +419,8 @@ export class Examples {
                             name: "Step",
                         }],
                         status: {
+                            iri: "http://endhealth.info/im#Draft",
                             name: "Draft",
-                            iri: "http://endhealth.info/im#Draft"
                         },
                         searchterms: [
                             {
@@ -424,16 +456,16 @@ export class Examples {
                         description: "",
                         code: null,
                         scheme: {
+                            iri: "http://endhealth.info/im#",
                             name: "Discovery",
-                            iri: "http://endhealth.info/im#"
                         },
                         entityType: [{
+                            iri: "http://endhealth.info/im#Q_Step",
                             name: "Step",
-                            iri: "http://endhealth.info/im#Q_Step"
                         }],
                         status: {
+                            iri: "http://endhealth.info/im#Draft",
                             name: "Draft",
-                            iri: "http://endhealth.info/im#Draft"
                         },
                         searchterms: [
                             {
@@ -460,26 +492,203 @@ export class Examples {
                     }
 
                 ],
+                variables: {
+                    ReferenceDate: {
+                        entityType: "im:DateTime",
+                        value: "31/03/2021"
+                    },
+                    StartDate: {
+                        entityType: "im:RelativeDateTime",
+                        value: "$ReferenceDate",
+                        operation: "minus",
+                        operationValue: "12",
+                        operationUnit: "months",
+                    }
+                }
             },
             sourceOrganisations: {
                 set: "im:Q_OrgSet_AllAllowable",
                 name: "All Allowable Organisations (set)",
-                setMembers: ["im:Q_Org_F84081", "im:Q_Org_F84083"],
-                setFetchDate: "26/12/2021",
+                members: ["im:Q_Org_F84081", "im:Q_Org_F84083"],
+                fetchDate: "01/04/2021",
             },
             mainSubject: "im:Patient",
             steps: [
+                {
+                    iri: "im:Q_Step_RegisteredPatients",
+                    name: "Registration history as GMS patient: date is on/before reference date, and either end date does not exist OR end date is after start date (reference date minus 12 months)",
+                    input: [
+                        {
+                            iri: "im:DDS",
+                            name: "Discovery Data Service",
+                        }
+                    ],
+                    include: [
+                        {
+                            and: [
+                                {
+                                    subject: {
+                                        iri: "im:GPRegistration",
+                                        modififer: "any",
+                                        count: 1,
+                                        var: "reg",
+                                    },
+                                    predicate: {
+                                        iri: "im:patientType",
+
+                                    },
+                                    object: {
+                                        matchIf: true,
+                                        comparison: "memberOf",
+                                        iri: "im:2751000252106",
+                                    }
+                                },
+                                {
+                                    subject: {
+                                        ref: "reg",
+                                        count: 1,
+                                    },
+                                    predicate: {
+                                        iri: "im:effectiveDate",
+                                    },
+                                    object: {
+                                        matchIf: true,
+                                        comparison: "lessThanOrEqual",
+                                        values: ["$ReferenceDate"],
+                                    }
 
 
+                                },
+                                {
+                                    or: [
+                                        {
+                                            subject: {
+                                                ref: "reg",
+                                                count: 1,
+                                            },
+                                            predicate: {
+                                                iri: "im:endDate",
+                                            },
+                                            object: {
+                                                matchIf: true,
+                                                comparison: "exists",
+                                            }
+                                        },
+                                        {
+                                            subject: {
+                                                ref: "reg",
+                                            },
+                                            predicate: {
+                                                iri: "im:endDate",
+                                            },
+                                            object: {
+                                                matchIf: true,
+                                                comparison: "before",
+                                                values: ["$ReferenceDate"]
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                        },
+                    ],
+                    exclude: []
+                },
+                {
+                    iri: "im:Q_Step_DiagnosisCHD",
+                    name: "Any Diagnosis of Coronary Heart Disease ",
+                    input: [
+                        {
+                            iri: "im:Q_Step_RegisteredPatients",
+                            name: "Discovery Data Service",
+                        }
+                    ],
+                    include: [
+                        {
+                            and: [
+                                {
+                                    subject: {
+                                        iri: "im:ProblemOrCondition",
+                                        modififer: "any",
+                                        count: 1,
+                                        var: "chd",
+                                    },
+                                    predicate: {
+                                        iri: "im:concept",
+                                    },
+                                    object: {
+                                        matchIf: true,
+                                        comparison: "memberOf",
+                                        iri: "im:CSET_CHD",
+                                    }
+                                },
+                            ],
+                        },
+                    ],
+                    exclude: []
+                },
+                {
+                    iri: "im:Q_Step_AntiClottingAgents12Months",
+                    name: "Prescribed any anti-clotting agents in the last 12 months (oral-anticoagulants, salicylates or clopidogrel)",
+                    input: [
+                        {
+                            iri: "im:Q_Step_RegisteredPatients",
+                            name: "Discovery Data Service",
+                        }
+                    ],
+                    include: [
+                        {
+                            and: [
+                                {
+                                    subject: {
+                                        iri: "im:MedicationOrder",
+                                        modififer: "any",
+                                        count: 1,
+                                        var: "medications",
+                                    },
+                                    predicate: {
+                                        iri: "im:concept",
+                                    },
+                                    object: {
+                                        matchIf: true,
+                                        comparison: "memberOf",
+                                        iri: "im:CSET_AllAntiClottingAgents",
+                                    }
+                                },
+                                {
+                                    subject: {
+                                        ref: "medications",
+                                    },
+                                    predicate: {
+                                        iri: "im:EffectiveDate",
+                                    },
+                                    object: {
+                                        matchIf: true,
+                                        comparison: "after",
+                                        value: ["$StartDate"],
+                                    }
+                                }
+                            ],
+                        },
+                    ],
+                    exclude: []
+                }
             ],
             output: [],
             export: {
                 format: "",
             },
-
-
-
         },
+        author: {
+            id: "7e799679-409e-46aa-8f2b-455b86ec5be2",
+            name: "Dr Bruce Wayne"
+        },
+        analytics: {
+            views: 3,
+            copy: 2,
+            query: 0
+
+        }
 
     }
 }
