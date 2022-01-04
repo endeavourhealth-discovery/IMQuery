@@ -1,4 +1,7 @@
-const { v4 } = require('uuid');
+// const { v4 } = require('uuid');
+
+//todo: check available DBID with opensearch first before accepting a random number as DBID
+const random = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
 export class Query {
     public id?: number | null;
@@ -11,7 +14,7 @@ export class Query {
     constructor(query?: Query)
     constructor(query: Query) {
 
-        this.id = query.id ? query.id : v4();
+        this.id = query.id ? query.id : random(10000000, 99999999);
         this.iri = query.iri ? query.iri : "im:Q_{0}";
         this.name = query.name ? query.name : "Untitled Dataset";
         this.description = query.description ? query.description : null;
@@ -19,7 +22,7 @@ export class Query {
     }
 
 
-    // use setters to check  validity of value, throw exception otherwise throew new Error('Iri is invalid');e.g. datamodel entity iri.
+    // use setters to check  validity of value, otherwise threw new Error('Iri is invalid');e.g. datamodel entity iri.
 
 }
 
@@ -282,7 +285,7 @@ export class Examples {
                                     subject: {
                                         iri: "im:GPRegistration",
                                         modififer: "any",
-                                        count: 1,
+                                        quantity: 1,
                                         var: "reg",
                                     },
                                     predicate: {
@@ -298,7 +301,7 @@ export class Examples {
                                 {
                                     subject: {
                                         ref: "reg",
-                                        count: 1,
+                                        quantity: 1,
                                     },
                                     predicate: {
                                         iri: "im:effectiveDate",
@@ -316,7 +319,7 @@ export class Examples {
                                         {
                                             subject: {
                                                 ref: "reg",
-                                                count: 1,
+                                                quantity: 1,
                                             },
                                             predicate: {
                                                 iri: "im:endDate",
@@ -362,7 +365,7 @@ export class Examples {
                                     subject: {
                                         iri: "im:ProblemOrCondition",
                                         modififer: "any",
-                                        count: 1,
+                                        quantity: 1,
                                         var: "chd",
                                     },
                                     predicate: {
@@ -371,7 +374,7 @@ export class Examples {
                                     object: {
                                         matchIf: true,
                                         comparison: "memberOf",
-                                        iri: "im:CSET_CHD",
+                                        iri: "im:Q_ConSet_CHD_Diagnosis",
                                     }
                                 },
                             ],
@@ -395,7 +398,7 @@ export class Examples {
                                     subject: {
                                         iri: "im:MedicationOrder",
                                         modififer: "any",
-                                        count: 1,
+                                        quantity: 1,
                                         var: "medications",
                                     },
                                     predicate: {
@@ -404,7 +407,7 @@ export class Examples {
                                     object: {
                                         matchIf: true,
                                         comparison: "memberOf",
-                                        iri: "im:CSET_AllAntiClottingAgents",
+                                        iri: "im:Q_ConSet_AntiClottingAgents",
                                     }
                                 },
                                 {
@@ -417,7 +420,7 @@ export class Examples {
                                     object: {
                                         matchIf: true,
                                         comparison: "after",
-                                        value: ["$StartDate"],
+                                        values: ["$StartDate"],
                                     }
                                 }
                             ],
@@ -432,13 +435,13 @@ export class Examples {
             },
         },
         author: {
-            id: "7e799679-409e-46aa-8f2b-455b86ec5be2",
-            name: "Dr Bruce Wayne"
+            iri: "im:Q_Author_7e799679-409e-46aa-8f2b-455b86ec5be2",
+            name: "Dr Bruce Wayne",  
         },
         analytics: {
             views: 3,
             copy: 2,
-            query: 0
+            query: 0,
 
         }
 

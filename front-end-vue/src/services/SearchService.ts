@@ -6,10 +6,10 @@ import { env } from "../../environment.js"
 export default class SearchService {
 
   //env variables not working for some reason?
-  static oss_url = env.oss_url;
+  static oss_url = process.env.VUE_APP_OSS_URL;
 
   static oss_headers = {
-    'Authorization': `Basic ${env.oss_auth_basictoken}`,
+    'Authorization': `Basic ${process.env.VUE_APP_OSS_AUTH_BASICTOKEN}`,
     'Content-Type': 'application/json'
   }
 
@@ -76,7 +76,7 @@ export default class SearchService {
         }]
       }
     }
-    return axios.post(`${this.oss_url}/${env.index_im}/_search`,
+    return axios.post(`${this.oss_url}/${process.env.VUE_APP_INDEX_IM}/_search`,
       {
         size: limit,
         query: q
@@ -130,7 +130,7 @@ export default class SearchService {
       }
     }
 
-    return axios.post(`${this.oss_url}/${env.index_im}/_search`,
+    return axios.post(`${this.oss_url}/${process.env.VUE_APP_INDEX_IM}/_search`,
       {
         size: 100,
         query: q

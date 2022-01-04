@@ -14,9 +14,13 @@
 
 <br>
 
-### Copy the environment.js file and paste your variables within it (you only have to do this once)
+### Ensure you have the following environment variables
 
-`cp environment_example.js environment.js`
+`
+VUE_APP_OSS_URL=""
+VUE_APP_OSS_AUTH_BASICTOKEN=""
+VUE_APP_INDEX_IM="dev-im"
+`
 
 <br>
 

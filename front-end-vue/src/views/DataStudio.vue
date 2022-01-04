@@ -236,6 +236,7 @@ export default defineComponent({
   async mounted() {
     const dataset = new Query(Examples.QOF_CHD005 as Query);
     console.log(dataset.name);
+    console.log("key: ", process.env.VUE_APP_INDEX_IM);
     await this.$store.dispatch("fetchDatamodel");
     await this.$store.dispatch("fetchDatamodelIris");
     // console.log("datamodel fetched: ", this.$store.state.datamodel);

@@ -1,4 +1,4 @@
-public static QOF_CHD005 = {
+export const QOF_CHD005_v1 = {
     id: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
     iri: "im:Q_QOF_CHD005",
     name: "QOF CHD005",
