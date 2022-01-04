@@ -361,12 +361,8 @@ export default defineComponent({
       set(value: any): void {
         this.$store.commit("updateOpenQueries", value);
         //sets an active file if A. there are openfiles left and B. there there is no longer an active file
-        if (
-          this.openQueries.length > 0 &&
-          !this.openQueries.some((query: any) => query.id == this.activeQueryId)
-        ) {
-          this.$store.commit("updateOpenQueries", this.openQueries[0].id);
-        }
+        this.activeQueryId =
+          this.openQueries.length > 0 ? this.openQueries[0].id : "";
       },
     },
     activeQuery: {

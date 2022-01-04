@@ -8,23 +8,27 @@
         type="button"
         :class="
           'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md  font-regular text-base text-gray-400 hover:text-gray-900 border border-transparent' +
-         [ modelValue == item.id ? ' active bg-white border-gray-300 shadow-sm ' : '']"
+            [
+              modelValue == item.id
+                ? ' active bg-white border-gray-300 shadow-sm '
+                : '',
+            ]
+        "
       >
         <!-- Icon -->
         <div class="inline-flex">
           <HeroIcon
-          :class="[modelValue == item.id ? ' text-yellow-500' : ' text-gray-500']"
-             :icon="[modelValue == item.id ? 'database' : 'database']"
+            :class="[
+              modelValue == item.id ? ' text-yellow-500' : ' text-gray-500',
+            ]"
+            icon="database"
             strokewidth="2"
             width="24"
             height="24"
           />
         </div>
 
-        <div
-          class="inline-flex text-base font-medium ml-2"
-        
-        >
+        <div class="inline-flex text-base font-medium ml-2">
           {{ item.name }}
         </div>
         <div v-if="closable" class="button-close inline-flex">
@@ -71,7 +75,6 @@ export default defineComponent({
 
 .tab-buttons {
   padding: 10px 3px;
-
 }
 
 .tab-button.active {
@@ -79,13 +82,11 @@ export default defineComponent({
 }
 
 .button-close {
-    margin-top: 2px;
-    margin-left: 10px;
+  margin-top: 2px;
+  margin-left: 10px;
 }
 
-
-.tab-buttons .tab-button:not(:last-child){
-margin-right: 5px;
+.tab-buttons .tab-button:not(:last-child) {
+  margin-right: 5px;
 }
-
 </style>

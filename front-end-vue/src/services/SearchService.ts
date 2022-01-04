@@ -1,7 +1,6 @@
 import axios, { AxiosResponse, CancelToken } from "axios";
 import { quadtree, quantize } from "d3";
 import { MeiliSearch } from 'meilisearch'
-import { env } from "../../environment.js"
 
 export default class SearchService {
 

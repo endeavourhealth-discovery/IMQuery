@@ -226,7 +226,6 @@ import DataStudio from "./DataStudio.vue";
 
 import OrganisationBrowser from "@/components/dataset/OrganisationBrowser.vue";
 
-import { env } from "../../environment.js";
 // import Dataset from "@/components/dataset/Dataset.ts";
 
 var _ = require("lodash");

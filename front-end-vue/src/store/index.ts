@@ -74,22 +74,6 @@ export default createStore({
     activeQueryId: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
     openQueries: [
       {
-        id: "06523b6c-d9dd-4aae-baca-a0c5afbf44da",
-        name: "Untitled Dataset",
-        iri: "dds:QRI_Untitled1",
-        description: "The percentage of patients with diabetes, on the register, and a history of CVD (excluding haemorrhagic stroke) who are currently treated with a statin.",
-        data: {
-          mainDataTypeIri: "im:Patient",
-          selectedOrganisations: "",
-          selectedOrganisationLists: [],
-          steps: [],
-          output: [],
-          export: {
-            format: "",
-          },
-        }
-      },
-      {
         id: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
         iri: "dds:QRI_QOF_CHD005",
         name: "QOF 2020 CHD005",
@@ -333,6 +317,7 @@ export default createStore({
           },
         }
       },
+      
     ],
     datamodel: [] as any[],
     datamodelIris: [] as any[],
@@ -4195,6 +4180,27 @@ export default createStore({
       // console.log("openPQLFiles.some((file: any) => file.uuid == state.activePQLFile)", openPQLFiles.some((file: any) => file.uuid == state.activePQLFile));
       state.openQueries = openQueries;
     },
+    // openQueryFile(state, queryFile) { 
+    //   state.openQueries = {
+    //     ...state.openQueries, 
+    //     {
+    //       id: "06523b6c-d9dd-4aae-baca-a0c5afbf44da",
+    //       name: "Untitled Dataset",
+    //       iri: "dds:QRI_Untitled1",
+    //       description: "The percentage of patients with diabetes, on the register, and a history of CVD (excluding haemorrhagic stroke) who are currently treated with a statin.",
+    //       data: {
+    //         mainDataTypeIri: "im:Patient",
+    //         selectedOrganisations: "",
+    //         selectedOrganisationLists: [],
+    //         steps: [],
+    //         output: [],
+    //         export: {
+    //           format: "",
+    //         },
+    //       }
+    //     }
+    //   }
+    // },
     updateActiveQueryId(state, activeQueryId) {
       state.activeQueryId = activeQueryId;
     },
