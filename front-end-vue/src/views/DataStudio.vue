@@ -1,4 +1,4 @@
-<template>
+ <template>
   <!-- Content Wrapper -->
   <div class="wrapper relative flex w-full h-full bg-white">
     <!-- Sidenav  -->
@@ -64,12 +64,16 @@
     <template v-else-if="sideNavActiveItem == 'View Definition'">
       <div class="section-center flex w-full h-full">
         <div class="inline-flex flex-col w-full h-full">
-          <div class="font-semibold text-lg text-black">JSON Definition</div>
-          <textarea v-model="json" class="h-full"></textarea>
+          <div class="font-semibold text-lg text-black text-center">
+            JSON Definition
+          </div>
+          <textarea v-model="json" class="h-full w-full padding-text"></textarea>
         </div>
         <div class="inline-flex flex-col w-full h-full">
-          <div class="font-semibold text-lg text-black">Queries</div>
-          <div v-if="json.length" class="query-viewer">
+          <div class="font-semibold text-lg text-black text-center">
+            Queries
+          </div>
+          <div v-if="json.length" class="query-viewer padding-text">
             <div
               v-for="query in JSON.parse(json)"
               :key="query.iri"
@@ -2247,7 +2251,7 @@ export default defineComponent({
 }
 
 .query-viewer {
-  padding-bottom: 150px;
+  /* padding-bottom: 150px; */
   overflow-y: auto;
   font-size: 14px !important;
 }
@@ -2263,5 +2267,8 @@ export default defineComponent({
 ::-webkit-scrollbar-thumb {
   background-color: #d3d3d3;
   /* outline: 1px solid slategrey; */
+}
+.padding-text {
+  padding: 20px 10px 150px 10px;
 }
 </style>
