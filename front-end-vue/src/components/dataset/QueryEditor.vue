@@ -134,6 +134,7 @@
               />
             </StepCurator>
 
+
             <div v-show="sideNavActiveItem == 'Output'">
               Output
             </div>

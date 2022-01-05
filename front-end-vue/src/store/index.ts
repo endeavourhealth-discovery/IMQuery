@@ -4364,10 +4364,10 @@ export default createStore({
             });
           })
           .catch((err) => {
-            console.log(
-              "Failed to get data model properties from server",
-              err
-            );
+            // console.log(
+            //   "Failed to get data model properties from server",
+            //   err
+            // );
           }
           );
         await EntityService.getEntitySummary(iri)
@@ -4379,10 +4379,10 @@ export default createStore({
             });
           })
           .catch((err) => {
-            console.log(
-              "Failed to get data model properties from server",
-              err
-            );
+            // console.log(
+            //   "Failed to get data model properties from server",
+            //   err
+            // );
           }
           );
 
