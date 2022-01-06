@@ -6,12 +6,16 @@ export default class SearchService {
 
   //env variables not working for some reason?
   static oss_url = process.env.VUE_APP_OSS_URL;
+  static graphdb_url = process.env.VUE_APP_GRAPHDB_URL;
 
   static oss_headers = {
     'Authorization': `Basic ${process.env.VUE_APP_OSS_AUTH_BASICTOKEN}`,
     'Content-Type': 'application/json'
   }
 
+  static graphdb_headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
 
   public static async oss_search(queryString: string, index: string, limit: number): Promise<AxiosResponse<any>> {
     return axios.post(`${this.oss_url}/${index}/_search`,
@@ -140,5 +144,46 @@ export default class SearchService {
       });
 
   };
+
+  public static async graphdb_search(sparqlQueryString: string): Promise<AxiosResponse<any>> {
+
+    // const queryParams = SearchService.toFormURLEncoded({ 'query': sparqlQueryString });
+    
+    
+    
+    
+    console.log("queryParams is: ", this.toFormURLEncoded(sparqlQueryString));
+    return axios.get(`${this.graphdb_url}/repositories/${process.env.VUE_APP_GRAPHDB_REPOSITORY}?q=${this.toFormURLEncoded(sparqlQueryString)}`,
+      {
+        headers: this.oss_headers
+      });
+
+  }
+
+  public static toFormURLEncoded(sparqlQueryString: any): string {
+    // var details = {
+    //   'userName': 'test@gmail.com',
+    //   'password': 'Password!',
+    //   'grant_type': 'password'
+    // };
+
+    // const formBody = [];
+    // for (const property in form) {
+    //   const encodedKey = encodeURIComponent(property);
+    //   const encodedValue = encodeURIComponent(form[property]);
+    //   formBody.push(encodedKey + "=" + encodedValue);
+    // }
+    // return formBody.join("&");
+
+    let qry = sparqlQueryString;
+    qry = qry.replaceAll(" ", "+");
+    qry = qry.replaceAll("{", "%7B");
+    qry = qry.replaceAll("}", "%7D");
+    qry = qry.replaceAll("?", "%3F");
+    return qry;
+
+  }
+
+
 
 }

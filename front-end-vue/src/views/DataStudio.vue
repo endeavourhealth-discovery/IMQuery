@@ -1,4 +1,4 @@
- <template>
+<template>
   <!-- Content Wrapper -->
   <div class="wrapper relative flex w-full h-full bg-white">
     <!-- Sidenav  -->
@@ -10,7 +10,9 @@
       <div class="flex pl-3 border-right">
         <RoundButton
           :class="'button-create ' + [expanded ? ' expanded' : '']"
-          :rounded="false"
+          :rosssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd="
+            false
+          "
           :showRing="true"
           backgroundColor="blue-500"
           hoverBackgroundColor="blue-700"
@@ -67,7 +69,10 @@
           <div class="font-semibold text-lg text-black text-center">
             JSON Definition
           </div>
-          <textarea v-model="json" class="h-full w-full padding-text"></textarea>
+          <textarea
+            v-model="json"
+            class="outline-none h-full w-full padding-text"
+          ></textarea>
         </div>
         <div class="inline-flex flex-col w-full h-full">
           <div class="font-semibold text-lg text-black text-center">
@@ -110,7 +115,7 @@ import LoggerService from "@/services/LoggerService";
 // import VerticalTabs from "@/components/search/VerticalTabs.vue";
 // import ProgressBar from "@/components/search/ProgressBar.vue";
 
-// import SearchService from "@/services/SearchService";
+import SearchService from "@/services/SearchService";
 // import SearchClient from "@/services/SearchClient";
 // const { MeiliSearch } = require("meilisearch");
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
@@ -2135,12 +2140,15 @@ export default defineComponent({
     },
   },
   async mounted() {
-    const dataset = new Query(Examples.QOF_CHD005 as Query);
-    console.log(dataset.name);
-    console.log("key: ", process.env.VUE_APP_INDEX_IM);
+    // const dataset = new Query(Examples.QOF_CHD005 as Query);
+    // console.log(dataset.name);
     // await this.$store.dispatch("fetchDatamodel");
     await this.$store.dispatch("fetchDatamodelIris");
     // console.log("datamodel fetched: ", this.$store.state.datamodel);
+    let qry = `CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} LIMIT 10`
+
+
+    await this.graphSearch(qry);
   },
   methods: {
     // onJSONInput(input: string): void {
@@ -2166,6 +2174,21 @@ export default defineComponent({
           );
         });
     },
+    async graphSearch(sparqlQueryString: string): Promise<any> {
+      await SearchService.graphdb_search(sparqlQueryString)
+        .then((res) => {
+          console.log("graphsearch complete: ", res);
+        })
+        .catch((err) => {
+          this.$toast.add(
+            LoggerService.error(
+              "Failed to get data model properties from server",
+              err
+            )
+          );
+        });
+    },
+
     handlePrevious(): void {
       for (let i = 4; i < this.sideNavItems.length; i++) {
         if (this.sideNavItems[i].name == this.sideNavActiveItem) {

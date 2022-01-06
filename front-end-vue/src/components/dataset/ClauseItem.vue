@@ -1,6 +1,6 @@
 <template>
   <div
-    v-for="(item, index) in clauseWithGUID"
+    v-for="(item, index) in clauseWithUUID"
     :key="item.id"
     class="clause-item flex"
   >
@@ -47,8 +47,9 @@
       v-if="!collapsedItems.includes(item.id) && item.clause"
       class="w-full non-selectable"
     >
-      <div class="inline text-black font-semibold hover:underline">
+      <div class="inline text-black font-semibold">
         <ClauseItem
+        class="hover:underline"
           :operator="item.operator"
           :clause="item.clause"
           :nestingCount="nestingCount + 1"
@@ -90,7 +91,7 @@ export default defineComponent({
     },
   },
   computed: {
-    clauseWithGUID(): any {
+    clauseWithUUID(): any {
       return this.clause.map((item: any) => {
         return { id: "temp_" + v4(), ...item };
       });
