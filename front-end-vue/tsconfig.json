@@ -26,7 +26,9 @@
       "esnext",
       "dom",
       "dom.iterable",
-      "scripthost"
+      "scripthost",
+      "es5", 
+      "es6"
     ]
   },
   "include": [
@@ -35,10 +37,11 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "*.d.ts"
-, "tests/unit/components/concept/Definition.spec.js"  ],
+    "*.d.ts", "tests/unit/components/concept/Definition.spec.js"
+  ],
   "exclude": [
     "node_modules"
   ],
   "removeComments": false,
+  "resolveJsonModule": true
 }

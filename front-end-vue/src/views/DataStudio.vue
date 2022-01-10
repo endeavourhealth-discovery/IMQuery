@@ -61,12 +61,78 @@
       <DatasetBrowser class="section-center w-full"
     /></template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
+    <template v-else-if="sideNavActiveItem == 'View Definition'">
+      <div class="section-center flex w-full h-full">
+        <div class="inline-flex flex-col w-full h-full">
+          <div class="font-semibold text-lg text-black">
+            Select
+          </div>
+          <input
+            class="font-regular text-lg text-black"
+            ref="upload"
+            type="file"
+            name="file-upload"
+            accept="application/JSON"
+            @change="onUploadFiles"
+          />
+          <div class="font-semibold text-lg text-black mt-2">
+            Files ({{ openFiles.length && openFiles[0]["entities"].length }})
+          </div>
+          <div v-if="openFiles.length" class="flex flex-col file-list px-2">
+            <div
+              v-for="item in openFiles[0]['entities']"
+              :key="item['@id']"
+              :class="
+                'file-list__item flex flex-col non-selectable p-2 px-3 mt-2 text-xl font-regular border hover:shadow-md hover:border-gray-300' +
+                  [
+                    selectedFile == item['@id']
+                      ? ' border-blue-600 text-blue-600'
+                      : '',
+                  ]
+              "
+              @click="selectedFile = item['@id']"
+            >
+              <div class="font-bold">{{ item["rdfs:label"] }}</div>
+              <div>{{ item["rdf:type"][0]["@id"].split(":")[1] }}</div>
+            </div>
+          </div>
+
+          <!-- <textarea
+            v-model="json"
+            class="outline-none h-full w-full padding-text"
+          ></textarea> -->
+        </div>
+        <div class="inline-flex flex-col w-full h-full">
+          <div class="font-semibold text-lg text-black text-center">
+            Queries ({{openQueries.length}})
+          </div>
+          <div v-if="openQueries.length" class="query-viewer padding-text">
+            <div v-for="query in openQueries" :key="query.iri" class="mt-5">
+              <div class="font-semibold text-lg text-gray-600">
+                {{ query["rdfs:label"] }}
+              </div>
+              <!-- <div
+                v-for="definition in JSON.parse(query['im:queryDefinition'])"
+                :key="definition['iri']"
+              >
+                <ClauseItem
+                  :operator="definition.operator"
+                  :clause="definition.clause"
+                  :nestingCount="1"
+                />
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
   <!-- /Content Wrapper -->
 </template>
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
+const { v4 } = require("uuid");
 
 import LoggerService from "@/services/LoggerService";
 // import OverlayPanel from "primevue/overlaypanel";
@@ -77,21 +143,24 @@ import LoggerService from "@/services/LoggerService";
 // import VerticalTabs from "@/components/search/VerticalTabs.vue";
 // import ProgressBar from "@/components/search/ProgressBar.vue";
 
-// import SearchService from "@/services/SearchService";
+import SearchService from "@/services/SearchService";
 // import SearchClient from "@/services/SearchClient";
 // const { MeiliSearch } = require("meilisearch");
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
+import ClauseItem from "@/components/dataset/ClauseItem.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
-import {
-  Query,
-  Examples,
-} from "@/models/query/QueryBuilder";
+import QueryBuilder, { Query, Folder } from "@/models/query/QueryBuilder";
+import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
+
+// import * as IMQ  from "@/models/query/QueryBuilder";
+
+// import ceg_smi from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
 
 export default defineComponent({
   name: "DataStudio",
@@ -104,6 +173,8 @@ export default defineComponent({
     // HorizontalNav,
     ContentNav,
     DatasetBrowser,
+    // ClauseItem,
+    // InputRadioButtons,
   },
   data() {
     return {
@@ -169,7 +240,7 @@ export default defineComponent({
           visible: false,
         },
       ],
-      sideNavActiveItem: "Steps",
+      sideNavActiveItem: "View Definition",
       sideNavItems: [
         {
           id: "074b7d3e-2519-4bed-bdf4-84f90f46de46",
@@ -178,7 +249,14 @@ export default defineComponent({
           visible: true,
           children: [],
         },
-
+        {
+          id: "d8108f1f-61e8-4d88-a0a1-59aa122b5725",
+          name: "View Definition",
+          icon: "menu_alt_1",
+          visible: true,
+          children: [],
+          seperator: false,
+        },
         {
           id: "dbb23c7f-7f8a-4457-ad60-9096e9de3eb7",
           name: "Get Help",
@@ -231,17 +309,62 @@ export default defineComponent({
         },
       ],
       isLoading: false,
+      openQueries: [] as any[],
+      openFiles: [] as any[],
+      selectedFile: "",
+      selectedFileItems: [] as any[],
+      fileItems: [] as any[],
     };
   },
+  watch: {
+    json(newValue) {
+      console.log(JSON.parse(newValue));
+    },
+  },
   async mounted() {
-    const dataset = new Query(Examples.QOF_CHD005 as Query);
-    console.log(dataset.name);
-    console.log("key: ", process.env.VUE_APP_INDEX_IM);
-    await this.$store.dispatch("fetchDatamodel");
-    await this.$store.dispatch("fetchDatamodelIris");
+    // const dataset = new Query(Examples.QOF_CHD005 as Query);
+    // console.log(dataset.name);
+    // await this.$store.dispatch("fetchDatamodel");
     // console.log("datamodel fetched: ", this.$store.state.datamodel);
+    // let qry = `CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} LIMIT 10`
+    // await this.graphSearch(qry);
+    // console.log("ceg_smi", ceg_smi);
+    // const _folder  = new Folder();
+    // folder.load("http://endhealth.info/ceg/qry#Q_CEGQueries");
+    // console.log(QueryBuilder.getExamples());
+    await this.$store.dispatch("fetchDatamodelIris");
   },
   methods: {
+    // onJSONInput(input: string): void {
+    // },
+    onUploadFiles(event: InputEvent): void {
+      const _inputElement = this.$refs.upload as HTMLInputElement;
+
+      const _files = [...(_inputElement.files ? _inputElement.files : [])];
+
+      this.openFiles = [];
+      _files.forEach((file: any) => {
+        const fr = new FileReader();
+        console.log(`File loaded: ${file.name}`);
+        fr.onload = (e: any) => {
+          const result = JSON.parse(e.target.result);
+          this.openFiles = [...this.openFiles, result];
+          console.log("File content: ", result);
+          // console.log("queries", this.getQueries());
+          this.openQueries = result["entities"].filter(
+            (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
+          );
+        };
+        fr.readAsText(file);
+      });
+      //  QueryBuilder.loadFile(_files[0]);
+      //  console.log(QueryBuilder.queries);
+    },
+    getQueries(): any {
+      return this.openFiles[0]["entities"].filter(
+        (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
+      );
+    },
     async getEntitySummary(iri: string): Promise<any> {
       await EntityService.getEntitySummary(iri)
         .then((res) => {
@@ -263,21 +386,42 @@ export default defineComponent({
           );
         });
     },
+    async graphSearch(sparqlQueryString: string): Promise<any> {
+      // await SearchService.graphdb_search(sparqlQueryString)
+      //   .then((res) => {
+      //     console.log("graphsearch complete: ", res);
+      //   })
+      //   .catch((err) => {
+      //     this.$toast.add(
+      //       LoggerService.error(
+      //         "Failed to get data model properties from server",
+      //         err
+      //       )
+      //     );
+      //   });
+    },
+
     handlePrevious(): void {
-      for (let i = 3; i < this.sideNavItems.length; i++) {
+      for (let i = 4; i < this.sideNavItems.length; i++) {
         if (this.sideNavItems[i].name == this.sideNavActiveItem) {
           this.sideNavActiveItem = this.sideNavItems[i - 1].name;
         }
       }
     },
     handleNext(): void {
-      for (let i = 2; i < this.sideNavItems.length - 1; i++) {
+      for (let i = 3; i < this.sideNavItems.length - 1; i++) {
         if (this.sideNavItems[i].name == this.sideNavActiveItem) {
           this.sideNavActiveItem = this.sideNavItems[i + 1].name;
           return;
         }
       }
     },
+  },
+
+  itemsithUUID(items: any): any {
+    return items.map((item: any) => {
+      return { id: "temp_" + v4(), ...items };
+    });
   },
 });
 </script>
@@ -345,5 +489,33 @@ export default defineComponent({
 .button-create.expanded {
   width: 125px;
   border-radius: 20px;
+}
+
+.query-viewer,
+.file-list {
+  /* padding-bottom: 150px; */
+  overflow-y: auto;
+  font-size: 12px !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+:-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d3d3d3;
+  /* outline: 1px solid slategrey; */
+}
+.padding-text {
+  padding: 20px 10px 150px 10px;
+}
+
+.file-list {
+  width: 300px;
+  height: 700px;
 }
 </style>

@@ -93,6 +93,7 @@
                   v-model="selectedOrganisations"
                   :items="radioButtonItems.sources"
                   :multiselect="false"
+                    :checkbox="true"
                 />
                 <MultiSelect
                   v-if="selectedOrganisations.includes('other')"
@@ -114,10 +115,12 @@
                   :description="inputMeta.mainDataType"
                 />
                 <InputRadioButtons
+                  
                   class="w-full max-w-lg mx-auto mt-7"
                   v-model="selectedMainDataType"
                   :items="radioButtonItems.mainDataType"
                   :multiselect="false"
+                  :checkbox="true"
                 />
               </div>
             </div>
@@ -361,12 +364,8 @@ export default defineComponent({
       set(value: any): void {
         this.$store.commit("updateOpenQueries", value);
         //sets an active file if A. there are openfiles left and B. there there is no longer an active file
-        if (
-          this.openQueries.length > 0 &&
-          !this.openQueries.some((query: any) => query.id == this.activeQueryId)
-        ) {
-          this.$store.commit("updateOpenQueries", this.openQueries[0].id);
-        }
+        this.activeQueryId =
+          this.openQueries.length > 0 ? this.openQueries[0].id : "";
       },
     },
     activeQuery: {

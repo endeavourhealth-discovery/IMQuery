@@ -71,24 +71,9 @@ export default createStore({
       selectedSchemes: ConceptReference[];
       selectedTypes: string[];
     },
+    isLoading: false,
     activeQueryId: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
     openQueries: [
-      {
-        id: "06523b6c-d9dd-4aae-baca-a0c5afbf44da",
-        name: "Untitled Dataset",
-        iri: "dds:QRI_Untitled1",
-        description: "The percentage of patients with diabetes, on the register, and a history of CVD (excluding haemorrhagic stroke) who are currently treated with a statin.",
-        data: {
-          mainDataTypeIri: "im:Patient",
-          selectedOrganisations: "",
-          selectedOrganisationLists: [],
-          steps: [],
-          output: [],
-          export: {
-            format: "",
-          },
-        }
-      },
       {
         id: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
         iri: "dds:QRI_QOF_CHD005",
@@ -333,6 +318,7 @@ export default createStore({
           },
         }
       },
+
     ],
     datamodel: [] as any[],
     datamodelIris: [] as any[],
@@ -4195,6 +4181,27 @@ export default createStore({
       // console.log("openPQLFiles.some((file: any) => file.uuid == state.activePQLFile)", openPQLFiles.some((file: any) => file.uuid == state.activePQLFile));
       state.openQueries = openQueries;
     },
+    // openQueryFile(state, queryFile) { 
+    //   state.openQueries = {
+    //     ...state.openQueries, 
+    //     {
+    //       id: "06523b6c-d9dd-4aae-baca-a0c5afbf44da",
+    //       name: "Untitled Dataset",
+    //       iri: "dds:QRI_Untitled1",
+    //       description: "The percentage of patients with diabetes, on the register, and a history of CVD (excluding haemorrhagic stroke) who are currently treated with a statin.",
+    //       data: {
+    //         mainDataTypeIri: "im:Patient",
+    //         selectedOrganisations: "",
+    //         selectedOrganisationLists: [],
+    //         steps: [],
+    //         output: [],
+    //         export: {
+    //           format: "",
+    //         },
+    //       }
+    //     }
+    //   }
+    // },
     updateActiveQueryId(state, activeQueryId) {
       state.activeQueryId = activeQueryId;
     },
@@ -4248,6 +4255,10 @@ export default createStore({
       }
 
       console.log("updated Entity with payload", payload);
+
+    },
+    updateIsLoading(state, isLoading) {
+      state.isLoading = isLoading;
 
     }
   },
@@ -4358,10 +4369,10 @@ export default createStore({
             });
           })
           .catch((err) => {
-            console.log(
-              "Failed to get data model properties from server",
-              err
-            );
+            // console.log(
+            //   "Failed to get data model properties from server",
+            //   err
+            // );
           }
           );
         await EntityService.getEntitySummary(iri)
@@ -4373,10 +4384,10 @@ export default createStore({
             });
           })
           .catch((err) => {
-            console.log(
-              "Failed to get data model properties from server",
-              err
-            );
+            // console.log(
+            //   "Failed to get data model properties from server",
+            //   err
+            // );
           }
           );
 
@@ -4386,7 +4397,7 @@ export default createStore({
 
 
     },
-    async fetchDatamodelIris({commit}) {
+    async fetchDatamodelIris({ commit }) {
       //fetch all datamodel Iris and then metadata (properties) from IM API 
       const datamodelIris = [] as any[];
       await SearchService.oss_getDataModelAll()
@@ -4404,7 +4415,7 @@ export default createStore({
           );
         }
         );
-        commit("updateDatamodelIris", datamodelIris);
+      commit("updateDatamodelIris", datamodelIris);
 
 
     }

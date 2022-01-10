@@ -9,12 +9,13 @@
         ref="radioButton"
       />
       <label
-        class="radio-button__label p-d-flex p-jc-between"
+        :class="'radio-button__label p-d-flex p-jc-between'
+        + [ checkbox ? ' checkbox' : '']"
         @click="$emit('update:modelValue', getSelectedItems(item.id));"
         ref="radioLabel"
       >
         {{ item.name }}
-        <div style="margin-left: 5px" v-tooltip="item.explanation">
+        <div v-if="item.explanation" style="margin-left: 5px" v-tooltip="item.explanation">
           <font-awesome-icon icon="question-circle" />
         </div>
       </label>
@@ -28,7 +29,7 @@ import { ref, defineComponent } from "vue";
 export default defineComponent({
   name: "InputRadioButtons",
   emits: ["update:modelValue"],
-  props: ["items", "multiselect", "modelValue"],
+  props: ["items", "multiselect", "modelValue", "checkbox"],
   $refs: {
     input: HTMLElement,
     label: HTMLElement,
@@ -107,18 +108,19 @@ ul {
   border: 1px solid #0d89ec; /* purple #590f85*/
 }
 
-.radio-button__label,
-.radio-button__label:after,
-.radio-button__label:before {
+.radio-button__label.checkbox,
+.radio-button__label.checkbox:after,
+.radio-button__label.checkbox:before {
   box-sizing: border-box;
   background-color: #fff;
   display: block;
-  transition: all 0.2s ease-in-out;
+  transition: al
+  l 0.2s ease-in-out;
 }
 .radio-button__label {
   font-size: 16px;
   font-weight: 500;
-  padding: 16px 16px 16px 56px;
+  padding: 16px 16px 16px 16px;
    border: 1px solid transparent;/* light #ced4da;  purple #9b6fb6 */
 
   border-radius: 4px;
@@ -127,6 +129,10 @@ ul {
   cursor: pointer;
   position: relative;
   margin: 0 0 10px;
+}
+
+.radio-button__label.checkbox {
+  padding-left: 56px;
 }
 
 .radio-button:checked + .radio-button__label:before {
@@ -141,8 +147,8 @@ ul {
   transition: border 0.1s ease-in-out;
 }
 
-.radio-button__label:after,
-.radio-button__label:before {
+.radio-button__label.checkbox:after,
+.radio-button__label.checkbox:before {
   border-radius: 50%;
   content: "";
   position: absolute;
