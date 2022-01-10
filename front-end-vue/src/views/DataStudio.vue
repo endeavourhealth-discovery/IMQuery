@@ -10,9 +10,7 @@
       <div class="flex pl-3 border-right">
         <RoundButton
           :class="'button-create ' + [expanded ? ' expanded' : '']"
-          :rosssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd="
-            false
-          "
+          :rounded="false"
           :showRing="true"
           backgroundColor="blue-500"
           hoverBackgroundColor="blue-700"
@@ -66,34 +64,63 @@
     <template v-else-if="sideNavActiveItem == 'View Definition'">
       <div class="section-center flex w-full h-full">
         <div class="inline-flex flex-col w-full h-full">
-          <div class="font-semibold text-lg text-black text-center">
-            JSON Definition
+          <div class="font-semibold text-lg text-black">
+            Select
           </div>
-          <textarea
+          <input
+            class="font-regular text-lg text-black"
+            ref="upload"
+            type="file"
+            name="file-upload"
+            accept="application/JSON"
+            @change="onUploadFiles"
+          />
+          <div class="font-semibold text-lg text-black mt-2">
+            Files ({{ openFiles.length && openFiles[0]["entities"].length }})
+          </div>
+          <div v-if="openFiles.length" class="flex flex-col file-list px-2">
+            <div
+              v-for="item in openFiles[0]['entities']"
+              :key="item['@id']"
+              :class="
+                'file-list__item flex flex-col non-selectable p-2 px-3 mt-2 text-xl font-regular border hover:shadow-md hover:border-gray-300' +
+                  [
+                    selectedFile == item['@id']
+                      ? ' border-blue-600 text-blue-600'
+                      : '',
+                  ]
+              "
+              @click="selectedFile = item['@id']"
+            >
+              <div class="font-bold">{{ item["rdfs:label"] }}</div>
+              <div>{{ item["rdf:type"][0]["@id"].split(":")[1] }}</div>
+            </div>
+          </div>
+
+          <!-- <textarea
             v-model="json"
             class="outline-none h-full w-full padding-text"
-          ></textarea>
+          ></textarea> -->
         </div>
         <div class="inline-flex flex-col w-full h-full">
           <div class="font-semibold text-lg text-black text-center">
-            Queries
+            Queries ({{openQueries.length}})
           </div>
-          <div v-if="json.length" class="query-viewer padding-text">
-            <div
-              v-for="query in JSON.parse(json)"
-              :key="query.iri"
-              class=" mt-5"
-            >
+          <div v-if="openQueries.length" class="query-viewer padding-text">
+            <div v-for="query in openQueries" :key="query.iri" class="mt-5">
               <div class="font-semibold text-lg text-gray-600">
-                {{ query.name }}
+                {{ query["rdfs:label"] }}
               </div>
-              <div>
+              <!-- <div
+                v-for="definition in JSON.parse(query['im:queryDefinition'])"
+                :key="definition['iri']"
+              >
                 <ClauseItem
-                  :operator="query.operator"
-                  :clause="query.clause"
+                  :operator="definition.operator"
+                  :clause="definition.clause"
                   :nestingCount="1"
                 />
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -105,6 +132,7 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
+const { v4 } = require("uuid");
 
 import LoggerService from "@/services/LoggerService";
 // import OverlayPanel from "primevue/overlaypanel";
@@ -127,7 +155,12 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
-import { Query, Examples } from "@/models/query/QueryBuilder";
+import QueryBuilder, { Query, Folder } from "@/models/query/QueryBuilder";
+import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
+
+// import * as IMQ  from "@/models/query/QueryBuilder";
+
+// import ceg_smi from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
 
 export default defineComponent({
   name: "DataStudio",
@@ -140,1867 +173,11 @@ export default defineComponent({
     // HorizontalNav,
     ContentNav,
     DatasetBrowser,
-    ClauseItem,
+    // ClauseItem,
+    // InputRadioButtons,
   },
   data() {
     return {
-      json: `[{
-   "iri": "urn:uuid6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-   "name": "SMI Population",
-   "description": "Adults 18+ with SMI",
-   "type": {
-     "@id": "http://endhealth.info/im#Query"
-   },
-   "prefix": {
-     "im": "http://endhealth.info/im#",
-     "rdf": "http://www.w3.org/1999/0 2/22-rdf-syntax-ns#",
-     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-     "sn": "http://snomed.info/sct#"
-   },
-   "operator": "AND",
-   "clause": [{
-     "name": "Registered with GP for GMS services on the reference date",
-     "where": [{
-       "entity": [{
-         "var": "?patient"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#inDataset"
-       }],
-       "filter": [{
-         "in": [{
-           "@id": "Q_RegisteredGMS"
-         }]
-       }]
-     }]
-   }, {
-     "name": "Regular patient type and Age years >18",
-     "where": [{
-       "entity": [{
-         "var": "?patient"
-       }, {
-         "@id": "isSubjectOf"
-       }, {
-         "var": "?reg1",
-         "@id": "PatientRegistration"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#patientType"
-       }],
-       "valueVar": "?patientType3",
-       "filter": [{
-         "in": [{
-           "@id": "urn:uuid:b34449f7-b2b8-4d7a-bdc4-835351479901"
-         }]
-       }]
-     }, {
-       "entity": [{
-         "var": "?patient"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#age"
-       }],
-       "valueVar": "?age6",
-       "filter": [{
-         "argument": ["?age6", "YEAR"],
-         "comparison": "greaterThanOrEqual",
-         "value": "18"
-       }]
-     }]
-   }, {
-     "name": "Serious mental illness (not resolved)",
-     "clause": [{
-       "select": [{
-         "var": "?patient"
-       }, {
-         "var": "?effectiveDate12"
-       }],
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }, {
-           "@id": "isSubjectOf"
-         }, {
-           "var": "?event8",
-           "@id": "Event"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#concept"
-         }],
-         "valueVar": "?concept10",
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11"
-           }, {
-             "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
-           }]
-         }]
-       }, {
-         "entity": [{
-           "var": "?event8"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#effectiveDate"
-         }],
-         "valueVar": "?effectiveDate12"
-       }],
-       "groupSort": [{
-         "sortBy": "LATEST",
-         "count": 1,
-         "field": "?effectiveDate12",
-         "groupBy": "?patient"
-       }]
-     }],
-     "where": [{
-       "entity": [{
-         "var": "?event8"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#concept"
-       }],
-       "valueVar": "?concept10",
-       "filter": [{
-         "in": [{
-           "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
-         }]
-       }]
-     }]
-   }],
-   "select": [{
-     "var": "?patient"
-   }]
- }, {
-   "iri": "urn:uuid40a4a1f1-b768-4db8-a8a6-6df744935d97",
-   "name": "Priority 1",
-   "type": {
-     "@id": "http://endhealth.info/im#Query"
-   },
-   "prefix": {
-     "im": "http://endhealth.info/im#",
-     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-     "sn": "http://snomed.info/sct#"
-   },
-   "operator": "AND",
-   "clause": [{
-     "name": "is in cohort : SMI Population",
-     "where": [{
-       "entity": [{
-         "var": "?patient"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#inDataset"
-       }],
-       "filter": [{
-         "in": [{
-           "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
-         }]
-       }]
-     }]
-   }, {
-     "operator": "OR",
-     "clause": [{
-       "operator": "AND",
-       "clause": [{
-         "name": "Hypertension (not resolved)",
-         "operator": "AND",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate5"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event1",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept3",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
-               }, {
-                 "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event1"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate5"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate5",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event1"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept3",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
-             }]
-           }]
-         }]
-       }, {
-         "operator": "OR",
-         "clause": [{
-           "name": "Latest systolic blood pressure in the last 18 months : If Office based and >140",
-           "clause": [{
-             "select": [{
-               "var": "?patient"
-             }, {
-               "var": "?effectiveDate14"
-             }],
-             "where": [{
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event8",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#concept"
-               }],
-               "valueVar": "?concept10",
-               "filter": [{
-                 "in": [{
-                   "@id": "urn:uuid:43ed3aa3-0e0f-4cfc-bf24-82f64c9c4582"
-                 }]
-               }]
-             }, {
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event12",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#effectiveDate"
-               }],
-               "valueVar": "?effectiveDate14",
-               "filter": [{
-                 "function": {
-                   "@id": "http://endhealth.info/im#TimeDifference"
-                 },
-                 "argument": ["MONTH", "?effectiveDate14", "$referenceDate"],
-                 "comparison": "greaterThanOrEqual",
-                 "value": "-18"
-               }]
-             }],
-             "groupSort": [{
-               "sortBy": "LATEST",
-               "count": 1,
-               "field": "?effectiveDate14",
-               "groupBy": "?patient"
-             }]
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?event12"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept10",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:4330157f-ddbd-4159-9cc7-e0375b0b4c99"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event12"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#numericValue"
-             }],
-             "filter": [{
-               "comparison": "greaterThanOrEqual",
-               "value": "140"
-             }]
-           }]
-         }, {
-           "name": "Latest diastolic blood pressure in the last 18 months : if Office based and >90",
-           "clause": [{
-             "select": [{
-               "var": "?patient"
-             }, {
-               "var": "?effectiveDate26"
-             }],
-             "where": [{
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event20",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#concept"
-               }],
-               "valueVar": "?concept22",
-               "filter": [{
-                 "in": [{
-                   "@id": "urn:uuid:241c7550-e131-478c-8538-0ee6385bdf9c"
-                 }]
-               }]
-             }, {
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event24",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#effectiveDate"
-               }],
-               "valueVar": "?effectiveDate26",
-               "filter": [{
-                 "function": {
-                   "@id": "http://endhealth.info/im#TimeDifference"
-                 },
-                 "argument": ["MONTH", "?effectiveDate26", "$referenceDate"],
-                 "comparison": "greaterThanOrEqual",
-                 "value": "-18"
-               }]
-             }],
-             "groupSort": [{
-               "sortBy": "LATEST",
-               "count": 1,
-               "field": "?effectiveDate26",
-               "groupBy": "?patient"
-             }]
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?event24"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept22",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:ed8147d9-24e1-4196-b2b8-3f7425ae14a5"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event24"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#numericValue"
-             }],
-             "filter": [{
-               "comparison": "greaterThanOrEqual",
-               "value": "90"
-             }]
-           }]
-         }, {
-           "name": "Latest systolic blood pressure in the last 18 monthsm : if home based >135",
-           "clause": [{
-             "select": [{
-               "var": "?patient"
-             }, {
-               "var": "?effectiveDate38"
-             }],
-             "where": [{
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event32",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#concept"
-               }],
-               "valueVar": "?concept34",
-               "filter": [{
-                 "in": [{
-                   "@id": "urn:uuid:36eb4f63-d28e-4e90-9ede-cbee1d58551b"
-                 }]
-               }]
-             }, {
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event36",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#effectiveDate"
-               }],
-               "valueVar": "?effectiveDate38",
-               "filter": [{
-                 "function": {
-                   "@id": "http://endhealth.info/im#TimeDifference"
-                 },
-                 "argument": ["MONTH", "?effectiveDate38", "$referenceDate"],
-                 "comparison": "greaterThanOrEqual",
-                 "value": "-18"
-               }]
-             }],
-             "groupSort": [{
-               "sortBy": "LATEST",
-               "count": 1,
-               "field": "?effectiveDate38",
-               "groupBy": "?patient"
-             }]
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?event36"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept34",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:c945de2c-9b76-4404-b8f7-103266b1b137"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event36"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#numericValue"
-             }],
-             "filter": [{
-               "comparison": "greaterThanOrEqual",
-               "value": "135"
-             }]
-           }]
-         }, {
-           "name": "Latest diastolic blood pressure in the last 18 months a: if home based and >85",
-           "clause": [{
-             "select": [{
-               "var": "?patient"
-             }, {
-               "var": "?effectiveDate50"
-             }],
-             "where": [{
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event44",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#concept"
-               }],
-               "valueVar": "?concept46",
-               "filter": [{
-                 "in": [{
-                   "@id": "urn:uuid:83661482-667f-4b8d-8735-aaa82790e86c"
-                 }]
-               }]
-             }, {
-               "entity": [{
-                 "var": "?patient"
-               }, {
-                 "@id": "isSubjectOf"
-               }, {
-                 "var": "?event48",
-                 "@id": "Event"
-               }],
-               "property": [{
-                 "@id": "http://endhealth.info/im#effectiveDate"
-               }],
-               "valueVar": "?effectiveDate50",
-               "filter": [{
-                 "function": {
-                   "@id": "http://endhealth.info/im#TimeDifference"
-                 },
-                 "argument": ["MONTH", "?effectiveDate50", "$referenceDate"],
-                 "comparison": "greaterThanOrEqual",
-                 "value": "-18"
-               }]
-             }],
-             "groupSort": [{
-               "sortBy": "LATEST",
-               "count": 1,
-               "field": "?effectiveDate50",
-               "groupBy": "?patient"
-             }]
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?event48"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept46",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:9bbc735b-2403-43f2-8fe1-494da702c333"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event48"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#numericValue"
-             }],
-             "filter": [{
-               "comparison": "greaterThanOrEqual",
-               "value": "85"
-             }]
-           }]
-         }, {
-           "name": "No blood pressure in the last 18 months",
-           "notExist": true,
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event56",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept58",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:a5b51359-b31b-4893-8d1b-98b4f5c1c817"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event60",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate62",
-             "filter": [{
-               "function": {
-                 "@id": "http://endhealth.info/im#TimeDifference"
-               },
-               "argument": ["MONTH", "?effectiveDate62", "$referenceDate"],
-               "comparison": "greaterThanOrEqual",
-               "value": "-18"
-             }]
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "Diabetes (not resolved)",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate68"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event64",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept66",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
-               }, {
-                 "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event64"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate68"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate68",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event64"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept66",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
-             }]
-           }]
-         }]
-       }, {
-         "name": "Latest HBA1C in the last 18 months : if >59",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate75"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event71",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept73",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:a903cde4-68af-433b-9fa0-0ce292d906b3"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event71"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate75"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate75",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event71"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#numericValue"
-           }],
-           "filter": [{
-             "comparison": "greaterThanOrEqual",
-             "value": "59"
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "Latest QRisk2 or Qrisk 3, : if >10",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate82"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event78",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept80",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:c7ca8edd-dd0f-4b2c-b17b-3abcc9951641"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event78"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate82"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate82",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event78"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#numericValue"
-           }],
-           "filter": [{
-             "comparison": "greaterThanOrEqual",
-             "value": "10"
-           }]
-         }]
-       }, {
-         "name": "Not on statins in the last 6 months",
-         "notExist": true,
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med85",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#medication"
-           }],
-           "valueVar": "?medication87",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:5d985d56-1a49-44a9-ac83-961e34a8838d"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med89",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate91",
-           "filter": [{
-             "function": {
-               "@id": "http://endhealth.info/im#TimeDifference"
-             },
-             "argument": ["MONTH", "?effectiveDate91", "$referenceDate"],
-             "comparison": "greaterThanOrEqual",
-             "value": "-6"
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "? What are these clinical concepts",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?event93",
-             "@id": "Event"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept95",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
-             }, {
-               "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d"
-             }, {
-               "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4"
-             }, {
-               "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
-             }]
-           }]
-         }]
-       }, {
-         "notExist": true,
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med97",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#medication"
-           }],
-           "valueVar": "?medication99",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:705b717b-880c-402b-aed8-f76cdb561fa2"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med101",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate103",
-           "filter": [{
-             "function": {
-               "@id": "http://endhealth.info/im#TimeDifference"
-             },
-             "argument": ["MONTH", "?effectiveDate103", "$referenceDate"],
-             "comparison": "greaterThanOrEqual",
-             "value": "-6"
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "Cardiovascular disease (not resolved)",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate109"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event105",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept107",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:b8e618ac-9a75-40d7-a3f9-698c94c6591c"
-               }, {
-                 "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event105"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate109"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate109",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event105"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept107",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
-             }]
-           }]
-         }]
-       }, {
-         "name": "Latest CHA2DS2-VASc and if >2",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate116"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event112",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept114",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:797a3f50-a95d-41a5-a4a5-21c5ccd87fa8"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event112"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate116"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate116",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event112"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#numericValue"
-           }],
-           "filter": [{
-             "comparison": "greaterThanOrEqual",
-             "value": "2"
-           }]
-         }]
-       }, {
-         "name": "Not on Warfarin,Edoxaban,Dabigatranm Apixaban,Rivaroxaban,Phenindione,Acenocoumarol, in the last 6 months",
-         "notExist": true,
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med119",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#medication"
-           }],
-           "valueVar": "?medication121",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:44254378-a46d-4d21-9da9-710098583301"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med123",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate125",
-           "filter": [{
-             "function": {
-               "@id": "http://endhealth.info/im#TimeDifference"
-             },
-             "argument": ["MONTH", "?effectiveDate125", "$referenceDate"],
-             "comparison": "greaterThanOrEqual",
-             "value": "-6"
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "Latest BMI : if >30",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate131"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event127",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept129",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:aefeba01-d292-406d-8d02-15790430d61f"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event127"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate131"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate131",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event127"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#numericValue"
-           }],
-           "filter": [{
-             "comparison": "greaterThanOrEqual",
-             "value": "30"
-           }]
-         }]
-       }, {
-         "name": "On Olanzapine, Clozapine in the last 6 months",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med134",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#medication"
-           }],
-           "valueVar": "?medication136",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:d15c85e6-00c7-4ef0-aecd-169b82acfb96"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med138",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate140",
-           "filter": [{
-             "function": {
-               "@id": "http://endhealth.info/im#TimeDifference"
-             },
-             "argument": ["MONTH", "?effectiveDate140", "$referenceDate"],
-             "comparison": "greaterThanOrEqual",
-             "value": "-6"
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "Latest BMI : if >27.5",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate146"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event142",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept144",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:f36f7b3e-1689-4d59-865d-4f4f6954f74c"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event142"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate146"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate146",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event142"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#numericValue"
-           }],
-           "filter": [{
-             "comparison": "greaterThanOrEqual",
-             "value": "27.5"
-           }]
-         }]
-       }, {
-         "name": "On Olanzapine, Clozapine in the last 6 months",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med149",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#medication"
-           }],
-           "valueVar": "?medication151",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:ea022cb8-a544-4789-a4c6-68a84d4337e6"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med153",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate155",
-           "filter": [{
-             "function": {
-               "@id": "http://endhealth.info/im#TimeDifference"
-             },
-             "argument": ["MONTH", "?effectiveDate155", "$referenceDate"],
-             "comparison": "greaterThanOrEqual",
-             "value": "-6"
-           }]
-         }]
-       }, {
-         "name": "Asian or chinese",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?event157",
-             "@id": "Event"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept159",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:726d11dd-c26f-4c8e-89a1-aa1102fba5ca"
-             }]
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "Type 1 Diabetes",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?event161",
-             "@id": "Event"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept163",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:5a0192fd-27ea-4b30-8f8d-db17ab89284a"
-             }]
-           }]
-         }]
-       }, {
-         "name": "Age years >18",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#age"
-           }],
-           "valueVar": "?age166",
-           "filter": [{
-             "argument": ["?age166", "YEAR"],
-             "comparison": "greaterThanOrEqual",
-             "value": "18"
-           }]
-         }]
-       }, {
-         "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med168",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#medication"
-           }],
-           "valueVar": "?medication170",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:bc8ff12e-54d7-4f34-bc1c-6f5fc9465ee0"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med172",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate174",
-           "filter": [{
-             "function": {
-               "@id": "http://endhealth.info/im#TimeDifference"
-             },
-             "argument": ["MONTH", "?effectiveDate174", "$referenceDate"],
-             "comparison": "greaterThanOrEqual",
-             "value": "-6"
-           }]
-         }]
-       }]
-     }, {
-       "operator": "AND",
-       "clause": [{
-         "name": "Latest various Diabetes illnesses and if a subset of these",
-         "clause": [{
-           "select": [{
-             "var": "?patient"
-           }, {
-             "var": "?effectiveDate180"
-           }],
-           "where": [{
-             "entity": [{
-               "var": "?patient"
-             }, {
-               "@id": "isSubjectOf"
-             }, {
-               "var": "?event176",
-               "@id": "Event"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#concept"
-             }],
-             "valueVar": "?concept178",
-             "filter": [{
-               "in": [{
-                 "@id": "urn:uuid:b31d668d-47d2-4859-82f6-1fc3d927389a"
-               }]
-             }]
-           }, {
-             "entity": [{
-               "var": "?event176"
-             }],
-             "property": [{
-               "@id": "http://endhealth.info/im#effectiveDate"
-             }],
-             "valueVar": "?effectiveDate180"
-           }],
-           "groupSort": [{
-             "sortBy": "LATEST",
-             "count": 1,
-             "field": "?effectiveDate180",
-             "groupBy": "?patient"
-           }]
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?event176"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept178",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:339cb893-1c82-449d-93ab-e24d4ab4fd97"
-             }]
-           }]
-         }]
-       }, {
-         "name": "Age years >40",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#age"
-           }],
-           "valueVar": "?age184",
-           "filter": [{
-             "argument": ["?age184", "YEAR"],
-             "comparison": "greaterThanOrEqual",
-             "value": "40"
-           }]
-         }]
-       }, {
-         "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med186",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#medication"
-           }],
-           "valueVar": "?medication188",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:858923e7-d77e-419a-8a1e-f1b9e2646cb1"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?med190",
-             "@id": "MedicationOrder"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate192",
-           "filter": [{
-             "function": {
-               "@id": "http://endhealth.info/im#TimeDifference"
-             },
-             "argument": ["MONTH", "?effectiveDate192", "$referenceDate"],
-             "comparison": "greaterThanOrEqual",
-             "value": "-6"
-           }]
-         }]
-       }]
-     }]
-   }],
-   "select": [{
-     "var": "?patient"
-   }]
- }, {
-   "iri": "urn:uuidfe469cf2-84f3-4b03-a2f5-96223ae78dfd",
-   "name": "Priority 2",
-   "type": {
-     "@id": "http://endhealth.info/im#Query"
-   },
-   "prefix": {
-     "im": "http://endhealth.info/im#",
-     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-     "sn": "http://snomed.info/sct#"
-   },
-   "operator": "AND",
-   "clause": [{
-     "name": "is in cohort : SMI Population",
-     "where": [{
-       "entity": [{
-         "var": "?patient"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#inDataset"
-       }],
-       "filter": [{
-         "in": [{
-           "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
-         }]
-       }]
-     }]
-   }, {
-     "clause": [{
-       "name": "is in cohort : Priority 1",
-       "notExist": true,
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#inDataset"
-         }],
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
-           }]
-         }]
-       }]
-     }]
-   }],
-   "select": [{
-     "var": "?patient"
-   }]
- }, {
-   "iri": "urn:uuid6d4abdbb-d278-4675-a98d-c340967daee6",
-   "name": "Priority 3a",
-   "type": {
-     "@id": "http://endhealth.info/im#Query"
-   },
-   "prefix": {
-     "im": "http://endhealth.info/im#",
-     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-     "sn": "http://snomed.info/sct#"
-   },
-   "operator": "AND",
-   "clause": [{
-     "name": "is in cohort : SMI Population",
-     "where": [{
-       "entity": [{
-         "var": "?patient"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#inDataset"
-       }],
-       "filter": [{
-         "in": [{
-           "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
-         }]
-       }]
-     }]
-   }, {
-     "operator": "OR",
-     "clause": [{
-       "name": "Hypertension (not resolved)",
-       "clause": [{
-         "select": [{
-           "var": "?patient"
-         }, {
-           "var": "?effectiveDate5"
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?event1",
-             "@id": "Event"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept3",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
-             }, {
-               "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?event1"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate5"
-         }],
-         "groupSort": [{
-           "sortBy": "LATEST",
-           "count": 1,
-           "field": "?effectiveDate5",
-           "groupBy": "?patient"
-         }]
-       }],
-       "where": [{
-         "entity": [{
-           "var": "?event1"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#concept"
-         }],
-         "valueVar": "?concept3",
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
-           }]
-         }]
-       }]
-     }, {
-       "name": "Diabetes (not resolved)",
-       "clause": [{
-         "select": [{
-           "var": "?patient"
-         }, {
-           "var": "?effectiveDate12"
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?event8",
-             "@id": "Event"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept10",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
-             }, {
-               "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?event8"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate12"
-         }],
-         "groupSort": [{
-           "sortBy": "LATEST",
-           "count": 1,
-           "field": "?effectiveDate12",
-           "groupBy": "?patient"
-         }]
-       }],
-       "where": [{
-         "entity": [{
-           "var": "?event8"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#concept"
-         }],
-         "valueVar": "?concept10",
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
-           }]
-         }]
-       }]
-     }, {
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }, {
-           "@id": "isSubjectOf"
-         }, {
-           "var": "?event15",
-           "@id": "Event"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#concept"
-         }],
-         "valueVar": "?concept17",
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
-           }, {
-             "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d"
-           }, {
-             "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4"
-           }, {
-             "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
-           }]
-         }]
-       }]
-     }, {
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }, {
-           "@id": "isSubjectOf"
-         }, {
-           "var": "?event19",
-           "@id": "Event"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#concept"
-         }],
-         "valueVar": "?concept21",
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:15bd20c8-c92f-496c-8560-896299a632e5"
-           }, {
-             "@id": "urn:uuid:c97f55a2-fe6e-4da2-8865-a95b7cc80f4f"
-           }]
-         }]
-       }]
-     }, {
-       "name": "- Latest BMI >35",
-       "clause": [{
-         "select": [{
-           "var": "?patient"
-         }, {
-           "var": "?effectiveDate27"
-         }],
-         "where": [{
-           "entity": [{
-             "var": "?patient"
-           }, {
-             "@id": "isSubjectOf"
-           }, {
-             "var": "?event23",
-             "@id": "Event"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#concept"
-           }],
-           "valueVar": "?concept25",
-           "filter": [{
-             "in": [{
-               "@id": "urn:uuid:849eaf4e-55ef-40b7-be7b-1d95f56abee2"
-             }]
-           }]
-         }, {
-           "entity": [{
-             "var": "?event23"
-           }],
-           "property": [{
-             "@id": "http://endhealth.info/im#effectiveDate"
-           }],
-           "valueVar": "?effectiveDate27"
-         }],
-         "groupSort": [{
-           "sortBy": "LATEST",
-           "count": 1,
-           "field": "?effectiveDate27",
-           "groupBy": "?patient"
-         }]
-       }],
-       "where": [{
-         "entity": [{
-           "var": "?event23"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#numericValue"
-         }],
-         "filter": [{
-           "comparison": "greaterThanOrEqual",
-           "value": "35"
-         }]
-       }]
-     }]
-   }, {
-     "operator": "NOTOR",
-     "clause": [{
-       "name": "is in cohort : Priority 1",
-       "notExist": true,
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#inDataset"
-         }],
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
-           }]
-         }]
-       }]
-     }, {
-       "name": "is in cohort : Priority 2",
-       "notExist": true,
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#inDataset"
-         }],
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
-           }]
-         }]
-       }]
-     }]
-   }],
-   "select": [{
-     "var": "?patient"
-   }]
- }, {
-   "iri": "urn:uuid3f04bc73-fb03-4d50-bae4-49a866ad5033",
-   "name": "Priority 3b",
-   "type": {
-     "@id": "http://endhealth.info/im#Query"
-   },
-   "prefix": {
-     "im": "http://endhealth.info/im#",
-     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-     "sn": "http://snomed.info/sct#"
-   },
-   "operator": "AND",
-   "clause": [{
-     "name": "is in cohort : SMI Population",
-     "where": [{
-       "entity": [{
-         "var": "?patient"
-       }],
-       "property": [{
-         "@id": "http://endhealth.info/im#inDataset"
-       }],
-       "filter": [{
-         "in": [{
-           "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
-         }]
-       }]
-     }]
-   }, {
-     "operator": "NOTOR",
-     "clause": [{
-       "name": "is in cohort : Priority 1",
-       "notExist": true,
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#inDataset"
-         }],
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
-           }]
-         }]
-       }]
-     }, {
-       "name": "is in cohort : Priority 2",
-       "notExist": true,
-       "where": [{
-         "entity": [{
-           "var": "?patient"
-         }],
-         "property": [{
-           "@id": "http://endhealth.info/im#inDataset"
-         }],
-         "filter": [{
-           "in": [{
-             "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
-           }]
-         }]
-       }]
-     }]
-   }],
-   "select": [{
-     "var": "?patient"
-   }]
- }]`,
       expanded: false,
       showBackgroundCards: true,
       activeFileIndex: 0,
@@ -2132,6 +309,11 @@ export default defineComponent({
         },
       ],
       isLoading: false,
+      openQueries: [] as any[],
+      openFiles: [] as any[],
+      selectedFile: "",
+      selectedFileItems: [] as any[],
+      fileItems: [] as any[],
     };
   },
   watch: {
@@ -2143,16 +325,46 @@ export default defineComponent({
     // const dataset = new Query(Examples.QOF_CHD005 as Query);
     // console.log(dataset.name);
     // await this.$store.dispatch("fetchDatamodel");
-    await this.$store.dispatch("fetchDatamodelIris");
     // console.log("datamodel fetched: ", this.$store.state.datamodel);
-    let qry = `CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} LIMIT 10`
-
-
-    await this.graphSearch(qry);
+    // let qry = `CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} LIMIT 10`
+    // await this.graphSearch(qry);
+    // console.log("ceg_smi", ceg_smi);
+    // const _folder  = new Folder();
+    // folder.load("http://endhealth.info/ceg/qry#Q_CEGQueries");
+    // console.log(QueryBuilder.getExamples());
+    await this.$store.dispatch("fetchDatamodelIris");
   },
   methods: {
     // onJSONInput(input: string): void {
     // },
+    onUploadFiles(event: InputEvent): void {
+      const _inputElement = this.$refs.upload as HTMLInputElement;
+
+      const _files = [...(_inputElement.files ? _inputElement.files : [])];
+
+      this.openFiles = [];
+      _files.forEach((file: any) => {
+        const fr = new FileReader();
+        console.log(`File loaded: ${file.name}`);
+        fr.onload = (e: any) => {
+          const result = JSON.parse(e.target.result);
+          this.openFiles = [...this.openFiles, result];
+          console.log("File content: ", result);
+          // console.log("queries", this.getQueries());
+          this.openQueries = result["entities"].filter(
+            (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
+          );
+        };
+        fr.readAsText(file);
+      });
+      //  QueryBuilder.loadFile(_files[0]);
+      //  console.log(QueryBuilder.queries);
+    },
+    getQueries(): any {
+      return this.openFiles[0]["entities"].filter(
+        (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
+      );
+    },
     async getEntitySummary(iri: string): Promise<any> {
       await EntityService.getEntitySummary(iri)
         .then((res) => {
@@ -2175,18 +387,18 @@ export default defineComponent({
         });
     },
     async graphSearch(sparqlQueryString: string): Promise<any> {
-      await SearchService.graphdb_search(sparqlQueryString)
-        .then((res) => {
-          console.log("graphsearch complete: ", res);
-        })
-        .catch((err) => {
-          this.$toast.add(
-            LoggerService.error(
-              "Failed to get data model properties from server",
-              err
-            )
-          );
-        });
+      // await SearchService.graphdb_search(sparqlQueryString)
+      //   .then((res) => {
+      //     console.log("graphsearch complete: ", res);
+      //   })
+      //   .catch((err) => {
+      //     this.$toast.add(
+      //       LoggerService.error(
+      //         "Failed to get data model properties from server",
+      //         err
+      //       )
+      //     );
+      //   });
     },
 
     handlePrevious(): void {
@@ -2204,6 +416,12 @@ export default defineComponent({
         }
       }
     },
+  },
+
+  itemsithUUID(items: any): any {
+    return items.map((item: any) => {
+      return { id: "temp_" + v4(), ...items };
+    });
   },
 });
 </script>
@@ -2273,10 +491,11 @@ export default defineComponent({
   border-radius: 20px;
 }
 
-.query-viewer {
+.query-viewer,
+.file-list {
   /* padding-bottom: 150px; */
   overflow-y: auto;
-  font-size: 14px !important;
+  font-size: 12px !important;
 }
 
 ::-webkit-scrollbar {
@@ -2293,5 +512,10 @@ export default defineComponent({
 }
 .padding-text {
   padding: 20px 10px 150px 10px;
+}
+
+.file-list {
+  width: 300px;
+  height: 700px;
 }
 </style>

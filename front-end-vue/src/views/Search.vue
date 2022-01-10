@@ -255,7 +255,6 @@ export default defineComponent({
         lastName: "",
         email: "",
       },
-      isLoading: false,
       searchString: "",
       activePageName: "Main", //Options #Home #SearchResults
       activeTabName: "Data",
@@ -310,9 +309,18 @@ export default defineComponent({
       tableHeight: 600,
     };
   },
-  computed: mapState(["currentUser", "isLoggedIn"]),
+  computed: {
+    ...mapState(["currentUser", "isLoggedIn"]),
+    isLoading: {
+      get(): any {
+        return this.$store.state.isLoading;
+      },
+      set(value: any): void {
+        this.$store.commit("updateIsLoading", value);
+      },
+    },
+  },
   async mounted() {
-
     await this.$store.dispatch("authenticateCurrentUser");
 
     if (this.currentUser && this.isLoggedIn) {
@@ -431,7 +439,11 @@ export default defineComponent({
       this.searchString = searchString;
       this.showSearchResults(searchString);
     },
-    async oss_search(searchString: string, index: string, limit: number): Promise<any> {
+    async oss_search(
+      searchString: string,
+      index: string,
+      limit: number
+    ): Promise<any> {
       this.isLoading = true;
 
       await SearchService.oss_search(searchString, index, limit)
@@ -440,7 +452,6 @@ export default defineComponent({
           console.log("fetched opensearch results: ", res);
         })
         .catch((err: any) => {
-          
           this.isLoading = false;
           console.log("Could not load opensearch results", err);
         });

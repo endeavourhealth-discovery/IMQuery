@@ -93,6 +93,7 @@
                   v-model="selectedOrganisations"
                   :items="radioButtonItems.sources"
                   :multiselect="false"
+                    :checkbox="true"
                 />
                 <MultiSelect
                   v-if="selectedOrganisations.includes('other')"
@@ -114,10 +115,12 @@
                   :description="inputMeta.mainDataType"
                 />
                 <InputRadioButtons
+                  
                   class="w-full max-w-lg mx-auto mt-7"
                   v-model="selectedMainDataType"
                   :items="radioButtonItems.mainDataType"
                   :multiselect="false"
+                  :checkbox="true"
                 />
               </div>
             </div>
@@ -133,7 +136,6 @@
                 :description="inputMeta.steps_data"
               />
             </StepCurator>
-
 
             <div v-show="sideNavActiveItem == 'Output'">
               Output

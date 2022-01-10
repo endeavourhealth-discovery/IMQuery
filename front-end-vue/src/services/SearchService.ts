@@ -145,23 +145,29 @@ export default class SearchService {
 
   };
 
-  public static async graphdb_search(sparqlQueryString: string): Promise<AxiosResponse<any>> {
+  // public static async graphdb_search(sparqlQueryString: string): Promise<AxiosResponse<any>> {
 
-    // const queryParams = SearchService.toFormURLEncoded({ 'query': sparqlQueryString });
-    
-    
-    
-    
-    console.log("queryParams is: ", this.toFormURLEncoded(sparqlQueryString));
-    return axios.get(`${this.graphdb_url}/repositories/${process.env.VUE_APP_GRAPHDB_REPOSITORY}?q=${this.toFormURLEncoded(sparqlQueryString)}`,
-      {
-        headers: this.oss_headers
-      });
+  //   // const queryParams = SearchService.toFormURLEncoded({ 'query': sparqlQueryString });
 
-  }
+    
+  //   console.log("queryParams is: ", this.toFormURLEncoded(sparqlQueryString));
+  //   return axios.get(`${this.graphdb_url}/repositories/${process.env.VUE_APP_GRAPHDB_REPOSITORY}?q=${this.toFormURLEncoded(sparqlQueryString)}`,
+  //     {
+  //       headers: this.graphdb_headers
+  //     });
 
-  public static toFormURLEncoded(sparqlQueryString: any): string {
-    // var details = {
+  // }
+
+  // public static toFormURLEncoded(sparqlQueryString: any): string {
+
+  //   let qry = sparqlQueryString;
+  //   qry = qry.replaceAll(" ", "+");
+  //   qry = qry.replaceAll("{", "%7B");
+  //   qry = qry.replaceAll("}", "%7D");
+  //   qry = qry.replaceAll("?", "%3F");
+  //   return qry;
+
+        // var details = {
     //   'userName': 'test@gmail.com',
     //   'password': 'Password!',
     //   'grant_type': 'password'
@@ -175,14 +181,7 @@ export default class SearchService {
     // }
     // return formBody.join("&");
 
-    let qry = sparqlQueryString;
-    qry = qry.replaceAll(" ", "+");
-    qry = qry.replaceAll("{", "%7B");
-    qry = qry.replaceAll("}", "%7D");
-    qry = qry.replaceAll("?", "%3F");
-    return qry;
-
-  }
+  // }
 
 
 

@@ -71,6 +71,7 @@ export default createStore({
       selectedSchemes: ConceptReference[];
       selectedTypes: string[];
     },
+    isLoading: false,
     activeQueryId: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
     openQueries: [
       {
@@ -317,7 +318,7 @@ export default createStore({
           },
         }
       },
-      
+
     ],
     datamodel: [] as any[],
     datamodelIris: [] as any[],
@@ -4255,6 +4256,10 @@ export default createStore({
 
       console.log("updated Entity with payload", payload);
 
+    },
+    updateIsLoading(state, isLoading) {
+      state.isLoading = isLoading;
+
     }
   },
   actions: {
@@ -4392,7 +4397,7 @@ export default createStore({
 
 
     },
-    async fetchDatamodelIris({commit}) {
+    async fetchDatamodelIris({ commit }) {
       //fetch all datamodel Iris and then metadata (properties) from IM API 
       const datamodelIris = [] as any[];
       await SearchService.oss_getDataModelAll()
@@ -4410,7 +4415,7 @@ export default createStore({
           );
         }
         );
-        commit("updateDatamodelIris", datamodelIris);
+      commit("updateDatamodelIris", datamodelIris);
 
 
     }
