@@ -10,18 +10,15 @@ const { v4 } = require('uuid');
 // const random = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
 
-
-
-
 export default class QueryBuilder {
 
 
-    private _loaded = false;
+    public _loaded = false;
 
 
-    private _context: any;
-    private _graph: any;
-    private _entities = [] as any[];
+    public _context: any;
+    public _graph: any;
+    public _entities = [] as any[];
     get entities(): any[] {
         return this._entities;
     }
@@ -38,6 +35,33 @@ export default class QueryBuilder {
     private _queries = [] as any[];
     get queries(): any[] {
         return this._queries;
+    }
+
+
+    loadJSON(file: any): QueryBuilder {
+
+        // file
+        // file = JSON.parse(file);
+        this._context = file["@context"];
+        this._graph = file["@graph"];
+        this._entities = file["entities"];
+
+        //types
+        file["entities"].forEach((entity: any) => {
+            const _type = entity["rdf:type"][0]["@id"];
+            if (!this._entityTypes.includes(_type)) {
+                this._entityTypes.push(_type);
+            }
+        });
+
+        //queries
+        this._queries = file["entities"].filter((entity: any) => entity["rdf:type"][0]["@id"] === "im:Query");
+
+        //query tree
+
+
+        this._loaded = true;
+        return this;
     }
 
 
@@ -96,30 +120,7 @@ export default class QueryBuilder {
 
 
 
-    loadFile(file: any): QueryBuilder {
 
-        // file
-        this._context = file["@context"];
-        this._graph = file["@graph"];
-        this._entities = file["entities"];
-
-        //types
-        file["entities"].forEach((entity: any) => {
-            const _type = entity["rdf:type"][0]["@id"];
-            if (!this._entityTypes.includes(_type)) {
-                this._entityTypes.push(_type);
-            }
-        });
-
-        //queries
-        this._queries = file["entities"].filter((entity: any) => entity["rdf:type"][0]["@id"] === "im:Query");
-
-        //query tree
-
-
-        this._loaded = true;
-        return this;
-    }
 }
 
 //entity["rdf:type"][0]["@id"]
@@ -177,16 +178,14 @@ export class Folder {
 }
 
 
-export class Node
-{
-	// Vertices node key
-	public id: number;
-	public next: Node | null;
-	constructor(id: number)
-	{
-		// Set value of node key
-		this.id = id;
-		this.next = null;
-	}
+export class Node {
+    // Vertices node key
+    public id: number;
+    public next: Node | null;
+    constructor(id: number) {
+        // Set value of node key
+        this.id = id;
+        this.next = null;
+    }
 }
 

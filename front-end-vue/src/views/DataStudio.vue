@@ -132,7 +132,11 @@
             v-if="queryBuilder.queryTree(topLevelEntity).children.length"
             class="query-viewer padding-text"
           >
-            <div v-for="item in queryBuilder.queryTree(topLevelEntity).children" :key="item['@id']" class="mt-5">
+            <div
+              v-for="item in queryBuilder.queryTree(topLevelEntity).children"
+              :key="item['@id']"
+              class="mt-5"
+            >
               <div class="font-semibold text-lg text-gray-600">
                 {{ item["rdfs:label"] }}
               </div>
@@ -385,16 +389,11 @@ export default defineComponent({
     // this.queryBuilder.onLoad
   },
   async mounted() {
-    // const dataset = new Query(Examples.QOF_CHD005 as Query);
-    // console.log(dataset.name);
     // await this.$store.dispatch("fetchDatamodel");
-    // console.log("datamodel fetched: ", this.$store.state.datamodel);
-    // let qry = `CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o} LIMIT 10`
-    // await this.graphSearch(qry);
-    // console.log("ceg_smi", ceg_smi);
     // const _folder  = new Folder();
     // folder.load("http://endhealth.info/ceg/qry#Q_CEGQueries");
     // console.log(QueryBuilder.getExamples());
+
     await this.$store.dispatch("fetchDatamodelIris");
   },
   methods: {
@@ -413,40 +412,53 @@ export default defineComponent({
       }
     },
     async onUploadFiles(event: InputEvent): Promise<void> {
-      // this.isLoading = true;
       const _inputElement = this.$refs.upload as HTMLInputElement;
       const _files = [...(_inputElement.files ? _inputElement.files : [])];
 
       this.openFiles = [];
       this.openQueries = [];
-
-      console.log(`File loaded: ${_files[0].name}`);
-
-      //load file and parse
-      const fr = new FileReader();
-      fr.onload = (e: any) => {
-        const result = JSON.parse(e.target.result);
-        this.openFiles = [...this.openFiles, result];
-        this.queryBuilder.loadFile(result);
-
+      const fileReader = new FileReader();
+      fileReader.onload = (e: any) => {
+        const json = JSON.parse(e.target.result);
+        this.openFiles = [...this.openFiles, json];
+        this.$store.commit("queryBuilder", {
+          action: "loadJSON",
+          payload: json,
+        });
+        this.openQueries = this.$store.state.queryBuilder.queries;
+        console.log("Queries: ", this.$store.state.queryBuilder.queries);
         this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
           return {
             value: entity,
             label: entity.split(":")[1],
           };
         });
-        this.openQueries = this.queryBuilder.queries;
-
-        console.log("File content: ", result);
-
-        console.log("Tree: ", this.queryBuilder.queryTree(this.topLevelEntity));
       };
-      fr.readAsText(_files[0]);
-      this.isLoading = false;
+      fileReader.readAsText(_files[0]);
 
-      console.log("_files", _files[0]);
+      // //alternativeloading file into local  component statestate
+      // const fr = new FileReader();
+      // fr.onload = (e: any) => {
+      //   const result = JSON.parse(e.target.result);
+      //   this.openFiles = [...this.openFiles, result];
+      //   this.queryBuilder.loadJSON(result);
 
-      //alternative code with multiple files
+      //   this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
+      //     return {
+      //       value: entity,
+      //       label: entity.split(":")[1],
+      //     };
+      //   });
+      //   this.openQueries = this.queryBuilder.queries;
+
+      //   console.log("File content: ", result);
+
+      //   console.log("Tree: ", this.queryBuilder.queryTree(this.topLevelEntity));
+      // };
+
+      // console.log("_files", _files[0]);
+
+      /// /alternative: loading multiple files
       // _files.forEach((file: any) => {
       //   const fr = new FileReader();
       //   console.log(`File loaded: ${file.name}`);
