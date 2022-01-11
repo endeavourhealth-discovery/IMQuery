@@ -13,6 +13,7 @@ import { ConceptReference } from "@/models/TTConcept/ConceptReference";
 import axios from "axios";
 import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
+import QueryBuilder from "@/models/query/QueryBuilder";
 const _ = require("lodash");
 
 export default createStore({
@@ -4123,8 +4124,7 @@ export default createStore({
         ],
       },
     ],
-
-
+    queryBuilder: new QueryBuilder(),
   },
   mutations: {
     updateConceptIri(state, conceptIri) {

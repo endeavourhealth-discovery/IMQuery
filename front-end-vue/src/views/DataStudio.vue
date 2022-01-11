@@ -62,28 +62,45 @@
     /></template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
     <template v-else-if="sideNavActiveItem == 'View Definition'">
-      <div class="section-center flex w-full h-full">
+      <div class="section-center flex w-full h-full p-3">
         <div class="inline-flex flex-col w-full h-full">
-          <div class="font-semibold text-lg text-black">
-            Select
+          <div v-if="openFiles.length" class="font-semibold text-lg text-black">
+            Entities ({{ openFiles.length && openFiles[0]["entities"].length }})
+          </div>
+          <div v-else class="font-semibold text-lg text-black">
+            Select a -id.json file
           </div>
           <input
-            class="font-regular text-lg text-black"
+            class="font-regular text-lg text-black "
             ref="upload"
             type="file"
             name="file-upload"
             accept="application/JSON"
-            @change="onUploadFiles"
+            @change="onUploadFiles()"
           />
+
           <div class="font-semibold text-lg text-black mt-2">
-            Files ({{ openFiles.length && openFiles[0]["entities"].length }})
+            Filter by type
           </div>
-          <div v-if="openFiles.length" class="flex flex-col file-list px-2">
+          <MultiSelect
+            v-if="openFiles.length"
+            class="w-full multi-large file-filter"
+            v-model="selectedFilterTypes"
+            :options="filterTypes"
+            optionLabel="label"
+            placeholder="Type(s)"
+          />
+
+          <div class="font-semibold text-lg text-black mt-2">
+            Items
+          </div>
+
+          <div v-if="openFiles.length" class="flex flex-col file-list mt-2 ">
             <div
-              v-for="item in openFiles[0]['entities']"
+              v-for="item in getFilteredEntities()"
               :key="item['@id']"
               :class="
-                'file-list__item flex flex-col non-selectable p-2 px-3 mt-2 text-xl font-regular border hover:shadow-md hover:border-gray-300' +
+                'file-list__item rounded-sm flex flex-col non-selectable p-2 px-3 mt-2 text-xl font-regular border hover:shadow-md hover:border-gray-300' +
                   [
                     selectedFile == item['@id']
                       ? ' border-blue-600 text-blue-600'
@@ -102,25 +119,35 @@
             class="outline-none h-full w-full padding-text"
           ></textarea> -->
         </div>
-        <div class="inline-flex flex-col w-full h-full">
+        <div
+          v-if="queryBuilder.queryTree(topLevelEntity)"
+          class="inline-flex flex-col w-full h-full"
+        >
           <div class="font-semibold text-lg text-black text-center">
-            Queries ({{openQueries.length}})
+            Queries ({{
+              queryBuilder.queryTree(topLevelEntity).children.length
+            }})
           </div>
-          <div v-if="openQueries.length" class="query-viewer padding-text">
-            <div v-for="query in openQueries" :key="query.iri" class="mt-5">
+          <div
+            v-if="queryBuilder.queryTree(topLevelEntity).children.length"
+            class="query-viewer padding-text"
+          >
+            <div v-for="item in queryBuilder.queryTree(topLevelEntity).children" :key="item['@id']" class="mt-5">
               <div class="font-semibold text-lg text-gray-600">
-                {{ query["rdfs:label"] }}
+                {{ item["rdfs:label"] }}
               </div>
-              <!-- <div
-                v-for="definition in JSON.parse(query['im:queryDefinition'])"
-                :key="definition['iri']"
-              >
-                <ClauseItem
-                  :operator="definition.operator"
-                  :clause="definition.clause"
-                  :nestingCount="1"
-                />
-              </div> -->
+              <template v-if="false">
+                <div
+                  v-for="definition in query['im:queryDefinition']"
+                  :key="definition['iri']"
+                >
+                  <ClauseItem
+                    :operator="definition.operator"
+                    :clause="definition.clause"
+                    :nestingCount="1"
+                  />
+                </div>
+              </template>
             </div>
           </div>
         </div>
@@ -142,7 +169,7 @@ import LoggerService from "@/services/LoggerService";
 // import HorizontalTabs from "@/components/search/HorizontalTabs.vue";
 // import VerticalTabs from "@/components/search/VerticalTabs.vue";
 // import ProgressBar from "@/components/search/ProgressBar.vue";
-
+import MultiSelect from "primevue/multiselect";
 import SearchService from "@/services/SearchService";
 // import SearchClient from "@/services/SearchClient";
 // const { MeiliSearch } = require("meilisearch");
@@ -157,7 +184,9 @@ import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
 import QueryBuilder, { Query, Folder } from "@/models/query/QueryBuilder";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
-
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import ColumnGroup from "primevue/columngroup"; //optional for column grouping
 // import * as IMQ  from "@/models/query/QueryBuilder";
 
 // import ceg_smi from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
@@ -173,11 +202,31 @@ export default defineComponent({
     // HorizontalNav,
     ContentNav,
     DatasetBrowser,
+    MultiSelect,
+    // DataTable,
+    // Column,
+    // ColumnGroup,
     // ClauseItem,
     // InputRadioButtons,
   },
   data() {
     return {
+      topLevelEntity: {
+        "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries",
+        "rdf:type": [
+          {
+            "@id": "im:Folder",
+          },
+        ],
+        "rdfs:label": "QMUL CEG query library",
+        "im:isContainedIn": [
+          {
+            "@id": "im:Q_Queries",
+          },
+        ],
+      },
+      selectedFilterTypes: [] as any[],
+      filterTypes: [] as any[],
       expanded: false,
       showBackgroundCards: true,
       activeFileIndex: 0,
@@ -308,18 +357,32 @@ export default defineComponent({
           children: [],
         },
       ],
-      isLoading: false,
       openQueries: [] as any[],
       openFiles: [] as any[],
       selectedFile: "",
       selectedFileItems: [] as any[],
       fileItems: [] as any[],
+      queryBuilder: new QueryBuilder(),
     };
   },
   watch: {
     json(newValue) {
       console.log(JSON.parse(newValue));
     },
+  },
+  computed: {
+    isLoading: {
+      get(): any {
+        return this.$store.state.isLoading;
+      },
+      set(value: any): void {
+        this.$store.commit("updateIsLoading", value);
+      },
+    },
+  },
+  created() {
+    //todo: bind updates to specific methods e.g. onLoad should trigger a new state
+    // this.queryBuilder.onLoad
   },
   async mounted() {
     // const dataset = new Query(Examples.QOF_CHD005 as Query);
@@ -337,28 +400,69 @@ export default defineComponent({
   methods: {
     // onJSONInput(input: string): void {
     // },
-    onUploadFiles(event: InputEvent): void {
+    getFilteredEntities(): any {
+      if (this.selectedFilterTypes.length) {
+        return this.openFiles[0]["entities"].filter((entity: any) =>
+          this.selectedFilterTypes.some(
+            (selectedFilterType: any) =>
+              selectedFilterType.value == entity["rdf:type"][0]["@id"]
+          )
+        );
+      } else {
+        return this.openFiles[0]["entities"];
+      }
+    },
+    async onUploadFiles(event: InputEvent): Promise<void> {
+      // this.isLoading = true;
       const _inputElement = this.$refs.upload as HTMLInputElement;
-
       const _files = [...(_inputElement.files ? _inputElement.files : [])];
 
       this.openFiles = [];
-      _files.forEach((file: any) => {
-        const fr = new FileReader();
-        console.log(`File loaded: ${file.name}`);
-        fr.onload = (e: any) => {
-          const result = JSON.parse(e.target.result);
-          this.openFiles = [...this.openFiles, result];
-          console.log("File content: ", result);
-          // console.log("queries", this.getQueries());
-          this.openQueries = result["entities"].filter(
-            (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
-          );
-        };
-        fr.readAsText(file);
-      });
-      //  QueryBuilder.loadFile(_files[0]);
-      //  console.log(QueryBuilder.queries);
+      this.openQueries = [];
+
+      console.log(`File loaded: ${_files[0].name}`);
+
+      //load file and parse
+      const fr = new FileReader();
+      fr.onload = (e: any) => {
+        const result = JSON.parse(e.target.result);
+        this.openFiles = [...this.openFiles, result];
+        this.queryBuilder.loadFile(result);
+
+        this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
+          return {
+            value: entity,
+            label: entity.split(":")[1],
+          };
+        });
+        this.openQueries = this.queryBuilder.queries;
+
+        console.log("File content: ", result);
+
+        console.log("Tree: ", this.queryBuilder.queryTree(this.topLevelEntity));
+      };
+      fr.readAsText(_files[0]);
+      this.isLoading = false;
+
+      console.log("_files", _files[0]);
+
+      //alternative code with multiple files
+      // _files.forEach((file: any) => {
+      //   const fr = new FileReader();
+      //   console.log(`File loaded: ${file.name}`);
+      //   this.isLoading = true;
+      //   fr.onload = (e: any) => {
+      //     const result = JSON.parse(e.target.result);
+      //     this.openFiles = [...this.openFiles, result];
+      //     console.log("File content: ", result);
+      //     // console.log("queries", this.getQueries());
+      //     this.openQueries = result["entities"].filter(
+      //       (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
+      //     );
+      //     this.isLoading = false;
+      //   };
+      //   fr.readAsText(file);
+      // });
     },
     getQueries(): any {
       return this.openFiles[0]["entities"].filter(
@@ -416,12 +520,11 @@ export default defineComponent({
         }
       }
     },
-  },
-
-  itemsithUUID(items: any): any {
-    return items.map((item: any) => {
-      return { id: "temp_" + v4(), ...items };
-    });
+    itemsithUUID(items: any): any {
+      return items.map((item: any) => {
+        return { id: "temp_" + v4(), ...items };
+      });
+    },
   },
 });
 </script>
@@ -515,7 +618,10 @@ export default defineComponent({
 }
 
 .file-list {
-  width: 300px;
-  height: 700px;
+  width: 500px;
+  height: 650px;
+}
+.file-filter {
+  width: 500px;
 }
 </style>
