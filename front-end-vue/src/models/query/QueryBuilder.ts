@@ -291,7 +291,7 @@ export class Query extends Entity {
     public mainEntityType?: Entity | null;
     public mainEntityVar?: string | null;
     public prefix?: any | null;
-    public operator: "AND" | "OR" | "NOTOR" | "NOTAND" = "AND";
+    public operator: "AND" | "OR" | "NOTOR" | "NOTAND" | null= "AND";
     public clause?: Clause[] | null;
     public select?: Selection[] | null;
 
@@ -300,12 +300,12 @@ export class Query extends Entity {
     constructor(query?: Query)
     constructor(query: Query) {
         super()
-        this["mainEntityType"] = entity["mainEntityType"] ? entity["mainEntityType"] : null;
-        this["mainEntityVar"] = entity["mainEntityVar"] ? entity["mainEntityVar"] : null;
-        this["prefix"] = entity["prefix"] ? entity["prefix"] : null;
-        this["operator"] = entity["operator"] ? entity["operator"] : null;
-        this["clause"] = entity["clause"] ? entity["clause"] : null;
-        this["select"] = entity["select"] ? entity["select"] : null;
+        this["mainEntityType"] = query["mainEntityType"] ? query["mainEntityType"] : null;
+        this["mainEntityVar"] = query["mainEntityVar"] ? query["mainEntityVar"] : null;
+        this["prefix"] = query["prefix"] ? query["prefix"] : null;
+        this["operator"] = query["operator"] ? query["operator"] : null;
+        this["clause"] = query["clause"] ? query["clause"] : null;
+        this["select"] = query["select"] ? query["select"] : null;
     }
 
 }
