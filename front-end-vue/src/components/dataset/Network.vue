@@ -176,7 +176,6 @@ export default {
   },
   computed: {
     nodes() {
-      // 去重
       let nodes = this.nodeList.slice();
       let nodeIds = [];
       nodes = nodes.filter((node) => {
@@ -255,25 +254,20 @@ export default {
         );
 
       // console.log(this.nodes);
-      // console.log(this.links);
     },
     initDragTickZoom() {
-      // 给节点添加拖拽
       d3.selectAll(".node").call(this.drag(this.force));
       this.force.on("tick", () => {
-        // 更新连线坐标
         d3.selectAll(".link")
           .data(this.links)
           .attr("x1", (d) => d.source.x)
           .attr("y1", (d) => d.source.y)
           .attr("x2", (d) => d.target.x)
           .attr("y2", (d) => d.target.y);
-        // 更新节点坐标
         d3.selectAll(".node")
           .data(this.nodes)
           .attr("cx", (d) => d.x)
           .attr("cy", (d) => d.y);
-        // 更新文字坐标
         d3.selectAll(".node-text")
           .data(this.nodes)
           .attr("x", (d) => d.x)
@@ -324,11 +318,9 @@ export default {
         if (this.pinned.length === 0) {
           this.selectedState(e);
         }
-        // 强制刷新
         this.$forceUpdate();
         this.$emit("hoverNode", e, e.target.__data__);
       } else if (e.target.nodeName === "line") {
-        // 显示关系文本
         this.linkTextPosition = {
           left: e.clientX + "px",
           top: e.clientY - 50 + "px",
@@ -344,27 +336,21 @@ export default {
         if (this.pinned.length === 0) {
           this.noSelectedState(e);
         }
-        // 强制刷新
         this.$forceUpdate();
       }
     },
     selectedState(e) {
-      // 节点自身显示文字、增加 selected class、添加进 selection
       e.target.__data__.showText = true;
       e.target.classList.add("selected");
       this.selection.nodes.push(e.target.__data__);
-      // 周围节点显示文字、边和结点增加 selected class、添加进 selection
       this.lightNeibor(e.target.__data__);
-      // 除了 selected 的其余节点透明度减小
       d3.selectAll(".element").style("opacity", 0.2);
     },
     noSelectedState(e) {
-      // 节点自身不显示文字、移除 selected class
       e.target.__data__.showText = false;
       // e.target.classList.remove("selected");
-      // 周围节点不显示文字、边和结点移除 selected class
       this.darkenNerbor();
-      // 所有节点透明度恢复
+
       d3.selectAll(".element").style("opacity", 1);
     },
     pinnedState(e) {
@@ -409,12 +395,12 @@ export default {
           }
         });
       });
-      // 清空 selection
+
       this.selection.nodes = [];
       this.selection.links = [];
     },
     zoomed() {
-      // 缩放中：以鼠标所在的位置为中心
+ 
       d3.select("#container").attr(
         "transform",
         "translate(" +

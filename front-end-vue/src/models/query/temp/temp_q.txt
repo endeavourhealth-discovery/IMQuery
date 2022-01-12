@@ -48,7 +48,7 @@ AND
     Age years >18
     On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months
     Latest various Diabetes illnesses and if a subset of these
-    Age years >40
+    Age years  >40
     On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months
 
 Priority 2
@@ -63,6 +63,6 @@ Priority 2
     is in cohort : Priority 2
 
 Priority 3b
-    ion
+    is in 
     is in cohort : Priority 1,
     is in cohort : Priority 2,

@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-buttons font-medium h-full flex  justify-end">
+  <div class="tab-buttons font-medium h-full flex justify-center">
     <template v-for="item in items">
       <div
         v-if="item.visible"
