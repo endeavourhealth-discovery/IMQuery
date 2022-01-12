@@ -63,6 +63,6 @@ Priority 2
     is in cohort : Priority 2
 
 Priority 3b
-    ion
+    is in 
     is in cohort : Priority 1,
     is in cohort : Priority 2,

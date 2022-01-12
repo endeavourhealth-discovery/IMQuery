@@ -79,68 +79,82 @@
             @change="onUploadFiles()"
           />
 
-          <div class="font-semibold text-lg text-black mt-2">
-            Filter by type
-          </div>
-          <MultiSelect
-            v-if="openFiles.length"
-            class="w-full multi-large file-filter"
-            v-model="selectedFilterTypes"
-            :options="filterTypes"
-            optionLabel="label"
-            placeholder="Type(s)"
-          />
-
-          <div class="font-semibold text-lg text-black mt-2">
-            Items
+          <div class="font-semibold text-lg text-black mt-2 h-10 flex">
+            <HorizontalNavbar v-model="activeFileView" :items="fileViews" />
           </div>
 
-          <div v-if="openFiles.length" class="flex flex-col file-list mt-2 ">
-            <div
-              v-for="item in getFilteredEntities()"
-              :key="item['@id']"
-              :class="
-                'file-list__item rounded-sm flex flex-col non-selectable p-2 px-3 mt-2 text-xl font-regular border hover:shadow-md hover:border-gray-300' +
-                  [
-                    selectedFile == item['@id']
-                      ? ' border-blue-600 text-blue-600'
-                      : '',
-                  ]
-              "
-              @click="selectedFile = item['@id']"
-            >
-              <div class="font-bold">{{ item["rdfs:label"] }}</div>
-              <div>{{ item["rdf:type"][0]["@id"].split(":")[1] }}</div>
-            </div>
-          </div>
-
-          <!-- <textarea
-            v-model="json"
-            class="outline-none h-full w-full padding-text"
-          ></textarea> -->
-        </div>
-        <div
-          v-if="queryBuilder.hierarchyTree(topLevelEntity)"
-          class="inline-flex flex-col w-full h-full"
-        >
-          <div class="font-semibold text-lg text-black text-center">
-            {{ queryBuilder.hierarchyTree(topLevelEntity)["rdfs:label"] }}
-            ({{ queryBuilder.hierarchyTree(topLevelEntity).children.length }})
-          </div>
-          <div
-            v-if="queryBuilder.hierarchyTree(topLevelEntity).children.length"
-            class="query-viewer padding-text"
-          >
-            <div class="flex flex-col">
-              <HierarchyTreeItem
-                v-for="item in queryBuilder.hierarchyTree(topLevelEntity)
-                  .children"
-                :key="item['@id']"
-                class="mt-5"
-                :value="item"
+          <template v-if="openFiles.length">
+            <div v-show="activeFileView == 'All Items'">
+              <div class="flex flex-col file-list mt-2 ">
+                <div
+                  v-for="item in getFilteredEntities()"
+                  :key="item['@id']"
+                  :class="
+                    'file-list__item rounded-sm flex flex-col non-selectable p-2 px-3 mt-2 text-xl font-regular border hover:shadow-md hover:border-gray-300' +
+                      [
+                        selectedFile == item['@id']
+                          ? ' border-blue-600 text-blue-600'
+                          : '',
+                      ]
+                  "
+                  @click="selectedFile = item['@id']"
+                >
+                  <div class="font-bold">{{ item["rdfs:label"] }}</div>
+                  <div>{{ item["rdf:type"][0]["@id"].split(":")[1] }}</div>
+                </div>
+              </div>
+              <div class="font-semibold text-lg text-black mt-2">
+                Filter by type
+              </div>
+              <MultiSelect
+                v-if="openFiles.length"
+                class="w-full multi-large file-filter"
+                v-model="selectedFilterTypes"
+                :options="filterTypes"
+                optionLabel="label"
+                placeholder="Type(s)"
               />
             </div>
-          </div>
+            <div v-show="activeFileView == 'Folder Hierarchy'">
+              <div
+                v-if="queryBuilder.hierarchyTree(topLevelEntity)"
+                class="left inline-flex flex-col w-full h-full"
+              >
+                <!-- <div class="font-semibold text-lg text-black text-center">
+                  {{ queryBuilder.hierarchyTree(topLevelEntity)["rdfs:label"] }}
+                  ({{
+                    queryBuilder.hierarchyTree(topLevelEntity).children.length
+                  }})
+                </div> -->
+                <div
+                  v-if="
+                    queryBuilder.hierarchyTree(topLevelEntity).children.length
+                  "
+                  class="folder-viewer padding-text"
+                >
+                  <HierarchyTreeItem
+                    v-for="item in queryBuilder.hierarchyTree(topLevelEntity)
+                      .children"
+                    :key="item['@id']"
+                    class="mt-5"
+                    :value="item"
+                  />
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+        <div class="inline-flex flex-col w-full h-full">
+          <Network
+            class="w-full h-full bg-white"
+            :nodeList="nodes"
+            :linkList="links"
+            :nodeSize="nodeSize"
+            :linkWidth="linkWidth"
+            :linkDistance="linkDistance"
+            :svgTheme="svgTheme ? 'dark' : 'light'"
+            :bodyStrength="bodyStrength"
+          ></Network>
         </div>
       </div>
     </template>
@@ -182,6 +196,7 @@ import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
 import ClauseItem from "@/components/dataset/ClauseItem.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
+import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
@@ -190,6 +205,7 @@ import DatasetBrowser from "@/views/DatasetBrowser.vue";
 import QueryBuilder, { Query, Folder } from "@/models/query/QueryBuilder";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
+import Network from "@/components/dataset/Network.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
@@ -205,12 +221,13 @@ export default defineComponent({
     // VerticalButtonGroup,
     RoundButton,
     HeroIcon,
-    // HorizontalNav,
+    HorizontalNavbar,
     ContentNav,
     DatasetBrowser,
     MultiSelect,
     // SectionToggler,
     HierarchyTreeItem,
+    Network,
     // DataTable,
     // Column,
     // ColumnGroup,
@@ -219,6 +236,162 @@ export default defineComponent({
   },
   data() {
     return {
+      activeFileView: "Folder Hierarchy",
+      fileViews: [
+        {
+          name: "All Items",
+          icon: "menu",
+          visible: true,
+        },
+        {
+          name: "Folder Hierarchy",
+          icon: "folder_open",
+          visible: true,
+        },
+      ],
+      nodeSize: 20,
+      linkWidth: 4,
+      linkDistance: 100,
+      bodyStrength: -400,
+      svgTheme: false, // false = light, true = dark
+      nodes: [
+        { id: "Dataset", group: 1 },
+        { id: "Filters", group: 2 },
+        { id: "Output", group: 3 },
+        { id: "ANY Registration Status", group: 4 },
+        { id: "Registered", group: 4 },
+        { id: "AT Anytime1", group: 4 },
+        { id: "AT Anytime2", group: 4 },
+        { id: "GP Practices in London", group: 4 },
+        { id: "LATEST Registration Status", group: 5 },
+        { id: "Deregistered", group: 5 },
+        { id: "Dead", group: 5 },
+        { id: "BEFORE 01/01/2019", group: 5 },
+        { id: "OR", group: 5 },
+      ],
+      links: [
+        { source: "Dataset", target: "Filters", value: "has" },
+        { source: "Dataset", target: "Output", value: "has" },
+        {
+          source: "Filters",
+          target: "ANY Registration Status",
+          value: "INCLUDE IF",
+        },
+        {
+          source: "ANY Registration Status",
+          target: "Registered",
+          value: "is",
+        },
+        {
+          source: "ANY Registration Status",
+          target: "AT Anytime1",
+          value: "starting",
+        },
+        {
+          source: "ANY Registration Status",
+          target: "AT Anytime2",
+          value: "ending",
+        },
+        {
+          source: "ANY Registration Status",
+          target: "GP Practices in London",
+          value: "at",
+        },
+        {
+          source: "Filters",
+          target: "LATEST Registration Status",
+          value: "EXCLUDE IF",
+        },
+        {
+          source: "LATEST Registration Status",
+          target: "OR",
+          value: "is",
+        },
+        {
+          source: "OR",
+          target: "Deregistered",
+          value: "",
+        },
+        {
+          source: "OR",
+          target: "Dead",
+          value: "",
+        },
+        {
+          source: "LATEST Registration Status",
+          target: "BEFORE 01/01/2019",
+          value: "ending",
+        },
+      ],
+      // nodes: [
+      //   { id: "Dataset", group: 1 },
+      //   { id: "Filters", group: 2 },
+      //   { id: "Output", group: 3 },
+      //   { id: "ANY Registration Status", group: 4 },
+      //   { id: "Registered", group: 4 },
+      //   { id: "AT Anytime1", group: 4 },
+      //   { id: "AT Anytime2", group: 4 },
+      //   { id: "GP Practices in London", group: 4 },
+      //   { id: "LATEST Registration Status", group: 5 },
+      //   { id: "Deregistered", group: 5 },
+      //   { id: "Dead", group: 5 },
+      //   { id: "BEFORE 01/01/2019", group: 5 },
+      //   { id: "OR", group: 5 },
+      // ],
+      // links: [
+      //   { source: "Dataset", target: "Filters", value: "has" },
+      //   { source: "Dataset", target: "Output", value: "has" },
+      //   {
+      //     source: "Filters",
+      //     target: "ANY Registration Status",
+      //     value: "INCLUDE IF",
+      //   },
+      //   {
+      //     source: "ANY Registration Status",
+      //     target: "Registered",
+      //     value: "is",
+      //   },
+      //   {
+      //     source: "ANY Registration Status",
+      //     target: "AT Anytime1",
+      //     value: "starting",
+      //   },
+      //   {
+      //     source: "ANY Registration Status",
+      //     target: "AT Anytime2",
+      //     value: "ending",
+      //   },
+      //   {
+      //     source: "ANY Registration Status",
+      //     target: "GP Practices in London",
+      //     value: "at",
+      //   },
+      //   {
+      //     source: "Filters",
+      //     target: "LATEST Registration Status",
+      //     value: "EXCLUDE IF",
+      //   },
+      //   {
+      //     source: "LATEST Registration Status",
+      //     target: "OR",
+      //     value: "is",
+      //   },
+      //   {
+      //     source: "OR",
+      //     target: "Deregistered",
+      //     value: "",
+      //   },
+      //   {
+      //     source: "OR",
+      //     target: "Dead",
+      //     value: "",
+      //   },
+      //   {
+      //     source: "LATEST Registration Status",
+      //     target: "BEFORE 01/01/2019",
+      //     value: "ending",
+      //   },
+      // ],
       topLevelEntity: {
         "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries",
         "rdf:type": [
@@ -441,6 +614,7 @@ export default defineComponent({
 
         this.openQueries = this.queryBuilder.queries;
         console.log("Queries: ", this.queryBuilder.queries);
+        console.log("Query Definitions: ", this.queryBuilder.queryDefinitions);
         this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
           return {
             value: entity,
@@ -537,6 +711,19 @@ export default defineComponent({
   border-right: 1px solid #ecefed;
 }
 
+.section-center .left {
+  /* position: absolute; */
+  /* margin-left: 10px; */
+  /* margin-top: 15px; */
+  /* margin-right: 15px; */
+  /* bottom: 15px; */
+  width: 500px;
+  /* max-width: 1000px; */
+  /* box-shadow: rgb(207 210 218) 0px 0px 6px; */ /* lighter shadow   */
+  /* box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3); */
+  border-right: 1px solid #ecefed;
+}
+
 .border-right {
   border-right: 1px solid #ecefed;
   /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
@@ -580,11 +767,13 @@ export default defineComponent({
   border-radius: 20px;
 }
 
-.query-viewer,
+.folder-viewer,
 .file-list {
   /* padding-bottom: 150px; */
   overflow-y: auto;
   font-size: 12px !important;
+    width: 500px;
+  height: 680px;
 }
 
 ::-webkit-scrollbar {
@@ -603,10 +792,7 @@ export default defineComponent({
   padding: 20px 10px 150px 10px;
 }
 
-.file-list {
-  width: 500px;
-  height: 650px;
-}
+
 .file-filter {
   width: 500px;
 }

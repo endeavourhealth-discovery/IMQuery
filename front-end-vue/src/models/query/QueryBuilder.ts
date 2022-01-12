@@ -1,3 +1,4 @@
+import { prefix } from '@fortawesome/free-solid-svg-icons';
 import { nice } from 'd3';
 import { PropertiesContext } from './../../discovery-syntax/DiscoverySyntaxParser';
 const { v4 } = require('uuid');
@@ -16,7 +17,7 @@ const _ = require('lodash')
 export default class QueryBuilder {
 
 
-    public _loaded = false;
+    public Loaded = false;
 
 
     public _context: any;
@@ -41,7 +42,20 @@ export default class QueryBuilder {
     }
 
 
+    private _queryDefinitions = [] as any[];
+    get queryDefinitions(): any[] {
+        return this._queryDefinitions;
+    }
+
+
+
+
+
     loadJSON(file: any): QueryBuilder {
+
+
+        // this._hierarchyTree = [];
+        // this._lastTopLevelEntity = [];
 
         // file
         // file = JSON.parse(file);
@@ -58,12 +72,27 @@ export default class QueryBuilder {
         });
 
         //queries
-        this._queries = file["entities"].filter((entity: any) => entity["rdf:type"][0]["@id"] === "im:Query");
+        file["entities"].forEach((entity: any) => {
+            if (entity["rdf:type"][0]["@id"] === "im:Query") {
+                this._queries.push(entity);
+            }
+        });
+
+        //queryDefinitions
+
+        this._queries.forEach((query: any) => {
+            // this._queryDefinitions.push(query['im:queryDefinition']);
+            // const definition = JSON.parse(JSON.stringify(query['im:queryDefinition']));
+            const definition = query['im:queryDefinition'];
+            // console.log("query['im:queryDefinition']", definition);
+            console.log("query['im:queryDefinition']", definition);
+        });
+
 
         //query tree
 
 
-        this._loaded = true;
+        this.Loaded = true;
         return this;
     }
 
@@ -72,7 +101,7 @@ export default class QueryBuilder {
     private _lastTopLevelEntity: any;
     hierarchyTree(topLevelEntity: any): any[] | null {
 
-        if (!this._loaded) return null;
+        if (!this.Loaded) return null;
 
 
         //prevents expensive recomputation with each computed() call
@@ -203,61 +232,85 @@ export default class QueryBuilder {
 }
 
 
+export class Entity {
+    public '@id'?: string | null;
+    public 'rdfs:label'?: string | null;
+    public 'rdf:type'?: Entity | null;
+    public 'rdfs:comment'?: string | null;
+    public 'im:isContainedIn'?: Entity | null;
+    public 'iri'?: string | null;
+    public 'name'?: string | null;
+    public 'type'?: Entity | null;
+    public 'description'?: string | null;
+    public 'children'?: Entity | null;
 
 
-//entity["rdf:type"][0]["@id"]
+    constructor(entity?: Entity)
+    constructor(entity: Entity) {
 
-
-export class Query {
-    public id?: number | null;
-    public iri?: string | null;
-    public name?: string | null;
-    public description?: string | null;
-    public data?: any | null;
-
-    // constructor(id?: string, iri?: string, name?: string, description?: string, data?: any) {
-    constructor(query?: Query)
-    constructor(query: Query) {
-        this.iri = query.iri ? query.iri : "im:Q_{0}";
-        this.name = query.name ? query.name : "Untitled Dataset";
-        this.description = query.description ? query.description : null;
-        this.data = query.data ? query.data : null;
-    }
-    // use setters to check  validity of value, otherwise threw new Error('Iri is invalid');e.g. datamodel entity iri.
-
-}
-
-export class Folder {
-
-    public "@id"?: string | null;
-    public "rdf:type"?: string | null;
-    public "rdfs:label"?: string | null;
-    public "im:isContainedIn"?: any | null;
-    public "im:contains"?: any | null;
-
-    constructor(folder?: Folder)
-    constructor(folder: Folder) {
-
-        this["@id"] = folder["@id"] ? folder["@id"] : "im:Q_{0}";
-        this["rdf:type"] = folder["rdf:type"] ? folder["rdf:type"] : "Untitled Dataset";
-        this["rdfs:label"] = folder["rdfs:label"] ? folder["rdfs:label"] : null;
-        this["im:isContainedIn"] = folder["im:isContainedIn"] ? folder["im:isContainedIn"] : null;
-        this["im:contains"] = folder["im:contains"] ? folder["im:contains"] : null;
+        this["@id"] = entity["@id"] ? entity["@id"] : null;
+        this["rdf:type"] = entity["rdf:type"] ? entity["rdf:type"] : null;
+        this["rdfs:label"] = entity["rdfs:label"] ? entity["rdfs:label"] : null;
+        this["rdfs:comment"] = entity["rdfs:comment"] ? entity["rdfs:comment"] : null;
+        this["im:isContainedIn"] = entity["im:isContainedIn"] ? entity["im:isContainedIn"] : null;
+        this["iri"] = entity["iri"] ? entity["iri"] : null;
+        this["name"] = entity["name"] ? entity["name"] : null;
+        this["type"] = entity["type"] ? entity["type"] : null;
+        this["description"] = entity["description"] ? entity["description"] : null;
+        this["children"] = entity["children"] ? entity["children"] : null;
 
         return this;
     }
+}
 
-    load(iri: string): void {
 
-        //hardcoded example        
-        if (iri == "http://endhealth.info/ceg/qry#Q_CEGQueries") {
-            // console.log("ceg_c19_vac_2nd", ceg_c19_vac_2nd);
-        }
+export class Clause extends Entity {
+    public clause?: Clause[] | null;
+    public where?: Where[] | null;
+}
 
-        //todo: fetch folder content using Workflow Service/API 
+export class Where extends Entity {
+    public entityVar?: string | null;
+    public property?: Entity | null;
+    public valueVar?: string | null;
+    public filter?: Filter[] | null;
+    public valueEntity?: Entity | null;
+}
+
+export class Filter {
+    public in?: Entity[] | null;
+}
+
+
+export class Selection {
+    public var?: string | null;
+}
+
+
+export class Query extends Entity {
+    public mainEntityType?: Entity | null;
+    public mainEntityVar?: string | null;
+    public prefix?: any | null;
+    public operator: "AND" | "OR" | "NOTOR" | "NOTAND" = "AND";
+    public clause?: Clause[] | null;
+    public select?: Selection[] | null;
+
+
+
+    constructor(query?: Query)
+    constructor(query: Query) {
+        super()
+        this["mainEntityType"] = entity["mainEntityType"] ? entity["mainEntityType"] : null;
+        this["mainEntityVar"] = entity["mainEntityVar"] ? entity["mainEntityVar"] : null;
+        this["prefix"] = entity["prefix"] ? entity["prefix"] : null;
+        this["operator"] = entity["operator"] ? entity["operator"] : null;
+        this["clause"] = entity["clause"] ? entity["clause"] : null;
+        this["select"] = entity["select"] ? entity["select"] : null;
     }
 
 }
+
+
 
 
 export class Node {
@@ -270,4 +323,40 @@ export class Node {
         this.next = null;
     }
 }
+
+
+
+
+// export class Folder {
+
+//     public "@id"?: string | null;
+//     public "rdf:type"?: string | null;
+//     public "rdfs:label"?: string | null;
+//     public "im:isContainedIn"?: any | null;
+//     public "im:contains"?: any | null;
+
+//     constructor(folder?: Folder)
+//     constructor(folder: Folder) {
+        
+//         this["@id"] = folder["@id"] ? folder["@id"] : "im:Q_{0}";
+//         this["rdf:type"] = folder["rdf:type"] ? folder["rdf:type"] : "Untitled Dataset";
+//         this["rdfs:label"] = folder["rdfs:label"] ? folder["rdfs:label"] : null;
+//         this["im:isContainedIn"] = folder["im:isContainedIn"] ? folder["im:isContainedIn"] : null;
+//         this["im:contains"] = folder["im:contains"] ? folder["im:contains"] : null;
+
+//         return this;
+//     }
+
+//     load(iri: string): void {
+
+//         //hardcoded example        
+//         if (iri == "http://endhealth.info/ceg/qry#Q_CEGQueries") {
+//             // console.log("ceg_c19_vac_2nd", ceg_c19_vac_2nd);
+//         }
+
+//         //todo: fetch folder content using Workflow Service/API 
+//     }
+
+// }
+
 
