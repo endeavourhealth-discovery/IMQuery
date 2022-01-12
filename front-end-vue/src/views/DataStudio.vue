@@ -120,24 +120,46 @@
           ></textarea> -->
         </div>
         <div
-          v-if="queryBuilder.queryTree(topLevelEntity)"
+          v-if="queryBuilder.hierarchyTree(topLevelEntity)"
           class="inline-flex flex-col w-full h-full"
         >
           <div class="font-semibold text-lg text-black text-center">
-            Queries ({{
-              queryBuilder.queryTree(topLevelEntity).children.length
-            }})
+            {{ queryBuilder.hierarchyTree(topLevelEntity)["rdfs:label"] }}
+            ({{ queryBuilder.hierarchyTree(topLevelEntity).folders.length }})
           </div>
           <div
-            v-if="queryBuilder.queryTree(topLevelEntity).children.length"
+            v-if="queryBuilder.hierarchyTree(topLevelEntity).folders.length"
             class="query-viewer padding-text"
           >
             <div
-              v-for="item in queryBuilder.queryTree(topLevelEntity).children"
+              v-for="item in queryBuilder.hierarchyTree(topLevelEntity).folders"
               :key="item['@id']"
               class="mt-5"
             >
-              <div class="font-semibold text-lg text-gray-600">
+              <div
+                class="font-semibold text-lg text-gray-800 flex items-center"
+              >
+                <SectionToggler
+                  v-if="(item['rdf:type'][0]['@id'] = 'im:Folder')"
+                  :expanded="expandedItems.includes(item['@id'])"
+                  @click="
+                    expandedItems.includes(item['@id'])
+                      ? (expandedItems = expandedItems.filter(
+                          (i: any) => i != item['@id']
+                        ))
+                      : loadChildren(item['@id'])
+                  "
+                  :class="
+                    'inline query-item__toggler' + [index != 0 ? ' ml-4' : '']
+                  "
+                />
+                <HeroIcon
+                  class="text-gray-500 hover:text-red-500 inline mx-3 "
+                  strokewidth="2"
+                  width="16"
+                  height="16"
+                  icon="folder_open"
+                />
                 {{ item["rdfs:label"] }}
               </div>
               <template v-if="false">
@@ -164,6 +186,7 @@
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
 const { v4 } = require("uuid");
+import SectionToggler from "@/components/dataset/SectionToggler.vue";
 
 import LoggerService from "@/services/LoggerService";
 // import OverlayPanel from "primevue/overlaypanel";
@@ -207,6 +230,7 @@ export default defineComponent({
     ContentNav,
     DatasetBrowser,
     MultiSelect,
+    SectionToggler,
     // DataTable,
     // Column,
     // ColumnGroup,
@@ -229,6 +253,7 @@ export default defineComponent({
           },
         ],
       },
+      expandedItems: [] as any[],
       selectedFilterTypes: [] as any[],
       filterTypes: [] as any[],
       expanded: false,
@@ -366,7 +391,6 @@ export default defineComponent({
       selectedFile: "",
       selectedFileItems: [] as any[],
       fileItems: [] as any[],
-      queryBuilder: new QueryBuilder(),
     };
   },
   watch: {
@@ -383,6 +407,17 @@ export default defineComponent({
         this.$store.commit("updateIsLoading", value);
       },
     },
+    queryBuilder: {
+      get(): any {
+        return this.$store.state.queryBuilder;
+      },
+      set({ action, payload }: any): void {
+        this.$store.commit("queryBuilder", {
+          action: action,
+          payload: payload,
+        });
+      },
+    },
   },
   created() {
     //todo: bind updates to specific methods e.g. onLoad should trigger a new state
@@ -392,7 +427,7 @@ export default defineComponent({
     // await this.$store.dispatch("fetchDatamodel");
     // const _folder  = new Folder();
     // folder.load("http://endhealth.info/ceg/qry#Q_CEGQueries");
-    // console.log(QueryBuilder.getExamples());
+    //  (QueryBuilder.getExamples());
 
     await this.$store.dispatch("fetchDatamodelIris");
   },
@@ -421,12 +456,17 @@ export default defineComponent({
       fileReader.onload = (e: any) => {
         const json = JSON.parse(e.target.result);
         this.openFiles = [...this.openFiles, json];
-        this.$store.commit("queryBuilder", {
-          action: "loadJSON",
-          payload: json,
-        });
-        this.openQueries = this.$store.state.queryBuilder.queries;
-        console.log("Queries: ", this.$store.state.queryBuilder.queries);
+
+        this.queryBuilder.loadJSON(json);
+
+        // alternative: commit payload
+        // this.$store.commit("queryBuilder", {
+        //   action: "loadJSON",
+        //   payload: json,
+        // });
+
+        this.openQueries = this.queryBuilder.queries;
+        console.log("Queries: ", this.queryBuilder.queries);
         this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
           return {
             value: entity,
@@ -453,7 +493,7 @@ export default defineComponent({
 
       //   console.log("File content: ", result);
 
-      //   console.log("Tree: ", this.queryBuilder.queryTree(this.topLevelEntity));
+      //   console.log("Tree: ", this.queryBuilder.hierarchyTree(this.topLevelEntity));
       // };
 
       // console.log("_files", _files[0]);
@@ -635,5 +675,10 @@ export default defineComponent({
 }
 .file-filter {
   width: 500px;
+}
+
+.query-item__toggler {
+  height: 16px;
+  width: 16px;
 }
 </style>

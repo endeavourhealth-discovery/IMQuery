@@ -1,4 +1,7 @@
+import { nice } from 'd3';
+import { PropertiesContext } from './../../discovery-syntax/DiscoverySyntaxParser';
 const { v4 } = require('uuid');
+const _ = require('lodash')
 // import * as ceg_c19_vac_2nd from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
 // import ceg_c19_vac_booster from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
 // import ceg_c19_pregant from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
@@ -65,56 +68,136 @@ export default class QueryBuilder {
     }
 
 
-    // private _queryTree: any;
-    queryTree(topLevelEntity: any): any[] | null {
+    private _hierarchyTree: any;
+    private _lastTopLevelEntity: any;
+    hierarchyTree(topLevelEntity: any): any[] | null {
 
-        if (!this._loaded) {
-            return null;
+        if (!this._loaded) return null;
+
+
+        //prevents expensive recomputation with each computed() call
+        if (this._lastTopLevelEntity && this._lastTopLevelEntity.iri == topLevelEntity.iri) {
+            return this._hierarchyTree;
+        } else {
+            this._lastTopLevelEntity = topLevelEntity;
         }
 
-        const _node = {
-            children: [] as any[]
-        }
+        const _hierarchyTree = { ...topLevelEntity, currentPath: '', children: [] };
 
 
+        // const _currentChildren = [] as any[];
+        // let _currentDepth = 0;
+        // const _currentEntity = topLevelEntity;
+        // const _maxDepth = 1;
 
-        const _queryTree = { ...topLevelEntity, children: [] };
-        const _currentChildren = [] as any[];
+        // while (_currentDepth < _maxDepth) {
+        //     _currentDepth += 1;
+        //     // const _currentChildren = this.getChildren(_currentEntity);
+        //     // console.log(_currentChildren);
 
-        let _currentDepth = 0;
-        const _currentEntity = topLevelEntity;
-        const _maxDepth = 1;
+        // }
+        this._hierarchyTree = _hierarchyTree;
 
-        while (_currentDepth < _maxDepth) {
-            _currentDepth += 1;
-            const _currentChildren = this.getChildren(_currentEntity);
-            // console.log(_currentChildren);
-            _queryTree.children = _currentChildren;
-
-        }
-        console.log("_queryTree", _queryTree);
-        return _queryTree;
+        this.getFolders();
+        console.log("_hierarchyTree", _hierarchyTree);
+        return _hierarchyTree;
     }
 
 
-    private getChildren(targetEntity: any) {
+    item(iri: string) {
+        return this.entities.filter((ent: any) => ent["@id"] == iri);
+    }
 
-        const _type = targetEntity["rdf:type"][0]["@id"];
-        console.log("_type", _type);
-        if (_type == "im:Folder") {
-            const _ent = this.entities.filter((ent: any) => ent["im:isContainedIn"] && ent["im:isContainedIn"][0]["@id"] == targetEntity["@id"]);
 
-            return _ent.map((entity: any) => {
+    private getFolders() {
+
+
+        const _added = new Set();
+        const _queue = [this._hierarchyTree]
+        const _itemPaths = {};
+
+
+        // .set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".name", payload.name)
+        const getChildren = (targetEntity: any): any => {
+            let _children = this.entities.filter((ent: any) => ent["im:isContainedIn"] && ent["im:isContainedIn"][0]["@id"] == targetEntity["@id"])
+            _children = _children.map((item: any) => {
                 return {
-                    ...entity,
+                    ...item,
+                    currentPath: '',
                     children: [] as any[]
+                   
                 }
             })
+            
+            console.log("children length:", _children.length)
 
-        } else if (_type == "im:Query") {
-            // return this._entities.filter((entity: any) => entity["im:isContainedIn"][0]["@id"] == _currentEntity);
-            return null;
+
+
+            for (let i = 0; i < _children.length ; i++) {
+                if (targetEntity['currentPath'] == '') {
+                    _children[i]['currentPath'] = `${targetEntity['currentPath']}children[${i.toString()}]`
+                } else {
+                    _children[i]['currentPath'] = `${targetEntity['currentPath']}.children[${i.toString()}]`
+                }
+
+
+            }
+
+
+            return _children;
+
+
+        };
+
+
+        while (_queue.length > 0) {
+
+
+
+            const _currentItem = _queue.shift(); // mutates the queue
+
+            // console.log("1. _currentItem", _currentItem)
+
+
+            const _children = getChildren(_currentItem);
+
+
+            if (_currentItem['@id'] == this._hierarchyTree['@id']) {
+
+                _.set(this._hierarchyTree, 'children', _children)
+                // console.log("2.children: ", _children)
+                // console.log("3. path: ", 'children')
+                // console.log("4. tree: ", this._hierarchyTree)
+            } else {
+
+                _.set(this._hierarchyTree, _currentItem['currentPath'] + '.children', _children)
+                // console.log("2.children: ", _children)
+                // console.log("3. path: ", _currentItem['currentPath'] + '.children')
+                // console.log("4. tree: ", this._hierarchyTree)
+            }
+
+
+
+
+            //get children of children
+            for (const _child of _children) {
+
+
+                if (!_added.has(_child)) {
+                    _added.add(_child);
+                    _queue.push(_child);
+                    // __itemPaths[_child['id']] = 
+                }
+
+            }
+
+
         }
+
+
+
+
+
     }
 
 
