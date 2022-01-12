@@ -125,15 +125,15 @@ export default class QueryBuilder {
                     ...item,
                     currentPath: '',
                     children: [] as any[]
-                   
+
                 }
             })
-            
+
             console.log("children length:", _children.length)
 
 
 
-            for (let i = 0; i < _children.length ; i++) {
+            for (let i = 0; i < _children.length; i++) {
                 if (targetEntity['currentPath'] == '') {
                     _children[i]['currentPath'] = `${targetEntity['currentPath']}children[${i.toString()}]`
                 } else {
@@ -200,11 +200,10 @@ export default class QueryBuilder {
 
     }
 
-
-
-
-
 }
+
+
+
 
 //entity["rdf:type"][0]["@id"]
 

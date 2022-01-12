@@ -12,18 +12,22 @@
               ))
             : expandedItems.push(value['@id'])
         "
-        :class="
-          'inline hierachytreeitem__toggler' + [index != 0 ? '' : '']
+        :class="'inline hierachytreeitem__toggler' + [index != 0 ? '' : '']"
+      />
+      <div v-else class="ml-12"></div>
+      <HeroIcon
+        class="inline text-gray-600 mr-2 "
+        strokewidth="2"
+        width="20"
+        height="20"
+        :icon="
+          value['rdf:type'][0]['@id'] == 'im:Folder'
+            ? 'folder_open'
+            : 'document'
         "
       />
-      <div v-else class="ml-12">
-
-      </div>
       <div class="mr-3 font-semibold text-lg text-gray-800 ">
         {{ value["rdfs:label"] }}
-      </div>
-      <div class="inline font-regular text-lg text-gray-700">
-        ({{ value["rdf:type"][0]["@id"].split(":")[1] }})
       </div>
     </div>
     <template v-if="value.children.length">
@@ -44,13 +48,14 @@ const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
-// import HeroIcon from "@/components/search/HeroIcon.vue";
+import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "HierarchyTreeItem",
   props: ["value"],
   components: {
     SectionToggler,
+    HeroIcon,
   },
   data() {
     return {
