@@ -125,42 +125,45 @@
         >
           <div class="font-semibold text-lg text-black text-center">
             {{ queryBuilder.hierarchyTree(topLevelEntity)["rdfs:label"] }}
-            ({{ queryBuilder.hierarchyTree(topLevelEntity).folders.length }})
+            ({{ queryBuilder.hierarchyTree(topLevelEntity).children.length }})
           </div>
           <div
-            v-if="queryBuilder.hierarchyTree(topLevelEntity).folders.length"
+            v-if="queryBuilder.hierarchyTree(topLevelEntity).children.length"
             class="query-viewer padding-text"
           >
             <div
-              v-for="item in queryBuilder.hierarchyTree(topLevelEntity).folders"
+              v-for="item in queryBuilder.hierarchyTree(topLevelEntity)
+                .children"
               :key="item['@id']"
-              class="mt-5"
+              class="mt-5 flex items-center"
             >
-              <div
-                class="font-semibold text-lg text-gray-800 flex items-center"
-              >
-                <SectionToggler
-                  v-if="(item['rdf:type'][0]['@id'] = 'im:Folder')"
-                  :expanded="expandedItems.includes(item['@id'])"
-                  @click="
-                    expandedItems.includes(item['@id'])
-                      ? (expandedItems = expandedItems.filter(
-                          (i: any) => i != item['@id']
-                        ))
-                      : loadChildren(item['@id'])
-                  "
-                  :class="
-                    'inline query-item__toggler' + [index != 0 ? ' ml-4' : '']
-                  "
-                />
-                <HeroIcon
+              <SectionToggler
+                class="mr-3"
+                v-if="(item['rdf:type'][0]['@id'] = 'im:Folder')"
+                :expanded="expandedItems.includes(item['@id'])"
+                @click="
+                  expandedItems.includes(item['@id'])
+                    ? (expandedItems = expandedItems.filter(
+                        (i: any) => i != item['@id']
+                      ))
+                    : expandedItems.push(item['@id'])
+                "
+                :class="
+                  'inline query-item__toggler' + [index != 0 ? ' ml-4' : '']
+                "
+              />
+              <div class="mr-3 font-semibold text-lg text-gray-800 ">
+                <!-- <HeroIcon
                   class="text-gray-500 hover:text-red-500 inline mx-3 "
                   strokewidth="2"
                   width="16"
                   height="16"
                   icon="folder_open"
-                />
+                /> -->
                 {{ item["rdfs:label"] }}
+              </div>
+              <div class="inline font-regular text-lg text-gray-700">
+                ({{ item["rdf:type"][0]["@id"].split(":")[1] }})
               </div>
               <template v-if="false">
                 <div
@@ -678,7 +681,7 @@ export default defineComponent({
 }
 
 .query-item__toggler {
-  height: 16px;
-  width: 16px;
+  height: 20px;
+  width: 20px;
 }
 </style>
