@@ -131,41 +131,24 @@
             v-if="queryBuilder.hierarchyTree(topLevelEntity).children.length"
             class="query-viewer padding-text"
           >
-            <div
-              v-for="item in queryBuilder.hierarchyTree(topLevelEntity)
-                .children"
-              :key="item['@id']"
-              class="mt-5 flex items-center"
-            >
-              <SectionToggler
-                class="mr-3"
-                v-if="(item['rdf:type'][0]['@id'] = 'im:Folder')"
-                :expanded="expandedItems.includes(item['@id'])"
-                @click="
-                  expandedItems.includes(item['@id'])
-                    ? (expandedItems = expandedItems.filter(
-                        (i: any) => i != item['@id']
-                      ))
-                    : expandedItems.push(item['@id'])
-                "
-                :class="
-                  'inline query-item__toggler' + [index != 0 ? ' ml-4' : '']
-                "
+            <div class="flex flex-col">
+              <HierarchyTreeItem
+                v-for="item in queryBuilder.hierarchyTree(topLevelEntity)
+                  .children"
+                :key="item['@id']"
+                class="mt-5"
+                :value="item"
               />
-              <div class="mr-3 font-semibold text-lg text-gray-800 ">
-                <!-- <HeroIcon
-                  class="text-gray-500 hover:text-red-500 inline mx-3 "
-                  strokewidth="2"
-                  width="16"
-                  height="16"
-                  icon="folder_open"
-                /> -->
-                {{ item["rdfs:label"] }}
-              </div>
-              <div class="inline font-regular text-lg text-gray-700">
-                ({{ item["rdf:type"][0]["@id"].split(":")[1] }})
-              </div>
-              <template v-if="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+  <!-- /Content Wrapper -->
+</template>
+
+<!-- <template v-if="false">
                 <div
                   v-for="definition in query['im:queryDefinition']"
                   :key="definition['iri']"
@@ -176,15 +159,7 @@
                     :nestingCount="1"
                   />
                 </div>
-              </template>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-  </div>
-  <!-- /Content Wrapper -->
-</template>
+              </template> -->
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
@@ -214,6 +189,7 @@ import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
 import QueryBuilder, { Query, Folder } from "@/models/query/QueryBuilder";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
+import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
@@ -233,7 +209,8 @@ export default defineComponent({
     ContentNav,
     DatasetBrowser,
     MultiSelect,
-    SectionToggler,
+    // SectionToggler,
+    HierarchyTreeItem,
     // DataTable,
     // Column,
     // ColumnGroup,
@@ -462,12 +439,6 @@ export default defineComponent({
 
         this.queryBuilder.loadJSON(json);
 
-        // alternative: commit payload
-        // this.$store.commit("queryBuilder", {
-        //   action: "loadJSON",
-        //   payload: json,
-        // });
-
         this.openQueries = this.queryBuilder.queries;
         console.log("Queries: ", this.queryBuilder.queries);
         this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
@@ -478,46 +449,6 @@ export default defineComponent({
         });
       };
       fileReader.readAsText(_files[0]);
-
-      // //alternativeloading file into local  component statestate
-      // const fr = new FileReader();
-      // fr.onload = (e: any) => {
-      //   const result = JSON.parse(e.target.result);
-      //   this.openFiles = [...this.openFiles, result];
-      //   this.queryBuilder.loadJSON(result);
-
-      //   this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
-      //     return {
-      //       value: entity,
-      //       label: entity.split(":")[1],
-      //     };
-      //   });
-      //   this.openQueries = this.queryBuilder.queries;
-
-      //   console.log("File content: ", result);
-
-      //   console.log("Tree: ", this.queryBuilder.hierarchyTree(this.topLevelEntity));
-      // };
-
-      // console.log("_files", _files[0]);
-
-      /// /alternative: loading multiple files
-      // _files.forEach((file: any) => {
-      //   const fr = new FileReader();
-      //   console.log(`File loaded: ${file.name}`);
-      //   this.isLoading = true;
-      //   fr.onload = (e: any) => {
-      //     const result = JSON.parse(e.target.result);
-      //     this.openFiles = [...this.openFiles, result];
-      //     console.log("File content: ", result);
-      //     // console.log("queries", this.getQueries());
-      //     this.openQueries = result["entities"].filter(
-      //       (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
-      //     );
-      //     this.isLoading = false;
-      //   };
-      //   fr.readAsText(file);
-      // });
     },
     getQueries(): any {
       return this.openFiles[0]["entities"].filter(
@@ -678,10 +609,5 @@ export default defineComponent({
 }
 .file-filter {
   width: 500px;
-}
-
-.query-item__toggler {
-  height: 20px;
-  width: 20px;
 }
 </style>
