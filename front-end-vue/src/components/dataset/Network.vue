@@ -1,9 +1,19 @@
 <template>
-  <div
-    :style="{ width: svgSize.width + 'px', height: svgSize.height + 'px' }"
+  <marker
+    id="arrow"
+    markerUnits="strokeWidth"
+    markerWidth="12"
+    markerHeight="12"
+    viewBox="0 0 12 12"
+    refX="25"
+    refY="6"
+    orient="auto-start-reverse"
   >
+    <path d="M2,2 L10,6 L2,10 L6,6 L2,2" style="fill: #781c81;"></path>
+  </marker>
+  <div :style="{ width: svgSize.width + 'px', height: svgSize.height + 'px' }">
     <div
-      class="linkText"
+      class="link-text-hover"
       :style="linkTextPosition"
       v-show="linkTextVisible"
       v-text="linkTextContent"
@@ -14,20 +24,36 @@
       :width="svgSize.width"
       :height="svgSize.height"
       :style="{ 'background-color': theme.bgcolor }"
-      @click="clickEle"
+      @click="clickElement"
       @mouseover.prevent="svgMouseover"
       @mouseout="svgMouseout"
     >
       <g id="container">
-        <!-- links and link-text 注：先绘制边 -->
+        <!-- links and link-text  -->
         <g>
           <g v-for="link in links" :key="link.index">
+            <!-- arrow  -->
+            <defs>
+              <marker
+                id="arrowhead"
+                class="arrow-head"
+                markerWidth="10"
+                markerHeight="7"
+                refX="10"
+                refY="3.5"
+                orient="auto"
+              >
+                <polygon style="fill: #b8b8b8;"  points="0 0, 5 3.5, 0 7" />
+              </marker>
+            </defs>
+
             <line
               :class="`${link[linkTypeKey]} ${link.selected} link element`"
               :stroke="theme.linkStroke"
               :stroke-width="linkWidth"
+              marker-end="url(#arrowhead)" 
             ></line>
-            <!-- dx dy 文字左下角坐标 -->
+            <!-- dx dy-->
             <text
               v-if="showLinkText"
               dx="0"
@@ -60,7 +86,7 @@
               :r="nodeSize"
             ></circle>
             <text
-              v-show="node.showText"
+              v-show="true || node.showText"
               :dx="nodeSize + 5"
               dy="0"
               class="node-text"
@@ -276,9 +302,10 @@ export default {
           .data(this.links)
           .attr("x", (d) => (d.source.x + d.target.x) / 2)
           .attr("y", (d) => (d.source.y + d.target.y) / 2);
+        d3.selectAll(null).attr("marker-end", (d) =>
+          d.target.x < d.source.x ? "url(#arrow)" : ""
+        );
       });
-
-
 
       // previous code
       // this.zoom.scaleExtent([0.1, 4]).on("zoom", this.zoomed);
@@ -306,11 +333,12 @@ export default {
       }
       this.$emit("clickNode", e, e.target.__data__);
     },
-    clickEle(e) {
+    clickElement(e) {
       if (e.target.tagName === "circle") {
-        this.clickNode(e);
+        // darkens neighbours permanently
+        // this.clickNode(e);
       } else if (e.target.tagName === "line") {
-        this.clickLink(e);
+        // this.clickLink(e);
       }
     },
     svgMouseover(e) {
@@ -343,21 +371,20 @@ export default {
       e.target.__data__.showText = true;
       e.target.classList.add("selected");
       this.selection.nodes.push(e.target.__data__);
-      this.lightNeibor(e.target.__data__);
+      this.lightenNeighbour(e.target.__data__);
       d3.selectAll(".element").style("opacity", 0.2);
     },
     noSelectedState(e) {
       e.target.__data__.showText = false;
-      // e.target.classList.remove("selected");
-      this.darkenNerbor();
-
+      e.target.classList.remove("selected");
+      this.darkenNeighbour();
       d3.selectAll(".element").style("opacity", 1);
     },
     pinnedState(e) {
       this.pinned.push(e.target.__data__.index);
       d3.selectAll(".element").style("opacity", 0.05);
     },
-    lightNeibor(node) {
+    lightenNeighbour(node) {
       this.links.forEach((link) => {
         if (link.source.index === node.index) {
           link.selected = "selected";
@@ -380,7 +407,7 @@ export default {
         }
       });
     },
-    darkenNerbor() {
+    darkenNeighbour() {
       this.links.forEach((link) => {
         this.selection.links.forEach((selectedLink) => {
           if (selectedLink.id === link.id) {
@@ -400,7 +427,6 @@ export default {
       this.selection.links = [];
     },
     zoomed() {
- 
       d3.select("#container").attr(
         "transform",
         "translate(" +
@@ -455,7 +481,7 @@ svg {
 .link {
   cursor: pointer;
 }
-.linkText {
+.link-text-hover {
   position: absolute;
   z-index: 10;
   background-color: rgba(75, 75, 75, 0.596);
@@ -463,4 +489,15 @@ svg {
   color: white;
   padding: 10px;
 }
+
+.link-text {
+  font-size: 12px;
+}
+
+.node-text {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv */
 </style>

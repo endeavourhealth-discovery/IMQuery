@@ -132,12 +132,15 @@
                   "
                   class="folder-viewer padding-text"
                 >
-                  <HierarchyTreeItem
+                  <!-- <HierarchyTreeItem
                     v-for="item in queryBuilder.hierarchyTree(topLevelEntity)
                       .children"
                     :key="item['@id']"
                     class="mt-5"
                     :value="item"
+                  /> -->
+                  <HierarchyTreeItem
+                    :value="queryBuilder.hierarchyTree(topLevelEntity)"
                   />
                 </div>
               </div>
@@ -154,6 +157,8 @@
             :linkDistance="linkDistance"
             :svgTheme="svgTheme ? 'dark' : 'light'"
             :bodyStrength="bodyStrength"
+            :nodeTextKey="nodeTextKey"
+            :showLinkText="true"
           ></Network>
         </div>
       </div>
@@ -202,7 +207,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
-import QueryBuilder, { Query, Folder } from "@/models/query/QueryBuilder";
+import QueryBuilder, { Query } from "@/models/query/QueryBuilder";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import Network from "@/components/dataset/Network.vue";
@@ -249,149 +254,31 @@ export default defineComponent({
           visible: true,
         },
       ],
-      nodeSize: 20,
-      linkWidth: 4,
-      linkDistance: 100,
-      bodyStrength: -400,
+      nodeSize: 15,
+      linkWidth: 3,
+      linkDistance: 125,
+      bodyStrength: -800,
       svgTheme: false, // false = light, true = dark
+      nodeTextKey: "name",
       nodes: [
-        { id: "Dataset", group: 1 },
-        { id: "Filters", group: 2 },
-        { id: "Output", group: 3 },
-        { id: "ANY Registration Status", group: 4 },
-        { id: "Registered", group: 4 },
-        { id: "AT Anytime1", group: 4 },
-        { id: "AT Anytime2", group: 4 },
-        { id: "GP Practices in London", group: 4 },
-        { id: "LATEST Registration Status", group: 5 },
-        { id: "Deregistered", group: 5 },
-        { id: "Dead", group: 5 },
-        { id: "BEFORE 01/01/2019", group: 5 },
-        { id: "OR", group: 5 },
+        { id:"5f7d54a0-fb79-498a-97fc-22bc8135cde4", name: "Patient", group: 1 },
+        { id:"55aa377a-9f2c-4d05-b45b-7fa1063f8cc7", name: "GP Registration", group: 2 },
+        { id:"57b14e08-1625-4168-ba06-2e1dc4b697f4", name: "Regular GMS patient", group: 3 },
+        { id:"d09a3b13-a69e-4cb0-8bb9-e525a2470361", name: "is before 31/03/2020", group: 3 },
+        { id:"ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed", name: "is after 31/03/2020", group: 3 },
+        { id:"a572d325-321a-418d-948a-8c87baaf7fd8", name: "does not exist", group: 3 },
+        { id:"9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", name: "and", group: 4 },
+        { id:"453e074a-1543-4956-bf0e-305df888993c", name: "or", group: 4 },
       ],
       links: [
-        { source: "Dataset", target: "Filters", value: "has" },
-        { source: "Dataset", target: "Output", value: "has" },
-        {
-          source: "Filters",
-          target: "ANY Registration Status",
-          value: "INCLUDE IF",
-        },
-        {
-          source: "ANY Registration Status",
-          target: "Registered",
-          value: "is",
-        },
-        {
-          source: "ANY Registration Status",
-          target: "AT Anytime1",
-          value: "starting",
-        },
-        {
-          source: "ANY Registration Status",
-          target: "AT Anytime2",
-          value: "ending",
-        },
-        {
-          source: "ANY Registration Status",
-          target: "GP Practices in London",
-          value: "at",
-        },
-        {
-          source: "Filters",
-          target: "LATEST Registration Status",
-          value: "EXCLUDE IF",
-        },
-        {
-          source: "LATEST Registration Status",
-          target: "OR",
-          value: "is",
-        },
-        {
-          source: "OR",
-          target: "Deregistered",
-          value: "",
-        },
-        {
-          source: "OR",
-          target: "Dead",
-          value: "",
-        },
-        {
-          source: "LATEST Registration Status",
-          target: "BEFORE 01/01/2019",
-          value: "ending",
-        },
+        { source: "5f7d54a0-fb79-498a-97fc-22bc8135cde4", target: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7", value: "is subject of" },
+        { source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7", target: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", value: "" },
+        { source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", target: "57b14e08-1625-4168-ba06-2e1dc4b697f4", value: "patient type" },
+        { source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", target: "d09a3b13-a69e-4cb0-8bb9-e525a2470361", value: "effective date" },
+        { source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", target: "453e074a-1543-4956-bf0e-305df888993c", value: "" },
+        { source: "453e074a-1543-4956-bf0e-305df888993c", target: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed", value: "end date" },
+        { source: "453e074a-1543-4956-bf0e-305df888993c", target: "a572d325-321a-418d-948a-8c87baaf7fd8", value: "end date" },
       ],
-      // nodes: [
-      //   { id: "Dataset", group: 1 },
-      //   { id: "Filters", group: 2 },
-      //   { id: "Output", group: 3 },
-      //   { id: "ANY Registration Status", group: 4 },
-      //   { id: "Registered", group: 4 },
-      //   { id: "AT Anytime1", group: 4 },
-      //   { id: "AT Anytime2", group: 4 },
-      //   { id: "GP Practices in London", group: 4 },
-      //   { id: "LATEST Registration Status", group: 5 },
-      //   { id: "Deregistered", group: 5 },
-      //   { id: "Dead", group: 5 },
-      //   { id: "BEFORE 01/01/2019", group: 5 },
-      //   { id: "OR", group: 5 },
-      // ],
-      // links: [
-      //   { source: "Dataset", target: "Filters", value: "has" },
-      //   { source: "Dataset", target: "Output", value: "has" },
-      //   {
-      //     source: "Filters",
-      //     target: "ANY Registration Status",
-      //     value: "INCLUDE IF",
-      //   },
-      //   {
-      //     source: "ANY Registration Status",
-      //     target: "Registered",
-      //     value: "is",
-      //   },
-      //   {
-      //     source: "ANY Registration Status",
-      //     target: "AT Anytime1",
-      //     value: "starting",
-      //   },
-      //   {
-      //     source: "ANY Registration Status",
-      //     target: "AT Anytime2",
-      //     value: "ending",
-      //   },
-      //   {
-      //     source: "ANY Registration Status",
-      //     target: "GP Practices in London",
-      //     value: "at",
-      //   },
-      //   {
-      //     source: "Filters",
-      //     target: "LATEST Registration Status",
-      //     value: "EXCLUDE IF",
-      //   },
-      //   {
-      //     source: "LATEST Registration Status",
-      //     target: "OR",
-      //     value: "is",
-      //   },
-      //   {
-      //     source: "OR",
-      //     target: "Deregistered",
-      //     value: "",
-      //   },
-      //   {
-      //     source: "OR",
-      //     target: "Dead",
-      //     value: "",
-      //   },
-      //   {
-      //     source: "LATEST Registration Status",
-      //     target: "BEFORE 01/01/2019",
-      //     value: "ending",
-      //   },
-      // ],
       topLevelEntity: {
         "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries",
         "rdf:type": [
@@ -610,11 +497,10 @@ export default defineComponent({
         const json = JSON.parse(e.target.result);
         this.openFiles = [...this.openFiles, json];
 
-        this.queryBuilder.loadJSON(json);
+        this.queryBuilder.loadJSON(e.target.result);
 
         this.openQueries = this.queryBuilder.queries;
-        console.log("Queries: ", this.queryBuilder.queries);
-        console.log("Query Definitions: ", this.queryBuilder.queryDefinitions);
+
         this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
           return {
             value: entity,
@@ -650,20 +536,20 @@ export default defineComponent({
           );
         });
     },
-    async graphSearch(sparqlQueryString: string): Promise<any> {
-      // await SearchService.graphdb_search(sparqlQueryString)
-      //   .then((res) => {
-      //     console.log("graphsearch complete: ", res);
-      //   })
-      //   .catch((err) => {
-      //     this.$toast.add(
-      //       LoggerService.error(
-      //         "Failed to get data model properties from server",
-      //         err
-      //       )
-      //     );
-      //   });
-    },
+    // async graphSearch(sparqlQueryString: string): Promise<any> {
+    // await SearchService.graphdb_search(sparqlQueryString)
+    //   .then((res) => {
+    //     console.log("graphsearch complete: ", res);
+    //   })
+    //   .catch((err) => {
+    //     this.$toast.add(
+    //       LoggerService.error(
+    //         "Failed to get data model properties from server",
+    //         err
+    //       )
+    //     );
+    //   });
+    // },
 
     handlePrevious(): void {
       for (let i = 4; i < this.sideNavItems.length; i++) {
@@ -772,7 +658,7 @@ export default defineComponent({
   /* padding-bottom: 150px; */
   overflow-y: auto;
   font-size: 12px !important;
-    width: 500px;
+  width: 500px;
   height: 680px;
 }
 
@@ -791,7 +677,6 @@ export default defineComponent({
 .padding-text {
   padding: 20px 10px 150px 10px;
 }
-
 
 .file-filter {
   width: 500px;

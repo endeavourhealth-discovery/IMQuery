@@ -1,8 +1,15 @@
 <template>
   <div>
-    <div class="hierachytreeitem flex items-center">
+    <div
+      :class="
+        'hierachytreeitem py-3 flex items-center' +
+          [ishover == true ? ' hover' : '']
+      "
+      @mouseenter="isHover = true"
+      @mouseleave="isHover = false"
+    >
       <SectionToggler
-        class="mr-3"
+        class="mr-3 border-none"
         v-if="value['rdf:type'][0]['@id'] == 'im:Folder'"
         :expanded="expandedItems.includes(value['@id'])"
         @click="
@@ -14,9 +21,9 @@
         "
         :class="'inline hierachytreeitem__toggler' + [index != 0 ? '' : '']"
       />
-      <div v-else class="ml-12"></div>
+      <div v-else class="ml-9"></div>
       <HeroIcon
-        class="inline text-gray-600 mr-2 "
+        class="inline font-regular text-lg text-gray-700 mr-2"
         strokewidth="2"
         width="20"
         height="20"
@@ -31,13 +38,15 @@
       </div>
     </div>
     <template v-if="value.children.length">
-      <HierarchyTreeItem
-        v-show="expandedItems.includes(value['@id'])"
-        v-for="item in value.children"
-        :key="item['@id']"
-        class="mt-5"
-        :value="item"
-      />
+      <div class="hierachytreeitem">
+        <HierarchyTreeItem
+          v-show="expandedItems.includes(value['@id'])"
+          v-for="item in value.children"
+          :key="item['@id']"
+          class="ml-3"
+          :value="item"
+        />
+      </div>
     </template>
   </div>
 </template>
@@ -59,6 +68,7 @@ export default defineComponent({
   },
   data() {
     return {
+      isHover: false,
       expandedItems: [] as any[],
     };
   },
@@ -90,5 +100,11 @@ export default defineComponent({
 .hierachytreeitem__toggler {
   height: 20px;
   width: 20px;
+}
+</style>
+
+<style>
+.hierachytreeitem {
+  border-left: 1px solid #EEF0F2;
 }
 </style>

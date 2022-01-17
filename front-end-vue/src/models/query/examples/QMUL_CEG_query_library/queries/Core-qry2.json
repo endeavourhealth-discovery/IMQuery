@@ -1,0 +1,69 @@
+{
+  "@context" : {
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "" : "http://endhealth.info/im#",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "sn" : "http://snomed.info/sct#",
+    "entities" : {
+      "@id" : "http://envhealth.info/im#entities",
+      "@container" : "@set"
+    }
+  },
+  "@graph" : {
+    "@id" : ":"
+  },
+  "entities" : [ {
+    "@id" : ":Q_RegisteredGMS",
+    "rdf:type" : [ {
+      "@id" : ":Profile"
+    } ],
+    "rdfs:label" : "Patients registered for GMS services on the reference date",
+    "rdfs:comment" : "For any registration period,a registration start date before the reference date and no end date,or an end date after the reference date.",
+    ":entityType" : [ {
+      "@id" : ":Patient"
+    } ],
+    ":and" : [ {
+      ":match" : [ {
+        ":entityPath" : "http://endhealth.info/im#isSubjectOf http://endhealth.info/im#GPRegistration",
+        ":and" : [ {
+          ":property" : [ {
+            "@id" : ":patientType"
+          } ],
+          ":valueIn" : [ {
+            "@id" : ":2751000252106"
+          } ],
+          ":order" : 0
+        }, {
+          ":property" : [ {
+            "@id" : ":effectiveDate"
+          } ],
+          ":value" : [ {
+            ":comparison" : "lessThanOrEqual",
+            ":value" : "$ReferenceDate"
+          } ],
+          ":order" : 1
+        }, {
+          ":or" : [ {
+            ":not" : [ {
+              ":property" : [ {
+                "@id" : ":endDate"
+              } ]
+            } ],
+            ":order" : 0
+          }, {
+            ":property" : [ {
+              "@id" : ":endDate"
+            } ],
+            ":value" : [ {
+              ":comparison" : "greaterThan",
+              ":value" : "$ReferenceDate"
+            } ],
+            ":order" : 1
+          } ],
+          ":order" : 2
+        } ]
+      } ],
+      ":order" : 0
+    } ]
+  } ]
+}
