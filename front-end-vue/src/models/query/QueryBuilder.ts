@@ -61,9 +61,32 @@ export default class QueryBuilder {
     }
 
 
+    //maps terms terms -> matched (see examples below)
+    private _compoundTerms = new Map<string, string>();
+
+    // example (should ideally be loaded from API)
+    private _terms = [
+        {'@id': ' http://endhealth.info/im#Q_term_IssuedPrescription', 'term':'Issued Prescription for'},
+        {'@id': ' http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'term':'Investigation'}
+    ] ;
+
+    // example 
+    private _matches = [
+        //Issued Prescription for" -> Medication Authorisation + Medication Order  
+        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationOrder'],
+        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationAuthorisationsOrCourses'],
+       // A referral/request for investigation or its results -> Diagnostic Report, Ovservation, Precedure, Request etc.  
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#DiagnosticReport'],
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Observation'],
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Procedure'],
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#ReferralRequestOrProcedureRequest'],
+
+    ];
+    
 
 
-   
+
+
     
     'Loaded' = false;
     'JSONContentType'? : "entityDefinitions" | "queryDefinitions" | null;
@@ -169,7 +192,7 @@ export default class QueryBuilder {
 
 
 
-//separate out queries
+        //separate out queries
             file["query"].forEach((query: any) => {
                 // this._queryDefinitions.set(query as Query);
             });

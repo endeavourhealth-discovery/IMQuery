@@ -150,8 +150,8 @@
         <div class="inline-flex flex-col w-full h-full">
           <Network
             class="w-full h-full bg-white"
-            :nodeList="nodes"
-            :linkList="links"
+            :nodeList="examples.gms.nodes"
+            :linkList="examples.gms.links"
             :nodeSize="nodeSize"
             :linkWidth="linkWidth"
             :linkDistance="linkDistance"
@@ -254,31 +254,171 @@ export default defineComponent({
           visible: true,
         },
       ],
-      nodeSize: 15,
+      nodeSize: 8,
       linkWidth: 3,
-      linkDistance: 125,
-      bodyStrength: -800,
+      linkDistance: 145,
+      bodyStrength: -400,
       svgTheme: false, // false = light, true = dark
       nodeTextKey: "name",
-      nodes: [
-        { id:"5f7d54a0-fb79-498a-97fc-22bc8135cde4", name: "Patient", group: 1 },
-        { id:"55aa377a-9f2c-4d05-b45b-7fa1063f8cc7", name: "GP Registration", group: 2 },
-        { id:"57b14e08-1625-4168-ba06-2e1dc4b697f4", name: "Regular GMS patient", group: 3 },
-        { id:"d09a3b13-a69e-4cb0-8bb9-e525a2470361", name: "is before 31/03/2020", group: 3 },
-        { id:"ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed", name: "is after 31/03/2020", group: 3 },
-        { id:"a572d325-321a-418d-948a-8c87baaf7fd8", name: "does not exist", group: 3 },
-        { id:"9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", name: "and", group: 4 },
-        { id:"453e074a-1543-4956-bf0e-305df888993c", name: "or", group: 4 },
-      ],
-      links: [
-        { source: "5f7d54a0-fb79-498a-97fc-22bc8135cde4", target: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7", value: "is subject of" },
-        { source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7", target: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", value: "" },
-        { source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", target: "57b14e08-1625-4168-ba06-2e1dc4b697f4", value: "patient type" },
-        { source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", target: "d09a3b13-a69e-4cb0-8bb9-e525a2470361", value: "effective date" },
-        { source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e", target: "453e074a-1543-4956-bf0e-305df888993c", value: "" },
-        { source: "453e074a-1543-4956-bf0e-305df888993c", target: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed", value: "end date" },
-        { source: "453e074a-1543-4956-bf0e-305df888993c", target: "a572d325-321a-418d-948a-8c87baaf7fd8", value: "end date" },
-      ],
+      examples: {
+        gms_separtenodes: {
+          nodes: [
+            {
+              id: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
+              name: "Patient",
+              group: 1,
+            },
+            {
+              id: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              name: "GP Registration",
+              group: 2,
+            },
+            {
+              id: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
+              name: "Regular GMS patient",
+              group: 3,
+            },
+            {
+              id: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
+              name: "is on or before 31/03/2020",
+              group: 3,
+            },
+            {
+              id: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
+              name: "is after 31/03/2020",
+              group: 3,
+            },
+            {
+              id: "a572d325-321a-418d-948a-8c87baaf7fd8",
+              name: "does not exist",
+              group: 3,
+            },
+            {
+              id: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
+              name: "and",
+              group: 4,
+            },
+            {
+              id: "453e074a-1543-4956-bf0e-305df888993c",
+              name: "or",
+              group: 4,
+            },
+          ],
+          links: [
+            {
+              source: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
+              target: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              value: "is subject of",
+            },
+            {
+              source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              target: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
+              value: "",
+            },
+            {
+              source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
+              target: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
+              value: "patient type",
+            },
+            {
+              source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
+              target: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
+              value: "effective date",
+            },
+            {
+              source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
+              target: "453e074a-1543-4956-bf0e-305df888993c",
+              value: "",
+            },
+            {
+              source: "453e074a-1543-4956-bf0e-305df888993c",
+              target: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
+              value: "end date",
+            },
+            {
+              source: "453e074a-1543-4956-bf0e-305df888993c",
+              target: "a572d325-321a-418d-948a-8c87baaf7fd8",
+              value: "end date",
+            },
+          ],
+        },
+        gms: {
+          nodes: [
+            {
+              id: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
+              name: "Patient",
+              group: 1,
+            },
+            {
+              id: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              name: "GP Registration",
+              group: 2,
+            },
+            {
+              id: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
+              name: "Regular GMS patient",
+              group: 3,
+            },
+            {
+              id: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
+              name: "before 31/03/2020",
+              group: 3,
+            },
+            {
+              id: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
+              name: "after 31/03/2020",
+              group: 3,
+            },
+            {
+              id: "a572d325-321a-418d-948a-8c87baaf7fd8",
+              name: "non existent",
+              group: 3,
+            },
+            {
+              id: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
+              name: "where",
+              group: 4,
+            },
+            {
+              id: "453e074a-1543-4956-bf0e-305df888993c",
+              name: " either",
+              group: 4,
+            },
+          ],
+          links: [
+            {
+              source: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
+              target: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              value: "had a",
+            },
+            {
+              source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              target: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
+              value: "and its patient type is",
+            },
+            {
+              source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              target: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
+              value: " and its effective date is",
+            },
+            {
+              source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
+              target: "453e074a-1543-4956-bf0e-305df888993c",
+              value: "and its end date is",
+            },
+            {
+              source: "453e074a-1543-4956-bf0e-305df888993c",
+              target: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
+              value: "",
+            },
+            {
+              source: "453e074a-1543-4956-bf0e-305df888993c",
+              target: "a572d325-321a-418d-948a-8c87baaf7fd8",
+              value: "or",
+            },
+          ],
+        },
+      },
       topLevelEntity: {
         "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries",
         "rdf:type": [

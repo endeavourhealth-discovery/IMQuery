@@ -39,11 +39,11 @@
                 class="arrow-head"
                 markerWidth="10"
                 markerHeight="7"
-                refX="10"
+                refX="7.5"
                 refY="3.5"
                 orient="auto"
               >
-                <polygon style="fill: #b8b8b8;"  points="0 0, 5 3.5, 0 7" />
+                <polygon style="fill: #b8b8b8;" points="1 1, 5 3.5, 1 6" />
               </marker>
             </defs>
 
@@ -51,11 +51,11 @@
               :class="`${link[linkTypeKey]} ${link.selected} link element`"
               :stroke="theme.linkStroke"
               :stroke-width="linkWidth"
-              marker-end="url(#arrowhead)" 
+              marker-end="url(#arrowhead)"
             ></line>
             <!-- dx dy-->
             <text
-              v-if="showLinkText"
+              v-show="isHover ? link.selected : true"
               dx="0"
               dy="0"
               class="link-text"
@@ -69,33 +69,37 @@
 
         <!-- node and node-text -->
         <g id="node-group">
-          <g v-for="node in nodes" :key="node.index">
-            <circle
-              :fill="nodeColor(node[nodeTypeKey])"
-              :stroke-width="highlightNodes.indexOf(node.id) == -1 ? 3 : 10"
-              :stroke="
-                highlightNodes.indexOf(node.id) == -1
-                  ? theme.nodeStroke
-                  : 'gold'
-              "
-              :class="
-                `${node[nodeTypeKey]} ${
-                  node.showText ? 'selected' : ''
-                } node element`
-              "
-              :r="nodeSize"
-            ></circle>
-            <text
-              v-show="true || node.showText"
-              :dx="nodeSize + 5"
-              dy="0"
-              class="node-text"
-              :fill="theme.textFill"
-              :font-size="nodeTextFontSize"
-            >
-              {{ node[nodeTextKey] }}
-            </text>
-          </g>
+          <template v-for="node in nodes" :key="node.index">
+            <g>
+              <circle
+                @mouseenter="isHover = true"
+                @mouseleave="isHover = false"
+                :fill="nodeColor(node[nodeTypeKey])"
+                :stroke-width="highlightNodes.indexOf(node.id) == -1 ? 3 : 10"
+                :stroke="
+                  highlightNodes.indexOf(node.id) == -1
+                    ? theme.nodeStroke
+                    : 'gold'
+                "
+                :class="
+                  `${node[nodeTypeKey]} ${
+                    node.showText ? 'selected' : ''
+                  } node element`
+                "
+                :r="nodeSize"
+              ></circle>
+              <text
+                v-show="isHover ? node.showText : true"
+                :dx="nodeSize + 5"
+                dy="0"
+                class="node-text"
+                :fill="theme.textFill"
+                :font-size="nodeTextFontSize"
+              >
+                {{ node[nodeTextKey] }}
+              </text>
+            </g>
+          </template>
           <g></g>
         </g>
       </g>
@@ -184,6 +188,7 @@ export default {
   },
   data() {
     return {
+      isHover: false,
       selection: {
         links: [],
         nodes: [],
