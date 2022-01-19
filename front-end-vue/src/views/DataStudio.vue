@@ -115,36 +115,6 @@
                 placeholder="Type(s)"
               />
             </div>
-            <div v-show="activeFileView == 'Folder Hierarchy'">
-              <div
-                v-if="queryBuilder.hierarchyTree(topLevelEntity)"
-                class="left inline-flex flex-col w-full h-full"
-              >
-                <!-- <div class="font-semibold text-lg text-black text-center">
-                  {{ queryBuilder.hierarchyTree(topLevelEntity)["rdfs:label"] }}
-                  ({{
-                    queryBuilder.hierarchyTree(topLevelEntity).children.length
-                  }})
-                </div> -->
-                <div
-                  v-if="
-                    queryBuilder.hierarchyTree(topLevelEntity).children.length
-                  "
-                  class="folder-viewer padding-text"
-                >
-                  <!-- <HierarchyTreeItem
-                    v-for="item in queryBuilder.hierarchyTree(topLevelEntity)
-                      .children"
-                    :key="item['@id']"
-                    class="mt-5"
-                    :value="item"
-                  /> -->
-                  <HierarchyTreeItem
-                    :value="queryBuilder.hierarchyTree(topLevelEntity)"
-                  />
-                </div>
-              </div>
-            </div>
           </template>
         </div>
         <div class="inline-flex flex-col w-full h-full">
@@ -166,19 +136,6 @@
   </div>
   <!-- /Content Wrapper -->
 </template>
-
-<!-- <template v-if="false">
-                <div
-                  v-for="definition in query['im:queryDefinition']"
-                  :key="definition['iri']"
-                >
-                  <ClauseItem
-                    :operator="definition.operator"
-                    :clause="definition.clause"
-                    :nestingCount="1"
-                  />
-                </div>
-              </template> -->
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
@@ -207,9 +164,8 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
-import QueryBuilder  from "@/models/query/QueryBuilder";
+import QueryBuilder from "@/models/query/QueryBuilder";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
-import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import Network from "@/components/dataset/Network.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
@@ -231,7 +187,6 @@ export default defineComponent({
     DatasetBrowser,
     MultiSelect,
     // SectionToggler,
-    HierarchyTreeItem,
     Network,
     // DataTable,
     // Column,
@@ -241,7 +196,7 @@ export default defineComponent({
   },
   data() {
     return {
-      activeFileView: "Folder Hierarchy",
+      activeFileView: "All Items",
       fileViews: [
         {
           name: "All Items",
@@ -251,7 +206,7 @@ export default defineComponent({
         {
           name: "Folder Hierarchy",
           icon: "folder_open",
-          visible: true,
+          visible: false,
         },
       ],
       nodeSize: 8,
@@ -566,7 +521,6 @@ export default defineComponent({
           children: [],
         },
       ],
-      openQueries: [] as any[],
       openFiles: [] as any[],
       selectedFile: "",
       selectedFileItems: [] as any[],
@@ -631,7 +585,6 @@ export default defineComponent({
       const _files = [...(_inputElement.files ? _inputElement.files : [])];
 
       this.openFiles = [];
-      this.openQueries = [];
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
         const json = JSON.parse(e.target.result);
@@ -639,14 +592,20 @@ export default defineComponent({
 
         this.queryBuilder.loadJSON(e.target.result);
 
-        this.openQueries = this.queryBuilder.queries;
+        this.filterTypes = this.queryBuilder.entityTypes.map((item: any) => {
+          const _label =
+            item.substring(0, 1) == ":"
+              ? item.substring(1)
+              : item.split(":")[1];
 
-        this.filterTypes = this.queryBuilder.entityTypes.map((entity: any) => {
           return {
-            value: entity,
-            label: entity.split(":")[1],
+            value: item,
+            label: _label,
           };
         });
+        
+        // console.log("this.queryBuilder.entityTypes",this.queryBuilder.entityTypes );
+        console.log("this.filterTypes",this.filterTypes );
       };
       fileReader.readAsText(_files[0]);
     },
