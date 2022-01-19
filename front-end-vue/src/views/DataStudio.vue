@@ -207,7 +207,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
-import QueryBuilder, { Query } from "@/models/query/QueryBuilder";
+import QueryBuilder  from "@/models/query/QueryBuilder";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import Network from "@/components/dataset/Network.vue";
