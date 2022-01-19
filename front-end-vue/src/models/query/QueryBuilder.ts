@@ -8,8 +8,8 @@ export default class QueryBuilder {
 
 
     //properties without getters/setters
+    'JSONContentType'?: "entityDefinitions" | "profileDefinitions" | null;
     'Loaded' = false;
-    'JSONContentType'?: "entityDefinitions" | "populationDefinitions" | null;
 
 
     // properties dependenet on entities loaded from JSON
@@ -34,8 +34,8 @@ export default class QueryBuilder {
 
 
     // profiles
-    private _profileEntities = [] as any[];
-    get profileEntities(): any[] {
+    private _profileEntities = new Map<string, any>();
+    get profileEntities(): Map<string, any> {
         return this._profileEntities;
     }
 
@@ -93,7 +93,7 @@ export default class QueryBuilder {
     private reset(): void {
         this._entities = [] as any[];
         this._entityTypes = [] as any[];
-        this._profileEntities = [] as any[];
+        this._profileEntities = new Map<string, any>()
         this._clauses = new Map<string, any>();
         this._path = new Map<string, string>();
         this._graph = new Map<string, any>();
@@ -111,9 +111,14 @@ export default class QueryBuilder {
 
         if (file["entities"]) {
             this.JSONContentType = "entityDefinitions";
-            if (this.loadEntityDefinitions(file) == false) throw new Error("JSON content structure not recognised");
+            if (this.loadEntityDefinitions(file) == false) {
+                throw new Error ("JSON content structure not recognised");
+            } else {
+                this.Loaded = true;
+            } 
         } else if (file[":and"] || file[":or"]) {
-            this.JSONContentType = "populationDefinitions";
+            this.JSONContentType = "profileDefinitions";
+            this.Loaded = true;
             // if (this.loadQueryDefinitions(file) == false) throw new Error ("JSON content structure not recognised");
         } else {
             throw new Error("JSON content structure not recognised");
@@ -139,12 +144,10 @@ export default class QueryBuilder {
                     this._entityTypes.push(_type);
                 }
 
-                console.log("entity:", entity);
-                console.log("entityTypes:", this._entityTypes);
-
                 if (_type === ":Profile") {
                     //profiles 
-                    this._profileEntities.push(entity);
+                    this._profileEntities.set(entity['@id'], entity);
+
                     // _clauses - looks for AND/OR
                     if (entity[':and']) {
                         this._clauses.set(entity['@id'], { ':and': entity[':and'] })
@@ -156,16 +159,110 @@ export default class QueryBuilder {
 
             });
 
-            console.log("_clauses:", this._clauses);
-
             return true;
+            
         } catch (error) {
+            
             console.log("Error with loadEntityDefinitions:", error)
             return false;
+            
+        } finally {
+            console.log("_clauses:", this._clauses);
+            console.log("_hierachyTree:", this._hierarchyTree);
+
+        }
+    }
+
+
+    private _hierarchyTree: any;
+    private _lastTopLevelEntity: any;
+    hierarchyTree(topLevelEntity: any): any[] | null {
+
+        if (!this.Loaded) return null;
+
+
+        //prevents expensive recomputation with each computed() call
+        if (this._lastTopLevelEntity && this._lastTopLevelEntity.iri == topLevelEntity.iri) {
+            return this._hierarchyTree;
+        } else {
+            this._lastTopLevelEntity = topLevelEntity;
         }
 
+        const _hierarchyTree = { ...topLevelEntity, currentPath: '', children: [] };
+        this._hierarchyTree = _hierarchyTree;
+
+        this.populateHierarchyTree();
+        return _hierarchyTree;
+    }
 
 
+    item(iri: string) {
+        return this.entities.filter((ent: any) => ent["@id"] == iri);
+    }
+
+
+    private populateHierarchyTree() {
+
+
+
+        // .set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".name", payload.name)
+        const getChildren = (targetEntity: any): any => {
+            let _children = this.entities.filter((ent: any) => ent["im:isContainedIn"] && ent["im:isContainedIn"][0]["@id"] == targetEntity["@id"])
+            _children = _children.map((item: any) => {
+                return {
+                    ...item,
+                    currentPath: '',
+                    children: [] as any[]
+
+                }
+            })
+
+            for (let i = 0; i < _children.length; i++) {
+                if (targetEntity['currentPath'] == '') {
+                    _children[i]['currentPath'] = `${targetEntity['currentPath']}children[${i.toString()}]`
+                } else {
+                    _children[i]['currentPath'] = `${targetEntity['currentPath']}.children[${i.toString()}]`
+                }
+
+
+            }
+        
+
+            return _children;
+        };
+
+
+        // breadth-first addition of children
+        const _added = new Set();
+        const _queue = [this._hierarchyTree]
+
+        while (_queue.length > 0) {
+
+            const _currentItem = _queue.shift(); // gets the next item from the queue
+            const _children = getChildren(_currentItem);
+
+            if (_currentItem['@id'] == this._hierarchyTree['@id']) {
+
+                _.set(this._hierarchyTree, 'children', _children)
+                // console.log("2.children: ", _children)
+                // console.log("3. path: ", 'children')
+                // console.log("4. tree: ", this._hierarchyTree)
+            } else {
+
+                _.set(this._hierarchyTree, _currentItem['currentPath'] + '.children', _children)
+                // console.log("2.children: ", _children)
+                // console.log("3. path: ", _currentItem['currentPath'] + '.children')
+                // console.log("4. tree: ", this._hierarchyTree)
+            }
+
+            //get children of children
+            for (const _child of _children) {
+                if (!_added.has(_child['@id'])) {
+                    _added.add(_child['@id']);
+                    _queue.push(_child);
+                }
+            }
+        }
     }
 
 }

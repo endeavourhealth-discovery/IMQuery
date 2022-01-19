@@ -82,7 +82,6 @@
           <div class="font-semibold text-lg text-black mt-2 h-10 flex">
             <HorizontalNavbar v-model="activeFileView" :items="fileViews" />
           </div>
-
           <template v-if="openFiles.length">
             <div v-show="activeFileView == 'All Items'">
               <div class="flex flex-col file-list mt-2 ">
@@ -114,6 +113,24 @@
                 optionLabel="label"
                 placeholder="Type(s)"
               />
+            </div>
+            <div v-show="activeFileView == 'Folder Hierarchy'">
+              <div
+                v-if="queryBuilder.hierarchyTree(topLevelEntity)"
+                class="left inline-flex flex-col w-full h-full"
+              >
+          
+                <div
+                  v-if="
+                    queryBuilder.hierarchyTree(topLevelEntity).children.length
+                  "
+                  class="folder-viewer padding-text"
+                >
+                  <HierarchyTreeItem
+                    :value="queryBuilder.hierarchyTree(topLevelEntity)"
+                  />
+                </div>
+              </div>
             </div>
           </template>
         </div>
@@ -171,7 +188,7 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
 // import * as IMQ  from "@/models/query/QueryBuilder";
-
+import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 // import ceg_smi from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
 
 export default defineComponent({
@@ -188,6 +205,7 @@ export default defineComponent({
     MultiSelect,
     // SectionToggler,
     Network,
+    HierarchyTreeItem
     // DataTable,
     // Column,
     // ColumnGroup,
@@ -206,7 +224,7 @@ export default defineComponent({
         {
           name: "Folder Hierarchy",
           icon: "folder_open",
-          visible: false,
+          visible: true,
         },
       ],
       nodeSize: 8,
@@ -384,7 +402,7 @@ export default defineComponent({
         "rdfs:label": "QMUL CEG query library",
         "im:isContainedIn": [
           {
-            "@id": "im:Q_Queries",
+            "@id": "im:QT_QueryTemplates",
           },
         ],
       },
@@ -603,9 +621,7 @@ export default defineComponent({
             label: _label,
           };
         });
-        
-        // console.log("this.queryBuilder.entityTypes",this.queryBuilder.entityTypes );
-        console.log("this.filterTypes",this.filterTypes );
+
       };
       fileReader.readAsText(_files[0]);
     },

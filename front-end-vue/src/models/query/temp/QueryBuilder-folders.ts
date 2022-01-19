@@ -94,7 +94,7 @@ export default class QueryBuilder {
     
     
     'Loaded' = false;
-    'JSONContentType'? : "entityDefinitions" | "populationDefinitions" | null;
+    'JSONContentType'? : "entityDefinitions" | "profileDefinitions" | null;
 
     '_@context': any;
     '_@graph': any;
@@ -121,10 +121,15 @@ export default class QueryBuilder {
 
         if (file["entities"]) {
             this.JSONContentType =  "entityDefinitions";
-            if (this.loadEntityDefinitions(file) == false) throw new Error ("JSON content structure not recognised");
+            if (this.loadEntityDefinitions(file) == false) {
+                throw new Error ("JSON content structure not recognised");
+            } else {
+                this.Loaded = true;
+            } 
         } else if (file[":and"] || file[":or"] ) {
-            this.JSONContentType =  "populationDefinitions";
+            this.JSONContentType =  "profileDefinitions";
             // if (this.loadQueryDefinitions(file) == false) throw new Error ("JSON content structure not recognised");
+            this.Loaded = true;
         } else {
             throw new Error ("JSON content structure not recognised");
         }

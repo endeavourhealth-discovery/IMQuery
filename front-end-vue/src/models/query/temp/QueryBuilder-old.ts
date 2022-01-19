@@ -282,8 +282,6 @@ export class Examples {
                                 {
                                     subject: {
                                         iri: "im:GPRegistration",
-                                        modififer: "any",
-                                        quantity: 1,
                                         var: "reg",
                                     },
                                     predicate: {
@@ -292,7 +290,7 @@ export class Examples {
                                     },
                                     object: {
                                         matchIf: true,
-                                        comparison: "memberOf",
+                                        comparison: "in",
                                         iri: "im:2751000252106",
                                     }
                                 },
@@ -306,7 +304,7 @@ export class Examples {
                                     },
                                     object: {
                                         matchIf: true,
-                                        comparison: "lessThanOrEqual",
+                                        comparison: "lessThanOrEqualTo",
                                         values: ["$ReferenceDate"],
                                     }
 

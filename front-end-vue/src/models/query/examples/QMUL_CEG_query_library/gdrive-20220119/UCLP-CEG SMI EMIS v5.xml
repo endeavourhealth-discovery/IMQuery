@@ -1,0 +1,4366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2018 sp1 (http://www.altova.com) by David Stables (Private) -->
+<enquiryDocument>
+ <id>08c13046-8f90-4559-980c-be1fc6c4898a</id>
+ <creationTime>2021-11-22T10:26:35.7450848+00:00</creationTime>
+ <reportFolder>
+  <id>9eab35db-ac57-47d8-8eea-05ef06e44dca</id>
+  <name>UCLP-CEG SMI EMIS v5</name>
+  <parentFolder>32c30caf-57fe-4612-be82-68e412762a8d</parentFolder>
+  <sequence>0</sequence>
+  <enterpriseReportingLevel>PSEUDO_IDENTIFYING</enterpriseReportingLevel>
+  <association>
+   <organisation>77b59d29-0fd9-4737-964f-5dba49d94ab6</organisation>
+  </association>
+  <association>
+   <organisation>0c1983d8-fb7d-4563-84d0-1f8f6933e786</organisation>
+  </association>
+  <association>
+   <organisation>b13f3cc9-c317-4e0d-9c57-c545e4a53caf</organisation>
+  </association>
+  <association>
+   <organisation>26597c5a-3e29-4960-be11-ac75d0430615</organisation>
+  </association>
+  <association>
+   <organisation>00a3ba25-21c6-42de-82aa-55ff0d85a6c3</organisation>
+  </association>
+  <association>
+   <organisation>28031036-2cdd-4426-a427-efa4f77f4790</organisation>
+  </association>
+  <association>
+   <organisation>00a9c32d-2bb2-4a20-842a-381b3f2031c0</organisation>
+  </association>
+  <association>
+   <organisation>9a4518c4-82ce-4509-8039-1b5f49f9c1fa</organisation>
+  </association>
+  <association>
+   <organisation>55e60891-8827-40cd-8011-b0223d5c8970</organisation>
+  </association>
+  <association>
+   <organisation>734f4c99-6326-4ca4-a22c-632f0ac12ffc</organisation>
+  </association>
+  <association>
+   <organisation>01b8341f-bc8f-450e-8afa-4cda344a5009</organisation>
+  </association>
+  <association>
+   <organisation>3e013cb7-bd2e-455a-85f5-511aee33b08f</organisation>
+  </association>
+  <association>
+   <organisation>04f6c555-a298-45f1-ac5e-ac8ebd2bb720</organisation>
+  </association>
+  <association>
+   <organisation>249c3f3c-24f0-44ce-97a9-b535982bd70c</organisation>
+  </association>
+  <association>
+   <organisation>f09e9cef-2615-4c9d-aa3d-79e0ab10d0b3</organisation>
+  </association>
+  <association>
+   <organisation>7d1852da-e264-4599-b9b4-8f40207f967d</organisation>
+  </association>
+  <association>
+   <organisation>0af9b2af-a0fb-40b0-ba05-743ba6845db1</organisation>
+  </association>
+  <association>
+   <organisation>e32aa6a6-46b1-4198-aa13-058038ab8746</organisation>
+  </association>
+  <association>
+   <organisation>08946f29-1a53-4af2-814b-0b8758112f21</organisation>
+  </association>
+  <association>
+   <organisation>bcb43b1d-2857-4186-918b-460620f98f81</organisation>
+  </association>
+  <association>
+   <organisation>fef842da-fd7c-480f-945a-d097910a81eb</organisation>
+  </association>
+  <association>
+   <organisation>a3ea804d-e7eb-43ee-8f1f-e860f6337ff7</organisation>
+  </association>
+  <association>
+   <organisation>9dd5d2ce-2585-49d8-af04-2cb1bd137594</organisation>
+  </association>
+  <association>
+   <organisation>aabddc3a-93a4-4a87-9506-aaf52e74012b</organisation>
+  </association>
+  <association>
+   <organisation>d6696bb5-de69-49d1-bc5e-c56799e42640</organisation>
+  </association>
+  <association>
+   <organisation>03a63f52-7fee-4592-9b54-83cebcf67b5d</organisation>
+  </association>
+  <association>
+   <organisation>071a50e7-1764-4210-94ef-6a4bf96cf753</organisation>
+  </association>
+  <association>
+   <organisation>b51160f1-79e3-4ba7-aa3d-1112ab341146</organisation>
+  </association>
+  <association>
+   <organisation>c0f40044-c2ca-4d1d-95d3-553b29992385</organisation>
+  </association>
+  <association>
+   <organisation>db39b649-b48d-4ac2-bab1-ac807aabfac4</organisation>
+  </association>
+  <association>
+   <organisation>d392c499-345c-499b-898c-93f2cb8cc1b9</organisation>
+  </association>
+  <association>
+   <organisation>03148933-6e1c-4a8a-a6d2-a3d488e14ddd</organisation>
+  </association>
+  <association>
+   <organisation>1c422471-f52a-4c30-8d23-140beb7aaefc</organisation>
+  </association>
+  <association>
+   <organisation>612dcb3a-5be6-4d50-909b-f0f20565f9fc</organisation>
+  </association>
+  <association>
+   <organisation>cd7ef748-db88-49cf-aa6e-24f65029391f</organisation>
+  </association>
+  <association>
+   <organisation>578dcc0c-e3df-424e-944b-4b9b75d35f81</organisation>
+  </association>
+  <association>
+   <organisation>0a8ecfde-95ee-4811-bc05-668d49f5c799</organisation>
+  </association>
+  <association>
+   <organisation>a6467e73-0f15-49d6-afab-4dfb487e7963</organisation>
+  </association>
+  <association>
+   <organisation>6d8b4d28-838b-4915-a148-6fec2cebce77</organisation>
+  </association>
+  <association>
+   <organisation>94470227-587c-47d7-a51f-9893512424d8</organisation>
+  </association>
+  <association>
+   <organisation>0beaf1f0-9507-4ac2-8997-ec0ba1d0247e</organisation>
+  </association>
+  <association>
+   <organisation>5b87882a-0ee8-4233-93d0-d2f5f4f94040</organisation>
+  </association>
+  <association>
+   <organisation>e312a5b7-13e7-4e43-be35-ed29f6216d3c</organisation>
+  </association>
+  <association>
+   <organisation>3646cca5-7fe4-4dfe-87cd-da3ce1ba885d</organisation>
+  </association>
+  <association>
+   <organisation>86537b5b-7cf3-4964-8906-7c10929fbc20</organisation>
+  </association>
+  <association>
+   <organisation>7b03e105-9275-47cc-8022-1469fe2d6ae4</organisation>
+  </association>
+  <author>
+   <authorName>DOSTAL, Isabel (Ms)</authorName>
+  </author>
+  <PopulationTypeId>PATIENT</PopulationTypeId>
+  <IsEnterpriseSearchOverride>false</IsEnterpriseSearchOverride>
+ </reportFolder>
+ <report>
+  <id>6d517466-813b-46a8-b848-aaf5a4fbdcbf</id>
+  <name>SMI Population</name>
+  <description>Adults 18+ with SMI</description>
+  <creationTime>2021-08-16T13:50:57.0025488+01:00</creationTime>
+  <author>
+   <userInRole>a5db4395-cb7a-4fa5-950b-db5ffb0ca5bb</userInRole>
+  </author>
+  <populationType>PATIENT</populationType>
+  <folder>9eab35db-ac57-47d8-8eea-05ef06e44dca</folder>
+  <parent parentType="ACTIVE"/>
+  <searchDate>BASELINE</searchDate>
+  <population>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>cebe3297-5f54-4556-81f0-0ca14f27922e</id>
+       <table>PATIENTS</table>
+       <displayName>Patient Details</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>2b6d78fa-bebf-4c1c-94a2-7354b79b81b5</id>
+         <column>PATIENT_TYPE</column>
+         <displayName>Patient Type</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>53ecbd7e-5b1b-43ba-9a22-c9a70c9a4c28</id>
+          <codeSystem>EMISINTERNAL</codeSystem>
+          <values>
+           <value>Regular</value>
+           <displayName>Regular</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>31c7a9fa-1056-4470-9cfd-1fad117d097c</id>
+         <column>AGE</column>
+         <displayName>Age</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>18</value>
+            <unit>YEAR</unit>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>NEXT</actionIfTrue>
+    <actionIfFalse>REJECT</actionIfFalse>
+    <id>1a2ae18f-a4d9-44c0-a4a8-578f85e46180</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>36817d95-6552-43f1-9c7a-85c46b1a77b5</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>9e9fd884-9578-46a6-98ed-5728b450bc0d</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>837c474c-f6af-4a05-83ad-7c4ee7557e11</libraryItem>
+         <libraryItem>8ab86afb-94e0-45fc-9875-3d16705cf41c</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>f5507e1a-3618-4d5c-a712-c4308649c170</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>8ab86afb-94e0-45fc-9875-3d16705cf41c</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>REJECT</actionIfFalse>
+    <id>57b7b258-8cf6-46dd-a815-d1c9214c1f56</id>
+   </criteriaGroup>
+  </population>
+ </report>
+ <report>
+  <id>40a4a1f1-b768-4db8-a8a6-6df744935d97</id>
+  <name>Priority 1</name>
+  <description/>
+  <creationTime>2021-11-22T10:25:15.7451965+00:00</creationTime>
+  <author>
+   <userInRole>a5db4395-cb7a-4fa5-950b-db5ffb0ca5bb</userInRole>
+  </author>
+  <populationType>PATIENT</populationType>
+  <folder>9eab35db-ac57-47d8-8eea-05ef06e44dca</folder>
+  <parent parentType="POP">
+   <SearchIdentifier reportGuid="6d517466-813b-46a8-b848-aaf5a4fbdcbf"/>
+  </parent>
+  <searchDate>BASELINE</searchDate>
+  <population>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>b46ee284-fbb2-4d0e-b766-25cb5e7e32a9</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>4c17e64d-6ffb-4930-996c-348f1896e605</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+         <libraryItem>aafda1f0-02fc-45bc-bd6f-b899efe9547d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>b100da33-e40b-45c6-aad6-db4cc3062a75</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>07aed05b-62cc-4e62-87a2-5df95b604d87</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>be8e092a-3589-40fd-9f54-a0bdce9681cb</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>d62e7bce-5623-41da-8a8f-96d3188e09c5</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>5527201000006112</value>
+           <displayName>SAP - Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527191000006114</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418961000000111</value>
+           <displayName>Baseline systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159157015</value>
+           <displayName>Lying systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159155011</value>
+           <displayName>Sitting systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780182014</value>
+           <displayName>Standing systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>114311000006111</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676261000006112</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676271000006117</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11903371000006115</value>
+           <displayName>O/E - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556601000006117</value>
+           <displayName>On examination - Systolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556591000006113</value>
+           <displayName>On examination - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458803012</value>
+           <displayName>Average systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2533615017</value>
+           <displayName>Average home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1994021000006115</value>
+           <displayName>Home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046311000006118</value>
+           <displayName>24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298281000000114</value>
+           <displayName>Ambulatory systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057971000006116</value>
+           <displayName>Ambulatory systolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458809011</value>
+           <displayName>Average day interval systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458812014</value>
+           <displayName>Average 24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808011000006111</value>
+           <displayName>Systolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808041000006110</value>
+           <displayName>Systolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>76f1cb89-b90d-4165-a6fa-a4a7d9f8a763</id>
+         <column>DATE</column>
+         <displayName>Date</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-18</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>965416f7-8254-472d-b873-8e5c3d11e157</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <valueSet>
+            <id>94446fd2-96b3-4500-82a3-aa65352e8962</id>
+            <codeSystem>SNOMED_CONCEPT</codeSystem>
+            <values>
+             <value>5527201000006112</value>
+             <displayName>SAP - Systolic arterial pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>5527191000006114</value>
+             <displayName>Systolic blood pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>2418961000000111</value>
+             <displayName>Baseline systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>2159157015</value>
+             <displayName>Lying systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>2159155011</value>
+             <displayName>Sitting systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1780182014</value>
+             <displayName>Standing systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>114311000006111</value>
+             <displayName>Systolic arterial pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>3676261000006112</value>
+             <displayName>Systolic arterial pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>3676271000006117</value>
+             <displayName>Systolic blood pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>11903371000006115</value>
+             <displayName>O/E - Systolic BP reading</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>4556601000006117</value>
+             <displayName>On examination - Systolic blood pressure reading</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>4556591000006113</value>
+             <displayName>On examination - Systolic BP reading</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>458803012</value>
+             <displayName>Average systolic blood pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>1808041000006110</value>
+             <displayName>Systolic blood pressure - right arm</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1808011000006111</value>
+             <displayName>Systolic blood pressure - left arm</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+           </valueSet>
+          </columnValue>
+          <columnValue>
+           <id>b2c3b2ac-79ac-42d2-bb93-d95586920e6b</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>140</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>990f1c0b-1676-45f0-b321-d2e710dd7336</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>3bc2d33f-778a-465e-9c50-68fea6dd7317</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>de8d46d2-a6cd-41e3-9c09-fe12bd380dd7</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+         <libraryItem>aafda1f0-02fc-45bc-bd6f-b899efe9547d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>b100da33-e40b-45c6-aad6-db4cc3062a75</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>bbdaa84b-ffef-43e4-b54c-12dd71dae6cd</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>a9a66530-f499-468d-b417-392c58fd0636</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>75fc7421-4fe5-4bab-8a89-7a3b08a66d8e</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>5527221000006119</value>
+           <displayName>DAP - Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527231000006116</value>
+           <displayName>DBP - Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527241000006114</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527211000006110</value>
+           <displayName>Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418921000000115</value>
+           <displayName>Baseline diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>619931000006119</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2159158013</value>
+           <displayName>Lying diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159156012</value>
+           <displayName>Sitting diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780183016</value>
+           <displayName>Standing diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458816012</value>
+           <displayName>Average diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11924381000006114</value>
+           <displayName>O/E - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556621000006110</value>
+           <displayName>On examination - Diastolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556631000006113</value>
+           <displayName>On examination - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2533636015</value>
+           <displayName>Average home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1993951000006110</value>
+           <displayName>Home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046321000006114</value>
+           <displayName>24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298311000000112</value>
+           <displayName>Ambulatory diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057991000006115</value>
+           <displayName>Ambulatory diastolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458824019</value>
+           <displayName>Average day interval diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458825018</value>
+           <displayName>Average 24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808021000006115</value>
+           <displayName>Diastolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808051000006112</value>
+           <displayName>Diastolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>b59f6911-7420-4cf8-a616-5a3369172c30</id>
+         <column>DATE</column>
+         <displayName>Date</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-18</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>e512e92a-05b3-4d32-af1d-f14580f43573</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <valueSet>
+            <id>35cb9ad9-66d1-4b2a-a2d6-e42fbfde87ff</id>
+            <codeSystem>SNOMED_CONCEPT</codeSystem>
+            <values>
+             <value>5527221000006119</value>
+             <displayName>DAP - Diastolic arterial pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>5527231000006116</value>
+             <displayName>DBP - Diastolic blood pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>5527241000006114</value>
+             <displayName>Diastolic arterial pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>5527211000006110</value>
+             <displayName>Diastolic blood pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>2418921000000115</value>
+             <displayName>Baseline diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>619931000006119</value>
+             <displayName>Diastolic arterial pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>2159158013</value>
+             <displayName>Lying diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>2159156012</value>
+             <displayName>Sitting diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1780183016</value>
+             <displayName>Standing diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>458816012</value>
+             <displayName>Average diastolic blood pressure</displayName>
+             <includeChildren>false</includeChildren>
+            </values>
+            <values>
+             <value>11924381000006114</value>
+             <displayName>O/E - Diastolic BP reading</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>4556621000006110</value>
+             <displayName>On examination - Diastolic blood pressure reading</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>4556631000006113</value>
+             <displayName>On examination - Diastolic BP reading</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1808051000006112</value>
+             <displayName>Diastolic blood pressure - right arm</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1808021000006115</value>
+             <displayName>Diastolic blood pressure - left arm</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+           </valueSet>
+          </columnValue>
+          <columnValue>
+           <id>dc842198-7ca5-4cf2-8f50-afe4a8a9b5cd</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>90</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>16465b73-385e-44bb-b1cc-3b5a162415a4</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>5cf4ba51-6e57-4672-9c49-4b8a1c2d7d87</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>d53381c2-fc03-4013-9ab3-b77e11fab568</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+         <libraryItem>aafda1f0-02fc-45bc-bd6f-b899efe9547d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>b100da33-e40b-45c6-aad6-db4cc3062a75</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>12847f67-d2bb-4646-9de9-bfd77a9eb821</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>2e1deaa6-3a71-4213-af00-898f4664cbc4</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>f0af11a2-e524-4842-b75d-175e8d7cdeea</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>5527201000006112</value>
+           <displayName>SAP - Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527191000006114</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418961000000111</value>
+           <displayName>Baseline systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159157015</value>
+           <displayName>Lying systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159155011</value>
+           <displayName>Sitting systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780182014</value>
+           <displayName>Standing systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>114311000006111</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676261000006112</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676271000006117</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11903371000006115</value>
+           <displayName>O/E - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556601000006117</value>
+           <displayName>On examination - Systolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556591000006113</value>
+           <displayName>On examination - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458803012</value>
+           <displayName>Average systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2533615017</value>
+           <displayName>Average home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1994021000006115</value>
+           <displayName>Home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046311000006118</value>
+           <displayName>24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298281000000114</value>
+           <displayName>Ambulatory systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057971000006116</value>
+           <displayName>Ambulatory systolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458809011</value>
+           <displayName>Average day interval systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458812014</value>
+           <displayName>Average 24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808011000006111</value>
+           <displayName>Systolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808041000006110</value>
+           <displayName>Systolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>26f5b155-47b5-4091-9dfe-fb86d949ef86</id>
+         <column>DATE</column>
+         <displayName>Date</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-18</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>965416f7-8254-472d-b873-8e5c3d11e157</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <valueSet>
+            <id>8ea62af8-2c89-4df6-aff6-fa5f696755e5</id>
+            <codeSystem>SNOMED_CONCEPT</codeSystem>
+            <values>
+             <value>2533615017</value>
+             <displayName>Average home systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1994021000006115</value>
+             <displayName>Home systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6046311000006118</value>
+             <displayName>24 hour systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>298281000000114</value>
+             <displayName>Ambulatory systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>8057971000006116</value>
+             <displayName>Ambulatory systolic BP (blood pressure)</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>458809011</value>
+             <displayName>Average day interval systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>458812014</value>
+             <displayName>Average 24 hour systolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+           </valueSet>
+          </columnValue>
+          <columnValue>
+           <id>b2c3b2ac-79ac-42d2-bb93-d95586920e6b</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>135</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>d31a5d4b-62b2-4ebe-9391-ffb74d12b0c8</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>82f4fbfe-dece-464d-976a-89191e39dac0</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>8dc599eb-0f70-4b8a-8d0b-24929f1c7466</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+         <libraryItem>aafda1f0-02fc-45bc-bd6f-b899efe9547d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>b100da33-e40b-45c6-aad6-db4cc3062a75</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>556f28a3-8c42-42d5-99d1-30f8acb604e6</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>ac82a30f-dba6-46ec-8145-6e436c910fc3</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>d9e0d52c-f4ea-4fa7-b130-ea05aaae190b</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>5527221000006119</value>
+           <displayName>DAP - Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527231000006116</value>
+           <displayName>DBP - Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527241000006114</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527211000006110</value>
+           <displayName>Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418921000000115</value>
+           <displayName>Baseline diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>619931000006119</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2159158013</value>
+           <displayName>Lying diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159156012</value>
+           <displayName>Sitting diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780183016</value>
+           <displayName>Standing diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458816012</value>
+           <displayName>Average diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11924381000006114</value>
+           <displayName>O/E - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556621000006110</value>
+           <displayName>On examination - Diastolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556631000006113</value>
+           <displayName>On examination - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2533636015</value>
+           <displayName>Average home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1993951000006110</value>
+           <displayName>Home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046321000006114</value>
+           <displayName>24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298311000000112</value>
+           <displayName>Ambulatory diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057991000006115</value>
+           <displayName>Ambulatory diastolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458824019</value>
+           <displayName>Average day interval diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458825018</value>
+           <displayName>Average 24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808021000006115</value>
+           <displayName>Diastolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808051000006112</value>
+           <displayName>Diastolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>a85ec3e5-2ef2-4431-881f-f9bda9e1328d</id>
+         <column>DATE</column>
+         <displayName>Date</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-18</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>e512e92a-05b3-4d32-af1d-f14580f43573</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <valueSet>
+            <id>dd0c58f6-5284-45aa-909c-f7fbfec9c27e</id>
+            <codeSystem>SNOMED_CONCEPT</codeSystem>
+            <values>
+             <value>2533636015</value>
+             <displayName>Average home diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1993951000006110</value>
+             <displayName>Home diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6046321000006114</value>
+             <displayName>24 hour diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>298311000000112</value>
+             <displayName>Ambulatory diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>8057991000006115</value>
+             <displayName>Ambulatory diastolic BP (blood pressure)</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>458824019</value>
+             <displayName>Average day interval diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>458825018</value>
+             <displayName>Average 24 hour diastolic blood pressure</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+           </valueSet>
+          </columnValue>
+          <columnValue>
+           <id>dc842198-7ca5-4cf2-8f50-afe4a8a9b5cd</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>85</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>fb967373-d30b-46aa-aba2-bcfb1898d1d8</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>55d78b69-1f74-4c7c-af11-cacc4da4c8f3</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>3dd1889a-c4a8-4c99-8108-4e6c1efe5674</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>4ecec7ee-f42f-4418-acc3-ba4f16264c95</libraryItem>
+         <libraryItem>bd8458fb-abb7-469b-91e5-ce888b5b0f3d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>5830ed39-7323-432f-8dbc-d135c9bd11d0</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>4ecec7ee-f42f-4418-acc3-ba4f16264c95</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>6fabf76c-4078-4ee1-8788-34614722df83</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>1b1068ee-52a6-4a15-9510-551ec90cc8e8</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>226b6486-09f6-47c4-aad0-51a6a0e845c9</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>1700711000006113</value>
+           <displayName>Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1986181000006111</value>
+           <displayName>HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1986191000006114</value>
+           <displayName>HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>f33f6d6b-b08b-4f16-8c8b-78c6b87a9287</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>59</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>d6fabb84-7a47-46d6-b215-2eade45bad68</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>310ffb9c-2013-47a9-9c4d-1945133e1132</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>cdc7fc52-4a9e-491c-b895-a2d0c239070f</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>77b8d09a-e753-48d2-8c22-81f25b544ee6</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>1126121000000112</value>
+           <displayName>QRISK2 cardiovascular disease 10 year risk score</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8463841000006110</value>
+           <displayName>QRISK3 cardiovascular disease 10 year risk calculator score</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>6ca472eb-02f2-4fb6-ade3-a32f690a8712</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>10</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>d5398de3-a724-4da1-9cc9-9d8f8577ef06</id>
+       <table>MEDICATION_ISSUES</table>
+       <displayName>Medication Issues</displayName>
+       <negation>true</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>01074232-8fb8-46dd-95ad-1c8f9c3dcdb9</id>
+         <column>DRUGCODE</column>
+         <displayName>Drug</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>b1f894de-ae97-43a9-b0a8-ab2f87086183</id>
+          <codeSystem>SCT_PREP</codeSystem>
+          <values>
+           <value>6468841000033114</value>
+           <displayName>Atorvastatin 20mg chewable tablets sugar free</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>92041000033111</value>
+           <displayName>Atorvastatin 20mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>5990541000033112</value>
+           <displayName>Atorvastatin 20mg/5ml oral solution</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3868741000033118</value>
+           <displayName>Atorvastatin 20mg/5ml oral suspension</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>7861441000033110</value>
+           <displayName>Atorvastatin 30mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>92141000033110</value>
+           <displayName>Atorvastatin 40mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>7861541000033111</value>
+           <displayName>Atorvastatin 60mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2261041000033114</value>
+           <displayName>Atorvastatin 80mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6469141000033114</value>
+           <displayName>Lipitor 20mg chewable tablets (Upjohn UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>836341000033115</value>
+           <displayName>Lipitor 20mg tablets (Upjohn UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>836441000033114</value>
+           <displayName>Lipitor 40mg tablets (Upjohn UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2261141000033113</value>
+           <displayName>Lipitor 80mg tablets (Upjohn UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891841000033113</value>
+           <displayName>Crestor 10mg tablets (AstraZeneca UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891941000033117</value>
+           <displayName>Crestor 20mg tablets (AstraZeneca UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2892041000033111</value>
+           <displayName>Crestor 40mg tablets (AstraZeneca UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891541000033111</value>
+           <displayName>Rosuvastatin 10mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891641000033112</value>
+           <displayName>Rosuvastatin 20mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891741000033115</value>
+           <displayName>Rosuvastatin 40mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>dd0517d2-c101-47b6-ac57-ce44de75ca31</id>
+         <column>ISSUE_DATE</column>
+         <displayName>Date of Issue</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-6</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>f3a97116-59b0-4b84-ab06-9fe4ae7d1e5c</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>deaf1a83-9c5f-414c-83eb-18ff7e9656db</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>c3d50ba5-1cd6-4f47-aea6-185c67a163ab</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>22575230-a13e-431d-983c-3fee668bf452</libraryItem>
+         <libraryItem>8aa2198a-efca-4d1a-9bcf-1fd6117ef87d</libraryItem>
+         <libraryItem>1ee3788a-0e92-4a69-890a-0b5daff494b4</libraryItem>
+         <libraryItem>8a030be6-be7a-49eb-b187-6575dfdd32c0</libraryItem>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>e6786a04-e856-47c6-8130-f632633f9e41</id>
+       <table>MEDICATION_ISSUES</table>
+       <displayName>Medication Issues</displayName>
+       <negation>true</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>9e431415-7b55-4a39-99eb-f18f611361b4</id>
+         <column>DRUGCODE</column>
+         <displayName>Drug</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>d858d929-50d3-4b7b-a760-402e7fa21e80</id>
+          <codeSystem>SCT_PREP</codeSystem>
+          <values>
+           <value>92141000033110</value>
+           <displayName>Atorvastatin 40mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>7861541000033111</value>
+           <displayName>Atorvastatin 60mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2261041000033114</value>
+           <displayName>Atorvastatin 80mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>836441000033114</value>
+           <displayName>Lipitor 40mg tablets (Upjohn UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2261141000033113</value>
+           <displayName>Lipitor 80mg tablets (Upjohn UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891941000033117</value>
+           <displayName>Crestor 20mg tablets (AstraZeneca UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2892041000033111</value>
+           <displayName>Crestor 40mg tablets (AstraZeneca UK Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891641000033112</value>
+           <displayName>Rosuvastatin 20mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2891741000033115</value>
+           <displayName>Rosuvastatin 40mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3292941000033114</value>
+           <displayName>Inegy 10mg/80mg tablets (Organon Pharma (UK) Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4941641000033116</value>
+           <displayName>Simvador 80mg tablets (Dexcel-Pharma Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3292641000033119</value>
+           <displayName>Simvastatin 80mg / Ezetimibe 10mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2066241000033118</value>
+           <displayName>Simvastatin 80mg tablets</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2066341000033111</value>
+           <displayName>Zocor 80mg tablets (Organon Pharma (UK) Ltd)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>b85b7d5b-d6b3-409f-8bfc-1d480e86649c</id>
+         <column>ISSUE_DATE</column>
+         <displayName>Date of Issue</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-6</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>0afc83aa-6fe3-48a4-a20b-d738f5935d66</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>e4ab0abb-d248-48f7-945b-8a1712f5243a</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>6c9b290e-28ea-4b42-973f-5a64fdb26be6</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>b8e618ac-9a75-40d7-a3f9-698c94c6591c</libraryItem>
+         <libraryItem>8717d642-5703-444d-8985-de8e5d1a3a06</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>6d67ac97-3b63-4940-a62c-dae44ee5e598</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>8717d642-5703-444d-8985-de8e5d1a3a06</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>53849fc3-0b25-44c6-84ba-5ef42eea179b</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>72ace7d8-c528-4282-af3c-1f0d30559a03</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>4f1150a0-3f71-4489-8e72-1a362164ef28</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>1782641000006118</value>
+           <displayName>CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>2ae53f3f-5edd-4c54-bcb2-ba708ea2b4ee</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>2</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>eb34618b-c421-4033-8efa-084a8500466c</id>
+       <table>MEDICATION_ISSUES</table>
+       <displayName>Medication Issues</displayName>
+       <negation>true</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>b6eb6c3a-99c8-49d9-8dea-bb1e4a3f2128</id>
+         <column>DRUGCODE</column>
+         <displayName>Drug</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>b051aa24-0fc5-4e78-ad76-959518dbaf9c</id>
+          <codeSystem>SCT_CONST</codeSystem>
+          <values>
+           <value>157321000033119</value>
+           <displayName>Warfarin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>157421000033111</value>
+           <displayName>Warfarin Sodium</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1230221000033111</value>
+           <displayName>Edoxaban tosilate</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>945021000033114</value>
+           <displayName>Dabigatran Etexilate</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>979521000033119</value>
+           <displayName>Apixaban</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>950721000033119</value>
+           <displayName>Rivaroxaban</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>113921000033117</value>
+           <displayName>Phenindione</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>103521000033111</value>
+           <displayName>Acenocoumarol</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>e9f6003b-7283-45d3-887c-fe3452025054</id>
+         <column>ISSUE_DATE</column>
+         <displayName>Date of Issue</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-6</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>838bf170-ad28-4c93-9139-69d23ac49ec8</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>3be8ae58-e020-43d1-bd60-966da838be32</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>6e4d8207-00de-4343-a064-8ca48fb5f9e6</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>6b261f27-5a7a-43f5-8ab9-cd83ddae2c96</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>100716012</value>
+           <displayName>Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484801000006114</value>
+           <displayName>BMI - Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484781000006110</value>
+           <displayName>Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484811000006112</value>
+           <displayName>Quetelet index</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3484791000006113</value>
+           <displayName>Weight: body mass</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>adaca4b3-afa1-44c3-b06c-7e785d38d34e</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>30</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>6b56f2da-a542-40a7-9172-4d21ef663527</id>
+       <table>MEDICATION_ISSUES</table>
+       <displayName>Medication Issues</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>616d6fcc-d674-4545-8e58-ef473930ce63</id>
+         <column>DRUGCODE</column>
+         <displayName>Drug</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>a5be12bb-c175-4a90-815e-1007ef77f8de</id>
+          <codeSystem>SCT_CONST</codeSystem>
+          <values>
+           <value>625021000033112</value>
+           <displayName>Olanzapine</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>971221000033118</value>
+           <displayName>Olanzapine Pamoate Monohydrate</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>672521000033114</value>
+           <displayName>Clozapine</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>0ddd8024-199e-4052-87b8-ef0968be25fa</id>
+         <column>ISSUE_DATE</column>
+         <displayName>Date of Issue</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-6</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>ffd7d69b-a1c2-480f-9e94-1fad925b06f8</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>150b48a3-4f93-4e1c-9c62-dbca8ea4cb6b</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>6526f3a4-40da-4707-bf9a-09b614b29871</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>6b261f27-5a7a-43f5-8ab9-cd83ddae2c96</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>100716012</value>
+           <displayName>Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484801000006114</value>
+           <displayName>BMI - Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484781000006110</value>
+           <displayName>Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484811000006112</value>
+           <displayName>Quetelet index</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3484791000006113</value>
+           <displayName>Weight: body mass</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>adaca4b3-afa1-44c3-b06c-7e785d38d34e</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>27.5</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>a61e833d-4515-40ec-84e8-7cc7326f9629</id>
+       <table>MEDICATION_ISSUES</table>
+       <displayName>Medication Issues</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>bca14698-aef0-45f4-af04-a0fb42aee066</id>
+         <column>DRUGCODE</column>
+         <displayName>Drug</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>a5be12bb-c175-4a90-815e-1007ef77f8de</id>
+          <codeSystem>SCT_CONST</codeSystem>
+          <values>
+           <value>625021000033112</value>
+           <displayName>Olanzapine</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>971221000033118</value>
+           <displayName>Olanzapine Pamoate Monohydrate</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>672521000033114</value>
+           <displayName>Clozapine</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>8de89eca-f17f-4f8d-bb01-31c4ae2b2a2a</id>
+         <column>ISSUE_DATE</column>
+         <displayName>Date of Issue</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-6</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>c1e45cbf-11cd-4f7a-a6df-d8435211aa05</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>70082496-23bc-4b3f-833b-44de2a1f5fc9</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>78584c05-0941-4a54-a655-9b9982a8ff23</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>3548651000006118</value>
+           <displayName>Indians (Hindi-speaking)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3818151000006118</value>
+           <displayName>Pakistani (Urduspeakers)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3822021000006117</value>
+           <displayName>Todas</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3830921000006119</value>
+           <displayName>Naiars</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>136081000000111</value>
+           <displayName>Sri Lankan - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3865581000006114</value>
+           <displayName>Irula</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141361000000114</value>
+           <displayName>Pakistani or British Pakistani - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>937541000006115</value>
+           <displayName>Bangladeshi or British Bangladeshi - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141381000000117</value>
+           <displayName>Other Asian background - ethnic category 2001 census</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>141511000000116</value>
+           <displayName>Mixed Asian - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141521000000110</value>
+           <displayName>Punjabi - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141531000000112</value>
+           <displayName>Kashmiri - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141541000000115</value>
+           <displayName>East African Asian - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141551000000117</value>
+           <displayName>Tamil - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141561000000119</value>
+           <displayName>British Asian - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141571000000114</value>
+           <displayName>Caribbean Asian - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>937651000006117</value>
+           <displayName>Other Asian or Asian unspecified - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3981921000006113</value>
+           <displayName>Oraons</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>157271000000119</value>
+           <displayName>Indian or British Indian - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1572831000000110</value>
+           <displayName>Nepali</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>157301000000116</value>
+           <displayName>Sinhalese - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968131000006112</value>
+           <displayName>Asian or Asian British: Indian - England and Wales ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968141000006119</value>
+           <displayName>Asian or Asian British: Pakistani - England and Wales ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968151000006117</value>
+           <displayName>Asian or Asian British: Bangladeshi - England and Wales ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968171000006110</value>
+           <displayName>Asian or Asian British: any other Asian background - England and Wales ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968301000006118</value>
+           <displayName>Asian or Asian British: Indian - Northern Ireland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968311000006115</value>
+           <displayName>Asian or Asian British: Pakistani - Northern Ireland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968321000006111</value>
+           <displayName>Asian or Asian British: Bangladeshi - Northern Ireland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968341000006116</value>
+           <displayName>Asian or Asian British: any other Asian background - Northern Ireland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968481000006118</value>
+           <displayName>Asian or Asian Scottish or Asian British: Pakistani, Pakistani Scottish or Pakistani British - Scotland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968491000006115</value>
+           <displayName>Asian or Asian Scottish or Asian British: Indian, Indian Scottish or Indian British - Scotland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968501000006111</value>
+           <displayName>Asian or Asian Scottish or Asian British: Bangladeshi, Bangladeshi Scottish or Bangladeshi British - Scotland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968521000006118</value>
+           <displayName>Asian or Asian Scottish or Asian British: any other Asian group - Scotland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>250224013</value>
+           <displayName>Asian origin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6843621000006111</value>
+           <displayName>Asian race</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>285954016</value>
+           <displayName>Indian</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4740201000006119</value>
+           <displayName>Indian (East Indian)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>285955015</value>
+           <displayName>Pakistani</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>285956019</value>
+           <displayName>Bangladeshi</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>285976013</value>
+           <displayName>Indian sub-continent (NMO)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>285977016</value>
+           <displayName>Other Asian (NMO)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>7590171000006117</value>
+           <displayName>Punjabi</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>405069018</value>
+           <displayName>E Afric Asian/Indo-Carib (NMO)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>411583012</value>
+           <displayName>East African Asian (NMO)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>411584018</value>
+           <displayName>Indo-Caribbean (NMO)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>286020010</value>
+           <displayName>Asian - ethnic group</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>459784018</value>
+           <displayName>Other Asian ethnic group</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3254831000006114</value>
+           <displayName>Badagas</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2567401000006117</value>
+           <displayName>Marathas</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3432851000006110</value>
+           <displayName>Chenchu</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1745831000006112</value>
+           <displayName>Nepalese</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>141401000000117</value>
+           <displayName>Chinese - ethnic category 2001 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968161000006115</value>
+           <displayName>Asian or Asian British: Chinese - England and Wales ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968331000006114</value>
+           <displayName>Asian or Asian British: Chinese - Northern Ireland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1968511000006114</value>
+           <displayName>Asian or Asian Scottish or Asian British: Chinese - Scotland ethnic category 2011 census</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>56590016</value>
+           <displayName>Chinese</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>36a15439-592a-4f8e-9703-ed8aab03aea7</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>bc852b08-1c52-4f49-85bb-0bdb88ccf5a2</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>795a1133-2776-41e0-add5-eea48fdfaaf6</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>5a0192fd-27ea-4b30-8f8d-db17ab89284a</libraryItem>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>daaa2db1-a973-40d7-a573-65178c5b7c7c</id>
+       <table>PATIENTS</table>
+       <displayName>Patient Details</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>ba5eb3c4-260a-42a4-8e1c-ab2ac2540d7d</id>
+         <column>AGE</column>
+         <displayName>Age</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>18</value>
+            <unit>YEAR</unit>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>3912027d-bffe-44f0-91a4-d1151b9e4abc</id>
+       <table>MEDICATION_ISSUES</table>
+       <displayName>Medication Issues</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>35c1200f-eac1-411f-a531-0ca4fe3cb625</id>
+         <column>DRUGCODE</column>
+         <displayName>Drug</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>95756d4f-49ff-4009-a88f-ba1e8f2ccc83</id>
+          <codeSystem>SCT_CONST</codeSystem>
+          <values>
+           <value>635321000033112</value>
+           <displayName>Atorvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>868521000033110</value>
+           <displayName>Rosuvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>717521000033114</value>
+           <displayName>Pravastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>534121000033115</value>
+           <displayName>Fluvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>390721000033117</value>
+           <displayName>Simvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>e33374de-98bd-4bdd-a882-36d285ae3047</id>
+         <column>ISSUE_DATE</column>
+         <displayName>Date of Issue</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-6</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>73cc6420-7c47-4ba2-8b22-9a2a8379d7f1</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>bebe5d71-9f40-440e-9f39-6f0c6e6fbc76</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>471996a3-54d1-4778-97bb-e5ec084657b5</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>aa9016fc-3966-44b3-9cc2-071f8992f731</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>292466013</value>
+           <displayName>Diabetes mellitus without complication</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>189711000000119</value>
+           <displayName>Lipoatrophic diabetes mellitus without complication</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>19931010</value>
+           <displayName>Brittle diabetes</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>4392141000006116</value>
+           <displayName>Lipoatrophic diabetes</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>205225016</value>
+           <displayName>Diabetic nephropathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>292540012</value>
+           <displayName>Type 1 diabetes mellitus with ulcer</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>292553010</value>
+           <displayName>Type 1 diabetes mellitus maturity onset</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>292577016</value>
+           <displayName>Type 2 diabetes mellitus with multiple complications</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>292579018</value>
+           <displayName>Type 2 diabetes mellitus with ulcer</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>616971000006114</value>
+           <displayName>Diabetic Charcot's arthropathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>345492010</value>
+           <displayName>Diabetic mononeuropathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>914391000006116</value>
+           <displayName>Insulin treated type 2 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>356078011</value>
+           <displayName>Secondary endocrine diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>840971000006112</value>
+           <displayName>Diabetes mellitus autosomal dominant type II</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2156000010</value>
+           <displayName>Lipodystrophy, partial, with Rieger anomaly, short stature, and insulinopenic diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>356100018</value>
+           <displayName>Herrmann syndrome</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>356101019</value>
+           <displayName>Hyperproinsulinaemia</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1775531012</value>
+           <displayName>Hypogonadism, diabetes mellitus, alopecia, mental retardation and electrocardiographic abnormalities</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>356110010</value>
+           <displayName>Megaloblastic anaemia, thiamine-responsive, with diabetes mellitus and sensorineural deafness</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>5109831000006114</value>
+           <displayName>Congenital insulin-dependent diabetes mellitus with fatal secretory diarrhea</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>356117013</value>
+           <displayName>Ballinger-Wallace syndrome</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>5110071000006112</value>
+           <displayName>Hypoglycaemic event in diabetes</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2900951000006115</value>
+           <displayName>Diabetic eye disease</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>401531012</value>
+           <displayName>Diabetic - poor control</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5754581000006110</value>
+           <displayName>Brittle type 1 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>913941000006114</value>
+           <displayName>Peripheral angiopathy due to type 1 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>616621000006115</value>
+           <displayName>Type 1 diabetes mellitus without complication</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>457329019</value>
+           <displayName>Type 2 diabetes mellitus without complication</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>6050041000006115</value>
+           <displayName>Insulin dependent diabetes mellitus with hypoglycaemic coma</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>459292011</value>
+           <displayName>Type 1 diabetes mellitus with arthropathy</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>280561000006111</value>
+           <displayName>Non-insulin-dependent diabetes mellitus with peripheral angiopathy</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>459309011</value>
+           <displayName>Non-insulin dependent diabetes mellitus with arthropathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>281181000006116</value>
+           <displayName>Non-insulin dependent diabetes mellitus with neuropathic arthropathy</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>622221000000118</value>
+           <displayName>Maternally inherited diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8118151000006112</value>
+           <displayName>Hyperosmolarity co-occurrent and due to drug induced diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>292565014</value>
+           <displayName>Diabetes mellitus with multiple complications</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1667891000000113</value>
+           <displayName>Hyperosmolar non-ketotic state in type II diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1229552016</value>
+           <displayName>Arthropathy associated with endocrine and metabolic disorder</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>1780311019</value>
+           <displayName>Type 1 diabetes mellitus with persistent microalbuminuria</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6763751000006119</value>
+           <displayName>Diabetes mellitus caused by non-steroid drugs</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>6837991000006112</value>
+           <displayName>Diabetes mellitus caused by non-steroid drugs without complication</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6951091000006110</value>
+           <displayName>Diabetes type 1 with ketoacidosis</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>914261000006119</value>
+           <displayName>Diabetes type 2 with nephropathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>12702401000006118</value>
+           <displayName>Mononeuropathy associated with type 2 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>12705001000006119</value>
+           <displayName>Exudative maculopathy associated with type 1 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>928461000006119</value>
+           <displayName>Persistent proteinuria associated with type 1 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>928561000006118</value>
+           <displayName>Persistent microalbuminuria associated with type 2 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>84871000006117</value>
+           <displayName>Cataract due to diabetes mellitus type 2</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6960441000006112</value>
+           <displayName>Diabetes type 1 with retinopathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>6961101000006114</value>
+           <displayName>Diabetes type 1 with gangrene</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>12702371000006116</value>
+           <displayName>Mononeuropathy associated with type 1 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6965571000006111</value>
+           <displayName>Diabetes mellitus type 1 with ketoacidotic coma</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6969931000006116</value>
+           <displayName>Diabetes type 2 with neurological disorder</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>6972451000006115</value>
+           <displayName>Diabetes type 1 with neurological disorder</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>281211000006117</value>
+           <displayName>Gangrene associated with type 2 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6977431000006113</value>
+           <displayName>Diabetes type 2 with ketoacidosis</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>12705011000006116</value>
+           <displayName>Exudative maculopathy associated with type 2 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6979251000006110</value>
+           <displayName>Diabetes mellitus type 2 with ketoacidotic coma</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6980001000006117</value>
+           <displayName>Kidney disorder associated with type 1 diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>6980041000006115</value>
+           <displayName>Diabetic peripheral circulatory disorder</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>12336121000006110</value>
+           <displayName>Cataract co-occurrent and due to diabetes mellitus type 1</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>928541000006117</value>
+           <displayName>Persistent proteinuria associated with type 2 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6982521000006119</value>
+           <displayName>Diabetes type 2 with retinopathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>616391000006114</value>
+           <displayName>Nervous system disorder due to diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>12704961000006118</value>
+           <displayName>Diabetic oculopathy associated with type 2 diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>6985411000006117</value>
+           <displayName>Diabetic skin ulcer</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>84731000006111</value>
+           <displayName>Multiple complications of type 1 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6987011000006115</value>
+           <displayName>Gangrene associated with diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>494831000000119</value>
+           <displayName>Diabetes mellitus associated with cystic fibrosis</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2674067015</value>
+           <displayName>Latent autoimmune diabetes mellitus in adult</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>73294018</value>
+           <displayName>Diabetic cataract</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>197761014</value>
+           <displayName>Type 2 diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>292590011</value>
+           <displayName>Type II diabetes mellitus poorly controlled</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>7287611000006113</value>
+           <displayName>Type 1 diabetes mellitus uncontrolled</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>197984010</value>
+           <displayName>Type 1 diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>9093013</value>
+           <displayName>Diabetic retinopathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>82373015</value>
+           <displayName>Diabetic polyneuropathy</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>9986011</value>
+           <displayName>Drug-induced diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>483882011</value>
+           <displayName>Maturity-onset diabetes of the young</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>7500201000006115</value>
+           <displayName>MODY1</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>12363671000006118</value>
+           <displayName>Gastroparesis co-occurrent and due to type 1 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>12363691000006117</value>
+           <displayName>Gastroparesis co-occurrent and due to type 2 diabetes mellitus</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>7708121000006119</value>
+           <displayName>Polyneuropathy due to diabetes mellitus type II</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8022471000006114</value>
+           <displayName>Diabetes mellitus type 1 with diabetic Charcot's arthropathy</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>459169018</value>
+           <displayName>Hypoglycaemic coma co-occurrent and due to diabetes mellitus type II</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>121589010</value>
+           <displayName>Diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3537388019</value>
+           <displayName>Diabetic oculopathy due to type 1 diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3291658019</value>
+           <displayName>Diabetes mellitus caused by insulin receptor antibodies</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>15518018</value>
+           <displayName>Secondary diabetes mellitus</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>6610fc65-ef25-48fd-a804-a049373f3bf2</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <valueSet>
+            <id>27b196f6-4a9f-478a-835c-ee58aaee52a9</id>
+            <codeSystem>SNOMED_CONCEPT</codeSystem>
+            <values>
+             <value>292466013</value>
+             <displayName>Diabetes mellitus without complication</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>19931010</value>
+             <displayName>Brittle diabetes</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>205225016</value>
+             <displayName>Diabetic nephropathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>4758061000006110</value>
+             <displayName>Insulin-dependent diabetes mellitus with ulcer</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>4758121000006115</value>
+             <displayName>Insulin-dependent diabetes maturity onset</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>4808921000006113</value>
+             <displayName>Diabetic neuropathic arthropathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>345492010</value>
+             <displayName>Diabetic mononeuropathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>5110071000006112</value>
+             <displayName>Hypoglycaemic event in diabetes</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>2900951000006115</value>
+             <displayName>Diabetic eye disease</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>5505651000006113</value>
+             <displayName>Diabetes mellitus uncontrolled</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>5754581000006110</value>
+             <displayName>Brittle type 1 diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>84411000006111</value>
+             <displayName>Type 1 diabetes mellitus with peripheral angiopathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>616621000006115</value>
+             <displayName>Type 1 diabetes mellitus without complication</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6050081000006114</value>
+             <displayName>Type 1 diabetes mellitus with hypoglycemic coma</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>459294012</value>
+             <displayName>Type I diabetes mellitus with arthropathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>913531000006111</value>
+             <displayName>Insulin dependent diabetes mellitus with multiple complicat</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>771331000006116</value>
+             <displayName>Insulin dependent diabetes mellitus with arthropathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>1780311019</value>
+             <displayName>Type 1 diabetes mellitus with persistent microalbuminuria</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>928511000006116</value>
+             <displayName>Type I diabetes mellitus with ketoacidosis</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>938311000006112</value>
+             <displayName>Type I diabetes mellitus with exudative maculopathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>928471000006114</value>
+             <displayName>Type I diabetes mellitus with persistent proteinuria</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6960441000006112</value>
+             <displayName>Diabetes type 1 with retinopathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6961101000006114</value>
+             <displayName>Diabetes type 1 with gangrene</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>913791000006119</value>
+             <displayName>Type I diabetes mellitus with mononeuropathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6965571000006111</value>
+             <displayName>Diabetes mellitus type 1 with ketoacidotic coma</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>84381000006113</value>
+             <displayName>Type 1 diabetes mellitus with neurological complications</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>84371000006110</value>
+             <displayName>Type 1 diabetes mellitus with nephropathy</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>616441000006113</value>
+             <displayName>Peripheral vascular disorder due to diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>84321000006114</value>
+             <displayName>Type 1 diabetes mellitus with diabetic cataract</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6983521000006113</value>
+             <displayName>Diabetic neurologic disease</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6985411000006117</value>
+             <displayName>Diabetic skin ulcer</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>84361000006115</value>
+             <displayName>Type 1 diabetes mellitus with multiple complications</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>6987011000006115</value>
+             <displayName>Gangrene associated with diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>2674067015</value>
+             <displayName>Latent autoimmune diabetes mellitus in adult</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>12183221000006110</value>
+             <displayName>Cataract co-occurrent and due to diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>7287611000006113</value>
+             <displayName>Type 1 diabetes mellitus uncontrolled</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>197984010</value>
+             <displayName>Type 1 diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>12166111000006116</value>
+             <displayName>Retinopathy due to diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>12185421000006113</value>
+             <displayName>Polyneuropathy due to diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>483882011</value>
+             <displayName>Maturity-onset diabetes of the young</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>7500191000006118</value>
+             <displayName>Maturity onset diabetes of the young, type 1</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>7500201000006115</value>
+             <displayName>MODY1</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>299601000000114</value>
+             <displayName>Gastroparesis with type 1 diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>7708091000006118</value>
+             <displayName>Polyneuropathy due to type 1 diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>8022441000006118</value>
+             <displayName>Neuropathic arthropathy due to type 1 diabetes mellitus</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+            <values>
+             <value>84401000006113</value>
+             <displayName>Type 1 diabetes mellitus with ophthalmic complications</displayName>
+             <includeChildren>true</includeChildren>
+            </values>
+           </valueSet>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>cb998aed-97d6-475d-b09c-15ce4fa90f47</id>
+       <table>PATIENTS</table>
+       <displayName>Patient Details</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>222f799d-94f8-4cd8-8d1a-93ace6227101</id>
+         <column>AGE</column>
+         <displayName>Age</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>40</value>
+            <unit>YEAR</unit>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>5c301847-c448-4b4c-849b-2e8d90ed279f</id>
+       <table>MEDICATION_ISSUES</table>
+       <displayName>Medication Issues</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>d8f2f539-ca6c-4783-9d34-c172402f1963</id>
+         <column>DRUGCODE</column>
+         <displayName>Drug</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>95756d4f-49ff-4009-a88f-ba1e8f2ccc83</id>
+          <codeSystem>SCT_CONST</codeSystem>
+          <values>
+           <value>635321000033112</value>
+           <displayName>Atorvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>868521000033110</value>
+           <displayName>Rosuvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>717521000033114</value>
+           <displayName>Pravastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>534121000033115</value>
+           <displayName>Fluvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>390721000033117</value>
+           <displayName>Simvastatin</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>2cc85860-3bb1-4739-8d9a-37f8f1df15da</id>
+         <column>ISSUE_DATE</column>
+         <displayName>Date of Issue</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-6</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>9ba683d9-1816-40b0-b591-857cbb086d3e</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>ba740b88-1614-4aa5-b749-79f43545ce77</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>094edccf-5b07-41dc-8101-96fe1e6211ed</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+         <libraryItem>aafda1f0-02fc-45bc-bd6f-b899efe9547d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>b100da33-e40b-45c6-aad6-db4cc3062a75</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>01e73690-c5ce-4f21-b8fb-5222172e8645</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>true</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>c5800429-577a-4cf3-ae61-2e2c5b64c83d</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>baecab97-5d13-495d-b807-63c0901ec469</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>5527201000006112</value>
+           <displayName>SAP - Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527191000006114</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418961000000111</value>
+           <displayName>Baseline systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159157015</value>
+           <displayName>Lying systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159155011</value>
+           <displayName>Sitting systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780182014</value>
+           <displayName>Standing systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>114311000006111</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676261000006112</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676271000006117</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11903371000006115</value>
+           <displayName>O/E - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556601000006117</value>
+           <displayName>On examination - Systolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556591000006113</value>
+           <displayName>On examination - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458803012</value>
+           <displayName>Average systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>1808011000006111</value>
+           <displayName>Systolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808041000006110</value>
+           <displayName>Systolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2533615017</value>
+           <displayName>Average home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1994021000006115</value>
+           <displayName>Home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046311000006118</value>
+           <displayName>24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298281000000114</value>
+           <displayName>Ambulatory systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057971000006116</value>
+           <displayName>Ambulatory systolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458809011</value>
+           <displayName>Average day interval systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458812014</value>
+           <displayName>Average 24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>5527221000006119</value>
+           <displayName>DAP - Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527231000006116</value>
+           <displayName>DBP - Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527241000006114</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527211000006110</value>
+           <displayName>Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418921000000115</value>
+           <displayName>Baseline diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>619931000006119</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2159158013</value>
+           <displayName>Lying diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159156012</value>
+           <displayName>Sitting diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780183016</value>
+           <displayName>Standing diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458816012</value>
+           <displayName>Average diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11924381000006114</value>
+           <displayName>O/E - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556621000006110</value>
+           <displayName>On examination - Diastolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556631000006113</value>
+           <displayName>On examination - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808021000006115</value>
+           <displayName>Diastolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808051000006112</value>
+           <displayName>Diastolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2533636015</value>
+           <displayName>Average home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1993951000006110</value>
+           <displayName>Home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046321000006114</value>
+           <displayName>24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298311000000112</value>
+           <displayName>Ambulatory diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057991000006115</value>
+           <displayName>Ambulatory diastolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458824019</value>
+           <displayName>Average day interval diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458825018</value>
+           <displayName>Average 24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>d2933de4-37ba-410c-9dde-a2bb19071438</id>
+         <column>DATE</column>
+         <displayName>Date</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-18</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>REJECT</actionIfFalse>
+    <id>a08079c6-2bf7-41e5-9473-c8ff5a50d6fa</id>
+   </criteriaGroup>
+  </population>
+ </report>
+ <report>
+  <id>fe469cf2-84f3-4b03-a2f5-96223ae78dfd</id>
+  <name>Priority 2</name>
+  <description/>
+  <creationTime>2021-11-15T10:17:47.9673496+00:00</creationTime>
+  <author>
+   <userInRole>a5db4395-cb7a-4fa5-950b-db5ffb0ca5bb</userInRole>
+  </author>
+  <populationType>PATIENT</populationType>
+  <folder>9eab35db-ac57-47d8-8eea-05ef06e44dca</folder>
+  <parent parentType="POP">
+   <SearchIdentifier reportGuid="6d517466-813b-46a8-b848-aaf5a4fbdcbf"/>
+  </parent>
+  <searchDate>BASELINE</searchDate>
+  <population>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <populationCriterion reportGuid="40a4a1f1-b768-4db8-a8a6-6df744935d97"/>
+     </criteria>
+    </definition>
+    <actionIfTrue>REJECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>f3fe55d9-dfac-422e-90f5-e4874d6eee41</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <criterion>
+       <id>187d074d-bc00-4fa6-a92f-f68011d1d0a6</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>331cb56c-661f-4d23-9560-62a7faf0fd43</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>baecab97-5d13-495d-b807-63c0901ec469</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>5527201000006112</value>
+           <displayName>SAP - Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527191000006114</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418961000000111</value>
+           <displayName>Baseline systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159157015</value>
+           <displayName>Lying systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159155011</value>
+           <displayName>Sitting systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780182014</value>
+           <displayName>Standing systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>114311000006111</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676261000006112</value>
+           <displayName>Systolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3676271000006117</value>
+           <displayName>Systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11903371000006115</value>
+           <displayName>O/E - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556601000006117</value>
+           <displayName>On examination - Systolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556591000006113</value>
+           <displayName>On examination - Systolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458803012</value>
+           <displayName>Average systolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>1808011000006111</value>
+           <displayName>Systolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808041000006110</value>
+           <displayName>Systolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2533615017</value>
+           <displayName>Average home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1994021000006115</value>
+           <displayName>Home systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046311000006118</value>
+           <displayName>24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298281000000114</value>
+           <displayName>Ambulatory systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057971000006116</value>
+           <displayName>Ambulatory systolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458809011</value>
+           <displayName>Average day interval systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458812014</value>
+           <displayName>Average 24 hour systolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>5527221000006119</value>
+           <displayName>DAP - Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527231000006116</value>
+           <displayName>DBP - Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527241000006114</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>5527211000006110</value>
+           <displayName>Diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2418921000000115</value>
+           <displayName>Baseline diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>619931000006119</value>
+           <displayName>Diastolic arterial pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>2159158013</value>
+           <displayName>Lying diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2159156012</value>
+           <displayName>Sitting diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1780183016</value>
+           <displayName>Standing diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458816012</value>
+           <displayName>Average diastolic blood pressure</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>11924381000006114</value>
+           <displayName>O/E - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556621000006110</value>
+           <displayName>On examination - Diastolic blood pressure reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>4556631000006113</value>
+           <displayName>On examination - Diastolic BP reading</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808021000006115</value>
+           <displayName>Diastolic blood pressure - left arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1808051000006112</value>
+           <displayName>Diastolic blood pressure - right arm</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>2533636015</value>
+           <displayName>Average home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>1993951000006110</value>
+           <displayName>Home diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>6046321000006114</value>
+           <displayName>24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>298311000000112</value>
+           <displayName>Ambulatory diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>8057991000006115</value>
+           <displayName>Ambulatory diastolic BP (blood pressure)</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458824019</value>
+           <displayName>Average day interval diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>458825018</value>
+           <displayName>Average 24 hour diastolic blood pressure</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <columnValue>
+         <id>337c438b-927c-4a58-8ace-83f33aa9633b</id>
+         <column>DATE</column>
+         <displayName>Date</displayName>
+         <inNotIn>IN</inNotIn>
+         <rangeValue>
+          <rangeFrom>
+           <value>
+            <value>-18</value>
+            <unit>MONTH</unit>
+            <relation>RELATIVE</relation>
+           </value>
+           <operator>GTEQ</operator>
+          </rangeFrom>
+         </rangeValue>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>REJECT</actionIfTrue>
+    <actionIfFalse>SELECT</actionIfFalse>
+    <id>a115861d-8951-4d9b-9105-ab7ef1baa5f7</id>
+   </criteriaGroup>
+  </population>
+ </report>
+ <report>
+  <id>6d4abdbb-d278-4675-a98d-c340967daee6</id>
+  <name>Priority 3a</name>
+  <description/>
+  <creationTime>2021-11-15T10:20:05.7270981+00:00</creationTime>
+  <author>
+   <userInRole>a5db4395-cb7a-4fa5-950b-db5ffb0ca5bb</userInRole>
+  </author>
+  <populationType>PATIENT</populationType>
+  <folder>9eab35db-ac57-47d8-8eea-05ef06e44dca</folder>
+  <parent parentType="POP">
+   <SearchIdentifier reportGuid="6d517466-813b-46a8-b848-aaf5a4fbdcbf"/>
+  </parent>
+  <searchDate>BASELINE</searchDate>
+  <population>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <populationCriterion reportGuid="40a4a1f1-b768-4db8-a8a6-6df744935d97"/>
+     </criteria>
+    </definition>
+    <actionIfTrue>REJECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>3eced22f-4cbd-413d-badf-014366a6f5f7</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <populationCriterion reportGuid="fe469cf2-84f3-4b03-a2f5-96223ae78dfd"/>
+     </criteria>
+    </definition>
+    <actionIfTrue>REJECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>b2c0bff4-7b9b-4ad5-86de-185419a13b6b</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>OR</memberOperator>
+     <criteria>
+      <criterion>
+       <id>9aa3ca5c-b724-4a13-900f-8f41f24621af</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>0d81995d-2668-4e73-8ac8-3c7a442b6709</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+         <libraryItem>aafda1f0-02fc-45bc-bd6f-b899efe9547d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>b100da33-e40b-45c6-aad6-db4cc3062a75</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>be880ad6-5dab-48c2-8e94-d5c5219afb4f</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>cc94257d-661b-48dc-bd73-3c0714c0089d</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>dd9e67af-0b11-43d8-8d34-bb4b7648ebab</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>4ecec7ee-f42f-4418-acc3-ba4f16264c95</libraryItem>
+         <libraryItem>bd8458fb-abb7-469b-91e5-ce888b5b0f3d</libraryItem>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>5830ed39-7323-432f-8dbc-d135c9bd11d0</id>
+           <column>READCODE</column>
+           <displayName>Clinical Code</displayName>
+           <inNotIn>IN</inNotIn>
+           <libraryItem>4ecec7ee-f42f-4418-acc3-ba4f16264c95</libraryItem>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>07c87645-0fc7-4ac4-acce-1ac901e33dd4</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>df5c3b76-9e49-4593-bdc3-a5d5f3d19f20</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>22575230-a13e-431d-983c-3fee668bf452</libraryItem>
+         <libraryItem>8aa2198a-efca-4d1a-9bcf-1fd6117ef87d</libraryItem>
+         <libraryItem>1ee3788a-0e92-4a69-890a-0b5daff494b4</libraryItem>
+         <libraryItem>8a030be6-be7a-49eb-b187-6575dfdd32c0</libraryItem>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>701ef455-8f18-4402-81a7-90d3acfd30a4</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>ddd17464-31f9-4dcd-bb2c-7a1ab7d23efa</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <libraryItem>15bd20c8-c92f-496c-8560-896299a632e5</libraryItem>
+         <libraryItem>c97f55a2-fe6e-4da2-8865-a95b7cc80f4f</libraryItem>
+        </columnValue>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+     <criteria>
+      <criterion>
+       <id>19d4a778-740c-4106-95c7-efda9bb38c33</id>
+       <table>EVENTS</table>
+       <displayName>Clinical Codes</displayName>
+       <negation>false</negation>
+       <filterAttribute>
+        <columnValue>
+         <id>aaba2249-2f16-4ec3-b051-ae9873551b8f</id>
+         <column>READCODE</column>
+         <displayName>Clinical Code</displayName>
+         <inNotIn>IN</inNotIn>
+         <valueSet>
+          <id>6b261f27-5a7a-43f5-8ab9-cd83ddae2c96</id>
+          <codeSystem>SNOMED_CONCEPT</codeSystem>
+          <values>
+           <value>100716012</value>
+           <displayName>Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484801000006114</value>
+           <displayName>BMI - Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484781000006110</value>
+           <displayName>Body mass index</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+          <values>
+           <value>3484811000006112</value>
+           <displayName>Quetelet index</displayName>
+           <includeChildren>true</includeChildren>
+          </values>
+          <values>
+           <value>3484791000006113</value>
+           <displayName>Weight: body mass</displayName>
+           <includeChildren>false</includeChildren>
+          </values>
+         </valueSet>
+        </columnValue>
+        <restriction>
+         <columnOrder>
+          <recordCount>1</recordCount>
+          <columns>
+           <column>DATE</column>
+           <displayName>Date</displayName>
+           <direction>DESC</direction>
+          </columns>
+         </columnOrder>
+         <testAttribute>
+          <columnValue>
+           <id>adaca4b3-afa1-44c3-b06c-7e785d38d34e</id>
+           <column>NUMERIC_VALUE</column>
+           <displayName>Value</displayName>
+           <inNotIn>IN</inNotIn>
+           <rangeValue>
+            <rangeFrom>
+             <value>
+              <value>35</value>
+             </value>
+             <operator>GTEQ</operator>
+            </rangeFrom>
+           </rangeValue>
+          </columnValue>
+         </testAttribute>
+        </restriction>
+       </filterAttribute>
+      </criterion>
+     </criteria>
+    </definition>
+    <actionIfTrue>SELECT</actionIfTrue>
+    <actionIfFalse>REJECT</actionIfFalse>
+    <id>d1b0d8a1-81bf-4307-91eb-ec7116ecabcf</id>
+   </criteriaGroup>
+  </population>
+ </report>
+ <report>
+  <id>3f04bc73-fb03-4d50-bae4-49a866ad5033</id>
+  <name>Priority 3b</name>
+  <description/>
+  <creationTime>2021-08-16T15:28:57.1999201+01:00</creationTime>
+  <author>
+   <userInRole>a5db4395-cb7a-4fa5-950b-db5ffb0ca5bb</userInRole>
+  </author>
+  <populationType>PATIENT</populationType>
+  <folder>9eab35db-ac57-47d8-8eea-05ef06e44dca</folder>
+  <parent parentType="POP">
+   <SearchIdentifier reportGuid="6d517466-813b-46a8-b848-aaf5a4fbdcbf"/>
+  </parent>
+  <searchDate>BASELINE</searchDate>
+  <population>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <populationCriterion reportGuid="40a4a1f1-b768-4db8-a8a6-6df744935d97"/>
+     </criteria>
+    </definition>
+    <actionIfTrue>REJECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>864a8831-ba1e-4acf-954d-4e00633b8170</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <populationCriterion reportGuid="fe469cf2-84f3-4b03-a2f5-96223ae78dfd"/>
+     </criteria>
+    </definition>
+    <actionIfTrue>REJECT</actionIfTrue>
+    <actionIfFalse>NEXT</actionIfFalse>
+    <id>84e746b6-02ba-4542-acca-db26ec1f9109</id>
+   </criteriaGroup>
+   <criteriaGroup>
+    <definition>
+     <memberOperator>AND</memberOperator>
+     <criteria>
+      <populationCriterion reportGuid="6d4abdbb-d278-4675-a98d-c340967daee6"/>
+     </criteria>
+    </definition>
+    <actionIfTrue>REJECT</actionIfTrue>
+    <actionIfFalse>SELECT</actionIfFalse>
+    <id>82d7f43a-2428-4700-b3cb-cc30262e024f</id>
+   </criteriaGroup>
+  </population>
+ </report>
+</enquiryDocument>
