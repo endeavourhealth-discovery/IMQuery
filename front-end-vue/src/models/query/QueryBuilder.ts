@@ -3,6 +3,11 @@ import { nice } from 'd3';
 import { PropertiesContext } from './../../discovery-syntax/DiscoverySyntaxParser';
 const { v4 } = require('uuid');
 const _ = require('lodash')
+const jmespath = require('jmespath');
+// ###### NOTE: for JMESPath to work special characters (@ :) in keys must be replaced or removed 
+// e.g. "@id" -> "id" 
+// e.g. "rdfs:label" -> rdfs_label" 
+// e.g. "im:Q_CEG"  -> "im_Q_CEG" (i.e. the first underscore is assumed to be a colon if the data was orgiinally RDF)
 
 export default class QueryBuilder {
 
@@ -37,6 +42,10 @@ export default class QueryBuilder {
     private _profileEntities = new Map<string, any>();
     get profileEntities(): Map<string, any> {
         return this._profileEntities;
+    }
+
+    get profileEntitiesAsArray(): any {
+        return  [...this._profileEntities.values() ];
     }
 
 
@@ -144,16 +153,16 @@ export default class QueryBuilder {
                     this._entityTypes.push(_type);
                 }
 
-                if (_type === ":Profile") {
+                if (_type === "im:Profile") {
                     //profiles 
                     this._profileEntities.set(entity['@id'], entity);
 
                     // _clauses - looks for AND/OR
-                    if (entity[':and']) {
-                        this._clauses.set(entity['@id'], { ':and': entity[':and'] })
-                    } else if (entity[':or']) {
-                        this._clauses.set(entity['@id'], { ':or': entity[':or'] })
-                    }
+                    // if (entity[':and']) {
+                    //     this._clauses.set(entity['@id'], { ':and': entity[':and'] })
+                    // } else if (entity[':or']) {
+                    //     this._clauses.set(entity['@id'], { ':or': entity[':or'] })
+                    // }
 
                 }
 
@@ -167,6 +176,9 @@ export default class QueryBuilder {
             return false;
             
         } finally {
+            console.log("_entities:", this._entities);
+            console.log("_profileEntities:", this._profileEntities);
+            console.log("profileEntitiesAsArray", this.profileEntitiesAsArray);
             console.log("_clauses:", this._clauses);
             console.log("_hierachyTree:", this._hierarchyTree);
 

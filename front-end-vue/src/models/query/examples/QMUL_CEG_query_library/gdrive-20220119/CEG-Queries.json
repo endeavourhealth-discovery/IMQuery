@@ -53237,7 +53237,7 @@
     "rdf:type" : [ {
       "@id" : "im:Profile"
     } ],
-    "rdfs:label" : "SMI Population",
+    "rdfs:label" : "Regular GMS patients, aged 18+, with unresolved SMI",
     "rdfs:comment" : "Adults 18+ with SMI",
     "im:isContainedIn" : [ {
       "@id" : "urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca"
@@ -54503,7 +54503,7 @@
     } ],
     "im:definition" : [ {
       "im:and" : [ {
-        "rdfs:label" : "SMI Population",
+        "rdfs:label" : "Significant Mental Illness (SMI)",
         "im:property" : [ {
           "@id" : "im:hasProfile"
         } ],
@@ -56008,7 +56008,7 @@
     } ],
     "im:definition" : [ {
       "im:and" : [ {
-        "rdfs:label" : "SMI Population",
+        "rdfs:label" : "Significant Mental Illness (SMI)",
         "im:property" : [ {
           "@id" : "im:hasProfile"
         } ],
@@ -56166,7 +56166,7 @@
     } ],
     "im:definition" : [ {
       "im:and" : [ {
-        "rdfs:label" : "SMI Population",
+        "rdfs:label" : "Significant Mental Illness (SMI)",
         "im:property" : [ {
           "@id" : "im:hasProfile"
         } ],
@@ -56427,7 +56427,7 @@
     } ],
     "im:definition" : [ {
       "im:and" : [ {
-        "rdfs:label" : "SMI Population",
+        "rdfs:label" : "Significant Mental Illness (SMI)",
         "im:property" : [ {
           "@id" : "im:hasProfile"
         } ],

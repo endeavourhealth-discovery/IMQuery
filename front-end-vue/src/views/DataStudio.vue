@@ -63,7 +63,7 @@
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
     <template v-else-if="sideNavActiveItem == 'View Definition'">
       <div class="section-center flex w-full h-full p-3">
-        <div class="inline-flex flex-col w-full h-full">
+        <div class="inline-flex flex-col w-full h-full w-max-500p">
           <div v-if="openFiles.length" class="font-semibold text-lg text-black">
             Entities ({{ openFiles.length && openFiles[0]["entities"].length }})
           </div>
@@ -134,7 +134,7 @@
             </div>
           </template>
         </div>
-        <div class="inline-flex flex-col w-full h-full">
+        <div class="inline-flex flex-col w-full h-full w-max-500p">
           <Network
             class="w-full h-full bg-white"
             :nodeList="examples.gms.nodes"
@@ -775,6 +775,11 @@ export default defineComponent({
   font-size: 12px !important;
   width: 500px;
   height: 680px;
+}
+
+
+.w-max-500p {
+  width: 500px;
 }
 
 ::-webkit-scrollbar {
