@@ -16,6 +16,7 @@ import SearchService from "@/services/SearchService";
 import QueryBuilder from "@/models/query/QueryBuilder";
 const _ = require("lodash");
 
+
 export default createStore({
   // update stateType.ts when adding new state!
   state: {
@@ -72,6 +73,7 @@ export default createStore({
       selectedSchemes: ConceptReference[];
       selectedTypes: string[];
     },
+    JSONContent: "",
     isLoading: false,
     activeQueryId: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
     openQueries: [
@@ -4248,6 +4250,10 @@ export default createStore({
     },
     updateIsLoading(state, isLoading) {
       state.isLoading = isLoading;
+
+    },
+    updateJSONContent(state, JSONContent) {
+      state.JSONContent = JSONContent;
 
     }
   },

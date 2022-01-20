@@ -165,7 +165,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          width: window.innerWidth - 20, //#todo use javascript for dynamic sizing
+          width: window.innerWidth / 2, //#todo use javascript for dynamic sizing
           height: window.innerHeight - 150,
         };
       },

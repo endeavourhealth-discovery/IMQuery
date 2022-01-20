@@ -36,6 +36,13 @@
       <div class="mr-3 font-semibold text-lg text-gray-800 ">
         {{ value["rdfs:label"] }}
       </div>
+      <div
+        @click="updateJSONContent(value)"
+        v-if="isHover"
+        class="non-selectable text-lg text-blue-600 font-semibold hover:underline"
+      >
+        View
+      </div>
     </div>
     <template v-if="value.children.length">
       <div class="hierachytreeitem">
@@ -55,7 +62,8 @@
 import { ref, onMounted, defineComponent } from "vue";
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
-
+const prettier = require("prettier/standalone");
+const prettierBabylon = require("prettier/parser-babylon");
 // import Constraint from "@/components/dataset/Constraint.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 
@@ -65,6 +73,49 @@ export default defineComponent({
   components: {
     SectionToggler,
     HeroIcon,
+  },
+  computed: {
+    JSONContent: {
+      get(): any {
+        return this.$store.state.JSONContent;
+      },
+      set(JSONContent: any): void {
+        this.$store.commit("updateJSONContent", JSONContent);
+      },
+    },
+    queryBuilder: {
+      get(): any {
+        return this.$store.state.queryBuilder;
+      },
+      set({ action, payload }: any): void {
+        this.$store.commit("queryBuilder", {
+          action: action,
+          payload: payload,
+        });
+      },
+    },
+  },
+  methods: {
+    updateJSONContent(entity: any): void {
+      const _entityType = entity["rdf:type"][0]["@id"];
+      let _json: any;
+      
+      if (_entityType == "im:Folder") {
+        const _folderIri = entity["@id"];
+        _json = JSON.stringify(this.queryBuilder.getProfiles(_folderIri));
+      } else if (_entityType == "im:Profile") {
+        const _profileIri = entity["@id"];
+        _json = JSON.stringify(this.queryBuilder.getProfile(_profileIri));
+      } else {
+        return;
+      }
+
+      _json = prettier.format(_json, {
+        parser: "json",
+        plugins: [prettierBabylon],
+      });
+      this.JSONContent = _json;
+    },
   },
   data() {
     return {
@@ -105,6 +156,6 @@ export default defineComponent({
 
 <style>
 .hierachytreeitem {
-  border-left: 1px solid #EEF0F2;
+  border-left: 1px solid #eef0f2;
 }
 </style>

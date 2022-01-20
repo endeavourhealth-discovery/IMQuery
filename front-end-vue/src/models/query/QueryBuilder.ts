@@ -1,13 +1,6 @@
-import { prefix } from '@fortawesome/free-solid-svg-icons';
-import { nice } from 'd3';
-import { PropertiesContext } from './../../discovery-syntax/DiscoverySyntaxParser';
 const { v4 } = require('uuid');
 const _ = require('lodash')
-const jmespath = require('jmespath');
-// ###### NOTE: for JMESPath to work special characters (@ :) in keys must be replaced or removed 
-// e.g. "@id" -> "id" 
-// e.g. "rdfs:label" -> rdfs_label" 
-// e.g. "im:Q_CEG"  -> "im_Q_CEG" (i.e. the first underscore is assumed to be a colon if the data was orgiinally RDF)
+const jp = require('jmespath');
 
 export default class QueryBuilder {
 
@@ -20,6 +13,7 @@ export default class QueryBuilder {
     // properties dependenet on entities loaded from JSON
     '_@context': any;
     '_@graph': any;
+    '_file': any;
 
 
     //all other properties:
@@ -45,7 +39,7 @@ export default class QueryBuilder {
     }
 
     get profileEntitiesAsArray(): any {
-        return  [...this._profileEntities.values() ];
+        return [...this._profileEntities.values()];
     }
 
 
@@ -71,6 +65,27 @@ export default class QueryBuilder {
         return this._graph;
     }
 
+
+    public getProfiles(folderIri: string): any {
+        const _q = `entities[?
+            "rdf:type"[?"@id" == \`im:Profile\`] && 
+            "im:isContainedIn"[?"@id" == \`${folderIri}\`]]
+                ."im:definition" 
+                | [] 
+                | {"im:Profile": @}`; //optional
+
+        const _result = jp.search(this._file, _q);
+        console.log("_result:", _result)
+
+        return _result;
+    }
+
+
+
+
+    public getProfile(profileIri: string): any {
+        return this._profileEntities.get(profileIri);
+    }
 
 
 
@@ -116,15 +131,16 @@ export default class QueryBuilder {
 
         // file
         file = JSON.parse(file);
-
+        console.log("file", file)
+        this._file = file;
 
         if (file["entities"]) {
             this.JSONContentType = "entityDefinitions";
             if (this.loadEntityDefinitions(file) == false) {
-                throw new Error ("JSON content structure not recognised");
+                throw new Error("JSON content structure not recognised");
             } else {
                 this.Loaded = true;
-            } 
+            }
         } else if (file[":and"] || file[":or"]) {
             this.JSONContentType = "profileDefinitions";
             this.Loaded = true;
@@ -169,12 +185,12 @@ export default class QueryBuilder {
             });
 
             return true;
-            
+
         } catch (error) {
-            
+
             console.log("Error with loadEntityDefinitions:", error)
             return false;
-            
+
         } finally {
             console.log("_entities:", this._entities);
             console.log("_profileEntities:", this._profileEntities);
@@ -238,7 +254,7 @@ export default class QueryBuilder {
 
 
             }
-        
+
 
             return _children;
         };

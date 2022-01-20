@@ -72,8 +72,8 @@
           </template>
 
           <template v-if="openFiles.length">
-            <div v-show="activeItemView == 'All Items'">
-              <div class="flex flex-col file-list mt-2 ">
+            <div class="item-view" v-show="activeItemView == 'All Items'">
+              <div class="flex flex-col file-list">
                 <div
                   v-for="item in getFilteredEntities()"
                   :key="item['@id']"
@@ -103,7 +103,7 @@
                 placeholder="Type(s)"
               />
             </div>
-            <div v-show="activeItemView == 'Folder Hierarchy'">
+            <div class="item-view"  v-show="activeItemView == 'Folder Hierarchy'">
               <div
                 v-if="queryBuilder.hierarchyTree(topLevelEntity)"
                 class="left inline-flex flex-col w-full h-full"
@@ -144,14 +144,15 @@
             @change="onUploadFiles()"
           />
         </div>
-        <div class="inline-flex flex-col w-full h-full w-max-500p">
-          <div class="h-10">
+        <div class="inline-flex flex-col w-full h-full">
+          <div class="h-10 w-full">
             <HorizontalNavbar
               class="w-full h-full text-center"
               :items="contentViews"
               v-model="activeContentView"
             />
           </div>
+          
           <template v-if="activeContentView == 'Graph'">
             <Network
               class="w-full h-full bg-white"
@@ -167,13 +168,21 @@
             ></Network>
           </template>
 
+            <template v-if="activeContentView == 'Text'">
+              Text
+
+              </template>
+          
+
           <template v-if="activeContentView == 'JSON'">
             <v-ace-editor
+              id="editor"
+              ref="aceeditor"
+              class="json-viewer h-full w-full"
               v-model:value="JSONContent"
               @init="editorInit"
-              lang="html"
-              theme="chrome"
-              style="height: 300px"
+              lang="json"
+              theme="tomorrow"
             />
           </template>
         </div>
@@ -190,17 +199,8 @@ const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 
 import LoggerService from "@/services/LoggerService";
-// import OverlayPanel from "primevue/overlaypanel";
-// import Dialog from "primevue/dialog";
-// import Searchbox from "@/components/search/Searchbox.vue"; //replace with autosuggest box (same size but floating + richer suggestions. This is for the dialogue)
-// import HeroIcon from "@/components/search/HeroIcon.vue";
-// import HorizontalTabs from "@/components/search/HorizontalTabs.vue";
-// import VerticalTabs from "@/components/search/VerticalTabs.vue";
-// import ProgressBar from "@/components/search/ProgressBar.vue";
 import MultiSelect from "primevue/multiselect";
 import SearchService from "@/services/SearchService";
-// import SearchClient from "@/services/SearchClient";
-// const { MeiliSearch } = require("meilisearch");
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
 import ClauseItem from "@/components/dataset/ClauseItem.vue";
@@ -216,37 +216,38 @@ import Network from "@/components/dataset/Network.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
-// import * as IMQ  from "@/models/query/QueryBuilder";
 import QueryBuilder from "@/models/query/QueryBuilder";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 
 import { VAceEditor } from "@/components/dataset/VAceEditor";
+
+// import * as IMQ  from "@/models/query/QueryBuilder";
+// import HeroIcon from "@/components/search/HeroIcon.vue";
+// import VueJsonPretty from "vue-json-pretty";
+// import "vue-json-pretty/lib/styles.css";
+// import ProgressBar from "@/components/search/ProgressBar.vue";
+// import OverlayPanel from "primevue/overlaypanel";
+// import Dialog from "primevue/dialog";
+
 
 export default defineComponent({
   name: "DataStudio",
   components: {
     QueryEditor,
     BackgroundCards,
-    // VerticalButtonGroup,
     RoundButton,
     HeroIcon,
     HorizontalNavbar,
     ContentNav,
     DatasetBrowser,
     MultiSelect,
-    // SectionToggler,
     Network,
     HierarchyTreeItem,
     VAceEditor,
-    // DataTable,
-    // Column,
-    // ColumnGroup,
-    // ClauseItem,
-    // InputRadioButtons,
+    // VueJsonPretty
   },
   data() {
     return {
-      JSONContent: "",
       activeItemView: "All Items",
       itemViews: [
         {
@@ -265,6 +266,11 @@ export default defineComponent({
         {
           name: "Graph",
           icon: "share",
+          visible: true,
+        },
+        {
+          name: "Text",
+          icon: "translate",
           visible: true,
         },
         {
@@ -597,6 +603,14 @@ export default defineComponent({
     },
   },
   computed: {
+    JSONContent: {
+      get(): any {
+        return this.$store.state.JSONContent;
+      },
+      set(value: any): void {
+        this.$store.commit("updateJSONContent", value);
+      },
+    },
     isLoading: {
       get(): any {
         return this.$store.state.isLoading;
@@ -630,7 +644,9 @@ export default defineComponent({
     await this.$store.dispatch("fetchDatamodelIris");
   },
   methods: {
-    // onJSONInput(input: string): void {
+    // editorInit: function(editor: any) {
+    //   require("brace/mode/json");
+    //   require("brace/theme/tomorrow");
     // },
     getFilteredEntities(): any {
       if (this.selectedFilterTypes.length) {
@@ -818,8 +834,12 @@ export default defineComponent({
   /* padding-bottom: 150px; */
   overflow-y: auto;
   font-size: 12px !important;
-  width: 500px;
+width: 100%;
   height: 680px;
+}
+
+.item-view {
+  width: 500px;
 }
 
 .w-max-500p {
@@ -873,5 +893,15 @@ export default defineComponent({
 }
 .file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+
+
+.json-viewer {
+  height: calc(100vh - 9rem);
+  width: 100%;
+  overflow-y: auto;
+  /* background-color: #ffffff; */
+  /* border: 1px solid #dee2e6; */
 }
 </style>
