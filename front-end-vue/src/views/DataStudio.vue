@@ -64,26 +64,15 @@
     <template v-else-if="sideNavActiveItem == 'View Definition'">
       <div class="section-center flex w-full h-full p-3">
         <div class="inline-flex flex-col w-full h-full w-max-500p">
-          <div v-if="openFiles.length" class="font-semibold text-lg text-black">
-            Entities ({{ openFiles.length && openFiles[0]["entities"].length }})
-          </div>
-          <div v-else class="font-semibold text-lg text-black">
-            Select a -id.json file
-          </div>
-          <input
-            class="font-regular text-lg text-black "
-            ref="upload"
-            type="file"
-            name="file-upload"
-            accept="application/JSON"
-            @change="onUploadFiles()"
-          />
-
-          <div class="font-semibold text-lg text-black mt-2 h-10 flex">
-            <HorizontalNavbar v-model="activeFileView" :items="fileViews" />
-          </div>
           <template v-if="openFiles.length">
-            <div v-show="activeFileView == 'All Items'">
+            <div class="font-semibold text-lg text-black h-10 flex">
+              <HorizontalNavbar v-model="activeItemView" :items="itemViews" />
+            </div>
+            <!-- <div class="line-separator"></div> -->
+          </template>
+
+          <template v-if="openFiles.length">
+            <div v-show="activeItemView == 'All Items'">
               <div class="flex flex-col file-list mt-2 ">
                 <div
                   v-for="item in getFilteredEntities()"
@@ -114,12 +103,11 @@
                 placeholder="Type(s)"
               />
             </div>
-            <div v-show="activeFileView == 'Folder Hierarchy'">
+            <div v-show="activeItemView == 'Folder Hierarchy'">
               <div
                 v-if="queryBuilder.hierarchyTree(topLevelEntity)"
                 class="left inline-flex flex-col w-full h-full"
               >
-          
                 <div
                   v-if="
                     queryBuilder.hierarchyTree(topLevelEntity).children.length
@@ -133,20 +121,61 @@
               </div>
             </div>
           </template>
+
+          <template v-if="openFiles.length" class="">
+            <!-- <div class="line-separator"></div> -->
+            <div class="font-semibold text-lg text-black">
+              Entities ({{
+                openFiles.length && openFiles[0]["entities"].length
+              }})
+            </div>
+          </template>
+          <div v-else class="font-semibold text-lg text-black">
+            Select a -id.json file
+          </div>
+
+          <input
+            class="file-input font-regular text-lg text-black "
+            ref="upload"
+            type="file"
+            name="file-upload"
+            accept="application/JSON"
+            content="Upload JSON file containing entities (-id)"
+            @change="onUploadFiles()"
+          />
         </div>
         <div class="inline-flex flex-col w-full h-full w-max-500p">
-          <Network
-            class="w-full h-full bg-white"
-            :nodeList="examples.gms.nodes"
-            :linkList="examples.gms.links"
-            :nodeSize="nodeSize"
-            :linkWidth="linkWidth"
-            :linkDistance="linkDistance"
-            :svgTheme="svgTheme ? 'dark' : 'light'"
-            :bodyStrength="bodyStrength"
-            :nodeTextKey="nodeTextKey"
-            :showLinkText="true"
-          ></Network>
+          <div class="h-10">
+            <HorizontalNavbar
+              class="w-full h-full text-center"
+              :items="contentViews"
+              v-model="activeContentView"
+            />
+          </div>
+          <template v-if="activeContentView == 'Graph'">
+            <Network
+              class="w-full h-full bg-white"
+              :nodeList="examples.gms.nodes"
+              :linkList="examples.gms.links"
+              :nodeSize="nodeSize"
+              :linkWidth="linkWidth"
+              :linkDistance="linkDistance"
+              :svgTheme="svgTheme ? 'dark' : 'light'"
+              :bodyStrength="bodyStrength"
+              :nodeTextKey="nodeTextKey"
+              :showLinkText="true"
+            ></Network>
+          </template>
+
+          <template v-if="activeContentView == 'JSON'">
+            <v-ace-editor
+              v-model:value="JSONContent"
+              @init="editorInit"
+              lang="html"
+              theme="chrome"
+              style="height: 300px"
+            />
+          </template>
         </div>
       </div>
     </template>
@@ -156,6 +185,7 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
+
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 
@@ -181,15 +211,16 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
-import QueryBuilder from "@/models/query/QueryBuilder";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 import Network from "@/components/dataset/Network.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
 // import * as IMQ  from "@/models/query/QueryBuilder";
+import QueryBuilder from "@/models/query/QueryBuilder";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
-// import ceg_smi from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
+
+import { VAceEditor } from "@/components/dataset/VAceEditor";
 
 export default defineComponent({
   name: "DataStudio",
@@ -205,7 +236,8 @@ export default defineComponent({
     MultiSelect,
     // SectionToggler,
     Network,
-    HierarchyTreeItem
+    HierarchyTreeItem,
+    VAceEditor,
     // DataTable,
     // Column,
     // ColumnGroup,
@@ -214,8 +246,9 @@ export default defineComponent({
   },
   data() {
     return {
-      activeFileView: "All Items",
-      fileViews: [
+      JSONContent: "",
+      activeItemView: "All Items",
+      itemViews: [
         {
           name: "All Items",
           icon: "menu",
@@ -224,6 +257,19 @@ export default defineComponent({
         {
           name: "Folder Hierarchy",
           icon: "folder_open",
+          visible: true,
+        },
+      ],
+      activeContentView: "Graph",
+      contentViews: [
+        {
+          name: "Graph",
+          icon: "share",
+          visible: true,
+        },
+        {
+          name: "JSON",
+          icon: "document",
           visible: true,
         },
       ],
@@ -621,7 +667,6 @@ export default defineComponent({
             label: _label,
           };
         });
-
       };
       fileReader.readAsText(_files[0]);
     },
@@ -777,7 +822,6 @@ export default defineComponent({
   height: 680px;
 }
 
-
 .w-max-500p {
   width: 500px;
 }
@@ -800,5 +844,34 @@ export default defineComponent({
 
 .file-filter {
   width: 500px;
+}
+.line-separator {
+  height: 1px;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.file-input::before {
+  content: "Upload JSON";
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #d3d3d3;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.file-input:hover::before {
+  border-color: black;
+}
+.file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 </style>
