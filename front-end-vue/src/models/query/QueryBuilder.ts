@@ -1,6 +1,7 @@
 const { v4 } = require('uuid');
 const _ = require('lodash')
-const jp = require('jmespath');
+const jmp = require('jmespath');
+const jp = require('jsonpath');
 
 export default class QueryBuilder {
 
@@ -74,7 +75,7 @@ export default class QueryBuilder {
                 | [] 
                 | {"im:Profile": @}`; //optional
 
-        const _result = jp.search(this._file, _q);
+        const _result = jmp.search(this._file, _q);
         console.log("_result:", _result)
 
         return _result;
@@ -85,6 +86,95 @@ export default class QueryBuilder {
 
     public getProfile(profileIri: string): any {
         return this._profileEntities.get(profileIri);
+    }
+
+    //returns all the paths to rdfs:label and assigns a temp uuid as key for v-for iteration
+    public getLabelPaths(profileIri: string): any {
+
+        const _profile = this.getProfile(profileIri);
+        const _definition = _profile["im:definition"];
+        const _jsonPaths = jp.paths(_definition, '$..["rdfs:label"]');
+        const _jsonLabels = jp.query(_definition, '$..["rdfs:label"]');
+
+        console.log("_jsonLabels", _jsonLabels);
+
+        const _paths = [] as any[];
+
+
+        for (let i = 0; i < _jsonPaths.length; i++) {
+            _paths.push(_jsonPaths[i].map((item: any) => {
+
+
+                const _jsonPathAsString: string = this.toPath(_jsonPaths[i]);
+                // console.log("_jsonPathAsString", _jsonPathAsString);
+
+                //imquery refers to this application i.e. temporary object keys used only within the frontend application (and are not part of the query model)
+                return {
+                    'imquery:uuid': `urn:uuid${v4()}`,
+                    'rdfs:label': _jsonLabels[i],
+                    'imquery:jsonPathArray': {
+                        'asArray': _jsonPaths[i],
+                        'asString': _jsonPathAsString,
+                    },
+                }
+            }));
+        }
+
+
+        console.log("_paths", _paths);
+        return _paths;
+
+    }
+
+    
+    private toPath(array: any): string {
+        let _path = "";
+
+        for (let i = 0; i < array.length; i++) {
+            if (typeof (array[i]) == "number") {
+                _path = _path + `[${array[i]}]`
+            } else if (typeof (array[i]) == "string") {
+                _path = _path + (i != 0 ? '.' : '') + array[i];
+            }
+        }
+        console.log("_path", _path);
+
+        return _path;
+    }
+
+    public getGraphData(profileIri: string): any {
+
+
+        //group numbers:
+        // 0 = main entity node
+        // 1 = and/or/not node 
+        // 2 = leaf node
+
+
+        const _profile = this.getProfile(profileIri);
+        const _definition = _profile["im:definition"];
+        //the path to all labels
+        const _paths = jp.paths(_definition, '$..["rdfs:label"]');
+        console.log("_paths", _paths);
+
+
+
+
+
+
+
+        const _nodes = [] as any[];
+        const _links = [] as any[];
+
+        //add main entity
+
+
+
+        return {
+            nodes: _nodes,
+            links: _links
+        }
+
     }
 
 
@@ -196,7 +286,6 @@ export default class QueryBuilder {
             console.log("_profileEntities:", this._profileEntities);
             console.log("profileEntitiesAsArray", this.profileEntitiesAsArray);
             console.log("_clauses:", this._clauses);
-            console.log("_hierachyTree:", this._hierarchyTree);
 
         }
     }
@@ -220,6 +309,7 @@ export default class QueryBuilder {
         this._hierarchyTree = _hierarchyTree;
 
         this.populateHierarchyTree();
+        console.log("_hierachyTree:", this._hierarchyTree);
         return _hierarchyTree;
     }
 

@@ -41,7 +41,14 @@
         v-if="isHover"
         class="non-selectable text-lg text-blue-600 font-semibold hover:underline"
       >
-        View
+        JSON
+      </div>
+      <div
+        @click="test(value)"
+        v-if="isHover"
+        class="non-selectable ml-2 text-lg text-red-600 font-semibold hover:underline"
+      >
+        Graph
       </div>
     </div>
     <template v-if="value.children.length">
@@ -99,7 +106,7 @@ export default defineComponent({
     updateJSONContent(entity: any): void {
       const _entityType = entity["rdf:type"][0]["@id"];
       let _json: any;
-      
+
       if (_entityType == "im:Folder") {
         const _folderIri = entity["@id"];
         _json = JSON.stringify(this.queryBuilder.getProfiles(_folderIri));
@@ -115,6 +122,13 @@ export default defineComponent({
         plugins: [prettierBabylon],
       });
       this.JSONContent = _json;
+    },
+    test(entity: any): void {
+      const _entityType = entity["rdf:type"][0]["@id"];
+      if (_entityType == "im:Profile") {
+        // this.queryBuilder.getGraphData(entity["@id"]);
+        this.queryBuilder.getLabelPaths(entity["@id"]);
+      }
     },
   },
   data() {

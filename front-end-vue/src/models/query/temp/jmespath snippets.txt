@@ -1,0 +1,60 @@
+filter entity definition by population
+
+
+and clauses
+[*]."im:definition"[*]."im:and" | [][]
+
+just definitions
+[*]."im:definition"[*] | []
+
+
+?
+"rdf:type"[*]."@id"
+
+
+
+ascending and descending ordering
+| sort_by(@, &@id) ascending
+|  reverse(sort_by(@, &@id)) descending
+
+
+
+works
+
+[?type[?"id" == `im:Profile`]]
+
+entities[?"rdf:type"[?"@id" == `im:Profile`]]
+entities[?"rdf:type"[?"@id" == `im:Profile`]]."im:definition" | [] | {profiles: @}
+
+
+
+entities[?"rdf:type"[?"@id" == `im:Profile`] && "im:isContainedIn"[?"@id" == `urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca`]]."im:definition" | [] | {profiles: @}
+
+entities[?'rdf:type'[?'@id' == `im:Profile`] && 'im:isContainedIn'[?'@id' == `urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca`]].'im:definition' | [] | {profiles: @}
+
+
+
+entities[?
+   "rdf:type"[?"@id" == `im:Profile`] && 
+   "im:isContainedIn"[?"@id" == `urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca`]]
+      ."im:definition" 
+         | [] 
+         | {profiles: @}
+
+
+
+Profile / MainEntity e.g. Patient (show all within Selected Folder)
+      Include Patients if 
+         they were part of population: Significant Mental Illness (SMI)
+         and they were not part of either: 
+               population Priority 2  
+            or population Priorta 3a
+
+
+
+
+JSON Path
+
+
+
+$.im:definition..im:or[*].im:and[*]

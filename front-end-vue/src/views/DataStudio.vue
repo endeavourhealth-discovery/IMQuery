@@ -168,9 +168,10 @@
             ></Network>
           </template>
 
-            <template v-if="activeContentView == 'Text'">
-              Text
+            <template v-if="activeContentView == 'Text (rdfs:label)'">
+              <!-- <button @click="test()">Click</button> -->
 
+              
               </template>
           
 
@@ -248,6 +249,7 @@ export default defineComponent({
   },
   data() {
     return {
+      labelPaths: [] as any[],
       activeItemView: "All Items",
       itemViews: [
         {
@@ -269,7 +271,7 @@ export default defineComponent({
           visible: true,
         },
         {
-          name: "Text",
+          name: "Text (rdfs:label)",
           icon: "translate",
           visible: true,
         },
@@ -281,8 +283,8 @@ export default defineComponent({
       ],
       nodeSize: 8,
       linkWidth: 3,
-      linkDistance: 145,
-      bodyStrength: -400,
+      linkDistance: 165,
+      bodyStrength: -1000,
       svgTheme: false, // false = light, true = dark
       nodeTextKey: "name",
       examples: {
@@ -398,11 +400,6 @@ export default defineComponent({
               id: "a572d325-321a-418d-948a-8c87baaf7fd8",
               name: "non existent",
               group: 3,
-            },
-            {
-              id: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
-              name: "where",
-              group: 4,
             },
             {
               id: "453e074a-1543-4956-bf0e-305df888993c",
