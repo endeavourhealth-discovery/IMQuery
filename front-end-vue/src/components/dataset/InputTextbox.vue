@@ -1,7 +1,6 @@
 <template>
   <div>
-
-    <input :type="type" :class="['w-100', (hasUserInteracted && !validateMinLength ? 'p-invalid' : '')]" :placeholder="placeholder" @blur="handleBlur" :value="value" :maxlength="maxlength"  @input="$emit('valueChanged', $event.target.value)"/>
+    <input :type="type" :class="['w-100', (hasUserInteracted && !validateMinLength ? 'p-invalid' : '')]" :placeholder="placeholder" @blur="handleBlur" :value="modelValue" :maxlength="maxlength"  @input="$emit('update:modelValue', $event.target.value)"/>
     <div class="message">
       <Message v-if="hasUserInteracted && !validateMinLength" severity="error" :closable="false"
         >The minimum characters required is {{ minlength }}</Message
@@ -15,11 +14,10 @@ import { ref, onMounted, defineComponent } from "vue";
 
 export default defineComponent({
   name: "InputTextbox",
-  emits: ["valueChanged"],
-  props: ["type", "placeholder", "minlength", "maxlength", "value", "onInputChanged"],
+  emits: ["update:modelValue"],
+  props: ["type", "placeholder", "minlength", "maxlength", "modelValue", "onInputChanged"],
   data() {
     return {
-      inputValue: "",
       hasUserInteracted: false,
     };
   },
@@ -31,7 +29,7 @@ export default defineComponent({
   computed: {
     validateMinLength(): boolean {
        if (this.minlength) {
-          return this.inputValue.trim().length >= this.minlength;    
+          return this.modelValue.trim().length >= this.minlength;    
       } else {
         return true;
       } 

@@ -117,7 +117,7 @@ export default defineComponent({
         const _profileIri = entity["@id"];
 
         _json = JSON.stringify(this.queryBuilder.getProfile(_profileIri));
-        this.LabelContent = this.queryBuilder.getLabelPaths(entity["@id"]);
+        this.LabelContent = this.queryBuilder.getClausePaths(entity["@id"]);
       } else {
         return;
       }

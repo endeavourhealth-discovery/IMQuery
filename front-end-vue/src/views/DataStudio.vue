@@ -173,19 +173,39 @@
 
           <template v-if="activeContentView == 'Text (rdfs:label)'">
             <!-- <button @click="test()">Click</button> -->
-            <LabelView class="p-3 w-full h-full" v-model="LabelContent" />
+            <LabelView
+              class="p-3 w-full h-full"
+              v-model="LabelContent"
+              :pathIris="['im:and', 'im:or', 'im:not']"
+            />
           </template>
 
           <template v-if="activeContentView == 'JSON'">
-            <v-ace-editor
-              id="editor"
-              ref="aceeditor"
-              class="json-viewer h-full w-full"
-              v-model:value="JSONContent"
-              @init="editorInit"
-              lang="json"
-              theme="tomorrow"
-            />
+            <div class="w-full h-20 py-2">
+              <InputTextbox
+                v-model="jsonpath"
+                class="w-max-500p mx-auto"
+                type="text"
+                placeholder="Paste JSONPath query here"
+              />
+            </div>
+            <div class="flex">
+              <v-ace-editor
+                class="inline json-viewer h-full w-full"
+                v-model:value="JSONContent"
+                @init="editorInit"
+                lang="json"
+                theme="tomorrow"
+              />
+              <v-ace-editor
+                v-if="jsonpath && filteredJSONContent"
+                class="inline json-viewer h-full w-full"
+                v-model:value="filteredJSONContent"
+                @init="editorInit"
+                lang="json"
+                theme="tomorrow"
+              />
+            </div>
           </template>
         </div>
       </div>
@@ -221,7 +241,10 @@ import ColumnGroup from "primevue/columngroup"; //optional for column grouping
 import QueryBuilder from "@/models/query/QueryBuilder";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import LabelView from "@/components/dataset/LabelView.vue";
-
+import InputTextbox from "@/components/dataset/InputTextbox.vue";
+const jp = require("jsonpath");
+const prettier = require("prettier/standalone");
+const prettierBabylon = require("prettier/parser-babylon");
 import { VAceEditor } from "@/components/dataset/VAceEditor";
 
 // import * as IMQ  from "@/models/query/QueryBuilder";
@@ -247,10 +270,13 @@ export default defineComponent({
     HierarchyTreeItem,
     VAceEditor,
     LabelView,
+    InputTextbox,
     // VueJsonPretty
   },
   data() {
     return {
+      filteredJSONContent: "",
+      jsonpath: "",
       labelPaths: [] as any[],
       activeItemView: "All Items",
       itemViews: [
@@ -597,8 +623,26 @@ export default defineComponent({
     };
   },
   watch: {
-    json(newValue) {
-      console.log(JSON.parse(newValue));
+    jsonpath(newValue) {
+      try {
+        const _parsed = jp.parse(newValue);
+        if (_parsed && _parsed.length) {
+          const _jpq = jp.query(JSON.parse(this.JSONContent), newValue);
+          if (_jpq.length) {
+            this.filteredJSONContent = JSON.stringify(_jpq);
+          }
+
+          this.filteredJSONContent = prettier.format(this.filteredJSONContent, {
+            parser: "json",
+            plugins: [prettierBabylon],
+          });
+
+          // this.filteredJSONContent = JSON.stringify(_jpq.toString());
+          console.log("_jpq", _jpq);
+        }
+      } catch (error) {
+        // console.log("jsonpath error: ", error);
+      }
     },
   },
   computed: {

@@ -93,11 +93,11 @@ export const VAceEditor = defineComponent({
     selectAll(this: VAceEditorInstance) {
       this._editor.selectAll();
     },
-    beautify(this: VAceEditorInstance) {
-      const beautify = ace.require("ace/ext/beautify");
-      // const editor = ace.edit("editor");
-      beautify.beautify(this._editor.session);
-    }
+    // beautify(this: VAceEditorInstance) {
+    //   const beautify = ace.require("ace/ext/beautify");
+    //   // const editor = ace.edit("editor");
+    //   beautify.beautify(this._editor.session);
+    // }
   },
   watch: {
     value(this: VAceEditorInstance, val: string) {

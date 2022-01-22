@@ -7,26 +7,25 @@
       class="label-view__item flex"
     >
       <template
-        v-for="(item, itemIndex) in filterOperators(
+        v-for="(item, itemIndex) in filteredPath(
           label['imquery:jsonPath']['imquery:asArray']
         )"
         :key="item['imquery:uuid']"
       >
         <!-- Shows Operators Only  -->
-        <div v-if="labelIndex == 0"></div>
-        <div
+        <!-- <div v-if="labelIndex == 0"></div> -->
+        <!-- <div
           v-else-if="
             itemIndex == label['imquery:jsonPath']['imquery:asArray'].length - 1
           "
-        ></div>
+        ></div> -->
         <div
-          v-else-if="
+          v-if="
             isOperatorVisible(
               labelIndex,
               modelValue.length,
               itemIndex,
-              filterOperators(label['imquery:jsonPath']['imquery:asArray'])
-                .length
+              filteredPath(label['imquery:jsonPath']['imquery:asArray']).length
             )
           "
           class="inline label-view__operator"
@@ -51,7 +50,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "LabelView",
-  props: ["modelValue"],
+  props: ["modelValue", "pathIris"],
   emits: ["update:modelValue"],
   methods: {
     isOperatorVisible(
@@ -73,19 +72,52 @@ export default defineComponent({
     updateModelValue(modelValue: string): void {
       this.$emit("update:modelValue", modelValue);
     },
-    filterOperators(array: any): any {
-      const _filterArray = ["im:and", "im:or", "im:not"];
+    filteredPath(array: any): any {
       const _resultArray = [] as any[];
-      array.forEach((item: any, index: number) => {
-        if (_filterArray.includes(array[index]["rdfs:label"])) {
-          if (
-            index < array.length - 1 &&
-            array[index + 1]["rdfs:label"] != "0"
-          ) {
-            _resultArray.push(array[index]);
-          }
-        }
-      });
+
+      //only allows iris in the path if they are pathIri prop e.g. im:and, im:or, im:not
+      const addToResults = (index: any) =>
+        this.pathIris.includes(array[index]["item"]) &&
+        _resultArray.push(array[index]);
+
+      if (array.length && array[array.length - 2]["item"] != 0) {
+        addToResults(array.length - 3);
+      } else {
+        // addToResults(array.slice(0, array.legnth - 3));
+        array.slice(0, array.length - 3).forEach((item: any, index: number) => {
+          addToResults(index);
+        });
+      }
+
+      //alternatively  do a for loop for all X/Y coordinates and decice which AND/OR/NOTs are hidden based on patterns
+      // e.g. in a vertical row, every duplicate node should have their first node REMOVED
+      // ee/g/
+
+      // addToResults(array.length - 3);
+
+      // array.forEach((item: any, index: number) => {
+      //   if (
+      //     index < array.length - 2 &&
+      //     array[array.length - 2]["rdfs:label"] == 0
+      //   ) {
+      //     addToResults(array.length - 3);
+      //   } else {
+      //     // addToResults(array.length - 2);
+      //   }
+      // });
+
+      // array.forEach((item: any, index: number) => {
+      //   if (
+      //     index < array.length - 2 &&
+      //     array[index + 1]["rdfs:label"] == 0 &&
+      //     array[index + 2]["rdfs:label"] == "rdfs:label"
+      //   ) {
+      //     console.log("t");
+      //   } else {
+      //     addToResults(index);
+      //   }
+      // });
+
       // const _resultArray = array.filter((item: any, index: number) => {
       //   return _filterArray.includes(array[index]["rdfs:label"]);
       // });
@@ -105,11 +137,11 @@ export default defineComponent({
 
 .label-view__label,
 .label-view__operator {
+  margin-left: 10px;
   font-size: 14px;
 }
 
 .label-view__operator {
-  margin-right: 10px;
   margin-left: 10px;
   width: 25px;
 }

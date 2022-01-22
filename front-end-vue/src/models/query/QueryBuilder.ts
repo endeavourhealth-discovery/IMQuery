@@ -89,67 +89,90 @@ export default class QueryBuilder {
     }
 
     //returns all the paths to rdfs:label and assigns a temp uuid as key for v-for iteration
-    public getLabelPaths(profileIri: string): any {
+
+    public getClausePaths(profileIri: string, pathToClause = `["rdfs:label"]`): any {
 
 
-        const _definitionIri = "im:definition";
 
         const _profile = this.getProfile(profileIri);
-        const _definition = _profile[_definitionIri];
-        const _jsonLabels = jp.query(_definition, '$..["rdfs:label"]');
-        const _jsonPaths1 = jp.paths(_definition, '$..["rdfs:label"]');
-        const _jsonPaths2 = [] as any[];
-
-        // console.log("_jsonPaths1", _jsonPaths1);
-        // console.log("_jsonLabels", _jsonLabels);
-
-        for (let i = 0; i < _jsonPaths1.length; i++) {
+        const _clauseLabels = jp.query(_profile, `$..${pathToClause}`);
+        const _clauseNodes1 = jp.nodes(_profile, `$..${pathToClause}`);
+        const _clauseNodes2 = [] as any[];
 
 
-            //required to concatenate correct path to profile's rdfs:label
-            _jsonPaths1[i].splice(1, 0, _definitionIri);
+        const _pathItems = new Set();
+
+        console.log("_definition", _clauseLabels);
+        console.log("_clauseLabels", _clauseLabels);
+
+        console.log("_clauseNodes1", _clauseNodes1);
+        for (let i = 0; i < _clauseNodes1.length; i++) {
 
             //imquery refers to this application i.e. temporary object keys used only within the frontend application (and are not part of the query model)
-            _jsonPaths2.push({
+            const _node = {
                 'imquery:uuid': `urn:uuid${v4()}`,
-                'rdfs:label': _jsonLabels[i],
+                'rdfs:label': _clauseNodes1[i].value,
                 'imquery:jsonPath': {
-                    'imquery:asArray': this.withUUID(_jsonPaths1[i]),
-                    'imquery:asString': this.toPath(_jsonPaths1[i]),
-                },
-            })
+                    'imquery:asArray': _clauseNodes1[i].path,
+                    'imquery:asString': jp.stringify((_clauseNodes1[i].path)),
+                }
+            };
+
+
+//determine path items as keys and arrays
+            // _clauseNodes1[i].path.forEach((item: any) => {
+
+            //     if (!_pathItems.has(item)) {
+
+
+            //     }
+
+            // });
+
+
+
+
+
+            // remove definition path
+            // _node['imquery:jsonPath']['imquery:asString'].replace(`["im:definition"]`, "")
+
+            _clauseNodes2.push(_node);
+
+
         }
 
 
-        console.log("_jsonPaths2", _jsonPaths2);
-        return _jsonPaths2;
+
+
+        console.log("_clauseNodes2", _clauseNodes2);
+        return { nodes: _clauseNodes2, pathItems: [] };
 
     }
 
-    private withUUID(array: any): any {
-        return array.map((item: any) => {
-            return {
-                'imquery:uuid': `urn:uuid${v4()}`,
-                'rdfs:label': item
-            }
-        })
-    }
+    // private withUUID(array: any): any {
+    //     return array.map((item: any) => {
+    //         return {
+    //             'imquery:uuid': `urn:uuid${v4()}`,
+    //             'item': item
+    //         }
+    //     })
+    // }
 
 
-    private toPath(array: any): string {
-        let _path = "";
+    // private toPathString(array: any): string {
+    //     let _path = "";
 
-        for (let i = 0; i < array.length; i++) {
-            if (typeof (array[i]) == "number") {
-                _path = _path + `[${array[i]}]`
-            } else if (typeof (array[i]) == "string") {
-                _path = _path + (i != 0 ? '.' : '') + array[i];
-            }
-        }
-        console.log("_path", _path);
+    //     for (let i = 0; i < array.length; i++) {
+    //         if (typeof (array[i]) == "number") {
+    //             _path = _path + `[${array[i]}]`
+    //         } else if (typeof (array[i]) == "string") {
+    //             _path = _path + (i != 0 ? '.' : '') + array[i];
+    //         }
+    //     }
+    //     console.log("_path", _path);
 
-        return _path;
-    }
+    //     return _path;
+    // }
 
     public getGraphData(profileIri: string): any {
 
@@ -163,7 +186,7 @@ export default class QueryBuilder {
         const _profile = this.getProfile(profileIri);
         const _definition = _profile["im:definition"];
         //the path to all labels
-        const _paths = jp.paths(_definition, '$..["rdfs:label"]');
+        const _paths = jp.nodes(_definition, '$..["rdfs:label"]');
         console.log("_paths", _paths);
 
 
