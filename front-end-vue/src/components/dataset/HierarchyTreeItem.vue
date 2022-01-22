@@ -37,18 +37,11 @@
         {{ value["rdfs:label"] }}
       </div>
       <div
-        @click="updateJSONContent(value)"
+        @click="loadFile(value)"
         v-if="isHover"
         class="non-selectable text-lg text-blue-600 font-semibold hover:underline"
       >
-        JSON
-      </div>
-      <div
-        @click="test(value)"
-        v-if="isHover"
-        class="non-selectable ml-2 text-lg text-red-600 font-semibold hover:underline"
-      >
-        Graph
+        Open
       </div>
     </div>
     <template v-if="value.children.length">
@@ -90,6 +83,14 @@ export default defineComponent({
         this.$store.commit("updateJSONContent", JSONContent);
       },
     },
+    LabelContent: {
+      get(): any {
+        return this.$store.state.LabelContent;
+      },
+      set(LabelContent: any): void {
+        this.$store.commit("updateLabelContent", LabelContent);
+      },
+    },
     queryBuilder: {
       get(): any {
         return this.$store.state.queryBuilder;
@@ -103,7 +104,9 @@ export default defineComponent({
     },
   },
   methods: {
-    updateJSONContent(entity: any): void {
+
+    //populates JSON, graph and labels
+    loadFile(entity: any): void {
       const _entityType = entity["rdf:type"][0]["@id"];
       let _json: any;
 
@@ -112,7 +115,9 @@ export default defineComponent({
         _json = JSON.stringify(this.queryBuilder.getProfiles(_folderIri));
       } else if (_entityType == "im:Profile") {
         const _profileIri = entity["@id"];
+
         _json = JSON.stringify(this.queryBuilder.getProfile(_profileIri));
+        this.LabelContent = this.queryBuilder.getLabelPaths(entity["@id"]);
       } else {
         return;
       }
@@ -127,7 +132,7 @@ export default defineComponent({
       const _entityType = entity["rdf:type"][0]["@id"];
       if (_entityType == "im:Profile") {
         // this.queryBuilder.getGraphData(entity["@id"]);
-        this.queryBuilder.getLabelPaths(entity["@id"]);
+      
       }
     },
   },

@@ -7,7 +7,13 @@ import { ref, onMounted, defineComponent } from "vue";
 
 export default defineComponent({
   name: "TailwindButton",
-  props: ["prop"],
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
+   methods: {
+    updateValue(name: string): void {
+      this.$emit("update:modelValue", name);
+    },
+  },
 });
 </script>
 

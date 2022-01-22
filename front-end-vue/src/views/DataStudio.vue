@@ -103,7 +103,10 @@
                 placeholder="Type(s)"
               />
             </div>
-            <div class="item-view"  v-show="activeItemView == 'Folder Hierarchy'">
+            <div
+              class="item-view"
+              v-show="activeItemView == 'Folder Hierarchy'"
+            >
               <div
                 v-if="queryBuilder.hierarchyTree(topLevelEntity)"
                 class="left inline-flex flex-col w-full h-full"
@@ -152,7 +155,7 @@
               v-model="activeContentView"
             />
           </div>
-          
+
           <template v-if="activeContentView == 'Graph'">
             <Network
               class="w-full h-full bg-white"
@@ -168,12 +171,10 @@
             ></Network>
           </template>
 
-            <template v-if="activeContentView == 'Text (rdfs:label)'">
-              <!-- <button @click="test()">Click</button> -->
-
-              
-              </template>
-          
+          <template v-if="activeContentView == 'Text (rdfs:label)'">
+            <!-- <button @click="test()">Click</button> -->
+            <LabelView class="p-3 w-full h-full" v-model="LabelContent" />
+          </template>
 
           <template v-if="activeContentView == 'JSON'">
             <v-ace-editor
@@ -219,6 +220,7 @@ import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
 import QueryBuilder from "@/models/query/QueryBuilder";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
+import LabelView from "@/components/dataset/LabelView.vue";
 
 import { VAceEditor } from "@/components/dataset/VAceEditor";
 
@@ -229,7 +231,6 @@ import { VAceEditor } from "@/components/dataset/VAceEditor";
 // import ProgressBar from "@/components/search/ProgressBar.vue";
 // import OverlayPanel from "primevue/overlaypanel";
 // import Dialog from "primevue/dialog";
-
 
 export default defineComponent({
   name: "DataStudio",
@@ -245,6 +246,7 @@ export default defineComponent({
     Network,
     HierarchyTreeItem,
     VAceEditor,
+    LabelView,
     // VueJsonPretty
   },
   data() {
@@ -608,6 +610,14 @@ export default defineComponent({
         this.$store.commit("updateJSONContent", value);
       },
     },
+    LabelContent: {
+      get(): any {
+        return this.$store.state.LabelContent;
+      },
+      set(LabelContent: any): void {
+        this.$store.commit("updateLabelContent", LabelContent);
+      },
+    },
     isLoading: {
       get(): any {
         return this.$store.state.isLoading;
@@ -831,7 +841,7 @@ export default defineComponent({
   /* padding-bottom: 150px; */
   overflow-y: auto;
   font-size: 12px !important;
-width: 100%;
+  width: 100%;
   height: 680px;
 }
 
@@ -891,8 +901,6 @@ width: 100%;
 .file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
-
-
 
 .json-viewer {
   height: calc(100vh - 9rem);

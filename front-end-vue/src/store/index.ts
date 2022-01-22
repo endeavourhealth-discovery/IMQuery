@@ -74,6 +74,7 @@ export default createStore({
       selectedTypes: string[];
     },
     JSONContent: "",
+    LabelContent: [] as any[],
     isLoading: false,
     activeQueryId: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
     openQueries: [
@@ -4254,6 +4255,10 @@ export default createStore({
     },
     updateJSONContent(state, JSONContent) {
       state.JSONContent = JSONContent;
+
+    },
+    updateLabelContent(state, LabelContent) {
+      state.LabelContent = LabelContent;
 
     }
   },

@@ -91,42 +91,51 @@ export default class QueryBuilder {
     //returns all the paths to rdfs:label and assigns a temp uuid as key for v-for iteration
     public getLabelPaths(profileIri: string): any {
 
+
+        const _definitionIri = "im:definition";
+
         const _profile = this.getProfile(profileIri);
-        const _definition = _profile["im:definition"];
-        const _jsonPaths = jp.paths(_definition, '$..["rdfs:label"]');
+        const _definition = _profile[_definitionIri];
         const _jsonLabels = jp.query(_definition, '$..["rdfs:label"]');
+        const _jsonPaths1 = jp.paths(_definition, '$..["rdfs:label"]');
+        const _jsonPaths2 = [] as any[];
 
-        console.log("_jsonLabels", _jsonLabels);
+        // console.log("_jsonPaths1", _jsonPaths1);
+        // console.log("_jsonLabels", _jsonLabels);
 
-        const _paths = [] as any[];
-
-
-        for (let i = 0; i < _jsonPaths.length; i++) {
-            _paths.push(_jsonPaths[i].map((item: any) => {
+        for (let i = 0; i < _jsonPaths1.length; i++) {
 
 
-                const _jsonPathAsString: string = this.toPath(_jsonPaths[i]);
-                // console.log("_jsonPathAsString", _jsonPathAsString);
+            //required to concatenate correct path to profile's rdfs:label
+            _jsonPaths1[i].splice(1, 0, _definitionIri);
 
-                //imquery refers to this application i.e. temporary object keys used only within the frontend application (and are not part of the query model)
-                return {
-                    'imquery:uuid': `urn:uuid${v4()}`,
-                    'rdfs:label': _jsonLabels[i],
-                    'imquery:jsonPathArray': {
-                        'asArray': _jsonPaths[i],
-                        'asString': _jsonPathAsString,
-                    },
-                }
-            }));
+            //imquery refers to this application i.e. temporary object keys used only within the frontend application (and are not part of the query model)
+            _jsonPaths2.push({
+                'imquery:uuid': `urn:uuid${v4()}`,
+                'rdfs:label': _jsonLabels[i],
+                'imquery:jsonPath': {
+                    'imquery:asArray': this.withUUID(_jsonPaths1[i]),
+                    'imquery:asString': this.toPath(_jsonPaths1[i]),
+                },
+            })
         }
 
 
-        console.log("_paths", _paths);
-        return _paths;
+        console.log("_jsonPaths2", _jsonPaths2);
+        return _jsonPaths2;
 
     }
 
-    
+    private withUUID(array: any): any {
+        return array.map((item: any) => {
+            return {
+                'imquery:uuid': `urn:uuid${v4()}`,
+                'rdfs:label': item
+            }
+        })
+    }
+
+
     private toPath(array: any): string {
         let _path = "";
 
