@@ -55,6 +55,44 @@ Profile / MainEntity e.g. Patient (show all within Selected Folder)
 
 JSON Path
 
+$..["im:var"]
+
+$..["im:and"][?(@.["im:var"] && @.["im:valueIn"])]
 
 
-$.im:definition..im:or[*].im:and[*]
+
+to get any statement
+$..[?(@.property && (@.valueIn || @.value))]
+
+
+
+First get all named clauses 
+$..[?(@.rdfs:label)]
+
+
+This may give you a path like:
+$["im__definition"][*]["im__and"][1]["im__or"][0]["im__and"][1]
+
+Then get all properties
+$..[?(@.im__property && (@.im__valueIn || @.im__value))]
+$..[?(@.rdfs__label && (@.im__property && (@.im__valueIn || @.im__value)))]
+
+
+
+
+
+Or get all properties for a clause
+$..[?(@.rdfs__label && (@.im__var))]
+
+
+// all the variables for a specific clause
+$..[?(@.rdfs__label == "Latest systolic blood pressure in the last 18 months : If Office based and >140")]..[?(@.im__var)]
+
+
+
+experimental:
+$..[?(@.rdfs__label == "Latest systolic blood pressure in the last 18 months : If Office based and >140")][?(@.im__property && (@.im__valueIn || @.im__value))]
+$..[?(@.im__entityType)]
+$..[?(@.rdfs__label)]
+
+

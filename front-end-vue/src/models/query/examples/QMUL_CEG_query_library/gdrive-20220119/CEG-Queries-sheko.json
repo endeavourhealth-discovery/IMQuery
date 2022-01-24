@@ -250,36 +250,40 @@
         "im:order": 0
       }, {
         "im:or": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:9f9f1d94-1d7c-4418-92bc-8208dbd1ef04",
             "name": "Aged 65-69"
           }],
           "im:order": 0
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile2",
           "im:valueIn": [{
             "@id": "urn:uuid:e0dadef9-b429-48f7-b69f-faa39d103673",
             "name": "Aged 70-74"
           }],
           "im:order": 1
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile3",
           "im:valueIn": [{
             "@id": "urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9",
             "name": "Aged 75-79"
           }],
           "im:order": 2
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile4",
           "im:valueIn": [{
             "@id": "urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51",
             "name": "Aged 80+"
@@ -456,9 +460,10 @@
         "im:order": 0
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562",
             "name": "01 Older adults resident in a care home"
@@ -470,6 +475,7 @@
         "im:property": [{
           "@id": "im:hasProfile"
         }],
+        "im:var": "profile2",
         "im:valueIn": [{
           "@id": "urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51",
           "name": "Aged 80+"
@@ -556,9 +562,10 @@
         "im:order": 0
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562",
             "name": "01 Older adults resident in a care home"
@@ -570,6 +577,7 @@
         "im:property": [{
           "@id": "im:hasProfile"
         }],
+        "im:var": "profile2",
         "im:valueIn": [{
           "@id": "urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9",
           "name": "Aged 75-79"
@@ -1398,10 +1406,12 @@
         }],
         "im:order": 1
       }, {
-        "im:and": [{
-          "im:property": [{
+        "im:and": [
+          {
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:5910e110-12a2-4f28-9c98-59eb850881f8",
             "name": "COVID Risk High = shielding = CEV aged 16+"
@@ -3124,9 +3134,10 @@
         "im:order": 1
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec",
             "name": "04b CEV=high risk (excl previous cohorts)"
@@ -3136,108 +3147,120 @@
         "im:order": 2
       }, {
         "im:or": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile2",
           "im:valueIn": [{
             "@id": "urn:uuid:2fa3c8d3-9d5c-4513-85fa-7edf454d8a1e",
             "name": "COVID-19 Chronic heart disease (CHD)"
           }],
           "im:order": 0
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile3",
           "im:valueIn": [{
             "@id": "urn:uuid:09d960fc-ab20-45bb-a6e2-34b10b87118c",
             "name": "COVID-19 Chronic kidney disease (CKD)"
           }],
           "im:order": 1
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile4",
           "im:valueIn": [{
             "@id": "urn:uuid:0d334461-759c-44df-b089-13d5bcff6022",
             "name": "COVID-19 Chronic liver disease (CLD)"
           }],
           "im:order": 2
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile5",
           "im:valueIn": [{
             "@id": "urn:uuid:ae9b9934-2bc5-4279-b86c-285d6c703691",
             "name": "COVID-19 Chronic respiratory disease (CRD)"
           }],
           "im:order": 3
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile6",
           "im:valueIn": [{
             "@id": "urn:uuid:c339d6ff-f475-4843-ad29-6781f68491b8",
             "name": "COVID-19 Diabetes"
           }],
           "im:order": 4
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile7",
           "im:valueIn": [{
             "@id": "urn:uuid:ed7eecab-7ff4-45a6-8d55-ed059ea67d96",
             "name": "COVID-19 Immune deficiency diagnosis (code)"
           }],
           "im:order": 5
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile8",
           "im:valueIn": [{
             "@id": "urn:uuid:b44f715e-3292-4d66-8b8c-f7cc699e3203",
             "name": "COVID-19 Immunosuppressant medication (drug)"
           }],
           "im:order": 6
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile9",
           "im:valueIn": [{
             "@id": "urn:uuid:4848461d-4140-4e34-843f-e4c216a10725",
             "name": "COVID-19 Patients with Asplenia or dysfunction of the spleen"
           }],
           "im:order": 7
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile10",
           "im:valueIn": [{
             "@id": "urn:uuid:22f49920-0f80-4862-bf75-b05e74564b26",
             "name": "COVID-19 Patients with CNS disease including significant learning disorder"
           }],
           "im:order": 8
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile11",
           "im:valueIn": [{
             "@id": "urn:uuid:f528f948-3886-4e74-a4a8-80ae61dbbc4f",
             "name": "COVID-19 Patients with morbid obesity"
           }],
           "im:order": 9
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile12",
           "im:valueIn": [{
             "@id": "urn:uuid:c1b5dec8-ba26-4d4b-b5cd-2c9b85d2fcb8",
             "name": "COVID-19 Wider learning disability"
           }],
           "im:order": 10
         }, {
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile13",
           "im:valueIn": [{
             "@id": "urn:uuid:4793f789-cb3b-4f1a-a027-9da0b5374110",
             "name": "COVID-19 Severe mental illness"
@@ -12552,9 +12575,10 @@
         "im:order": 0
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213",
             "name": "A1) All patients who have received any COVID-19 vaccination dose"
@@ -55858,9 +55882,10 @@
     "im:definition": [{
       "im:and": [{
           "rdfs:label": "Significant Mental Illness (SMI)",
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
           }],
@@ -56180,9 +56205,10 @@
         "im:order": 0
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
             "name": "Priority 1"
@@ -56338,9 +56364,10 @@
         "im:order": 0
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile1",
           "im:valueIn": [{
             "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
             "name": "Priority 1"
@@ -56350,9 +56377,10 @@
         "im:order": 1
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile2",
           "im:valueIn": [{
             "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd",
             "name": "Priority 2"
@@ -56593,15 +56621,17 @@
         "im:property": [{
           "@id": "im:hasProfile"
         }],
+        "im:var": "profile1",
         "im:valueIn": [{
           "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
         }],
         "im:order": 0
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile2",
           "im:valueIn": [{
             "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
             "name": "Priority 1"
@@ -56611,9 +56641,10 @@
         "im:order": 1
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile3",
           "im:valueIn": [{
             "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd",
             "name": "Priority 2"
@@ -56623,9 +56654,10 @@
         "im:order": 2
       }, {
         "im:not": [{
-          "im:property": [{
+           "im:property": [{
             "@id": "im:hasProfile"
           }],
+          "im:var": "profile4",
           "im:valueIn": [{
             "@id": "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6",
             "name": "Priority 3a"

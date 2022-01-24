@@ -278,20 +278,20 @@ export default defineComponent({
       filteredJSONContent: "",
       jsonpath: "",
       labelPaths: [] as any[],
-      activeItemView: "All Items",
+      activeItemView: "Folder Hierarchy",
       itemViews: [
-        {
-          name: "All Items",
-          icon: "menu",
-          visible: true,
-        },
         {
           name: "Folder Hierarchy",
           icon: "folder_open",
           visible: true,
         },
+        {
+          name: "All Items",
+          icon: "menu",
+          visible: true,
+        },
       ],
-      activeContentView: "Graph",
+      activeContentView: "JSON",
       contentViews: [
         {
           name: "Graph",
@@ -630,12 +630,19 @@ export default defineComponent({
           const _jpq = jp.query(JSON.parse(this.JSONContent), newValue);
           if (_jpq.length) {
             this.filteredJSONContent = JSON.stringify(_jpq);
+          } else {
+            this.filteredJSONContent = "";
           }
 
-          this.filteredJSONContent = prettier.format(this.filteredJSONContent, {
-            parser: "json",
-            plugins: [prettierBabylon],
-          });
+          if (this.filteredJSONContent && this.filteredJSONContent != "") {
+            this.filteredJSONContent = prettier.format(
+              this.filteredJSONContent,
+              {
+                parser: "json",
+                plugins: [prettierBabylon],
+              }
+            );
+          }
 
           // this.filteredJSONContent = JSON.stringify(_jpq.toString());
           console.log("_jpq", _jpq);
