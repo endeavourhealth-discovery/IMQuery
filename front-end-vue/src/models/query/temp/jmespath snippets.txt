@@ -70,11 +70,18 @@ First get all named clauses
 $..[?(@.rdfs:label)]
 
 
+
+#####
+$..[?(@.rdfs__label && (@.im__pathTo || @.im__property))]
+$..[?(@.im__var || @.im__fromLatest)]
+
+
 This may give you a path like:
 $["im__definition"][*]["im__and"][1]["im__or"][0]["im__and"][1]
 
 Then get all properties
-$..[?(@.im__property && (@.im__valueIn || @.im__value))]
+$..[?(@.rdfs__label && (@.im__pathTo || @.im__property))]
+$..[?(@.rdfs__label && (@.im__valueIn || @.im__value))]
 $..[?(@.rdfs__label && (@.im__property && (@.im__valueIn || @.im__value)))]
 
 

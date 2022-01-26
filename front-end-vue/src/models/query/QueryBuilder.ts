@@ -12,9 +12,11 @@ export default class QueryBuilder {
 
 
     // properties dependenet on entities loaded from JSON
+    '_file': any;
     '_@context': any;
     '_@graph': any;
-    '_file': any;
+
+
 
 
     //all other properties:
@@ -51,6 +53,22 @@ export default class QueryBuilder {
 
     }
 
+    //replaces all ":"" and "@" with __ and ___ respectively to enable JMESPath and JsonPath tools
+    private replaceKeys(object: any): any {
+        const replaceKeysDeep = (o: any) => {
+            return _.transform(o, function (result: any, value: any, key: any) {
+
+
+                const _currentKey = typeof (key) == "string" ? key.replaceAll(":", "__").replaceAll("@", "___") : key;
+                console.log(_currentKey);
+
+                result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
+            });
+        }
+
+        return replaceKeysDeep(object);
+    }
+
     // each key and value from the JSON acts as a "node" with a temporarily generated UUID that is mapped against the property path (where it originated from) (useful for editing)
     // temporary iris examples are (@id = "urn:tempuuid_")   
     private _path = new Map<string, string>();
@@ -85,7 +103,7 @@ export default class QueryBuilder {
 
 
     public getProfile(profileIri: string): any {
-        return this._profileEntities.get(profileIri);
+        return this.replaceKeys(this._profileEntities.get(profileIri));
     }
 
     //returns all the paths to rdfs:label and assigns a temp uuid as key for v-for iteration
@@ -119,7 +137,7 @@ export default class QueryBuilder {
             };
 
 
-//determine path items as keys and arrays
+            //determine path items as keys and arrays
             // _clauseNodes1[i].path.forEach((item: any) => {
 
             //     if (!_pathItems.has(item)) {
@@ -253,8 +271,12 @@ export default class QueryBuilder {
 
         // file
         file = JSON.parse(file);
-        console.log("file", file)
         this._file = file;
+
+
+        console.log("__file", file)
+
+
 
         if (file["entities"]) {
             this.JSONContentType = "entityDefinitions";
@@ -294,13 +316,6 @@ export default class QueryBuilder {
                 if (_type === "im:Profile") {
                     //profiles 
                     this._profileEntities.set(entity['@id'], entity);
-
-                    // _clauses - looks for AND/OR
-                    // if (entity[':and']) {
-                    //     this._clauses.set(entity['@id'], { ':and': entity[':and'] })
-                    // } else if (entity[':or']) {
-                    //     this._clauses.set(entity['@id'], { ':or': entity[':or'] })
-                    // }
 
                 }
 
