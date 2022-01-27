@@ -6,20 +6,10 @@ const jp = require('jsonpath');
 export default class QueryBuilder {
 
 
-    //properties without getters/setters
-    'JSONContentType'?: "entityDefinitions" | "profileDefinitions" | null;
+    //properties without getters/setters belonging to this class
     'Loaded' = false;
 
-
-    // properties dependenet on entities loaded from JSON
-    '_file': any;
-    '_@context': any;
-    '_@graph': any;
-
-
-
-
-    //all other properties:
+    //all other properties belonging to this class
 
     // all entities
     public _entities = [] as any[];
@@ -53,21 +43,7 @@ export default class QueryBuilder {
 
     }
 
-    //replaces all ":"" and "@" with __ and ___ respectively to enable JMESPath and JsonPath tools
-    private replaceKeys(object: any): any {
-        const replaceKeysDeep = (o: any) => {
-            return _.transform(o, function (result: any, value: any, key: any) {
 
-
-                const _currentKey = typeof (key) == "string" ? key.replaceAll(":", "__").replaceAll("@", "___") : key;
-                console.log(_currentKey);
-
-                result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
-            });
-        }
-
-        return replaceKeysDeep(object);
-    }
 
     // each key and value from the JSON acts as a "node" with a temporarily generated UUID that is mapped against the property path (where it originated from) (useful for editing)
     // temporary iris examples are (@id = "urn:tempuuid_")   
@@ -85,13 +61,97 @@ export default class QueryBuilder {
     }
 
 
+    private reset(): void {
+        this._entities = [] as any[];
+        this._entityTypes = [] as any[];
+        this._profileEntities = new Map<string, any>()
+        this._clauses = new Map<string, any>();
+        this._path = new Map<string, string>();
+        this._graph = new Map<string, any>();
+    }
+
+
+
+    // properties bbelonging to JSON file
+    '_file': any;
+    '_@context': any;
+    '_@graph': any;
+
+
+    // loads JSON file 
+
+    loadJSON(file: any): QueryBuilder {
+
+        // removes previous instances
+        if (this.Loaded) this.reset();
+
+        // parse
+        file = JSON.parse(file);
+
+        // store
+        this._file = file;
+        console.log("__file", file)
+
+
+        //
+        if (file["entities"] && this.loadEntities(file) == true) {
+            this.Loaded = true;
+        } else {
+            throw new Error("JSON content structure not recognised");
+        }
+
+        return this;
+    }
+
+    // load JSON file containing entity definitions
+    private loadEntities(file: any): boolean {
+
+        try {
+            this['_@context'] = file["@context"];
+            this['_@graph'] = file["@graph"];
+            this['_entities'] = file["entities"];
+
+            // separate out types, queries, definitions and _clauses
+            file["entities"].forEach((entity: any) => {
+
+                //types
+                const _type = entity["rdf:type"][0]["@id"];
+                if (!this._entityTypes.includes(_type)) {
+                    this._entityTypes.push(_type);
+                }
+
+                //profiles 
+                if (_type === "im:Profile") {
+                    this._profileEntities.set(entity['@id'], entity);
+                }
+
+            });
+
+            return true;
+
+        } catch (error) {
+
+            console.log("Error with loadEntityDefinitions:", error)
+            return false;
+
+        } finally {
+            console.log("_entities:", this._entities);
+            console.log("_profileEntities:", this._profileEntities);
+            console.log("profileEntitiesAsArray", this.profileEntitiesAsArray);
+            console.log("_clauses:", this._clauses);
+
+        }
+    }
+
+
+
+    // get all profiles in a folder
     public getProfiles(folderIri: string): any {
         const _q = `entities[?
             "rdf:type"[?"@id" == \`im:Profile\`] && 
             "im:isContainedIn"[?"@id" == \`${folderIri}\`]]
                 ."im:definition" 
-                | [] 
-                | {"im:Profile": @}`; //optional
+                | []`;
 
         const _result = jmp.search(this._file, _q);
         console.log("_result:", _result)
@@ -101,13 +161,13 @@ export default class QueryBuilder {
 
 
 
-
+    // get profile by iri
+    // special characters in keys are replaced 
     public getProfile(profileIri: string): any {
-        return this.replaceKeys(this._profileEntities.get(profileIri));
+        return Tools.replaceKeys(this._profileEntities.get(profileIri));
     }
 
     //returns all the paths to rdfs:label and assigns a temp uuid as key for v-for iteration
-
     public getClausePaths(profileIri: string, pathToClause = `["rdfs:label"]`): any {
 
 
@@ -148,9 +208,6 @@ export default class QueryBuilder {
             // });
 
 
-
-
-
             // remove definition path
             // _node['imquery:jsonPath']['imquery:asString'].replace(`["im:definition"]`, "")
 
@@ -160,38 +217,14 @@ export default class QueryBuilder {
         }
 
 
-
-
         console.log("_clauseNodes2", _clauseNodes2);
         return { nodes: _clauseNodes2, pathItems: [] };
 
     }
 
-    // private withUUID(array: any): any {
-    //     return array.map((item: any) => {
-    //         return {
-    //             'imquery:uuid': `urn:uuid${v4()}`,
-    //             'item': item
-    //         }
-    //     })
-    // }
 
 
-    // private toPathString(array: any): string {
-    //     let _path = "";
-
-    //     for (let i = 0; i < array.length; i++) {
-    //         if (typeof (array[i]) == "number") {
-    //             _path = _path + `[${array[i]}]`
-    //         } else if (typeof (array[i]) == "string") {
-    //             _path = _path + (i != 0 ? '.' : '') + array[i];
-    //         }
-    //     }
-    //     console.log("_path", _path);
-
-    //     return _path;
-    // }
-
+    // one way conversion for display as nodges/edges in d3.js (Network.vue component)
     public getGraphData(profileIri: string): any {
 
 
@@ -206,12 +239,6 @@ export default class QueryBuilder {
         //the path to all labels
         const _paths = jp.nodes(_definition, '$..["rdfs:label"]');
         console.log("_paths", _paths);
-
-
-
-
-
-
 
         const _nodes = [] as any[];
         const _links = [] as any[];
@@ -229,115 +256,8 @@ export default class QueryBuilder {
 
 
 
-    //maps terms terms -> matched (see examples below)
-    private _compoundTerms = new Map<string, string>();
 
-    // example (should ideally be loaded from API)
-    private _terms = [
-        { '@id': ' http://endhealth.info/im#Q_term_IssuedPrescription', 'term': 'Issued Prescription for' },
-        { '@id': ' http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'term': 'Investigation' }
-    ];
-
-    // example 
-    private _matches = [
-        // a medication that has been prescribed and issued -> Medication Authorisation + Medication Order  
-        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationOrder'],
-        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationAuthorisationsOrCourses'],
-        // A referral/request for investigation or its results -> Diagnostic Report, Ovservation, Precedure, Request etc.  
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#DiagnosticReport'],
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Observation'],
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Procedure'],
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#ReferralRequestOrProcedureRequest'],
-
-    ];
-
-
-
-
-    private reset(): void {
-        this._entities = [] as any[];
-        this._entityTypes = [] as any[];
-        this._profileEntities = new Map<string, any>()
-        this._clauses = new Map<string, any>();
-        this._path = new Map<string, string>();
-        this._graph = new Map<string, any>();
-    }
-
-
-    loadJSON(file: any): QueryBuilder {
-
-
-        if (this.Loaded) this.reset();
-
-        // file
-        file = JSON.parse(file);
-        this._file = file;
-
-
-        console.log("__file", file)
-
-
-
-        if (file["entities"]) {
-            this.JSONContentType = "entityDefinitions";
-            if (this.loadEntityDefinitions(file) == false) {
-                throw new Error("JSON content structure not recognised");
-            } else {
-                this.Loaded = true;
-            }
-        } else if (file[":and"] || file[":or"]) {
-            this.JSONContentType = "profileDefinitions";
-            this.Loaded = true;
-            // if (this.loadQueryDefinitions(file) == false) throw new Error ("JSON content structure not recognised");
-        } else {
-            throw new Error("JSON content structure not recognised");
-        }
-
-        return this;
-    }
-
-    private loadEntityDefinitions(file: any): boolean {
-
-
-
-        try {
-            this['_@context'] = file["@context"];
-            this['_@graph'] = file["@graph"];
-            this['_entities'] = file["entities"];
-
-            // separate out types, queries, definitions and _clauses
-            file["entities"].forEach((entity: any) => {
-                //types
-                const _type = entity["rdf:type"][0]["@id"];
-                if (!this._entityTypes.includes(_type)) {
-                    this._entityTypes.push(_type);
-                }
-
-                if (_type === "im:Profile") {
-                    //profiles 
-                    this._profileEntities.set(entity['@id'], entity);
-
-                }
-
-            });
-
-            return true;
-
-        } catch (error) {
-
-            console.log("Error with loadEntityDefinitions:", error)
-            return false;
-
-        } finally {
-            console.log("_entities:", this._entities);
-            console.log("_profileEntities:", this._profileEntities);
-            console.log("profileEntitiesAsArray", this.profileEntitiesAsArray);
-            console.log("_clauses:", this._clauses);
-
-        }
-    }
-
-
+    // displaying folders as a hierarchy tree 
     private _hierarchyTree: any;
     private _lastTopLevelEntity: any;
     hierarchyTree(topLevelEntity: any): any[] | null {
@@ -361,14 +281,7 @@ export default class QueryBuilder {
     }
 
 
-    item(iri: string) {
-        return this.entities.filter((ent: any) => ent["@id"] == iri);
-    }
-
-
     private populateHierarchyTree() {
-
-
 
         // .set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".name", payload.name)
         const getChildren = (targetEntity: any): any => {
@@ -430,7 +343,114 @@ export default class QueryBuilder {
         }
     }
 
+
+
+
+
+
+
+
+
 }
+
+
+export class Tools {
+
+
+
+    //characters and their replacements
+    private static _characterMap: any = {
+        ':': "__c__",
+        '@': "__a__",
+    };
+
+
+    //replaces all ":"" and "@" with __ and ___ respectively to enable JMESPath and JsonPath tools
+    public static replaceKeys(object: any): any {
+
+
+        //replaces all keys in an object using  key-value pairs in character map
+        const replaceChars = (text: string) => {
+            let _text = text;
+            Object.keys(this._characterMap).forEach((key: string) => {
+                _text = _text.replaceAll(key, this._characterMap[key])
+            });
+            return _text;
+
+        };
+
+        // deep nested replacement of keys if they are string
+        const replaceKeysDeep = (o: any) => {
+            return _.transform(o, function (result: any, value: any, key: any) {
+                const _currentKey = typeof (key) == "string" ? replaceChars(key) : key;
+                result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
+            });
+        }
+
+
+        return replaceKeysDeep(object);
+    }
+
+
+
+
+    // adds random uuid only used in frontend to provide a :key for v-for iterators in UI components  
+    private addUUID(array: any): any {
+        return array.map((item: any) => {
+            return {
+                'imq__id': `urn:uuid${v4()}`,
+                'item': item
+            }
+        })
+    }
+
+
+
+
+
+    //////////////////// experimental  //////////////////// 
+
+    //maps terms terms -> matched (see examples below)
+    private _compoundTerms = new Map<string, string>();
+
+    // example (should ideally be loaded from API)
+    private _terms = [
+        { '@id': ' http://endhealth.info/im#Q_term_IssuedPrescription', 'term': 'Issued Prescription for' },
+        { '@id': ' http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'term': 'Investigation' }
+    ];
+
+    // example 
+    private _matches = [
+        // a medication that has been prescribed and issued -> Medication Authorisation + Medication Order  
+        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationOrder'],
+        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationAuthorisationsOrCourses'],
+        // A referral/request for investigation or its results -> Diagnostic Report, Ovservation, Precedure, Request etc.  
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#DiagnosticReport'],
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Observation'],
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Procedure'],
+        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#ReferralRequestOrProcedureRequest'],
+
+    ];
+
+
+}
+
+    // superceded by jp.stringify()
+    // private toPathString(array: any): string {
+    //     let _path = "";
+
+    //     for (let i = 0; i < array.length; i++) {
+    //         if (typeof (array[i]) == "number") {
+    //             _path = _path + `[${array[i]}]`
+    //         } else if (typeof (array[i]) == "string") {
+    //             _path = _path + (i != 0 ? '.' : '') + array[i];
+    //         }
+    //     }
+    //     console.log("_path", _path);
+
+    //     return _path;
+    // }
+
 
 
 
