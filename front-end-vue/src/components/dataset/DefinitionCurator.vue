@@ -69,7 +69,7 @@ import SectionToggler from "@/components/dataset/SectionToggler.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
-  name: "ClauseItem",
+  name: "DefinitionCurator",
   props: ["operator", "clause", "nestingCount"],
   components: {
     SectionToggler,
@@ -93,7 +93,7 @@ export default defineComponent({
   computed: {
     clauseWithUUID(): any {
       return this.clause.map((item: any) => {
-        return { id: "temp_" + v4(), ...item };
+        return { temp_id: "urn:uuid:" + v4(), ...item };
       });
     },
   },

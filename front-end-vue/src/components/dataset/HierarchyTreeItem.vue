@@ -83,7 +83,7 @@ export default defineComponent({
         this.$store.commit("updateJSONContent", JSONContent);
       },
     },
-    LabelContent: {
+    LabelContent: { 
       get(): any {
         return this.$store.state.LabelContent;
       },
@@ -104,7 +104,6 @@ export default defineComponent({
     },
   },
   methods: {
-
     //populates JSON, graph and labels
     loadFile(entity: any): void {
       const _entityType = entity["rdf:type"][0]["@id"];
@@ -112,11 +111,13 @@ export default defineComponent({
 
       if (_entityType == "im:Folder") {
         const _folderIri = entity["@id"];
-        _json = JSON.stringify(this.queryBuilder.getProfiles(_folderIri));
+        _json = JSON.stringify(this.queryBuilder.getProfilesByFolder(_folderIri));
       } else if (_entityType == "im:Profile") {
         const _profileIri = entity["@id"];
 
-        _json = JSON.stringify(this.queryBuilder.getProfile(_profileIri));
+        _json = JSON.stringify(
+          this.queryBuilder.getProfile(_profileIri, false)
+        );
         this.LabelContent = this.queryBuilder.getClausePaths(entity["@id"]);
       } else {
         return;
@@ -132,7 +133,6 @@ export default defineComponent({
       const _entityType = entity["rdf:type"][0]["@id"];
       if (_entityType == "im:Profile") {
         // this.queryBuilder.getGraphData(entity["@id"]);
-      
       }
     },
   },

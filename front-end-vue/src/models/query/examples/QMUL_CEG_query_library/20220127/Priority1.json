@@ -1,0 +1,2247 @@
+{
+    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
+    "rdf:type": [{ "@id": "im:Profile" }],
+    "rdfs:label": "Priority 1",
+    "rdfs:comment": "",
+    "im:isContainedIn": [
+      { "@id": "urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca" }
+    ],
+    "im:entityType": [{ "@id": "im:Person" }],
+    "im:definition": [
+      {
+        "rdf:type": [{ "@id": "im:MatchClause" }],
+        "im:and": [
+          {
+            "rdf:type": [{ "@id": "im:MatchClause" }],
+            "rdfs:label": "SMI Population",
+            "im:property": [{ "@id": "im:hasProfile" }],
+            "im:valueIn": [
+              { "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf" }
+            ],
+            "im:order": 0
+          },
+          {
+            "rdf:type": [{ "@id": "im:MatchClause" }],
+            "im:or": [
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Hypertension (not resolved)",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                      },
+                                      {
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept6",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate7",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                          }
+                        ],
+                        "im:valueVar": "concept8"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest systolic blood pressure in the last 18 months : If Office based and >140",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:820c00a2-016b-4fe7-9a60-20d10e9ba001",
+                                        "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept9",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate10",
+                                    "im:order": 1
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueCompare": [
+                                      {
+                                        "im:comparison": "greaterThanOrEqual",
+                                        "im:valueData": "-18",
+                                        "rdf:type": [
+                                          { "@id": "im:CompareClause" }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueFunction": [
+                                      {
+                                        "im:functionIri": [
+                                          { "@id": "im:TimeDifference" }
+                                        ],
+                                        "im:argument": [
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "units",
+                                            "im:valueData": "MONTH"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "firstDate",
+                                            "im:valueData": "$referenceDate"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "secondDate",
+                                            "im:valueData": "effectiveDate11"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueVar": "effectiveDate11",
+                                    "im:order": 2
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:and": [
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:concept" }],
+                            "im:valueIn": [
+                              {
+                                "@id": "urn:uuid:3ba2188d-ff64-4e41-a6a1-9a4a85b3c700",
+                                "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more"
+                              }
+                            ],
+                            "im:valueVar": "concept12",
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:numericValue" }],
+                            "im:valueCompare": [
+                              {
+                                "im:comparison": "greaterThanOrEqual",
+                                "im:valueData": "140",
+                                "rdf:type": [{ "@id": "im:CompareClause" }]
+                              }
+                            ],
+                            "im:valueVar": "numericValue13",
+                            "im:order": 1
+                          }
+                        ]
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 0
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Hypertension (not resolved)",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                      },
+                                      {
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept14",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate15",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                          }
+                        ],
+                        "im:valueVar": "concept16"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest diastolic blood pressure in the last 18 months : if Office based and >90",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:c8e8c982-3e06-48a1-834f-f24f387cc0e4",
+                                        "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept17",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate18",
+                                    "im:order": 1
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueCompare": [
+                                      {
+                                        "im:comparison": "greaterThanOrEqual",
+                                        "im:valueData": "-18",
+                                        "rdf:type": [
+                                          { "@id": "im:CompareClause" }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueFunction": [
+                                      {
+                                        "im:functionIri": [
+                                          { "@id": "im:TimeDifference" }
+                                        ],
+                                        "im:argument": [
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "units",
+                                            "im:valueData": "MONTH"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "firstDate",
+                                            "im:valueData": "$referenceDate"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "secondDate",
+                                            "im:valueData": "effectiveDate19"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueVar": "effectiveDate19",
+                                    "im:order": 2
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:and": [
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:concept" }],
+                            "im:valueIn": [
+                              {
+                                "@id": "urn:uuid:bc3f4e3b-273c-4cb2-9b4c-a98178d23821",
+                                "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more"
+                              }
+                            ],
+                            "im:valueVar": "concept20",
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:numericValue" }],
+                            "im:valueCompare": [
+                              {
+                                "im:comparison": "greaterThanOrEqual",
+                                "im:valueData": "90",
+                                "rdf:type": [{ "@id": "im:CompareClause" }]
+                              }
+                            ],
+                            "im:valueVar": "numericValue21",
+                            "im:order": 1
+                          }
+                        ]
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 1
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Hypertension (not resolved)",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                      },
+                                      {
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept22",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate23",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                          }
+                        ],
+                        "im:valueVar": "concept24"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest systolic blood pressure in the last 18 monthsm : if home based >135",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:820c00a2-016b-4fe7-9a60-20d10e9ba001",
+                                        "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept25",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate26",
+                                    "im:order": 1
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueCompare": [
+                                      {
+                                        "im:comparison": "greaterThanOrEqual",
+                                        "im:valueData": "-18",
+                                        "rdf:type": [
+                                          { "@id": "im:CompareClause" }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueFunction": [
+                                      {
+                                        "im:functionIri": [
+                                          { "@id": "im:TimeDifference" }
+                                        ],
+                                        "im:argument": [
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "units",
+                                            "im:valueData": "MONTH"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "firstDate",
+                                            "im:valueData": "$referenceDate"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "secondDate",
+                                            "im:valueData": "effectiveDate27"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueVar": "effectiveDate27",
+                                    "im:order": 2
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:and": [
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:concept" }],
+                            "im:valueIn": [
+                              {
+                                "@id": "urn:uuid:353185d8-1333-4637-a251-449b3e1bb7ba",
+                                "name": "Average home systolic blood pressure, Home systolic blood pressure, 24 hour systolic blood pressure, Ambulatory systolic blood pressure, Ambulatory systolic BP (blood pressure), Average day interval systolic blood pressure, Average 24 hour systolic blood pressure"
+                              }
+                            ],
+                            "im:valueVar": "concept28",
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:numericValue" }],
+                            "im:valueCompare": [
+                              {
+                                "im:comparison": "greaterThanOrEqual",
+                                "im:valueData": "135",
+                                "rdf:type": [{ "@id": "im:CompareClause" }]
+                              }
+                            ],
+                            "im:valueVar": "numericValue29",
+                            "im:order": 1
+                          }
+                        ]
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 2
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Hypertension (not resolved)",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                      },
+                                      {
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept30",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate31",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                          }
+                        ],
+                        "im:valueVar": "concept32"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest diastolic blood pressure in the last 18 months a: if home based and >85",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:c8e8c982-3e06-48a1-834f-f24f387cc0e4",
+                                        "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept33",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate34",
+                                    "im:order": 1
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueCompare": [
+                                      {
+                                        "im:comparison": "greaterThanOrEqual",
+                                        "im:valueData": "-18",
+                                        "rdf:type": [
+                                          { "@id": "im:CompareClause" }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueFunction": [
+                                      {
+                                        "im:functionIri": [
+                                          { "@id": "im:TimeDifference" }
+                                        ],
+                                        "im:argument": [
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "units",
+                                            "im:valueData": "MONTH"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "firstDate",
+                                            "im:valueData": "$referenceDate"
+                                          },
+                                          {
+                                            "rdf:type": [
+                                              { "@id": "im:ArgumentClause" }
+                                            ],
+                                            "im:parameter": "secondDate",
+                                            "im:valueData": "effectiveDate35"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "im:valueVar": "effectiveDate35",
+                                    "im:order": 2
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:and": [
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:concept" }],
+                            "im:valueIn": [
+                              {
+                                "@id": "urn:uuid:553d10a9-7c84-4779-b739-a32c68edfdfa",
+                                "name": "Average home diastolic blood pressure, Home diastolic blood pressure, 24 hour diastolic blood pressure, Ambulatory diastolic blood pressure, Ambulatory diastolic BP (blood pressure), Average day interval diastolic blood pressure, Average 24 hour diastolic blood pressure"
+                              }
+                            ],
+                            "im:valueVar": "concept36",
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:MatchClause" }],
+                            "im:property": [{ "@id": "im:numericValue" }],
+                            "im:valueCompare": [
+                              {
+                                "im:comparison": "greaterThanOrEqual",
+                                "im:valueData": "85",
+                                "rdf:type": [{ "@id": "im:CompareClause" }]
+                              }
+                            ],
+                            "im:valueVar": "numericValue37",
+                            "im:order": 1
+                          }
+                        ]
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 3
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Diabetes (not resolved)",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                                      },
+                                      {
+                                        "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept38",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate39",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                          }
+                        ],
+                        "im:valueVar": "concept40"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest HBA1C in the last 18 months : if >59",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:19dc8704-776a-43c2-8c81-cc3991ce255d",
+                                        "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised, HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised, HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept41",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate42",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:numericValue" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "59",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueVar": "numericValue43"
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 4
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest QRisk2 or Qrisk 3, : if >10",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:a92dcc3a-76f1-4039-b2e5-0fb48aa5f1cd",
+                                        "name": "QRISK2 cardiovascular disease 10 year risk score, QRISK3 cardiovascular disease 10 year risk calculator score"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept44",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate45",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:numericValue" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "10",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueVar": "numericValue46"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Not on statins in the last 6 months",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:MedicationOrder" }],
+                    "im:notExist": true,
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:medication" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:7f3eb335-4ca7-4cd8-ab76-ce60d36e3b8b",
+                            "name": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more"
+                          }
+                        ],
+                        "im:valueVar": "medication47",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-6",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate48"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate48",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 5
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "? What are these clinical concepts",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:property": [{ "@id": "im:concept" }],
+                    "im:valueIn": [
+                      { "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452" },
+                      { "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d" },
+                      { "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4" },
+                      { "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0" }
+                    ],
+                    "im:valueVar": "concept49",
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:MedicationOrder" }],
+                    "im:notExist": true,
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:medication" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:2b68a441-3f4e-4bee-9a76-d713336d6a64",
+                            "name": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more"
+                          }
+                        ],
+                        "im:valueVar": "medication50",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-6",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate51"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate51",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 6
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Cardiovascular disease (not resolved)",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:b8e618ac-9a75-40d7-a3f9-698c94c6591c"
+                                      },
+                                      {
+                                        "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept52",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate53",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                          }
+                        ],
+                        "im:valueVar": "concept54"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest CHA2DS2-VASc and if >2",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:ec8b2dea-c18a-4aef-a7ed-0e9a6f8e5954",
+                                        "name": "CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept55",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate56",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:numericValue" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "2",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueVar": "numericValue57"
+                      }
+                    ],
+                    "im:order": 1
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Not on Warfarin,Edoxaban,Dabigatranm Apixaban,Rivaroxaban,Phenindione,Acenocoumarol, in the last 6 months",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:MedicationOrder" }],
+                    "im:notExist": true,
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:medication" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:98371209-1794-400e-859f-6abe4e2927df",
+                            "name": "Warfarin, Warfarin Sodium, Edoxaban tosilate, Dabigatran Etexilate, Apixaban, Rivaroxaban, Phenindione, Acenocoumarol"
+                          }
+                        ],
+                        "im:valueVar": "medication58",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-6",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate59"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate59",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 2
+                  }
+                ],
+                "im:order": 7
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest BMI : if >30",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:7719f689-2ed6-4040-bfa1-7792a308771e",
+                                        "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept60",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate61",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:numericValue" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "30",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueVar": "numericValue62"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "On Olanzapine, Clozapine in the last 6 months",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:MedicationOrder" }],
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:medication" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:18f89c3a-4179-48d6-ae7b-d8ff8ffb146a",
+                            "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine"
+                          }
+                        ],
+                        "im:valueVar": "medication63",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-6",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate64"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate64",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 8
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest BMI : if >27.5",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:7719f689-2ed6-4040-bfa1-7792a308771e",
+                                        "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept65",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate66",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:numericValue" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "27.5",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueVar": "numericValue67"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "On Olanzapine, Clozapine in the last 6 months",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:MedicationOrder" }],
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:medication" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:18f89c3a-4179-48d6-ae7b-d8ff8ffb146a",
+                            "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine"
+                          }
+                        ],
+                        "im:valueVar": "medication68",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-6",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate69"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate69",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 1
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Asian or chinese",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:property": [{ "@id": "im:concept" }],
+                    "im:valueIn": [
+                      {
+                        "@id": "urn:uuid:8b4e5606-180a-42ed-8f9b-e718575d794a",
+                        "name": "Indians (Hindi-speaking), Pakistani (Urduspeakers), Todas, Naiars, Sri Lankan - ethnic category 2001 census, Irula, Pakistani or British Pakistani - ethnic category 2001 census, Bangladeshi or British Bangladeshi - ethnic category 2001 census, Other Asian background - ethnic category 2001 census..more"
+                      }
+                    ],
+                    "im:valueVar": "concept70",
+                    "im:order": 2
+                  }
+                ],
+                "im:order": 9
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Type 1 Diabetes",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:property": [{ "@id": "im:concept" }],
+                    "im:valueIn": [
+                      { "@id": "urn:uuid:5a0192fd-27ea-4b30-8f8d-db17ab89284a" }
+                    ],
+                    "im:valueVar": "concept71",
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Age years >18",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Demographic" }],
+                    "im:property": [{ "@id": "im:age" }],
+                    "im:valueCompare": [
+                      {
+                        "im:comparison": "greaterThanOrEqual",
+                        "im:valueData": "18",
+                        "rdf:type": [{ "@id": "im:CompareClause" }]
+                      }
+                    ],
+                    "im:valueFunction": [
+                      {
+                        "im:functionIri": [{ "@id": "im:AgeFunction" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": "units",
+                            "im:valueData": "YEAR",
+                            "im:order": 0
+                          }
+                        ]
+                      }
+                    ],
+                    "im:valueVar": "age72",
+                    "im:order": 1
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:MedicationOrder" }],
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:medication" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:8d8550f0-4e4f-406a-a5fd-b55f5c55ad57",
+                            "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin"
+                          }
+                        ],
+                        "im:valueVar": "medication73",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-6",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate74"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate74",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 2
+                  }
+                ],
+                "im:order": 10
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Latest various Diabetes illnesses and if a subset of these",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:1583a089-12fb-427c-9569-edb81e39937d",
+                                        "name": "Diabetes mellitus without complication, Lipoatrophic diabetes mellitus without complication, Brittle diabetes, Lipoatrophic diabetes, Diabetic nephropathy, Type 1 diabetes mellitus with ulcer, Type 1 diabetes mellitus maturity onset, Type 2 diabetes mellitus with multiple complications, Type 2 diabetes mellitus with ulcer..more"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept75",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate76",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:5756d8e1-23bb-41e6-a33f-68bb0a297947",
+                            "name": "Diabetes mellitus without complication, Brittle diabetes, Diabetic nephropathy, Insulin-dependent diabetes mellitus with ulcer, Insulin-dependent diabetes maturity onset, Diabetic neuropathic arthropathy, Diabetic mononeuropathy, Hypoglycaemic event in diabetes, Diabetic eye disease..more"
+                          }
+                        ],
+                        "im:valueVar": "concept77"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Age years >40",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Demographic" }],
+                    "im:property": [{ "@id": "im:age" }],
+                    "im:valueCompare": [
+                      {
+                        "im:comparison": "greaterThanOrEqual",
+                        "im:valueData": "40",
+                        "rdf:type": [{ "@id": "im:CompareClause" }]
+                      }
+                    ],
+                    "im:valueFunction": [
+                      {
+                        "im:functionIri": [{ "@id": "im:AgeFunction" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": "units",
+                            "im:valueData": "YEAR",
+                            "im:order": 0
+                          }
+                        ]
+                      }
+                    ],
+                    "im:valueVar": "age78",
+                    "im:order": 1
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:MedicationOrder" }],
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:medication" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:8d8550f0-4e4f-406a-a5fd-b55f5c55ad57",
+                            "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin"
+                          }
+                        ],
+                        "im:valueVar": "medication79",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-6",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate80"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate80",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 2
+                  }
+                ],
+                "im:order": 11
+              },
+              {
+                "rdf:type": [{ "@id": "im:MatchClause" }],
+                "im:and": [
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "Hypertension (not resolved)",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:function": [
+                      {
+                        "im:functionIri": [{ "@id": "im:OrderLimit" }],
+                        "im:argument": [
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortOrder" }],
+                            "im:valueIrI": [{ "@id": "im:DESCENDING" }],
+                            "im:order": 0
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:sortField" }],
+                            "im:valueIrI": [{ "@id": "im:effectiveDate" }],
+                            "im:order": 1
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:limit" }],
+                            "im:valueData": "1",
+                            "im:order": 2
+                          },
+                          {
+                            "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                            "im:parameter": [{ "@id": "im:match" }],
+                            "im:valueMatch": [
+                              {
+                                "rdf:type": [{ "@id": "im:MatchClause" }],
+                                "im:and": [
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [{ "@id": "im:concept" }],
+                                    "im:valueIn": [
+                                      {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                      },
+                                      {
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                      }
+                                    ],
+                                    "im:valueVar": "concept81",
+                                    "im:order": 0
+                                  },
+                                  {
+                                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                                    "im:property": [
+                                      { "@id": "im:effectiveDate" }
+                                    ],
+                                    "im:valueVar": "effectiveDate82",
+                                    "im:order": 1
+                                  }
+                                ]
+                              }
+                            ],
+                            "im:order": 3
+                          }
+                        ]
+                      }
+                    ],
+                    "im:test": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                          }
+                        ],
+                        "im:valueVar": "concept83"
+                      }
+                    ],
+                    "im:order": 0
+                  },
+                  {
+                    "rdf:type": [{ "@id": "im:MatchClause" }],
+                    "rdfs:label": "No blood pressure in the last 18 months",
+                    "im:pathTo": [{ "@id": "im:isSubjectOf" }],
+                    "im:entityType": [{ "@id": "im:Event" }],
+                    "im:notExist": true,
+                    "im:and": [
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:concept" }],
+                        "im:valueIn": [
+                          {
+                            "@id": "urn:uuid:dbb80e28-7b08-41a1-a429-1151b639da1a",
+                            "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more"
+                          }
+                        ],
+                        "im:valueVar": "concept84",
+                        "im:order": 0
+                      },
+                      {
+                        "rdf:type": [{ "@id": "im:MatchClause" }],
+                        "im:property": [{ "@id": "im:effectiveDate" }],
+                        "im:valueCompare": [
+                          {
+                            "im:comparison": "greaterThanOrEqual",
+                            "im:valueData": "-18",
+                            "rdf:type": [{ "@id": "im:CompareClause" }]
+                          }
+                        ],
+                        "im:valueFunction": [
+                          {
+                            "im:functionIri": [{ "@id": "im:TimeDifference" }],
+                            "im:argument": [
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "units",
+                                "im:valueData": "MONTH"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "firstDate",
+                                "im:valueData": "$referenceDate"
+                              },
+                              {
+                                "rdf:type": [{ "@id": "im:ArgumentClause" }],
+                                "im:parameter": "secondDate",
+                                "im:valueData": "effectiveDate85"
+                              }
+                            ]
+                          }
+                        ],
+                        "im:valueVar": "effectiveDate85",
+                        "im:order": 1
+                      }
+                    ],
+                    "im:order": 1
+                  }
+                ],
+                "im:order": 12
+              }
+            ],
+            "im:order": 1
+          }
+        ]
+      }
+    ]
+  }
+  

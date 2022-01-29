@@ -173,9 +173,9 @@
 
           <template v-if="activeContentView == 'Text (rdfs:label)'">
             <!-- <button @click="test()">Click</button> -->
-            <LabelView
+            <DefinitionCurator
               class="p-3 w-full h-full"
-              v-model="LabelContent"
+              v-model=""
               :pathIris="['im:and', 'im:or', 'im:not']"
             />
           </template>
@@ -225,7 +225,7 @@ import MultiSelect from "primevue/multiselect";
 import SearchService from "@/services/SearchService";
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
-import ClauseItem from "@/components/dataset/ClauseItem.vue";
+import DefinitionCurator from "@/components/dataset/DefinitionCurator.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
@@ -269,8 +269,9 @@ export default defineComponent({
     Network,
     HierarchyTreeItem,
     VAceEditor,
-    LabelView,
+    // LabelView,
     InputTextbox,
+    DefinitionCurator
     // VueJsonPretty
   },
   data() {

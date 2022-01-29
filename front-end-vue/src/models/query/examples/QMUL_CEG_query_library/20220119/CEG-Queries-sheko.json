@@ -31,6 +31,15 @@
     "@id": "http://endhealth.info/ceg/qry#"
   },
   "entities": [{
+    "@id": "urn:uuid:beedb355-08d4-4bfb-8e63-80478cf6b374",
+    "rdf:type": [{
+      "@id": "im:LanguageTemplate"
+    }],
+    "rdfs:label": "Latest",
+    "im:isContainedIn": [{
+      "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries"
+    }]
+  },{
     "@id": "http://org.endhealth.info/im#QMUL_CEG",
     "rdf:type": [{
       "@id": "im:Organisation"

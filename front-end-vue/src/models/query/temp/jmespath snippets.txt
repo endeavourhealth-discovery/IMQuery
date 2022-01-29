@@ -1,3 +1,14 @@
+
+
+@@[?"im:property"[?"@id" == `im:age`]]
+[
+   @"im:property"[?"@id" == `im:age`] 
+   && 
+   @"entityType"[?"@id" == `Demographic`]
+]
+
+[@"im:property"[?"@id"==`im:age`]&&@"entityType"[?"@id"==`Demographic`]]
+
 filter entity definition by population
 
 
@@ -74,6 +85,7 @@ $..[?(@.rdfs:label)]
 #####
 $..[?(@.rdfs__label && (@.im__pathTo || @.im__property))]
 $..[?(@.im__var || @.im__fromLatest)]
+$..[?(@.im__c__entityType]
 
 
 This may give you a path like:

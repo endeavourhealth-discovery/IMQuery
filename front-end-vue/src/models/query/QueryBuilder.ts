@@ -72,7 +72,7 @@ export default class QueryBuilder {
 
 
 
-    // properties bbelonging to JSON file
+    // properties belonging to JSON file
     '_file': any;
     '_@context': any;
     '_@graph': any;
@@ -146,7 +146,7 @@ export default class QueryBuilder {
 
 
     // get all profiles in a folder
-    public getProfiles(folderIri: string): any {
+    public getProfilesByFolder(folderIri: string): any {
         const _q = `entities[?
             "rdf:type"[?"@id" == \`im:Profile\`] && 
             "im:isContainedIn"[?"@id" == \`${folderIri}\`]]
@@ -159,12 +159,12 @@ export default class QueryBuilder {
         return _result;
     }
 
-
-
     // get profile by iri
     // special characters in keys are replaced 
-    public getProfile(profileIri: string): any {
-        return Tools.replaceKeys(this._profileEntities.get(profileIri));
+    public getProfile(profileIri: string, replaceKeys = true): any {
+
+        const _profile = this._profileEntities.get(profileIri);
+        return replaceKeys ? Tools.replaceKeys(_profile) : _profile;
     }
 
     //returns all the paths to rdfs:label and assigns a temp uuid as key for v-for iteration
@@ -358,31 +358,14 @@ export class Tools {
 
 
 
-    //characters and their replacements
-    private static _characterMap: any = {
-        ':': "__c__",
-        '@': "__a__",
-    };
-
 
     //replaces all ":"" and "@" with __ and ___ respectively to enable JMESPath and JsonPath tools
     public static replaceKeys(object: any): any {
 
-
-        //replaces all keys in an object using  key-value pairs in character map
-        const replaceChars = (text: string) => {
-            let _text = text;
-            Object.keys(this._characterMap).forEach((key: string) => {
-                _text = _text.replaceAll(key, this._characterMap[key])
-            });
-            return _text;
-
-        };
-
         // deep nested replacement of keys if they are string
         const replaceKeysDeep = (o: any) => {
             return _.transform(o, function (result: any, value: any, key: any) {
-                const _currentKey = typeof (key) == "string" ? replaceChars(key) : key;
+                const _currentKey = typeof (key) == "string" ? Tools.replaceChars(key) : key;
                 result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
             });
         }
@@ -390,6 +373,31 @@ export class Tools {
 
         return replaceKeysDeep(object);
     }
+
+
+    //characters and their replacements
+    private static _characterMap: any = {
+        ':': "__c__",
+        '@': "__a__",
+    };
+
+
+
+    //replaces all keys in an object using  key-value pairs in character map
+    public static replaceChars = (text: string) => {
+        let _text = text;
+        Object.keys(Tools._characterMap).forEach((key: string) => {
+            _text = _text.replaceAll(key, Tools._characterMap[key])
+        });
+        return _text;
+
+    };
+
+
+    // todo replace characters
+
+
+
 
 
 
