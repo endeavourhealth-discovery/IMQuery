@@ -3,6 +3,8 @@ import ace from 'ace-builds';
 import { Ace } from 'ace-builds';
 import { capitalize, defineComponent, markRaw, h } from 'vue';
 import ResizeObserver from 'resize-observer-polyfill';
+const prettier = require("prettier/standalone");
+const prettierBabylon = require("prettier/parser-babylon");
 
 import type { VAceEditorInstance } from './types';
 
@@ -50,7 +52,7 @@ export const VAceEditor = defineComponent({
     const editor = this._editor = markRaw(ace.edit(this.$el, {
       placeholder: this.placeholder,
       readOnly: this.readonly,
-      value: this.value,
+      value: typeof (this.value) != "string" ? JSON.stringify(this.value) : this.value,
       mode: 'ace/mode/' + this.lang,
       theme: 'ace/theme/' + this.theme,
       wrap: this.wrap,
@@ -101,6 +103,10 @@ export const VAceEditor = defineComponent({
   },
   watch: {
     value(this: VAceEditorInstance, val: string) {
+      if (typeof (val) != "string") {
+        val = JSON.stringify(val)
+      }
+
       if (this._contentBackup !== val) {
         try {
           this._isSettingContent = true;
@@ -138,5 +144,6 @@ export const VAceEditor = defineComponent({
     maxLines(this: VAceEditorInstance, val: number) {
       this._editor.setOption('maxLines', val);
     },
-  }
+  },
+
 });

@@ -26,6 +26,8 @@ export declare const VAceEditor: import("vue").DefineComponent<{
     focus(this: VAceEditorInstance): void;
     blur(this: VAceEditorInstance): void;
     selectAll(this: VAceEditorInstance): void;
+    // selectAll(this: VAceEditorInstance): void;
+
 }, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, string[], string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     value?: unknown;
     lang?: unknown;

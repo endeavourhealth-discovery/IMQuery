@@ -1,10 +1,11 @@
 <template>
-  <div
+  {{ definition }}
+  <!-- <div
     v-for="(item, index) in clauseWithUUID"
     :key="item.id"
     class="clause-item flex"
-  >
-    <SectionToggler
+  > -->
+  <!-- <SectionToggler
       v-if="item.clause && item.clause.length > 1"
       :expanded="!collapsedItems.includes(item.id)"
       @click="
@@ -16,27 +17,20 @@
         'inline clause-item__toggler' +
           [index != 0 && item.where ? ' ml-4' : '']
       "
-    />
+    /> -->
 
-    <div
+  <!-- <div
       v-if="index != 0 && item.where"
       class="clause-item__operator text-green-600 font-semibold hover:underline mr-4"
     >
       {{ operator }}
     </div>
+
     <template v-if="item.name" class="w-full non-selectable">
       <div :class="'inline text-blue-600 font-semibold hover:underline'">
         {{ item.name }}
       </div>
     </template>
-    <!-- <template v-else>
-      <div
-        v-if="item.where"
-        :class="'inline text-yellow-600 font-semibold hover:underline'"
-      >
-        WHERE CLAUSE
-      </div>
-    </template> -->
     <div
       v-if="'notExist' in item && item.notExist == true"
       class="ml-3 text-red-600"
@@ -49,7 +43,7 @@
     >
       <div class="inline text-black font-semibold">
         <ClauseItem
-        class="hover:underline"
+          class="hover:underline"
           :operator="item.operator"
           :clause="item.clause"
           :nestingCount="nestingCount + 1"
@@ -57,7 +51,7 @@
         </ClauseItem>
       </div>
     </template>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
@@ -69,15 +63,37 @@ import SectionToggler from "@/components/dataset/SectionToggler.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
-  name: "DefinitionCurator",
-  props: ["operator", "clause", "nestingCount"],
+  name: "DefinitionEditor",
+  props: [
+    "modelValue",
+    "operatorIris",
+    "definitionIri",
+    "operator",
+    "clause",
+    "nestingCount",
+  ],
+  emits: ["update:modelValue"],
   components: {
-    SectionToggler,
+    // SectionToggler,
   },
   data() {
     return {
       collapsedItems: [] as any[],
+      definition: "test",
     };
+  },
+  watch: {
+    modelValue() {
+      console.log("this.modelValue", this.modelValue);
+      console.log(
+        "this.modelValue[this.definitionIri]",
+        this.modelValue[this.definitionIri]
+      );
+      console.log(
+        "this.modelValue[this.definitionIri]",
+        this.modelValue[this.definitionIri]
+      );
+    },
   },
   methods: {
     toggleTableSection(item: number): void {
@@ -89,14 +105,13 @@ export default defineComponent({
         this.collapsedItems = [...this.collapsedItems, item];
       }
     },
-  },
-  computed: {
-    clauseWithUUID(): any {
-      return this.clause.map((item: any) => {
+    withUUID(array: any[]): any[] {
+      return this.array.map((item: any) => {
         return { temp_id: "urn:uuid:" + v4(), ...item };
       });
     },
   },
+  computed: {},
 });
 </script>
 

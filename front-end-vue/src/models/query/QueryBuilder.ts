@@ -2,6 +2,8 @@ const { v4 } = require('uuid');
 const _ = require('lodash')
 const jmp = require('jmespath');
 const jp = require('jsonpath');
+const prettier = require("prettier/standalone");
+const prettierBabylon = require("prettier/parser-babylon");
 
 export default class QueryBuilder {
 
@@ -160,19 +162,38 @@ export default class QueryBuilder {
     }
 
     // get profile by iri
-    // special characters in keys are replaced 
-    public getProfile(profileIri: string, replaceKeys = true): any {
-
+    // special characters in keys are replaced for JSON queries
+    private _activeProfile: any;
+    private _openProfiles: Profile[] = [];
+    public loadProfile(profileIri: string, replaceKeys = true, prettify = true): any {
         const _profile = this._profileEntities.get(profileIri);
-        return replaceKeys ? Tools.replaceKeys(_profile) : _profile;
+        this._activeProfile = new Profile(_profile as Entity);
+        this._openProfiles.push(new Profile(_profile as Entity));
+        // temporarily convert if JSON queries are required
+        // if (replaceKeys) _profile = QueryTools.replaceKeys(_profile);
     }
+
+
+    get activeProfile(): any {
+        return this._activeProfile;
+    }
+    set activeProfile(value: any) {
+        this._activeProfile = value;
+    }
+    get openProfiles(): any {
+        return this._openProfiles;
+    }
+
+
+
+
 
     //returns all the paths to rdfs:label and assigns a temp uuid as key for v-for iteration
     public getClausePaths(profileIri: string, pathToClause = `["rdfs:label"]`): any {
 
 
 
-        const _profile = this.getProfile(profileIri);
+        const _profile = this.loadProfile(profileIri);
         const _clauseLabels = jp.query(_profile, `$..${pathToClause}`);
         const _clauseNodes1 = jp.nodes(_profile, `$..${pathToClause}`);
         const _clauseNodes2 = [] as any[];
@@ -234,7 +255,7 @@ export default class QueryBuilder {
         // 2 = leaf node
 
 
-        const _profile = this.getProfile(profileIri);
+        const _profile = this.loadProfile(profileIri);
         const _definition = _profile["im:definition"];
         //the path to all labels
         const _paths = jp.nodes(_definition, '$..["rdfs:label"]');
@@ -342,19 +363,69 @@ export default class QueryBuilder {
             }
         }
     }
+}
 
 
+export class Entity {
+    public '@id'?: string | null;
+    public 'rdfs:label'?: string | null;
+    public 'rdf:type'?: Entity | null;
+    public 'rdfs:comment'?: string = "";
+    public 'im:isContainedIn'?: Entity | null;
+    // public 'children'?: Entity | null;
 
 
+    constructor(entity?: any)
+    constructor(entity: any) {
+        this["@id"] = entity["@id"] ? entity["@id"] : null;
+        this["rdf:type"] = entity["rdf:type"] ? entity["rdf:type"] : null;
+        this["rdfs:label"] = entity["rdfs:label"] ? entity["rdfs:label"] : null;
+        this["rdfs:comment"] = entity["rdfs:comment"] ? entity["rdfs:comment"] : null;
+        this["im:isContainedIn"] = entity["im:isContainedIn"] ? entity["im:isContainedIn"] : null;
+        // this["iri"] = entity["iri"] ? entity["iri"] : null;
+        // this["name"] = entity["name"] ? entity["name"] : null;
+        // this["type"] = entity["type"] ? entity["type"] : null;
+        // this["description"] = entity["description"] ? entity["description"] : null;
+        // this["children"] = entity["children"] ? entity["children"] : null;
+
+        return this;
+    }
+}
 
 
+// Profile
+export class Profile extends Entity {
+    public 'im:definition'?: any | null;
 
 
+    constructor(entity?: any)
+    constructor(entity: any) {
+        super(entity);
+        this["im:definition"] = entity["im:definition"] ? entity["im:definition"] : null;
+        return this;
+    }
+
+    get asString(): string {
+        //stringified  and prettified
+        return QueryTools.prettifyJSON(JSON.stringify(this));
+    }
 
 }
 
 
-export class Tools {
+export class QueryTools {
+
+
+    // prettify JSON
+    public static prettifyJSON(value: string): string {
+        const _json = prettier.format(value, {
+            parser: "json",
+            plugins: [prettierBabylon],
+        }) as string;
+        return _json;
+
+    }
+
 
 
 
@@ -362,10 +433,11 @@ export class Tools {
     //replaces all ":"" and "@" with __ and ___ respectively to enable JMESPath and JsonPath tools
     public static replaceKeys(object: any): any {
 
+
         // deep nested replacement of keys if they are string
         const replaceKeysDeep = (o: any) => {
             return _.transform(o, function (result: any, value: any, key: any) {
-                const _currentKey = typeof (key) == "string" ? Tools.replaceChars(key) : key;
+                const _currentKey = typeof (key) == "string" ? QueryTools.replaceChars(key) : key;
                 result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
             });
         }
@@ -386,8 +458,8 @@ export class Tools {
     //replaces all keys in an object using  key-value pairs in character map
     public static replaceChars = (text: string) => {
         let _text = text;
-        Object.keys(Tools._characterMap).forEach((key: string) => {
-            _text = _text.replaceAll(key, Tools._characterMap[key])
+        Object.keys(QueryTools._characterMap).forEach((key: string) => {
+            _text = _text.replaceAll(key, QueryTools._characterMap[key])
         });
         return _text;
 

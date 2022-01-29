@@ -173,10 +173,12 @@
 
           <template v-if="activeContentView == 'Text (rdfs:label)'">
             <!-- <button @click="test()">Click</button> -->
-            <DefinitionCurator
+            <DefinitionEditor
+              v-if="queryBuilder.activeProfile"
               class="p-3 w-full h-full"
-              v-model=""
-              :pathIris="['im:and', 'im:or', 'im:not']"
+              v-model="queryBuilder.activeProfile"
+              :operatorIris="['im:and', 'im:or', 'im:not']"
+              :definitionIri="'im:definition'"
             />
           </template>
 
@@ -191,8 +193,9 @@
             </div>
             <div class="flex">
               <v-ace-editor
+                v-if="queryBuilder.activeProfile"
                 class="inline json-viewer h-full w-full"
-                v-model:value="JSONContent"
+                v-model:value="queryBuilder.activeProfile.asString"
                 @init="editorInit"
                 lang="json"
                 theme="tomorrow"
@@ -225,7 +228,7 @@ import MultiSelect from "primevue/multiselect";
 import SearchService from "@/services/SearchService";
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
-import DefinitionCurator from "@/components/dataset/DefinitionCurator.vue";
+import DefinitionEditor from "@/components/dataset/DefinitionEditor.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
@@ -271,7 +274,7 @@ export default defineComponent({
     VAceEditor,
     // LabelView,
     InputTextbox,
-    DefinitionCurator
+    DefinitionEditor,
     // VueJsonPretty
   },
   data() {
@@ -623,53 +626,53 @@ export default defineComponent({
       fileItems: [] as any[],
     };
   },
-  watch: {
-    jsonpath(newValue) {
-      try {
-        const _parsed = jp.parse(newValue);
-        if (_parsed && _parsed.length) {
-          const _jpq = jp.query(JSON.parse(this.JSONContent), newValue);
-          if (_jpq.length) {
-            this.filteredJSONContent = JSON.stringify(_jpq);
-          } else {
-            this.filteredJSONContent = "";
-          }
+  // watch: {
+  //   jsonpath(newValue) {
+  //     try {
+  //       const _parsed = jp.parse(newValue);
+  //       if (_parsed && _parsed.length) {
+  //         const _jpq = jp.query(JSON.parse(this.JSONContent), newValue);
+  //         if (_jpq.length) {
+  //           this.filteredJSONContent = JSON.stringify(_jpq);
+  //         } else {
+  //           this.filteredJSONContent = "";
+  //         }
 
-          if (this.filteredJSONContent && this.filteredJSONContent != "") {
-            this.filteredJSONContent = prettier.format(
-              this.filteredJSONContent,
-              {
-                parser: "json",
-                plugins: [prettierBabylon],
-              }
-            );
-          }
+  //         if (this.filteredJSONContent && this.filteredJSONContent != "") {
+  //           this.filteredJSONContent = prettier.format(
+  //             this.filteredJSONContent,
+  //             {
+  //               parser: "json",
+  //               plugins: [prettierBabylon],
+  //             }
+  //           );
+  //         }
 
-          // this.filteredJSONContent = JSON.stringify(_jpq.toString());
-          console.log("_jpq", _jpq);
-        }
-      } catch (error) {
-        // console.log("jsonpath error: ", error);
-      }
-    },
-  },
+  //         // this.filteredJSONContent = JSON.stringify(_jpq.toString());
+  //         console.log("_jpq", _jpq);
+  //       }
+  //     } catch (error) {
+  //       // console.log("jsonpath error: ", error);
+  //     }
+  //   },
+  // },
   computed: {
-    JSONContent: {
-      get(): any {
-        return this.$store.state.JSONContent;
-      },
-      set(value: any): void {
-        this.$store.commit("updateJSONContent", value);
-      },
-    },
-    LabelContent: {
-      get(): any {
-        return this.$store.state.LabelContent;
-      },
-      set(LabelContent: any): void {
-        this.$store.commit("updateLabelContent", LabelContent);
-      },
-    },
+    // JSONContent: {
+    //   get(): any {
+    //     return this.$store.state.JSONContent;
+    //   },
+    //   set(value: any): void {
+    //     this.$store.commit("updateJSONContent", value);
+    //   },
+    // },
+    // LabelContent: {
+    //   get(): any {
+    //     return this.$store.state.LabelContent;
+    //   },
+    //   set(LabelContent: any): void {
+    //     this.$store.commit("updateLabelContent", LabelContent);
+    //   },
+    // },
     isLoading: {
       get(): any {
         return this.$store.state.isLoading;

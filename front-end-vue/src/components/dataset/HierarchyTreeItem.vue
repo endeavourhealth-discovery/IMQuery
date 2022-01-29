@@ -110,24 +110,24 @@ export default defineComponent({
       let _json: any;
 
       if (_entityType == "im:Folder") {
-        const _folderIri = entity["@id"];
-        _json = JSON.stringify(this.queryBuilder.getProfilesByFolder(_folderIri));
-      } else if (_entityType == "im:Profile") {
-        const _profileIri = entity["@id"];
+        
+        // for folders get all profiles it contains
+        // const _folderIri = entity["@id"];
+        // _json = JSON.stringify(this.queryBuilder.getProfilesByFolder(_folderIri));
 
-        _json = JSON.stringify(
-          this.queryBuilder.getProfile(_profileIri, false)
-        );
-        this.LabelContent = this.queryBuilder.getClausePaths(entity["@id"]);
+      } else if (_entityType == "im:Profile") {
+
+        const _profileIri = entity["@id"];
+        this.queryBuilder.loadProfile(_profileIri)
       } else {
         return;
       }
 
-      _json = prettier.format(_json, {
-        parser: "json",
-        plugins: [prettierBabylon],
-      });
-      this.JSONContent = _json;
+      // _json = prettier.format(_json, {
+      //   parser: "json",
+      //   plugins: [prettierBabylon],
+      // });
+      // this.JSONContent = _json;
     },
     test(entity: any): void {
       const _entityType = entity["rdf:type"][0]["@id"];
