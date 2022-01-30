@@ -1,63 +1,18 @@
 <template>
-  {{ definition }}
-  <!-- <div
-    v-for="(item, index) in clauseWithUUID"
-    :key="item.id"
-    class="clause-item flex"
-  > -->
-  <!-- <SectionToggler
-      v-if="item.clause && item.clause.length > 1"
-      :expanded="!collapsedItems.includes(item.id)"
-      @click="
-        collapsedItems.includes(item.id)
-          ? (collapsedItems = collapsedItems.filter((i: any) => i != item.id))
-          : collapsedItems.push(item.id)
-      "
-      :class="
-        'inline clause-item__toggler' +
-          [index != 0 && item.where ? ' ml-4' : '']
-      "
-    /> -->
-
-  <!-- <div
-      v-if="index != 0 && item.where"
-      class="clause-item__operator text-green-600 font-semibold hover:underline mr-4"
-    >
-      {{ operator }}
-    </div>
-
-    <template v-if="item.name" class="w-full non-selectable">
-      <div :class="'inline text-blue-600 font-semibold hover:underline'">
-        {{ item.name }}
-      </div>
-    </template>
-    <div
-      v-if="'notExist' in item && item.notExist == true"
-      class="ml-3 text-red-600"
-    >
-      DOES NOT EXIST
-    </div>
-    <template
-      v-if="!collapsedItems.includes(item.id) && item.clause"
-      class="w-full non-selectable"
-    >
-      <div class="inline text-black font-semibold">
-        <ClauseItem
-          class="hover:underline"
-          :operator="item.operator"
-          :clause="item.clause"
-          :nestingCount="nestingCount + 1"
-        >
-        </ClauseItem>
-      </div>
-    </template>
-  </div> -->
+  <div class="definition-editor">
+    <ClauseItem
+      :clause="modelValue[definitionIri][0]['im:and']"
+      :operator="'im:and'"
+      :operatorIris="['im:and', 'im:or', 'im:not']"
+    />
+  </div>
 </template>
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
+import ClauseItem from "@/components/dataset/ClauseItem.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
@@ -75,25 +30,12 @@ export default defineComponent({
   emits: ["update:modelValue"],
   components: {
     // SectionToggler,
+    ClauseItem,
   },
   data() {
     return {
       collapsedItems: [] as any[],
-      definition: "test",
     };
-  },
-  watch: {
-    modelValue() {
-      console.log("this.modelValue", this.modelValue);
-      console.log(
-        "this.modelValue[this.definitionIri]",
-        this.modelValue[this.definitionIri]
-      );
-      console.log(
-        "this.modelValue[this.definitionIri]",
-        this.modelValue[this.definitionIri]
-      );
-    },
   },
   methods: {
     toggleTableSection(item: number): void {
@@ -105,10 +47,23 @@ export default defineComponent({
         this.collapsedItems = [...this.collapsedItems, item];
       }
     },
-    withUUID(array: any[]): any[] {
-      return this.array.map((item: any) => {
+    withTempUUID(items: any[]): any[] {
+      console.log("items", items);
+      return items.map((item: any) => {
         return { temp_id: "urn:uuid:" + v4(), ...item };
       });
+    },
+    isOperator(item: any): boolean {
+      return this.operatorIris.some((operatorIri: any) => {
+        return item[operatorIri];
+      });
+    },
+    getOperator(item: any): any {
+      console.log("item", item);
+      const _keys = Object.keys(item);
+      return _keys.filter((key: any) => {
+        return this.operatorIris.includes(key);
+      })[0];
     },
   },
   computed: {},

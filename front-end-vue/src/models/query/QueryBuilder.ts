@@ -370,17 +370,17 @@ export class Entity {
     public '@id'?: string | null;
     public 'rdfs:label'?: string | null;
     public 'rdf:type'?: Entity | null;
-    public 'rdfs:comment'?: string = "";
+    public 'rdfs:comment'?: string | null;
     public 'im:isContainedIn'?: Entity | null;
     // public 'children'?: Entity | null;
 
 
     constructor(entity?: any)
     constructor(entity: any) {
-        this["@id"] = entity["@id"] ? entity["@id"] : null;
+        this["@id"] = entity["@id"] ? entity["@id"] : "";
         this["rdf:type"] = entity["rdf:type"] ? entity["rdf:type"] : null;
-        this["rdfs:label"] = entity["rdfs:label"] ? entity["rdfs:label"] : null;
-        this["rdfs:comment"] = entity["rdfs:comment"] ? entity["rdfs:comment"] : null;
+        this["rdfs:label"] = entity["rdfs:label"] ? entity["rdfs:label"] : "";
+        this["rdfs:comment"] = entity["rdfs:comment"] ? entity["rdfs:comment"] : "";
         this["im:isContainedIn"] = entity["im:isContainedIn"] ? entity["im:isContainedIn"] : null;
         // this["iri"] = entity["iri"] ? entity["iri"] : null;
         // this["name"] = entity["name"] ? entity["name"] : null;
