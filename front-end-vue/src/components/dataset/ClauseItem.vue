@@ -1,108 +1,33 @@
 <template>
-  <template v-for="(item, index) in withTempUUID(clause)" :key="item.temp_id">
-    <div>
-      <div class="clause-item flex">
-        <!-- Operator  -->
-        <template v-if="operator">
-          <div
-            class="clause-item__operator inline text-green-600 font-semibold hover:underline mr-4"
-          >
-            {{ operator.split(":")[1] }}
-          </div>
-        </template>
+  <template v-if="isOperator(clause)">
+    <!-- iterate over its children  -->
+    <div
+      v-for="(item, index) in withTempUUID(clause[getOperatorIri(clause)])"
+      :key="item.temp_id"
+      class="block w-full"
+    >
+      <div class="flex bg-blue-500">
+        <!-- Display Operator  -->
+        <div v-if="index != 0" class="inline bg-red-500">
+          {{ getOperatorIri(clause).split(":")[1] }}
+        </div>
 
-        <!-- top level match clause with rdfs:label  -->
-        <template v-if="item['rdfs:label']">
-          <div
-            :class="'inline w-full text-blue-600 font-semibold hover:underline'"
-          >
-            {{ item["rdfs:label"] }}
-          </div>
-        </template>
-        <!-- child match clause without label -->
+        <div v-if="item['rdfs:label']" class="inline bg-white">
+          {{ item["rdfs:label"] }}
+        </div>
+
         <template v-if="!item['rdfs:label']">
-          <ClauseItem
-            v-if="index == 0"
-            class="inline"
-            :clause="item[getOperator(item)]"
-            :operator="getOperator(item)"
-            :operatorIris="['im:and', 'im:or', 'im:not']"
-          >
-          </ClauseItem>
+          <div class="inline-block w-full flex flex-col">
+            <ClauseItem
+              class=""
+              :clause="item"
+              :operatorIris="['im:and', 'im:or', 'im:not']"
+            />
+          </div>
         </template>
       </div>
-
-      <!-- child match clause without label -->
-      <template v-if="!item['rdfs:label']">
-        <ClauseItem
-
-          v-if="index > 0"
-          class="inline"
-          :clause="item[getOperator(item)]"
-          :operator="getOperator(item)"
-          :operatorIris="['im:and', 'im:or', 'im:not']"
-        >
-        </ClauseItem>
-      </template>
     </div>
   </template>
-  <!-- <template v-else>
-    Operator 
-    <template v-if="operator">
-      <div
-        class="clause-item__operator inline text-green-600 font-semibold hover:underline mr-4"
-      >
-        {{ operator.split(":")[1] }}
-      </div>
-    </template>
-  </template> -->
-
-  <!-- <SectionToggler
-        v-if="item.clause && item.clause.length > 1"
-        :expanded="!collapsedItems.includes(item.id)"
-        @click="
-          collapsedItems.includes(item.id)
-            ? (collapsedItems = collapsedItems.filter((i: any) => i != item.id))
-            : collapsedItems.push(item.id)
-        "
-        :class="
-          'inline clause-item__toggler' +
-            [index != 0 && item.where ? ' ml-4' : '']
-        "
-      /> -->
-
-  <!-- 
-      <div
-    v-if="index != 0 && item.where"
-    class="clause-item__operator text-green-600 font-semibold hover:underline mr-4"
-  >
-    {{ operator }}
-  </div>
-    <template v-if="item.name" class="w-full non-selectable">
-      <div :class="'inline text-blue-600 font-semibold hover:underline'">
-        {{ item.name }}
-      </div>
-    </template>
-    <div
-      v-if="'notExist' in item && item.notExist == true"
-      class="ml-3 text-red-600"
-    >
-      DOES NOT EXIST
-    </div>
-    <template
-      v-if="!collapsedItems.includes(item.id) && item.clause"
-      class="w-full non-selectable"
-    >
-      <div class="inline text-black font-semibold">
-        <ClauseItem
-          class="hover:underline"
-          :operator="item.operator"
-          :clause="item.clause"
-          :nestingCount="nestingCount + 1"
-        >
-        </ClauseItem>
-      </div>
-    </template> -->
 </template>
 
 <script lang="ts">
@@ -152,11 +77,12 @@ export default defineComponent({
       }
     },
     isOperator(item: any): boolean {
+      console.log("item", item);
       return this.operatorIris.some((operatorIri: any) => {
         return item[operatorIri];
       });
     },
-    getOperator(item: any): any {
+    getOperatorIri(item: any): any {
       // console.log("item", item);
       const _keys = Object.keys(item);
       return _keys.filter((key: any) => {

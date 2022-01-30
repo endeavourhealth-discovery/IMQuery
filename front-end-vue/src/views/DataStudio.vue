@@ -176,7 +176,7 @@
             <DefinitionEditor
               v-if="queryBuilder.activeProfile"
               class="p-3 w-full h-full"
-             :modelValue="queryBuilder.activeProfile"
+              :modelValue="queryBuilder.activeProfile"
               :operatorIris="['im:and', 'im:or', 'im:not']"
               :definitionIri="'im:definition'"
             />

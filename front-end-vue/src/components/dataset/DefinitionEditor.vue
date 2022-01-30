@@ -1,10 +1,14 @@
 <template>
   <div class="definition-editor">
-    <ClauseItem
-      :clause="modelValue[definitionIri][0]['im:and']"
-      :operator="'im:and'"
-      :operatorIris="['im:and', 'im:or', 'im:not']"
-    />
+    <template
+      v-for="item in withTempUUID(modelValue[definitionIri])"
+      :key="item.temp_id"
+    >
+      <ClauseItem
+        :clause="item"
+        :operatorIris="['im:and', 'im:or', 'im:not']"
+      />
+    </template>
   </div>
 </template>
 
@@ -47,11 +51,12 @@ export default defineComponent({
         this.collapsedItems = [...this.collapsedItems, item];
       }
     },
-    withTempUUID(items: any[]): any[] {
-      console.log("items", items);
-      return items.map((item: any) => {
-        return { temp_id: "urn:uuid:" + v4(), ...item };
-      });
+    withTempUUID(items: any[]): any[] | any {
+      if (items) {
+        return items.map((item: any) => {
+          return { temp_id: "urn:uuid:" + v4(), ...item };
+        });
+      }
     },
     isOperator(item: any): boolean {
       return this.operatorIris.some((operatorIri: any) => {
