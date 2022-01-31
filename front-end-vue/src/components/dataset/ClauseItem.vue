@@ -1,30 +1,58 @@
 <template>
+  <!-- Any object that is not preceded by an operator should be ignored -->
   <template v-if="isOperator(clause)">
-    <!-- iterate over its children  -->
+    <!-- Iterate over the children in the array of the oeprator -->
     <div
       v-for="(item, index) in withTempUUID(clause[getOperatorIri(clause)])"
       :key="item.temp_id"
-      class="block w-full"
+      class="block w-full flex"
     >
-      <div class="flex bg-blue-500">
-        <!-- Display Operator  -->
-        <div v-if="index != 0" class="inline bg-red-500">
-          {{ getOperatorIri(clause).split(":")[1] }}
-        </div>
+      <SectionToggler
+        :expanded="!collapsedItems.includes(item.temp_id)"
+        @click="
+          collapsedItems.includes(item.temp_id)
+            ? (collapsedItems = collapsedItems.filter(
+                (i: any) => i != item.temp_id
+              ))
+            : collapsedItems.push(item.temp_id)
+        "
+        :class="'inline clause-item__toggler' + [true ? '' : '']"
+      />
 
-        <div v-if="item['rdfs:label']" class="inline bg-white">
-          {{ item["rdfs:label"] }}
-        </div>
+      <!-- Display Operator (first item invisible)  -->
+      <div v-if="index == 0" class="invisible"></div>
+      <!-- Display Operator (the rest is visible ) -->
+      <div
+        v-else
+        class="clause-item__operator inline text-green-600 font-semibold hover:underline mr-4"
+      >
+        {{ getOperatorIri(clause).split(":")[1] }}
+      </div>
 
-        <template v-if="!item['rdfs:label']">
-          <div class="inline-block w-full flex flex-col">
-            <ClauseItem
-              class=""
-              :clause="item"
-              :operatorIris="['im:and', 'im:or', 'im:not']"
-            />
-          </div>
-        </template>
+      <!-- Display Label  -->
+      <div
+        @click="
+          queryBuilder.activeClause = `${propertyPath}.${getOperatorIri(
+            clause
+          )}[${index}]`
+        "
+        v-if="item['rdfs:label']"
+        class="clause-item__label inline w-full text-blue-600 font-semibold hover:underline"
+      >
+        {{ item["rdfs:label"] }}
+      </div>
+
+      <!-- If there's no label   -->
+      <div
+        v-if="!item['rdfs:label']"
+        v-show="!collapsedItems.includes(item.temp_id)"
+        class="inline-block w-full flex flex-col"
+      >
+        <ClauseItem
+          :propertyPath="`${propertyPath}.${getOperatorIri(clause)}[${index}]`"
+          :clause="item"
+          :operatorIris="['im:and', 'im:or', 'im:not']"
+        />
       </div>
     </div>
   </template>
@@ -41,6 +69,7 @@ import SectionToggler from "@/components/dataset/SectionToggler.vue";
 export default defineComponent({
   name: "ClauseItem",
   props: [
+    "propertyPath",
     "modelValue",
     "operatorIris",
     "definitionIri",
@@ -50,14 +79,13 @@ export default defineComponent({
   ],
   emits: ["update:modelValue"],
   components: {
-    // SectionToggler,
+    SectionToggler,
   },
   data() {
     return {
       collapsedItems: [] as any[],
     };
   },
-
   methods: {
     toggleTableSection(item: number): void {
       if (this.collapsedItems.includes(item)) {
@@ -69,7 +97,7 @@ export default defineComponent({
       }
     },
     withTempUUID(items: any[]): any[] | any {
-      console.log("items", items);
+      // console.log("items", items);
       if (items) {
         return items.map((item: any) => {
           return { temp_id: "urn:uuid:" + v4(), ...item };
@@ -77,7 +105,7 @@ export default defineComponent({
       }
     },
     isOperator(item: any): boolean {
-      console.log("item", item);
+      // console.log("item", item);
       return this.operatorIris.some((operatorIri: any) => {
         return item[operatorIri];
       });
@@ -89,8 +117,23 @@ export default defineComponent({
         return this.operatorIris.includes(key);
       })[0];
     },
+    test(val: any): void {
+      alert(val);
+    },
   },
-  computed: {},
+  computed: {
+    queryBuilder: {
+      get(): any {
+        return this.$store.state.queryBuilder;
+      },
+      set({ action, payload }: any): void {
+        this.$store.commit("queryBuilder", {
+          action: action,
+          payload: payload,
+        });
+      },
+    },
+  },
 });
 </script>
 
@@ -102,10 +145,11 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
-.clause-item {
-  /* margin-left: 15px; */
-  /* height: 30px; */
+.clause-item,
+.clause-item__operator,
+.clause-item__label {
   cursor: pointer;
+  font-size: 14px;
 }
 
 .clause-item__toggler {
@@ -114,6 +158,6 @@ export default defineComponent({
   margin-right: 5px;
 }
 .clause-item__operator {
-  /* margin-left: 5px; */
+  width: 40px;
 }
 </style>

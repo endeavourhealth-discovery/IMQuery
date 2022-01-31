@@ -137,10 +137,10 @@ export default class QueryBuilder {
             return false;
 
         } finally {
-            console.log("_entities:", this._entities);
-            console.log("_profileEntities:", this._profileEntities);
-            console.log("profileEntitiesAsArray", this.profileEntitiesAsArray);
-            console.log("_clauses:", this._clauses);
+            // console.log("_entities:", this._entities);
+            // console.log("_profileEntities:", this._profileEntities);
+            // console.log("profileEntitiesAsArray", this.profileEntitiesAsArray);
+            // console.log("_clauses:", this._clauses);
 
         }
     }
@@ -182,6 +182,77 @@ export default class QueryBuilder {
     }
     get openProfiles(): any {
         return this._openProfiles;
+    }
+
+
+    private _activeClause: any;
+    get activeClause(): any {
+        return this._activeClause;
+    }
+    set activeClause(propertyPath: any) {
+        if (typeof (propertyPath) == "string") {
+            //find clause using JSON properyPath
+            this._activeClause = _.get(this.activeProfile, propertyPath);
+        }
+
+        this.interpolateTemplate({ "@id": this._activeProfile["@id"], propertyPath: propertyPath }, this._activeClause)
+
+
+    }
+
+
+
+    private _interpolationTemplates: any = [
+        {
+            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+            propertyPath: "im:definition[0].im:and[0]",
+            text: "they were: {{0}}",
+            vars: ["im:valueIn[0].rdfs:label"]
+        },
+        {
+            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+            propertyPath: "im:definition[0].im:and[2]",
+            text: "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
+            vars: [
+                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+                "im:test[0].im:valueIn[0].rdfs:label"
+            ]
+        },
+
+    ];
+    
+    private _interpolatedTemplate: any;
+    get interpolatedTemplate(): any {
+        return this._interpolatedTemplate;
+    }
+
+    private _activeTemplate: any;
+    get activeTemplate(): any {
+        return this._activeTemplate;
+    }
+
+    public interpolateTemplate(meta: any, activeClause: any): any {
+        const _template = this._interpolationTemplates.filter((item: any) => item["@id"] == meta["@id"] && item["propertyPath"] == meta["propertyPath"])[0];
+        // console.log("activeClause", activeClause);
+        // console.log("_template1", _template)
+
+
+        this._activeTemplate = _template.text
+        
+        
+        let _interpolatedTemplate = _template.text;
+        _template.vars.forEach((item: any, index: number) => {
+
+            _interpolatedTemplate  = _interpolatedTemplate.replaceAll(`{{${index}}}`, _.get( activeClause, _template.vars[index])); 
+            // console.log(`lodash get: ${_template.vars[index]}`, _.get(activeClause, _template.vars[index] ));
+
+        });
+        
+        this._interpolatedTemplate = _interpolatedTemplate;
+          
+        
+
     }
 
 
@@ -242,7 +313,6 @@ export default class QueryBuilder {
         return { nodes: _clauseNodes2, pathItems: [] };
 
     }
-
 
 
     // one way conversion for display as nodges/edges in d3.js (Network.vue component)
@@ -414,6 +484,9 @@ export class Profile extends Entity {
 
 
 export class QueryTools {
+
+
+
 
 
     // prettify JSON

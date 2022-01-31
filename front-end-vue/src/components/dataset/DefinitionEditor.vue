@@ -1,14 +1,20 @@
 <template>
-  <div class="definition-editor">
-    <template
-      v-for="item in withTempUUID(modelValue[definitionIri])"
-      :key="item.temp_id"
-    >
-      <ClauseItem
-        :clause="item"
-        :operatorIris="['im:and', 'im:or', 'im:not']"
-      />
-    </template>
+  <div class="definition-editor flex">
+    <div class="definition-editor__definition w-full overflow-y-auto">
+      <template
+        v-for="(item, index) in withTempUUID(modelValue[definitionIri])"
+        :key="item.temp_id"
+      >
+        <ClauseItem
+          :propertyPath="`${definitionIri}[${index}]`"
+          :clause="item"
+          :operatorIris="['im:and', 'im:or', 'im:not']"
+        />
+      </template>
+    </div>
+    <div v-if="queryBuilder.activeClause" class="definition-editor__curator w-full">
+      <ClauseEditor :modelValue="queryBuilder.activeClause" />
+    </div>
   </div>
 </template>
 
@@ -17,6 +23,7 @@ import { ref, onMounted, defineComponent } from "vue";
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import ClauseItem from "@/components/dataset/ClauseItem.vue";
+import ClauseEditor from "@/components/dataset/ClauseEditor.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
@@ -35,6 +42,7 @@ export default defineComponent({
   components: {
     // SectionToggler,
     ClauseItem,
+    ClauseEditor,
   },
   data() {
     return {
@@ -71,7 +79,19 @@ export default defineComponent({
       })[0];
     },
   },
-  computed: {},
+  computed: {
+    queryBuilder: {
+      get(): any {
+        return this.$store.state.queryBuilder;
+      },
+      set({ action, payload }: any): void {
+        this.$store.commit("queryBuilder", {
+          action: action,
+          payload: payload,
+        });
+      },
+    },
+  },
 });
 </script>
 
@@ -83,17 +103,16 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
-.clause-item {
-  /* margin-left: 15px; */
-  /* height: 30px; */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.clause-item__toggler {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
+:-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
 }
-.clause-item__operator {
-  /* margin-left: 5px; */
+
+::-webkit-scrollbar-thumb {
+  background-color: #d3d3d3;
+  /* outline: 1px solid slategrey; */
 }
 </style>

@@ -24,8 +24,6 @@
           </div>
         </RoundButton>
       </div>
-
-      <!-- <VerticalButtonGroup :items="availableViews" v-model="activeView" /> -->
       <!--Content Nav -->
       <ContentNav
         class="inline w-full h-full"
@@ -626,53 +624,9 @@ export default defineComponent({
       fileItems: [] as any[],
     };
   },
-  // watch: {
-  //   jsonpath(newValue) {
-  //     try {
-  //       const _parsed = jp.parse(newValue);
-  //       if (_parsed && _parsed.length) {
-  //         const _jpq = jp.query(JSON.parse(this.JSONContent), newValue);
-  //         if (_jpq.length) {
-  //           this.filteredJSONContent = JSON.stringify(_jpq);
-  //         } else {
-  //           this.filteredJSONContent = "";
-  //         }
 
-  //         if (this.filteredJSONContent && this.filteredJSONContent != "") {
-  //           this.filteredJSONContent = prettier.format(
-  //             this.filteredJSONContent,
-  //             {
-  //               parser: "json",
-  //               plugins: [prettierBabylon],
-  //             }
-  //           );
-  //         }
-
-  //         // this.filteredJSONContent = JSON.stringify(_jpq.toString());
-  //         console.log("_jpq", _jpq);
-  //       }
-  //     } catch (error) {
-  //       // console.log("jsonpath error: ", error);
-  //     }
-  //   },
-  // },
   computed: {
-    // JSONContent: {
-    //   get(): any {
-    //     return this.$store.state.JSONContent;
-    //   },
-    //   set(value: any): void {
-    //     this.$store.commit("updateJSONContent", value);
-    //   },
-    // },
-    // LabelContent: {
-    //   get(): any {
-    //     return this.$store.state.LabelContent;
-    //   },
-    //   set(LabelContent: any): void {
-    //     this.$store.commit("updateLabelContent", LabelContent);
-    //   },
-    // },
+
     isLoading: {
       get(): any {
         return this.$store.state.isLoading;
@@ -693,15 +647,8 @@ export default defineComponent({
       },
     },
   },
-  created() {
-    //todo: bind updates to specific methods e.g. onLoad should trigger a new state
-    // this.queryBuilder.onLoad
-  },
+
   async mounted() {
-    // await this.$store.dispatch("fetchDatamodel");
-    // const _folder  = new Folder();
-    // folder.load("http://endhealth.info/ceg/qry#Q_CEGQueries");
-    //  (QueryBuilder.getExamples());
 
     await this.$store.dispatch("fetchDatamodelIris");
   },
