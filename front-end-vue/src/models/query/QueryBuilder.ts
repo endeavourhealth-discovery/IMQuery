@@ -4,6 +4,7 @@ const jmp = require('jmespath');
 const jp = require('jsonpath');
 const prettier = require("prettier/standalone");
 const prettierBabylon = require("prettier/parser-babylon");
+import SearchService from "@/services/SearchService";
 
 export default class QueryBuilder {
 
@@ -184,7 +185,7 @@ export default class QueryBuilder {
         return this._openProfiles;
     }
 
-
+    //the clause that is currently being edited 
     private _activeClause: any;
     get activeClause(): any {
         return this._activeClause;
@@ -193,27 +194,27 @@ export default class QueryBuilder {
         if (typeof (propertyPath) == "string") {
             //find clause using JSON properyPath
             this._activeClause = _.get(this.activeProfile, propertyPath);
+            this.interpolateTemplate({ "@id": this._activeProfile["@id"], propertyPath: propertyPath }, this._activeClause)
+            // this.interpolateTemplate2(this._activeClause)
         }
-
-        this.interpolateTemplate({ "@id": this._activeProfile["@id"], propertyPath: propertyPath }, this._activeClause)
-
-
     }
 
 
 
+
+    //examples of templates
     private _interpolationTemplates: any = [
         {
             "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
             propertyPath: "im:definition[0].im:and[0]",
             text: "they were: {{0}}",
-            vars: ["im:valueIn[0].rdfs:label"]
+            variables: ["im:valueIn[0].rdfs:label"]
         },
         {
             "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
             propertyPath: "im:definition[0].im:and[2]",
-            text: "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
-            vars: [
+            text: "they had a health record coded as either {{0}} or {{1}} but the most recent record was {{2}} ",
+            variables: [
                 "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
                 "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
                 "im:test[0].im:valueIn[0].rdfs:label"
@@ -221,7 +222,7 @@ export default class QueryBuilder {
         },
 
     ];
-    
+
     private _interpolatedTemplate: any;
     get interpolatedTemplate(): any {
         return this._interpolatedTemplate;
@@ -239,21 +240,113 @@ export default class QueryBuilder {
 
 
         this._activeTemplate = _template.text
-        
-        
         let _interpolatedTemplate = _template.text;
-        _template.vars.forEach((item: any, index: number) => {
 
-            _interpolatedTemplate  = _interpolatedTemplate.replaceAll(`{{${index}}}`, _.get( activeClause, _template.vars[index])); 
-            // console.log(`lodash get: ${_template.vars[index]}`, _.get(activeClause, _template.vars[index] ));
+
+        _template.variables.forEach((item: any, index: number) => {
+
+            _interpolatedTemplate = _interpolatedTemplate.replaceAll(`{{${index}}}`, _.get(activeClause, _template.variables[index]));
+            // console.log(`lodash get: ${_template.variables[index]}`, _.get(activeClause, _template.variables[index] ));
 
         });
-        
+
         this._interpolatedTemplate = _interpolatedTemplate;
-          
-        
 
     }
+
+
+    private static _relevantPaths = [
+        "im:function[0].im:functionIri[0].@id",
+        "im:function[0].im:argument[1].im:valueIrI[0].@id",
+        "im:test[0].im:property[0].@id",
+    ];
+
+    public interpolateTemplate2(activeClause: any): any {
+        const _template = this.findTemplate(activeClause);
+
+        // console.log("template found", _template)
+        // this._activeTemplate = _template.template[0].text
+        // let _interpolatedTemplate = _template.template[0].text;
+
+        // _template.template[0].variables.forEach((item: any, index: number) => {
+        //     _interpolatedTemplate = _interpolatedTemplate.replaceAll(`{{${index}}}`, _.get(activeClause, _template.template[0].variables[index]));
+        //     // console.log(`lodash get: ${_template.variables[index]}`, _.get(activeClause, _template.variables[index] ));
+
+        // });
+
+        // this._interpolatedTemplate = _interpolatedTemplate;
+
+    }
+
+    private async findTemplate(activeClause: any): Promise<any> {
+        const _q = {
+            "bool": {
+                "filter": [
+                    {
+                        "bool": {
+                            "must": [
+                                {
+                                    "match_phrase": {
+                                        "target.pathTo": "im:isSubjectOf"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "target.entityType": "im:event"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "target.propertyPaths.path": "im:function[0].im:functionIri[0].@id"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "target.propertyPaths.value": "im:OrderLimit"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "target.propertyPaths.path": "im:function[0].im:argument[1].im:valueIrI[0].@id"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "target.propertyPaths.value": "im:effectiveDate"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "target.propertyPaths.path": "im:test[0].im:property[0].@id"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "target.propertyPaths.value": "im:concept"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        };
+
+        await SearchService.oss_search_templates(_q, 1)
+            .then((res: any) => {
+                console.log("fetched opensearch results: ", res);
+                return res;
+            })
+            .catch((err: any) => {
+                console.log("Could not load opensearch results", err);
+                return err;
+            });
+
+
+
+    }
+
+
 
 
 
@@ -485,6 +578,57 @@ export class Profile extends Entity {
 
 export class QueryTools {
 
+    //flattens a JS object to its constituent paths
+    public static flattenObject(object: any): any {
+
+        const result = {} as any;
+        function recurse(cur: any, prop: any) {
+            if (Object(cur) !== cur) {
+                result[prop] = cur;
+            } else if (Array.isArray(cur)) {
+                // for (var i = 0, l = cur.length; i < l; i++)
+                for (let i = 0; i < cur.length; i++)
+                    recurse(cur[i], prop + "[" + i + "]");
+                // if (l == 0)
+                if (cur.length == 0)
+                    result[prop] = [];
+            } else {
+                let isEmpty = true;
+                for (const p in cur) {
+                    isEmpty = false;
+                    recurse(cur[p], prop ? prop + "." + p : p);
+                }
+                if (isEmpty && prop)
+                    result[prop] = {};
+            }
+        }
+        recurse(object, "");
+        console.log("flattened result", result)
+        return result;
+
+
+
+    }
+
+    //unflattens JS object
+    // public static unflattenObject(object: any): any {
+    //     if (Object(object) !== object || Array.isArray(object))
+    //         return object;
+    //     var regex = /\.?([^.\[\]]+)|\[(\d+)\]/g,
+    //         resultholder = {} as any;
+    //     for (var p in object) {
+    //         var cur = resultholder as any,
+    //             prop = "",
+    //             m;
+    //         while (m = regex.exec(p)) {
+    //             cur = cur[prop] || (cur[prop] = (m[2] ? [] : {}));
+    //             prop = m[2] || m[1];
+    //         }
+    //         cur[prop] = object[p];
+    //     }
+    //     return resultholder[""] || resultholder;
+    // }
+
 
 
 
@@ -498,9 +642,6 @@ export class QueryTools {
         return _json;
 
     }
-
-
-
 
 
     //replaces all ":"" and "@" with __ and ___ respectively to enable JMESPath and JsonPath tools
@@ -527,7 +668,6 @@ export class QueryTools {
     };
 
 
-
     //replaces all keys in an object using  key-value pairs in character map
     public static replaceChars = (text: string) => {
         let _text = text;
@@ -539,14 +679,6 @@ export class QueryTools {
     };
 
 
-    // todo replace characters
-
-
-
-
-
-
-
     // adds random uuid only used in frontend to provide a :key for v-for iterators in UI components  
     private addUUID(array: any): any {
         return array.map((item: any) => {
@@ -556,8 +688,6 @@ export class QueryTools {
             }
         })
     }
-
-
 
 
 

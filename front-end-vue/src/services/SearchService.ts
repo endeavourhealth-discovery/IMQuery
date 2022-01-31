@@ -33,6 +33,19 @@ export default class SearchService {
       });
   }
 
+  public static async oss_search_templates(query: any, limit: number): Promise<AxiosResponse<any>> {
+
+    return axios.post(`${this.oss_url}/${process.env.VUE_APP_INDEX_TEMPLATES}/_search`,
+      {
+        size: limit,
+        query: query
+      }
+      ,
+      {
+        headers: this.oss_headers
+      });
+
+  };
   public static async oss_search_im(queryString: string, limit: number, entityType?: string): Promise<AxiosResponse<any>> {
     const q = {
       bool: {
