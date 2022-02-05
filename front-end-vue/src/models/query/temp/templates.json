@@ -1,0 +1,162 @@
+{
+    "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+    "name": "disease status",
+    "description": "",
+    "code": "",
+    "entityType": [{
+        "@id": "http://endhealth.info/im#TextTemplate",
+        "name": "UI Text Interpolation Template"
+    }],
+    "scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "status": {
+        "@id": "http://endhealth.info/im#Draft",
+        "name": "Draft"
+    },
+    "target": [{
+        "pathTo": "im:isSubjectOf",
+        "entityType": "im:event",
+        "property": null,
+        "propertyPaths": [{
+                "path": "im:function[0].im:functionIri[0].@id",
+                "value": "im:OrderLimit"
+            },
+            {
+                "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
+                "value": "im:effectiveDate"
+            },
+            {
+                "path": "im:test[0].im:property[0].@id",
+                "value": "im:concept"
+            }
+        ]
+    }],
+    "template": [{
+        "text": "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
+        "variables": [
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+            "im:test[0].im:valueIn[0].rdfs:label"
+        ]
+    }]
+},  {
+    "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+    "name": "disease status",
+    "description": "",
+    "code": "",
+    "entityType": [{
+        "@id": "http://endhealth.info/im#TextTemplate",
+        "name": "UI Text Interpolation Template"
+    }],
+    "scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "status": {
+        "@id": "http://endhealth.info/im#Draft",
+        "name": "Draft"
+    },
+    "target": [{
+        "pathTo": "im:isSubjectOf",
+        "entityType": "im:event",
+        "property": null,
+        "propertyPaths": [{
+                "path": "im:function[0].im:functionIri[0].@id",
+                "value": "im:OrderLimit"
+            },
+            {
+                "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
+                "value": "im:effectiveDate"
+            },
+            {
+                "path": "im:test[0].im:property[0].@id",
+                "value": "im:concept"
+            }
+        ]
+    }],
+    "template": [{
+        "text": [
+            [
+                ["Search for a person who had a"],
+                [" {{0}}"]
+            ],
+            [
+                ["Filter health records coded as"],
+                [" {{1}}"],
+                [" or"],
+                [" {{2}}"]
+            ],
+            [
+                ["Sort the results by"],
+                [" {{3}}"],
+                [" {{4}}"]
+            ]
+            [
+                ["Check the top"],
+                [" {{5}} entry "]
+            ],
+            [
+                ["If the value is"],
+                [" {{6}}"]
+            ],
+            [
+                ["{{include}} a person in the final search results"]
+            ]
+        ],
+        "variables": [
+            "im:entityType[0].@id",
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+            "im:function[0].im:argument[0].im:valueIrI[0].@id",
+            "im:function[0].im:argument[2].im:valueData",
+            "im:test[0].im:valueIn[0].rdfs:label"
+        ]
+    }]
+} {
+    "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+    "name": "main entity template",
+    "description": "",
+    "code": "",
+    "entityType": [{
+        "@id": "http://endhealth.info/im#TextTemplate",
+        "name": "UI Text Interpolation Template"
+    }],
+    "scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "status": {
+        "@id": "http://endhealth.info/im#Draft",
+        "name": "Draft"
+    },
+    "target": [{
+        "pathTo": "im:isSubjectOf",
+        "entityType": "im:event",
+        "property": null,
+        "propertyPaths": [{
+                "path": "im:function[0].im:functionIri[0].@id",
+                "value": "im:OrderLimit"
+            },
+            {
+                "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
+                "value": "im:effectiveDate"
+            },
+            {
+                "path": "im:test[0].im:property[0].@id",
+                "value": "im:concept"
+            }
+        ]
+    }],
+    "template": [{
+        "placeholder": "{{}}"
+        "text": "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
+        "variables": [
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+            "im:test[0].im:valueIn[0].rdfs:label"
+        ]
+    }]
+}
+
+
+
+\

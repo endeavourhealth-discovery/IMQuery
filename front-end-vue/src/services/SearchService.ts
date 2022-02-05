@@ -158,11 +158,63 @@ export default class SearchService {
 
   };
 
+
+  public static async fetchAppData(): Promise<AxiosResponse<any>> {
+
+
+
+    const _fileName = "CoreOntology.json";
+    const _url = `${process.env.VUE_APP_CDN_URL}/${_fileName}`;
+
+    let _shouldCacheRefresh = true;
+
+    //checks a file's last modified timestamp found in the response header to determine if cache needs to be refreshed
+    await axios.head(_url).then((res => {
+
+      // console.log("localStorage.getItem(`cache_last_modified_${_fileName}`)", localStorage.getItem(`cache_last_modified_${_fileName}`))
+      // console.log(" res.headers[last-modified]", res.headers["last-modified"])
+
+
+      if ((localStorage.getItem(`cache_last_modified_${_fileName}`) != res.headers["last-modified"])) {
+        _shouldCacheRefresh = true;
+        localStorage.setItem(`cache_last_modified_${_fileName}`, res.headers["last-modified"])
+      } else {
+        _shouldCacheRefresh = false;
+      }
+
+    }))
+
+    if (_shouldCacheRefresh) {
+
+      console.log("app data refreshed using latest files from server");
+      const _res = await axios.get(_url);
+      localStorage.setItem(`cache_data_${_fileName}`, JSON.stringify(_res.data));
+      return _res;
+
+      // axios.get(_url).then((res2 => {
+      //   console.log("file loaded from sever");
+      //   localStorage.setItem(`cache_${_fileName}`, JSON.stringify(res2))
+      //   return res2;
+      // }));
+
+      // return axios.get(_url);
+
+
+    } else {
+      console.log("app data refreshed using files from localstorage as cache");
+      return JSON.parse(localStorage.getItem(`cache_data_${_fileName}`) as string);
+    }
+
+
+
+  };
+
+
   // public static async graphdb_search(sparqlQueryString: string): Promise<AxiosResponse<any>> {
 
   //   // const queryParams = SearchService.toFormURLEncoded({ 'query': sparqlQueryString });
 
-    
+
   //   console.log("queryParams is: ", this.toFormURLEncoded(sparqlQueryString));
   //   return axios.get(`${this.graphdb_url}/repositories/${process.env.VUE_APP_GRAPHDB_REPOSITORY}?q=${this.toFormURLEncoded(sparqlQueryString)}`,
   //     {
@@ -180,19 +232,19 @@ export default class SearchService {
   //   qry = qry.replaceAll("?", "%3F");
   //   return qry;
 
-        // var details = {
-    //   'userName': 'test@gmail.com',
-    //   'password': 'Password!',
-    //   'grant_type': 'password'
-    // };
+  // var details = {
+  //   'userName': 'test@gmail.com',
+  //   'password': 'Password!',
+  //   'grant_type': 'password'
+  // };
 
-    // const formBody = [];
-    // for (const property in form) {
-    //   const encodedKey = encodeURIComponent(property);
-    //   const encodedValue = encodeURIComponent(form[property]);
-    //   formBody.push(encodedKey + "=" + encodedValue);
-    // }
-    // return formBody.join("&");
+  // const formBody = [];
+  // for (const property in form) {
+  //   const encodedKey = encodeURIComponent(property);
+  //   const encodedValue = encodeURIComponent(form[property]);
+  //   formBody.push(encodedKey + "=" + encodedValue);
+  // }
+  // return formBody.join("&");
 
   // }
 

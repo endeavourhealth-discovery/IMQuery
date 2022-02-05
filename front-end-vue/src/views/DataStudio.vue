@@ -144,6 +144,7 @@
             content="Upload JSON file containing entities (-id)"
             @change="onUploadFiles()"
           />
+          <!-- <button @click="testQuery()"> Test Query </button> -->
         </div>
         <div class="inline-flex flex-col w-full h-full">
           <div class="h-10 w-full">
@@ -277,6 +278,7 @@ export default defineComponent({
   },
   data() {
     return {
+      CoreOntology: {} as any,
       filteredJSONContent: "",
       jsonpath: "",
       labelPaths: [] as any[],
@@ -626,7 +628,6 @@ export default defineComponent({
   },
 
   computed: {
-
     isLoading: {
       get(): any {
         return this.$store.state.isLoading;
@@ -649,6 +650,18 @@ export default defineComponent({
   },
 
   async mounted() {
+    // localStorage.set("test", "test")
+    // fetch(
+    //   "https://appindex.ams3.cdn.digitaloceanspaces.com/CoreOntology.json",
+    //   {
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //     },
+    //   }
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data));
+    await this.getAppData();
 
     await this.$store.dispatch("fetchDatamodelIris");
   },
@@ -657,6 +670,9 @@ export default defineComponent({
     //   require("brace/mode/json");
     //   require("brace/theme/tomorrow");
     // },
+    testQuery(): any {
+      return;
+    },
     getFilteredEntities(): any {
       if (this.selectedFilterTypes.length) {
         return this.openFiles[0]["entities"].filter((entity: any) =>
@@ -699,6 +715,59 @@ export default defineComponent({
       return this.openFiles[0]["entities"].filter(
         (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
       );
+    },
+    async getAppData(): Promise<any> {
+      // uses up to 5mb of localstorage of the browser
+      // x-amz-version-id is Amazon S3 bucket version (feature must be enabled)
+
+      // const isCacheSupported = "caches" in window;
+      // if (isCacheSupported) {
+      const url = `${process.env.VUE_APP_CDN_URL}/CoreOntology.json`;
+      const cacheName = "imquery-appdata";
+      // create store
+      // caches.open(cacheName).then((cache) => {
+      //   cache.add(url).then(() => {
+      //     console.log("Data cached");
+      //   });
+      // });
+      // check response
+      // caches.open(cacheName).then((cache) => {
+      //   cache.match(url).then((settings: any) => {
+      //     console.log(settings);
+      //     fetch(settings.body)
+      //       // Retrieve its body as ReadableStream
+      //       .then((response) => response.body);
+      //   });
+      // });
+      // retrieve items
+      // caches.open(cacheName).then((cache) => {
+      //   cache.keys().then((arrayOfRequest) => {
+      //     console.log(arrayOfRequest); // [Request,  Request]
+      //   });
+      // });
+      // } else {
+      //   console.log(
+      //     "Content caching is not supported in this browser. App data is fetched from CDN everytime the page is refreshed."
+      //   );
+      // }
+
+      // console.log("local",, "lol"));
+
+      
+
+      // var start = Date.now();
+      await SearchService.fetchAppData()
+        .then((res) => {
+          // console.log("res", res);
+          // var end = Date.now();
+          // console.log(`Fetch time: ${end - start} ms`);
+          return res.data;
+        })
+        .catch((err) => {
+          this.$toast.add(
+            LoggerService.error("Failed to get app data from server", err)
+          );
+        });
     },
     async getEntitySummary(iri: string): Promise<any> {
       await EntityService.getEntitySummary(iri)

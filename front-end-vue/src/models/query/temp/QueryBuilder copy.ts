@@ -194,6 +194,8 @@ export default class QueryBuilder {
         if (typeof (propertyPath) == "string") {
             //find clause using JSON properyPath
             this._activeClause = _.get(this.activeProfile, propertyPath);
+
+            this.interpolateTemplate({ "@id": this._activeProfile["@id"], propertyPath: propertyPath }, this._activeClause)
             this.interpolateTemplate({ "@id": this._activeProfile["@id"], propertyPath: propertyPath }, this._activeClause)
             // this.interpolateTemplate2(this._activeClause)
         }
@@ -212,25 +214,13 @@ export default class QueryBuilder {
         },
         {
             "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-            propertyPath: "im:definition[0].im:and[2]",
-            text: "they had a health record coded as either {{0}} or {{1}} but the most recent record was {{2}} ",
-            variables: [
-                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
-                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
-                "im:test[0].im:valueIn[0].rdfs:label"
-            ]
-        },
-        {
-            "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
             "name": "disease status",
             "description": "",
             "code": "",
-            "entityType": [
-                {
-                    "@id": "http://endhealth.info/im#TextTemplate",
-                    "name": "UI Text Interpolation Template"
-                }
-            ],
+            "entityType": [{
+                "@id": "http://endhealth.info/im#TextTemplate",
+                "name": "UI Text Interpolation Template"
+            }],
             "scheme": {
                 "@id": "http://endhealth.info/im#"
             },
@@ -238,93 +228,78 @@ export default class QueryBuilder {
                 "@id": "http://endhealth.info/im#Draft",
                 "name": "Draft"
             },
-            "target": [
+            "target": [{
+                "pathTo": "im:isSubjectOf",
+                "entityType": "im:event",
+                "property": null,
+                "propertyPaths": [{
+                    "path": "im:function[0].im:functionIri[0].@id",
+                    "value": "im:OrderLimit"
+                },
                 {
-                    "pathTo": "im:isSubjectOf",
-                    "entityType": "im:event",
-                    "property": "",
-                    "propertyPaths": [
-                        {
-                            "path": "im:function[0].im:functionIri[0].@id",
-                            "value": "im:OrderLimit"
-                        },
-                        {
-                            "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
-                            "value": "im:effectiveDate"
-                        },
-                        {
-                            "path": "im:test[0].im:property[0].@id",
-                            "value": "im:concept"
-                        }
-                    ]
-                }
-            ],
-            "template": [
+                    "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
+                    "value": "im:effectiveDate"
+                },
                 {
-                    "text": "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
-                    "variables": [
-                        "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
-                        "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
-                        "im:test[0].im:valueIn[0].rdfs:label"
-                    ]
+                    "path": "im:test[0].im:property[0].@id",
+                    "value": "im:concept"
                 }
-            ]
-        },
-        {
-            "size": 1,
-            "query": {
-              "bool": {
-                "filter": [
-                  {
-                    "bool": {
-                      "must": [
-                        {
-                          "match_phrase": {
-                            "target.pathTo": "im:isSubjectOf"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.entityType": "im:event"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.path": "im:function[0].im:functionIri[0].@id"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.value": "im:OrderLimit"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.path": "im:function[0].im:argument[1].im:valueIrI[0].@id"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.value": "im:effectiveDate"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.path": "im:test[0].im:property[0].@id"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.value": "im:concept"
-                          }
-                        }
-                      ]
-                    }
-                  }
                 ]
-              }
-            }
-          }
+            }],
+            "template": [{
+                "text": [
+                    [
+                        ["Search for a person who had a"],
+                        [" {{0}}"]
+                    ],
+                    [
+                        ["Filter health records coded as"],
+                        [" {{1}}"],
+                        [" or"],
+                        [" {{2}}"]
+                    ],
+                    [
+                        ["Sort the results by"],
+                        [" {{3}}"],
+                        [" {{4}}"]
+                    ],
+                    [
+                        ["Check the top"],
+                        [" {{5}} entries "]
+                    ],
+                    [
+                        ["If the value is"],
+                        [" {{6}}"]
+                    ],
+                    [
+                        ["{{im:not}} a person in the final search results"]
+                    ]
+                ],
+                "vars": [{
+                    "placeholder": "im:not",
+                    "target": "Clause",
+                    "propertyPath": "im:not",
+                    "test": "exists",
+                    "action": [
+                        {
+                            "result": "true", "return": "Exclude"
+                        },
+                        {
+                            "result": "false", "return": "Include"
+                        },
+                    ]
+                },
+            ],
+                "variables": [
+                    "im:entityType[0].@id",
+                    "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+                    "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+                    "im:function[0].im:argument[0].im:valueIrI[0].@id",
+                    "im:function[0].im:argument[2].im:valueData",
+                    "im:test[0].im:valueIn[0].rdfs:label"
+                ]
+            }]
+        },
 
     ];
 
@@ -348,14 +323,20 @@ export default class QueryBuilder {
         let _interpolatedTemplate = _template.text;
 
 
-        _template.variables.forEach((item: any, index: number) => {
+        _template.text.forEach((row: any, index: number) => {
 
-            _interpolatedTemplate = _interpolatedTemplate.replaceAll(`{{${index}}}`, _.get(activeClause, _template.variables[index]));
+            row.forEach((item: any, index: number) => {
+                if (item.)
+
+
+
+            });
+            // _interpolatedTemplate = _interpolatedTemplate.replaceAll(`{{${index}}}`, _.get(activeClause, _template.variables[index]));
             // console.log(`lodash get: ${_template.variables[index]}`, _.get(activeClause, _template.variables[index] ));
 
         });
 
-        this._interpolatedTemplate = _interpolatedTemplate;
+        // this._interpolatedTemplate = _interpolatedTemplate;
 
     }
 
@@ -451,7 +432,7 @@ export default class QueryBuilder {
 
     }
 
-    
+
 
 
 
@@ -517,9 +498,6 @@ export default class QueryBuilder {
 
     // one way conversion for display as nodges/edges in d3.js (Network.vue component)
     public getGraphData(profileIri: string): any {
-
-       
-
 
 
 
