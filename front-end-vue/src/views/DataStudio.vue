@@ -144,7 +144,7 @@
             content="Upload JSON file containing entities (-id)"
             @change="onUploadFiles()"
           />
-          <!-- <button @click="testQuery()"> Test Query </button> -->
+          <button @click="testQuery()">Test Query</button>
         </div>
         <div class="inline-flex flex-col w-full h-full">
           <div class="h-10 w-full">
@@ -195,7 +195,6 @@
                 v-if="queryBuilder.activeProfile"
                 class="inline json-viewer h-full w-full"
                 v-model:value="queryBuilder.activeProfile.asString"
-                @init="editorInit"
                 lang="json"
                 theme="tomorrow"
               />
@@ -203,7 +202,6 @@
                 v-if="jsonpath && filteredJSONContent"
                 class="inline json-viewer h-full w-full"
                 v-model:value="filteredJSONContent"
-                @init="editorInit"
                 lang="json"
                 theme="tomorrow"
               />
@@ -240,7 +238,8 @@ import Network from "@/components/dataset/Network.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
-import QueryBuilder from "@/models/query/QueryBuilder";
+import QueryTools, {QueryBuilder} from "@/models/query/QueryTools";
+import  {entityTypes} from "@/models/query/OntologyTools";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import LabelView from "@/components/dataset/LabelView.vue";
 import InputTextbox from "@/components/dataset/InputTextbox.vue";
@@ -647,31 +646,39 @@ export default defineComponent({
         });
       },
     },
+    ontology: {
+      get(): any {
+        return this.$store.state.ontology;
+      },
+      set(value: any): void {
+        return;
+      },
+    },
   },
 
   async mounted() {
-    // localStorage.set("test", "test")
-    // fetch(
-    //   "https://appindex.ams3.cdn.digitaloceanspaces.com/CoreOntology.json",
-    //   {
-    //     headers: {
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //   }
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
-    await this.getAppData();
-
+    // await this.getAppData();
     await this.$store.dispatch("fetchDatamodelIris");
   },
   methods: {
-    // editorInit: function(editor: any) {
-    //   require("brace/mode/json");
-    //   require("brace/theme/tomorrow");
-    // },
     testQuery(): any {
-      return;
+      // console.log(
+      //   "ontology",
+      //   this.ontology
+      // );
+      // console.log(
+      //   "all",
+      //   this.ontology.entities
+      // );
+      // console.log(
+      //   "entities",
+      //   this.ontology.entities.byIri("im:MedicationOrder")
+      // );
+      // console.log(
+      //   "datamodels",
+      //   this.ontology.entities.byType(entityTypes.datamodel)
+      // );
+   
     },
     getFilteredEntities(): any {
       if (this.selectedFilterTypes.length) {
@@ -685,7 +692,7 @@ export default defineComponent({
         return this.openFiles[0]["entities"];
       }
     },
-    async onUploadFiles(event: InputEvent): Promise<void> {
+    async onUploadFiles(): Promise<void> {
       const _inputElement = this.$refs.upload as HTMLInputElement;
       const _files = [...(_inputElement.files ? _inputElement.files : [])];
 
@@ -719,11 +726,10 @@ export default defineComponent({
     async getAppData(): Promise<any> {
       // uses up to 5mb of localstorage of the browser
       // x-amz-version-id is Amazon S3 bucket version (feature must be enabled)
-
       // const isCacheSupported = "caches" in window;
       // if (isCacheSupported) {
-      const url = `${process.env.VUE_APP_CDN_URL}/CoreOntology.json`;
-      const cacheName = "imquery-appdata";
+      // const url = `${process.env.VUE_APP_ONTOLOGY_URL}/CoreOntology.json`;
+      // const cacheName = "imquery-appdata";
       // create store
       // caches.open(cacheName).then((cache) => {
       //   cache.add(url).then(() => {
@@ -750,24 +756,20 @@ export default defineComponent({
       //     "Content caching is not supported in this browser. App data is fetched from CDN everytime the page is refreshed."
       //   );
       // }
-
       // console.log("local",, "lol"));
-
-      
-
       // var start = Date.now();
-      await SearchService.fetchAppData()
-        .then((res) => {
-          // console.log("res", res);
-          // var end = Date.now();
-          // console.log(`Fetch time: ${end - start} ms`);
-          return res.data;
-        })
-        .catch((err) => {
-          this.$toast.add(
-            LoggerService.error("Failed to get app data from server", err)
-          );
-        });
+      // await SearchService.fetchAppData()
+      //   .then((res) => {
+      //     // console.log("res", res);
+      //     // var end = Date.now();
+      //     // console.log(`Fetch time: ${end - start} ms`);
+      //     return res.data;
+      //   })
+      //   .catch((err) => {
+      //     this.$toast.add(
+      //       LoggerService.error("Failed to get app data from server", err)
+      //     );
+      //   });
     },
     async getEntitySummary(iri: string): Promise<any> {
       await EntityService.getEntitySummary(iri)

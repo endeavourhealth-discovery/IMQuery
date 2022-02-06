@@ -5,8 +5,10 @@ const jp = require('jsonpath');
 const prettier = require("prettier/standalone");
 const prettierBabylon = require("prettier/parser-babylon");
 import SearchService from "@/services/SearchService";
+import axios, { AxiosResponse, CancelToken } from "axios";
 
-export default class QueryBuilder {
+
+export class QueryBuilder {
 
 
     //properties without getters/setters belonging to this class
@@ -273,58 +275,58 @@ export default class QueryBuilder {
         {
             "size": 1,
             "query": {
-              "bool": {
-                "filter": [
-                  {
-                    "bool": {
-                      "must": [
+                "bool": {
+                    "filter": [
                         {
-                          "match_phrase": {
-                            "target.pathTo": "im:isSubjectOf"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.entityType": "im:event"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.path": "im:function[0].im:functionIri[0].@id"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.value": "im:OrderLimit"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.path": "im:function[0].im:argument[1].im:valueIrI[0].@id"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.value": "im:effectiveDate"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.path": "im:test[0].im:property[0].@id"
-                          }
-                        },
-                        {
-                          "match_phrase": {
-                             "target.propertyPaths.value": "im:concept"
-                          }
+                            "bool": {
+                                "must": [
+                                    {
+                                        "match_phrase": {
+                                            "target.pathTo": "im:isSubjectOf"
+                                        }
+                                    },
+                                    {
+                                        "match_phrase": {
+                                            "target.entityType": "im:event"
+                                        }
+                                    },
+                                    {
+                                        "match_phrase": {
+                                            "target.propertyPaths.path": "im:function[0].im:functionIri[0].@id"
+                                        }
+                                    },
+                                    {
+                                        "match_phrase": {
+                                            "target.propertyPaths.value": "im:OrderLimit"
+                                        }
+                                    },
+                                    {
+                                        "match_phrase": {
+                                            "target.propertyPaths.path": "im:function[0].im:argument[1].im:valueIrI[0].@id"
+                                        }
+                                    },
+                                    {
+                                        "match_phrase": {
+                                            "target.propertyPaths.value": "im:effectiveDate"
+                                        }
+                                    },
+                                    {
+                                        "match_phrase": {
+                                            "target.propertyPaths.path": "im:test[0].im:property[0].@id"
+                                        }
+                                    },
+                                    {
+                                        "match_phrase": {
+                                            "target.propertyPaths.value": "im:concept"
+                                        }
+                                    }
+                                ]
+                            }
                         }
-                      ]
-                    }
-                  }
-                ]
-              }
+                    ]
+                }
             }
-          }
+        }
 
     ];
 
@@ -451,7 +453,7 @@ export default class QueryBuilder {
 
     }
 
-    
+
 
 
 
@@ -518,7 +520,7 @@ export default class QueryBuilder {
     // one way conversion for display as nodges/edges in d3.js (Network.vue component)
     public getGraphData(profileIri: string): any {
 
-       
+
 
 
 
@@ -640,6 +642,7 @@ export default class QueryBuilder {
 }
 
 
+// Entity
 export class Entity {
     public '@id'?: string | null;
     public 'rdfs:label'?: string | null;
@@ -652,10 +655,10 @@ export class Entity {
     constructor(entity?: any)
     constructor(entity: any) {
         this["@id"] = entity["@id"] ? entity["@id"] : "";
-        this["rdf:type"] = entity["rdf:type"] ? entity["rdf:type"] : null;
+        this["rdf:type"] = entity["rdf:type"] ? entity["rdf:type"] as Entity : null;
         this["rdfs:label"] = entity["rdfs:label"] ? entity["rdfs:label"] : "";
         this["rdfs:comment"] = entity["rdfs:comment"] ? entity["rdfs:comment"] : "";
-        this["im:isContainedIn"] = entity["im:isContainedIn"] ? entity["im:isContainedIn"] : null;
+        this["im:isContainedIn"] = entity["im:isContainedIn"] ? entity["im:isContainedIn"] as Entity : null;
         // this["iri"] = entity["iri"] ? entity["iri"] : null;
         // this["name"] = entity["name"] ? entity["name"] : null;
         // this["type"] = entity["type"] ? entity["type"] : null;
@@ -667,15 +670,17 @@ export class Entity {
 }
 
 
-// Profile
+// Profile\\\\\
 export class Profile extends Entity {
     public 'im:definition'?: any | null;
+    public 'im:entityType'?: Entity | null;
 
 
     constructor(entity?: any)
     constructor(entity: any) {
         super(entity);
         this["im:definition"] = entity["im:definition"] ? entity["im:definition"] : null;
+        this["im:entityType"] = entity["im:entityType"] ? entity["im:entityType"] : null;
         return this;
     }
 
@@ -687,7 +692,30 @@ export class Profile extends Entity {
 }
 
 
-export class QueryTools {
+export default class QueryTools {
+
+ // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
+    public static findPlaceholders(text: string): any {
+
+        // eslint-disable-next-line
+        const _regExPlaceholders = /{{\s*[\S\.]+\s*}}/g;
+        // eslint-disable-next-line
+        const _regExPlaceholderIri = /[\w+\:\w]+/;
+
+
+        return text.match(_regExPlaceholders)
+            .map(function (x) { return x.match(_regExPlaceholderIri)[0]; });
+
+
+        // const escapeRegExp = (expString: string) => {
+        //     return expString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+        // }
+        // return text.match(/{{\s*[\S\.]+\s*}}/g)
+        // .map(function(x) { return x.match(/\s*[\S\.]+\s*/g)[0]; })
+        // return text.match(/{{\s*[\w\.]+\s*}}/g)
+        //     .map((x: string) => x.match(/[\w\.]+/)[0]);
+    }
+
 
     //flattens a JS object to its constituent paths (lodash compatible)
     public static flattenObject(object: any): any {
@@ -794,7 +822,7 @@ export class QueryTools {
     private addUUID(array: any): any {
         return array.map((item: any) => {
             return {
-                'imq__id': `urn:uuid${v4()}`,
+                'temp_id': `urn:uuid${v4()}`,
                 'item': item
             }
         })
@@ -802,34 +830,19 @@ export class QueryTools {
 
 
 
-    //////////////////// experimental  //////////////////// 
-
-    //maps terms terms -> matched (see examples below)
-    private _compoundTerms = new Map<string, string>();
-
-    // example (should ideally be loaded from API)
-    private _terms = [
-        { '@id': ' http://endhealth.info/im#Q_term_IssuedPrescription', 'term': 'Issued Prescription for' },
-        { '@id': ' http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'term': 'Investigation' }
-    ];
-
-    // example 
-    private _matches = [
-        // a medication that has been prescribed and issued -> Medication Authorisation + Medication Order  
-        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationOrder'],
-        ['http://endhealth.info/im#Q_term_IssuedPrescription', 'http://endhealth.info/im#MedicationAuthorisationsOrCourses'],
-        // A referral/request for investigation or its results -> Diagnostic Report, Ovservation, Precedure, Request etc.  
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#DiagnosticReport'],
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Observation'],
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#Procedure'],
-        ['http://endhealth.info/im#Q_term_InvestigationRequestOrResult', 'http://endhealth.info/im#ReferralRequestOrProcedureRequest'],
-
-    ];
-
 
 }
 
-    // superceded by jp.stringify()
+
+
+
+
+
+
+
+
+
+    // superceded by jp.stringify() but may be handy if custom method is required
     // private toPathString(array: any): string {
     //     let _path = "";
 
@@ -844,9 +857,3 @@ export class QueryTools {
 
     //     return _path;
     // }
-
-
-
-
-
-

@@ -1,22 +1,126 @@
-{
-    "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-    "name": "disease status",
-    "description": "",
-    "code": "",
-    "entityType": [{
-        "@id": "http://endhealth.info/im#TextTemplate",
-        "name": "UI Text Interpolation Template"
+[{
+    "@id": "im:T_MainEntityAnimate",
+    "rdfs:label": "Main Entity (Animate Subject)",
+    "rdfs:comment": "",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
     }],
-    "scheme": {
+    "im:code": -1,
+    "im:scheme": {
         "@id": "http://endhealth.info/im#"
     },
-    "status": {
-        "@id": "http://endhealth.info/im#Draft",
-        "name": "Draft"
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "im:target": [{
+        "im:component": "im:Profile",
+        "im:jsonPath": "rdf:entityType[0].@id",
+        "im:value": "im:Person"
+    }],
+    "im:definition": [{
+        "im:text": "{{variable:not}} {{phrase:indefiniteArticle}} {{variable:mainEntity}} if they {{template:linkedEntity}}",
+        "im:placeholders": ["variable:not", "phrase:indefiniteArticle", "variable:mainEntity", "template:inkedEntity" ],
+        "im:variables": [{
+            "im:placeholder": "variable:not",
+            "im:targetComponent": "im:Profile",
+            "im:jsonPath": "im:definition[0].im:not",
+            "im:testName": "exists",
+            "im:action": [{
+                    "im:result": true,
+                    "im:return": "Exclude"
+                },
+                {
+                    "im:result": false,
+                    "im:return": "Include"
+                }
+            ]
+
+        },
+        {
+            "im:placeholder": "variable:mainEntity",
+            "im:targetComponent": "im:Profile",
+            "im:jsonPath": "rdf:entityType[0].@id",
+            "im:testName": "",
+            "im:action": []
+        }]
+    }],
+    "im:usedIn": []
+}, {
+    "@id": "im:T_MainEntityInanimate",
+    "rdfs:label": "Main Entity (Inanimate Subject)",
+    "rdfs:comment": "",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": -1,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "im:target": [{
+        "im:component": "im:Profile",
+        "im:jsonPath": "rdf:entityType[0].@id",
+        "im:value": "im:Organisation"
+    },
+    {
+        "im:component": "im:Profile",
+        "im:jsonPath": "rdf:entityType[0].@id",
+        "im:value": "im:Property"
+    },
+    {
+        "im:component": "im:Profile",
+        "im:jsonPath": "rdf:entityType[0].@id",
+        "im:value": "im:Appointment"
+    }],
+    "im:definition": [{
+        "im:text": "{{variable:not}} {{phrase:indefiniteArticle}} {{variable:mainEntity}} if it {{template:linkedEntity}}",
+        "im:variables": [{
+            "im:placeholder": "variable:not",
+            "im:targetComponent": "im:Profile",
+            "im:jsonPath": "im:definition[0].im:not",
+            "im:testName": "exists",
+            "im:action": [{
+                    "im:result": true,
+                    "im:return": "Exclude"
+                },
+                {
+                    "im:result": false,
+                    "im:return": "Include"
+                }
+            ]
+
+        },
+        {
+            "im:placeholder": "variable:mainEntity",
+            "im:targetComponent": "im:Profile",
+            "im:jsonPath": "rdf:entityType[0].@id",
+            "im:testName": "",
+            "im:action": []
+        }]
+    }],
+    "im:usedIn": []
+}, {
+    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+    "rdfs:label": "disease status",
+    "rdfs:comment": "",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": -1,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
     },
     "target": [{
         "pathTo": "im:isSubjectOf",
-        "entityType": "im:event",
+        "rdf:type": "im:event",
         "property": null,
         "propertyPaths": [{
                 "path": "im:function[0].im:functionIri[0].@id",
@@ -32,33 +136,35 @@
             }
         ]
     }],
-    "template": [{
+    "im:definition": [{
         "text": "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
         "variables": [
             "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
             "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
             "im:test[0].im:valueIn[0].rdfs:label"
         ]
-    }]
-},  {
-    "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-    "name": "disease status",
-    "description": "",
-    "code": "",
-    "entityType": [{
-        "@id": "http://endhealth.info/im#TextTemplate",
-        "name": "UI Text Interpolation Template"
     }],
-    "scheme": {
+    "im:usedIn": [{
+        "@id": ""
+    }]
+}, {
+    "@id": "urn:uuid:e5d0c200-6f21-4b38-8c68-4fd540e14e77",
+    "rdfs:label": "disease status",
+    "rdfs:comment": "",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": -1,
+    "im:scheme": {
         "@id": "http://endhealth.info/im#"
     },
-    "status": {
-        "@id": "http://endhealth.info/im#Draft",
-        "name": "Draft"
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
     },
     "target": [{
         "pathTo": "im:isSubjectOf",
-        "entityType": "im:event",
+        "rdf:type": "im:event",
         "property": null,
         "propertyPaths": [{
                 "path": "im:function[0].im:functionIri[0].@id",
@@ -74,7 +180,7 @@
             }
         ]
     }],
-    "template": [{
+    "im:definition": [{
         "text": [
             [
                 ["Search for a person who had a"],
@@ -90,7 +196,7 @@
                 ["Sort the results by"],
                 [" {{3}}"],
                 [" {{4}}"]
-            ]
+            ],
             [
                 ["Check the top"],
                 [" {{5}} entry "]
@@ -111,52 +217,8 @@
             "im:function[0].im:argument[2].im:valueData",
             "im:test[0].im:valueIn[0].rdfs:label"
         ]
-    }]
-} {
-    "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-    "name": "main entity template",
-    "description": "",
-    "code": "",
-    "entityType": [{
-        "@id": "http://endhealth.info/im#TextTemplate",
-        "name": "UI Text Interpolation Template"
     }],
-    "scheme": {
-        "@id": "http://endhealth.info/im#"
-    },
-    "status": {
-        "@id": "http://endhealth.info/im#Draft",
-        "name": "Draft"
-    },
-    "target": [{
-        "pathTo": "im:isSubjectOf",
-        "entityType": "im:event",
-        "property": null,
-        "propertyPaths": [{
-                "path": "im:function[0].im:functionIri[0].@id",
-                "value": "im:OrderLimit"
-            },
-            {
-                "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
-                "value": "im:effectiveDate"
-            },
-            {
-                "path": "im:test[0].im:property[0].@id",
-                "value": "im:concept"
-            }
-        ]
-    }],
-    "template": [{
-        "placeholder": "{{}}"
-        "text": "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
-        "variables": [
-            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
-            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
-            "im:test[0].im:valueIn[0].rdfs:label"
-        ]
+    "im:usedIn": [{
+        "@id": ""
     }]
-}
-
-
-
-\
+}]

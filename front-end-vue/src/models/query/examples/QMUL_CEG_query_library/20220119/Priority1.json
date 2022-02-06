@@ -6,7 +6,7 @@
     "im:isContainedIn": [
       { "@id": "urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca" }
     ],
-    "im:entityType": [{ "@id": "im:Patient" }],
+    "im:entityType": [{ "@id": "im:Person" }],
     "im:definition": [
       {
         "im:and": [

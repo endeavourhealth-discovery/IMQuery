@@ -13,7 +13,8 @@ import { ConceptReference } from "@/models/TTConcept/ConceptReference";
 import axios from "axios";
 import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
-import QueryBuilder from "@/models/query/QueryBuilder";
+import {QueryBuilder} from "@/models/query/QueryTools";
+import Ontology from "@/models/query/OntologyTools";
 const _ = require("lodash");
 
 
@@ -4128,6 +4129,7 @@ export default createStore({
       },
     ],
     queryBuilder: new QueryBuilder(),
+    ontology: new Ontology(),
   },
   mutations: {
     queryBuilder(state, { action, payload }) {

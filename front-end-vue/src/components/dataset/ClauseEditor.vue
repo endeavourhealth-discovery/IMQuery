@@ -26,7 +26,7 @@ import { ref, onMounted, defineComponent } from "vue";
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import InputDescription from "@/components/dataset/InputDescription.vue";
-import { QueryTools } from "@/models/query/QueryBuilder";
+import QueryTools from "@/models/query/QueryTools";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
