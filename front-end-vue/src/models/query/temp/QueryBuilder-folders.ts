@@ -1,5 +1,5 @@
 import { prefix } from '@fortawesome/free-solid-svg-icons';
-import { nice } from 'd3';
+// import { nice } from 'd3';
 import { PropertiesContext } from './../../discovery-syntax/DiscoverySyntaxParser';
 const { v4 } = require('uuid');
 const _ = require('lodash')

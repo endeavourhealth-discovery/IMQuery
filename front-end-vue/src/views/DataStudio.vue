@@ -216,6 +216,7 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
+import { functions_v1 as f } from "@/models/query/TemplateFunctions";
 
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
@@ -238,8 +239,8 @@ import Network from "@/components/dataset/Network.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
-import QueryTools, {QueryBuilder} from "@/models/query/QueryTools";
-import  {entityTypes} from "@/models/query/OntologyTools";
+import QueryTools, { QueryBuilder } from "@/models/query/QueryTools";
+import { entityTypes } from "@/models/query/OntologyTools";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import LabelView from "@/components/dataset/LabelView.vue";
 import InputTextbox from "@/components/dataset/InputTextbox.vue";
@@ -662,6 +663,7 @@ export default defineComponent({
   },
   methods: {
     testQuery(): any {
+  
       // console.log(
       //   "ontology",
       //   this.ontology
@@ -678,7 +680,6 @@ export default defineComponent({
       //   "datamodels",
       //   this.ontology.entities.byType(entityTypes.datamodel)
       // );
-   
     },
     getFilteredEntities(): any {
       if (this.selectedFilterTypes.length) {

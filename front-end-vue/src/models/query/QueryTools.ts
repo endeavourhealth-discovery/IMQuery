@@ -272,61 +272,6 @@ export class QueryBuilder {
                 }
             ]
         },
-        {
-            "size": 1,
-            "query": {
-                "bool": {
-                    "filter": [
-                        {
-                            "bool": {
-                                "must": [
-                                    {
-                                        "match_phrase": {
-                                            "target.pathTo": "im:isSubjectOf"
-                                        }
-                                    },
-                                    {
-                                        "match_phrase": {
-                                            "target.entityType": "im:event"
-                                        }
-                                    },
-                                    {
-                                        "match_phrase": {
-                                            "target.propertyPaths.path": "im:function[0].im:functionIri[0].@id"
-                                        }
-                                    },
-                                    {
-                                        "match_phrase": {
-                                            "target.propertyPaths.value": "im:OrderLimit"
-                                        }
-                                    },
-                                    {
-                                        "match_phrase": {
-                                            "target.propertyPaths.path": "im:function[0].im:argument[1].im:valueIrI[0].@id"
-                                        }
-                                    },
-                                    {
-                                        "match_phrase": {
-                                            "target.propertyPaths.value": "im:effectiveDate"
-                                        }
-                                    },
-                                    {
-                                        "match_phrase": {
-                                            "target.propertyPaths.path": "im:test[0].im:property[0].@id"
-                                        }
-                                    },
-                                    {
-                                        "match_phrase": {
-                                            "target.propertyPaths.value": "im:concept"
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        }
 
     ];
 

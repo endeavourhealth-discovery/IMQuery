@@ -15,7 +15,6 @@ export default class Ontology {
 
 
 
-    public Loaded = false;
 
     private _ontology: any;
     public get ontology(): any {
@@ -26,7 +25,6 @@ export default class Ontology {
             this["@context"] = value["@context"];
             this["@graph"] = value["@graph"];
             this["_entities"] = value["entities"];
-            this.Loaded = true;
         } else {
 
             throw new Error("Unrecognised Ontology file content");
@@ -38,7 +36,7 @@ export default class Ontology {
 
     public '@graph': any;
 
-    private _entities: any;
+    private '_entities': any;
 
 
 
@@ -50,7 +48,7 @@ export default class Ontology {
 
         public byIri(iri: string): any {
             if (iri != "") {
-                return _.cloneDeep(jmp.search(this.superThis._entities, `[?"@id" == \`${iri}\`]`))[0]
+                return jmp.search(this.superThis._entities, `[?"@id" == \`${iri}\`]`)[0]
             }
             else {
                 throw new Error("Iri parameter is an empty string");
@@ -58,9 +56,9 @@ export default class Ontology {
         }
 
         public byType(entityType: entityTypes): any {
-            return _.cloneDeep(jmp.search(this.superThis._entities, `[?"rdf:type"[?"@id" == \`${entityType}\`]]`))
+            return jmp.search(this.superThis._entities, `[?"rdf:type"[?"@id" == \`${entityType}\`]]`)
         }
-        
+
     }(this);
 
 
@@ -74,10 +72,11 @@ export default class Ontology {
             throw new Error("No Ontology URL specified on instantiation. Pass a URL to entities in your ontology in JSON-LD format i.e. '@context', '@graph' and 'entities'");
         }
 
-        this.fetchOntology(ontologyURL).then((res) => {
-            this.ontology = res;
-            console.log("ontology loaded", res);
-        })
+        this.fetchOntology(ontologyURL)
+            .then((res) => {
+                this.ontology = res;
+                console.log("ontology loaded", res);
+            })
             .catch((err) => {
                 throw new Error("Failed to fetch Ontology from specified URL. Error message:" + err);
             });;
