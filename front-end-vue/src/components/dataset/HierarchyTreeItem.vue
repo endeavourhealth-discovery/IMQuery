@@ -1,15 +1,16 @@
 <template>
   <div>
     <div
+      @click="loadFile(value)"
       :class="
-        'hierachytreeitem py-3 flex items-center' +
-          [ishover == true ? ' hover' : '']
+        'hierachytreeitem py-3 pl-4 rounded-md flex items-center hover:bg-gray-100 text-gray-700' +
+          [isHover == true ? ' hover' : '']
       "
       @mouseenter="isHover = true"
       @mouseleave="isHover = false"
     >
       <SectionToggler
-        class="mr-3 border-none"
+        :class="'hierachytreeitem__toggler mr-3 border-none'"
         v-if="value['rdf:type'][0]['@id'] == 'im:Folder'"
         :expanded="expandedItems.includes(value['@id'])"
         @click="
@@ -19,11 +20,12 @@
               ))
             : expandedItems.push(value['@id'])
         "
-        :class="'inline hierachytreeitem__toggler' + [index != 0 ? '' : '']"
       />
       <div v-else class="ml-9"></div>
       <HeroIcon
-        class="inline font-regular text-lg text-gray-700 mr-2"
+        :class="
+          'inline font-regular text-lg mr-2' + [isHover || isActive(value['@id']) ? ' text-blue-700' : '']
+        "
         strokewidth="2"
         width="20"
         height="20"
@@ -33,15 +35,24 @@
             : 'document'
         "
       />
-      <div class="mr-3 font-semibold text-lg text-gray-800 ">
+      <div
+        :class="
+          'mr-3 font-semibold text-lg' + [isHover || isActive(value['@id']) ? ' text-blue-700' : '']
+        "
+      >
         {{ value["rdfs:label"] }}
       </div>
       <div
-        @click="loadFile(value)"
-        v-if="isHover"
         class="non-selectable text-lg text-blue-600 font-semibold hover:underline"
       >
-        Open
+        <HeroIcon
+          v-show="isHover && value['rdf:type'][0]['@id'] == 'im:Profile'"
+          :class="'inline'"
+          strokewidth="2"
+          width="20"
+          height="20"
+          icon="chevron_right"
+        />
       </div>
     </div>
     <template v-if="value.children.length">
@@ -83,7 +94,7 @@ export default defineComponent({
         this.$store.commit("updateJSONContent", JSONContent);
       },
     },
-    LabelContent: { 
+    LabelContent: {
       get(): any {
         return this.$store.state.LabelContent;
       },
@@ -110,15 +121,12 @@ export default defineComponent({
       let _json: any;
 
       if (_entityType == "im:Folder") {
-        
         // for folders get all profiles it contains
         // const _folderIri = entity["@id"];
         // _json = JSON.stringify(this.queryBuilder.getProfilesByFolder(_folderIri));
-
       } else if (_entityType == "im:Profile") {
-
         const _profileIri = entity["@id"];
-        this.queryBuilder.loadProfile(_profileIri)
+        this.queryBuilder.loadProfile(_profileIri);
       } else {
         return;
       }
@@ -128,6 +136,10 @@ export default defineComponent({
       //   plugins: [prettierBabylon],
       // });
       // this.JSONContent = _json;
+    },
+    isActive(id: string): boolean {
+      // console.log(this.queryBuilder.Loaded)
+      return this.queryBuilder.activeProfile && this.queryBuilder.activeProfile['@id'] == id;
     },
     test(entity: any): void {
       const _entityType = entity["rdf:type"][0]["@id"];
@@ -171,10 +183,8 @@ export default defineComponent({
   height: 20px;
   width: 20px;
 }
-</style>
 
-<style>
 .hierachytreeitem {
-  border-left: 1px solid #eef0f2;
+  cursor: pointer;
 }
 </style>

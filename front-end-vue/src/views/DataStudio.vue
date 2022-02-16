@@ -60,17 +60,21 @@
     /></template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
     <template v-else-if="sideNavActiveItem == 'View Definition'">
-      <div class="section-center flex w-full h-full p-3">
-        <div class="inline-flex flex-col w-full h-full w-max-500p">
+      <div class="section-center flex w-full h-full">
+        <div class="item-view inline-flex flex-col w-full h-full w-max-500p m-2">
           <template v-if="openFiles.length">
-            <div class="font-semibold text-lg text-black h-10 flex">
-              <HorizontalNavbar v-model="activeItemView" :items="itemViews" />
+            <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
+              Folders
             </div>
-            <!-- <div class="line-separator"></div> -->
+           
+            
+            <!-- <div class="font-semibold text-lg text-black h-10 flex mb-3">
+              <HorizontalNavbar v-model="activeItemView" :items="itemViews" />
+            </div> -->
           </template>
 
           <template v-if="openFiles.length">
-            <div class="item-view" v-show="activeItemView == 'All Items'">
+            <div class="w-full h-full" v-show="activeItemView == 'All Items'">
               <div class="flex flex-col file-list">
                 <div
                   v-for="item in getFilteredEntities()"
@@ -102,8 +106,8 @@
               />
             </div>
             <div
-              class="item-view"
-              v-show="activeItemView == 'Folder Hierarchy'"
+              class="w-full h-full"
+              v-show="activeItemView == 'Folders'"
             >
               <div
                 v-if="queryBuilder.hierarchyTree(topLevelEntity)"
@@ -113,7 +117,7 @@
                   v-if="
                     queryBuilder.hierarchyTree(topLevelEntity).children.length
                   "
-                  class="folder-viewer padding-text"
+                  class="folder-view"
                 >
                   <HierarchyTreeItem
                     :value="queryBuilder.hierarchyTree(topLevelEntity)"
@@ -125,17 +129,15 @@
 
           <template v-if="openFiles.length" class="">
             <!-- <div class="line-separator"></div> -->
-            <div class="font-semibold text-lg text-black">
+            <!-- <div class="font-semibold text-lg text-black">
               Entities ({{
                 openFiles.length && openFiles[0]["entities"].length
               }})
-            </div>
+            </div> -->
           </template>
           <div v-else class="font-semibold text-lg text-black">
             Select a -id.json file
-          </div>
-
-          <input
+             <input
             class="file-input font-regular text-lg text-black "
             ref="upload"
             type="file"
@@ -144,16 +146,19 @@
             content="Upload JSON file containing entities (-id)"
             @change="onUploadFiles()"
           />
-          <button @click="testQuery()">Test Query</button>
+          </div>
+
+         
+          <!-- <button @click="testQuery()">Test Query</button> -->
         </div>
         <div class="inline-flex flex-col w-full h-full">
-          <div class="h-10 w-full">
+          <!-- <div class="h-10 w-full">
             <HorizontalNavbar
               class="w-full h-full text-center"
               :items="contentViews"
               v-model="activeContentView"
             />
-          </div>
+          </div> -->
 
           <template v-if="activeContentView == 'Graph'">
             <Network
@@ -264,7 +269,7 @@ export default defineComponent({
     BackgroundCards,
     RoundButton,
     HeroIcon,
-    HorizontalNavbar,
+    // HorizontalNavbar,
     ContentNav,
     DatasetBrowser,
     MultiSelect,
@@ -282,10 +287,10 @@ export default defineComponent({
       filteredJSONContent: "",
       jsonpath: "",
       labelPaths: [] as any[],
-      activeItemView: "Folder Hierarchy",
+      activeItemView: "Folders",
       itemViews: [
         {
-          name: "Folder Hierarchy",
+          name: "Folders",
           icon: "folder_open",
           visible: true,
         },
@@ -295,22 +300,22 @@ export default defineComponent({
           visible: true,
         },
       ],
-      activeContentView: "JSON",
+      activeContentView: "Text (rdfs:label)",
       contentViews: [
         {
           name: "Graph",
           icon: "share",
-          visible: true,
+          visible: true, // set to true
         },
         {
           name: "Text (rdfs:label)",
           icon: "translate",
-          visible: true,
+          visible: true, // set to true
         },
         {
           name: "JSON",
           icon: "document",
-          visible: true,
+          visible: true, // set to true
         },
       ],
       nodeSize: 8,
@@ -832,6 +837,14 @@ export default defineComponent({
 });
 </script>
 
+<style> 
+.border-right {
+  border-right: 1px solid #ecefed;
+  /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
+}
+
+</style>
+
 <style scoped>
 .non-selectable {
   -webkit-user-select: none; /* Chrome all / Safari all */
@@ -851,7 +864,7 @@ export default defineComponent({
   /* max-width: 1000px; */
   /* box-shadow: rgb(207 210 218) 0px 0px 6px; */ /* lighter shadow   */
   /* box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3); */
-  border-right: 1px solid #ecefed;
+  /* border-right: 1px solid #ecefed; */
 }
 
 .section-center .left {
@@ -864,13 +877,10 @@ export default defineComponent({
   /* max-width: 1000px; */
   /* box-shadow: rgb(207 210 218) 0px 0px 6px; */ /* lighter shadow   */
   /* box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3); */
-  border-right: 1px solid #ecefed;
+  /* border-right: 1px solid #ecefed; */
 }
 
-.border-right {
-  border-right: 1px solid #ecefed;
-  /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
-}
+
 
 .wrapper-sidenav {
   position: absolute;
@@ -910,17 +920,26 @@ export default defineComponent({
   border-radius: 20px;
 }
 
-.folder-viewer,
+.folder-view,
 .file-list {
   /* padding-bottom: 150px; */
   overflow-y: auto;
   font-size: 12px !important;
   width: 100%;
-  height: 680px;
+  height: 825px;
+
 }
+
+.folder-view {
+  /* padding: 20px 10px 150px 10px; */
+
+}
+
+
 
 .item-view {
   width: 500px;
+  /* border-right: 1px solid #ecefed; */
 }
 
 .w-max-500p {
@@ -940,7 +959,6 @@ export default defineComponent({
   /* outline: 1px solid slategrey; */
 }
 .padding-text {
-  padding: 20px 10px 150px 10px;
 }
 
 .file-filter {

@@ -1,23 +1,27 @@
 <template>
   <!-- Any object that is not preceded by an operator should be ignored -->
-  <template v-if="isOperator(clause)">
+  <template v-if="hasOperator(clause)">
     <!-- Iterate over the children in the array of the oeprator -->
 
-    <template
-      v-for="(item, index) in withTempUUID(clause[getOperatorIri(clause)])"
-      :key="item.temp_id"
-    >
+    <template v-for="(item, index) in currentClause" :key="item.temp_id">
       <div
         :class="'clause-item block w-full flex bg-white hover:bg-indigo-100'"
       >
         <div class="inline-flex flex-col">
           <!-- ring  -->
-          <div :class="'inline circle'"></div>
+          <div
+            :class="
+              'inline circle' +
+                [
+                  queryBuilder.activeClause == pathToClause(index)
+                    ? ' bg-black'
+                    : '',
+                ]
+            "
+          ></div>
           <!-- Line -->
           <div
-            v-if="
-              index != withTempUUID(clause[getOperatorIri(clause)]).length - 1
-            "
+            v-if="index != currentClause.length - 1"
             :class="
               'inline' +
                 [
@@ -34,7 +38,7 @@
 
         <div
           v-if="index == 0 && getOperatorIri(clause).split(':')[1] == 'or'"
-          class="clause-item__operator inline text-indigo-700 font-regular hover:text-blue-600  hover:underline"
+          class="clause-item__operator inline text-indigo-700 font-semibold hover:text-blue-600  hover:underline"
         >
           either
         </div>
@@ -48,18 +52,14 @@
 
         <div
           v-else-if="index > 0"
-          class="clause-item__operator inline text-indigo-700 font-regular hover:text-blue-600  hover:underline"
+          class="clause-item__operator inline text-indigo-700 font-semibold hover:text-blue-600  hover:underline"
         >
           {{ getOperatorIri(clause).split(":")[1] }}
         </div>
 
         <!-- Display Label  -->
         <div
-          @click="
-            queryBuilder.activeClause = `${propertyPath}.${getOperatorIri(
-              clause
-            )}[${index}]`
-          "
+          @click="queryBuilder.activeClause = pathToClause(index)"
           v-if="item['rdfs:label']"
           class="clause-item__label inline-flex w-full text-black font-semibold hover:font-semibold hover:text-blue-600 hover:underline"
         >
@@ -71,10 +71,7 @@
             class="clause-item_arrow flex flex-col items-center pt-1 ml-2"
           >
             <HeroIcon
-              v-if="
-                queryBuilder.activeClause ==
-                  `${propertyPath}.${getOperatorIri(clause)}[${index}]`
-              "
+              v-if="queryBuilder.activeClause == pathToClause(index)"
               class="inline text-blue-500"
               icon="chevron_right"
               strokewidth="2"
@@ -91,9 +88,7 @@
           class="inline-block w-full flex flex-col"
         >
           <ClauseItem
-            :propertyPath="
-              `${propertyPath}.${getOperatorIri(clause)}[${index}]`
-            "
+            :propertyPath="pathToClause(index)"
             :clause="item"
             :operatorIris="['im:and', 'im:or', 'im:not']"
           />
@@ -155,7 +150,7 @@ export default defineComponent({
         });
       }
     },
-    isOperator(item: any): boolean {
+    hasOperator(item: any): boolean {
       // console.log("item", item);
       return this.operatorIris.some((operatorIri: any) => {
         return item[operatorIri];
@@ -171,6 +166,11 @@ export default defineComponent({
     test(val: any): void {
       alert(val);
     },
+    pathToClause(index: number): any {
+      return `${this.propertyPath}.${this.getOperatorIri(
+        this.clause
+      )}[${index}]`;
+    },
   },
   computed: {
     queryBuilder: {
@@ -182,6 +182,14 @@ export default defineComponent({
           action: action,
           payload: payload,
         });
+      },
+    },
+    currentClause: {
+      get(): any {
+        return this.withTempUUID(this.clause[this.getOperatorIri(this.clause)]);
+      },
+      set(value: any): void {
+        return;
       },
     },
   },
@@ -218,9 +226,8 @@ export default defineComponent({
   width: 20px;
 }
 
-
 .clause-item:hover {
-  background-color: #EBEFF3;
+  background-color: #ebeff3;
 }
 
 .circle {

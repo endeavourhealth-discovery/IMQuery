@@ -1,7 +1,11 @@
 <template>
-  <div class="definition-editor flex">
+  <div class="definition-editor flex shadow-md">
     <div class="definition-editor__definition w-full overflow-y-auto">
-      <template
+      <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
+        Inclusion / Exclusion Criteria
+      </div>
+      <div
+      class="pb-6"
         v-for="(item, index) in withTempUUID(modelValue[definitionIri])"
         :key="item.temp_id"
       >
@@ -10,9 +14,15 @@
           :clause="item"
           :operatorIris="['im:and', 'im:or', 'im:not']"
         />
-      </template>
+      </div>
     </div>
-    <div v-if="queryBuilder.activeClause" class="definition-editor__curator w-full">
+    <div
+      v-if="queryBuilder.activeClause"
+      class="definition-editor__curator w-full"
+    >
+      <div class="title text-center text-gray-400 w-full h-10 font-semibold">
+         Details
+      </div>
       <ClauseEditor :modelValue="queryBuilder.activeClause" />
     </div>
   </div>
@@ -104,7 +114,7 @@ export default defineComponent({
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0;
 }
 
 :-webkit-scrollbar-track {
@@ -117,6 +127,6 @@ export default defineComponent({
 }
 
 .definition-editor {
-  height: 825px;
+  height: 890px;
 }
 </style>
