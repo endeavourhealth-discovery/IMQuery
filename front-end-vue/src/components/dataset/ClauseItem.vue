@@ -7,10 +7,12 @@
       v-for="(item, index) in withTempUUID(clause[getOperatorIri(clause)])"
       :key="item.temp_id"
     >
-      <div class="block w-full flex clause-item">
-        <div class="inline-flex flex-col h-full connections">
-        <!-- ring  -->
-          <div class="inline circle"></div>
+      <div
+        :class="'clause-item block w-full flex bg-white hover:bg-indigo-100'"
+      >
+        <div class="inline-flex flex-col">
+          <!-- ring  -->
+          <div :class="'inline circle'"></div>
           <!-- Line -->
           <div
             v-if="
@@ -21,7 +23,7 @@
                 [
                   getOperatorIri(clause).split(':')[1] == 'or'
                     ? ' line-dotted'
-                    : ' line'
+                    : ' line',
                 ]
             "
           ></div>
@@ -32,14 +34,21 @@
 
         <div
           v-if="index == 0 && getOperatorIri(clause).split(':')[1] == 'or'"
-          class="clause-item__operator inline text-indigo-700 font-semibold hover:underline mr-2"
+          class="clause-item__operator inline text-indigo-700 font-regular hover:text-blue-600  hover:underline"
         >
           either
         </div>
         <!-- Display Operator (the rest is visible ) -->
+        <!-- <div
+          v-else-if="
+            index == 0 && getOperatorIri(clause).split(':')[1] == 'and'
+          "
+          class="clause-item__operator inline invisible"
+        ></div> -->
+
         <div
           v-else-if="index > 0"
-          class="clause-item__operator inline text-indigo-700 font-semibold hover:underline mr-2"
+          class="clause-item__operator inline text-indigo-700 font-regular hover:text-blue-600  hover:underline"
         >
           {{ getOperatorIri(clause).split(":")[1] }}
         </div>
@@ -52,9 +61,27 @@
             )}[${index}]`
           "
           v-if="item['rdfs:label']"
-          class="clause-item__label inline w-full text-black font-semibold hover:text-blue-600 hover:underline"
+          class="clause-item__label inline-flex w-full text-black font-semibold hover:font-semibold hover:text-blue-600 hover:underline"
         >
-          {{ item["rdfs:label"] }}
+          <div>
+            {{ item["rdfs:label"] }}
+          </div>
+          <div
+            v-if="item['rdfs:label']"
+            class="clause-item_arrow flex flex-col items-center pt-1 ml-2"
+          >
+            <HeroIcon
+              v-if="
+                queryBuilder.activeClause ==
+                  `${propertyPath}.${getOperatorIri(clause)}[${index}]`
+              "
+              class="inline text-blue-500"
+              icon="chevron_right"
+              strokewidth="2"
+              width="20"
+              height="20"
+            />
+          </div>
         </div>
 
         <!-- If there's no label   -->
@@ -80,6 +107,7 @@
 import { ref, onMounted, defineComponent } from "vue";
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
+import HeroIcon from "@/components/search/HeroIcon.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
@@ -98,10 +126,15 @@ export default defineComponent({
   emits: ["update:modelValue"],
   components: {
     // SectionToggler,
+    HeroIcon,
   },
   data() {
     return {
       collapsedItems: [] as any[],
+      componentState: "default", // Options #"default", #"hover", #"focus", #"",
+      isHover: false,
+      activeClause: "",
+      isLoading: false,
     };
   },
   methods: {
@@ -176,39 +209,52 @@ export default defineComponent({
   margin-right: 5px;
 }
 .clause-item__operator {
-  width: 50px;
+  width: 55px;
+  padding-right: 10px;
+}
+
+.clause-item_arrow {
+  min-width: 20px;
+  width: 20px;
+}
+
+
+.clause-item:hover {
+  background-color: #EBEFF3;
 }
 
 .circle {
   /* padding-top: 5px; */
-  margin: 5px 15px 5px 0px;
+  margin: 5px 10px 5px 0px;
   min-width: 13px;
   min-height: 13px;
-  background: white;
+  /* background: white; */
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  border: 2px solid rgb(94, 94, 233);
+  border: 2px solid #caccf7;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-
-
 .line-dotted {
   width: 7px;
   height: 100%;
-
-  border-right: 2px solid rgb(94, 94, 233);
+  min-height: 10px;
+  border-right: 2px solid #caccf7;
   border-style: dotted;
 }
-
 
 .line {
   width: 7px;
   height: 100%;
-  min-height: 12px;
-  border-right: 2px solid rgb(94, 94, 233);
+  min-height: 10px;
+  border-right: 2px solid #caccf7;
 }
+
+/* .clause-item.hover .circle {
+  background-color: #caccf7 !important;
+  color: #caccf7 !important;
+} */
 </style>

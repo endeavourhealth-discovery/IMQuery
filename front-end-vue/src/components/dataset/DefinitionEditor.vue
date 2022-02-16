@@ -115,4 +115,8 @@ export default defineComponent({
   background-color: #d3d3d3;
   /* outline: 1px solid slategrey; */
 }
+
+.definition-editor {
+  height: 825px;
+}
 </style>
