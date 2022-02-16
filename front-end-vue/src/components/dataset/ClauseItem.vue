@@ -2,59 +2,77 @@
   <!-- Any object that is not preceded by an operator should be ignored -->
   <template v-if="isOperator(clause)">
     <!-- Iterate over the children in the array of the oeprator -->
-    <div
+
+    <template
       v-for="(item, index) in withTempUUID(clause[getOperatorIri(clause)])"
       :key="item.temp_id"
-      class="block w-full flex"
     >
-      <SectionToggler
-        :expanded="!collapsedItems.includes(item.temp_id)"
-        @click="
-          collapsedItems.includes(item.temp_id)
-            ? (collapsedItems = collapsedItems.filter(
-                (i: any) => i != item.temp_id
-              ))
-            : collapsedItems.push(item.temp_id)
-        "
-        :class="'inline clause-item__toggler' + [true ? '' : '']"
-      />
+      <div class="block w-full flex clause-item">
+        <div class="inline-flex flex-col h-full connections">
+        <!-- ring  -->
+          <div class="inline circle"></div>
+          <!-- Line -->
+          <div
+            v-if="
+              index != withTempUUID(clause[getOperatorIri(clause)]).length - 1
+            "
+            :class="
+              'inline' +
+                [
+                  getOperatorIri(clause).split(':')[1] == 'or'
+                    ? ' line-dotted'
+                    : ' line'
+                ]
+            "
+          ></div>
+          <!-- <div class="ring-inner"></div> -->
+        </div>
 
-      <!-- Display Operator (first item invisible)  -->
-      <div v-if="index == 0" class="invisible"></div>
-      <!-- Display Operator (the rest is visible ) -->
-      <div
-        v-else
-        class="clause-item__operator inline text-green-600 font-semibold hover:underline mr-4"
-      >
-        {{ getOperatorIri(clause).split(":")[1] }}
-      </div>
+        <!-- Display Operator (first item invisible)  -->
 
-      <!-- Display Label  -->
-      <div
-        @click="
-          queryBuilder.activeClause = `${propertyPath}.${getOperatorIri(
-            clause
-          )}[${index}]`
-        "
-        v-if="item['rdfs:label']"
-        class="clause-item__label inline w-full text-blue-600 font-semibold hover:underline"
-      >
-        {{ item["rdfs:label"] }}
-      </div>
+        <div
+          v-if="index == 0 && getOperatorIri(clause).split(':')[1] == 'or'"
+          class="clause-item__operator inline text-indigo-700 font-semibold hover:underline mr-2"
+        >
+          either
+        </div>
+        <!-- Display Operator (the rest is visible ) -->
+        <div
+          v-else-if="index > 0"
+          class="clause-item__operator inline text-indigo-700 font-semibold hover:underline mr-2"
+        >
+          {{ getOperatorIri(clause).split(":")[1] }}
+        </div>
 
-      <!-- If there's no label   -->
-      <div
-        v-if="!item['rdfs:label']"
-        v-show="!collapsedItems.includes(item.temp_id)"
-        class="inline-block w-full flex flex-col"
-      >
-        <ClauseItem
-          :propertyPath="`${propertyPath}.${getOperatorIri(clause)}[${index}]`"
-          :clause="item"
-          :operatorIris="['im:and', 'im:or', 'im:not']"
-        />
+        <!-- Display Label  -->
+        <div
+          @click="
+            queryBuilder.activeClause = `${propertyPath}.${getOperatorIri(
+              clause
+            )}[${index}]`
+          "
+          v-if="item['rdfs:label']"
+          class="clause-item__label inline w-full text-black font-semibold hover:text-blue-600 hover:underline"
+        >
+          {{ item["rdfs:label"] }}
+        </div>
+
+        <!-- If there's no label   -->
+        <div
+          v-if="!item['rdfs:label']"
+          v-show="!collapsedItems.includes(item.temp_id)"
+          class="inline-block w-full flex flex-col"
+        >
+          <ClauseItem
+            :propertyPath="
+              `${propertyPath}.${getOperatorIri(clause)}[${index}]`
+            "
+            :clause="item"
+            :operatorIris="['im:and', 'im:or', 'im:not']"
+          />
+        </div>
       </div>
-    </div>
+    </template>
   </template>
 </template>
 
@@ -79,7 +97,7 @@ export default defineComponent({
   ],
   emits: ["update:modelValue"],
   components: {
-    SectionToggler,
+    // SectionToggler,
   },
   data() {
     return {
@@ -158,6 +176,39 @@ export default defineComponent({
   margin-right: 5px;
 }
 .clause-item__operator {
-  width: 40px;
+  width: 50px;
+}
+
+.circle {
+  /* padding-top: 5px; */
+  margin: 5px 15px 5px 0px;
+  min-width: 13px;
+  min-height: 13px;
+  background: white;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: 2px solid rgb(94, 94, 233);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+
+.line-dotted {
+  width: 7px;
+  height: 100%;
+
+  border-right: 2px solid rgb(94, 94, 233);
+  border-style: dotted;
+}
+
+
+.line {
+  width: 7px;
+  height: 100%;
+  min-height: 12px;
+  border-right: 2px solid rgb(94, 94, 233);
 }
 </style>
