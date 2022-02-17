@@ -1,20 +1,22 @@
 <template>
-  <div class="clause-editor relative flex flex-col px-2">
+  <div class="clause-editor relative flex flex-col shadow-lg mx-10">
     <!-- <div class="font-semibold text-black">Label</div> -->
     <div
       class="clause-editor__label flex item-center text-black border border-gray-300 bg-gray-100 py-1 px-3 rounded-t-md"
     >
       <input
-        :readonly="componentState != 'edit'"
-        :class="'label__input outline-none w-full bg-transparent text-gray-900 font-semibold border border-transparent' + [componentState == 'edit' ? ' focus:border-b-blue-600 focus:border-b-2' : '' ]"
+        :class="
+          'label__input outline-none w-full bg-transparent text-gray-900 font-semibold border border-transparent focus:border-b-blue-600 focus:border-b-2' +
+            [componentState == 'edit' ? ' ' : '']
+        "
         placeholder="Unnamed Feature"
         :value="modelValue['rdfs:label']"
         @input="updateLabel($event.target.value)"
       />
       <HeroIcon
         @click="componentState = 'edit'"
-        class="inline text-black mt-1"
-        icon="dots_horizontal"
+        class="inline text-black mt-1 hover:text-red-600"
+        icon="x"
         strokewidth="2"
         width="20"
         height="20"
@@ -23,9 +25,37 @@
     <!-- </textarea> -->
 
     <div
-      class="clause-editor__description text-gray-700 border border-gray-300 bg-white py-1 px-3 rounded-b-md"
+      class="clause-editor__description text-gray-700 border border-gray-300 bg-white py-4 px-6 rounded-b-md"
     >
-      {{ queryBuilder.interpolatedTemplate }}
+      <span class="" v-html="queryBuilder.interpolatedTemplate"> </span>
+
+      <div class="flex justify-end mt-6 pr-3 pb-2">
+        <div
+          class="cursor-pointer text-gray-500 hover:text-blue-700 flex items-center font-semibold text-md"
+        >
+          <HeroIcon
+            class="inline mt-1 ml-7 mr-2"
+            icon="pencil"
+            strokewidth="2"
+            width="20"
+            height="20"
+          />
+          Edit
+        </div>
+
+        <div
+          class="cursor-pointer text-gray-500 hover:text-blue-700 flex items-center font-semibold text-md"
+        >
+          <HeroIcon
+            class="inline mt-1 ml-7 mr-2"
+            icon="dots_horizontal"
+            strokewidth="2"
+            width="20"
+            height="20"
+          />
+          More
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -49,13 +79,12 @@ export default defineComponent({
     // InputDescription,
     HeroIcon,
   },
-  mounted() {
-    console.log(
-      "active template",
-      JSON.stringify(this.queryBuilder.activeTemplate)
-    );
-    console.log("clause", JSON.stringify(this.modelValue));
-    QueryTools.flattenObject(this.modelValue);
+  watch: {
+    modelValue() {
+      console.log("active template", this.queryBuilder.activeTemplate);
+      console.log("clause", this.modelValue);
+      QueryTools.flattenObject(this.modelValue);
+    },
   },
   data() {
     return {
@@ -76,8 +105,8 @@ export default defineComponent({
       return;
     },
     updateLabel(value: string): void {
-      this.queryBuilder.activeClause['rdfs:label'] = value;
-    }
+      this.queryBuilder.activeClause["rdfs:label"] = value;
+    },
   },
   computed: {
     InterpolatedTemplate: {
@@ -113,20 +142,18 @@ export default defineComponent({
 
 .clause-editor__label {
   border-bottom: none;
-  font-size: 18px;
 }
 .clause-editor__description {
   /* border-bottom: none; */
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .clause-editor__label::before {
   background-color: #c7c7c7;
-  /* border-color: 1px solid #f3f4f6; */
   position: absolute;
   top: 11px;
   right: 100%;
-  left: -2px;
+  left: -9px;
   display: block;
   width: 10px;
   height: 16px;
@@ -135,7 +162,6 @@ export default defineComponent({
   -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
   clip-path: polygon(0 50%, 100% 0, 100% 100%);
 }
-
 
 /* .label__input.border-bottom {
   border-bottom: 2px solid #2563eb;

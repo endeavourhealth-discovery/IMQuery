@@ -60,7 +60,7 @@
     /></template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
     <template v-else-if="sideNavActiveItem == 'View Definition'">
-      <div class="section-center flex w-full h-full">
+      <div class="section-center flex w-full h-full border-right">
         <div class="item-view inline-flex flex-col w-full h-full w-max-500p m-2">
           <template v-if="openFiles.length">
             <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
@@ -841,6 +841,14 @@ export default defineComponent({
 .border-right {
   border-right: 1px solid #ecefed;
   /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
+}
+
+.title{
+  font-size: 18px;
+}
+
+.subtitle{
+  font-size: 15px;
 }
 
 </style>

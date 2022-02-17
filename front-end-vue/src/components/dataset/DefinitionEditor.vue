@@ -1,11 +1,33 @@
 <template>
-  <div class="definition-editor flex shadow-md">
-    <div class="definition-editor__definition w-full overflow-y-auto">
+  <div class="definition-editor flex">
+    <div class="definition-editor__definition w-full overflow-y-auto px-5">
       <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
-        Inclusion / Exclusion Criteria
+        Features
       </div>
+<!-- 
+      <p
+        class="subtitle border border-l-4 border-l-blue-600 px-2 py-3 bg-blue-100 text-black w-full font-regular flex mb-10"
+      >
+        <HeroIcon
+          class="inline text-black mt-1 mr-2 text-blue-700 h-20 w-20"
+          icon="question_mark_circle"
+          strokewidth="2"
+          width="20"
+          height="20"
+        />
+        <span class="inline">
+          A person is included in or excluded from your final if they
+        </span>
+        <span class="mx-2 text-indigo-600 font-bold inline">match</span>
+        <span>or</span>
+        <span class="text-red-600 mx-2 font-bold inline">don't match</span>
+        <span class="inline">
+          the features specified below.
+        </span>
+      </p> -->
+
       <div
-      class="pb-6"
+        class="pb-6"
         v-for="(item, index) in withTempUUID(modelValue[definitionIri])"
         :key="item.temp_id"
       >
@@ -21,7 +43,7 @@
       class="definition-editor__curator w-full"
     >
       <div class="title text-center text-gray-400 w-full h-10 font-semibold">
-         Details
+        Details
       </div>
       <ClauseEditor :modelValue="queryBuilder.activeClause" />
     </div>
@@ -34,6 +56,7 @@ const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import ClauseItem from "@/components/dataset/ClauseItem.vue";
 import ClauseEditor from "@/components/dataset/ClauseEditor.vue";
+import HeroIcon from "@/components/search/HeroIcon.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
@@ -53,6 +76,7 @@ export default defineComponent({
     // SectionToggler,
     ClauseItem,
     ClauseEditor,
+    // HeroIcon,
   },
   data() {
     return {

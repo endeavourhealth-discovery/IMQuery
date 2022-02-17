@@ -12,12 +12,12 @@
       "im:and": [
         {
           "rdf:type": [{ "@id": "im:MatchClause" }],
-          "rdfs:label": "GMS Register",
+          "rdfs:label": "GP Register",
           "im:property": [{ "@id": "im:hasProfile" }],
           "im:valueIn": [
             {
               "@id": "im:Q_RegisteredGMS",
-              "rdfs:label": "a person who was actively registered with their GP for GMS services before the reference date"
+              "rdfs:label": "Active Registration at a General Practice before the reference date"
             }
           ],
           "im:order": 0
@@ -26,29 +26,29 @@
           "rdf:type": [{ "@id": "im:MatchClause" }],
           "im:and": [
             {
-              "rdfs:label": "patient type is regular GMS ",
+              "rdfs:label": "GMS Patient",
               "rdf:type": [{ "@id": "im:MatchClause" }],
               "im:pathTo": [{ "@id": "im:isSubjectOf" }],
-              "im:entityType": [{ "@id": "im:PatientRegistration", "rdfs:label": "Patient Registration" }],
-              "im:property": [{ "@id": "im:patientType" }],
+              "im:entityType": [{ "@id": "im:PatientRegistration", "rdfs:label": "Patient Registration Record" }],
+              "im:property": [{ "@id": "im:patientType", "rdfs:label": "Patient Type" }],
               "im:valueIn": [
                 {
                   "@id": "urn:uuid:ea2abf09-2efa-45e1-bb86-02acdd7e3b3b",
-                  "name": "Regular"
+                  "rdfs:label": "Regular GMS"
                 }
               ],
               "im:valueVar": "patientType1",
               "im:order": 0
             },
             {
-              "rdfs:label": "age above 18",
+              "rdfs:label": "Age over 18",
               "rdf:type": [{ "@id": "im:MatchClause" }],
               "im:pathTo": [{ "@id": "im:isSubjectOf" }],
-              "im:entityType": [{ "@id": "im:Demographic" }],
-              "im:property": [{ "@id": "im:age" }],
+              "im:entityType": [{ "@id": "im:PersonDetails", "rdfs:label": "Personal Details" }],
+              "im:property": [{ "@id": "im:age", "rdfs:label": "Age" }],
               "im:valueCompare": [
                 {
-                  "im:comparison": "greaterThanOrEqual",
+                  "im:comparison": "greaterThanOrEqualTo",
                   "im:valueData": "18",
                   "rdf:type": [{ "@id": "im:CompareClause" }]
                 }
@@ -73,7 +73,7 @@
           "im:order": 1
         },
         {
-          "rdfs:label": "Serious mental illness (not resolved)",
+          "rdfs:label": "Unresolved SMI",
           "rdf:type": [{ "@id": "im:MatchClause" }],
           "im:pathTo": [{ "@id": "im:isSubjectOf" }],
           "im:entityType": [{ "@id": "im:Event", "rdfs:label": "Event" }],
@@ -112,11 +112,11 @@
                           "im:valueIn": [
                             {
                               "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11",
-                              "rdfs:label": "Serious mental illness"
+                              "rdfs:label": "Serious Mental Illness"
                             },
                             {
                               "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                              "rdfs:label": "Serious mental illness (not resolved)"
+                              "rdfs:label": "Serious Mental Illness (not resolved)"
                             }
                           ],
                           "im:valueVar": "concept3",
@@ -143,7 +143,7 @@
               "im:valueIn": [
                 {
                   "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                  "rdfs:label": "Serious mental illness (not resolved)"
+                  "rdfs:label": "Serious Mental Illness (not resolved)"
                 }
               ],
               "im:valueVar": "concept5"
