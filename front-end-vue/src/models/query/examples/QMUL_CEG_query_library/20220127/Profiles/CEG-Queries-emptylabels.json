@@ -50685,7 +50685,7 @@
                 "im:valueIn": [
                   {
                     "@id": "urn:uuid:ea2abf09-2efa-45e1-bb86-02acdd7e3b3b",
-                    "name": "Regular GMS"
+                    "rdfs:label": "Regular GMS"
                   }
                 ],
                 "im:valueVar": "patientType1",
@@ -50767,7 +50767,7 @@
                               },
                               {
                                 "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                                "rdfs:label": "Serious Mental Illness (not resolved)"
+                                "rdfs:label": "Serious Mental Illness (Resolved)"
                               }
                             ],
                             "im:valueVar": "concept3",
@@ -50794,7 +50794,7 @@
                 "im:valueIn": [
                   {
                     "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                    "rdfs:label": "Serious Mental Illness (not resolved)"
+                    "rdfs:label": "Serious Mental Illness"
                   }
                 ],
                 "im:valueVar": "concept5"
@@ -53003,7 +53003,7 @@
                 "im:and": [
                   {
                     "rdf:type": [{ "@id": "im:MatchClause" }],
-                    "rdfs:label": "Untitled Clause",
+                    "rdfs:label": "Type to Name this Feature",
                     "im:pathTo": [{ "@id": "im:isSubjectOf" }],
                     "im:entityType": [{ "@id": "im:Event" }],
                     "im:property": [{ "@id": "im:concept" }],
@@ -53017,7 +53017,7 @@
                     "im:order": 0
                   },
                   {
-                    "rdfs:label": "Untitled Clause",
+                    "rdfs:label": "Type to Name this Feature",
                     "rdf:type": [{ "@id": "im:MatchClause" }],
                     "im:pathTo": [{ "@id": "im:isSubjectOf" }],
                     "im:entityType": [{ "@id": "im:MedicationOrder" }],
@@ -54054,7 +54054,7 @@
             "im:order": 0
           },
           {
-            "rdfs:label": "Untitled Clause",
+            "rdfs:label": "Type to Name this Feature",
             "rdf:type": [{ "@id": "im:MatchClause" }],
             "im:not": [
               {
@@ -54072,7 +54072,7 @@
             "im:order": 1
           },
           {
-            "rdfs:label": "Untitled Clause",
+            "rdfs:label": "Type to Name this Feature",
             "rdf:type": [{ "@id": "im:MatchClause" }],
             "im:not": [
               {
@@ -54189,7 +54189,7 @@
                 "im:order": 0
             },
             {
-                "rdfs:label": "Untitled Clause",
+                "rdfs:label": "Type to Name this Feature",
                 "rdf:type": [{
                     "@id": "im:MatchClause"
                 }],
@@ -54209,7 +54209,7 @@
                 "im:order": 1
             },
             {
-                "rdfs:label": "Untitled Clause",
+                "rdfs:label": "Type to Name this Feature",
                 "rdf:type": [{
                     "@id": "im:MatchClause"
                 }],
@@ -54448,7 +54448,7 @@
                         "im:order": 1
                     },
                     {
-                        "rdfs:label": "Untitled Clause",
+                        "rdfs:label": "Type to Name this Feature",
 
                         "rdf:type": [{
                             "@id": "im:MatchClause"
@@ -54479,7 +54479,7 @@
                         "im:order": 2
                     },
                     {
-                        "rdfs:label": "Untitled Clause",
+                        "rdfs:label": "Type to Name this Feature",
 
                         "rdf:type": [{
                             "@id": "im:MatchClause"
@@ -54654,7 +54654,7 @@
                 "im:order": 0
             },
             {
-                "rdfs:label": "Untitled Clause",
+                "rdfs:label": "Type to Name this Feature",
                 "rdf:type": [{
                     "@id": "im:MatchClause"
                 }],
@@ -54674,7 +54674,7 @@
                 "im:order": 1
             },
             {
-                "rdfs:label": "Untitled Clause",
+                "rdfs:label": "Type to Name this Feature",
                 "rdf:type": [{
                     "@id": "im:MatchClause"
                 }],
@@ -54694,7 +54694,7 @@
                 "im:order": 2
             },
             {
-                "rdfs:label": "Untitled Clause",
+                "rdfs:label": "Type to Name this Feature",
                 "rdf:type": [{
                     "@id": "im:MatchClause"
                 }],

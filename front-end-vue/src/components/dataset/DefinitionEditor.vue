@@ -2,7 +2,7 @@
   <div class="definition-editor flex">
     <div class="definition-editor__definition w-full overflow-y-auto px-5">
       <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
-        Features
+        Inclusions and Exclusions
       </div>
 <!-- 
       <p
@@ -27,14 +27,17 @@
       </p> -->
 
       <div
-        class="pb-6"
+        :class="'px-4 pt-4 pb-2 hover:bg-gray-100 rounded-md' + [isHover ? ' hover' : ''] "
         v-for="(item, index) in withTempUUID(modelValue[definitionIri])"
         :key="item.temp_id"
+        @mouseenter="isHover = true"
+        @mouseleave="isHover = false"
       >
         <ClauseItem
           :propertyPath="`${definitionIri}[${index}]`"
           :clause="item"
           :operatorIris="['im:and', 'im:or', 'im:not']"
+          :isHover="isHover"
         />
       </div>
     </div>
@@ -43,7 +46,7 @@
       class="definition-editor__curator w-full"
     >
       <div class="title text-center text-gray-400 w-full h-10 font-semibold">
-        Details
+        Profile
       </div>
       <ClauseEditor :modelValue="queryBuilder.activeClause" />
     </div>
@@ -80,6 +83,7 @@ export default defineComponent({
   },
   data() {
     return {
+      isHover: false,
       collapsedItems: [] as any[],
     };
   },
@@ -152,5 +156,11 @@ export default defineComponent({
 
 .definition-editor {
   height: 890px;
+}
+
+
+.definition-editor__definition {
+  width: 100%;
+  max-width: 800px;
 }
 </style>

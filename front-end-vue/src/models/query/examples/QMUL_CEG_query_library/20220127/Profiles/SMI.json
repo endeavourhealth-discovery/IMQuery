@@ -116,7 +116,7 @@
                             },
                             {
                               "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                              "rdfs:label": "Serious Mental Illness (not resolved)"
+                              "rdfs:label": "Serious Mental Illness (Resolved)"
                             }
                           ],
                           "im:valueVar": "concept3",
@@ -143,7 +143,7 @@
               "im:valueIn": [
                 {
                   "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                  "rdfs:label": "Serious Mental Illness (not resolved)"
+                  "rdfs:label": "Serious Mental Illness"
                 }
               ],
               "im:valueVar": "concept5"

@@ -188,13 +188,15 @@ export class QueryBuilder {
     }
 
     //the clause that is currently being edited 
-    private _activeClause: any;
-    get activeClause(): any {
-        return this._activeClause;
+    private _activePath: string;
+    get activePath(): string {
+        return this._activePath;
     }
-    set activeClause(propertyPath: any) {
-        if (typeof (propertyPath) == "string") {
+    set activePath(propertyPath: string) {
+        // if (typeof (propertyPath) == "string") {
+        if (propertyPath != "") {
             //find clause using JSON properyPath
+            this._activePath = propertyPath;
             this._activeClause = _.get(this.activeProfile, propertyPath);
             this.interpolateTemplate({ "@id": this._activeProfile["@id"], propertyPath: propertyPath }, this._activeClause)
             // this.interpolateTemplate2(this._activeClause)
@@ -203,46 +205,18 @@ export class QueryBuilder {
 
 
 
+    private _activeClause: any;
+    get activeClause(): any {
+        return this._activeClause;
+    }
+
+
+
+
 
     //examples of templates
     private _interpolationTemplates: any = [
-        {
-            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-            propertyPath: "im:definition[0].im:and[1].im:and[1]",
-            text: `<p><span class="font-bold text-indigo-700">Include</span> a <span class="font-bold text-indigo-700">Person</span> if they </p>
-            <p style="margin-left: 30px;">had an <span class="font-bold text-indigo-700">{{0}}</span> that is <span class="font-bold text-indigo-700">greater than or equal to </span><span class="font-semibold text-black border border-transparent border-b-2 border-b-blue-700">{{1}}</span></p>`,
-            variables: [ "im:property[0].rdfs:label","im:valueCompare[0].im:valueData"]
-        },
-        {
-            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-            propertyPath: "im:definition[0].im:and[1].im:and[0]",
-            text: `<p><span class="font-bold text-indigo-700">Include</span> a <span class="font-bold text-indigo-700">Person</span> if they </p>
-            <p style="margin-left: 30px;">had a <span class="font-bold text-indigo-700">{{0}}</span> with</p>
-            <p style="margin-left: 60px;">a <span class="font-bold text-indigo-700">{{1}}</span><span> that is a part of the list of codes in the values set </span><span class="font-semibold text-black border border-transparent border-b-2 border-b-blue-700">{{2}}</span></p>`,
-            variables: ["im:entityType[0].rdfs:label", "im:property[0].rdfs:label", "im:valueIn[0].rdfs:label"]
-        },
-        {
-            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-            propertyPath: "im:definition[0].im:and[0]",
-            text: `<p><span class="font-bold text-indigo-700">Include</span> a <span class="font-bold text-indigo-700">Person</span><span> if they</span></p>
-                   <p style="margin-left: 30px;"><span>had an </span><span class="font-semibold text-black border border-transparent border-b-2 border-b-blue-700">{{0}}</span></p>`,
-            variables: ["im:valueIn[0].rdfs:label"]
-        },
-        {
-            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
-            propertyPath: "im:definition[0].im:and[2]",
-            text: `<p><span class="font-bold text-indigo-700">Include</span> a <span class="font-bold text-indigo-700">Person</span> if they </p>
-                <p style="margin-left: 30px;">had a <span class="font-bold text-indigo-700">Health Record</span> with</p>
-                <p style="margin-left: 60px;">a <span class="font-bold text-indigo-700">Clinical Code</span> that is part of the list of codes in the value set</p>
-                <p style="margin-left: 90px;"><span class="font-semibold text-black border border-transparent border-b-2 border-b-blue-700">{{0}}</span></p>
-                <p style="margin-left: 90px;"><span class="font-bold text-indigo-700">or</span> <span class="font-semibold text-black border border-transparent border-b-2 border-b-blue-700">{{1}}</span></p>
-                <p><span class="font-bold text-indigo-700">and</span> the most recent record was <span class="font-semibold text-black border border-transparent border-b-2 border-b-blue-700">{{2}}</span></p>`,
-            variables: [
-                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
-                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
-                "im:test[0].im:valueIn[0].rdfs:label"
-            ]
-        },
+
         {
             "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
             "name": "disease status",
@@ -660,7 +634,7 @@ export class Profile extends Entity {
 
 export default class QueryTools {
 
- // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
+    // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
     public static findPlaceholders(text: string): any {
 
         // eslint-disable-next-line

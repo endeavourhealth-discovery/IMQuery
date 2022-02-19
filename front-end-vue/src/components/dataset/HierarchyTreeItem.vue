@@ -1,30 +1,24 @@
 <template>
-  <div>
+  <div >
     <div
-      @click="loadFile(value)"
       :class="
-        'hierachytreeitem py-3 pl-4 rounded-md flex items-center hover:bg-gray-100 text-gray-700' +
+        'hierachytreeitem group py-3 pl-4 rounded-md flex items-center hover:bg-gray-100 text-gray-700' +
           [isHover == true ? ' hover' : '']
       "
+      @click="onClick(value)"
       @mouseenter="isHover = true"
       @mouseleave="isHover = false"
     >
       <SectionToggler
-        :class="'hierachytreeitem__toggler mr-3 border-none'"
+        :class="'hierachytreeitem__toggler mr-3 border-none group-hover:bg-gray-100'"
         v-if="value['rdf:type'][0]['@id'] == 'im:Folder'"
         :expanded="expandedItems.includes(value['@id'])"
-        @click="
-          expandedItems.includes(value['@id'])
-            ? (expandedItems = expandedItems.filter(
-                (i: any) => i != value['@id']
-              ))
-            : expandedItems.push(value['@id'])
-        "
       />
       <div v-else class="ml-9"></div>
       <HeroIcon
         :class="
-          'inline font-regular text-lg mr-2' + [isHover || isActive(value['@id']) ? ' text-blue-700' : '']
+          'inline font-regular text-lg mr-2' +
+            [isHover || isActive(value['@id']) ? ' text-blue-700' : '']
         "
         strokewidth="2"
         width="20"
@@ -37,7 +31,8 @@
       />
       <div
         :class="
-          'mr-3 font-semibold text-lg' + [isHover || isActive(value['@id']) ? ' text-blue-700' : '']
+          'mr-3 font-semibold text-lg' +
+            [isHover || isActive(value['@id']) ? ' text-blue-700' : '']
         "
       >
         {{ value["rdfs:label"] }}
@@ -137,9 +132,26 @@ export default defineComponent({
       // });
       // this.JSONContent = _json;
     },
+    onClick(entity: any): void {
+      const _entityType = entity["rdf:type"][0]["@id"];
+      if (_entityType == "im:Folder") {
+        if (this.expandedItems.includes(entity["@id"])) {
+          this.expandedItems = this.expandedItems.filter(
+            (i: any) => i != entity["@id"]
+          );
+        } else {
+          this.expandedItems.push(entity["@id"]);
+        }
+      } else {
+        this.loadFile(entity);
+      }
+    },
     isActive(id: string): boolean {
       // console.log(this.queryBuilder.Loaded)
-      return this.queryBuilder.activeProfile && this.queryBuilder.activeProfile['@id'] == id;
+      return (
+        this.queryBuilder.activeProfile &&
+        this.queryBuilder.activeProfile["@id"] == id
+      );
     },
     test(entity: any): void {
       const _entityType = entity["rdf:type"][0]["@id"];
