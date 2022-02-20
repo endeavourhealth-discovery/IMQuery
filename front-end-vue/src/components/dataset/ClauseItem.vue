@@ -2,11 +2,10 @@
   <!-- Any object that is not preceded by an operator should be ignored -->
   <template v-if="hasOperator(clause)">
     <!-- Iterate over the children in the array of the oeprator -->
-
     <template v-for="(item, index) in currentClause" :key="item.temp_id">
       <div
         :class="
-          'clause-item block w-full flex hover:bg-white' +
+          'clause-item inline-block flex hover:bg-white' +
             [index == currentClause.length - 1 ? ' mb-4' : '']
         "
       >
@@ -15,20 +14,20 @@
           <!--  Operator (first item invisible unless it's an OR)  -->
           <!-- <div
             v-if="index == 0 && getOperatorIri(clause).split(':')[1] == 'or'"
-            class="inline-block w-full text-indigo-700 font-semibold hover:text-blue-600  hover:underline"
+            class="inline-block  text-indigo-700 font-semibold hover:text-blue-600  hover:underline"
           >
             either
           </div>
           <div
             v-if="index == 0 "
-            class="inline-block w-full invisible"
+            class="inline-block  invisible"
           >
             
           </div> -->
           <div
             v-if="index == 0"
             :class="
-              'inline-block w-full text-indigo-700 font-semibold hover:text-blue-600  hover:underline' +
+              'inline-block  text-indigo-700 font-semibold hover:text-blue-600  hover:underline' +
                 [
                   isIncluded
                     ? ` text-${colors.include}-700`
@@ -43,7 +42,7 @@
           <div
             v-else-if="index > 0"
             :class="
-              'inline-block w-full font-semibold hover:text-blue-600 hover:underline' +
+              'inline-block font-semibold hover:text-blue-600 hover:underline' +
                 [
                   getOperatorIri(clause).split(':')[1] == 'and'
                     ? ` text-${colors.and}-700`
@@ -91,7 +90,7 @@
         <div
           v-if="item['rdfs:label']"
           :class="
-            'clause-item__label w-full outline-none pr-2 font-semibold bg-transparent inline-flex w-full border border-transparent b-2 rounded-md text-black' +
+            'clause-item__label group break-all inline-flex outline-none pr-2 font-semibold bg-transparent border border-transparent b-2 rounded-md text-black' +
               [
                 queryBuilder.activePath == getPathToClause(index)
                   ? ' selected'
@@ -100,32 +99,46 @@
           "
           @click="queryBuilder.activePath = getPathToClause(index)"
         >
-          {{ item["rdfs:label"] }}
+          <div
+            :class="
+              'grow' +
+                [
+                  queryBuilder.activePath == getPathToClause(index)
+                    ? ' text-blue-700'
+                    : '',
+                ]
+            "
+          >
+            {{ item["rdfs:label"] }}
+          </div>
+          <div class="w-5">
+            <HeroIcon
+              v-if="queryBuilder.activePath == getPathToClause(index)"
+              class="inline text-blue-500 mb-1"
+              icon="pencil"
+              strokewidth="2"
+              width="16"
+              height="16"
+            />
+          </div>
         </div>
         <!-- </div> -->
-        <!-- <div
+        <div
           v-show="
             item['rdfs:label'] &&
               queryBuilder.activePath == getPathToClause(index)
           "
           class="clause-item_arrow flex flex-col items-center justify-center rounded-sm"
-        >
-          <HeroIcon
-            class="inline text-blue-500"
-            icon="chevron_right"
-            strokewidth="2"
-            width="20"
-            height="20"
-          />
-        </div> -->
+        ></div>
 
         <!-- If there's no label   -->
         <div
           v-if="!item['rdfs:label']"
           v-show="!collapsedItems.includes(item.temp_id)"
-          class="inline-block w-full flex flex-col"
+          class="inline-block  flex flex-col"
         >
           <ClauseItem
+            class=""
             :propertyPath="getPathToClause(index)"
             :clause="item"
             :operatorIris="['im:and', 'im:or', 'im:not']"
@@ -160,7 +173,7 @@ export default defineComponent({
   emits: ["update:modelValue"],
   components: {
     // SectionToggler,
-    // HeroIcon,
+    HeroIcon,
   },
   data() {
     return {
@@ -275,32 +288,31 @@ export default defineComponent({
   font-size: 14px;
 }
 
+.clause-item {
+  width: 400px;
+}
+
 .clause-item__label {
-  /* max-width: 500px; */
+  width: 100%;
+  /* max-width: 300px; */
   /* width: 100%; */
-  width: 300px;
+  /* max-width: 400px; */
   min-height: 20px;
+  /* max-width: 300px; */
+  min-width: 150px;
   position: relative;
-  /* border: 1px solid transparent; */
 
   z-index: 0;
   top: -7px;
   margin: 3px;
-  padding: 6px 4px 6px 8px;
+  padding: 6px 8px 6px 8px;
 }
 
 .definition-editor .hover .clause-item__label {
   background-color: #fff;
   border-color: #d1d5db;
-  /* box-shadow: 0 1px 0 #091e4240; */
-  /* cursor: pointer; */
-  /* display: block; */
-  /* margin-bottom: 8px; */
-
-  /* text-decoration: none; */
 }
 .definition-editor .hover .clause-item__label:hover {
-  /* border-color: #d1d5db; */
   border: 1px solid #0d89ec;
   background-color: #edf7ff;
   color: #0d89ec;
@@ -308,34 +320,19 @@ export default defineComponent({
 
 .definition-editor .clause-item__label.selected {
   background-color: #edf7ff;
-  /* color: #0d89ec; */
   border: 1px solid #0d89ec;
-  /* box-shadow: rgb(207 210 218) 0px 0px 6px; */
 }
-
-/* 
-.clause-item__toggler {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-} */
 
 .clause-item__operator {
   /* min-width: 55px; */
   min-width: 60px;
   margin-left: 13px;
-
-  /* padding-right: 10px; */
 }
 
 .clause-item_arrow {
   margin-top: 4px;
   min-width: 20px;
   width: 20px;
-}
-
-.clause-item:hover {
-  /* background-color: #ebeff3; */
 }
 
 .definition-editor .hover .circle,
@@ -345,17 +342,13 @@ export default defineComponent({
 
 .circle {
   visibility: hidden;
-  /* margin: 4px; */
-  /* padding: 4px; */
-  /* padding-top: 5px; */
+
   margin: 5px 10px 5px 0px;
   min-width: 13px;
   min-height: 13px;
-  /* background: white; */
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  /* border: 2px solid #caccf7; */
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -366,11 +359,5 @@ export default defineComponent({
   width: 7px;
   height: 100%;
   min-height: 10px;
-  /* border-right: 2px solid #caccf7; */
 }
-
-/* .clause-item.hover .circle {
-  background-color: #caccf7 !important;
-  color: #caccf7 !important;
-} */
 </style>

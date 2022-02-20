@@ -61,54 +61,16 @@
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
     <template v-else-if="sideNavActiveItem == 'View Definition'">
       <div class="section-center flex w-full h-full border-right">
-        <div class="item-view inline-flex flex-col w-full h-full w-max-500p m-2">
+        <div
+          class="item-view inline-flex flex-col w-full h-full w-max-500p m-2"
+        >
           <template v-if="openFiles.length">
-            <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
+            <div
+              class="title text-center text-gray-400 w-full h-10 font-semibold "
+            >
               Folders
             </div>
-           
-            
-            <!-- <div class="font-semibold text-lg text-black h-10 flex mb-3">
-              <HorizontalNavbar v-model="activeItemView" :items="itemViews" />
-            </div> -->
-          </template>
-
-          <template v-if="openFiles.length">
-            <div class="w-full h-full" v-show="activeItemView == 'All Items'">
-              <div class="flex flex-col file-list">
-                <div
-                  v-for="item in getFilteredEntities()"
-                  :key="item['@id']"
-                  :class="
-                    'file-list__item rounded-sm flex flex-col non-selectable p-2 px-3 mt-2 text-xl font-regular border hover:shadow-md hover:border-gray-300' +
-                      [
-                        selectedFile == item['@id']
-                          ? ' border-blue-600 text-blue-600'
-                          : '',
-                      ]
-                  "
-                  @click="selectedFile = item['@id']"
-                >
-                  <div class="font-bold">{{ item["rdfs:label"] }}</div>
-                  <div>{{ item["rdf:type"][0]["@id"].split(":")[1] }}</div>
-                </div>
-              </div>
-              <div class="font-semibold text-lg text-black mt-2">
-                Filter by type
-              </div>
-              <MultiSelect
-                v-if="openFiles.length"
-                class="w-full multi-large file-filter"
-                v-model="selectedFilterTypes"
-                :options="filterTypes"
-                optionLabel="label"
-                placeholder="Type(s)"
-              />
-            </div>
-            <div
-              class="w-full h-full"
-              v-show="activeItemView == 'Folders'"
-            >
+            <div class="w-full h-full" v-show="activeItemView == 'Folders'">
               <div
                 v-if="queryBuilder.hierarchyTree(topLevelEntity)"
                 class="left inline-flex flex-col w-full h-full"
@@ -117,39 +79,30 @@
                   v-if="
                     queryBuilder.hierarchyTree(topLevelEntity).children.length
                   "
-                  class="folder-view"
+                  class="folder-view p-2"
                 >
                   <HierarchyTreeItem
+                    class="w-full my-3"
                     :value="queryBuilder.hierarchyTree(topLevelEntity)"
+                    :nestingCount="0"
                   />
                 </div>
               </div>
             </div>
           </template>
-
-          <template v-if="openFiles.length" class="">
-            <!-- <div class="line-separator"></div> -->
-            <!-- <div class="font-semibold text-lg text-black">
-              Entities ({{
-                openFiles.length && openFiles[0]["entities"].length
-              }})
-            </div> -->
-          </template>
-          <div v-else class="font-semibold text-lg text-black">
+          <template v-else class="font-semibold text-lg text-black">
             Select a -id.json file
-             <input
-            class="file-input font-regular text-lg text-black "
-            ref="upload"
-            type="file"
-            name="file-upload"
-            accept="application/JSON"
-            content="Upload JSON file containing entities (-id)"
-            @change="onUploadFiles()"
-          />
-          </div>
+            <input
+              class="file-input font-regular text-lg text-black "
+              ref="upload"
+              type="file"
+              name="file-upload"
+              accept="application/JSON"
+              content="Upload JSON file containing entities (-id)"
+              @change="onUploadFiles()"
+            />
+          </template>
 
-         
-          <!-- <button @click="testQuery()">Test Query</button> -->
         </div>
         <div class="inline-flex flex-col w-full h-full">
           <!-- <div class="h-10 w-full">
@@ -272,7 +225,7 @@ export default defineComponent({
     // HorizontalNavbar,
     ContentNav,
     DatasetBrowser,
-    MultiSelect,
+    // MultiSelect,
     Network,
     HierarchyTreeItem,
     VAceEditor,
@@ -668,7 +621,6 @@ export default defineComponent({
   },
   methods: {
     testQuery(): any {
-  
       // console.log(
       //   "ontology",
       //   this.ontology
@@ -837,20 +789,19 @@ export default defineComponent({
 });
 </script>
 
-<style> 
+<style>
 .border-right {
   border-right: 1px solid #ecefed;
   /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
 }
 
-.title{
+.title {
   font-size: 18px;
 }
 
-.subtitle{
+.subtitle {
   font-size: 15px;
 }
-
 </style>
 
 <style scoped>
@@ -887,8 +838,6 @@ export default defineComponent({
   /* box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3); */
   /* border-right: 1px solid #ecefed; */
 }
-
-
 
 .wrapper-sidenav {
   position: absolute;
@@ -935,15 +884,11 @@ export default defineComponent({
   font-size: 12px !important;
   width: 100%;
   height: 825px;
-
 }
 
 .folder-view {
   /* padding: 20px 10px 150px 10px; */
-
 }
-
-
 
 .item-view {
   width: 500px;

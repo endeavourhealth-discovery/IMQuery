@@ -14,7 +14,7 @@
         @input="updateLabel($event.target.value)"
       />
       <HeroIcon
-        @click="componentState = 'edit'"
+        
         class="inline text-black mt-1 hover:text-red-600"
         icon="x"
         strokewidth="2"

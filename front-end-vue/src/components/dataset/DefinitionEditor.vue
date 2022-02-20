@@ -1,48 +1,45 @@
 <template>
-  <div class="definition-editor flex">
-    <div class="definition-editor__definition w-full overflow-y-auto px-5">
-      <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
-        Inclusions and Exclusions
+  <div  class="definition-editor flex">
+    <div
+      class="definition-editor__definition inline-block overflow-y-auto px-5"
+    >
+      <div class="title text-center text-gray-400 h-10 font-semibold ">
+        Search Criteria
       </div>
-<!-- 
-      <p
-        class="subtitle border border-l-4 border-l-blue-600 px-2 py-3 bg-blue-100 text-black w-full font-regular flex mb-10"
-      >
-        <HeroIcon
-          class="inline text-black mt-1 mr-2 text-blue-700 h-20 w-20"
-          icon="question_mark_circle"
-          strokewidth="2"
-          width="20"
-          height="20"
-        />
-        <span class="inline">
-          A person is included in or excluded from your final if they
-        </span>
-        <span class="mx-2 text-indigo-600 font-bold inline">match</span>
-        <span>or</span>
-        <span class="text-red-600 mx-2 font-bold inline">don't match</span>
-        <span class="inline">
-          the features specified below.
-        </span>
-      </p> -->
 
+      <!-- Definition  -->
       <div
-        :class="'px-4 pt-4 pb-2 hover:bg-gray-100 rounded-md' + [isHover ? ' hover' : ''] "
+        :class="
+          'pl-4 pt-4 pb-2 hover:bg-gray-100 rounded-md w-full' +
+            [isHover ? ' hover' : '']
+        "
         v-for="(item, index) in withTempUUID(modelValue[definitionIri])"
         :key="item.temp_id"
         @mouseenter="isHover = true"
         @mouseleave="isHover = false"
       >
+        <div class="flex">
+          <div class="title text-gray-500 h-10 font-semibold mb-5 ml-4">
+            {{
+              queryBuilder.activeProfile
+                ? queryBuilder.activeProfile["rdfs:label"]
+                : "Untitled Search Criteria"
+            }}
+          </div>
+          <div></div>
+        </div>
         <ClauseItem
+          class="w-full grow"
           :propertyPath="`${definitionIri}[${index}]`"
           :clause="item"
           :operatorIris="['im:and', 'im:or', 'im:not']"
           :isHover="isHover"
         />
       </div>
+      <!-- D/efinition  -->
     </div>
     <div
-      v-if="queryBuilder.activeClause"
+    v-if="queryBuilder.activeClause" 
       class="definition-editor__curator w-full"
     >
       <div class="title text-center text-gray-400 w-full h-10 font-semibold">
@@ -50,7 +47,7 @@
       </div>
       <ClauseEditor :modelValue="queryBuilder.activeClause" />
     </div>
-  </div>
+  </div> 
 </template>
 
 <script lang="ts">
@@ -158,9 +155,9 @@ export default defineComponent({
   height: 890px;
 }
 
-
 .definition-editor__definition {
-  width: 100%;
-  max-width: 800px;
+  /* width: 100%; */
+  /* max-width: 800px; */
+  min-width: 700px;
 }
 </style>

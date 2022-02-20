@@ -1,16 +1,22 @@
 <template>
-  <div >
+  <button
+    class="cursor-pointer block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10 focus:ring-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2"
+  >
     <div
+      :style="{ paddingLeft: `${paddingLeft}px` }"
       :class="
-        'hierachytreeitem group py-3 pl-4 rounded-md flex items-center hover:bg-gray-100 text-gray-700' +
-          [isHover == true ? ' hover' : '']
+        'hierachytreeitem group py-3 pl-3 rounded-md flex justify-start items-center hover:bg-blue-50 text-gray-700' +
+          [isHover ? ' hover' : ''] +
+          [isActive(value['@id']) ? ' active' : '']
       "
       @click="onClick(value)"
       @mouseenter="isHover = true"
       @mouseleave="isHover = false"
     >
       <SectionToggler
-        :class="'hierachytreeitem__toggler mr-3 border-none group-hover:bg-gray-100'"
+        :class="
+          'hierachytreeitem__toggler mr-3 border-none group-hover:bg-blue-50'
+        "
         v-if="value['rdf:type'][0]['@id'] == 'im:Folder'"
         :expanded="expandedItems.includes(value['@id'])"
       />
@@ -31,18 +37,18 @@
       />
       <div
         :class="
-          'mr-3 font-semibold text-lg' +
+          'mr-3 font-semibold text-lg w-full text-left' +
             [isHover || isActive(value['@id']) ? ' text-blue-700' : '']
         "
       >
         {{ value["rdfs:label"] }}
       </div>
       <div
-        class="non-selectable text-lg text-blue-600 font-semibold hover:underline"
+        class="hierachytreeitem__plus cursor-pointer text-lg text-blue-600 font-semibold hover:underline"
       >
         <HeroIcon
           v-show="isHover && value['rdf:type'][0]['@id'] == 'im:Profile'"
-          :class="'inline'"
+          :class="'inline mr-2'"
           strokewidth="2"
           width="20"
           height="20"
@@ -50,18 +56,18 @@
         />
       </div>
     </div>
-    <template v-if="value.children.length">
-      <div class="hierachytreeitem">
-        <HierarchyTreeItem
-          v-show="expandedItems.includes(value['@id'])"
-          v-for="item in value.children"
-          :key="item['@id']"
-          class="ml-3"
-          :value="item"
-        />
-      </div>
-    </template>
-  </div>
+
+    <div v-if="value.children.length" class="hierachytreeitem">
+      <HierarchyTreeItem
+        class="w-full"
+        v-show="expandedItems.includes(value['@id'])"
+        v-for="item in value.children"
+        :key="item['@id']"
+        :value="item"
+        :nestingCount="nestingCount + 1"
+      />
+    </div>
+  </button>
 </template>
 
 <script lang="ts">
@@ -75,7 +81,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "HierarchyTreeItem",
-  props: ["value"],
+  props: ["value", "nestingCount"],
   components: {
     SectionToggler,
     HeroIcon,
@@ -162,6 +168,7 @@ export default defineComponent({
   },
   data() {
     return {
+      paddingLeft: this.nestingCount == 0 ? 10 : 10 + this.nestingCount * 10,
       isHover: false,
       expandedItems: [] as any[],
     };
@@ -199,4 +206,14 @@ export default defineComponent({
 .hierachytreeitem {
   cursor: pointer;
 }
+
+.hierachytreeitem__plus {
+  min-width: 30px;
+}
+
+/* .hierachytreeitem.active {
+  border: 1px solid #0d89ec;
+  background-color: #edf7ff;
+  color: #0d89ec;
+} */
 </style>
