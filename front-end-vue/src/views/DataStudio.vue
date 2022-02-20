@@ -844,7 +844,7 @@ export default defineComponent({
   top: 0;
   bottom: 0;
   width: 60px;
-  z-index: 999;
+  z-index: 9;
 }
 
 .wrapper-sidenav:hover {

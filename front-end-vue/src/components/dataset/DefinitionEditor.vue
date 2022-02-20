@@ -33,7 +33,7 @@
           :propertyPath="`${definitionIri}[${index}]`"
           :clause="item"
           :operatorIris="['im:and', 'im:or', 'im:not']"
-          :isHover="isHover"
+          :isParentHover="isHover"
         />
       </div>
       <!-- D/efinition  -->
