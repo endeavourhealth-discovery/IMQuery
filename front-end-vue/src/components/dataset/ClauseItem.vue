@@ -1,18 +1,61 @@
 <template>
+  <!-- <FullscreenDialog
+
+    @close="isEditorVisible = false"
+    :title="queryBuilder.activeProfile['rdfs:label'] ? queryBuilder.activeProfile['rdfs:label'] : 'Unnamed Criteria'"
+  >
+    Full Screen
+  </FullscreenDialog> -->
+
   <!-- Any object that is not preceded by an operator should be ignored -->
   <template v-if="hasOperator(clause)">
     <!-- Iterate over the children in the array of the oeprator -->
     <template v-for="(item, index) in currentClause" :key="item.temp_id">
       <div
         :class="
-          'clause-item inline-block flex hover:bg-white' +
+          'clause-item relative inline-block flex hover:bg-white' +
             [index == currentClause.length - 1 ? ' mb-4' : '']
         "
-        @mouseenter="isHover[index] = true"
-        @mouseleave="isHover[index] = false"
       >
-        <!-- Opera tor -->
-        <div class="clause-item__operator">
+        <!-- Right Click Options  -->
+        <div
+          v-if="isOptionVisible[index]"
+          class="clause-item__options opacity-60 absolute"
+        >
+          <!-- <draggable
+            :list="options"
+            ghost-class="moving-card"
+            :move="checkMove"
+            @start="isDragging = true"
+            @end="isDragging = false"
+          > -->
+          <div
+            v-for="item in options"
+            :key="item.id"
+            :class="
+              'select-none cursor-pointer bg-black flex items-center text-white font-semibold rounded-md py-1 px-2 my-1 hover:bg-gray-800'
+            "
+          >
+            <HeroIcon
+              class="inline text-white mr-2"
+              :icon="item.icon"
+              strokewidth="2"
+              width="16"
+              height="16"
+            />
+            {{ item.name }}
+          </div>
+          <!-- </draggable> -->
+        </div>
+        <!-- Right Click Options  -->
+
+        <!-- Operator -->
+        <div
+          @mouseenter="isOperatorHovered[index] = true"
+          @mouseleave="isOperatorHovered[index] = false"
+          class="clause-item__operator relative"
+        >
+          <!-- First Item  -->
           <div
             v-if="index == 0"
             :class="
@@ -27,37 +70,46 @@
             Include
           </div>
 
-          <!--  Operator (all other items are visible ) -->
+          <!--  Rest -->
           <div
             v-else-if="index > 0"
             :class="
               'inline-block font-semibold hover:text-blue-600 hover:underline' +
                 [
-                  getOperatorIri(clause).split(':')[1] == 'and'
+                  operatorLabel() == 'And'
                     ? ` text-${colors.and}-700`
                     : ` text-${colors.or}-700`,
                 ]
             "
           >
-            {{ getOperatorLabel(clause) }}
+            {{ operatorLabel() }}
           </div>
+
+          <!-- <HeroIcon
+            v-if="isOperatorHovered[index]"
+            class="clause-item__dots absolute text-blue-500 "
+            icon="dots_horizontal"
+            strokewidth="2"
+            width="20"
+            height="20"
+          /> -->
         </div>
         <!-- / Operator -->
 
-        <!-- Ring + Line  -->
+        <!-- circle + Line  -->
         <div class="inline-flex flex-col">
-          <!-- ring  -->
+          <!-- circle  -->
           <div
             :class="
               'inline border border-transparent' +
                 [
-                  getOperatorIri(clause).split(':')[1] == 'and'
+                  operatorLabel() == 'And'
                     ? ` circle b-2 border-${colors.and}-700`
                     : ` circle b-2 border-${colors.or}-700`,
                 ]
             "
           ></div>
-          <!-- / ring  -->
+          <!-- / circle  -->
 
           <!-- Line -->
           <div
@@ -65,7 +117,7 @@
             :class="
               'inline border-r border-r-transparent' +
                 [
-                  getOperatorIri(clause).split(':')[1] == 'and'
+                  operatorLabel() == 'And'
                     ? ` line b-2 border-r-${colors.and}-700`
                     : ` line border-dotted b-2 border-r-${colors.or}-700`,
                 ]
@@ -75,58 +127,47 @@
         </div>
         <!-- /Ring + Line  -->
 
-        <!-- <FullscreenDialog
-          v-if="isEditorVisible"
-          @close="isEditorVisible = false"
-          :title="queryBuilder.activeProfile['rdfs:label']"
-        >
-          Full Screen
-        </FullscreenDialog> -->
-
         <!-- Display Label  -->
         <div
+          @mouseenter="isLabelHovered[index] = true"
+          @mouseleave="isLabelHovered[index] = false"
           v-if="item['rdfs:label']"
           :class="
-            'clause-item__label relative group break-all inline-flex outline-none pr-2 font-semibold bg-transparent border border-transparent b-2 rounded-md text-black' +
+            'clause-item__label relative group inline-flex outline-none font-semibold bg-transparent border border-transparent b-2 rounded-md text-black pr-2' +
               [isActive(index) ? ' selected' : ''] +
-              [isOptionVisible[index] ? ' options' : '']
+              [isOptionVisible[index] ? ' options bg-blue-50' : ''] +
+              [
+                containsLongWords(item['rdfs:label'])
+                  ? ' break-all'
+                  : ' break-words',
+              ]
           "
-          @click="setActive(index)"
-          @click.right.prevent="showOptions(index)"
         >
-          <div :class="'grow' + [isActive(index) ? ' #text-blue-700' : '']">
+          <div
+            @click="setActive(index)"
+            @click.right.prevent="showOptions(index)"
+            :class="
+              'clause-item__labeltext grow' +
+                [isActive(index) ? ' #text-blue-700' : '']
+            "
+          >
             {{ item["rdfs:label"] }}
           </div>
-          <div class="w-5">
+          <div
+            class="w-5 flex absolute h-9 w-9 right-0 group-hover:bg-white rounded-md top-2/4 -translate-y-2/4"
+            @click="showOptions(index)"
+            @click.right.prevent="showOptions(index)"
+          >
             <HeroIcon
-              v-if="isHover[index]"
-              class="inline text-blue-500 mb-1"
-              icon="pencil"
+              v-if="isLabelHovered[index]"
+              class="inline text-blue-500 mt-2 ml-2"
+              icon="dots_horizontal"
               strokewidth="2"
-              width="16"
-              height="16"
+              width="20"
+              height="20"
             />
           </div>
-          <template v-if="isOptionVisible[index]">
-            <div class="clause-item__options absolute">
-              <div
-                v-for="item in options"
-                :key="item.id"
-                :class="'bg-black flex items-center text-white font-semibold mb-2 rounded-md py-1 px-2'"
-              >
-               <HeroIcon
-              class="inline text-white mr-2"
-              :icon="item.icon"
-              strokewidth="2"
-              width="16"
-              height="16"
-            />
-                {{ item.title }}
-              </div>
-            </div>
-          </template>
         </div>
-
         <!-- /Display Label  -->
 
         <div
@@ -138,7 +179,7 @@
         <div
           v-if="!item['rdfs:label']"
           v-show="!collapsedItems.includes(item.temp_id)"
-          class="inline-block flex flex-col"
+          class="inline-block flex flex-col w-full"
         >
           <ClauseItem
             class=""
@@ -160,14 +201,13 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, defineComponent } from "vue";
+import { ref, defineComponent } from "vue";
 const { v4 } = require("uuid");
+
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import FullscreenDialog from "@/components/dataset/FullscreenDialog.vue";
-
-// import Constraint from "@/components/dataset/Constraint.vue";
-// import HeroIcon from "@/components/search/HeroIcon.vue";
+import draggable from "vuedraggable";
 
 export default defineComponent({
   name: "ClauseItem",
@@ -185,28 +225,69 @@ export default defineComponent({
   components: {
     // SectionToggler,
     HeroIcon,
+    // draggable,
     // FullscreenDialog,
   },
   data() {
     return {
+      maxLabelWordLength: 35,
+      isDragging: false,
       options: [
         {
-          id: "23cdb751-136c-433e-8614-f48f8459da11",
-          title: "Edit",
-          icon: "pencil",
+          id: "abc89209-fcc5-4770-9a4b-bb1655104258",
+          name: "Add",
+          icon: "plus",
           classes: "",
+          order: 1,
+          fixed: false,
         },
         {
           id: "afcd1608-3d79-4e10-90b6-1e9d354b9283",
-          title: "Copy",
+          name: "Copy",
           icon: "document_duplicate",
           classes: "",
+          order: 2,
+          fixed: false,
+        },
+        {
+          id: "23cdb751b04edc4a-79ad-41da-a44c-7e871902a8a9",
+          name: "Cut",
+          icon: "scissors",
+          classes: "",
+          order: 3,
+          fixed: false,
+        },
+        {
+          id: "23cdb75120e0ee94-b1d4-4c63-865f-e1c16f60d464",
+          name: "Paste",
+          icon: "clipboard_copy",
+          classes: "",
+          order: 4,
+          fixed: false,
+        },
+        {
+          id: "23cdb75120e0ee94-b1d4-4c63-865f-e1c16f60d464",
+          name: "Move",
+          icon: "arrow_right",
+          classes: "",
+          order: 5,
+          fixed: false,
+        },
+        {
+          id: "23cdb751-136c-433e-8614-f48f8459da11",
+          name: "Edit",
+          icon: "pencil",
+          classes: "",
+          order: 6,
+          fixed: false,
         },
         {
           id: "bf34d743-35b2-4e3c-b50f-5989b0bd3174",
-          title: "Delete",
+          name: "Delete",
           icon: "x",
           classes: "",
+          order: 7,
+          fixed: false,
         },
       ],
       colors: {
@@ -217,14 +298,29 @@ export default defineComponent({
       },
       collapsedItems: [] as any[],
       componentState: "default", // Options #"default", #"hover", #"focus", #"",
-      isHover: {}, ///returns bolean
+      isOperatorHovered: {}, ///returns bolean
+      isLabelHovered: {}, ///returns bolean
       isOptionVisible: {}, //returns bolean
-      isEditorVisible: {},
+      isEditorVisible: false,
       activeClause: "",
       isLoading: false,
     };
   },
   methods: {
+    //  add: function() {
+    //   this.list.push({ name: "Juan " + id, id: id++ });
+    // },
+    // replace: function() {
+    //   this.list = [{ name: "Edgard", id: id++ }];
+    // },
+    containsLongWords(testString: string): boolean {
+      return testString
+        .split(" ")
+        .some((i) => i.length > this.maxLabelWordLength);
+    },
+    checkMove: function(e) {
+      window.console.log("Future index: " + e.draggedContext.futureIndex);
+    },
     updateLabel(value: string): void {
       this.queryBuilder.activeClause["rdfs:label"] = value;
     },
@@ -254,16 +350,16 @@ export default defineComponent({
         return item[operatorIri];
       });
     },
-    getOperatorIri(clause: any): any {
+    operatorIri(): any {
       // console.log("item", item);
-      const _keys = Object.keys(clause);
+      const _keys = Object.keys(this.clause);
       return _keys.filter((key: any) => {
         return this.operatorIris.includes(key);
       })[0];
     },
-    getOperatorLabel(clause: any): any {
+    operatorLabel(): any {
       // console.log("item", item);
-      const _keys = Object.keys(clause);
+      const _keys = Object.keys(this.clause);
       const _iri = _keys.filter((key: any) => {
         return this.operatorIris.includes(key);
       })[0];
@@ -274,11 +370,11 @@ export default defineComponent({
       alert(val);
     },
     getPathToClause(index: number): any {
-      const _path = `${this.propertyPath}.${this.getOperatorIri(
+      const _path = `${this.propertyPath}.${this.operatorIri(
         this.clause
       )}[${index}]`;
       console.log(_path);
-      console.log("cative", this.queryBuilder.activeClause);
+      console.log("activeClause", this.queryBuilder.activeClause);
       return _path;
     },
     isActive(index: number): boolean {
@@ -288,10 +384,10 @@ export default defineComponent({
       this.queryBuilder.activePath = this.getPathToClause(index);
     },
     showOptions(index: number): void {
-      Object.keys(this.isEditorVisible).forEach(
-        (i: any) => (this.isEditorVisible[i] = false)
-      );
-      this.isEditorVisible[index] = true;
+      // Object.keys(this.isEditorVisible).forEach(
+      //   (i: any) => (this.isEditorVisible[i] = false)
+      // );
+      // this.isEditorVisible[index] = true;
 
       Object.keys(this.isOptionVisible).forEach(
         (i: any) => (this.isOptionVisible[i] = false)
@@ -314,7 +410,7 @@ export default defineComponent({
     },
     currentClause: {
       get(): any {
-        return this.withTempUUID(this.clause[this.getOperatorIri(this.clause)]);
+        return this.withTempUUID(this.clause[this.operatorIri(this.clause)]);
       },
       set(value: any): void {
         return;
@@ -342,7 +438,7 @@ export default defineComponent({
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.3); /* Black w/ opacity */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
 }
 
 .clause-item,
@@ -354,22 +450,25 @@ export default defineComponent({
 }
 
 .clause-item {
-  width: 400px;
+  /* max-width: 400px; */
+}
+
+.clause-item__labeltext {
+  padding: 6px 8px 6px 8px;
 }
 
 .clause-item__label {
   width: 100%;
   /* max-width: 300px; */
   /* width: 100%; */
-  /* max-width: 400px; */
+  max-width: 300px;
   min-height: 20px;
   /* max-width: 300px; */
-  min-width: 150px;
+  /* min-width: 150px; */
   position: relative;
 
   top: -7px;
   margin: 3px;
-  padding: 6px 8px 6px 8px;
   z-index: 9; /* Sit on top */
 }
 
@@ -379,17 +478,17 @@ export default defineComponent({
 }
 .definition-editor .hover .clause-item__label:hover {
   border: 1px solid #0d89ec;
-  background-color: #edf7ff;
+  background-color: #fff;
   color: #0d89ec;
 }
 
 .definition-editor .clause-item__label.selected {
-  /* background-color: #edf7ff; */
-  /* border: 1px solid #0d89ec; */
   /* background-color: black; */
   /* z-index: 149; Sit on top */
 }
 .definition-editor .clause-item__label.options {
+  color: #0d89ec;
+  border: 1px solid #0d89ec;
   /* background-color: #edf7ff; */
   /* border: 1px solid #0d89ec; */
   /* background-color: black; */
@@ -409,7 +508,8 @@ export default defineComponent({
 } */
 
 .definition-editor .hover .circle,
-.definition-editor .hover .line {
+.definition-editor .hover .line,
+.definition-editor .hover .linebutton {
   visibility: visible;
 }
 
@@ -434,10 +534,19 @@ export default defineComponent({
   min-height: 10px;
 }
 
+.linebutton {
+  visibility: hidden;
+  width: 7px;
+  height: 100%;
+  min-height: 0px;
+}
+
 .clause-item__options {
-  left: 310px;
+  left: 10px;
+  top: -8px;
+  font-size: 16px;
+  /* margin-right: 20px; */
   z-index: 150; /* Sit on top */
-  height: 500px;
-  width: 100px;
+  /* width: 100px; */
 }
 </style>

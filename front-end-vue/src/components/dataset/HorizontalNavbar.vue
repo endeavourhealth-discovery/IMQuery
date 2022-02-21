@@ -17,7 +17,6 @@
             width="24"
             height="24"
             :icon="item.icon"
-            :active="modelValue == item.name "
           />
         </div>
 

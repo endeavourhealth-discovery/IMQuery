@@ -1,5 +1,5 @@
 <template>
-  <div  class="definition-editor flex">
+  <div class="definition-editor flex">
     <div
       class="definition-editor__definition inline-block overflow-y-auto px-5"
     >
@@ -10,16 +10,18 @@
       <!-- Definition  -->
       <div
         :class="
-          'pl-4 pt-4 pb-2 hover:bg-gray-100 rounded-md w-full' +
-            [isHover ? ' hover' : '']
+          'transition duration-500 ease-in-out border border-b-1 border-gray-200 shadow-sm pb-20 rounded-md w-full' +
+            [isHover ? ' hover shadow-middle' : '']
         "
         v-for="(item, index) in withTempUUID(modelValue[definitionIri])"
         :key="item.temp_id"
         @mouseenter="isHover = true"
         @mouseleave="isHover = false"
       >
-        <div class="flex">
-          <div class="title text-gray-500 h-10 font-semibold mb-5 ml-4">
+        <div class="flex border-b border-b-gray-200">
+          <div
+            class="title text-black h-10 font-semibold mt-3 mb-1 mx-5 w-full"
+          >
             {{
               queryBuilder.activeProfile
                 ? queryBuilder.activeProfile["rdfs:label"]
@@ -28,18 +30,20 @@
           </div>
           <div></div>
         </div>
-        <ClauseItem
-          class="w-full grow"
-          :propertyPath="`${definitionIri}[${index}]`"
-          :clause="item"
-          :operatorIris="['im:and', 'im:or', 'im:not']"
-          :isParentHover="isHover"
-        />
+        <div class="pt-5 px-2 w-full">
+          <ClauseItem
+            class="grow"
+            :propertyPath="`${definitionIri}[${index}]`"
+            :clause="item"
+            :operatorIris="['im:and', 'im:or', 'im:not']"
+            :isParentHover="isHover"
+          />
+        </div>
       </div>
       <!-- D/efinition  -->
     </div>
     <div
-    v-if="queryBuilder.activeClause" 
+      v-if="queryBuilder.activeClause"
       class="definition-editor__curator w-full"
     >
       <div class="title text-center text-gray-400 w-full h-10 font-semibold">
@@ -47,7 +51,7 @@
       </div>
       <ClauseEditor :modelValue="queryBuilder.activeClause" />
     </div>
-  </div> 
+  </div>
 </template>
 
 <script lang="ts">
@@ -158,6 +162,6 @@ export default defineComponent({
 .definition-editor__definition {
   /* width: 100%; */
   /* max-width: 800px; */
-  min-width: 700px;
+  min-width: 600px;
 }
 </style>

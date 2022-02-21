@@ -13,8 +13,8 @@
             "@id": "im:MatchClause"
         }],
         "im:and": [{
-            
-            "rdfs:label": "SMI Population",
+
+                "rdfs:label": "SMI Population",
                 "rdf:type": [{
                     "@id": "im:MatchClause"
                 }],
@@ -31,20 +31,15 @@
                 "rdf:type": [{
                     "@id": "im:MatchClause"
                 }],
-                "im:not": [{
-                    "rdf:type": [{
-                        "@id": "im:MatchClause"
-                    }],
-                    "im:property": [{
-                        "@id": "im:hasProfile"
-                    }],
-                    "im:valueIn": [{
-                        "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
-                        "name": "Priority 1"
-                    }],
-                    "im:order": 0
+                "im:property": [{
+                    "@id": "im:hasProfile"
                 }],
-                "im:order": 1
+                "im:valueIn": [{
+                    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
+                    "name": "Priority 1"
+                }],
+                "im:order": 0
+
             },
             {
                 "rdfs:label": "Untitled Clause",

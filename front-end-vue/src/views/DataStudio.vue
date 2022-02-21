@@ -795,6 +795,12 @@ export default defineComponent({
   /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
 }
 
+
+
+.shadow-middle {
+  box-shadow: rgb(207, 210, 218) 0px 2px 6px;
+}
+
 .title {
   font-size: 18px;
 }

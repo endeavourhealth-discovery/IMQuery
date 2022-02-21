@@ -48,11 +48,11 @@
     "uuid": "^8.3.2",
     "vue": "^3.1.1",
     "vue-class-component": "^8.0.0-0",
-    "vue-codemirror": "^4.0.6",
     "vue-json-pretty": "^2.0.6",
     "vue-network-d3": "^0.1.2",
     "vue-router": "^4.0.9",
     "vue3-clipboard": "^1.0.0",
+    "vuedraggable": "^2.24.3",
     "vuex": "^4.0.1"
   },
   "devDependencies": {

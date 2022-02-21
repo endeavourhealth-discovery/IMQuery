@@ -9,7 +9,7 @@
     ringColor="blue-600"
   >
     <HeroIcon
-      :class="expanded ? ' text-gray-400' : 'text-gray-600'"
+      :class="'text-black'"
       :icon="expanded ? 'chevron_down' : 'chevron_right'"
       strokewidth="2"
       width="20"
