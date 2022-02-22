@@ -216,7 +216,6 @@ export class QueryBuilder {
 
     //examples of templates
     private _interpolationTemplates: any = [
-
         {
             "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
             "name": "disease status",

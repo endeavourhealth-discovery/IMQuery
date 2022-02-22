@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="flex">
     <nestedDraggable class="w" :tasks="list1" />
     <nestedDraggable class="w" :tasks="list2" />
     <!-- <rawDisplayer :value="list" title="List" /> -->
@@ -22,49 +22,49 @@ export default defineComponent({
     return {
       list1: [
         {
-          name: "Profile 1",
+          name: "Feature 1",
           tasks: [
             {
-              name: "Profile 2",
+              name: "Feature 2",
               tasks: [],
             },
           ],
         },
         {
-          name: "Profile 3",
+          name: "Feature 3",
           tasks: [
             {
-              name: "Profile 4",
+              name: "Feature 4",
               tasks: [],
             },
           ],
         },
         {
-          name: "Profile 5",
+          name: "Feature 5",
           tasks: [],
         },
       ],
       list2: [
         {
-          name: "Profile 6",
+          name: "Feature 6",
           tasks: [
             {
-              name: "Profile 7",
+              name: "Feature 7",
               tasks: [],
             },
           ],
         },
         {
-          name: "Profile 8",
+          name: "Feature 8",
           tasks: [
             {
-              name: "Profile 9",
+              name: "Feature 9",
               tasks: [],
             },
           ],
         },
         {
-          name: "Profile 10",
+          name: "Feature 10",
           tasks: [],
         },
       ],

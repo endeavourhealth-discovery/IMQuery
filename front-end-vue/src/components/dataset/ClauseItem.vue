@@ -121,7 +121,7 @@
         </div>
         <!-- /Ring + Line  -->
 
-        <!-- Display Label  -->
+        <!-- Display Label [horizontal flex direciton]   -->
         <div
           @mouseenter="isLabelHovered[index] = true"
           @mouseleave="isLabelHovered[index] = false"
@@ -164,12 +164,7 @@
         </div>
         <!-- /Display Label  -->
 
-        <div
-          v-show="item['rdfs:label'] && isActive(index)"
-          class="clause-item_arrow flex flex-col items-center justify-center rounded-sm"
-        ></div>
-
-        <!-- If there's no label   -->
+        <!-- If there's no label -> explore children [vertical flex direciton] -->
         <div
           v-if="!item['rdfs:label']"
           v-show="!collapsedItems.includes(item.temp_id)"

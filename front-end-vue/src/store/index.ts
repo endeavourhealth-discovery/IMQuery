@@ -4130,6 +4130,7 @@ export default createStore({
     ],
     queryBuilder: new QueryBuilder(),
     ontology: new Ontology(),
+    isCardDragged: false,
   },
   mutations: {
     queryBuilder(state, { action, payload }) {
@@ -4261,6 +4262,10 @@ export default createStore({
     },
     updateLabelContent(state, LabelContent) {
       state.LabelContent = LabelContent;
+
+    },
+    updateIsCardDragged(state, val) {
+      state.isCardDragged = val;
 
     }
   },
