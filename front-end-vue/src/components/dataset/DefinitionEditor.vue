@@ -40,8 +40,8 @@
       </div>
       <!-- D/efinition  -->
     </div>
-      <!-- <nestedExample /> -->
 
+    <!-- <dragNext /> -->
     <div
       v-if="queryBuilder.activeClause"
       class="definition-editor__curator w-full"
@@ -70,8 +70,9 @@ import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import ClauseItem from "@/components/dataset/ClauseItem.vue";
 import ClauseEditor from "@/components/dataset/ClauseEditor.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
-import nestedExample from "@/components/dataset/draggable/nestedExample.vue";
-import draggable from "vuedraggable";
+// import nestedExample from "@/components/dataset/draggable/nestedExample.vue";
+// import draggable from "vuedraggable";
+// import dragNext from "@/components/dataset/draggable/dragNext.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
@@ -92,6 +93,7 @@ export default defineComponent({
     // SectionToggler,
     ClauseItem,
     ClauseEditor,
+    // dragNext,
     // draggable,
     // HeroIcon,
   },

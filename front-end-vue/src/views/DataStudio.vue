@@ -59,6 +59,11 @@
       <DatasetBrowser class="section-center w-full"
     /></template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
+    <template v-else-if="sideNavActiveItem == 'Test Components'">
+      <div class="section-center flex w-full h-full border-right">
+        <nestedExample />
+      </div>
+    </template>
     <template v-else-if="sideNavActiveItem == 'View Definition'">
       <div class="section-center flex w-full h-full border-right">
         <div
@@ -102,7 +107,6 @@
               @change="onUploadFiles()"
             />
           </template>
-
         </div>
         <div class="inline-flex flex-col w-full h-full">
           <!-- <div class="h-10 w-full">
@@ -206,6 +210,7 @@ const jp = require("jsonpath");
 const prettier = require("prettier/standalone");
 const prettierBabylon = require("prettier/parser-babylon");
 import { VAceEditor } from "@/components/dataset/VAceEditor";
+import nestedExample from "@/components/dataset/draggable/nestedExample.vue";
 
 // import * as IMQ  from "@/models/query/QueryBuilder";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
@@ -233,6 +238,7 @@ export default defineComponent({
     InputTextbox,
     DefinitionEditor,
     // VueJsonPretty
+    nestedExample,
   },
   data() {
     return {
@@ -528,6 +534,14 @@ export default defineComponent({
           seperator: false,
         },
         {
+          id: "8986aceb-0e8f-4429-8b42-d408250e91f1",
+          name: "Test Components",
+          icon: "template",
+          visible: true,
+          children: [],
+          seperator: false,
+        },
+        {
           id: "dbb23c7f-7f8a-4457-ad60-9096e9de3eb7",
           name: "Get Help",
           icon: "question_mark_circle",
@@ -794,8 +808,6 @@ export default defineComponent({
   border-right: 1px solid #ecefed;
   /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
 }
-
-
 
 .shadow-middle {
   box-shadow: rgb(207, 210, 218) 0px 2px 6px;
