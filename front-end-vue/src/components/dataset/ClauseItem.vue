@@ -22,13 +22,7 @@
           v-if="isOptionVisible[index]"
           class="clause-item__options opacity-60 absolute"
         >
-          <!-- <draggable
-            :list="options"
-            ghost-class="moving-card"
-            :move="checkMove"
-            @start="isDragging = true"
-            @end="isDragging = false"
-          > -->
+    
           <div
             v-for="item in options"
             :key="item.id"
@@ -207,7 +201,6 @@ const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import FullscreenDialog from "@/components/dataset/FullscreenDialog.vue";
-import draggable from "vuedraggable";
 
 export default defineComponent({
   name: "ClauseItem",

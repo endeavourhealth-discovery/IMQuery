@@ -1,11 +1,11 @@
 <template>
   <button
-    class="cursor-pointer block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10 focus:ring-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2"
+    class="cursor-pointer block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10 focus:ring-blue-600 focus:outline-none focus:ring-2 "
   >
     <div
       :style="{ paddingLeft: `${paddingLeft}px` }"
       :class="
-        'hierachytreeitem cursor-pointer group py-2 pl-3 rounded-md flex justify-start items-center text-black' +
+        'hierachytreeitem cursor-pointer relative group py-2 pl-3 rounded-md flex justify-start items-center text-black' +
           [isHover ? ' hover bg-blue-50' : ''] +
           [isActive(value['@id']) ? ' active bg-blue-50' : '']
       "
@@ -27,12 +27,12 @@
       <HeroIcon
         :active="true"
         :class="
-          'inline font-regular text-md mr-2' +
+          'hierachytreeitem__icon inline mr-2' +
             [isHover || isActive(value['@id']) ? ' ' : ''] +
             [
               value['rdf:type'][0]['@id'] == 'im:Folder'
                 ? ' text-blue-600'
-                : ' text-green-500',
+                : ' text-cyan-500',
             ]
         "
         strokewidth="2"
@@ -44,22 +44,24 @@
       />
 
       <!-- Label  -->
-      <div :class="'mr-3 font-regular text-md w-full text-left'">
+      <div :class="'mr-3 font-normal text-md w-full text-left'">
         {{ value["rdfs:label"] }}
       </div>
 
-      <!-- Arrow -->
+      <!-- Hover Options -->
       <div
-        v-if="value['rdf:type'][0]['@id'] == 'im:Folder'"
-        class="hierachytreeitem__plus absolute right-0 bg-blue-50 cursor-pointer text-blue-700 font-semibold hover:underline"
+        v-if="isHover"
+        class="hierachytreeitem__hoveroptions absolute right-0 bg-blue-50 cursor-pointer text-blue-600 font-semibold h-full"
       >
-        {{ isHover ? "Expand" : "" }}
-      </div>
-      <div
-        v-else
-        class="hierachytreeitem__plus absolute right-0 bg-blue-50 cursor-pointer text-blue-700 font-semibold hover:underline"
-      >
-        {{ isHover ? "Open" : "" }}
+        <div class="top-2/4 translate-y-1/4 ">
+          {{
+            value["rdf:type"][0]["@id"] == "im:Folder"
+              ? expandedItems.includes(value["@id"])
+                ? "Collapse"
+                : "Expand"
+              : "Open"
+          }}
+        </div>
       </div>
     </div>
 
@@ -213,7 +215,11 @@ export default defineComponent({
   font-size: 14px;
 }
 
-.hierachytreeitem__plus {
+.hierachytreeitem__icon {
+  margin-top: 2px;
+}
+
+.hierachytreeitem__hoveroptions {
   min-width: 45px;
   margin-right: 10px;
 }

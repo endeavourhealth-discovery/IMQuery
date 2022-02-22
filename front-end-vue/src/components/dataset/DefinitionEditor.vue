@@ -11,7 +11,7 @@
       <div
         :class="
           'transition duration-500 ease-in-out border border-b-1 border-gray-200 shadow-sm pb-20 rounded-md w-full' +
-            [isHover ? ' hover shadow-middle' : '']
+            [isHover ? ' hover border-gray-300 shadow-middle' : '']
         "
         v-for="(item, index) in withTempUUID(modelValue[definitionIri])"
         :key="item.temp_id"
@@ -19,9 +19,7 @@
         @mouseleave="isHover = false"
       >
         <div class="flex border-b border-b-gray-200">
-          <div
-            class="title text-black h-10 font-semibold mt-3 mb-1 mx-5 w-full"
-          >
+          <div class="title text-black font-semibold mt-3 mb-2 mx-5 w-full">
             {{
               queryBuilder.activeProfile
                 ? queryBuilder.activeProfile["rdfs:label"]
@@ -42,6 +40,8 @@
       </div>
       <!-- D/efinition  -->
     </div>
+      <!-- <nestedExample /> -->
+
     <div
       v-if="queryBuilder.activeClause"
       class="definition-editor__curator w-full"
@@ -49,6 +49,15 @@
       <div class="title text-center text-gray-400 w-full h-10 font-semibold">
         Profile
       </div>
+      <!-- 
+      <draggable
+        :list="options"
+        ghost-class="moving-card"
+        :move="checkMove"
+        @start="isDragging = true"
+        @end="isDragging = false"
+      >
+      </draggable> -->
       <ClauseEditor :modelValue="queryBuilder.activeClause" />
     </div>
   </div>
@@ -61,6 +70,8 @@ import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import ClauseItem from "@/components/dataset/ClauseItem.vue";
 import ClauseEditor from "@/components/dataset/ClauseEditor.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
+import nestedExample from "@/components/dataset/draggable/nestedExample.vue";
+import draggable from "vuedraggable";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
@@ -77,18 +88,82 @@ export default defineComponent({
   ],
   emits: ["update:modelValue"],
   components: {
+    // nestedExample,
     // SectionToggler,
     ClauseItem,
     ClauseEditor,
+    // draggable,
     // HeroIcon,
   },
   data() {
     return {
       isHover: false,
       collapsedItems: [] as any[],
+      isDragging: false,
+      options: [
+        {
+          id: "abc89209-fcc5-4770-9a4b-bb1655104258",
+          name: "Add",
+          icon: "plus",
+          classes: "",
+          order: 1,
+          fixed: false,
+        },
+        {
+          id: "afcd1608-3d79-4e10-90b6-1e9d354b9283",
+          name: "Copy",
+          icon: "document_duplicate",
+          classes: "",
+          order: 2,
+          fixed: false,
+        },
+        {
+          id: "23cdb751b04edc4a-79ad-41da-a44c-7e871902a8a9",
+          name: "Cut",
+          icon: "scissors",
+          classes: "",
+          order: 3,
+          fixed: false,
+        },
+        {
+          id: "23cdb75120e0ee94-b1d4-4c63-865f-e1c16f60d464",
+          name: "Paste",
+          icon: "clipboard_copy",
+          classes: "",
+          order: 4,
+          fixed: false,
+        },
+        {
+          id: "23cdb75120e0ee94-b1d4-4c63-865f-e1c16f60d464",
+          name: "Move",
+          icon: "arrow_right",
+          classes: "",
+          order: 5,
+          fixed: false,
+        },
+        {
+          id: "23cdb751-136c-433e-8614-f48f8459da11",
+          name: "Edit",
+          icon: "pencil",
+          classes: "",
+          order: 6,
+          fixed: false,
+        },
+        {
+          id: "bf34d743-35b2-4e3c-b50f-5989b0bd3174",
+          name: "Delete",
+          icon: "x",
+          classes: "",
+          order: 7,
+          fixed: false,
+        },
+      ],
     };
   },
   methods: {
+    checkMove: function(e) {
+      window.console.log("Future index: " + e.draggedContext.futureIndex);
+    },
     toggleTableSection(item: number): void {
       if (this.collapsedItems.includes(item)) {
         this.collapsedItems = this.collapsedItems.filter(function(value: any) {

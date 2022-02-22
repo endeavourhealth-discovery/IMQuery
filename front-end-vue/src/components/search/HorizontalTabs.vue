@@ -22,7 +22,6 @@
             width="16"
             height="16"
             :icon="item.icon"
-            :active="modelValue == item.index"
           />
         </div>
         <!-- / Icon -->
