@@ -28,8 +28,9 @@
           </div>
           <div></div>
         </div>
-        <div class="pt-5 px-2 w-full">
+        <div class="pt-5 pl-8 pr-2 w-full">
           <ClauseItem
+            :isTopLevel="true"
             class="grow"
             :propertyPath="`${definitionIri}[${index}]`"
             :clause="item"

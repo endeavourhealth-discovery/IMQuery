@@ -1,7 +1,7 @@
 <template>
-  <div class="flex">
-    <nestedDraggable class="w" :tasks="list1" />
-    <nestedDraggable class="w" :tasks="list2" />
+  <div class="flex pl-10 pt-10">
+    <nestedDraggable class="mx-5" :children="profile1" />
+    <nestedDraggable class="mx-5" :children="profile2" />
     <!-- <rawDisplayer :value="list" title="List" /> -->
   </div>
 </template>
@@ -20,52 +20,72 @@ export default defineComponent({
   },
   data() {
     return {
-      list1: [
+      profile1: [
         {
-          name: "Feature 1",
-          tasks: [
+          name: "Clause 1",
+          include: true,
+          operator: "any",
+          children: [
             {
-              name: "Feature 2",
-              tasks: [],
+              name: "Clause 2",
+              include: true,
+              operator: "any",
+              children: [],
             },
           ],
         },
         {
-          name: "Feature 3",
-          tasks: [
+          name: "Clause 3",
+          include: true,
+          operator: "all",
+          children: [
             {
-              name: "Feature 4",
-              tasks: [],
+              name: "Clause 4",
+              include: true,
+              operator: "all",
+              children: [],
             },
           ],
         },
         {
-          name: "Feature 5",
-          tasks: [],
+          name: "Clause 5",
+          include: false,
+          operator: "all",
+          children: [],
         },
       ],
-      list2: [
+      profile2: [
         {
-          name: "Feature 6",
-          tasks: [
+          name: "Clause 6",
+          include: true,
+          operator: "all",
+          children: [
             {
-              name: "Feature 7",
-              tasks: [],
+              name: "Clause 7",
+              include: true,
+              operator: "all",
+              children: [],
             },
           ],
         },
         {
-          name: "Feature 8",
-          tasks: [
+          name: "Clause 8",
+          include: false,
+          operator: "any",
+          children: [
             {
-              name: "Feature 9",
-              tasks: [],
+              name: "Clause 9",
+              include: true,
+              operator: "any",
+              children: [],
             },
           ],
         },
         {
-          name: "Feature 10",
-          tasks: [],
+          name: "Clause 10",
+          include: true,
+          operator: "all",
+          children: [],
         },
       ],
     };

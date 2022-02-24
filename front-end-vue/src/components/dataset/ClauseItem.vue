@@ -22,7 +22,6 @@
           v-if="isOptionVisible[index]"
           class="clause-item__options opacity-60 absolute"
         >
-    
           <div
             v-for="item in options"
             :key="item.id"
@@ -61,11 +60,19 @@
                 ]
             "
           >
-            Include
+   
+            <HeroIcon
+            v-if="!isTopLevel"
+              class="inline"
+              icon="arrow_right"
+              strokewidth="1"
+              width="18"
+              height="18"
+            />
           </div>
 
           <!--  Rest -->
-          <div
+          <!-- <div
             v-else-if="index > 0"
             :class="
               'inline-block font-semibold hover:text-blue-600 hover:underline' +
@@ -77,7 +84,7 @@
             "
           >
             {{ operatorLabel() }}
-          </div>
+          </div> -->
 
           <!-- <HeroIcon
             v-if="isOperatorHovered[index]"
@@ -91,7 +98,7 @@
         <!-- / Operator -->
 
         <!-- circle + Line  -->
-        <div class="inline-flex flex-col">
+        <div class="inline-flex flex-col relative">
           <!-- circle  -->
           <div
             :class="
@@ -112,8 +119,34 @@
               'inline border-r border-r-transparent' +
                 [
                   operatorLabel() == 'And'
-                    ? ` line b-2 border-r-${colors.and}-700`
-                    : ` line border-dotted b-2 border-r-${colors.or}-700`,
+                    ? ` line-h b-2 border-r-${colors.and}-700`
+                    : ` line-h border-dotted b-2 border-r-${colors.or}-700`,
+                ]
+            "
+          ></div>
+
+          <div
+            v-if="index != currentClause.length - 1"
+            :class="
+              'clause-item__operatorlabel inline-block absolute bg-white font-semibold hover:text-blue-600 hover:underline' +
+                [
+                  operatorLabel() == 'And'
+                    ? ` text-${colors.and}-700`
+                    : ` text-${colors.or}-700`,
+                ]
+            "
+          >
+            {{ operatorLabel() }}
+          </div>
+
+          <div
+            v-if="index != currentClause.length - 1"
+            :class="
+              'inline border-r border-r-transparent' +
+                [
+                  operatorLabel() == 'And'
+                    ? ` line-h b-2 border-r-${colors.and}-700`
+                    : ` line-h border-dotted b-2 border-r-${colors.or}-700`,
                 ]
             "
           ></div>
@@ -127,9 +160,9 @@
           @mouseleave="isLabelHovered[index] = false"
           v-if="item['rdfs:label']"
           :class="
-            'clause-item__label relative group inline-flex outline-none font-semibold bg-transparent border border-transparent b-2 rounded-md text-black pr-2' +
-              [isActive(index) ? ' selected' : ''] +
-              [isOptionVisible[index] ? ' options bg-blue-50' : ''] +
+            'clause-item__label relative group inline-flex flex-col outline-none font-semibold bg-transparent border border-transparent b-2 rounded-md text-black pr-2' +
+              [isActive(index) ? ' selected bg-blue-500' : ''] +
+              [isOptionVisible[index] ? ' options bg-black' : ''] +
               [
                 containsLongWords(item['rdfs:label'])
                   ? ' break-all'
@@ -138,23 +171,40 @@
           "
         >
           <div
+            v-if="isLabelHovered[index]"
+            :class="
+              'clause-item__labelmeta flex items-center absolute z-10 rounded-t-md pl-2 bg-blue-400 text-white'
+            "
+          >
+            <HeroIcon
+              class="inline mr-1"
+              icon="search"
+              strokewidth="2"
+              width="18"
+              height="18"
+            />
+            <div class="px-1">
+              Search Criteria
+            </div>
+          </div>
+          <div
             @click="setActive(index)"
             @click.right.prevent="showOptions(index)"
             :class="
               'clause-item__labeltext grow' +
-                [isActive(index) ? ' #text-blue-700' : '']
+                [isActive(index) ? ' //text-blue-700' : '']
             "
           >
             {{ item["rdfs:label"] }}
           </div>
           <div
-            class="w-5 flex absolute h-9 w-9 right-0 group-hover:bg-white rounded-md top-2/4 -translate-y-2/4"
+            class="flex absolute h-auto w-8 right-0 group-hover:bg-white rounded-md top-2/4 -translate-y-2/4"
             @click="showOptions(index)"
             @click.right.prevent="showOptions(index)"
           >
             <HeroIcon
               v-if="isLabelHovered[index]"
-              class="inline text-blue-500 mt-2 ml-2"
+              class="inline text-blue-500 mt-1 ml-1"
               icon="dots_horizontal"
               strokewidth="2"
               width="20"
@@ -200,6 +250,7 @@ import FullscreenDialog from "@/components/dataset/FullscreenDialog.vue";
 export default defineComponent({
   name: "ClauseItem",
   props: [
+    "isTopLevel",
     "propertyPath",
     "modelValue",
     "operatorIris",
@@ -450,13 +501,15 @@ export default defineComponent({
   /* max-width: 300px; */
   /* width: 100%; */
   max-width: 300px;
-  min-height: 20px;
+  /* height: 100%; */
+  /* max-height:px; */
   /* max-width: 300px; */
   /* min-width: 150px; */
   position: relative;
 
-  top: -7px;
+  top: -9px;
   margin: 3px;
+
   z-index: 9; /* Sit on top */
 }
 
@@ -464,10 +517,19 @@ export default defineComponent({
   background-color: #fff;
   border-color: #d1d5db;
 }
-.definition-editor .hover .clause-item__label:hover {
+.definition-editor .clause-item__label:hover {
   border: 1px solid #0d89ec;
   background-color: #fff;
   color: #0d89ec;
+}
+.definition-editor .clause-item__label:hover .clause-item__labelmeta {
+  /* border: 1px solid #0d89ec; */
+  /* background-color: #0d89ec; */
+  /* color: #fff; */
+  padding: 2px 5px;
+  top: -20px;
+  width: calc(100% + 2px);
+  left: -1px;
 }
 
 .definition-editor .clause-item__label.selected {
@@ -485,8 +547,16 @@ export default defineComponent({
 
 .clause-item__operator {
   /* min-width: 55px; */
-  min-width: 60px;
-  margin-left: 13px;
+  min-width: 25px;
+  /* margin-left: 13px; */
+}
+
+.clause-item__operatorlabel {
+  top: calc(50%);
+  right: 30px;
+  /* width: 30px; */
+  text-align: right;
+  visibility: hidden;
 }
 /* 
 .clause-item_arrow {
@@ -494,19 +564,25 @@ export default defineComponent({
   min-width: 20px;
   width: 20px;
 } */
-
+/* 
 .definition-editor .hover .circle,
-.definition-editor .hover .line,
+.definition-editor .hover .line-h,
 .definition-editor .hover .linebutton {
   visibility: visible;
+} */
+
+.definition-editor .hover .clause-item__operatorlabel {
+  visibility: visible !important;
 }
 
 .circle {
-  visibility: hidden;
+  /* visibility: hidden; */
 
   margin: 5px 10px 5px 0px;
   min-width: 13px;
   min-height: 13px;
+  width: 13px;
+  height: 13px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
@@ -515,22 +591,28 @@ export default defineComponent({
   box-sizing: border-box;
 }
 
-.line {
-  visibility: hidden;
+.line-h {
+  /* visibility: hidden; */
   width: 7px;
   height: 100%;
   min-height: 10px;
 }
+.line-w {
+  /* visibility: hidden; */
+  width: 30px;
+  /* height: 100%; */
+  min-height: 10px;
+}
 
 .linebutton {
-  visibility: hidden;
+  /* visibility: hidden; */
   width: 7px;
   height: 100%;
   min-height: 0px;
 }
 
 .clause-item__options {
-  left: 10px;
+  left: -40px;
   top: -8px;
   font-size: 16px;
   /* margin-right: 20px; */

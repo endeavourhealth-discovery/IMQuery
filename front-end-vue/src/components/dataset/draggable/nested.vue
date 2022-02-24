@@ -1,15 +1,6 @@
-<!-- <template>
-  <draggable class="dragArea" tag="ul" :list="tasks" :group="{ name: 'g1' }">
-    
-      <li v-for="el in tasks" :key="el.name">
-        <p>{{ el.name }}</p>
-        <nested-draggable :tasks="el.tasks" />
-      </li>
-  </draggable>
-</template> -->
 <template @mouseleave="isCardDragged = false">
   <draggable
-    :list="tasks"
+    :list="children"
     item-key="name"
     :class="
       'select-none cursor-pointer dragArea rounded-sm order-color-300 ' +
@@ -24,67 +15,102 @@
     @drop="isCardDragged = false"
     @mouseleave="isCardDragged = false"
   >
+    <!-- Each item in list  -->
     <template #item="{ element, index }">
-      <div ref="listGroup" class="">
+      <div class="flex flex-col relative">
         <div
           v-if="index == 0"
-          class="select-none cursor-pointer text-gray-700 font-medium px-2"
+          class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
         >
-          Include a person if they match all descriptions
+          <div>
+            <div
+              @click="toggleInclude(element)"
+              :class="
+                'inline border b-1 px-2 py-0.5 rounded-md text-white ' +
+                  [element.include ? ' bg-green-600' : ' bg-red-600']
+              "
+            >
+              {{ element.include ? " Include" : " Exclude" }}
+            </div>
+            <!-- <div
+              :class="
+                'inline border b-1 pl-2 pr-1 py-0.5 rounded-md text-white ' +
+                  [element.include ? ' bg-green-600' : ' bg-red-600']
+              "
+            >
+              Include
+            </div> -->
+            <div class="inline">
+              a person if they match
+            </div>
+            <div
+              v-if="operatorLabel(element) && operatorLabel(element) != ''"
+              @click="toggleOperator(element)"
+              :class="
+                'inline border b-1 px-2 py-0.5 rounded-md text-white ' +
+                  [
+                    element.operator == 'all'
+                      ? ' bg-blue-600'
+                      : ' bg-indigo-600',
+                  ]
+              "
+            >
+              {{ operatorLabel(element) }}
+            </div>
+          </div>
         </div>
-        <div
-          class="select-none cursor-pointer text-black font-bold bg-white rounded-sm mx-5 my-1 px-2 py-1"
-        >
-          {{ element.name }}
+        <div class="inline-flex">
+          <div class="inline-flex flex-col">
+            <!-- circle  -->
+            <div :class="' inline border circle b-2 border-blue-600'"></div>
+            <!-- :line  -->
+            <div
+              v-if="index != children.length - 1"
+              :class="'inline  border-r line-h b-2 border-r-blue-700'"
+            ></div>
+            <!-- <div
+              v-if="element.children.length"
+              :class="'inline border circle b-2 border-blue-600'"
+            ></div> -->
+          </div>
+          <div class="inline flex-col">
+            <div
+              class="select-none cursor-pointer text-black font-bold bg-white rounded-sm my-1 pr-2 py-1 relative -translate-y-2"
+            >
+              {{ element.name }}
+            </div>
+            <nested-draggable
+              :isParentNegated="element.include == false"
+              :class="
+                'dragArea__children' +
+                  [
+                    isCardDragged && !element.children.length
+                      ? ' min-h bg-blue-100'
+                      : ' ',
+                  ] +
+                  [!isCardDragged && !element.children.length ? ' hidden' : ' ']
+              "
+              :children="element.children"
+              item-key="name"
+              @drag="isCardDragged = true"
+              @dragend="isCardDragged = false"
+              @drop="isCardDragged = false"
+            />
+          </div>
         </div>
-        <nested-draggable
-          :class="
-            'ml-5 dragArea__children' +
-              [
-                isCardDragged && !element.tasks.length
-                  ? ' min-h bg-blue-100'
-                  : '',
-              ] +
-              [!isCardDragged && !element.tasks.length ? ' hidden' : ' ']
-          "
-          :tasks="element.tasks"
-          item-key="name"
-          @drag="isCardDragged = true"
-          @dragend="isCardDragged = false"
-          @drop="isCardDragged = false"
-        />
-
-        <!-- <nested-draggable
-          v-else
-          :class="
-            'mt-10 ml-10 bg-gray-300 dragArea__nochildren' +
-              [isCardDragged ? ' min-h' : ' hidden']
-          "
-        /> -->
-
-        <!-- <nested-draggable
-          v-if="element.tasks.length"
-          class="ml-5"
-          :tasks="element.tasks"
-          item-key="name"
-        />
-        <nested-draggable
-          v-else-if="onDrag"
-          class="ml-5"
-          :tasks="element.tasks"
-          item-key="name"
-        /> -->
       </div>
     </template>
+    <!-- /Each item in list  -->
   </draggable>
 </template>
 
 <script lang="ts">
 import draggable from "vuedraggable";
 import { ref, onMounted, defineComponent } from "vue";
+import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 export default defineComponent({
-  props: ["tasks", "isParentDragged"],
+  props: ["children", "isParentNegated"],
   components: {
     draggable,
   },
@@ -92,8 +118,42 @@ export default defineComponent({
   name: "nested-draggable",
   data() {
     return {
-      // isDrag: false,
+      childrenText: {
+        1: {
+          any: "",
+          all: "",
+        },
+        2: {
+          any: "either feature",
+          all: "both features",
+        },
+        default: {
+          any: "any feature",
+          all: "all features",
+        },
+      },
     };
+  },
+  methods: {
+    toggleOperator(element: any): void {
+      if (element.operator == "any") {
+        element.operator = "all";
+      } else {
+        element.operator = "any";
+      }
+    },
+    toggleInclude(element: any): void {
+      element.include = !element.include;
+    },
+    operatorLabel(element: any): string {
+      if (this.children.length == 1) {
+        return this.childrenText[1][element.operator];
+      } else if (this.children.length == 2) {
+        return this.childrenText[2][element.operator];
+      } else {
+        return this.childrenText.default[element.operator];
+      }
+    },
   },
   computed: {
     isCardDragged: {
@@ -113,7 +173,6 @@ export default defineComponent({
   /* overflow-y: visible; */
   /* display: absolute; */
   min-width: 200px;
-  outline: 1px solid;
 }
 
 .dragArea__nochildren {
@@ -155,5 +214,28 @@ export default defineComponent({
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.circle {
+  /* visibility: hidden; */
+
+  margin: 5px 10px 5px 0px;
+  min-width: 13px;
+  min-height: 13px;
+  width: 13px;
+  height: 13px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.line-h {
+  /* visibility: hidden; */
+  width: 7px;
+  height: 100%;
+  /* min-height: 25px; */
 }
 </style>
