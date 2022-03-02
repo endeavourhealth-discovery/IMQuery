@@ -54,7 +54,7 @@ import Dialog from "primevue/dialog";
 import SplitButton from "primevue/splitbutton";
 import MultiSelect from "primevue/multiselect";
 import OverlayPanel from "primevue/overlaypanel";
-import Chart from "primevue/chart";
+// import Chart from "primevue/chart";
 import Menu from "primevue/menu";
 import ProgressSpinner from "primevue/progressspinner";
 import Menubar from "primevue/menubar";
@@ -73,6 +73,8 @@ import ContextMenu from "primevue/contextmenu";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 import RadioButton from "primevue/radiobutton";
 import ConfirmPopup from "primevue/confirmpopup";
+import Calendar from "primevue/calendar";
+import InputNumber from "primevue/inputnumber";
 
 import { Amplify, Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
@@ -118,7 +120,7 @@ const app = createApp(App)
   .component("MultiSelect", MultiSelect)
   .component("OverlayPanel", OverlayPanel)
   .component("Menu", Menu)
-  .component("Chart", Chart)
+  // .component("Chart", Chart)
   .component("font-awesome-icon", FontAwesomeIcon)
   .component("Menubar", Menubar)
   .component("InlineMessage", InlineMessage)
@@ -135,6 +137,8 @@ const app = createApp(App)
   .component("FilterMatchMode", FilterMatchMode)
   .component("FilterOperator", FilterOperator)
   .component("RadioButton", RadioButton)
-  .component("ConfirmPopup", ConfirmPopup);
+  .component("ConfirmPopup", ConfirmPopup)
+  .component("Calendar", Calendar)
+  .component("InputNumber", InputNumber);
 
 app.mount("#app");

@@ -93,7 +93,7 @@
                   v-model="selectedOrganisations"
                   :items="radioButtonItems.sources"
                   :multiselect="false"
-                    :checkbox="true"
+                  :checkbox="true"
                 />
                 <MultiSelect
                   v-if="selectedOrganisations.includes('other')"
@@ -115,7 +115,6 @@
                   :description="inputMeta.mainDataType"
                 />
                 <InputRadioButtons
-                  
                   class="w-full max-w-lg mx-auto mt-7"
                   v-model="selectedMainDataType"
                   :items="radioButtonItems.mainDataType"
@@ -138,7 +137,7 @@
             </StepCurator>
 
             <div v-show="sideNavActiveItem == 'Output'">
-              Output
+Output
             </div>
             <div
               v-show="sideNavActiveItem == 'Save or Export'"
@@ -189,7 +188,6 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
-
 // UI
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";

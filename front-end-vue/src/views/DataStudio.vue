@@ -59,7 +59,7 @@
       <DatasetBrowser class="section-center w-full"
     /></template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
-    <template v-else-if="sideNavActiveItem == 'Test Components'">
+    <template v-else-if="sideNavActiveItem == 'Draggable Test Components'">
       <div class="section-center flex w-full h-full border-right">
         <nestedExample />
       </div>
@@ -172,6 +172,11 @@
         </div>
       </div>
     </template>
+    <template v-else-if="sideNavActiveItem == 'Data Output'">
+      <div class="section-center flex justify-center w-full h-full border-right">
+        <DataViewer class="mt-6"> </DataViewer>
+      </div>
+    </template>
   </div>
   <!-- /Content Wrapper -->
 </template>
@@ -182,6 +187,7 @@ import { functions_v1 as f } from "@/models/query/TemplateFunctions";
 
 const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
+import DataViewer from "@/components/dataset/DataViewer.vue";
 
 import LoggerService from "@/services/LoggerService";
 import MultiSelect from "primevue/multiselect";
@@ -198,7 +204,6 @@ import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 import Network from "@/components/dataset/Network.vue";
-import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
 import QueryTools, { QueryBuilder } from "@/models/query/QueryTools";
@@ -223,6 +228,7 @@ import nestedExample from "@/components/dataset/draggable/nestedExample.vue";
 export default defineComponent({
   name: "DataStudio",
   components: {
+    DataViewer,
     QueryEditor,
     BackgroundCards,
     RoundButton,
@@ -516,7 +522,7 @@ export default defineComponent({
           visible: false,
         },
       ],
-      sideNavActiveItem: "View Definition",
+      sideNavActiveItem: "Data Output",
       sideNavItems: [
         {
           id: "074b7d3e-2519-4bed-bdf4-84f90f46de46",
@@ -531,15 +537,20 @@ export default defineComponent({
           icon: "menu_alt_1",
           visible: true,
           children: [],
-          seperator: false,
         },
         {
           id: "8986aceb-0e8f-4429-8b42-d408250e91f1",
-          name: "Test Components",
+          name: "Draggable Test Components",
           icon: "template",
           visible: true,
           children: [],
-          seperator: false,
+        },
+        {
+          id: "5a24a424-2b15-4255-a076-ac1a992fb4fc",
+          name: "Data Output",
+          icon: "cube",
+          visible: true,
+          children: [],
         },
         {
           id: "dbb23c7f-7f8a-4457-ad60-9096e9de3eb7",
