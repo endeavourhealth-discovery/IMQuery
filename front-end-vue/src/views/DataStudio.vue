@@ -77,18 +77,18 @@
             </div>
             <div class="w-full h-full" v-show="activeItemView == 'Folders'">
               <div
-                v-if="queryBuilder.hierarchyTree(topLevelEntity)"
+                v-if="queryBuilder.hierarchyTree(topLevelFolder)"
                 class="left inline-flex flex-col w-full h-full"
               >
                 <div
                   v-if="
-                    queryBuilder.hierarchyTree(topLevelEntity).children.length
+                    queryBuilder.hierarchyTree(topLevelFolder).children.length
                   "
                   class="folder-view p-2"
                 >
                   <HierarchyTreeItem
                     class="w-full my-3"
-                    :value="queryBuilder.hierarchyTree(topLevelEntity)"
+                    :value="queryBuilder.hierarchyTree(topLevelFolder)"
                     :nestingCount="0"
                   />
                 </div>
@@ -437,7 +437,7 @@ export default defineComponent({
           ],
         },
       },
-      topLevelEntity: {
+      topLevelFolder: {
         "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries",
         "rdf:type": [
           {

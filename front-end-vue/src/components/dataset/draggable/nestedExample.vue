@@ -1,8 +1,11 @@
 <template>
-  <div class="flex pl-10 pt-10">
-    <nestedDraggable class="mx-5" :children="profile1" />
-    <nestedDraggable class="mx-5" :children="profile2" />
-    <!-- <rawDisplayer :value="list" title="List" /> -->
+  <div class="flex flex-col pl-10 pt-10">
+    <div class="mb-20">Profile 1</div>
+    <nestedDraggable class="profile mx-5" :children="profile1" />
+  </div>
+  <div class="flex flex-col pl-10 pt-10">
+    <div class="mb-20">Profile 2</div>
+    <nestedDraggable class="profile mx-5" :children="profile2" />
   </div>
 </template>
 
@@ -22,69 +25,72 @@ export default defineComponent({
     return {
       profile1: [
         {
-          name: "Clause 1",
+          type: "operator",
           include: true,
-          operator: "any",
+          operator: "and",
           children: [
             {
-              name: "Clause 2",
+              type: "match",
+              name: "GP Register",
               include: true,
-              operator: "any",
+              operator: "and",
+              children: [],
+            },
+            {
+              type: "operator",
+              include: true,
+              operator: "and",
+              children: [
+                {
+                  name: "Regular Patient",
+                  type: "match",
+                  // include: true,
+                  // operator: "and",
+                  children: [],
+                },
+                {
+                  name: "Age over 18",
+                  type: "match",
+                  // include: true,
+                  // operator: "and",
+                  children: [],
+                },
+              ],
+            },
+            {
+              name: "Unresolved SMI",
+              type: "match",
+              include: true,
+              operator: "and",
               children: [],
             },
           ],
-        },
-        {
-          name: "Clause 3",
-          include: true,
-          operator: "all",
-          children: [
-            {
-              name: "Clause 4",
-              include: true,
-              operator: "all",
-              children: [],
-            },
-          ],
-        },
-        {
-          name: "Clause 5",
-          include: false,
-          operator: "all",
-          children: [],
         },
       ],
       profile2: [
         {
-          name: "Clause 6",
+          name: "GP Register",
           include: true,
-          operator: "all",
+          operator: "or",
           children: [
             {
-              name: "Clause 7",
+              name: "Regular Patient",
               include: true,
-              operator: "all",
+              operator: "or",
+              children: [],
+            },
+            {
+              name: "Age over 18",
+              include: true,
+              operator: "and",
               children: [],
             },
           ],
         },
         {
-          name: "Clause 8",
-          include: false,
-          operator: "any",
-          children: [
-            {
-              name: "Clause 9",
-              include: true,
-              operator: "any",
-              children: [],
-            },
-          ],
-        },
-        {
-          name: "Clause 10",
+          name: "Unresolved SMI",
           include: true,
-          operator: "all",
+          operator: "and",
           children: [],
         },
       ],
@@ -92,4 +98,8 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped></style>
+<style scoped>
+.profile {
+  height: 300px;
+}
+</style>

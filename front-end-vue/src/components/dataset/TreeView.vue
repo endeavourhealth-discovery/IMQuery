@@ -1,18 +1,18 @@
 <template>
             <div v-show="activeFileView == 'Folder Hierarchy'">
               <div
-                v-if="queryBuilder.hierarchyTree(topLevelEntity)"
+                v-if="queryBuilder.hierarchyTree(topLevelFolder)"
                 class="left inline-flex flex-col w-full h-full"
               
                 <div
                   v-if="
-                    queryBuilder.hierarchyTree(topLevelEntity).children.length
+                    queryBuilder.hierarchyTree(topLevelFolder).children.length
                   "
                   class="folder-viewer padding-text"
                 >
 
                   <HierarchyTreeItem
-                    :value="queryBuilder.hierarchyTree(topLevelEntity)"
+                    :value="queryBuilder.hierarchyTree(topLevelFolder)"
                   />
                 </div>
               </div>

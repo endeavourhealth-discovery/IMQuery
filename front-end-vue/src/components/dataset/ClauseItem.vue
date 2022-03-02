@@ -50,7 +50,7 @@
         >
           <!-- First Item  -->
           <div
-            v-if="index == 0"
+            v-if="!isTopLevel && index == 0"
             :class="
               'inline-block  text-indigo-700 font-semibold hover:text-blue-600  hover:underline' +
                 [
@@ -60,15 +60,15 @@
                 ]
             "
           >
-   
-            <HeroIcon
+            ––
+            <!-- <HeroIcon
             v-if="!isTopLevel"
               class="inline"
               icon="arrow_right"
               strokewidth="1"
               width="18"
               height="18"
-            />
+            /> -->
           </div>
 
           <!--  Rest -->
@@ -178,13 +178,13 @@
           >
             <HeroIcon
               class="inline mr-1"
-              icon="search"
+              icon="pencil"
               strokewidth="2"
               width="18"
               height="18"
             />
             <div class="px-1">
-              Search Criteria
+              Edit Search Criteria
             </div>
           </div>
           <div

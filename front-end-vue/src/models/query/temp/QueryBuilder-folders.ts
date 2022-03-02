@@ -215,20 +215,20 @@ export default class QueryBuilder {
 
     
     private _hierarchyTree: any;
-    private _lastTopLevelEntity: any;
-    hierarchyTree(topLevelEntity: any): any[] | null {
+    private _lastTopLevelFolder: any;
+    hierarchyTree(topLevelFolder: any): any[] | null {
 
         if (!this.Loaded) return null;
 
 
         //prevents expensive recomputation with each computed() call
-        if (this._lastTopLevelEntity && this._lastTopLevelEntity.iri == topLevelEntity.iri) {
+        if (this._lastTopLevelFolder && this._lastTopLevelFolder.iri == topLevelFolder.iri) {
             return this._hierarchyTree;
         } else {
-            this._lastTopLevelEntity = topLevelEntity;
+            this._lastTopLevelFolder = topLevelFolder;
         }
 
-        const _hierarchyTree = { ...topLevelEntity, currentPath: '', children: [] };
+        const _hierarchyTree = { ...topLevelFolder, currentPath: '', children: [] };
 
         this._hierarchyTree = _hierarchyTree;
 

@@ -166,7 +166,7 @@ export class QueryBuilder {
 
     // get profile by iri
     // special characters in keys are replaced for JSON queries
-    private _activeProfile: any;
+    private _activeProfile: Entity;
     private _openProfiles: Profile[] = [];
     public loadProfile(profileIri: string, replaceKeys = true, prettify = true): any {
         const _profile = this._profileEntities.get(profileIri);
@@ -216,6 +216,23 @@ export class QueryBuilder {
 
     //examples of templates
     private _interpolationTemplates: any = [
+        {
+            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+            propertyPath: "im:definition[0].im:and[2]",
+            text: `<p><span class="font-bold text-indigo-700">Include</span> a <span class="font-bold text-indigo-700">Person</span> if they </p>
+                <p style="margin-left: 30px;">had a <span class="font-bold text-indigo-700">Health Record</span> with</p>
+                <p style="margin-left: 60px;">a <span class="font-bold text-indigo-700">Clinical Code</span> that is part of the list of codes in the value set</p>
+                <p style="margin-left: 90px;"><span class="font-semibold text-black border border-transparent border-b-2 border-b-indigo-700">{{0}}</span></p>
+                <p style="margin-left: 90px;"><span class="font-bold text-indigo-700">or</span> <span class="font-semibold text-black border border-transparent border-b-2 border-b-indigo-700">{{1}}</span></p>
+                <p style="margin-left: 30px;">and the <span class="font-bold text-indigo-700">latest</span> <span class="font-semibold text-black border border-transparent border-b-2 border-b-indigo-700">1</span> entry had </p> 
+                <p style="margin-left: 60px;">a <span class="font-bold text-indigo-700">Clinical Code</span> that is part of the list of codes in the value set</p>
+                <p style="margin-left: 90px;"><span class="font-semibold text-black border border-transparent border-b-2 border-b-indigo-700">{{2}}</span></p>`,
+            variables: [
+                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+                "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+                "im:test[0].im:valueIn[0].rdfs:label"
+            ]
+        },
         {
             "iri": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
             "name": "disease status",
@@ -495,20 +512,20 @@ export class QueryBuilder {
 
     // displaying folders as a hierarchy tree 
     private _hierarchyTree: any;
-    private _lastTopLevelEntity: any;
-    hierarchyTree(topLevelEntity: any): any[] | null {
+    private _lastTopLevelFolder: any;
+    hierarchyTree(topLevelFolder: any): any[] | null {
 
         if (!this.Loaded) return null;
 
 
         //prevents expensive recomputation with each computed() call
-        if (this._lastTopLevelEntity && this._lastTopLevelEntity.iri == topLevelEntity.iri) {
+        if (this._lastTopLevelFolder && this._lastTopLevelFolder.iri == topLevelFolder.iri) {
             return this._hierarchyTree;
         } else {
-            this._lastTopLevelEntity = topLevelEntity;
+            this._lastTopLevelFolder = topLevelFolder;
         }
 
-        const _hierarchyTree = { ...topLevelEntity, currentPath: '', children: [] };
+        const _hierarchyTree = { ...topLevelFolder, currentPath: '', children: [] };
         this._hierarchyTree = _hierarchyTree;
 
         this.populateHierarchyTree();
@@ -531,9 +548,12 @@ export class QueryBuilder {
                 }
             })
 
+
+
+            // populates children's currentpath (a key that tells you the path to the current object) required by _currentItem['currentPath' ]
             for (let i = 0; i < _children.length; i++) {
                 if (targetEntity['currentPath'] == '') {
-                    _children[i]['currentPath'] = `${targetEntity['currentPath']}children[${i.toString()}]`
+                    _children[i]['currentPath'] = `children[${i.toString()}]`
                 } else {
                     _children[i]['currentPath'] = `${targetEntity['currentPath']}.children[${i.toString()}]`
                 }
@@ -541,13 +561,12 @@ export class QueryBuilder {
 
             }
 
-
             return _children;
         };
 
 
         // breadth-first addition of children
-        const _added = new Set();
+        const _visited = new Set();
         const _queue = [this._hierarchyTree]
 
         while (_queue.length > 0) {
@@ -569,10 +588,10 @@ export class QueryBuilder {
                 // console.log("4. tree: ", this._hierarchyTree)
             }
 
-            //get children of children
+            //add children to queue if they're not already visited
             for (const _child of _children) {
-                if (!_added.has(_child['@id'])) {
-                    _added.add(_child['@id']);
+                if (!_visited.has(_child['@id'])) {
+                    _visited.add(_child['@id']);
                     _queue.push(_child);
                 }
             }
@@ -614,19 +633,142 @@ export class Profile extends Entity {
     public 'im:definition'?: any | null;
     public 'im:entityType'?: Entity | null;
 
-
     constructor(entity?: any)
     constructor(entity: any) {
         super(entity);
-        this["im:definition"] = entity["im:definition"] ? entity["im:definition"] : null;
         this["im:entityType"] = entity["im:entityType"] ? entity["im:entityType"] : null;
+
+
+        if (entity["im:definition"]) {
+            this["im:definition"] = this["_graph"] = entity["im:definition"];
+        }
+
         return this;
     }
+
+
+
+    private '_graph'?: Graph | null;
+    public get graph(): any {
+        return this._graph;
+    }
+    public set graph(profileDefinition: any) {
+        this._graph = new Graph(profileDefinition);
+
+    }
+
+
+
+
+
 
     get asString(): string {
         //stringified  and prettified
         return QueryTools.prettifyJSON(JSON.stringify(this));
+
+
     }
+
+}
+
+
+export class Graph {
+
+
+    private '_graph'?: any | null;
+
+
+
+    constructor(input?: any)
+    constructor(input: any) {
+        this["_graph"] = Graph.convertToGraph(input);
+        return this;
+    }
+
+
+
+    public static convertToGraph(input: any) {
+
+
+
+        // must populate a map
+        // iterate until named clause         // v-if="!item['rdfs:label
+        // ensure every key has _uuid, path, childnode
+
+
+
+
+        const inputTree = { _childNode: [], _originalPath: '', ...input }
+
+
+
+
+        const getChildren = (propertyPath: string): any | null => {
+
+            const _expectedChildKeys = ['im:and', 'im:or', 'im:not'];
+
+
+
+            // get node at current property path
+            const _node = _.get(input, propertyPath);
+            if (_node) {
+                // check if node has children
+                const _childKey = _expectedChildKeys.filter((key: any) => _node.some((child: any) => child[key]));
+                if (_childKey.length) {
+                    // return first child
+                    return _node[_childKey[0]];
+                }
+            }
+
+            return null;
+        }
+
+
+        // const populateTree = () => {
+
+        //     // breadth-first addition of children
+        //     const _visited = new Set();
+        //     const _queue = ['']
+
+        //     while (_queue.length > 0) {
+
+        //         const _currentItem = _queue.shift(); // gets the next item from the queue
+        //         const _children = getChildren(_currentItem);
+
+        //         if (_currentItem['@id'] == this._hierarchyTree['@id']) {
+
+        //             _.set(this._hierarchyTree, 'children', _children)
+        //             // console.log("2.children: ", _children)
+        //             // console.log("3. path: ", 'children')
+        //             // console.log("4. tree: ", this._hierarchyTree)
+        //         } else {
+
+        //             _.set(this._hierarchyTree, _currentItem['currentPath'] + '.children', _children)
+        //             // console.log("2.children: ", _children)
+        //             // console.log("3. path: ", _currentItem['currentPath'] + '.children')
+        //             // console.log("4. tree: ", this._hierarchyTree)
+        //         }
+
+        //         //add current item to queue if its not a duplicate
+        //         for (const _child of _children) {
+        //             if (!_visited.has(_child['@id'])) {
+        //                 _visited.add(_child['@id']);
+        //                 _queue.push(_child);
+        //             }
+        //         }
+        //     }
+
+        // }
+
+
+
+
+        return;
+
+
+    }
+
+
 
 }
 

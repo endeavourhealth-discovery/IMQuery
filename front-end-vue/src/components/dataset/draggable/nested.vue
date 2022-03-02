@@ -3,7 +3,7 @@
     :list="children"
     item-key="name"
     :class="
-      'select-none cursor-pointer dragArea rounded-sm order-color-300 ' +
+      'clause select-none cursor-pointer dragArea rounded-sm order-color-300 ' +
         [isCardDragged ? ' ' : '']
     "
     ghost-class="bg-blue-300"
@@ -17,68 +17,75 @@
   >
     <!-- Each item in list  -->
     <template #item="{ element, index }">
-      <div class="flex flex-col relative">
-        <div
+      <div class="clause-item flex flex-col relative">
+        <!-- <div
           v-if="index == 0"
           class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
-        >
-          <div>
-            <div
-              @click="toggleInclude(element)"
-              :class="
-                'inline border b-1 px-2 py-0.5 rounded-md text-white ' +
-                  [element.include ? ' bg-green-600' : ' bg-red-600']
-              "
-            >
-              {{ element.include ? " Include" : " Exclude" }}
-            </div>
-            <!-- <div
-              :class="
-                'inline border b-1 pl-2 pr-1 py-0.5 rounded-md text-white ' +
-                  [element.include ? ' bg-green-600' : ' bg-red-600']
-              "
-            >
-              Include
-            </div> -->
-            <div class="inline">
-              a person if they match
-            </div>
-            <div
-              v-if="operatorLabel(element) && operatorLabel(element) != ''"
-              @click="toggleOperator(element)"
-              :class="
-                'inline border b-1 px-2 py-0.5 rounded-md text-white ' +
-                  [
-                    element.operator == 'all'
-                      ? ' bg-blue-600'
-                      : ' bg-indigo-600',
-                  ]
-              "
-            >
-              {{ operatorLabel(element) }}
-            </div>
-          </div>
-        </div>
+        ></div> -->
         <div class="inline-flex">
-          <div class="inline-flex flex-col">
+          <div class="clause-connector inline-flex flex-col">
             <!-- circle  -->
-            <div :class="' inline border circle b-2 border-blue-600'"></div>
+            <div :class="'circle inline border  b-2 border-blue-600'"></div>
             <!-- :line  -->
             <div
               v-if="index != children.length - 1"
-              :class="'inline  border-r line-h b-2 border-r-blue-700'"
+              :class="'line-h inline border-r  b-2 border-r-blue-700'"
             ></div>
-            <!-- <div
-              v-if="element.children.length"
-              :class="'inline border circle b-2 border-blue-600'"
-            ></div> -->
           </div>
-          <div class="inline flex-col">
-            <div
-              class="select-none cursor-pointer text-black font-bold bg-white rounded-sm my-1 pr-2 py-1 relative -translate-y-2"
-            >
-              {{ element.name }}
-            </div>
+
+          <div class="clause-content inline flex-col relative">
+            <!-- Named Clause - Name  -->
+            <template v-if="element.type == 'match'">
+              <textarea
+                :value="element.name"
+                class="clause-named__name select-none cursor-pointer text-black font-bold bg-white rounded-sm  pr-2 pt-1 py-2 relative"
+              >
+              </textarea>
+            </template>
+
+            <!-- Operator-Clause: Header  -->
+            <template v-else-if="element.type == 'operator'">
+              <div
+                :class="
+                  'clause-operator__header flex absolute -translate-y-8 w-200 bg-white'
+                "
+              >
+                <div
+                  @click="toggleInclude(element)"
+                  :class="
+                    'inline border b-1 px-2 py-0.5 rounded-md text-white ' +
+                      [
+                        element.include && !isParentNegated
+                          ? ' bg-green-600'
+                          : ' bg-red-600',
+                      ]
+                  "
+                >
+                  {{
+                    element.include && !isParentNegated ? "Include" : "Exclude"
+                  }}
+                </div>
+
+                <div class="inline">
+                  a person if they match
+                </div>
+                <div
+                  v-if="operatorLabel(element) && operatorLabel(element) != ''"
+                  @click="toggleOperator(element)"
+                  :class="
+                    'inline border b-1 px-2 py-0.5 rounded-md text-white ' +
+                      [
+                        element.operator == 'and'
+                          ? ' bg-blue-600'
+                          : ' bg-indigo-600',
+                      ]
+                  "
+                >
+                  {{ operatorLabel(element) }}
+                </div>
+              </div>
+            </template>
+
             <nested-draggable
               :isParentNegated="element.include == false"
               :class="
@@ -120,26 +127,26 @@ export default defineComponent({
     return {
       childrenText: {
         1: {
-          any: "",
-          all: "",
+          or: "",
+          and: "",
         },
         2: {
-          any: "either feature",
-          all: "both features",
+          or: "either feature",
+          and: "both features",
         },
         default: {
-          any: "any feature",
-          all: "all features",
+          or: "any feature",
+          and: "all features",
         },
       },
     };
   },
   methods: {
     toggleOperator(element: any): void {
-      if (element.operator == "any") {
-        element.operator = "all";
+      if (element.operator == "or") {
+        element.operator = "and";
       } else {
-        element.operator = "any";
+        element.operator = "or";
       }
     },
     toggleInclude(element: any): void {
@@ -172,15 +179,20 @@ export default defineComponent({
   /* max-height: 800px; */
   /* overflow-y: visible; */
   /* display: absolute; */
-  min-width: 200px;
+  min-width: 300px;
 }
 
 .dragArea__nochildren {
 }
 
+.clause-operator__header {
+  /* height: 30px; */
+  padding-bottom: 20px;
+}
+
 .min-h {
-  min-height: 25px;
-  height: 25px;
+  /* min-height: 25px; */
+  /* height: 25px; */
   /* min-width: 200px; */
   /* width: 200px; */
 }
