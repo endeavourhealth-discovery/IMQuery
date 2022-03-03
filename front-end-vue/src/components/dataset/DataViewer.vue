@@ -1,15 +1,16 @@
 <template>
   <DataTable
-    :value="patients1"
-    :paginator="true"
+    :value="datasetData"
     class="p-datatable-dataset shadow-middle"
-    showGridlines
-    :rows="10"
+    :rows="visibleRows"
     dataKey="nhsID"
-    v-model:filters="filters1"
+    v-model:filters="filters"
     filterDisplay="menu"
-    :loading="loading1"
+    :loading="loading"
     responsiveLayout="scroll"
+    :paginator="true"
+    stripedRows
+    v-model:selection="selectedRows"
     :globalFilterFields="[
       'uuid',
       'nhsID',
@@ -21,12 +22,22 @@
     ]"
   >
     <template #header>
-      <div class="flex justify-between">
-        <span></span>
+      <div class="flex justify-between mx-2">
+        <div style="text-left">
+          <!-- <MultiSelect
+            :modelValue="selectedColumns"
+            :options="columns"
+            optionLabel="header"
+            @update:modelValue="onToggle"
+            placeholder="Select Columns"
+            style="max-width: 20em"
+          /> -->
+        </div>
         <span class="p-input-icon-left">
-          <i class="pi pi-search" />
+          <i class="pi pi-search ml-2 !text-black" />
           <InputText
-            v-model="filters1['global'].value"
+            class="ml-3 w-min-200"
+            v-model="filters['global'].value"
             placeholder="Type to Search"
           />
         </span>
@@ -34,7 +45,7 @@
           type="button"
           icon="pi pi-filter-slash"
           label="Reset Filters"
-          class="p-button-outlined"
+          class="p-button p-button-secondary"
           @click="clearFilter()"
         />
       </div>
@@ -47,31 +58,18 @@
     <template #loading>
       Loading Data. Please wait.
     </template>
+    <Column selectionMode="multiple" headerStyle="width: 3em"></Column>
     <Column
       filterField="nhsID"
       header="NHS ID"
       dataType="numeric"
-      style="min-width:12rem"
+      style="min-width: 10rem"
     >
       <template #body="{data}">
         <div :class="`${classes.tbody}`">{{ data.nhsID }}</div>
       </template>
 
       <template #filter="{filterModel}">
-        <!-- <InputNumber v-model="filterModel.value" /> -->
-        <!-- <InputNumber
-          v-model="filterModel.value"
-          mode="decimal"
-          showButtons
-          buttonLayout="vertical"
-          decrementButtonClass="p-button-secondary"
-          incrementButtonClass="p-button-secondary"
-          incrementButtonIcon="pi pi-plus"
-          decrementButtonIcon="pi pi-minus"
-          :min="0"
-          :max="150"
-        /> -->
-
         <InputNumber
           v-model="filterModel.value"
           showButtons
@@ -81,12 +79,19 @@
           incrementButtonIcon="pi pi-plus"
           decrementButtonIcon="pi pi-minus"
           mode="decimal"
+          :min="1000000000"
+          :max="9999999999"
         />
       </template>
     </Column>
-    <Column field="firstName" header="First Name" style="min-width:12rem">
+    <Column
+      field="firstName"
+      header="First Name"
+      style="min-width: 10rem"
+      :sortable="true"
+    >
       <template #body="{data}">
-        <div :class="`${classes.tbody}`">{{ data.firstName }}</div>
+        <div :class="`${classes.tbody}`">{{ toTitleCase(data.firstName) }}</div>
       </template>
       <template #filter="{filterModel}">
         <InputText
@@ -97,9 +102,14 @@
         />
       </template>
     </Column>
-    <Column field="lastName" header="Last Name" style="min-width:12rem">
+    <Column
+      field="lastName"
+      header="Last Name"
+      style="min-width: 10rem"
+      :sortable="true"
+    >
       <template #body="{data}">
-        <div :class="`${classes.tbody}`">{{ data.lastName }}</div>
+        <div :class="`${classes.tbody}`">{{ toTitleCase(data.lastName) }}</div>
       </template>
       <template #filter="{filterModel}">
         <InputText
@@ -113,10 +123,13 @@
     <Column
       field="organisation"
       header="Organisation"
-      style="min-width:20rem; max-width:20rem;"
+      style="max-width:30rem;"
+      :sortable="true"
     >
       <template #body="{data}">
-        <div :class="`${classes.tbody}`">{{ data.organisation }}</div>
+        <div :class="`${classes.tbody}`">
+          {{ toTitleCase(data.organisation) }}
+        </div>
       </template>
       <template #filter="{filterModel}">
         <InputText
@@ -132,7 +145,7 @@
       header="Date Of Birth"
       filterField="dateOfBirth"
       dataType="date"
-      style="min-width:18rem"
+      style="min-width:12rem"
     >
       <template #body="{data}">
         <div :class="`${classes.tbody}`">
@@ -146,17 +159,17 @@
           placeholder="mm/dd/yyyy"
         />
       </template>
-      <!-- <template #filter="{filterModel}">
-        <Calendar
-          v-model="filterModel.value"
-          dateFormat="mm/dd/yyyy"
-          placeholder="mm/dd/yyyy"
-        />
-      </template> -->
     </Column>
-    <Column field="statedGender" header="Stated Gender" style="min-width:18rem">
+    <Column
+      field="statedGender"
+      header="Stated Gender"
+      style="min-width:12rem"
+      :sortable="true"
+    >
       <template #body="{data}">
-        <div :class="`${classes.tbody}`">{{ data.statedGender }}</div>
+        <div :class="`${classes.tbody}`">
+          {{ toTitleCase(data.statedGender) }}
+        </div>
       </template>
       <template #filter="{filterModel}">
         <InputText
@@ -167,99 +180,6 @@
         />
       </template>
     </Column>
-    <!-- <Column
-          header="nhsID"
-          filterField="nhsID"
-          dataType="numeric"
-          style="min-width:10rem"
-        >
-          <template #body="{data}">
-            {{ formatCurrency(data.balance) }}
-          </template>
-          <template #filter="{filterModel}">
-            <InputNumber
-              v-model="filterModel.value"
-              mode="currency"
-              currency="USD"
-              locale="en-US"
-            />
-          </template>
-        </Column> -->
-    <!-- <Column
-          field="status"
-          header="Status"
-          :filterMenuStyle="{ width: '14rem' }"
-          style="min-width:12rem"
-        >
-          <template #body="{data}">
-            <span :class="'customer-badge status-' + data.status">{{
-              data.status
-            }}</span>
-          </template>
-          <template #filter="{filterModel}">
-            <Dropdown
-              v-model="filterModel.value"
-              :options="statuses"
-              placeholder="Any"
-              class="p-column-filter"
-              :showClear="true"
-            >
-              <template #value="slotProps">
-                <span
-                  :class="'customer-badge status-' + slotProps.value"
-                  v-if="slotProps.value"
-                  >{{ slotProps.value }}</span
-                >
-                <span v-else>{{ slotProps.placeholder }}</span>
-              </template>
-              <template #option="slotProps">
-                <span :class="'customer-badge status-' + slotProps.option">{{
-                  slotProps.option
-                }}</span>
-              </template>
-            </Dropdown>
-          </template>
-        </Column> -->
-    <!-- <Column
-          field="activity"
-          header="Activity"
-          :showFilterMatchModes="false"
-          style="min-width:12rem"
-        >
-          <template #body="{data}">
-            <ProgressBar
-              :value="data.activity"
-              :showValue="false"
-            ></ProgressBar>
-          </template>
-          <template #filter="{filterModel}">
-            <Slider v-model="filterModel.value" range class="m-3"></Slider>
-            <div class="flex align-items-center justify-content-center px-2">
-              <span>{{ filterModel.value ? filterModel.value[0] : 0 }}</span>
-              <span>{{ filterModel.value ? filterModel.value[1] : 100 }}</span>
-            </div>
-          </template>
-        </Column> -->
-    <!-- <Column
-          field="verified"
-          header="Verified"
-          dataType="boolean"
-          bodyClass="text-center"
-          style="min-width:8rem"
-        >
-          <template #body="{data}">
-            <i
-              class="pi"
-              :class="{
-                'true-icon pi-check-circle': data.verified,
-                'false-icon pi-times-circle': !data.verified,
-              }"
-            ></i>
-          </template>
-          <template #filter="{filterModel}">
-            <TriStateCheckbox v-model="filterModel.value" />
-          </template>
-        </Column> -->
   </DataTable>
 </template>
 
@@ -271,12 +191,16 @@ export default {
   name: "DataViewer",
   data() {
     return {
+      columns: [],
+      selectedColumns: [],
+      selectedRows: null,
+      visibleRows: 8,
       classes: {
         theader: "text-black text-bold",
         tbody: "",
       },
-      patients1: null,
-      filters1: {
+      datasetData: null,
+      filters: {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
         uuid: {
           operator: FilterOperator.AND,
@@ -317,8 +241,7 @@ export default {
           ],
         },
       },
-      loading1: true,
-      //   loading2: true,
+      loading: true,
     };
   },
   created() {
@@ -326,23 +249,42 @@ export default {
     // this.initFilters();
   },
   mounted() {
-    this.dataService.getData().then((data) => {
-      this.patients1 = data;
-      this.loading1 = false;
-      this.patients1.forEach(
-        (customer) => (customer.date = new Date(customer.date))
-      );
-    });
+    this.dataService.getData("dataset1.json").then((data) => {
+      this.datasetData = data;
+      this.loading = false;
 
-    // this.dataService.getData().then((data) => {
-    //   this.customers2 = data;
-    //   this.loading2 = false;
-    //   this.customers2.forEach(
-    //     (customer) => (customer.date = new Date(customer.date))
-    //   );
-    // });
+      this.datasetData.forEach((entry) => {
+        entry.date = new Date(entry.date);
+      });
+
+      if (this.datasetData[0]) {
+        Object.keys(this.datasetData[0]).forEach((key) => {
+          const _column = {
+            field: key,
+            header: this.capitalise(key),
+          };
+          this.columns.push(_column);
+        });
+        console.log(this.columns);
+        this.selectedColumns = this.columns;
+      }
+    });
   },
+
   methods: {
+    onToggle(value) {
+      this.selectedColumns = this.columns.filter((col) => value.includes(col));
+    },
+    capitalise(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    toTitleCase(phrase) {
+      return phrase
+        .toLowerCase()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    },
     formatDate(value) {
       const _date = new Date(value);
       return _date.toLocaleDateString("en-UK", {
@@ -354,123 +296,80 @@ export default {
     clearFilter() {
       this.initFilters();
     },
-    initFilters() {
-      this.filters1 = {
-        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        patientId: {
-          operator: FilterOperator.AND,
-          constraints: [
-            { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-          ],
-        },
-        nhsID: {
-          operator: FilterOperator.AND,
-          constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
-        },
-        organisation: {
-          operator: FilterOperator.AND,
-          constraints: [
-            { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-          ],
-        },
-        firstName: {
-          operator: FilterOperator.AND,
-          constraints: [
-            { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-          ],
-        },
-        lastName: {
-          operator: FilterOperator.AND,
-          constraints: [
-            { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-          ],
-        },
-        dateOfBirth: {
-          operator: FilterOperator.AND,
-          constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }],
-        },
-        statedGender: {
-          operator: FilterOperator.AND,
-          constraints: [
-            { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-          ],
-        },
-      };
-    },
   },
 };
 </script>
 
 <style>
+.p-virtualscroller::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.p-virtualscroller::-webkit-scrollbar-track {
+  background: #ffffff;
+  /* darker colour: #f1f1f1; */
+}
+
+/* Handle */
+.p-virtualscroller::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: rgba(136, 136, 136, 0.233);
+}
+
+/* Handle on hover */
+.p-virtualscroller::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .p-datatable-dataset {
-  /* background-color:white !important; */
   max-height: 700px !important;
+  width: 100% !important;
+  max-width: 900px !important;
+
   border: 1px solid #d1d5db !important;
   border-radius: 10px !important;
 }
+.p-datatable-dataset .p-datatable-thead {
+  font-size: 12px !important;
+}
+.p-datatable-dataset .p-datatable-tbody {
+  font-size: 14px !important;
+}
 
 .p-datatable-dataset .p-datatable-header {
+  background-color: #f1f5f9 !important;
+
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
 
-.p-datatable-dataset .paginator {
+.p-datatable-dataset .p-paginator {
   position: absolute;
-  bottom: 0;
+  border-bottom: 0;
+  bottom: 10px;
   width: 100%;
 }
-</style>
 
-<style lang="scss">
-// ::v-deep(.p-paginator) {
-//   .p-paginator-current {
-//     margin-left: auto !important;
-//   }
-// }
+.p-datatable-dataset tr:hover {
+  background-color: #e2e8f0 !important;
+}
 
-// ::v-deep(.p-progressbar) {
-//   height: 0.5rem;
-//   background-color: #d8dadc !important;
+.p-datatable-dataset .p-datatable-thead > tr > th {
+  background-color: #f1f5f9 !important;
+}
 
-//   .p-progressbar-value {
-//     background-color: #607d8b !important;
-//   }
-// }
+.p-datatable-dataset .p-inputtext {
+  font-size: 14px;
+  min-width: 250px !important;
+  text-align: center !important;
+}
 
-// ::v-deep(.p-datepicker) {
-//   min-width: 25rem !important;
-
-//   td {
-//     font-weight: 400 !important;
-//   }
-// }
-
-// ::v-deep(.p-datatable.p-datatable-dataset) {
-
-//   .p-datatable-header {
-//     padding: 1rem !important;
-//     text-align: left !important;
-//     font-size: 1.5rem !important;
-//   }
-
-//   .p-paginator {
-//     padding: 1rem !important;
-//   }
-
-//   .p-datatable-thead > tr > th {
-//     text-align: left !important;
-//     font-size: 14px !important;
-
-//     // width: 100%;
-//   }
-
-//   .p-datatable-tbody > tr > td {
-//     cursor: auto !important;
-//     font-size: 14px !important;
-//   }
-
-//   .p-dropdown-label:not(.p-placeholder) {
-//     text-transform: uppercase !important;
-//   }
-// }
+.p-datatable-dataset.p-datatable.p-datatable-gridlines
+  .p-datatable-tbody
+  > tr
+  > td {
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
 </style>
