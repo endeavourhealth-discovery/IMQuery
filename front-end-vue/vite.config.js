@@ -24,13 +24,13 @@ export default defineConfig({
       }
     }
   },
-  optimizeDeps: {
-    exclude: ['/query/']
-  },
-  build: {
-    commonjsOptions: {
-      include: [/node_modules/],
-      exclude: [/query/]
-    }
-  }
+  // optimizeDeps: {
+  //   exclude: ['/query/']
+  // },
+  // build: {
+  //   commonjsOptions: {
+  //     include: [/node_modules/],
+  //     exclude: [/query/]
+  //   }
+  // }
 });
