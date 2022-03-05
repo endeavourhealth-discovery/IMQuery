@@ -125,11 +125,36 @@
           </div>
           <!-- /Searchbox  -->
 
+          <!-- Suggestions -->
+          <div class="flex justify-center w-full my-10">
+            <div
+              v-for="suggestion in suggestions"
+              :key="suggestion.name"
+              class="flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:border-blue-600 max-w-200"
+              @click="suggestion.onClick"
+            >
+              <HeroIcon
+                class="inline mx-2 my-3 text-blue-700"
+                strokewidth="2"
+                width="24"
+                height="24"
+                :icon="suggestion.icon"
+              />
+              <div class="inline text-lg font-bold text-gray-900">
+                {{ suggestion.name }}
+              </div>
+              <div class="inline text-lg font-bold text-gray-500">
+                {{ suggestion.description }}
+              </div>
+            </div>
+          </div>
+          <!-- /Suggestions -->
+
           <!-- Examples  -->
           <div
             id="examples"
             class="non-selectable max-w-3xl my-7 text-gray-900 text-lg"
-            @click="onTry('sbp and hr for diabetics with htn and stroke')"
+            @click="onTry()"
           >
             <a class="mr-3 font-bold">Try </a>
             <b>sbp</b> and <b>hr</b> for <b>diabetics</b> with <b>htn</b> and
@@ -258,6 +283,26 @@ export default defineComponent({
       searchString: "",
       activePageName: "Main", //Options #Home #SearchResults
       activeTabName: "Data",
+      suggestions: [
+        {
+          name: "DataStudio",
+          description: "Start a new Search for Data",
+          icon: "search",
+          visible: true,
+        },
+        {
+          name: "Library",
+          description: "Browse the Data Library",
+          icon: "menu",
+          visible: true,
+        },
+        {
+          name: "Try",
+          description: "sbp and hr for diabetics with htn and stroker",
+          icon: "cursor_click",
+          visible: true,
+        },
+      ],
       tabs: [
         {
           index: 0,
@@ -435,7 +480,7 @@ export default defineComponent({
         });
       }
     },
-    onTry(searchString: any): void {
+    onTry(searchString = "sbp and hr for diabetics with htn and stroke"): void {
       this.searchString = searchString;
       this.showSearchResults(searchString);
     },

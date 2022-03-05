@@ -95,7 +95,7 @@
               </div>
             </div>
           </template>
-          <template v-else class="font-semibold text-lg text-black">
+          <!-- <template v-else class="font-semibold text-lg text-black">
             Select a -id.json file
             <input
               class="file-input font-regular text-lg text-black "
@@ -106,7 +106,7 @@
               content="Upload JSON file containing entities (-id)"
               @change="onUploadFiles()"
             />
-          </template>
+          </template> -->
         </div>
         <div class="inline-flex flex-col w-full h-full">
           <!-- <div class="h-10 w-full">
@@ -173,7 +173,9 @@
       </div>
     </template>
     <template v-else-if="sideNavActiveItem == 'Data Output'">
-      <div class="section-center flex justify-center w-full h-full border-right">
+      <div
+        class="section-center flex justify-center w-full h-full border-right"
+      >
         <DataViewer class="mt-6"> </DataViewer>
       </div>
     </template>
@@ -189,7 +191,10 @@ const { v4 } = require("uuid");
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import DataViewer from "@/components/dataset/DataViewer.vue";
 
+import DataService from "@/services/DataService";
+import EntityService from "@/services/EntityService";
 import LoggerService from "@/services/LoggerService";
+
 import MultiSelect from "primevue/multiselect";
 import SearchService from "@/services/SearchService";
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
@@ -199,7 +204,6 @@ import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
-import EntityService from "@/services/EntityService";
 import ContentNav from "@/components/dataset/ContentNav.vue";
 import DatasetBrowser from "@/views/DatasetBrowser.vue";
 import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
@@ -522,7 +526,7 @@ export default defineComponent({
           visible: false,
         },
       ],
-      sideNavActiveItem: "Data Output",
+      sideNavActiveItem: "Draggable Test Components",
       sideNavItems: [
         {
           id: "074b7d3e-2519-4bed-bdf4-84f90f46de46",
@@ -641,7 +645,8 @@ export default defineComponent({
   },
 
   async mounted() {
-    // await this.getAppData();
+     this.getData("CEG-Queries-edited.json");
+
     await this.$store.dispatch("fetchDatamodelIris");
   },
   methods: {
@@ -675,6 +680,35 @@ export default defineComponent({
         return this.openFiles[0]["entities"];
       }
     },
+    async getData(filename) {
+      await DataService.getData(filename)
+        .then((obj) => {
+          this.openFiles = [];
+          this.openFiles.push(obj);
+          console.log(obj);
+
+          this.queryBuilder.loadJSON(JSON.stringify(obj));
+
+          // useful if you want to filter the entities 
+          this.filterTypes = this.queryBuilder.entityTypes.map((item: any) => {
+            const _label =
+              item.substring(0, 1) == ":"
+                ? item.substring(1)
+                : item.split(":")[1];
+
+            return {
+              value: item,
+              label: _label,
+            };
+          });
+          return obj;
+        })
+        .catch((err) => {
+          this.$toast.add(
+            LoggerService.error("Failed to load sample queries.", err)
+          );
+        });
+    },
     async onUploadFiles(): Promise<void> {
       const _inputElement = this.$refs.upload as HTMLInputElement;
       const _files = [...(_inputElement.files ? _inputElement.files : [])];
@@ -706,54 +740,7 @@ export default defineComponent({
         (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
       );
     },
-    async getAppData(): Promise<any> {
-      // uses up to 5mb of localstorage of the browser
-      // x-amz-version-id is Amazon S3 bucket version (feature must be enabled)
-      // const isCacheSupported = "caches" in window;
-      // if (isCacheSupported) {
-      // const url = `${process.env.VUE_APP_ONTOLOGY_URL}/CoreOntology.json`;
-      // const cacheName = "imquery-appdata";
-      // create store
-      // caches.open(cacheName).then((cache) => {
-      //   cache.add(url).then(() => {
-      //     console.log("Data cached");
-      //   });
-      // });
-      // check response
-      // caches.open(cacheName).then((cache) => {
-      //   cache.match(url).then((settings: any) => {
-      //     console.log(settings);
-      //     fetch(settings.body)
-      //       // Retrieve its body as ReadableStream
-      //       .then((response) => response.body);
-      //   });
-      // });
-      // retrieve items
-      // caches.open(cacheName).then((cache) => {
-      //   cache.keys().then((arrayOfRequest) => {
-      //     console.log(arrayOfRequest); // [Request,  Request]
-      //   });
-      // });
-      // } else {
-      //   console.log(
-      //     "Content caching is not supported in this browser. App data is fetched from CDN everytime the page is refreshed."
-      //   );
-      // }
-      // console.log("local",, "lol"));
-      // var start = Date.now();
-      // await SearchService.fetchAppData()
-      //   .then((res) => {
-      //     // console.log("res", res);
-      //     // var end = Date.now();
-      //     // console.log(`Fetch time: ${end - start} ms`);
-      //     return res.data;
-      //   })
-      //   .catch((err) => {
-      //     this.$toast.add(
-      //       LoggerService.error("Failed to get app data from server", err)
-      //     );
-      //   });
-    },
+
     async getEntitySummary(iri: string): Promise<any> {
       await EntityService.getEntitySummary(iri)
         .then((res) => {
@@ -775,20 +762,6 @@ export default defineComponent({
           );
         });
     },
-    // async graphSearch(sparqlQueryString: string): Promise<any> {
-    // await SearchService.graphdb_search(sparqlQueryString)
-    //   .then((res) => {
-    //     console.log("graphsearch complete: ", res);
-    //   })
-    //   .catch((err) => {
-    //     this.$toast.add(
-    //       LoggerService.error(
-    //         "Failed to get data model properties from server",
-    //         err
-    //       )
-    //     );
-    //   });
-    // },
 
     handlePrevious(): void {
       for (let i = 4; i < this.sideNavItems.length; i++) {

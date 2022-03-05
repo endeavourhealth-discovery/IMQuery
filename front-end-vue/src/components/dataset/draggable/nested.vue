@@ -23,28 +23,50 @@
           class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
         ></div> -->
         <div class="inline-flex">
-          <div class="clause-connector inline-flex flex-col">
-            <!-- circle  -->
-            <div :class="'circle inline border  b-2 border-blue-600'"></div>
-            <!-- :line  -->
+          <div class="clause-connector inline-flex flex">
             <div
-              v-if="index != children.length - 1"
-              :class="'line-h inline border-r  b-2 border-r-blue-700'"
-            ></div>
+              v-if="index == 0"
+              :class="
+                'inline-block  text-indigo-700 font-semibold hover:text-blue-600  hover:underline'
+              "
+            >
+              ––
+            </div>
+            <div v-else class="line-v">
+
+            </div>
+            <div class="inline-flex flex-col">
+              <!-- circle  -->
+              <div :class="'circle inline border  b-2 border-blue-600'"></div>
+              <!-- :line  -->
+              <div
+                v-if="index != children.length - 1"
+                :class="'line-h inline border-r  b-2 border-r-blue-700'"
+              ></div>
+            </div>
           </div>
 
           <div class="clause-content inline flex-col relative">
             <!-- Named Clause - Name  -->
             <template v-if="element.type == 'match'">
-              <textarea
-                :value="element.name"
-                class="clause-named__name select-none cursor-pointer text-black font-bold bg-white rounded-sm  pr-2 pt-1 py-2 relative"
-              >
-              </textarea>
+              <template v-if="true">
+                <button
+                  class="cursor-pointer block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10 focus:ring-blue-600 focus:outline-none focus:ring-2"
+                >
+                  {{ element.name }}
+                </button>
+              </template>
+              <template v-else-if="false">
+                <textarea
+                  :value="element.name"
+                  class="clause-named__name select-none cursor-pointer text-black font-bold bg-white rounded-sm  pr-2 pt-1 py-2 relative"
+                >
+                </textarea>
+              </template>
             </template>
 
             <!-- Operator-Clause: Header  -->
-            <template v-else-if="element.type == 'operator'">
+            <!-- <template v-else-if="element.type == 'operator'">
               <div
                 :class="
                   'clause-operator__header flex absolute -translate-y-8 w-200 bg-white'
@@ -84,7 +106,7 @@
                   {{ operatorLabel(element) }}
                 </div>
               </div>
-            </template>
+            </template> -->
 
             <nested-draggable
               :isParentNegated="element.include == false"
@@ -246,8 +268,18 @@ export default defineComponent({
 
 .line-h {
   /* visibility: hidden; */
-  width: 7px;
+  width: 10px;
   height: 100%;
   /* min-height: 25px; */
 }
+
+
+.line-v {
+  /* visibility: hidden; */
+  min-width: 10px;
+  /* height: 100%; */
+  min-height: 40px;
+}
+
+
 </style>

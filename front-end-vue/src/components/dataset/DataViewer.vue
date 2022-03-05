@@ -184,6 +184,8 @@
 </template>
 
 <script>
+import LoggerService from "@/services/LoggerService";
+
 import DataService from "@/services/DataService";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
@@ -245,33 +247,66 @@ export default {
     };
   },
   created() {
-    this.dataService = new DataService();
+    // this.dataService = new DataService();
     // this.initFilters();
   },
   mounted() {
-    this.dataService.getData("dataset1.json").then((data) => {
-      this.datasetData = data;
-      this.loading = false;
+    this.getData("dataset1.json");
+    //CEG-Queries-edited
+    // this.dataService.getData("dataset1.json").then((data) => {
+    //   this.datasetData = data;
+    //   this.loading = false;
 
-      this.datasetData.forEach((entry) => {
-        entry.date = new Date(entry.date);
-      });
+    //   this.datasetData.forEach((entry) => {
+    //     entry.date = new Date(entry.date);
+    //   });
 
-      if (this.datasetData[0]) {
-        Object.keys(this.datasetData[0]).forEach((key) => {
-          const _column = {
-            field: key,
-            header: this.capitalise(key),
-          };
-          this.columns.push(_column);
-        });
-        console.log(this.columns);
-        this.selectedColumns = this.columns;
-      }
-    });
+    //   if (this.datasetData[0]) {
+    //     Object.keys(this.datasetData[0]).forEach((key) => {
+    //       const _column = {
+    //         field: key,
+    //         header: this.capitalise(key),
+    //       };
+    //       this.columns.push(_column);
+    //     });
+    //     console.log(this.columns);
+    //     this.selectedColumns = this.columns;
+    //   }
+    // });
   },
 
   methods: {
+    async getData(filename) {
+      await DataService.getData(filename)
+        .then((json) => {
+          this.datasetData = json;
+          this.loading = false;
+          json.forEach((entry) => {
+            entry.date = new Date(entry.date);
+          });
+
+          // extract column names
+          // useful if you want want to allow the user to select their own columns
+          if (this.datasetData[0]) {
+            Object.keys(this.datasetData[0]).forEach((key) => {
+              const _column = {
+                field: key,
+                header: this.capitalise(key),
+              };
+              this.columns.push(_column);
+            });
+            console.log(this.columns);
+            this.selectedColumns = this.columns;
+          }
+
+          return json;
+        })
+        .catch((err) => {
+          this.$toast.add(
+            LoggerService.error("Failed to load sample Dataset.", err)
+          );
+        });
+    },
     onToggle(value) {
       this.selectedColumns = this.columns.filter((col) => value.includes(col));
     },
