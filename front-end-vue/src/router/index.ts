@@ -3,7 +3,7 @@ import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Datamodel from "../views/Concept.vue";
 import Workflow from "../views/Workflow.vue";
-import UPRN from "../views/Uprn.vue";
+// import UPRN from "../views/Uprn.vue";
 import User from "../views/User.vue";
 import Editor from "../views/Editor.vue";
 import Search from "../views/Search.vue";
@@ -178,14 +178,14 @@ const routes: Array<RouteRecordRaw> = [
       requiresLicense: true
     }
   },
-  {
-    path: "/uprn",
-    name: "UPRN",
-    component: UPRN,
-    meta: {
-      requiresLicense: true
-    }
-  },
+  // {
+  //   path: "/uprn",
+  //   name: "UPRN",
+  //   component: UPRN,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
   {
     path: "/snomedLicense",
     name: "License",

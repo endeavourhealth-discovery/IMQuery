@@ -2,7 +2,7 @@ import { ConceptReference } from "@/models/ConceptReference";
 import axios from "axios";
 
 export default class SuggestionService {
-  static api = process.env.VUE_APP_API;
+  static api = import.meta.env.VUE_APP_API;
 
   public static async getIriSuggestions(
     keyword: string,

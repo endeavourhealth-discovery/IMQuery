@@ -412,8 +412,8 @@ export default defineComponent({
       const _path = `${this.propertyPath}.${this.operatorIri(
         this.clause
       )}[${index}]`;
-      console.log(_path);
-      console.log("activeClause", this.queryBuilder.activeClause);
+      // console.log(_path);
+      // console.log("activeClause", this.queryBuilder.activeClause);
       return _path;
     },
     isActive(index: number): boolean {

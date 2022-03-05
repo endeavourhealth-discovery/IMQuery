@@ -66,7 +66,7 @@ export default class Ontology {
 
 
     // the url to the cloudfront url / S3 bucket containing the ontology file 
-    constructor(ontologyURL = process.env.VUE_APP_ONTOLOGY_URL as string) {
+    constructor(ontologyURL = import.meta.env.VUE_APP_ONTOLOGY_URL as string) {
 
         if (!ontologyURL || ontologyURL == "") {
             throw new Error("No Ontology URL specified on instantiation. Pass a URL to entities in your ontology in JSON-LD format i.e. '@context', '@graph' and 'entities'");

@@ -236,7 +236,7 @@ export default defineComponent({
         .replace(/\//gi, "%2F")
         .replace(/#/gi, "%23");
       const popup = window.open(
-        process.env.VUE_APP_API +
+        import.meta.env.VUE_APP_API +
           "api/entity/download?iri=" +
           modIri +
           "&members=true&expandMembers=true&format=excel"

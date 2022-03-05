@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 export default class UprnService {
-  static api = process.env.VUE_APP_UPRN_API;
+  static api = import.meta.env.VUE_APP_UPRN_API;
 
   public static async findUprn(
     address: string,

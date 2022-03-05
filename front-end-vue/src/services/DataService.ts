@@ -18,7 +18,7 @@ import axios, { AxiosResponse, CancelToken } from "axios";
 export default class DataService {
 
   //env variables not working for some reason?
-  //static url = process.env.VUE_APP_OSS_URL;
+  //static url = import.meta.env.VUE_APP_OSS_URL;
 
 
   public static async getData(filename: string): Promise<any> {
