@@ -15,7 +15,7 @@
     <div
       class="link-text-hover"
       :style="linkTextPosition"
-      v-show="linkTextVisible"
+      v-if="linkTextVisible"
       v-text="linkTextContent"
     ></div>
     <svg
@@ -55,7 +55,7 @@
             ></line>
             <!-- dx dy-->
             <text
-              v-show="isHover ? link.selected : true"
+              v-if="isHover ? link.selected : true"
               dx="0"
               dy="0"
               class="link-text"
@@ -89,7 +89,7 @@
                 :r="nodeSize"
               ></circle>
               <text
-                v-show="isHover ? node.showText : true"
+                v-if="isHover ? node.showText : true"
                 :dx="nodeSize + 5"
                 dy="0"
                 class="node-text"

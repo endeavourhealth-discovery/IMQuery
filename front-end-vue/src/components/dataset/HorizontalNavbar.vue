@@ -5,19 +5,14 @@
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex items-center mt-2 border border-transparent justify-center transition duration-500 ease-in-out text-gray-600 hover:text-blue-500 '
-         + [modelValue == item.name ? ' active text-blue-500' : ''],
+          'tab-button non-selectable inline-flex items-center border-b border-b-2 mt-2 justify-center transition duration-500 ease-in-out hover:text-blue-500 ' +
+            [modelValue == item.name ? ' text-blue-600 border-b-blue-500' : ' text-gray-700 border-b-transparent']
         ]"
         @click="$emit('update:modelValue', item.name)"
       >
         <!-- Icon -->
         <div class="inline-flex mr-2">
-          <HeroIcon
-            strokewidth="2"
-            width="24"
-            height="24"
-            :icon="item.icon"
-          />
+          <HeroIcon strokewidth="2" width="24" height="24" :icon="item.icon" />
         </div>
 
         <!-- / Icon -->
@@ -39,8 +34,8 @@ export default defineComponent({
   props: ["items", "modelValue"],
   emits: ["update:modelValue"],
   components: {
-    HeroIcon,
-  },
+    HeroIcon
+  }
 });
 </script>
 
@@ -55,7 +50,6 @@ export default defineComponent({
 .tab-buttons {
   width: 100%;
   text-align: center;
-
 }
 
 .tab-button {
@@ -65,7 +59,4 @@ export default defineComponent({
   /* border-bottom: solid 3px transparent; */
 }
 
-.tab-button.active {
-  border-bottom: 2px solid #3b82f6;  /* blue-700 #1d4ed8*/
-}
 </style>

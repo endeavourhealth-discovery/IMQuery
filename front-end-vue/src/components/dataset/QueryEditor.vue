@@ -55,7 +55,7 @@
           <!--  Content  -->
           <div class="bg-white inline query-editor-content rounded-b-2xl">
             <div
-              v-show="sideNavActiveItem == 'Sources'"
+              v-if="sideNavActiveItem == 'Sources'"
               class="pt-8 pl-14 pr-10"
             >
               <div class="flex justify-between max-w-2xl mx-auto">
@@ -106,7 +106,7 @@
               </div>
             </div>
             <div
-              v-show="sideNavActiveItem == 'Main Data Type'"
+              v-if="sideNavActiveItem == 'Main Data Type'"
               class="pt-8 pl-14 pr-10 "
             >
               <div class="flex flex-col w-full max-w-2xl mx-auto">
@@ -124,9 +124,8 @@
               </div>
             </div>
             <StepCurator
-              v-if="activeQuery.data.steps.length"
               class="w-full h-full"
-              v-show="sideNavActiveItem == 'Steps'"
+              v-if="activeQuery.data.steps.length && sideNavActiveItem == 'Steps'"
               :activeQuery="activeQuery"
               :openQueries="openQueries"
             >
@@ -136,11 +135,11 @@
               />
             </StepCurator>
 
-            <div v-show="sideNavActiveItem == 'Output'">
+            <div v-if="sideNavActiveItem == 'Output'">
 Output
             </div>
             <div
-              v-show="sideNavActiveItem == 'Save or Export'"
+              v-if="sideNavActiveItem == 'Save or Export'"
               class="pt-8 pl-14 pr-10"
             >
               <div class="flex justify-between items-center max-w-2xl mx-auto">

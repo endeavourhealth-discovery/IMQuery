@@ -161,7 +161,7 @@
           v-if="item['rdfs:label']"
           :class="
             'clause-item__label relative group inline-flex flex-col outline-none font-semibold bg-transparent border border-transparent b-2 rounded-md text-black pr-2' +
-              [isActive(index) ? ' selected bg-blue-500' : ''] +
+              [isActive(index) ? ' selected ' : ''] +
               [isOptionVisible[index] ? ' options bg-black' : ''] +
               [
                 containsLongWords(item['rdfs:label'])
@@ -216,8 +216,7 @@
 
         <!-- If there's no label -> explore children [vertical flex direciton] -->
         <div
-          v-if="!item['rdfs:label']"
-          v-show="!collapsedItems.includes(item.temp_id)"
+          v-if="!item['rdfs:label'] && !collapsedItems.includes(item.temp_id)"
           class="inline-block flex flex-col w-full"
         >
           <ClauseItem

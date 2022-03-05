@@ -28,7 +28,7 @@
         <!-- /Header -->
 
         <!-- Content -->
-        <div v-show="expandedSteps.includes(step.id)" class="pt-3 px-3">
+        <div v-if="expandedSteps.includes(step.id)" class="pt-3 px-3">
           <div class="w-full flex">
             <div
               :class="
@@ -76,7 +76,7 @@
                   </div>
 
                   <div
-                    v-show="expandedSteps.includes(step.id)"
+                    v-if="expandedSteps.includes(step.id)"
                     class="widget-content inline bg-white pb-3 pl-3 rounded-b-xl"
                   >
                     <template

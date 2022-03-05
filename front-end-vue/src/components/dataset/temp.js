@@ -19,7 +19,7 @@
         <!-- /Header -->
 
         <!-- Content -->
-        <div v-show="expanded" class="pt-3 px-3">
+        <div v-if="expanded" class="pt-3 px-3">
           <div class="w-full flex">
             <div
               :class="

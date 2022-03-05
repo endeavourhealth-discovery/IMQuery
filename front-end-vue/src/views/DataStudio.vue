@@ -3,7 +3,7 @@
   <div class="wrapper relative flex w-full h-full bg-white">
     <!-- Sidenav  -->
     <div
-      class="wrapper-sidenav w-full bg-white flex flex-col align-center"
+      class="wrapper-sidenav bg-white flex flex-col align-center"
       @mouseenter="expanded = true"
       @mouseleave="expanded = false"
     >
@@ -75,7 +75,7 @@
             >
               Folders
             </div>
-            <div class="w-full h-full" v-show="activeItemView == 'Folders'">
+            <div class="w-full h-full" v-if="activeItemView == 'Folders'">
               <div
                 v-if="queryBuilder.hierarchyTree(topLevelFolder)"
                 class="left inline-flex flex-col w-full h-full"

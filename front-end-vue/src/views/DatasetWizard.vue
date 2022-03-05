@@ -21,7 +21,7 @@
 
     <main>
       <!-- Step 1 -->
-      <div id="step1" v-show="activePage == 1" class="page">
+      <div id="step1" v-if="activePage == 1" class="page">
         <!-- Section: Name  -->
         <InputSection>
           <template v-slot:left>
@@ -59,7 +59,7 @@
       <!-- /Step 1-->
 
       <!-- Step 2 -->
-      <div id="step2" v-show="activePage == 2" class="page">
+      <div id="step2" v-if="activePage == 2" class="page">
         <!-- Section: Organisations  -->
 
         <!-- Full screen Search Dialog /  Create new List of Organisations  -->
@@ -126,7 +126,7 @@
       <!-- /Step 2-->
 
       <!-- Step 3 -->
-      <div id="step3" v-show="activePage == 3" class="page">
+      <div id="step3" v-if="activePage == 3" class="page">
         <!-- Section: Cohort Members  -->
         <InputSection>
           <template v-slot:left>
@@ -145,7 +145,7 @@
       <!-- /Step 3-->
 
       <!-- Step 4 -->
-      <div id="step4" v-show="activePage == 4" class="page">
+      <div id="step4" v-if="activePage == 4" class="page">
         Step 4
       </div>
       <!-- /Step 4-->
@@ -159,14 +159,14 @@
         ]"
       >
         <Button
-          v-show="activePage > 1"
+          v-if="activePage > 1"
           label="Back"
           icon="pi pi-chevron-left"
           class="p-button-primary p-button-outlined button-medium"
           @click="handleBack"
         />
         <Button
-          v-show="activePage != totalPageCount"
+          v-if="activePage != totalPageCount"
           label="Next"
           icon="pi pi-chevron-right"
           class="p-button-primary button-medium"

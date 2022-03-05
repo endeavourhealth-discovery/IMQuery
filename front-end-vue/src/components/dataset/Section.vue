@@ -12,7 +12,7 @@
 
     <!-- Content -->
     <div class="inline-flex">
-      <div v-show="expanded" class="inline-flex">
+      <div v-if="expanded" class="inline-flex">
         <slot> </slot>
       </div>
     </div>

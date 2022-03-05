@@ -38,11 +38,11 @@
     <!-- /Title -->
 
     <!-- Content -->
-    <div v-show="expanded" class="pt-3 px-3">
+    <div v-if="expanded" class="pt-3 px-3">
       <div class="line w-full flex">
         <!-- Error Button   -->
         <RoundButton
-          v-show="error"
+          v-if="error"
           class="non-selectable"
           :rounded="true"
           :showRing="true"

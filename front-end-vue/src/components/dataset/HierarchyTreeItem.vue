@@ -68,7 +68,7 @@
     <div v-if="value.children.length" class="hierachytreeitem">
       <HierarchyTreeItem
         class="w-full"
-        v-show="expandedItems.includes(value['@id'])"
+        v-if="expandedItems.includes(value['@id'])"
         v-for="item in value.children"
         :key="item['@id']"
         :value="item"

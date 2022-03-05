@@ -46,7 +46,7 @@
 
     <!-- Autocomplete  -->
     <div
-      v-show="componentState == 'focus' || componentState == 'typing'"
+      v-if="componentState == 'focus' || componentState == 'typing'"
       class="autocomplete absolute z-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none"
     >
       <div class="autocomplete-searchbox relative flex overflow-none py-2 ml-3">
@@ -68,7 +68,7 @@
         />
       </div>
       <div
-        v-show="
+        v-if="
           componentState == 'focus' || componentState == 'typing' || isHover
         "
         class="autocomplete-label relative text-sm font-medium text-gray-600"

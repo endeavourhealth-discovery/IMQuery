@@ -100,7 +100,7 @@
       <div class="page-content">
         <!-- Tab: Home -->
         <div
-          v-show="activeTabName == 'Home'"
+          v-if="activeTabName == 'Home'"
           class="tab-content flex pt-5 flex flex-col items-center justify-center"
         >
           <div
@@ -165,7 +165,7 @@
         <!-- /Tab: Home -->
 
         <!-- Tab: Search -->
-        <div v-show="activeTabName == 'Results'" class="tab-content  flex pt-5">
+        <div v-if="activeTabName == 'Results'" class="tab-content  flex pt-5">
           <div class="results w-full max-w-4xl ">
             <!-- <div>Filter and sort</div> -->
             <template v-if="searchResults && searchResults.length > 0">
@@ -185,32 +185,32 @@
         <!-- /Tab: Search  -->
 
         <!-- Tab: Data  -->
-        <DataStudio v-show="activeTabName == 'Data'" class="tab-content " />
+        <DataStudio v-if="activeTabName == 'Data'" class="tab-content " />
         <!-- /Tab: Data  -->
 
         <!-- Tab: Explore  -->
 
-        <div v-show="activeTabName == 'Explore'" class="tab-content ">
+        <div v-if="activeTabName == 'Explore'" class="tab-content ">
           Explore
         </div>
         <!-- /Tab: Explore  -->
 
         <!-- Tab: Organisations  -->
         <OrganisationBrowser
-          v-show="activeTabName == 'Sources'"
+          v-if="activeTabName == 'Sources'"
           class="tab-content"
         />
         <!-- /Tab: Organisations  -->
 
         <!-- Tab: Dictionary  -->
-        <div v-show="activeTabName == 'Dictionary'" class="tab-content ">
+        <div v-if="activeTabName == 'Dictionary'" class="tab-content ">
           <iframe class="w-full h-full" src="https://dev.endhealth.co.uk/#/">
           </iframe>
         </div>
         <!-- /Tab: Dictionary  -->
 
         <!-- Tab: Resources  -->
-        <div v-show="activeTabName == 'Resources'" class="tab-content ">
+        <div v-if="activeTabName == 'Resources'" class="tab-content ">
           Resources
         </div>
         <!-- /Tab: Resources  -->

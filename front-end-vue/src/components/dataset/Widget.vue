@@ -23,7 +23,7 @@
         {{ criterion.datamodelEntity.name }}
       </div>
     </div>
-    <div v-show="expanded" class="widget-content pb-3 pl-3 rounded-b-xl">
+    <div v-if="expanded" class="widget-content pb-3 pl-3 rounded-b-xl">
       <template v-for="node in criterion.constraints" :key="node.id">
         <Constraint :node="node" />
       </template>

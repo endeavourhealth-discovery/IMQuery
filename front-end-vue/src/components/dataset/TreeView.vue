@@ -1,5 +1,5 @@
 <template>
-            <div v-show="activeFileView == 'Folder Hierarchy'">
+            <div v-if="activeFileView == 'Folder Hierarchy'">
               <div
                 v-if="queryBuilder.hierarchyTree(topLevelFolder)"
                 class="left inline-flex flex-col w-full h-full"

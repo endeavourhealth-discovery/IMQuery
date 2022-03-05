@@ -89,7 +89,7 @@
 
       <!-- List Items  -->
       <div
-        v-show="expandedLists.includes(listIndex) | !collapsible"
+        v-if="expandedLists.includes(listIndex) | !collapsible"
         class="table-section-body"
       >
         <div>
