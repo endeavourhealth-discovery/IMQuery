@@ -1,7 +1,7 @@
 <template>
   <div class="query-table" :style="{ height: tableheight + 'px' }">
     <div
-      class="query-row p-d-flex"
+      class="query-row flex"
       v-for="item in filteredQueries"
       :key="item.id"
     >
@@ -13,22 +13,22 @@
           v-model="selectedRows"
         />
       </div>
-      <div class="row-data p-d-flex p-jc-between">
-        <div class="row-cell row-name p-d-inline" v-tooltip.top="item.name">
+      <div class="row-data flex justify-between">
+        <div class="row-cell row-name inline" v-tooltip.top="item.name">
           {{ item.name }}
         </div>
         <div
-          class="row-cell row-description p-d-inline"
+          class="row-cell row-description inline"
           v-tooltip.top="item.description"
         >
           {{ item.description }}
         </div>
         <div
-          class="row-cell row-tags p-d-inline"
+          class="row-cell row-tags inline"
           v-tooltip.top="item.tags.join(', ')"
         >
-          <div class="p-d-flex p-d-row-reverse">
-            <div class="row-tag p-d-inline" :key="tag" v-for="tag in item.tags">
+          <div class="flex">
+            <div class="row-tag inline" :key="tag" v-for="tag in item.tags">
               {{ tag }}
             </div>
           </div>

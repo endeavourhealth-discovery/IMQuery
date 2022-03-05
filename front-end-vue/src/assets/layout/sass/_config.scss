@@ -5,7 +5,7 @@
 	right: 0;
 	display: block;
 	width: 20em;
-	z-index: 998;
+	// z-index: 998;
 	height: calc(100% - 50px);
 	transform: translate3d(20em, 0px, 0px);
 	transition: transform $transitionDuration;

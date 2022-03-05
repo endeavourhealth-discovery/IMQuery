@@ -164,6 +164,8 @@ em {
 .searchbox,
 .autocomplete {
   font-size: 14px !important;
+  z-index: 999;
+
 
 }
 
@@ -173,7 +175,6 @@ em {
   margin-top: -3px;
   margin-left: -1px;
   width: calc(100% + 2px);
-  z-index: 989;
   cursor: default;
   border-bottom: 1px solid rgb(207, 210, 218);
   border-left: 1px solid rgb(207, 210, 218);

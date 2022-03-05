@@ -12,7 +12,7 @@
         <div
           :class="[
             'tab-button',
-            'p-d-inline',
+            'd-inline',
             'non-selectable',
             { active: activeTab == 'my-queries' },
           ]"
@@ -25,7 +25,7 @@
         <div
           :class="[
             'tab-button',
-            'p-d-inline',
+            'd-inline',
             'non-selectable',
             { active: activeTab == 'dataset-library' },
           ]"
@@ -44,25 +44,25 @@
         class="content-tab"
       >
         <!-- Action buttons + Options -->
-        <div class="button-toolbar p-pt-5 p-pb-3 p-d-flex p-jc-between">
+        <div class="button-toolbar pt-5 pb-3 flex justify-between">
           <div class="p-d-inline">
             <!-- <Button
               icon="pi pi-plus"
-              class="p-mr-3 button-medium"
+              class="mr-3 button-medium"
               type="button"
               label="Add"
               @click="toggleAddOverlay"
             /> -->
             <Button
               icon="pi pi-pencil "
-              class="p-mr-3 p-button-outlined p-button-warning button-medium"
+              class="mr-3 p-button-outlined p-button-warning button-medium"
               type="button"
               label="Edit"
               @click="editSelected"
             />
             <Button
               icon="pi pi-trash "
-              class="p-mr-3 p-button-outlined p-button-danger button-medium"
+              class="mr-3 p-button-outlined p-button-danger button-medium"
               type="button"
               label="Delete"
               @click="deleteSelected"
@@ -82,7 +82,7 @@
             />
             <Button
               icon="pi pi-sliders-h"
-              class="p-ml-3 p-button-secondary p-button-outlined"
+              class="ml-3 p-button-secondary p-button-outlined"
               v-tooltip.bottom="'Filter search results'"
               @click="toggleFilterOverlay"
             />
@@ -90,16 +90,16 @@
               <div class="overlay-title">Filters</div>
 
               <div class="filter-container p-d-flex p-flex-column">
-                <div class="p-my-2">
+                <div class="my-2">
                   <div>Tags</div>
-                  <Chips class="p-my-2" v-model="filterTags" />
+                  <Chips class="my-2" v-model="filterTags" />
                 </div>
               </div>
             </OverlayPanel>
           </div>
           <!-- /Searchbar -->
 
-          <div class="p-d-inline">
+          <div class="inline">
             <Button
               label="Share"
               icon="pi pi-upload"
@@ -109,15 +109,15 @@
           </div>
         </div>
         <OverlayPanel id="new-overlay" ref="new-overlay">
-          <div class="p-d-flex p-flex-column">
+          <div class="flex flex-col">
             <Button
               label="New Dataset"
-              class="p-button-primary p-button-outlined button-medium p-mx-2 p-mb-2"
+              class="p-button-primary p-button-outlined button-medium mx-2 mb-2"
               @click="handleNewDataset"
             />
             <Button
               label="Import Existing Dataset"
-              class="p-button-primary p-button-outlined button-medium p-mx-2"
+              class="p-button-primary p-button-outlined button-medium mx-2"
               @click="handleImportDataset"
             />
           </div>
@@ -153,7 +153,7 @@
     <!-- Page: New Query -->
     <div id="new-query-page" v-if="activePage == 'new-query'" class="page">
       <!-- Header -->
-      <div class="button-toolbar p-d-flex p-jc-between p-ai-center">
+      <div class="button-toolbar flex justify-between items-center">
         <div class="p-d-inline"></div>
 
         <div class="title p-d-inline">

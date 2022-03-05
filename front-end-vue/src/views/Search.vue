@@ -14,9 +14,9 @@
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <header :class="'header flex items-center justify-between w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
+      <header :class="'header relative flex items-center justify-between w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
         <!-- Left Side  -->
-        <div :class="'left pl-5 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
+        <div :class="' left pl-5 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
           <!-- Menu Toggler  -->
           <RoundButton
             class="menu-toggler h-14 w-14 mr-6"
@@ -57,14 +57,14 @@
         <!-- Searchbox  -->
         <Searchbox
           v-if="activeTabName != 'Home'"
-          :class="'searchbox-top bg-gray-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']"
+          :class="'searchbox-top 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 bg-gray-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']"
           v-model="searchString"
           :autocompleteData="autocompleteData"
           @search="showSearchResults()"
         />
         <!-- /Searchbox  -->
 
-        <div class="right mr-7">
+        <div class="right mr-7 ml-4">
           <UserWidget :modelValue="userMeta" />
         </div>
       </header>
@@ -547,6 +547,9 @@ header nav {
   }
 }
 
+
+
+
 .app-title-bottom {
   left: 10px;
   top: -4px;
@@ -573,7 +576,7 @@ nav .tab-buttons {
   /* left: 50%; */
   /* transform: translate() */
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
   height: 40px;
 }
 

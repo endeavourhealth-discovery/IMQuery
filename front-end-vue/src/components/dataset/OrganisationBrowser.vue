@@ -191,7 +191,7 @@ export default defineComponent({
 
 .wrapper-sidenav {
   margin-top: 20vh;
-  z-index: 99;
+  z-index: 80;
 }
 
 .wrapper-right {
