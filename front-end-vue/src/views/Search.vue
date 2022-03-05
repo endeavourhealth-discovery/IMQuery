@@ -8,25 +8,17 @@
     <ProgressBar v-if="isLoading" />
 
     <!-- Page: Home -->
-    <div
-      v-if="activePageName == 'PageName'"
-      class="page flex flex-col items-center justify-center"
-    >
+    <div v-if="activePageName == 'PageName'" class="page flex flex-col items-center justify-center">
       <!-- Brand  -->
     </div>
     <!-- /Page: Home -->
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <div
-        :class="
-          'header relative flex items-center justify-center w-full b-bottom' +
-            [activeTabName == 'Home' ? ' ' : ' ']
-        "
-      >
+      <div :class="'header flex items-center justify-center w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
         <!-- Menu Toggler  -->
         <RoundButton
-          class="menu-toggler absolute h-10 ml-4"
+          class="menu-toggler absolute h-10 w-auto ml-4"
           :rounded="false"
           :showRing="true"
           backgroundColor="white"
@@ -38,32 +30,20 @@
           textColor="gray-700"
           ringColor="blue-600"
         >
-          <HeroIcon
-            class="mx-2"
-            strokewidth="2"
-            width="24"
-            height="24"
-            icon="menu"
-          />
+          <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
         </RoundButton>
         <!-- / Menu Toggler  -->
 
         <!-- Branding  -->
-        <div
-          v-if="activeTabName != 'Home'"
-          :class="
-            'app-branding absolute flex  non-selectable ' +
-              [activeTabName == 'Home' ? ' invisible' : ' ']
-          "
-        >
+        <div v-if="activeTabName != 'Home'" :class="'app-branding absolute flex  non-selectable ' + [activeTabName == 'Home' ? ' invisible' : ' ']">
           <img class="app-logo inline" src="app-icon.png" alt="" />
           <div class="relative app-title inline-flex flex-col">
             <!-- <div class="relative app-title-top font-medium text-gray-600">
               Resolution
             </div> -->
-            <div class="relative app-title-bottom  font-medium text-black">
+            <!-- <div class="relative app-title-bottom  font-medium text-black">
               Resolution
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- / Branding  -->
@@ -71,22 +51,14 @@
         <!-- Searchbox  -->
         <Searchbox
           v-if="activeTabName != 'Home'"
-          :class="
-            'searchbox-top absolute' +
-              [activeTabName == 'Home' ? ' invisible' : '']
-          "
+          :class="'searchbox-top' + [activeTabName == 'Home' ? ' invisible' : '']"
           v-model="searchString"
           :autocompleteData="autocompleteData"
           @search="showSearchResults()"
         />
 
         <!-- Tab Buttons  -->
-        <div
-          :class="
-            'header-nav relative h-full flex flex-col justify-center' +
-              [activeTabName == 'Home' ? '' : '']
-          "
-        >
+        <div :class="'header-nav relative h-full flex flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
           <HorizontalNavbar v-model="activeTabName" :items="tabs" />
         </div>
         <!-- /Tab Buttons -->
@@ -99,29 +71,16 @@
       <!-- Tabs -->
       <div class="page-content">
         <!-- Tab: Home -->
-        <div
-          v-if="activeTabName == 'Home'"
-          class="tab-content flex pt-5 flex flex-col items-center justify-center"
-        >
-          <div
-            class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium"
-          >
+        <div v-if="activeTabName == 'Home'" class="tab-content flex pt-5 flex flex-col items-center justify-center">
+          <div class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium">
             <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
             <img class="search-logo mb-10" src="home-icon.png" alt="" />
           </div>
           <!-- /Brand  -->
 
           <!-- Searchbox  -->
-          <div
-            id="searchbox-main"
-            class="mx-auto w-full max-w-3xl flex px-5-sm"
-          >
-            <Searchbox
-              class="w-full mx-auto searchbox-main"
-              v-model="searchString"
-              :autocompleteData="autocompleteData"
-              @search="showSearchResults()"
-            />
+          <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm">
+            <Searchbox class="w-full mx-auto searchbox-main" v-model="searchString" :autocompleteData="autocompleteData" @search="showSearchResults()" />
           </div>
           <!-- /Searchbox  -->
 
@@ -133,13 +92,7 @@
               class="flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:border-blue-600 max-w-200"
               @click="suggestion.onClick"
             >
-              <HeroIcon
-                class="inline mx-2 my-3 text-blue-700"
-                strokewidth="2"
-                width="24"
-                height="24"
-                :icon="suggestion.icon"
-              />
+              <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="suggestion.icon" />
               <div class="inline text-lg font-bold text-gray-900">
                 {{ suggestion.name }}
               </div>
@@ -151,11 +104,7 @@
           <!-- /Suggestions -->
 
           <!-- Examples  -->
-          <div
-            id="examples"
-            class="non-selectable max-w-3xl my-7 text-gray-900 text-lg"
-            @click="onTry()"
-          >
+          <div id="examples" class="non-selectable max-w-3xl my-7 text-gray-900 text-lg" @click="onTry()">
             <a class="mr-3 font-bold">Try </a>
             <b>sbp</b> and <b>hr</b> for <b>diabetics</b> with <b>htn</b> and
             <b>stroke</b>
@@ -169,11 +118,7 @@
           <div class="results w-full max-w-4xl ">
             <!-- <div>Filter and sort</div> -->
             <template v-if="searchResults && searchResults.length > 0">
-              <SearchResults
-                class="w-full"
-                :results="searchResults"
-                :value="searchString"
-              />
+              <SearchResults class="w-full" :results="searchResults" :value="searchString" />
             </template>
             <template v-else>
               <div class="mt-10 ml-5 text-xl font-bold text-gray-600">
@@ -196,16 +141,12 @@
         <!-- /Tab: Explore  -->
 
         <!-- Tab: Organisations  -->
-        <OrganisationBrowser
-          v-if="activeTabName == 'Sources'"
-          class="tab-content"
-        />
+        <OrganisationBrowser v-if="activeTabName == 'Sources'" class="tab-content" />
         <!-- /Tab: Organisations  -->
 
         <!-- Tab: Dictionary  -->
         <div v-if="activeTabName == 'Dictionary'" class="tab-content ">
-          <iframe class="w-full h-full" src="https://dev.endhealth.co.uk/#/">
-          </iframe>
+          <iframe class="w-full h-full" src="https://dev.endhealth.co.uk/#/"> </iframe>
         </div>
         <!-- /Tab: Dictionary  -->
 
@@ -269,7 +210,7 @@ export default defineComponent({
     DataStudio,
     RoundButton,
     OrganisationBrowser,
-    UserWidget,
+    UserWidget
   },
   data() {
     return {
@@ -278,80 +219,80 @@ export default defineComponent({
         username: "",
         firstName: "",
         lastName: "",
-        email: "",
+        email: ""
       },
       searchString: "",
-      activePageName: "Main", 
+      activePageName: "Main",
       activeTabName: "Data", //Options #Home #SearchResults
       suggestions: [
         {
           name: "DataStudio",
           description: "Start a new Search for Data",
           icon: "search",
-          visible: true,
+          visible: true
         },
         {
           name: "Library",
           description: "Browse the Data Library",
           icon: "menu",
-          visible: true,
+          visible: true
         },
         {
           name: "Try",
           description: "sbp and hr for diabetics with htn and stroker",
           icon: "cursor_click",
-          visible: true,
-        },
+          visible: true
+        }
       ],
       tabs: [
         {
           index: 0,
           name: "Home",
           icon: "home",
-          visible: true,
+          visible: true
         },
         {
           index: 1,
           name: "Results",
           icon: "search",
-          visible: true,
+          visible: true
         },
         {
           index: 2,
           name: "Data",
           icon: "newspaper",
-          visible: true,
+          visible: true
         },
         {
           index: 3,
           name: "Explore",
           icon: "globe",
-          visible: false,
+          visible: false
         },
         {
           index: 4,
           name: "Sources",
           icon: "office_building",
-          visible: true,
+          visible: true
         },
         {
           index: 5,
           name: "Dictionary",
           icon: "bookOpen",
-          visible: true,
+          visible: true
         },
         {
           index: 6,
           name: "Resources",
           icon: "newspaper",
-          visible: false,
-        },
+          visible: false
+        }
       ],
       modulesData: null,
       searchData: null,
       searchResults: [],
       autocompleteData: null,
-      tableHeight: 600,
+      tableHeight: 600
     };
   },
   computed: {
@@ -362,8 +303,8 @@ export default defineComponent({
       },
       set(value: any): void {
         this.$store.commit("updateIsLoading", value);
-      },
-    },
+      }
+    }
   },
   async mounted() {
     await this.$store.dispatch("authenticateCurrentUser");
@@ -380,7 +321,7 @@ export default defineComponent({
     this.$store.commit("updateSideNavHierarchyFocus", {
       name: "Search",
       fullName: "Search",
-      iri: "http://endhealth.info/im#Search",
+      iri: "http://endhealth.info/im#Search"
     });
     // console.log(Dataset.definition)
 
@@ -394,9 +335,7 @@ export default defineComponent({
           this.autocompleteData = res;
         })
         .catch((err: any) => {
-          this.$toast.add(
-            LoggerService.error("Could not load autocomplete results", err)
-          );
+          this.$toast.add(LoggerService.error("Could not load autocomplete results", err));
         });
     },
     async getInitialData(): Promise<void> {
@@ -405,9 +344,7 @@ export default defineComponent({
           this.modulesData = res;
         })
         .catch((err: any) => {
-          this.$toast.add(
-            LoggerService.error("Could not load initial data", err)
-          );
+          this.$toast.add(LoggerService.error("Could not load initial data", err));
         });
       // #todo:other fetches
     },
@@ -419,27 +356,17 @@ export default defineComponent({
           Promise.resolve(res);
         })
         .catch((err: any) => {
-          this.$toast.add(
-            LoggerService.error("Could not load Meilisearch results data", err)
-          );
+          this.$toast.add(LoggerService.error("Could not load Meilisearch results data", err));
         });
     },
-    async searchMeiliFiltered(
-      index: string,
-      searchString: string
-    ): Promise<any> {
+    async searchMeiliFiltered(index: string, searchString: string): Promise<any> {
       await SearchClient.searchMeiliFiltered(index, searchString)
         .then((res: any) => {
-          console.log(
-            `fetched Filtered Meilisearch results for index: "${index}", searchString: "${searchString}"`,
-            res
-          );
+          console.log(`fetched Filtered Meilisearch results for index: "${index}", searchString: "${searchString}"`, res);
           Promise.resolve(res);
         })
         .catch((err: any) => {
-          this.$toast.add(
-            LoggerService.error("Could not load Meilisearch results data", err)
-          );
+          this.$toast.add(LoggerService.error("Could not load Meilisearch results data", err));
         });
     },
     async search(searchString: string): Promise<any> {
@@ -484,11 +411,7 @@ export default defineComponent({
       this.searchString = searchString;
       this.showSearchResults(searchString);
     },
-    async oss_search(
-      searchString: string,
-      index: string,
-      limit: number
-    ): Promise<any> {
+    async oss_search(searchString: string, index: string, limit: number): Promise<any> {
       this.isLoading = true;
 
       await SearchService.oss_search(searchString, index, limit)
@@ -500,7 +423,7 @@ export default defineComponent({
           this.isLoading = false;
           console.log("Could not load opensearch results", err);
         });
-    },
+    }
   },
   watch: {
     // whenever question changes, this function will run
@@ -508,8 +431,8 @@ export default defineComponent({
       if (newSearchString && newSearchString.trim() != "") {
         this.getAutocompleteSearch();
       }
-    },
-  },
+    }
+  }
 });
 </script>
 
@@ -612,6 +535,16 @@ export default defineComponent({
   margin-right: 3px;
   width: 31px;
   height: 26px;
+}
+
+.app-title {
+  visibility: hidden;
+}
+
+@media screen and (min-width: 1000px) {
+  .app-title {
+    visibility: visible;
+  }
 }
 
 .app-title-bottom {

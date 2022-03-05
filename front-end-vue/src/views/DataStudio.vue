@@ -898,7 +898,7 @@ export default defineComponent({
 }
 
 .w-max-500p {
-  width: 500px;
+  max-width: 500px;
 }
 
 ::-webkit-scrollbar {

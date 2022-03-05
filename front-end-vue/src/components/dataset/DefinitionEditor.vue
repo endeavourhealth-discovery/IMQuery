@@ -39,10 +39,10 @@
           />
         </div>
       </div>
-      <!-- D/efinition  -->
+      <!-- Definition  -->
     </div>
 
-    <!-- <dragNext /> -->
+    <!-- </ dragNext> -->
     <div
       v-if="queryBuilder.activeClause"
       class="definition-editor__curator w-full"

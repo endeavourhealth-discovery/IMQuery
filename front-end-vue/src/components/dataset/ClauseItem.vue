@@ -13,7 +13,7 @@
     <template v-for="(item, index) in currentClause" :key="item.temp_id">
       <div
         :class="
-          'clause-item relative inline-block flex hover:bg-white' +
+          'clause-item relative inline-block flex bg-white' +
             [index == currentClause.length - 1 ? ' mb-4' : '']
         "
       >
@@ -198,13 +198,13 @@
             {{ item["rdfs:label"] }}
           </div>
           <div
-            class="flex absolute h-auto w-8 right-0 group-hover:bg-white rounded-md top-2/4 -translate-y-2/4"
+            class="flex absolute h-8 w-8 right-3 group-hover:bg-white rounded-md top-2/4 -translate-y-2/4"
             @click="showOptions(index)"
             @click.right.prevent="showOptions(index)"
           >
             <HeroIcon
               v-if="isLabelHovered[index]"
-              class="inline text-blue-500 mt-1 ml-1"
+              class="inline text-blue-500 w-8 h-8 mt-1 ml-1"
               icon="dots_horizontal"
               strokewidth="2"
               width="20"
