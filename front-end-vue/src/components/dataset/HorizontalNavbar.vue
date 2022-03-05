@@ -11,7 +11,7 @@
         @click="$emit('update:modelValue', item.name)"
       >
         <!-- Icon -->
-        <div class="inline-flex mr-2">
+        <div v-if="showicon" class="inline-flex mr-2">
           <HeroIcon strokewidth="2" width="24" height="24" :icon="item.icon" />
         </div>
 
@@ -31,7 +31,7 @@ import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "HorizontalNavbar",
-  props: ["items", "modelValue"],
+  props: ["items", "modelValue", "showicon"],
   emits: ["update:modelValue"],
   components: {
     HeroIcon
@@ -58,5 +58,4 @@ export default defineComponent({
   /* margin-right: 1%; */
   /* border-bottom: solid 3px transparent; */
 }
-
 </style>

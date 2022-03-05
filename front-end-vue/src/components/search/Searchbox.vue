@@ -20,7 +20,7 @@
         />
       <input
         type="text"
-        class="relative transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900 font-medium rounded-md focus:outline-none"
+        class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900 font-medium rounded-md focus:outline-none"
         placeholder="Type to Search for Data, Apps and Resources"
         :value="modelValue"
         @input="onInput($event)"
@@ -47,7 +47,7 @@
         @click="$emit('update:modelValue', '')"
       >
         <HeroIcon
-          class="bg-white text-gray-600 hover:text-red-500 mr-3"
+          class="text-gray-600 hover:text-red-500 mr-3"
           strokewidth="2"
           width="24"
           height="24"
@@ -182,6 +182,7 @@ em {
 
 .hover,
 .focus {
+  background: #fff;
   border-color: rgb(207, 210, 218);
   box-shadow: rgb(207, 210, 218) 0px 0px 6px;
 }

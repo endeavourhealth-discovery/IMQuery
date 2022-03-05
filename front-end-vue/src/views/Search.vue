@@ -9,64 +9,65 @@
 
     <!-- Page: Home -->
     <div v-if="activePageName == 'PageName'" class="page flex flex-col items-center justify-center">
-      <!-- Brand  -->
     </div>
     <!-- /Page: Home -->
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <div :class="'header flex items-center justify-center w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
-        <!-- Menu Toggler  -->
-        <RoundButton
-          class="menu-toggler absolute h-10 w-auto ml-4"
-          :rounded="false"
-          :showRing="true"
-          backgroundColor="white"
-          hoverBackgroundColor="white"
-          borderColor="white"
-          hoverTextColor="blue-600"
-          focusTextColor="blue-600"
-          focusBackgroundColor="white"
-          textColor="gray-700"
-          ringColor="blue-600"
-        >
-          <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
-        </RoundButton>
-        <!-- / Menu Toggler  -->
+      <header :class="'header flex items-center justify-between w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
+        <!-- Left Side  -->
+        <div :class="'left pl-5 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
+          <!-- Menu Toggler  -->
+          <RoundButton
+            class="menu-toggler h-14 w-14 mr-6"
+            :rounded="false"
+            :showRing="true"
+            backgroundColor="white"
+            hoverBackgroundColor="white"
+            borderColor="white"
+            hoverTextColor="blue-600"
+            focusTextColor="blue-600"
+            focusBackgroundColor="white"
+            textColor="gray-700"
+            ringColor="blue-600"
+          >
+            <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
+          </RoundButton>
+          <!-- / Menu Toggler  -->
 
-        <!-- Branding  -->
-        <div v-if="activeTabName != 'Home'" :class="'app-branding absolute flex  non-selectable ' + [activeTabName == 'Home' ? ' invisible' : ' ']">
-          <img class="app-logo inline" src="app-icon.png" alt="" />
-          <div class="relative app-title inline-flex flex-col">
-            <!-- <div class="relative app-title-top font-medium text-gray-600">
-              Resolution
-            </div> -->
-            <!-- <div class="relative app-title-bottom  font-medium text-black">
-              Resolution
-            </div> -->
+          <img class="app-logo h-10 w-10 inline" src="app-icon.png" alt="" />
+
+          <!-- Apps  -->
+          <div class="flex">
+            <div class="app-title ml-5 font-medium text-black text-3xl">
+              Apps
+            </div>
+            <HeroIcon class="mt-1 mx-2" strokewidth="2" width="20" height="20" icon="chevron_down" />
           </div>
+          <!-- /Apps  -->
+
+          <!-- Tab Buttons  -->
+          <nav :class="'ml-8 inline-flex h-full flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
+            <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
+          </nav>
+          <!-- /Tab Buttons -->
         </div>
-        <!-- / Branding  -->
+        <!-- / Left Side    -->
 
         <!-- Searchbox  -->
         <Searchbox
           v-if="activeTabName != 'Home'"
-          :class="'searchbox-top' + [activeTabName == 'Home' ? ' invisible' : '']"
+          :class="'searchbox-top bg-gray-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']"
           v-model="searchString"
           :autocompleteData="autocompleteData"
           @search="showSearchResults()"
         />
+        <!-- /Searchbox  -->
 
-        <!-- Tab Buttons  -->
-        <div :class="'header-nav relative h-full flex flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
-          <HorizontalNavbar v-model="activeTabName" :items="tabs" />
-        </div>
-        <!-- /Tab Buttons -->
-        <div class="header-right">
+        <div class="right mr-7">
           <UserWidget :modelValue="userMeta" />
         </div>
-      </div>
-      <!-- /Searchbox  -->
+      </header>
 
       <!-- Tabs -->
       <div class="page-content">
@@ -524,26 +525,25 @@ export default defineComponent({
   left: 0px;
 }
 
-.app-branding {
-  /* margin-left: 15px;
-  margin-right: clamp(10px, 1%, 20px); */
-  top: 16px;
-  left: 75px;
-}
-
 .app-logo {
   margin-right: 3px;
-  width: 31px;
-  height: 26px;
+  min-width: 31px;
+  min-height: 26px;
 }
 
-.app-title {
-  visibility: hidden;
+.menu-toggler {
+  display: none;
+}
+header nav {
+  display: inline-flex;
 }
 
-@media screen and (min-width: 1000px) {
-  .app-title {
-    visibility: visible;
+@media screen and (max-width: 1000px) {
+  .menu-toggler {
+    display: inline-flex;
+  }
+  header nav {
+    display: none;
   }
 }
 
@@ -552,15 +552,11 @@ export default defineComponent({
   top: -4px;
   font-size: 22px;
 }
-
-.header {
-  padding-left: 0px;
-  height: 60px;
-}
-
-.header-right {
-  position: absolute;
-  right: 50px;
+header, 
+header .left ,
+nav,
+nav .tab-buttons {
+  min-height: 60px;
 }
 
 .b-bottom {
@@ -572,13 +568,15 @@ export default defineComponent({
 }
 .searchbox-main,
 .searchbox-top {
+  /* position: inline; */
+  /* left: 250px; */
+  /* left: 50%; */
+  /* transform: translate() */
   width: 100%;
   max-width: 400px;
   height: 40px;
 }
 
-.searchbox-top {
-  position: absolute;
-  left: 250px;
-}
+
+
 </style>
