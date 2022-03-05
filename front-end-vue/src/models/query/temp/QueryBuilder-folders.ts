@@ -1,8 +1,8 @@
 import { prefix } from '@fortawesome/free-solid-svg-icons';
 // import { nice } from 'd3';
 import { PropertiesContext } from './../../discovery-syntax/DiscoverySyntaxParser';
-const { v4 } = require('uuid');
-const _ = require('lodash')
+import { v4 } from "uuid";
+import _ from "lodash";
 // import * as ceg_c19_vac_2nd from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
 // import ceg_c19_vac_booster from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';
 // import ceg_c19_pregant from '@/models/query/examples/QMUL_CEG_query_library/COVID 2nd Vaccine-ld';

@@ -49,7 +49,7 @@ import LoggerService from "@/services/LoggerService";
 
 // import SearchService from "@/services/SearchService";
 // import SearchClient from "@/services/SearchClient";
-// const { MeiliSearch } = require("meilisearch");
+// import { MeiliSearch } from "meilisearch";
 import QueryEditor from "@/components/dataset/QueryEditor.vue";
 import BackgroundCards from "@/components/dataset/BackgroundCards.vue";
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";

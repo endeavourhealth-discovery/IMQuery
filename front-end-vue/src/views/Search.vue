@@ -255,7 +255,7 @@ import OrganisationBrowser from "@/components/dataset/OrganisationBrowser.vue";
 
 var _ = require("lodash");
 
-const { MeiliSearch } = require("meilisearch");
+import { MeiliSearch } from "meilisearch";
 
 export default defineComponent({
   name: "Search",

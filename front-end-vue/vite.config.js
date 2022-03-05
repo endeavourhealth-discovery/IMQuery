@@ -1,10 +1,13 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
+// import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 const path = require("path");
 
 export default defineConfig({
-  plugins: [vue(),  esbuildCommonjs(['path','meilisearch', 'uuid']) ],
+  plugins: [
+    vue()
+    // esbuildCommonjs(['path','meilisearch', 'uuid'])
+  ],
   resolve: {
     dedupe: ["vue"],
     alias: { "./runtimeConfig": "./runtimeConfig.browser", "@": path.resolve(__dirname, "./src") }
@@ -19,6 +22,15 @@ export default defineConfig({
       jsdom: {
         url: "http://localhost"
       }
+    }
+  },
+  optimizeDeps: {
+    exclude: ['/query/']
+  },
+  build: {
+    commonjsOptions: {
+      include: [/node_modules/],
+      exclude: [/query/]
     }
   }
 });

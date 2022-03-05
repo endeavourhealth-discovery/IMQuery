@@ -17,7 +17,7 @@ export default class EntityService {
     });
   }
 
-  static api = import.meta.env.VUE_APP_API;
+  static api = import.meta.env.VITE_API;
 
   public static async advancedSearch(
     request: SearchRequest,

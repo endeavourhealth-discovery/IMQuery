@@ -15,7 +15,7 @@ import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
 import {QueryBuilder} from "@/models/query/QueryTools";
 import Ontology from "@/models/query/OntologyTools";
-const _ = require("lodash");
+import _ from "lodash";
 
 
 export default createStore({

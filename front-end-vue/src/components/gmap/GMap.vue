@@ -39,7 +39,7 @@ export default defineComponent({
   },
   async mounted() {
     const loader = new Loader({
-      apiKey: import.meta.env.VUE_APP_GOOGLEMAPS_KEY
+      apiKey: import.meta.env.VITE_GOOGLEMAPS_KEY
     });
 
     await loader.load().then(() => {

@@ -17,9 +17,9 @@
 ### Ensure you have the following environment variables
 
 `
-VUE_APP_OSS_URL=""
-VUE_APP_OSS_AUTH_BASICTOKEN=""
-VUE_APP_INDEX_IM="dev-im"
+VITE_OSS_URL=""
+VITE_OSS_AUTH_BASICTOKEN=""
+VITE_INDEX_IM="dev-im"
 `
 
 <br>

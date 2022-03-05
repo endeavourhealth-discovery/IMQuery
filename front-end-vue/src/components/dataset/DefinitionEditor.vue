@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
-const { v4 } = require("uuid");
+import{ v4 } from "uuid";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import ClauseItem from "@/components/dataset/ClauseItem.vue";
 import ClauseEditor from "@/components/dataset/ClauseEditor.vue";

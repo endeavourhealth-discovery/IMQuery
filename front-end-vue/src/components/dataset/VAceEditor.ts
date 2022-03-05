@@ -3,8 +3,8 @@ import ace from 'ace-builds';
 import { Ace } from 'ace-builds';
 import { capitalize, defineComponent, markRaw, h } from 'vue';
 import ResizeObserver from 'resize-observer-polyfill';
-const prettier = require("prettier/standalone");
-const prettierBabylon = require("prettier/parser-babylon");
+import prettier from "prettier/standalone";
+import prettierBabylon from "prettier/parser-babylon";
 
 import type { VAceEditorInstance } from './types';
 

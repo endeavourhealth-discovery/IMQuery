@@ -1,7 +1,7 @@
-const { v4 } = require('uuid');
-const _ = require('lodash')
-const jmp = require('jmespath');
-const jp = require('jsonpath');
+import { v4 } from "uuid";
+import _ from "lodash";
+import jmp from "jmp";
+import jsonpath from "jsonpath";
 
 
 const functions_v1 = {

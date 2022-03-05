@@ -1,5 +1,5 @@
-const { MeiliSearch } = require('meilisearch')
-const { v4 } = require('uuid');
+import { MeiliSearch } from 'meilisearch'
+import { v4 } from 'uuid';
 import axios from "axios";
 
 

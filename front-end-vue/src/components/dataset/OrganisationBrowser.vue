@@ -93,7 +93,7 @@ import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 import ListItem from "@/components/dataset/ListItem.vue";
-const { v4 } = require("uuid");
+import{ v4 } from "uuid";
 // import OrganisationMap from "@/components/dataset/OrganisationMap.vue";
 
 export default defineComponent({

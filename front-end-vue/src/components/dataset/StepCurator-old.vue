@@ -109,7 +109,7 @@ import Section from "@/components/dataset/Section.vue";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import Selector from "@/components/dataset/Selector.vue";
 import Widget from "@/components/dataset/Widget.vue";
-const _ = require("lodash");
+import _ from "lodash";
 import EntityService from "@/services/EntityService";
 import LoggerService from "@/services/LoggerService";
 import Constraint from "@/components/dataset/Constraint.vue";

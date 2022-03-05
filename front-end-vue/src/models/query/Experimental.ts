@@ -3,7 +3,7 @@
       // x-amz-version-id is Amazon S3 bucket version (feature must be enabled)
       // const isCacheSupported = "caches" in window;
       // if (isCacheSupported) {
-      // const url = `${import.meta.env.VUE_APP_ONTOLOGY_URL}/CoreOntology.json`;
+      // const url = `${import.meta.env.VITE_ONTOLOGY_URL}/CoreOntology.json`;
       // const cacheName = "imquery-appdata";
       // create store
       // caches.open(cacheName).then((cache) => {

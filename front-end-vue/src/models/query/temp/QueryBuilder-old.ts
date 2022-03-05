@@ -1,4 +1,4 @@
-// const { v4 } = require('uuid');
+// import { v4 } from "uuid";
 
 //todo: check available DBID with opensearch first before accepting a random number as DBID
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;

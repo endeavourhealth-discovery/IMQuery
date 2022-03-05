@@ -80,10 +80,10 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
-const { v4 } = require("uuid");
+import{ v4 } from "uuid";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
-const prettier = require("prettier/standalone");
-const prettierBabylon = require("prettier/parser-babylon");
+import prettier from "prettier/standalone";
+import prettierBabylon from "prettier/parser-babylon";
 // import Constraint from "@/components/dataset/Constraint.vue";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 

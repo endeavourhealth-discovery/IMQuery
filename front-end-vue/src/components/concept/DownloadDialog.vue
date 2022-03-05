@@ -222,7 +222,7 @@ export default defineComponent({
         .replace(/#/gi, "%23");
 
       const url =
-        import.meta.env.VUE_APP_API +
+        import.meta.env.VITE_API +
         "api/entity/download?iri=" +
         modIri +
         "&format=" +

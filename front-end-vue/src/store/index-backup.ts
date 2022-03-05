@@ -13,7 +13,7 @@ import { ConceptReference } from "@/models/TTConcept/ConceptReference";
 import axios from "axios";
 import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
-const _ = require("lodash");
+import _ from "lodash";
 
 export default createStore({
   // update stateType.ts when adding new state!

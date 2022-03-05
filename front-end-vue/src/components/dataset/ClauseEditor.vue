@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
-const { v4 } = require("uuid");
+import{ v4 } from "uuid";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import InputDescription from "@/components/dataset/InputDescription.vue";
 import QueryTools from "@/models/query/QueryTools";

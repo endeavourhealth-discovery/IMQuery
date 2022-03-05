@@ -70,7 +70,7 @@ import VerticalTabs from "@/components/search/VerticalTabs.vue";
 
 import SearchService from "@/services/SearchService";
 import SearchClient from "@/services/SearchClient";
-const { MeiliSearch } = require("meilisearch");
+import { MeiliSearch } from "meilisearch";
 import Curator from "@/components/dataset/Curator.vue";
 
 export default defineComponent({

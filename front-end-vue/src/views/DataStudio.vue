@@ -187,7 +187,7 @@
 import { ref, onMounted, defineComponent } from "vue";
 import { functions_v1 as f } from "@/models/query/TemplateFunctions";
 
-const { v4 } = require("uuid");
+import{ v4 } from "uuid";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import DataViewer from "@/components/dataset/DataViewer.vue";
 
@@ -215,9 +215,9 @@ import { entityTypes } from "@/models/query/OntologyTools";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import LabelView from "@/components/dataset/LabelView.vue";
 import InputTextbox from "@/components/dataset/InputTextbox.vue";
-const jp = require("jsonpath");
-const prettier = require("prettier/standalone");
-const prettierBabylon = require("prettier/parser-babylon");
+import jp from "jsonpath";
+import prettier from "prettier/standalone";
+import prettierBabylon from "prettier/parser-babylon";
 import { VAceEditor } from "@/components/dataset/VAceEditor";
 import nestedExample from "@/components/dataset/draggable/nestedExample.vue";
 

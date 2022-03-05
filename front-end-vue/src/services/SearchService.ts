@@ -3,11 +3,11 @@ import axios, { AxiosResponse, CancelToken } from "axios";
 export default class SearchService {
 
   //env variables not working for some reason?
-  static oss_url = import.meta.env.VUE_APP_OSS_URL;
-  static graphdb_url = import.meta.env.VUE_APP_GRAPHDB_URL;
+  static oss_url = import.meta.env.VITE_OSS_URL;
+  static graphdb_url = import.meta.env.VITE_GRAPHDB_URL;
 
   static oss_headers = {
-    'Authorization': `Basic ${import.meta.env.VUE_APP_OSS_AUTH_BASICTOKEN}`,
+    'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
     'Content-Type': 'application/json'
   }
 
@@ -33,7 +33,7 @@ export default class SearchService {
 
   public static async oss_search_templates(query: any, limit: number): Promise<AxiosResponse<any>> {
 
-    return axios.post(`${this.oss_url}/${import.meta.env.VUE_APP_INDEX_TEMPLATES}/_search`,
+    return axios.post(`${this.oss_url}/${import.meta.env.VITE_INDEX_TEMPLATES}/_search`,
       {
         size: limit,
         query: query
@@ -90,7 +90,7 @@ export default class SearchService {
         }]
       }
     }
-    return axios.post(`${this.oss_url}/${import.meta.env.VUE_APP_INDEX_IM}/_search`,
+    return axios.post(`${this.oss_url}/${import.meta.env.VITE_INDEX_IM}/_search`,
       {
         size: limit,
         query: q
@@ -144,7 +144,7 @@ export default class SearchService {
       }
     }
 
-    return axios.post(`${this.oss_url}/${import.meta.env.VUE_APP_INDEX_IM}/_search`,
+    return axios.post(`${this.oss_url}/${import.meta.env.VITE_INDEX_IM}/_search`,
       {
         size: 100,
         query: q
@@ -166,7 +166,7 @@ export default class SearchService {
 
 
   //   console.log("queryParams is: ", this.toFormURLEncoded(sparqlQueryString));
-  //   return axios.get(`${this.graphdb_url}/repositories/${import.meta.env.VUE_APP_GRAPHDB_REPOSITORY}?q=${this.toFormURLEncoded(sparqlQueryString)}`,
+  //   return axios.get(`${this.graphdb_url}/repositories/${import.meta.env.VITE_GRAPHDB_REPOSITORY}?q=${this.toFormURLEncoded(sparqlQueryString)}`,
   //     {
   //       headers: this.graphdb_headers
   //     });

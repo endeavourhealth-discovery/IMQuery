@@ -1,9 +1,9 @@
-const { v4 } = require('uuid');
-const _ = require('lodash')
-const jmp = require('jmespath');
-const jp = require('jsonpath');
-const prettier = require("prettier/standalone");
-const prettierBabylon = require("prettier/parser-babylon");
+import { v4 } from "uuid";
+import _ from "lodash";
+import jmp from "jmp";
+import jsonpath from "jsonpath";
+import prettier from "prettier/standalone";
+import prettierBabylon from "prettier/parser-babylon";
 import SearchService from "@/services/SearchService";
 import axios, { AxiosResponse, CancelToken } from "axios";
 
