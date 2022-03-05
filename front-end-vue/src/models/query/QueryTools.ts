@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import _ from "lodash";
-import jmp from "jmp";
+// import jmp from "jmp";
 import jsonpath from "jsonpath";
 import prettier from "prettier/standalone";
 import prettierBabylon from "prettier/parser-babylon";
@@ -151,18 +151,18 @@ export class QueryBuilder {
 
 
     // get all profiles in a folder
-    public getProfilesByFolder(folderIri: string): any {
-        const _q = `entities[?
-            "rdf:type"[?"@id" == \`im:Profile\`] && 
-            "im:isContainedIn"[?"@id" == \`${folderIri}\`]]
-                ."im:definition" 
-                | []`;
+    // public getProfilesByFolder(folderIri: string): any {
+    //     const _q = `entities[?
+    //         "rdf:type"[?"@id" == \`im:Profile\`] && 
+    //         "im:isContainedIn"[?"@id" == \`${folderIri}\`]]
+    //             ."im:definition" 
+    //             | []`;
 
-        const _result = jmp.search(this._file, _q);
-        console.log("_result:", _result)
+    //     // const _result = jmp.search(this._file, _q);
+    //     console.log("_result:", _result)
 
-        return _result;
-    }
+    //     return _result;
+    // }
 
     // get profile by iri
     // special characters in keys are replaced for JSON queries

@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import _ from "lodash";
-import jmp from "jmp";
+// import jmp from "jmp";
 import jsonpath from "jsonpath";
 import axios, { AxiosResponse } from "axios";
 
@@ -48,7 +48,8 @@ export default class Ontology {
 
         public byIri(iri: string): any {
             if (iri != "") {
-                return jmp.search(this.superThis._entities, `[?"@id" == \`${iri}\`]`)[0]
+                return;
+                // return jmp.search(this.superThis._entities, `[?"@id" == \`${iri}\`]`)[0]
             }
             else {
                 throw new Error("Iri parameter is an empty string");
@@ -56,7 +57,8 @@ export default class Ontology {
         }
 
         public byType(entityType: entityTypes): any {
-            return jmp.search(this.superThis._entities, `[?"rdf:type"[?"@id" == \`${entityType}\`]]`)
+            return;
+            // return jmp.search(this.superThis._entities, `[?"rdf:type"[?"@id" == \`${entityType}\`]]`)
         }
 
     }(this);
@@ -69,7 +71,7 @@ export default class Ontology {
     constructor(ontologyURL = import.meta.env.VITE_ONTOLOGY_URL as string) {
 
         if (!ontologyURL || ontologyURL == "") {
-            
+
             throw new Error("No Ontology URL specified on instantiation. Pass a URL to entities in your ontology in JSON-LD format i.e. '@context', '@graph' and 'entities'");
         }
 

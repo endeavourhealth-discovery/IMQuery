@@ -281,8 +281,8 @@ export default defineComponent({
         email: "",
       },
       searchString: "",
-      activePageName: "Main", //Options #Home #SearchResults
-      activeTabName: "Data",
+      activePageName: "Main", 
+      activeTabName: "Data", //Options #Home #SearchResults
       suggestions: [
         {
           name: "DataStudio",

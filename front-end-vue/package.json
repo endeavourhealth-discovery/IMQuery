@@ -34,7 +34,6 @@
     "google-palette": "^1.1.0",
     "im-library": "file:../../IMLibrary",
     "jmespath": "^0.16.0",
-    "jmp": "^2.0.0",
     "jsonpath": "^1.1.1",
     "lodash": "^4.17.21",
     "meilisearch": "^0.22.1",

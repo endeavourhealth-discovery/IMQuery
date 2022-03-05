@@ -156,9 +156,15 @@ em {
   user-select: none; /* Likely future */
 }
 
+.searchbox {
+    min-height: 40px;
+  max-height: 40px;
+}
+
 .searchbox,
 .autocomplete {
   font-size: 14px !important;
+
 }
 
 .autocomplete {
