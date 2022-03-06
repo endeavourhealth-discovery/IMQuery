@@ -1,76 +1,72 @@
 <template>
-  <div class="p-d-flex p-flex-row p-ai-center">
-    <Card class="p-d-flex p-flex-column p-jc-sm-around p-ai-center login-card">
-      <template #header>
-        <i class="fa fa-fw fa-users icon-header" aria-hidden="true" />
-      </template>
-      <template #title>
-        Login
-      </template>
-      <template #content>
-        <div class="p-fluid login-form">
-          <div class="p-field">
-            <label for="fieldUsername">Username</label>
-            <InputText
+  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-md w-full space-y-24">
+      <div class="mb-10">
+          <img class="app-logo h-10 w-10 mx-auto h-12 w-auto" src="app-icon.png" alt="" />
+
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+          <div @click="$router.push({ name: 'Register' })" class="select-none text-xl font-medium text-blue-600 hover:underline"> I don't have an account yet</div>
+        </p>
+      </div>
+      <div class="mt-10 space-y-20">
+        <!-- <input type="hidden" name="remember" value="true" /> -->
+        <div class="rounded-md shadow-sm -space-y-px ">
+          <div>
+            <label for="email-address" class="sr-only">Email address</label>
+            <!-- <InputText id="fieldUsername" type="text" v-model="username" :placeholder="username" /> -->
+            <input
               id="fieldUsername"
-              type="text"
               v-model="username"
-              :placeholder="username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              required="true"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 text-3xl"
+              placeholder="Username"
             />
           </div>
-          <div class="p-field">
-            <label for="fieldPassword">Password</label>
-            <InputText
+          <div>
+            <label for="password" class="sr-only">Password</label>
+            <!-- <InputText id="fieldPassword" type="password" v-model="password" @keyup="checkKey" /> -->
+            <input
               id="fieldPassword"
-              type="password"
               v-model="password"
               @keyup="checkKey"
-            />
-          </div>
-          <div class="p-d-flex p-flex-row p-jc-center">
-            <Button
-              class="user-submit"
-              type="submit"
-              label="Login"
-              v-on:click.prevent="handleSubmit"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required="true"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 text-3xl"
+              placeholder="Password"
             />
           </div>
         </div>
-      </template>
-      <template #footer>
-        <small
-          >Don't have an account yet?
-          <a
-            id="register-link"
-            class="footer-link"
-            @click="$router.push({ name: 'Register' })"
-            >Register here</a
-          ></small
-        >
-        <br />
-        <br />
-        <small
-          >Already received a confirmation code?
-          <a
-            id="code-link"
-            class="footer-link"
-            @click="$router.push({ name: 'ConfirmCode' })"
-            >Add it here</a
-          ></small
-        >
-        <br />
-        <br />
-        <small
-          >Forgot your password or username? <br /><a
-            id="recover-link"
-            class="footer-link"
-            @click="$router.push({ name: 'ForgotPassword' })"
-          >
-            Recover account</a
-          ></small
-        >
-      </template>
-    </Card>
+
+
+    <Button type="submit" class=" group relative transition easy-in-out duration-500 w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium rounded-md back-button p-button-lg p-button-rounded " label="      Sign In" icon="pi pi-unlock" iconPos="left"      v-on:click.prevent="handleSubmit" 
+ />
+
+
+
+
+      </div>
+
+
+      
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+                       <div @click="$router.push({ name: 'ConfirmCode' })" class="text-lg hover:underline select-none font-medium text-blue-600 ">Enter Password Reset Code </div>
+
+          </div>
+
+          <div class="text-sm">
+            <div @click="$router.push({ name: 'ForgotPassword' })"  class="text-lg font-medium text-blue-600 hover:underline select-none ">Forgot your password? </div>
+          </div>
+        </div>
+
+     
+    </div>
   </div>
 </template>
 
@@ -80,6 +76,7 @@ import { mapState } from "vuex";
 import Swal from "sweetalert2";
 import AuthService from "@/services/AuthService";
 import { avatars } from "@/models/user/Avatars";
+import LoggerService from "@/services/LoggerService";
 
 export default defineComponent({
   name: "Login",
@@ -102,54 +99,60 @@ export default defineComponent({
           if (res.status === 200 && res.user) {
             const loggedInUser = res.user;
             // check if avatar exists and replace lagacy images with default avatar on signin
-            const result = avatars.find(
-              avatar => avatar.value === loggedInUser.avatar.value
-            );
+            const result = avatars.find(avatar => avatar.value === loggedInUser.avatar.value);
             if (!result) {
               loggedInUser.avatar = avatars[0];
             }
             this.$store.commit("updateCurrentUser", loggedInUser);
             this.$store.commit("updateRegisteredUsername", null);
             this.$store.commit("updateIsLoggedIn", true);
-            Swal.fire({
-              icon: "success",
-              title: "Success",
-              text: "Login successful"
-            }).then(() => {
-              this.$router.push({ name: "Home" });
-            });
+            this.$router.push({ name: "Home" });
+            // Swal.fire({
+            //   icon: "success",
+            //   title: "Success",
+            //   text: "Login successful"
+            // }).then(() => {
+            //   this.$router.push({ name: "Home" });
+            // });
           } else if (res.status === 401) {
-            Swal.fire({
-              icon: "warning",
-              title: "User Unconfirmed",
-              text:
-                "Account has not been confirmed. Please confirm account to continue.",
-              showCloseButton: true,
-              showCancelButton: true,
-              confirmButtonText: "Confirm Account"
-            }).then(result => {
-              if (result.isConfirmed) {
-                this.$store.commit("updateRegisteredUsername", this.username);
-                this.$router.push({ name: "ConfirmCode" });
-              }
-            });
+            this.$toast.add(LoggerService.error("Incorrect username or password. Try again or reset your password."));
+
+            // Swal.fire({
+            //   icon: "warning",
+            //   title: "User Unconfirmed",
+            //   text: "Account has not been confirmed. Please confirm account to continue.",
+            //   showCloseButton: true,
+            //   showCancelButton: true,
+            //   confirmButtonText: "Confirm Account"
+            // }).then(result => {
+            //   if (result.isConfirmed) {
+            //     this.$store.commit("updateRegisteredUsername", this.username);
+            //     this.$router.push({ name: "ConfirmCode" });
+            //   }
+            // });
           } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: res.message,
-              confirmButtonText: "Close"
-            });
+            this.$toast.add(LoggerService.error("Incorrect username or password. Try again or reset your password."));
+
+            // this.$toast.add(LoggerService.error("An error has occurred, please try again later."));
+            // Swal.fire({
+            //   icon: "error",
+            //   title: "Error",
+            //   text: res.message,
+            //   confirmButtonText: "Close"
+            // });
           }
         })
         .catch(err => {
-          console.error(err);
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Authentication error",
-            confirmButtonText: "Close"
-          });
+          this.$toast.add(LoggerService.error("Incorrect username or password. Try again or reset your password."));
+
+          // this.$toast.add(LoggerService.error("An error has occurred, please try again later."));
+          // console.error(err);
+          // Swal.fire({
+          //   icon: "error",
+          //   title: "Error",
+          //   text: "Authentication error",
+          //   confirmButtonText: "Close"
+          // });
         });
     },
 

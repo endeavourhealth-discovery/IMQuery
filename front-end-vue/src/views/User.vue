@@ -1,8 +1,10 @@
 <template>
-  <div class="p-d-flex p-flex-column p-ai-center p-jc-start user-container">
-    <div class="p-d-flex p-flex-column p-jc-start card-button-container">
-      <button-bar />
-      <div id="user-card-container">
+  <div class="flex flex-col justify-center user-container">
+  
+      <button-bar class="absolute top-20 left-2/4 -translate-x-2/4 bg-white" />
+
+    <div class="flex w-full justify-start card-button-container">
+      <div class="h-full w-full overflow-y-auto">
         <router-view />
       </div>
     </div>
@@ -24,12 +26,12 @@ export default defineComponent({
 <style scoped>
 .user-container {
   width: 100%;
-  height: 95vh;
   /* overflow-y: auto; */
-  margin-top: 5vh;
 }
 
 .card-button-container {
+  height: 100%;
+  /* margin-top: 5vh; */
   height: 100%;
 }
 

@@ -3,22 +3,22 @@
     <div
       v-for="result in searchResults"
       :key="result.id"
-      class="non-selectable transition duration-500 ease-in-out appearance-none rounded-none relative block w-full px-4 py-3 border border-white hover:border-gray-300 focus:border-gray-400 placeholder-gray-400 rounded-md  focus:outline-none focus:z-10 hover:shadow-md my-5"
+      class="non-selectable group rounded-md transition duration-500 ease-in-out appearance-none relative block px-4 py-3 border border-gray-200 hover:border-gray-300 focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none focus:z-10 hover:shadow-md my-5"
     >
       <div>
-        <div class="text-sm flex row-col items-center">
-          <div class="inline text-xs text-gray-700">
+        <div class="text-lg  flex row-col items-center">
+          <div class="inline text-black">
             {{ urlDomain(result.url) + "/" }}
           </div>
-          <div class="inline text-xs text-gray-400">
+          <div class="inline text-gray-500">
             {{ urlParams(result.url) }}
           </div>
         </div>
       </div>
-      <div class="text-2xl text-blue-500 font-semibold">
+      <div class="text-3xl text-blue-700 group-hover:underline font-normal">
         {{ result.title }}
       </div>
-      <div class="text-lg text-gray-900">
+      <div class="text-2xl text-gray-900 mt-2">
         {{ result.description }}
       </div>
     </div>

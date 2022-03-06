@@ -5,10 +5,10 @@
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex items-center border-b border-b-2 mt-2 justify-center transition duration-500 ease-in-out hover:text-blue-500 ' +
-            [modelValue == item.name ? ' text-blue-600 border-b-blue-500' : ' text-gray-700 border-b-transparent']
+          'tab-button non-selectable inline-flex items-center border-b border-b-2 justify-center transition duration-500 ease-in-out hover:text-blue-600 ' +
+            [modelValue == item.name ? ' text-blue-600 border-b-blue-500' : ' text-black border-b-transparent']
         ]"
-        @click="$emit('update:modelValue', item.name)"
+        @click="onClick(item.name, item.hyperlink ? item.hyperlink : '')"
       >
         <!-- Icon -->
         <div v-if="showicon" class="inline-flex mr-2">
@@ -17,7 +17,7 @@
 
         <!-- / Icon -->
 
-        <div class="inline-flex">
+        <div class="inline-flex text-2xl">
           <div>{{ item.name }}</div>
         </div>
       </div>
@@ -35,6 +35,15 @@ export default defineComponent({
   emits: ["update:modelValue"],
   components: {
     HeroIcon
+  },
+  methods: {
+    onClick(itemName: string, hyperlink: string = ""): void {
+      if (hyperlink && hyperlink != "") {
+        window.open(hyperlink, "_blank");
+      } else {
+        this.$emit("update:modelValue", itemName);
+      }
+    }
   }
 });
 </script>

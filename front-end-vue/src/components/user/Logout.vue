@@ -1,6 +1,6 @@
 <template>
-  <div class="p-d-flex p-flex-row p-ai-center">
-    <Card class="p-d-flex p-flex-column p-jc-sm-around p-ai-center logout-card">
+  <div class="flex  items-center">
+    <Card class="flex flex-col p-jc-sm-around items-center logout-card">
       <template #header>
         <i class="fa fa-fw fa-sign-out-alt icon-header" aria-hidden="true" />
       </template>
@@ -15,7 +15,7 @@
           <div class="p-field">
             <div
               v-if="isLoggedIn"
-              class="p-d-flex p-flex-row p-ai-center p-text-capitalize"
+              class="flex  items-center p-text-capitalize"
             >
               <img
                 v-if="isLoggedIn"
@@ -33,7 +33,7 @@
               Guest
             </div>
           </div>
-          <div class="p-d-flex p-flex-row p-jc-center">
+          <div class="flex  p-jc-center">
             <Button
               class="user-submit"
               type="submit"
@@ -51,7 +51,7 @@
 import { defineComponent } from "vue";
 import { mapState } from "vuex";
 import Swal from "sweetalert2";
-import { CustomAlert } from "@/models/user/CustomAlert";
+import { CustomAlert } from "../../models/user/CustomAlert";
 
 export default defineComponent({
   name: "Logout",

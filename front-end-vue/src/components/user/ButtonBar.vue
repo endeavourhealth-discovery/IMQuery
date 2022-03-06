@@ -1,31 +1,25 @@
 <template>
-  <div class="p-d-flex p-flex-row p-jc-start">
-    <Button
-      class="back-button"
-      label="Back"
-      icon="pi pi-arrow-circle-left"
-      iconPos="left"
-      v-on:click.prevent="clickedBack"
-    />
-    <Button
-      class="home-button"
-      icon="pi pi-home"
-      v-on:click.prevent="$router.push({ name: 'Home' })"
-    />
+  <div class="flex">
+
+
+    <Button class="back-button p-button-lg p-button-rounded " label="Back" icon="pi pi-arrow-circle-left" iconPos="left" v-on:click.prevent="clickedBack" />
+    <Button class="home-button p-button-lg p-button-rounded p-button-outlined"  icon="pi pi-home" iconPos="left" label="Home" v-on:click.prevent="$router.push({ name: 'Home' })" />
   </div>
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
 import { defineComponent } from "vue";
+import HeroIcon from "@/components/search/HeroIcon.vue";
 
 export default defineComponent({
   name: "ButtonBar",
-  computed: mapState(["snomedLicenseAccepted"]),
+  components: {
+    HeroIcon
+  },
   methods: {
     clickedBack(): void {
       if (this.$store.state.historyCount === window.history.length) {
-        this.$router.push({ name: "Dashboard" });
+        this.$router.push({ name: "Home" });
       } else {
         this.$router.go(-1);
       }
@@ -36,10 +30,17 @@ export default defineComponent({
 
 <style scoped>
 .back-button {
-  width: fit-content;
+  /* width: fit-content; */
 }
 
 .home-button {
-  margin-left: 0.25em;
+  margin-left: 1em;
+  
+}
+
+.back-button,
+.home-button {
+  height: 40px;
+  width: auto;
 }
 </style>

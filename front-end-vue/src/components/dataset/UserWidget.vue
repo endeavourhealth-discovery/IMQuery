@@ -19,17 +19,10 @@
       @blur="isHover ? null : [(expanded = false)]"
       a
     >
-      {{
-        modelValue.firstName.substring(0, 1) +
-          modelValue.lastName.substring(0, 1)
-      }}
+      {{ modelValue.firstName.substring(0, 1) + modelValue.lastName.substring(0, 1) }}
     </RoundButton>
-    <div
-      v-if="modelValue && expanded"
-      class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white ring-1 focus:outline-none"
-      role="menu"
-    >
-      <div class="non-selectable block px-4 py-2 text-sm border-b">
+    <div v-if="modelValue && expanded" class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white ring-1 focus:outline-none" role="menu">
+      <div class="non-selectable block px-4 py-2 text-2xl border-b">
         <div class="text-black font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
         <div class="text-gray-700 font-regular">
           {{ modelValue.email }}
@@ -38,31 +31,23 @@
 
       <div
         v-if="isLoggedIn"
-        class="non-selectable text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+        class="non-selectable text-gray-700 block px-4 py-2 text-2xl hover:bg-gray-100"
         role="menuitem"
         @click="$router.push({ name: 'UserEdit' })"
       >
         View Account
       </div>
-      <div
-        v-if="isLoggedIn"
-        class="non-selectable text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
-        role="menuitem"
-        @click="onLogOut()"
-      >
+      <div v-if="isLoggedIn" class="non-selectable text-red-600 block px-4 py-2 text-2xl hover:bg-gray-100" role="menuitem" @click="onLogOut()">
         Log Out
       </div>
     </div>
   </div>
-  <div v-else class="non-selectable relative flex text-xl font-semibold">
-    <div class="hover:underline" @click="$router.push({ name: 'Login' })">
-      Log In
-    </div>
-    <div
-      class="hover:underline text-blue-600 ml-7"
-      @click="$router.push({ name: 'Register' })"
-    >
+  <div v-else class="non-selectable relative pt-3 flex text-3xl font-semibold">
+    <div class="hover:underline text-blue-600 " @click="$router.push({ name: 'Register' })">
       Sign Up
+    </div>
+    <div class="hover:underline text-purple-600 ml-7" @click="$router.push({ name: 'Login' })">
+      Log In
     </div>
   </div>
 </template>
@@ -74,52 +59,57 @@ import { mapState } from "vuex";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import Swal from "sweetalert2";
 import { CustomAlert } from "@/models/user/CustomAlert";
+import LoggerService from "@/services/LoggerService";
+
 
 export default defineComponent({
   name: "UserWidget",
   props: ["modelValue"],
   components: {
     // HeroIcon,
-    RoundButton,
+    RoundButton
   },
   data() {
     return {
-      expanded: false,
+      expanded: false
     };
   },
   computed: mapState(["currentUser", "isLoggedIn"]),
   methods: {
     onLogOut(): void {
-      Swal.fire({
-        icon: "warning",
-        title: "Are you sure?",
-        text: "Confirm logout request",
-        showCancelButton: true,
-        confirmButtonText: "Logout",
-        reverseButtons: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.$store.dispatch("logoutCurrentUser").then((res: CustomAlert) => {
-            if (res.status === 200) {
-              Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: res.message,
-              }).then(() => {
-                this.$router.push({ name: "Home" });
-              });
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: res.message,
-              });
-            }
-          });
-        }
-      });
-    },
-  },
+      this.$store.dispatch("logoutCurrentUser")
+            this.$toast.add(LoggerService.success("Logged Out Successfully."));
+
+      // Swal.fire({
+      //   icon: "warning",
+      //   title: "Are you sure?",
+      //   text: "Confirm logout request",
+      //   showCancelButton: true,
+      //   confirmButtonText: "Logout",
+      //   reverseButtons: true
+      // }).then(result => {
+      //   if (result.isConfirmed) {
+      //     this.$store.dispatch("logoutCurrentUser").then((res: CustomAlert) => {
+      //       if (res.status === 200) {
+      //         Swal.fire({
+      //           icon: "success",
+      //           title: "Success",
+      //           text: res.message
+      //         }).then(() => {
+      //           this.$router.push({ name: "Home" });
+      //         });
+      //       } else {
+      //         Swal.fire({
+      //           icon: "error",
+      //           title: "Error",
+      //           text: res.message
+      //         });
+      //       }
+      //     });
+      //   }
+      // });
+    }
+  }
 });
 </script>
 

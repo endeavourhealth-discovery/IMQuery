@@ -8,15 +8,14 @@
     <ProgressBar v-if="isLoading" />
 
     <!-- Page: Home -->
-    <div v-if="activePageName == 'PageName'" class="page flex flex-col items-center justify-center">
-    </div>
+    <div v-if="activePageName == 'PageName'" class="page flex flex-col items-center justify-center"></div>
     <!-- /Page: Home -->
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
       <header :class="'header relative flex items-center justify-between w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
         <!-- Left Side  -->
-        <div :class="' left pl-5 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
+        <div :class="'left pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
           <!-- Menu Toggler  -->
           <RoundButton
             class="menu-toggler h-14 w-14 mr-6"
@@ -35,20 +34,11 @@
           </RoundButton>
           <!-- / Menu Toggler  -->
 
-          <img class="app-logo h-10 w-10 inline" src="app-icon.png" alt="" />
-
-          <!-- Apps  -->
-          <div class="flex">
-            <div class="app-title ml-5 font-medium text-black text-3xl">
-              Apps
-            </div>
-            <HeroIcon class="mt-1 mx-2" strokewidth="2" width="20" height="20" icon="chevron_down" />
-          </div>
-          <!-- /Apps  -->
+          <img class="app-logo h-10 w-10" src="app-icon.png" alt="" />
 
           <!-- Tab Buttons  -->
-          <nav :class="'ml-8 inline-flex h-full flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
-            <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
+          <nav :class="'ml-7 inline-flex h-full flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
+            <HorizontalNavbar class="h-full pt-3" v-model="activeTabName" :items="tabs" />
           </nav>
           <!-- /Tab Buttons -->
         </div>
@@ -57,15 +47,46 @@
         <!-- Searchbox  -->
         <Searchbox
           v-if="activeTabName != 'Home'"
-          :class="'searchbox-top 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 bg-gray-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']"
+          :class="
+            'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 bg-gray-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']
+          "
           v-model="searchString"
           :autocompleteData="autocompleteData"
           @search="showSearchResults()"
         />
         <!-- /Searchbox  -->
 
-        <div class="right mr-7 ml-4">
-          <UserWidget :modelValue="userMeta" />
+        <div class="right flex mr-7 ml-4">
+          <!-- Apps  -->
+          <div class="select-none flex pt-3" @click="onToggleApps">
+            <div class="app-title ml-5 font-medium text-black text-3xl">
+              Apps
+            </div>
+            <HeroIcon class="mt-1 mx-2" strokewidth="2" width="20" height="20" icon="chevron_down" />
+            <div class="relative">
+              <!-- Apps -->
+              <OverlayPanel ref="overlay-apps">
+                <div class="flex justify-center w-full my-10">
+                  <a
+                    :href="app.hyperlink"
+                    target="_blank"
+                    v-for="app in apps"
+                    :key="app.name"
+                    class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200"
+                  >
+                    <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="app.icon" />
+                    <div class="inline text-lg font-bold text-gray-900">
+                      {{ app.name }}
+                    </div>
+                  </a>
+                </div>
+              </OverlayPanel>
+            </div>
+            <!-- /Apps -->
+          </div>
+
+          <!-- User Widget -->
+          <UserWidget class="ml-10" :modelValue="userMeta" />
         </div>
       </header>
 
@@ -91,7 +112,6 @@
               v-for="suggestion in suggestions"
               :key="suggestion.name"
               class="flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:border-blue-600 max-w-200"
-              @click="suggestion.onClick"
             >
               <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="suggestion.icon" />
               <div class="inline text-lg font-bold text-gray-900">
@@ -116,13 +136,13 @@
 
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Results'" class="tab-content  flex pt-5">
-          <div class="results w-full max-w-4xl ">
+          <div class="results w-full max-w-4xl mx-auto">
             <!-- <div>Filter and sort</div> -->
             <template v-if="searchResults && searchResults.length > 0">
               <SearchResults class="w-full" :results="searchResults" :value="searchString" />
             </template>
             <template v-else>
-              <div class="mt-10 ml-5 text-xl font-bold text-gray-600">
+              <div class="mt-10 ml-5 text-xl font-bold text-gray-600 text-center">
                 No results were found for your search terms.
               </div>
             </template>
@@ -213,6 +233,9 @@ export default defineComponent({
     OrganisationBrowser,
     UserWidget
   },
+  $refs: {
+    OverlayPanel: HTMLElement
+  },
   data() {
     return {
       // definition: typeof Dataset,
@@ -277,16 +300,30 @@ export default defineComponent({
           visible: true
         },
         {
-          index: 5,
-          name: "Dictionary",
-          icon: "bookOpen",
-          visible: true
-        },
-        {
           index: 6,
           name: "Resources",
           icon: "newspaper",
           visible: false
+        }
+      ],
+      apps: [
+        {
+          name: "Directory",
+          icon: "document_search",
+          visible: true,
+          hyperlink: "https://dev.endhealth.co.uk/"
+        },
+        {
+          name: "Dictionary",
+          icon: "book_open",
+          visible: true,
+          hyperlink: "https://dev.endhealth.co.uk/viewer"
+        },
+        {
+          name: "Data Studio",
+          icon: "newspaper",
+          visible: true,
+          hyperlink: ""
         }
       ],
       modulesData: null,
@@ -330,6 +367,10 @@ export default defineComponent({
     // this.getInitialData();
   },
   methods: {
+    onToggleApps(event: any): void {
+      console.log(event);
+      (this.$refs["overlay-apps"] as any).toggle(event);
+    },
     async getAutocompleteSearch(): Promise<void> {
       await SearchClient.fetchAutocompleteSearch(this.searchString)
         .then((res: any) => {
@@ -500,6 +541,9 @@ export default defineComponent({
   left: 0;
 }
 
+
+
+
 .filter-container {
   max-width: 300px;
 }
@@ -529,6 +573,7 @@ export default defineComponent({
   margin-right: 3px;
   min-width: 31px;
   min-height: 26px;
+  display: inline;
 }
 
 .menu-toggler {
@@ -542,21 +587,20 @@ header nav {
   .menu-toggler {
     display: inline-flex;
   }
+
+  .app-logo,
   header nav {
     display: none;
   }
 }
-
-
-
 
 .app-title-bottom {
   left: 10px;
   top: -4px;
   font-size: 22px;
 }
-header, 
-header .left ,
+header,
+header .left,
 nav,
 nav .tab-buttons {
   min-height: 60px;
@@ -566,9 +610,6 @@ nav .tab-buttons {
   border-bottom: solid 1px #ecefed; /*#dde1e2;*/
 }
 
-.results {
-  margin-left: 140px;
-}
 .searchbox-main,
 .searchbox-top {
   /* position: inline; */
@@ -579,7 +620,4 @@ nav .tab-buttons {
   max-width: 350px;
   height: 40px;
 }
-
-
-
 </style>
