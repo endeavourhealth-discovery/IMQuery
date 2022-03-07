@@ -321,7 +321,7 @@ export default defineComponent({
   max-width: 300px;
 }
 
-.button-medium::v-deep * {
+::v-deep(.button-medium) {
   font-size: 16px;
 }
 

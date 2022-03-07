@@ -256,7 +256,7 @@ div.table {
   
 }
 
-div.table::v-deep * {
+::v-deep(div.table) {
   font-size: 16px !important;
 }
 

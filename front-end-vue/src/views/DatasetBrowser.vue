@@ -4,7 +4,7 @@
   <!-- /General UI -->
 
   <!-- Content Wrapper -->
-  <main >
+  <main>
     <!-- Page: Home -->
     <div id="home-page" v-if="activePage == 'home'" class="page">
       <!-- Tabs Header  -->
@@ -38,11 +38,7 @@
       <!-- /Tabs Header -->
 
       <!-- Tab: My Queries  -->
-      <div
-        id="tab-my-queries"
-        v-if="activeTab == 'my-queries'"
-        class="content-tab"
-      >
+      <div id="tab-my-queries" v-if="activeTab == 'my-queries'" class="content-tab">
         <!-- Action buttons + Options -->
         <div class="button-toolbar pt-5 pb-3 flex justify-between">
           <div class="p-d-inline">
@@ -53,32 +49,18 @@
               label="Add"
               @click="toggleAddOverlay"
             /> -->
-            <Button
-              icon="pi pi-pencil "
-              class="mr-3 p-button-outlined p-button-warning button-medium"
-              type="button"
-              label="Edit"
-              @click="editSelected"
-            />
-            <Button
-              icon="pi pi-trash "
-              class="mr-3 p-button-outlined p-button-danger button-medium"
-              type="button"
-              label="Delete"
-              @click="deleteSelected"
-            />
+            <Button icon="pi pi-pencil " class="mr-3 p-button-outlined p-button-warning button-medium" type="button" label="Edit" @click="editSelected" />
+            <Button icon="pi pi-trash " class="mr-3 p-button-outlined p-button-danger button-medium" type="button" label="Delete" @click="deleteSelected" />
           </div>
 
           <!-- Searchbar -->
-          <div >
+          <div>
             <InputText
               id="search-bar-input"
               type="text"
               placeholder="Search"
               v-model="searchInputText"
-              v-tooltip.bottom="
-                'Enter search terms to find queries by name or description'
-              "
+              v-tooltip.bottom="'Enter search terms to find queries by name or description'"
             />
             <Button
               icon="pi pi-sliders-h"
@@ -100,50 +82,27 @@
           <!-- /Searchbar -->
 
           <div class="inline">
-            <Button
-              label="Share"
-              icon="pi pi-upload"
-              class="p-button-secondary p-button-outlined button-medium"
-              @click="exportSelected"
-            />
+            <Button label="Share" icon="pi pi-upload" class="p-button-secondary p-button-outlined button-medium" @click="exportSelected" />
           </div>
         </div>
         <OverlayPanel id="new-overlay" ref="new-overlay">
           <div class="flex flex-col">
-            <Button
-              label="New Dataset"
-              class="p-button-primary p-button-outlined button-medium mx-2 mb-2"
-              @click="handleNewDataset"
-            />
-            <Button
-              label="Import Existing Dataset"
-              class="p-button-primary p-button-outlined button-medium mx-2"
-              @click="handleImportDataset"
-            />
+            <Button label="New Dataset" class="p-button-primary p-button-outlined button-medium mx-2 mb-2" @click="handleNewDataset" />
+            <Button label="Import Existing Dataset" class="p-button-primary p-button-outlined button-medium mx-2" @click="handleImportDataset" />
           </div>
         </OverlayPanel>
         <!-- /Action buttons + Options -->
 
         <!-- Content  -->
 
-        <QueryTable
-          id="query-table"
-          tableheight="650"
-          ref="querytable"
-          :searchstring="searchInputText"
-          :filtertags="filterTags"
-        />
+        <QueryTable id="query-table" tableheight="650" ref="querytable" :searchstring="searchInputText" :filtertags="filterTags" />
 
         <!-- /Content  -->
       </div>
       <!-- . Tab: My Queries  -->
 
       <!-- Tab: Query Library  -->
-      <div
-        id="tab-dataset-library"
-        v-if="activeTab == 'dataset-library'"
-        class="content-tab"
-      >
+      <div id="tab-dataset-library" v-if="activeTab == 'dataset-library'" class="content-tab">
         Query Library - Empty Currently
       </div>
       <!-- /Tab: Query Library  -->
@@ -160,12 +119,7 @@
           Alternative Page 2 - Empty / Not in use
         </div>
 
-        <Button
-          icon="pi pi-check"
-          class="p-mr-3 button-medium"
-          type="button"
-          label="Save"
-        />
+        <Button icon="pi pi-check" class="p-mr-3 button-medium" type="button" label="Save" />
       </div>
       <!-- /Header -->
     </div>
@@ -197,11 +151,11 @@ export default defineComponent({
     OverlayPanel,
     QueryTable,
     InputText,
-    Chips,
+    Chips
   },
   $refs: {
     OverlayPanel: HTMLElement,
-    QueryTable: HTMLElement,
+    QueryTable: HTMLElement
   },
   data() {
     return {
@@ -211,7 +165,7 @@ export default defineComponent({
       tableHeight: 600,
       selectedItems: [],
       searchInputText: "",
-      filterTags: null,
+      filterTags: null
     };
   },
   async mounted() {
@@ -219,7 +173,7 @@ export default defineComponent({
     this.$store.commit("updateSideNavHierarchyFocus", {
       name: "Datasets",
       fullName: "Datasets",
-      iri: "http://endhealth.info/im#Dataset",
+      iri: "http://endhealth.info/im#Dataset"
     });
   },
   methods: {
@@ -234,8 +188,8 @@ export default defineComponent({
     },
     deleteSelected(): void {
       (this.$refs["querytable"] as any).deleteSelected();
-    },
-  },
+    }
+  }
 });
 </script>
 
@@ -313,7 +267,7 @@ main {
   max-width: 300px;
 }
 
-.button-medium::v-deep * {
+::v-deep(.button-medium) {
   font-size: 16px;
 }
 

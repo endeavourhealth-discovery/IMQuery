@@ -37,7 +37,7 @@
           <img class="app-logo h-10 w-10" src="app-icon.png" alt="" />
 
           <!-- Tab Buttons  -->
-          <nav :class="'ml-7 inline-flex h-full flex-col justify-center' + [activeTabName == 'Home' ? '' : '']">
+          <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
             <HorizontalNavbar class="h-full pt-3" v-model="activeTabName" :items="tabs" />
           </nav>
           <!-- /Tab Buttons -->
@@ -52,7 +52,7 @@
           "
           v-model="searchString"
           :autocompleteData="autocompleteData"
-          @search="showSearchResults()"
+          @search="showSearchResults(searchString)"
         />
         <!-- /Searchbox  -->
 
@@ -102,30 +102,17 @@
 
           <!-- Searchbox  -->
           <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm">
-            <Searchbox class="w-full mx-auto searchbox-main" v-model="searchString" :autocompleteData="autocompleteData" @search="showSearchResults()" />
+            <Searchbox
+              class="w-full mx-auto searchbox-main"
+              v-model="searchString"
+              :autocompleteData="autocompleteData"
+              @search="showSearchResults(searchString)"
+            />
           </div>
           <!-- /Searchbox  -->
 
-          <!-- Suggestions -->
-          <div class="flex justify-center w-full my-10">
-            <div
-              v-for="suggestion in suggestions"
-              :key="suggestion.name"
-              class="flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:border-blue-600 max-w-200"
-            >
-              <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="suggestion.icon" />
-              <div class="inline text-lg font-bold text-gray-900">
-                {{ suggestion.name }}
-              </div>
-              <div class="inline text-lg font-bold text-gray-500">
-                {{ suggestion.description }}
-              </div>
-            </div>
-          </div>
-          <!-- /Suggestions -->
-
           <!-- Examples  -->
-          <div id="examples" class="non-selectable max-w-3xl my-7 text-gray-900 text-lg" @click="onTry()">
+          <div id="examples" class="non-selectable max-w-3xl my-7 text-gray-900 text-lg" @click="showSearchResults()">
             <a class="mr-3 font-bold">Try </a>
             <b>sbp</b> and <b>hr</b> for <b>diabetics</b> with <b>htn</b> and
             <b>stroke</b>
@@ -136,16 +123,63 @@
 
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Results'" class="tab-content  flex pt-5">
-          <div class="results w-full max-w-4xl mx-auto">
+          <div class="results w-full mx-auto max-w-4xl">
+                        <!-- Suggestions -->
+            <div class="flex justify-center w-full my-10">
+              <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
+                <template v-if="index == 0">
+                   <CardButton
+                   class="w-400px"
+                    :name="suggestion.name"
+                    :description="suggestion.description"
+                    :icon="suggestion.icon"
+                    :outlined="true"
+                    nameColor="white"
+                    descriptionColor="white"
+                    iconColor="white"
+                    backgroundColor="blue-500"
+                  />
+                </template>
+                <template v-else>
+                  <CardButton
+                  class="w-400px"
+                    :name="suggestion.name"
+                    :description="suggestion.description"
+                    :icon="suggestion.icon"
+                    :outlined="true"
+                    nameColor="black"
+                    descriptionColor="gray-700"
+                    iconColor="blue-700"
+                    backgroundColor="white"
+                  />
+                </template>
+                <!-- <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="suggestion.icon" />
+                <div class="inline text-lg font-bold text-gray-900">
+                  {{ suggestion.name }}
+                </div>
+                <div class="inline text-lg font-bold text-gray-500">
+                  {{ suggestion.description }}
+                </div> -->
+              </template>
+            </div>
+
+            <!-- /Suggestions -->
             <!-- <div>Filter and sort</div> -->
             <template v-if="searchResults && searchResults.length > 0">
+                       <!-- <div class="results w-full mx-auto max-w-4xl"> -->
+
               <SearchResults class="w-full" :results="searchResults" :value="searchString" />
+                       <!-- </div> -->
             </template>
             <template v-else>
-              <div class="mt-10 ml-5 text-xl font-bold text-gray-600 text-center">
-                No results were found for your search terms.
+              <div class="mt-10 ml-5 text-3xl font-bold text-gray-600 text-center">
+                No Search Results.
               </div>
+              <!-- <div class="mt-10 ml-5 text-2xl font-bold text-blue-600 text-center">
+                Enter new search terms or try out:
+              </div> -->
             </template>
+
           </div>
         </div>
         <!-- /Tab: Search  -->
@@ -205,6 +239,7 @@ import RoundButton from "@/components/dataset/RoundButton.vue";
 import UserWidget from "@/components/dataset/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
+import CardButton from "@/components/dataset/CardButton.vue";
 import ProgressBar from "@/components/search/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
@@ -231,7 +266,8 @@ export default defineComponent({
     DataStudio,
     RoundButton,
     OrganisationBrowser,
-    UserWidget
+    UserWidget,
+    CardButton
   },
   $refs: {
     OverlayPanel: HTMLElement
@@ -251,20 +287,35 @@ export default defineComponent({
       suggestions: [
         {
           name: "DataStudio",
-          description: "Start a new Search for Data",
-          icon: "search",
+          description: "Define a new Dataset",
+          icon: "newspaper",
+          action: {
+            module: "",
+            task: "",
+            meta: []
+          },
           visible: true
         },
         {
           name: "Library",
           description: "Browse the Data Library",
           icon: "menu",
+          action: {
+            module: "",
+            task: "",
+            meta: []
+          },
           visible: true
         },
         {
           name: "Try",
-          description: "sbp and hr for diabetics with htn and stroker",
+          description: 'Search for "sbp and hr for diabetics with htn and stroke"',
           icon: "cursor_click",
+          action: {
+            module: "",
+            task: "",
+            meta: []
+          },
           visible: true
         }
       ],
@@ -432,10 +483,12 @@ export default defineComponent({
         });
       this.isLoading = false;
     },
-    async showSearchResults(searchString: any): Promise<void> {
+    async showSearchResults(searchString = "sbp and hr for diabetics with htn and stroke"): Promise<void> {
       // await SearchClient.searchMeiliFiltered("IMSearch", ""); //'filter': `rdfsLabel =""`
 
       // alert(this.isLoading);
+      this.searchString = searchString;
+
       let _searchString = searchString ? searchString : this.searchString;
 
       if (_searchString && _searchString.trim() != "") {
@@ -448,10 +501,6 @@ export default defineComponent({
           this.activeTabName = "Results";
         });
       }
-    },
-    onTry(searchString = "sbp and hr for diabetics with htn and stroke"): void {
-      this.searchString = searchString;
-      this.showSearchResults(searchString);
     },
     async oss_search(searchString: string, index: string, limit: number): Promise<any> {
       this.isLoading = true;
@@ -540,9 +589,6 @@ export default defineComponent({
   right: 0;
   left: 0;
 }
-
-
-
 
 .filter-container {
   max-width: 300px;

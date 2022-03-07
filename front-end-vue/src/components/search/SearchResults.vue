@@ -3,7 +3,7 @@
     <div
       v-for="result in searchResults"
       :key="result.id"
-      class="non-selectable group rounded-md transition duration-500 ease-in-out appearance-none relative block px-4 py-3 border border-gray-200 hover:border-gray-300 focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none focus:z-10 hover:shadow-md my-5"
+      class="non-selectable group rounded-md transition duration-500 ease-in-out appearance-none relative block px-4 py-3 bg-white border border-gray-200 hover:border-gray-300 focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none focus:z-10 hover:shadow-md my-5"
     >
       <div>
         <div class="text-lg  flex row-col items-center">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="text-3xl text-blue-700 group-hover:underline font-normal">
+      <div class="text-3xl text-blue-600 group-hover:text-blue-800 font-normal">
         {{ result.title }}
       </div>
       <div class="text-2xl text-gray-900 mt-2">

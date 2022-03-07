@@ -115,7 +115,7 @@ export default defineComponent({
   overflow-y: auto;
 }
 
-.query-table::v-deep * {
+::v-deep(.query-table) {
   font-size: 16px !important;
 }
 

@@ -401,7 +401,7 @@ footer {
   margin-top: 20px;
 }
 
-.button-medium::v-deep * {
+::v-deep(.button-medium) {
   font-size: 16px;
 }
 

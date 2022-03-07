@@ -3,7 +3,7 @@
     :list="children"
     item-key="name"
     :class="
-      'clause select-none cursor-pointer dragArea rounded-sm order-color-300 ' +
+      'clauseselect-none cursor-pointer dragArea rounded-sm order-color-300 ' +
         [isCardDragged ? ' ' : '']
     "
     ghost-class="bg-blue-300"
@@ -27,21 +27,21 @@
             <div
               v-if="index == 0"
               :class="
-                'inline-block  text-indigo-700 font-semibold hover:text-blue-600  hover:underline'
+                'line-h inline-block  text-green-700 font-semibold '
               "
             >
               ––
             </div>
-            <div v-else class="line-v">
-
-            </div>
+            <div v-else class="line-h"></div>
+            <!-- <div v-else class="line-v"> -->
+            <!-- </div> -->
             <div class="inline-flex flex-col">
               <!-- circle  -->
-              <div :class="'circle inline border  b-2 border-blue-600'"></div>
+              <div :class="'circle inline border  b-2 border-green-700'"></div>
               <!-- :line  -->
               <div
                 v-if="index != children.length - 1"
-                :class="'line-h inline border-r  b-2 border-r-blue-700'"
+                :class="'line-v inline border-l b-2 border-l-green-700'"
               ></div>
             </div>
           </div>
@@ -51,7 +51,7 @@
             <template v-if="element.type == 'match'">
               <template v-if="true">
                 <button
-                  class="cursor-pointer block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10 focus:ring-blue-600 focus:outline-none focus:ring-2"
+                  class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10 focus:ring-blue-600 focus:outline-none focus:ring-2"
                 >
                   {{ element.name }}
                 </button>
@@ -59,7 +59,7 @@
               <template v-else-if="false">
                 <textarea
                   :value="element.name"
-                  class="clause-named__name select-none cursor-pointer text-black font-bold bg-white rounded-sm  pr-2 pt-1 py-2 relative"
+                  class="clause-named__name ml-5 text-xl select-none cursor-pointer text-black font-medium text-left bg-white rounded-sm  pr-2 pt-1 py-2 relative"
                 >
                 </textarea>
               </template>
@@ -109,6 +109,7 @@
             </template> -->
 
             <nested-draggable
+              :isTopLevelNode="false"
               :isParentNegated="element.include == false"
               :class="
                 'dragArea__children' +
@@ -219,6 +220,10 @@ export default defineComponent({
   /* width: 200px; */
 }
 
+/* .clause-connector {
+  width: 60px;
+} */
+
 .non-selectable {
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
@@ -250,10 +255,14 @@ export default defineComponent({
   background: #555;
 }
 
+.clause-named__name { 
+
+}
+
 .circle {
   /* visibility: hidden; */
 
-  margin: 5px 10px 5px 0px;
+  margin: 3px 0px 5px 0px;
   min-width: 13px;
   min-height: 13px;
   width: 13px;
@@ -266,17 +275,21 @@ export default defineComponent({
   box-sizing: border-box;
 }
 
-.line-h {
-  /* visibility: hidden; */
-  width: 10px;
-  height: 100%;
-  /* min-height: 25px; */
-}
-
-
 .line-v {
   /* visibility: hidden; */
   min-width: 10px;
+  max-width: 10px;
+  margin-left: 6px;
+  /* padding-left: 20px; */
+  height: 100%;
+  min-height: 5px;
+}
+
+
+.line-h {
+  /* visibility: hidden; */
+  min-width: 10px;
+  margin: 0 2px 0 0;
   /* height: 100%; */
   min-height: 40px;
 }
