@@ -8,12 +8,15 @@
     },
     "and": [
         {
-            "name": "SMI Population",
+            "id": {
+                "@id": "urn:uuid:2742a90f-998a-4900-957d-6050c7542309"
+            },
             "property": {
                 "@id": "http://endhealth.info/im#hasProfile"
             },
             "valueIn": [
                 {
+                    "name": "SMI Population",
                     "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
                 }
             ]
@@ -78,7 +81,10 @@
                             ]
                         },
                         {
-                            "name": "Latest systolic blood pressure in the last 18 months : If Office based and >140",
+                            "id": {
+                                "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87"
+                            },
+                            "name": "Latest systolic blood pressure in the last 18 months: If Office based and >140",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -117,10 +123,7 @@
                                         "valueVar": "numericValue13"
                                     }
                                 ]
-                            },
-                            "id": {
-                                "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87"
-                            },
+                            },                            
                             "and": [
                                 {
                                     "property": {
@@ -638,6 +641,9 @@
                     },
                     "and": [
                         {
+                            "id": {
+                                "@id": "urn:uuid:55d78b69-1f74-4c7c-af11-cacc4da4c8f3"
+                            },
                             "name": "Diabetes (not resolved)",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -663,9 +669,6 @@
                                 ],
                                 "valueVar": "concept40"
                             },
-                            "id": {
-                                "@id": "urn:uuid:55d78b69-1f74-4c7c-af11-cacc4da4c8f3"
-                            },
                             "and": [
                                 {
                                     "property": {
@@ -690,6 +693,9 @@
                             ]
                         },
                         {
+                            "id": {
+                                "@id": "urn:uuid:6fabf76c-4078-4ee1-8788-34614722df83"
+                            },
                             "name": "Latest HBA1C in the last 18 months : if >59",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -713,9 +719,6 @@
                                     "valueData": "59"
                                 },
                                 "valueVar": "numericValue43"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:6fabf76c-4078-4ee1-8788-34614722df83"
                             },
                             "and": [
                                 {
@@ -746,6 +749,9 @@
                     },
                     "and": [
                         {
+                            "id": {
+                                "@id": "urn:uuid:310ffb9c-2013-47a9-9c4d-1945133e1132"
+                            },
                             "name": "Latest QRisk2 or Qrisk 3, : if >10",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -770,9 +776,6 @@
                                 },
                                 "valueVar": "numericValue46"
                             },
-                            "id": {
-                                "@id": "urn:uuid:310ffb9c-2013-47a9-9c4d-1945133e1132"
-                            },
                             "and": [
                                 {
                                     "property": {
@@ -795,6 +798,9 @@
                             ]
                         },
                         {
+                            "id": {
+                                "@id": "urn:uuid:d5398de3-a724-4da1-9cc9-9d8f8577ef06"
+                            },
                             "name": "Not on statins in the last 6 months",
                             "notExist": true,
                             "pathTo": {
@@ -802,9 +808,6 @@
                             },
                             "entityType": {
                                 "@id": "http://endhealth.info/im#MedicationOrder"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:d5398de3-a724-4da1-9cc9-9d8f8577ef06"
                             },
                             "and": [
                                 {
@@ -858,7 +861,10 @@
                     },
                     "and": [
                         {
-                            "name": "? What are these clinical concepts",
+                            "id": {
+                                "@id": "urn:uuid:deaf1a83-9c5f-414c-83eb-18ff7e9656db"
+                            },
+                            "name": "Unnamed Criteria",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -882,21 +888,19 @@
                                     "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
                                 }
                             ],
-                            "id": {
-                                "@id": "urn:uuid:deaf1a83-9c5f-414c-83eb-18ff7e9656db"
-                            },
                             "valueVar": "concept49"
                         },
                         {
+                            "id": {
+                                "@id": "urn:uuid:e6786a04-e856-47c6-8130-f632633f9e41"
+                            },
+                            "name": "Prescription of High Dose Statin 6 months before the reference date",
                             "notExist": true,
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
                             "entityType": {
                                 "@id": "http://endhealth.info/im#MedicationOrder"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:e6786a04-e856-47c6-8130-f632633f9e41"
                             },
                             "and": [
                                 {
@@ -950,6 +954,9 @@
                     },
                     "and": [
                         {
+                            "id": {
+                                "@id": "urn:uuid:e4ab0abb-d248-48f7-945b-8a1712f5243a"
+                            },
                             "name": "Cardiovascular disease (not resolved)",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -975,9 +982,6 @@
                                 ],
                                 "valueVar": "concept54"
                             },
-                            "id": {
-                                "@id": "urn:uuid:e4ab0abb-d248-48f7-945b-8a1712f5243a"
-                            },
                             "and": [
                                 {
                                     "property": {
@@ -1002,7 +1006,7 @@
                             ]
                         },
                         {
-                            "name": "Latest CHA2DS2-VASc and if >2",
+                            "name": "Latest CHA2DS2-VASc score is 2 or more",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -1114,7 +1118,11 @@
                     },
                     "and": [
                         {
-                            "name": "Latest BMI : if >30",
+                            
+                            "id": {
+                                "@id": "urn:uuid:3be8ae58-e020-43d1-bd60-966da838be32"
+                            },
+                            "name": "Latest BMI is 30 or more",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -1137,9 +1145,6 @@
                                     "valueData": "30"
                                 },
                                 "valueVar": "numericValue62"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:3be8ae58-e020-43d1-bd60-966da838be32"
                             },
                             "and": [
                                 {
@@ -1225,7 +1230,7 @@
                     },
                     "and": [
                         {
-                            "name": "Latest BMI : if >27.5",
+                            "name": "Latest BMI  is 27.5 or more",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -1274,15 +1279,16 @@
                             ]
                         },
                         {
-                            "name": "On Olanzapine, Clozapine in the last 6 months",
+                            
+                            "id": {
+                                "@id": "urn:uuid:a61e833d-4515-40ec-84e8-7cc7326f9629"
+                            },
+                            "name": "Prescription of Olanzapine, Clozapine in the last 6 months",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
                             "entityType": {
                                 "@id": "http://endhealth.info/im#MedicationOrder"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:a61e833d-4515-40ec-84e8-7cc7326f9629"
                             },
                             "and": [
                                 {
@@ -1329,7 +1335,7 @@
                             ]
                         },
                         {
-                            "name": "Asian or chinese",
+                            "name": "Asian or Chinese Ethnicity",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -1358,6 +1364,9 @@
                     },
                     "and": [
                         {
+                            "id": {
+                                "@id": "urn:uuid:bc852b08-1c52-4f49-85bb-0bdb88ccf5a2"
+                            },
                             "name": "Type 1 Diabetes",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -1373,13 +1382,10 @@
                                     "@id": "urn:uuid:5a0192fd-27ea-4b30-8f8d-db17ab89284a"
                                 }
                             ],
-                            "id": {
-                                "@id": "urn:uuid:bc852b08-1c52-4f49-85bb-0bdb88ccf5a2"
-                            },
                             "valueVar": "concept71"
                         },
                         {
-                            "name": "Age years >18",
+                            "name": "Age years 18 or more",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -1410,15 +1416,16 @@
                             "valueVar": "age72"
                         },
                         {
+                            
+                            "id": {
+                                "@id": "urn:uuid:3912027d-bffe-44f0-91a4-d1151b9e4abc"
+                            },
                             "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
                             "entityType": {
                                 "@id": "http://endhealth.info/im#MedicationOrder"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:3912027d-bffe-44f0-91a4-d1151b9e4abc"
                             },
                             "and": [
                                 {
@@ -1472,7 +1479,10 @@
                     },
                     "and": [
                         {
-                            "name": "Latest various Diabetes illnesses and if a subset of these",
+                            "id": {
+                                "@id": "urn:uuid:bebe5d71-9f40-440e-9f39-6f0c6e6fbc76"
+                            },
+                            "name": "Latest record of various Diabetic illnesses is within the specified subset",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -1498,9 +1508,6 @@
                                 ],
                                 "valueVar": "concept77"
                             },
-                            "id": {
-                                "@id": "urn:uuid:bebe5d71-9f40-440e-9f39-6f0c6e6fbc76"
-                            },
                             "and": [
                                 {
                                     "property": {
@@ -1523,7 +1530,11 @@
                             ]
                         },
                         {
-                            "name": "Age years >40",
+                            
+                            "id": {
+                                "@id": "urn:uuid:cb998aed-97d6-475d-b09c-15ce4fa90f47"
+                            },
+                            "name": "Age years 40 or more",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
@@ -1548,21 +1559,19 @@
                                     }
                                 ]
                             },
-                            "id": {
-                                "@id": "urn:uuid:cb998aed-97d6-475d-b09c-15ce4fa90f47"
-                            },
                             "valueVar": "age78"
                         },
                         {
+                            
+                            "id": {
+                                "@id": "urn:uuid:5c301847-c448-4b4c-849b-2e8d90ed279f"
+                            },
                             "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
                             },
                             "entityType": {
                                 "@id": "http://endhealth.info/im#MedicationOrder"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:5c301847-c448-4b4c-849b-2e8d90ed279f"
                             },
                             "and": [
                                 {
@@ -1615,7 +1624,10 @@
                         "@id": "urn:uuid:a08079c6-2bf7-41e5-9473-c8ff5a50d6fa"
                     },
                     "and": [
-                        {
+                        {                            
+                            "id": {
+                                "@id": "urn:uuid:ba740b88-1614-4aa5-b749-79f43545ce77"
+                            },
                             "name": "Hypertension (not resolved)",
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -1641,9 +1653,6 @@
                                 ],
                                 "valueVar": "concept83"
                             },
-                            "id": {
-                                "@id": "urn:uuid:ba740b88-1614-4aa5-b749-79f43545ce77"
-                            },
                             "and": [
                                 {
                                     "property": {
@@ -1668,6 +1677,9 @@
                             ]
                         },
                         {
+                            "id": {
+                                "@id": "urn:uuid:01e73690-c5ce-4f21-b8fb-5222172e8645"
+                            },
                             "name": "No blood pressure in the last 18 months",
                             "notExist": true,
                             "pathTo": {
@@ -1675,9 +1687,6 @@
                             },
                             "entityType": {
                                 "@id": "http://endhealth.info/im#Event"
-                            },
-                            "id": {
-                                "@id": "urn:uuid:01e73690-c5ce-4f21-b8fb-5222172e8645"
                             },
                             "and": [
                                 {

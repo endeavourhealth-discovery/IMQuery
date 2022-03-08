@@ -8,11 +8,16 @@
         [componentState == 'hover' ? ' hover' : ''] +
         [componentState == 'focus' ? ' focus' : '']
     "
-
   >
     <!-- Searchbox  -->
     <div class="flex items-center w-full h-full">
-      <HeroIcon class="widget-icon text-gray- ml-3" icon="search" strokewidth="2" width="20" height="20" />
+      <HeroIcon
+          class="widget-icon text-gray- ml-3"
+          icon="search"
+          strokewidth="2"
+          width="20"
+          height="20"
+        />
       <input
         type="text"
         class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900 font-medium rounded-md focus:outline-none"
@@ -21,12 +26,33 @@
         @input="onInput($event)"
         @keyup.enter="onEnter($event)"
         @focus="componentState = 'focus'"
-        @blur="autocompleteHover ? (componentState = 'focus') : (componentState = 'default')"
-        @mouseenter="componentState == 'focus' ? (componentState = 'focus') : (componentState = 'hover')"
-        @mouseleave="componentState == 'focus' ? (componentState = 'focus') : (componentState = 'default')"
+        @blur="
+          autocompleteHover
+            ? (componentState = 'focus')
+            : (componentState = 'default')
+        "
+        @mouseenter="
+          componentState == 'focus'
+            ? (componentState = 'focus')
+            : (componentState = 'hover')
+        "
+        @mouseleave="
+          componentState == 'focus'
+            ? (componentState = 'focus')
+            : (componentState = 'default')
+        "
       />
-      <div v-if="modelValue && modelValue != ''" @click="$emit('update:modelValue', '')">
-        <HeroIcon class="text-gray-600 hover:text-red-500 mr-3" strokewidth="2" width="24" height="24" icon="x" />
+      <div
+        v-if="modelValue && modelValue != ''"
+        @click="$emit('update:modelValue', '')"
+      >
+        <HeroIcon
+          class="text-gray-600 hover:text-red-500 mr-3"
+          strokewidth="2"
+          width="24"
+          height="24"
+          icon="x"
+        />
       </div>
     </div>
     <!-- / Searchbox  -->
@@ -60,35 +86,38 @@ export default defineComponent({
   props: ["modelValue", "autocompleteData"],
   emits: ["update:modelValue", "search"],
   components: {
-    HeroIcon
+    HeroIcon,
   },
   data() {
     return {
       exampleAutocompleteHits: [
         {
           id: 0,
-          searchString: "Heart rate for diabetics"
+          searchString: "Heart rate for diabetics",
         },
         {
           id: 1,
-          searchString: "Blood pressure for patients with stroke"
+          searchString: "Blood pressure for patients with stroke",
         },
         {
           id: 2,
-          searchString: "Patients with asthma"
-        }
+          searchString: "Patients with asthma",
+        },
       ],
       initialAutocompleteData: this.autocompleteData,
       autocompleteHits: [],
       autocompleteHover: false,
-      componentState: "default" // Options #"default", #"hover", #"focus", #""
+      componentState: "default", // Options #"default", #"hover", #"focus", #""
     };
   },
   methods: {
     filteredHits(): any {
       /* Todo: instead of overriding <em> globally use _matchedInfo property to highlight text  */
       if (this.autocompleteData && this.autocompleteData.hits.length > 0) {
-        let _maxHits = this.autocompleteData.hits.length < 5 ? this.autocompleteData.hits.length : 5;
+        let _maxHits =
+          this.autocompleteData.hits.length < 5
+            ? this.autocompleteData.hits.length
+            : 5;
         return this.autocompleteData.hits.slice(0, _maxHits);
       }
     },
@@ -101,12 +130,12 @@ export default defineComponent({
     onInput(event: any): void {
       this.$emit("update:modelValue", event.target.value);
     },
-    onEnter(event: any): void {
+    onEnter( event: any): void {
       event.target.blur();
       this.$emit("search");
       this.componentState = "default";
-    }
-  }
+    },
+  },
 });
 </script>
 
@@ -128,7 +157,7 @@ em {
 }
 
 .searchbox {
-  min-height: 40px;
+    min-height: 40px;
   max-height: 40px;
 }
 
@@ -136,6 +165,8 @@ em {
 .autocomplete {
   font-size: 14px !important;
   z-index: 999;
+
+
 }
 
 .autocomplete {

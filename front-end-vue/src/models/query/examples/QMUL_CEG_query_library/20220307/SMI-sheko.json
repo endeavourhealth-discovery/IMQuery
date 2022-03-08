@@ -6,25 +6,27 @@
     "entityType": {
         "@id": "http://endhealth.info/im#Person"
     },
-    "and": [
-        {
+    "and": [{
+            "id": {
+                "@id": "urn:uuid:3a542a93-1221-4505-999f-1b994ed14f88"
+            },
             "name": "Registered with GP for GMS services on the reference date",
             "property": {
                 "@id": "http://endhealth.info/im#hasProfile"
             },
-            "valueIn": [
-                {
-                    "@id": "http://endhealth.info/im#Q_RegisteredGMS"
-                }
-            ]
+            "valueIn": [{
+                "@id": "http://endhealth.info/im#Q_RegisteredGMS"
+            }]
         },
         {
-            "name": "Regular patient type and Age years >18",
             "id": {
                 "@id": "urn:uuid:cebe3297-5f54-4556-81f0-0ca14f27922e"
             },
-            "and": [
-                {
+            "and": [{
+                    "id": {
+                        "@id": "urn:uuid:87a2fee3-04ce-4a2d-8e13-b8cba10a54c5"
+                    },
+                    "name": "Regular patient type",
                     "pathTo": {
                         "@id": "http://endhealth.info/im#isSubjectOf"
                     },
@@ -42,16 +44,18 @@
                         "id": {
                             "@id": "http://endhealth.info/im#AgeFunction"
                         },
-                        "argument": [
-                            {
-                                "parameter": "units",
-                                "valueData": "YEAR"
-                            }
-                        ]
+                        "argument": [{
+                            "parameter": "units",
+                            "valueData": "YEAR"
+                        }]
                     },
                     "valueVar": "age1"
                 },
                 {
+                    "id": {
+                        "@id": "urn:uuid:b6bfc82c-ca1f-40d8-aaa6-4b8ce99aeafb"
+                    },
+                    "name": "Age years >18",
                     "pathTo": {
                         "@id": "http://endhealth.info/im#isSubjectOf"
                     },
@@ -61,17 +65,18 @@
                     "property": {
                         "@id": "http://endhealth.info/im#patientType"
                     },
-                    "valueIn": [
-                        {
-                            "name": "Regular",
-                            "@id": "urn:uuid:0061d781-f601-4b14-9648-e54bc5070782"
-                        }
-                    ],
+                    "valueIn": [{
+                        "name": "Regular",
+                        "@id": "urn:uuid:0061d781-f601-4b14-9648-e54bc5070782"
+                    }],
                     "valueVar": "patientType2"
                 }
             ]
         },
         {
+            "id": {
+                "@id": "urn:uuid:36817d95-6552-43f1-9c7a-85c46b1a77b5"
+            },
             "name": "Serious mental illness (not resolved)",
             "pathTo": {
                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -90,23 +95,16 @@
                 "property": {
                     "@id": "http://endhealth.info/im#concept"
                 },
-                "valueIn": [
-                    {
-                        "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
-                    }
-                ],
+                "valueIn": [{
+                    "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
+                }],
                 "valueVar": "concept5"
             },
-            "id": {
-                "@id": "urn:uuid:36817d95-6552-43f1-9c7a-85c46b1a77b5"
-            },
-            "and": [
-                {
+            "and": [{
                     "property": {
                         "@id": "http://endhealth.info/im#concept"
                     },
-                    "valueIn": [
-                        {
+                    "valueIn": [{
                             "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11"
                         },
                         {
