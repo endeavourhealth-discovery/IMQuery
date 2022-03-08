@@ -38,7 +38,7 @@
 
           <!-- Tab Buttons  -->
           <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
-            <HorizontalNavbar class="h-full pt-3" v-model="activeTabName" :items="tabs" />
+            <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
           </nav>
           <!-- /Tab Buttons -->
         </div>
@@ -172,7 +172,7 @@
                        <!-- </div> -->
             </template>
             <template v-else>
-              <div class="mt-10 ml-5 text-3xl font-bold text-gray-600 text-center">
+              <div v-if="hasSearched" class="mt-10 ml-5 text-3xl font-bold text-gray-600 text-center">
                 No Search Results.
               </div>
               <!-- <div class="mt-10 ml-5 text-2xl font-bold text-blue-600 text-center">
@@ -274,6 +274,7 @@ export default defineComponent({
   },
   data() {
     return {
+      hasSearched: false,
       // definition: typeof Dataset,
       userMeta: {
         username: "",
@@ -464,6 +465,7 @@ export default defineComponent({
     },
     async search(searchString: string): Promise<any> {
       this.isLoading = true;
+      
 
       await SearchClient.search(searchString)
         .then((res: any) => {
@@ -485,6 +487,7 @@ export default defineComponent({
     },
     async showSearchResults(searchString = "sbp and hr for diabetics with htn and stroke"): Promise<void> {
       // await SearchClient.searchMeiliFiltered("IMSearch", ""); //'filter': `rdfsLabel =""`
+      this.hasSearched = true;
 
       // alert(this.isLoading);
       this.searchString = searchString;

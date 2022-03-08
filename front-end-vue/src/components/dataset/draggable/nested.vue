@@ -3,7 +3,7 @@
     :list="children"
     item-key="name"
     :class="
-      'clauseselect-none cursor-pointer dragArea rounded-sm order-color-300 ' +
+      'clause before:select-none cursor-pointer dragArea rounded-sm order-color-300 ' +
         [isCardDragged ? ' ' : '']
     "
     ghost-class="bg-blue-300"
@@ -13,11 +13,10 @@
     @drag="isCardDragged = true"
     @dragend="isCardDragged = false"
     @drop="isCardDragged = false"
-    @mouseleave="isCardDragged = false"
   >
     <!-- Each item in list  -->
     <template #item="{ element, index }">
-      <div class="clause-item flex flex-col relative">
+      <div  class="clause-item flex flex-col relative">
         <!-- <div
           v-if="index == 0"
           class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
@@ -37,7 +36,7 @@
             <!-- </div> -->
             <div class="inline-flex flex-col">
               <!-- circle  -->
-              <div :class="'circle inline border  b-2 border-green-700'"></div>
+              <div :class="'circle inline border  b-2 border-green-700'" ></div>
               <!-- :line  -->
               <div
                 v-if="index != children.length - 1"
@@ -137,14 +136,12 @@
 <script lang="ts">
 import draggable from "vuedraggable";
 import { ref, onMounted, defineComponent } from "vue";
-import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 export default defineComponent({
   props: ["children", "isParentNegated"],
   components: {
     draggable,
   },
-
   name: "nested-draggable",
   data() {
     return {

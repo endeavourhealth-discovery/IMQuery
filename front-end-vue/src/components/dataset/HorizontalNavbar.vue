@@ -9,6 +9,14 @@
             [modelValue == item.name ? ' text-blue-600 border-b-blue-500' : ' text-black border-b-transparent']
         ]"
         @click="onClick(item.name, item.hyperlink ? item.hyperlink : '')"
+            v-wave="{
+    color: 'currentColor',
+    easing: 'ease-out',
+    duration: 0.3,
+    initialOpacity: 0.2,
+    finalOpacity: 0.1,
+    cancellationPeriod: 75
+  }"
       >
         <!-- Icon -->
         <div v-if="showicon" class="inline-flex mr-2">

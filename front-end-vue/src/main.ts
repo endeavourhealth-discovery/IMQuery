@@ -13,6 +13,7 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
+
 dom.watch();
 
 library.add(fas, far, fab);
@@ -77,6 +78,11 @@ import ConfirmPopup from "primevue/confirmpopup";
 import Calendar from "primevue/calendar";
 import InputNumber from "primevue/inputnumber";
 
+//other components
+import VWave from 'v-wave'
+
+
+//aws
 import { Amplify, Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
 
@@ -93,6 +99,7 @@ const app = createApp(App)
     autoSetContainer: true,
     appendToBody: true
   })
+  .use(VWave)
   .directive("tooltip", Tooltip)
   .component("Card", Card)
   .component("ProgressSpinner", ProgressSpinner)

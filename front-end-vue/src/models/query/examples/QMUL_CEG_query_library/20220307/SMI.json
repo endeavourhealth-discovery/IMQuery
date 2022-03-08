@@ -1,0 +1,107 @@
+{
+    "entityType": {
+        "@id": "http://endhealth.info/im#Person"
+    },
+    "and": [{
+            "and": [{
+                "name": "Registered with GP for GMS services on the reference date",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [{
+                    "@id": "http://endhealth.info/im#Q_RegisteredGMS"
+                }]
+            }]
+        },
+        {
+            "name": "Regular patient type and Age years >18",
+            "and": [{
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#PatientRegistration"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#patientType"
+                    },
+                    "valueIn": [{
+                        "name": "Regular",
+                        "@id": "urn:uuid:b58331c3-5c09-4307-99d8-a976bf5fb0ea"
+                    }],
+                    "valueVar": "patientType1"
+                },
+                {
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#PersonDetails"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#age"
+                    },
+                    "valueCompare": {
+                        "comparison": "GREATER_THAN_OR_EQUAL",
+                        "valueData": "18"
+                    },
+                    "valueFunction": {
+                        "id": {
+                            "@id": "http://endhealth.info/im#AgeFunction"
+                        },
+                        "argument": [{
+                            "parameter": "units",
+                            "valueData": "YEAR"
+                        }]
+                    },
+                    "valueVar": "age2"
+                }
+            ]
+        },
+        {
+            "name": "Serious mental illness (not resolved)",
+            "pathTo": {
+                "@id": "http://endhealth.info/im#isSubjectOf"
+            },
+            "entityType": {
+                "@id": "http://endhealth.info/im#Event"
+            },
+            "sort": {
+                "orderBy": {
+                    "@id": "http://endhealth.info/im#effectiveDate"
+                },
+                "count": 1,
+                "direction": "DESCENDING"
+            },
+            "test": {
+                "property": {
+                    "@id": "http://endhealth.info/im#concept"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
+                }],
+                "valueVar": "concept5"
+            },
+            "and": [{
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                            "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11"
+                        },
+                        {
+                            "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
+                        }
+                    ],
+                    "valueVar": "concept3"
+                },
+                {
+                    "property": {
+                        "@id": "http://endhealth.info/im#effectiveDate"
+                    },
+                    "valueVar": "effectiveDate4"
+                }
+            ]
+        }
+    ]
+}

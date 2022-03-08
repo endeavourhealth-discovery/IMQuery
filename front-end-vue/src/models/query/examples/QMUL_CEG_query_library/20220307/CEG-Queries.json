@@ -1,0 +1,1698 @@
+{
+    "profile": [
+        {
+        "entityType": {
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "and": [{
+            "and": [{
+                "name": "Registered with GP for GMS services on the reference date",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [{
+                    "@id": "http://endhealth.info/im#Q_RegisteredGMS"
+                }]
+            }]
+        }, {
+            "name": "Regular patient type and Age years >18",
+            "and": [{
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#PatientRegistration"
+                },
+                "property": {
+                    "@id": "http://endhealth.info/im#patientType"
+                },
+                "valueIn": [{
+                    "name": "Regular",
+                    "@id": "urn:uuid:b58331c3-5c09-4307-99d8-a976bf5fb0ea"
+                }],
+                "valueVar": "patientType1"
+            }, {
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#PersonDetails"
+                },
+                "property": {
+                    "@id": "http://endhealth.info/im#age"
+                },
+                "valueCompare": {
+                    "comparison": "GREATER_THAN_OR_EQUAL",
+                    "valueData": "18"
+                },
+                "valueFunction": {
+                    "id": {
+                        "@id": "http://endhealth.info/im#AgeFunction"
+                    },
+                    "argument": [{
+                        "parameter": "units",
+                        "valueData": "YEAR"
+                    }]
+                },
+                "valueVar": "age2"
+            }]
+        }, {
+            "name": "Serious mental illness (not resolved)",
+            "pathTo": {
+                "@id": "http://endhealth.info/im#isSubjectOf"
+            },
+            "entityType": {
+                "@id": "http://endhealth.info/im#Event"
+            },
+            "sort": {
+                "orderBy": {
+                    "@id": "http://endhealth.info/im#effectiveDate"
+                },
+                "count": 1,
+                "direction": "DESCENDING"
+            },
+            "test": {
+                "property": {
+                    "@id": "http://endhealth.info/im#concept"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
+                }],
+                "valueVar": "concept5"
+            },
+            "and": [{
+                "property": {
+                    "@id": "http://endhealth.info/im#concept"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11"
+                }, {
+                    "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
+                }],
+                "valueVar": "concept3"
+            }, {
+                "property": {
+                    "@id": "http://endhealth.info/im#effectiveDate"
+                },
+                "valueVar": "effectiveDate4"
+            }]
+        }]
+    }, {
+        "entityType": {
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "and": [{
+            "and": [{
+                "name": "SMI Population",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                }]
+            }]
+        },  {
+            "or": [{
+                "and": [{
+                    "name": "Hypertension (not resolved)",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }],
+                        "valueVar": "concept8"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }, {
+                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                        }],
+                        "valueVar": "concept6"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate7"
+                    }]
+                }, {
+                    "name": "Latest systolic blood pressure in the last 18 months : If Office based and >140",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "and": [{
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueIn": [{
+                                "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                "@id": "urn:uuid:47f3102a-8b40-4c09-b668-afbef099e59e"
+                            }],
+                            "valueVar": "concept12"
+                        }, {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "140"
+                            },
+                            "valueVar": "numericValue13"
+                        }]
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                            "@id": "urn:uuid:0f19c1be-6d17-4ab3-85dc-4bb61674939f"
+                        }],
+                        "valueVar": "concept9"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate10"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-18"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate11"
+                            }]
+                        },
+                        "valueVar": "effectiveDate11"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Hypertension (not resolved)",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }],
+                        "valueVar": "concept16"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }, {
+                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                        }],
+                        "valueVar": "concept14"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate15"
+                    }]
+                }, {
+                    "name": "Latest diastolic blood pressure in the last 18 months : if Office based and >90",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "and": [{
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueIn": [{
+                                "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
+                                "@id": "urn:uuid:9a6d82e7-b731-4420-bf6f-b6fd7b741a09"
+                            }],
+                            "valueVar": "concept20"
+                        }, {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "90"
+                            },
+                            "valueVar": "numericValue21"
+                        }]
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
+                            "@id": "urn:uuid:242ac8ab-3bdc-4117-94a1-bf17ebff1a91"
+                        }],
+                        "valueVar": "concept17"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate18"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-18"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate19"
+                            }]
+                        },
+                        "valueVar": "effectiveDate19"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Hypertension (not resolved)",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }],
+                        "valueVar": "concept24"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }, {
+                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                        }],
+                        "valueVar": "concept22"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate23"
+                    }]
+                }, {
+                    "name": "Latest systolic blood pressure in the last 18 months : if home based >135",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "and": [{
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueIn": [{
+                                "name": "Average home systolic blood pressure, Home systolic blood pressure, 24 hour systolic blood pressure, Ambulatory systolic blood pressure, Ambulatory systolic BP (blood pressure), Average day interval systolic blood pressure, Average 24 hour systolic blood pressure",
+                                "@id": "urn:uuid:8497d81f-7f99-4eed-b518-11659c6eb714"
+                            }],
+                            "valueVar": "concept28"
+                        }, {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "135"
+                            },
+                            "valueVar": "numericValue29"
+                        }]
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                            "@id": "urn:uuid:7ff10d60-9f05-4ce5-b243-03d0be196b38"
+                        }],
+                        "valueVar": "concept25"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate26"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-18"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate27"
+                            }]
+                        },
+                        "valueVar": "effectiveDate27"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Hypertension (not resolved)",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }],
+                        "valueVar": "concept32"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }, {
+                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                        }],
+                        "valueVar": "concept30"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate31"
+                    }]
+                }, {
+                    "name": "Latest diastolic blood pressure in the last 18 months a: if home based and >85",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "and": [{
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueIn": [{
+                                "name": "Average home diastolic blood pressure, Home diastolic blood pressure, 24 hour diastolic blood pressure, Ambulatory diastolic blood pressure, Ambulatory diastolic BP (blood pressure), Average day interval diastolic blood pressure, Average 24 hour diastolic blood pressure",
+                                "@id": "urn:uuid:fef4da29-6e4a-4a25-9bdf-0c4cfe3b63ef"
+                            }],
+                            "valueVar": "concept36"
+                        }, {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "85"
+                            },
+                            "valueVar": "numericValue37"
+                        }]
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
+                            "@id": "urn:uuid:2d8def33-1a2f-4b0c-bd85-64c732bb4fc8"
+                        }],
+                        "valueVar": "concept33"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate34"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-18"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate35"
+                            }]
+                        },
+                        "valueVar": "effectiveDate35"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Diabetes (not resolved)",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                        }],
+                        "valueVar": "concept40"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                        }, {
+                            "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
+                        }],
+                        "valueVar": "concept38"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate39"
+                    }]
+                }, {
+                    "name": "Latest HBA1C in the last 18 months : if >59",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#numericValue"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "59"
+                        },
+                        "valueVar": "numericValue43"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised, HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised, HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised",
+                            "@id": "urn:uuid:8ffd9f17-8491-4242-a4d8-8e09205e2a6e"
+                        }],
+                        "valueVar": "concept41"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate42"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Latest QRisk2 or Qrisk 3, : if >10",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#numericValue"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "10"
+                        },
+                        "valueVar": "numericValue46"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "QRISK2 cardiovascular disease 10 year risk score, QRISK3 cardiovascular disease 10 year risk calculator score",
+                            "@id": "urn:uuid:82bf078a-81a5-40d0-9f06-e02e5e477686"
+                        }],
+                        "valueVar": "concept44"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate45"
+                    }]
+                }, {
+                    "name": "Not on statins in the last 6 months",
+                    "notExist": true,
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationOrder"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#medication"
+                        },
+                        "valueIn": [{
+                            "name": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more",
+                            "@id": "urn:uuid:58a831ff-ecab-49a8-89c3-5776963c24b3"
+                        }],
+                        "valueVar": "medication47"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-6"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate48"
+                            }]
+                        },
+                        "valueVar": "effectiveDate48"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "? What are these clinical concepts",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
+                    }, {
+                        "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d"
+                    }, {
+                        "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4"
+                    }, {
+                        "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
+                    }],
+                    "valueVar": "concept49"
+                }, {
+                    "notExist": true,
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationOrder"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#medication"
+                        },
+                        "valueIn": [{
+                            "name": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more",
+                            "@id": "urn:uuid:b0c27ea2-4ffd-478b-8862-26a095ba28df"
+                        }],
+                        "valueVar": "medication50"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-6"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate51"
+                            }]
+                        },
+                        "valueVar": "effectiveDate51"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Cardiovascular disease (not resolved)",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                        }],
+                        "valueVar": "concept54"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:b8e618ac-9a75-40d7-a3f9-698c94c6591c"
+                        }, {
+                            "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                        }],
+                        "valueVar": "concept52"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate53"
+                    }]
+                }, {
+                    "name": "Latest CHA2DS2-VASc and if >2",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#numericValue"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "2"
+                        },
+                        "valueVar": "numericValue57"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score",
+                            "@id": "urn:uuid:ecb7f52c-4303-466d-8165-c6ac464b9d2b"
+                        }],
+                        "valueVar": "concept55"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate56"
+                    }]
+                }, {
+                    "name": "Not on Warfarin,Edoxaban,Dabigatranm Apixaban,Rivaroxaban,Phenindione,Acenocoumarol, in the last 6 months",
+                    "notExist": true,
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationOrder"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#medication"
+                        },
+                        "valueIn": [{
+                            "name": "Warfarin, Warfarin Sodium, Edoxaban tosilate, Dabigatran Etexilate, Apixaban, Rivaroxaban, Phenindione, Acenocoumarol",
+                            "@id": "urn:uuid:31bf0e34-ee86-43af-9a99-bb70eb9f9044"
+                        }],
+                        "valueVar": "medication58"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-6"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate59"
+                            }]
+                        },
+                        "valueVar": "effectiveDate59"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Latest BMI : if >30",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#numericValue"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "30"
+                        },
+                        "valueVar": "numericValue62"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
+                            "@id": "urn:uuid:0aa67114-e54e-4928-9ebc-7d3a0ec8cd8a"
+                        }],
+                        "valueVar": "concept60"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate61"
+                    }]
+                }, {
+                    "name": "On Olanzapine, Clozapine in the last 6 months",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationOrder"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#medication"
+                        },
+                        "valueIn": [{
+                            "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
+                            "@id": "urn:uuid:354748ba-4c1e-4523-b810-083a22754a88"
+                        }],
+                        "valueVar": "medication63"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-6"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate64"
+                            }]
+                        },
+                        "valueVar": "effectiveDate64"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Latest BMI : if >27.5",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#numericValue"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "27.5"
+                        },
+                        "valueVar": "numericValue67"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
+                            "@id": "urn:uuid:67af44b4-f61e-4487-8934-770681118d52"
+                        }],
+                        "valueVar": "concept65"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate66"
+                    }]
+                }, {
+                    "name": "On Olanzapine, Clozapine in the last 6 months",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationOrder"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#medication"
+                        },
+                        "valueIn": [{
+                            "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
+                            "@id": "urn:uuid:d1d23ca3-fdae-4085-897c-9e096bbae179"
+                        }],
+                        "valueVar": "medication68"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-6"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate69"
+                            }]
+                        },
+                        "valueVar": "effectiveDate69"
+                    }]
+                }, {
+                    "name": "Asian or chinese",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "name": "Indians (Hindi-speaking), Pakistani (Urduspeakers), Todas, Naiars, Sri Lankan - ethnic category 2001 census, Irula, Pakistani or British Pakistani - ethnic category 2001 census, Bangladeshi or British Bangladeshi - ethnic category 2001 census, Other Asian background - ethnic category 2001 census..more",
+                        "@id": "urn:uuid:c8f7bcb3-444f-49f5-9cda-d06bc206c11e"
+                    }],
+                    "valueVar": "concept70"
+                }]
+            }, {
+                "and": [{
+                    "name": "Type 1 Diabetes",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "@id": "urn:uuid:5a0192fd-27ea-4b30-8f8d-db17ab89284a"
+                    }],
+                    "valueVar": "concept71"
+                }, {
+                    "name": "Age years >18",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#PersonDetails"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#age"
+                    },
+                    "valueCompare": {
+                        "comparison": "GREATER_THAN_OR_EQUAL",
+                        "valueData": "18"
+                    },
+                    "valueFunction": {
+                        "id": {
+                            "@id": "http://endhealth.info/im#AgeFunction"
+                        },
+                        "argument": [{
+                            "parameter": "units",
+                            "valueData": "YEAR"
+                        }]
+                    },
+                    "valueVar": "age72"
+                }, {
+                    "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationOrder"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#medication"
+                        },
+                        "valueIn": [{
+                            "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
+                            "@id": "urn:uuid:ec19e392-0f17-4aed-950f-e913f4a7e313"
+                        }],
+                        "valueVar": "medication73"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-6"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate74"
+                            }]
+                        },
+                        "valueVar": "effectiveDate74"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Latest various Diabetes illnesses and if a subset of these",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "Diabetes mellitus without complication, Brittle diabetes, Diabetic nephropathy, Insulin-dependent diabetes mellitus with ulcer, Insulin-dependent diabetes maturity onset, Diabetic neuropathic arthropathy, Diabetic mononeuropathy, Hypoglycaemic event in diabetes, Diabetic eye disease..more",
+                            "@id": "urn:uuid:ed1d9df0-c16e-41a3-8f20-072417be9993"
+                        }],
+                        "valueVar": "concept77"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "Diabetes mellitus without complication, Lipoatrophic diabetes mellitus without complication, Brittle diabetes, Lipoatrophic diabetes, Diabetic nephropathy, Type 1 diabetes mellitus with ulcer, Type 1 diabetes mellitus maturity onset, Type 2 diabetes mellitus with multiple complications, Type 2 diabetes mellitus with ulcer..more",
+                            "@id": "urn:uuid:d3e11282-1fdc-4590-b2d8-d1e67bbea798"
+                        }],
+                        "valueVar": "concept75"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate76"
+                    }]
+                }, {
+                    "name": "Age years >40",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#PersonDetails"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#age"
+                    },
+                    "valueCompare": {
+                        "comparison": "GREATER_THAN_OR_EQUAL",
+                        "valueData": "40"
+                    },
+                    "valueFunction": {
+                        "id": {
+                            "@id": "http://endhealth.info/im#AgeFunction"
+                        },
+                        "argument": [{
+                            "parameter": "units",
+                            "valueData": "YEAR"
+                        }]
+                    },
+                    "valueVar": "age78"
+                }, {
+                    "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationOrder"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#medication"
+                        },
+                        "valueIn": [{
+                            "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
+                            "@id": "urn:uuid:4eaff2ab-a10b-4690-93a9-c60b3f1d955b"
+                        }],
+                        "valueVar": "medication79"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-6"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate80"
+                            }]
+                        },
+                        "valueVar": "effectiveDate80"
+                    }]
+                }]
+            }, {
+                "and": [{
+                    "name": "Hypertension (not resolved)",
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "sort": {
+                        "orderBy": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "count": 1,
+                        "direction": "DESCENDING"
+                    },
+                    "test": {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }],
+                        "valueVar": "concept83"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }, {
+                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                        }],
+                        "valueVar": "concept81"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueVar": "effectiveDate82"
+                    }]
+                }, {
+                    "name": "No blood pressure in the last 18 months",
+                    "notExist": true,
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "and": [{
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [{
+                            "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                            "@id": "urn:uuid:556fe926-f04a-4f01-a3eb-ebc45ceb109d"
+                        }],
+                        "valueVar": "concept84"
+                    }, {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-18"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [{
+                                "parameter": "units",
+                                "valueData": "MONTH"
+                            }, {
+                                "parameter": "firstDate",
+                                "valueData": "$referenceDate"
+                            }, {
+                                "parameter": "secondDate",
+                                "valueData": "effectiveDate85"
+                            }]
+                        },
+                        "valueVar": "effectiveDate85"
+                    }]
+                }]
+            }]
+        }]
+    }, {
+        "entityType": {
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "and": [{
+            "and": [{
+                "name": "SMI Population",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                }]
+            }]
+        }, {
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 1",
+                "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+            }]
+        }, {
+            "name": "No blood pressure in the last 18 months",
+            "pathTo": {
+                "@id": "http://endhealth.info/im#isSubjectOf"
+            },
+            "entityType": {
+                "@id": "http://endhealth.info/im#Event"
+            },
+            "and": [{
+                "property": {
+                    "@id": "http://endhealth.info/im#concept"
+                },
+                "valueIn": [{
+                    "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                    "@id": "urn:uuid:37c03c2d-3221-48f9-a3dc-cf211d9deab6"
+                }],
+                "valueVar": "concept86"
+            }, {
+                "property": {
+                    "@id": "http://endhealth.info/im#effectiveDate"
+                },
+                "valueCompare": {
+                    "comparison": "GREATER_THAN_OR_EQUAL",
+                    "valueData": "-18"
+                },
+                "valueFunction": {
+                    "id": {
+                        "@id": "http://endhealth.info/im#TimeDifference"
+                    },
+                    "argument": [{
+                        "parameter": "units",
+                        "valueData": "MONTH"
+                    }, {
+                        "parameter": "firstDate",
+                        "valueData": "$referenceDate"
+                    }, {
+                        "parameter": "secondDate",
+                        "valueData": "effectiveDate87"
+                    }]
+                },
+                "valueVar": "effectiveDate87"
+            }]
+        }]
+    }, {
+        "entityType": {
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "and": [{
+            "and": [{
+                "name": "SMI Population",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                }]
+            }]
+        }, {
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 1",
+                "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+            }]
+        }, {
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 2",
+                "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+            }]
+        }, {
+            "or": [{
+                "name": "Hypertension (not resolved)",
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#Event"
+                },
+                "sort": {
+                    "orderBy": {
+                        "@id": "http://endhealth.info/im#effectiveDate"
+                    },
+                    "count": 1,
+                    "direction": "DESCENDING"
+                },
+                "test": {
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                    }],
+                    "valueVar": "concept90"
+                },
+                "and": [{
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                    }, {
+                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                    }],
+                    "valueVar": "concept88"
+                }, {
+                    "property": {
+                        "@id": "http://endhealth.info/im#effectiveDate"
+                    },
+                    "valueVar": "effectiveDate89"
+                }]
+            }, {
+                "name": "Diabetes (not resolved)",
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#Event"
+                },
+                "sort": {
+                    "orderBy": {
+                        "@id": "http://endhealth.info/im#effectiveDate"
+                    },
+                    "count": 1,
+                    "direction": "DESCENDING"
+                },
+                "test": {
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                    }],
+                    "valueVar": "concept93"
+                },
+                "and": [{
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                    }, {
+                        "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
+                    }],
+                    "valueVar": "concept91"
+                }, {
+                    "property": {
+                        "@id": "http://endhealth.info/im#effectiveDate"
+                    },
+                    "valueVar": "effectiveDate92"
+                }]
+            }, {
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#Event"
+                },
+                "property": {
+                    "@id": "http://endhealth.info/im#concept"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
+                }, {
+                    "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d"
+                }, {
+                    "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4"
+                }, {
+                    "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
+                }],
+                "valueVar": "concept94"
+            }, {
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#Event"
+                },
+                "property": {
+                    "@id": "http://endhealth.info/im#concept"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:15bd20c8-c92f-496c-8560-896299a632e5"
+                }, {
+                    "@id": "urn:uuid:c97f55a2-fe6e-4da2-8865-a95b7cc80f4f"
+                }],
+                "valueVar": "concept95"
+            }, {
+                "name": "- Latest BMI >35",
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#Event"
+                },
+                "sort": {
+                    "orderBy": {
+                        "@id": "http://endhealth.info/im#effectiveDate"
+                    },
+                    "count": 1,
+                    "direction": "DESCENDING"
+                },
+                "test": {
+                    "property": {
+                        "@id": "http://endhealth.info/im#numericValue"
+                    },
+                    "valueCompare": {
+                        "comparison": "GREATER_THAN_OR_EQUAL",
+                        "valueData": "35"
+                    },
+                    "valueVar": "numericValue98"
+                },
+                "and": [{
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [{
+                        "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
+                        "@id": "urn:uuid:87be87a5-b068-4e22-9e0e-1a430746cfbb"
+                    }],
+                    "valueVar": "concept96"
+                }, {
+                    "property": {
+                        "@id": "http://endhealth.info/im#effectiveDate"
+                    },
+                    "valueVar": "effectiveDate97"
+                }]
+            }]
+        }]
+    }, {
+        "entityType": {
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "and": [{
+            "and": [{
+                "name": "SMI Population",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [{
+                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                }]
+            }]
+        }, {
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 1",
+                "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+            }]
+        }, {
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 2",
+                "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+            }]
+        }, {
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 3a",
+                "@id": "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6"
+            }]
+        }]
+    }]
+}
