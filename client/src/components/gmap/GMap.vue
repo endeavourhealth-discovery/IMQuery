@@ -2,7 +2,7 @@
   <div id="uprn-map" ref="mapDivRef"></div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 import { Loader } from "@googlemaps/js-api-loader";
 
@@ -18,7 +18,7 @@ export default defineComponent({
       if (newValue) {
         let latlong = newValue || { lat: 53.6242957, lng: -1.8826361 };
         this.map.setCenter(latlong);
-        this.marker = new window.google.maps.Marker({
+        this.marker = new window["google"]["maps"].Marker({
           position: latlong,
           map: this.map
         });
@@ -47,7 +47,7 @@ export default defineComponent({
         document.getElementById("uprn-map"),
         {
           mapTypeId: this.mapType || "hybrid",
-          center: { lat: this.pin.lat, lng: this.pin.lng },
+          // center: { lat: this.pin.lat, lng: this.pin.lng },
           zoom: this.zoom,
           disableDefaultUI: this.disableUI
         }

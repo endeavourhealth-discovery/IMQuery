@@ -87,6 +87,8 @@ export class QueryBuilder {
 
     loadJSON(file: any): QueryBuilder {
 
+        console.log("loadjsonfile", file)
+
         // removes previous instances
         if (this.Loaded) this.reset();
 

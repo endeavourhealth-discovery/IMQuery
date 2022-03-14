@@ -25,8 +25,8 @@ import Section from "@/components/dataset/Section.vue";
 import Selector from "@/components/dataset/Selector.vue";
 import Widget from "@/components/dataset/Widget.vue";
 import _ from "lodash";
-import EntityService from "@/services/EntityService";
-import LoggerService from "@/services/LoggerService";
+// import EntityService from "@/services/EntityService";
+// import LoggerService from "@/services/LoggerService";
 import Constraint from "@/components/dataset/Constraint.vue";
 import KeywordWidget from "@/components/dataset/KeywordWidget.vue";
 // import RichInput from "@/components/dataset/RichInput.vue";
@@ -198,7 +198,7 @@ export default defineComponent({
   position: absolute;
   left: 100px;
   top: 3px;
-  z-index: 2;
+  /* z-index: 2; */
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }

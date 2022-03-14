@@ -2,11 +2,8 @@
   <draggable
     :list="children"
     item-key="name"
-    :class="
-      'clause before:select-none cursor-pointer dragArea rounded-sm order-color-300 ' +
-        [isCardDragged ? ' ' : '']
-    "
-    ghost-class="bg-blue-300"
+    :class="'clause before:select-none cursor-pointer dragArea rounded-md order-color-300 ' + [isCardDragged ? ' ' : '']"
+    ghost-class="ghost"
     :group="{ name: 'g1' }"
     tag="div"
     h="auto"
@@ -16,41 +13,43 @@
   >
     <!-- Each item in list  -->
     <template #item="{ element, index }">
-      <div  class="clause-item flex flex-col relative">
+      <div class="clause-item flex flex-col relative">
         <!-- <div
           v-if="index == 0"
           class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
         ></div> -->
         <div class="inline-flex">
           <div class="clause-connector inline-flex flex">
-            <div
-              v-if="index == 0"
-              :class="
-                'line-h inline-block  text-green-700 font-semibold '
-              "
-            >
+            <div v-if="index == 0" :class="'space-h inline-block text-white font-semibold '">
               ––
             </div>
-            <div v-else class="line-h"></div>
+            <div v-else class="space-h"></div>
             <!-- <div v-else class="line-v"> -->
             <!-- </div> -->
             <div class="inline-flex flex-col">
               <!-- circle  -->
-              <div :class="'circle inline border  b-2 border-green-700'" ></div>
+              <div v-if="showCircle(index, element.uuid)" :class="'circle inline border  b-2 border-white'"></div>
               <!-- :line  -->
-              <div
-                v-if="index != children.length - 1"
-                :class="'line-v inline border-l b-2 border-l-green-700'"
-              ></div>
+              <div v-if="index != children.length - 1" :class="'line-v inline border-l b-2 border-l-white'"></div>
             </div>
           </div>
 
-          <div class="clause-content inline flex-col relative">
+          <div
+            class="clause-content inline flex-col relative rounded-md"
+            v-wave="{
+              color: 'currentColor',
+              easing: 'ease-out',
+              duration: 0.3,
+              initialOpacity: 0.2,
+              finalOpacity: 0.1,
+              cancellationPeriod: 75
+            }"
+          >
             <!-- Named Clause - Name  -->
             <template v-if="element.type == 'match'">
               <template v-if="true">
                 <button
-                  class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10 focus:ring-blue-600 focus:outline-none focus:ring-2"
+                  class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10  outline-none"
                 >
                   {{ element.name }}
                 </button>
@@ -108,15 +107,12 @@
             </template> -->
 
             <nested-draggable
+              :data="data"
               :isTopLevelNode="false"
               :isParentNegated="element.include == false"
               :class="
                 'dragArea__children' +
-                  [
-                    isCardDragged && !element.children.length
-                      ? ' min-h bg-blue-100'
-                      : ' ',
-                  ] +
+                  [isCardDragged && !element.children.length ? ' min-h bg-blue-100' : ' '] +
                   [!isCardDragged && !element.children.length ? ' hidden' : ' ']
               "
               :children="element.children"
@@ -138,9 +134,9 @@ import draggable from "vuedraggable";
 import { ref, onMounted, defineComponent } from "vue";
 
 export default defineComponent({
-  props: ["children", "isParentNegated"],
+  props: ["data", "children", "isParentNegated", "isTopLevelNode"],
   components: {
-    draggable,
+    draggable
   },
   name: "nested-draggable",
   data() {
@@ -148,20 +144,30 @@ export default defineComponent({
       childrenText: {
         1: {
           or: "",
-          and: "",
+          and: ""
         },
         2: {
           or: "either feature",
-          and: "both features",
+          and: "both features"
         },
         default: {
           or: "any feature",
-          and: "all features",
-        },
-      },
+          and: "all features"
+        }
+      }
     };
   },
   methods: {
+    showCircle(index: number, uuid: number): boolean {
+      return true;
+      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+        console.log("uuid", uuid);
+        console.log("data", this.data);
+        return false;
+      } else {
+        return true;
+      }
+    },
     toggleOperator(element: any): void {
       if (element.operator == "or") {
         element.operator = "and";
@@ -180,7 +186,7 @@ export default defineComponent({
       } else {
         return this.childrenText.default[element.operator];
       }
-    },
+    }
   },
   computed: {
     isCardDragged: {
@@ -189,9 +195,9 @@ export default defineComponent({
       },
       set(val: boolean): void {
         this.$store.commit("updateIsCardDragged", val);
-      },
-    },
-  },
+      }
+    }
+  }
 });
 </script>
 <style scoped>
@@ -220,6 +226,12 @@ export default defineComponent({
 /* .clause-connector {
   width: 60px;
 } */
+
+
+.ghost {
+  background-color: #93c5fd;
+  border-radius: 5px;
+}
 
 .non-selectable {
   -webkit-user-select: none; /* Chrome all / Safari all */
@@ -252,8 +264,7 @@ export default defineComponent({
   background: #555;
 }
 
-.clause-named__name { 
-
+.clause-named__name {
 }
 
 .circle {
@@ -282,14 +293,18 @@ export default defineComponent({
   min-height: 5px;
 }
 
-
-.line-h {
+.space-h {
   /* visibility: hidden; */
   min-width: 10px;
-  margin: 0 2px 0 0;
+  margin: 0 5px 0 0;
   /* height: 100%; */
   min-height: 40px;
 }
 
+
+.ghost .space-h,
+.ghost .line-v {
+visibility: hidden;
+}
 
 </style>

@@ -2,11 +2,7 @@
   <!-- Content Wrapper -->
   <div class="wrapper relative flex w-full h-full bg-white">
     <!-- Sidenav  -->
-    <div
-      class="wrapper-sidenav bg-white flex flex-col align-center"
-      @mouseenter="expanded = true"
-      @mouseleave="expanded = false"
-    >
+    <div class="wrapper-sidenav bg-white flex flex-col align-center" @mouseenter="expanded = true" @mouseleave="expanded = false">
       <div class="flex pl-3 border-right">
         <RoundButton
           :class="'button-create ' + [expanded ? ' expanded' : '']"
@@ -25,12 +21,7 @@
         </RoundButton>
       </div>
       <!--Content Nav -->
-      <ContentNav
-        class="inline w-full h-full"
-        :expanded="expanded"
-        :items="sideNavItems"
-        v-model="sideNavActiveItem"
-      />
+      <ContentNav class="inline w-full h-full" :expanded="expanded" :items="sideNavItems" v-model="sideNavActiveItem" />
       <!-- /Content Nav -->
     </div>
 
@@ -48,16 +39,9 @@
           sideNavActiveItem == 'View Data'
       "
     >
-      <QueryEditor
-        class="section-center w-full"
-        :sideNavActiveItem="sideNavActiveItem"
-        @previous="handlePrevious()"
-        @next="handleNext()"
-      />
+      <QueryEditor class="section-center w-full" :sideNavActiveItem="sideNavActiveItem" @previous="handlePrevious()" @next="handleNext()" />
     </template>
-    <template v-else-if="sideNavActiveItem == 'Library'">
-      <DatasetBrowser class="section-center w-full"
-    /></template>
+    <template v-else-if="sideNavActiveItem == 'Library'"> <DatasetBrowser class="section-center w-full"/></template>
     <template v-else-if="sideNavActiveItem == 'Help'">Help</template>
     <template v-else-if="sideNavActiveItem == 'Draggable Test Components'">
       <div class="section-center flex w-full h-full border-right">
@@ -66,31 +50,15 @@
     </template>
     <template v-else-if="sideNavActiveItem == 'View Definition'">
       <div class="section-center flex w-full h-full border-right">
-        <div
-          class="item-view inline-flex flex-col w-full h-full w-max-500p m-2"
-        >
+        <div class="item-view inline-flex flex-col w-full h-full w-max-500p m-2">
           <template v-if="openFiles.length">
-            <div
-              class="title text-center text-gray-400 w-full h-10 font-semibold "
-            >
+            <div class="title text-center text-gray-400 w-full h-10 font-semibold ">
               Folders
             </div>
             <div class="w-full h-full" v-if="activeItemView == 'Folders'">
-              <div
-                v-if="queryBuilder.hierarchyTree(topLevelFolder)"
-                class="left inline-flex flex-col w-full h-full"
-              >
-                <div
-                  v-if="
-                    queryBuilder.hierarchyTree(topLevelFolder).children.length
-                  "
-                  class="folder-view p-2"
-                >
-                  <HierarchyTreeItem
-                    class="w-full my-3"
-                    :value="queryBuilder.hierarchyTree(topLevelFolder)"
-                    :nestingCount="0"
-                  />
+              <div v-if="queryBuilder.hierarchyTree(topLevelFolder)" class="left inline-flex flex-col w-full h-full">
+                <div v-if="queryBuilder.hierarchyTree(topLevelFolder).children.length" class="folder-view p-2">
+                  <HierarchyTreeItem class="w-full my-3" :value="queryBuilder.hierarchyTree(topLevelFolder)" :nestingCount="0" />
                 </div>
               </div>
             </div>
@@ -145,12 +113,7 @@
 
           <template v-if="activeContentView == 'JSON'">
             <div class="w-full h-20 py-2">
-              <InputTextbox
-                v-model="jsonpath"
-                class="w-max-500p mx-auto"
-                type="text"
-                placeholder="Paste JSONPath query here"
-              />
+              <InputTextbox v-model="jsonpath" class="w-max-500p mx-auto" type="text" placeholder="Paste JSONPath query here" />
             </div>
             <div class="flex">
               <v-ace-editor
@@ -173,9 +136,7 @@
       </div>
     </template>
     <template v-else-if="sideNavActiveItem == 'Data Output'">
-      <div
-        class="section-center flex justify-center w-full h-full border-right"
-      >
+      <div class="section-center flex justify-center w-full h-full border-right">
         <DataViewer class="mt-6"> </DataViewer>
       </div>
     </template>
@@ -187,7 +148,7 @@
 import { ref, onMounted, defineComponent } from "vue";
 import { functions_v1 as f } from "@/models/query/TemplateFunctions";
 
-import{ v4 } from "uuid";
+import { v4 } from "uuid";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import DataViewer from "@/components/dataset/DataViewer.vue";
 
@@ -248,7 +209,7 @@ export default defineComponent({
     InputTextbox,
     DefinitionEditor,
     // VueJsonPretty
-    nestedExample,
+    nestedExample
   },
   data() {
     return {
@@ -261,31 +222,31 @@ export default defineComponent({
         {
           name: "Folders",
           icon: "folder_open",
-          visible: true,
+          visible: true
         },
         {
           name: "All Items",
           icon: "menu",
-          visible: true,
-        },
+          visible: true
+        }
       ],
       activeContentView: "Text (rdfs:label)",
       contentViews: [
         {
           name: "Graph",
           icon: "share",
-          visible: true, // set to true
+          visible: true // set to true
         },
         {
           name: "Text (rdfs:label)",
           icon: "translate",
-          visible: true, // set to true
+          visible: true // set to true
         },
         {
           name: "JSON",
           icon: "document",
-          visible: true, // set to true
-        },
+          visible: true // set to true
+        }
       ],
       nodeSize: 8,
       linkWidth: 3,
@@ -299,167 +260,167 @@ export default defineComponent({
             {
               id: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
               name: "Patient",
-              group: 1,
+              group: 1
             },
             {
               id: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
               name: "GP Registration",
-              group: 2,
+              group: 2
             },
             {
               id: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
               name: "Regular GMS patient",
-              group: 3,
+              group: 3
             },
             {
               id: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
               name: "is on or before 31/03/2020",
-              group: 3,
+              group: 3
             },
             {
               id: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
               name: "is after 31/03/2020",
-              group: 3,
+              group: 3
             },
             {
               id: "a572d325-321a-418d-948a-8c87baaf7fd8",
               name: "does not exist",
-              group: 3,
+              group: 3
             },
             {
               id: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
               name: "and",
-              group: 4,
+              group: 4
             },
             {
               id: "453e074a-1543-4956-bf0e-305df888993c",
               name: "or",
-              group: 4,
-            },
+              group: 4
+            }
           ],
           links: [
             {
               source: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
               target: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
-              value: "is subject of",
+              value: "is subject of"
             },
             {
               source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
               target: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
-              value: "",
+              value: ""
             },
             {
               source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
               target: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
-              value: "patient type",
+              value: "patient type"
             },
             {
               source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
               target: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
-              value: "effective date",
+              value: "effective date"
             },
             {
               source: "9dcff16d-b723-4fcf-8f1d-d4dd2c9c7b9e",
               target: "453e074a-1543-4956-bf0e-305df888993c",
-              value: "",
+              value: ""
             },
             {
               source: "453e074a-1543-4956-bf0e-305df888993c",
               target: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
-              value: "end date",
+              value: "end date"
             },
             {
               source: "453e074a-1543-4956-bf0e-305df888993c",
               target: "a572d325-321a-418d-948a-8c87baaf7fd8",
-              value: "end date",
-            },
-          ],
+              value: "end date"
+            }
+          ]
         },
         gms: {
           nodes: [
             {
               id: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
               name: "Patient",
-              group: 1,
+              group: 1
             },
             {
               id: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
               name: "GP Registration",
-              group: 2,
+              group: 2
             },
             {
               id: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
               name: "Regular GMS patient",
-              group: 3,
+              group: 3
             },
             {
               id: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
               name: "before 31/03/2020",
-              group: 3,
+              group: 3
             },
             {
               id: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
               name: "after 31/03/2020",
-              group: 3,
+              group: 3
             },
             {
               id: "a572d325-321a-418d-948a-8c87baaf7fd8",
               name: "non existent",
-              group: 3,
+              group: 3
             },
             {
               id: "453e074a-1543-4956-bf0e-305df888993c",
               name: " either",
-              group: 4,
-            },
+              group: 4
+            }
           ],
           links: [
             {
               source: "5f7d54a0-fb79-498a-97fc-22bc8135cde4",
               target: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
-              value: "had a",
+              value: "had a"
             },
             {
               source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
               target: "57b14e08-1625-4168-ba06-2e1dc4b697f4",
-              value: "and its patient type is",
+              value: "and its patient type is"
             },
             {
               source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
               target: "d09a3b13-a69e-4cb0-8bb9-e525a2470361",
-              value: " and its effective date is",
+              value: " and its effective date is"
             },
             {
               source: "55aa377a-9f2c-4d05-b45b-7fa1063f8cc7",
               target: "453e074a-1543-4956-bf0e-305df888993c",
-              value: "and its end date is",
+              value: "and its end date is"
             },
             {
               source: "453e074a-1543-4956-bf0e-305df888993c",
               target: "ce5c00bb-3de4-4cd7-8c6a-8cf98c703fed",
-              value: "",
+              value: ""
             },
             {
               source: "453e074a-1543-4956-bf0e-305df888993c",
               target: "a572d325-321a-418d-948a-8c87baaf7fd8",
-              value: "or",
-            },
-          ],
-        },
+              value: "or"
+            }
+          ]
+        }
       },
       topLevelFolder: {
         "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries",
         "rdf:type": [
           {
-            "@id": "im:Folder",
-          },
+            "@id": "im:Folder"
+          }
         ],
         "rdfs:label": "QMUL CEG query library",
         "im:isContainedIn": [
           {
-            "@id": "im:QT_QueryTemplates",
-          },
-        ],
+            "@id": "im:QT_QueryTemplates"
+          }
+        ]
       },
       expandedItems: [] as any[],
       selectedFilterTypes: [] as any[],
@@ -475,7 +436,7 @@ export default defineComponent({
           name: "Home",
           title: "Home",
           icon: "home",
-          visible: true,
+          visible: true
         },
         {
           id: "9ea69a5e-14ea-43bd-ad99-b5f67f10447c",
@@ -483,7 +444,7 @@ export default defineComponent({
           name: "Edit",
           title: "Open Editor",
           icon: "pencil",
-          visible: true,
+          visible: true
         },
         {
           id: "ffa2a3ac-b819-4378-89b8-cf7299cf559c",
@@ -491,7 +452,7 @@ export default defineComponent({
           name: "View",
           title: "View Data",
           icon: "cube_transparent",
-          visible: true,
+          visible: true
         },
         {
           id: "4fc82f08-18e4-49e4-91f9-061e87521b0c",
@@ -499,7 +460,7 @@ export default defineComponent({
           name: "Search",
           title: "Search This Document",
           icon: "search",
-          visible: false,
+          visible: false
         },
         {
           id: "90f245fb-cafe-43d0-8c72-bb1b685ebaf5",
@@ -507,7 +468,7 @@ export default defineComponent({
           name: "Suggestions",
           title: "See Suggestions",
           icon: "light_bulb",
-          visible: false,
+          visible: false
         },
         {
           id: "b6f0fbdc-3632-4eda-9801-83c6951169f6",
@@ -515,7 +476,7 @@ export default defineComponent({
           name: "Help",
           title: "Get Help",
           icon: "question_mark_circle",
-          visible: true,
+          visible: true
         },
         {
           id: "34f406e9-5784-4c1e-8f8e-52352a63aeba",
@@ -523,8 +484,8 @@ export default defineComponent({
           name: "Settings",
           title: "Change Settings",
           icon: "cog",
-          visible: false,
-        },
+          visible: false
+        }
       ],
       sideNavActiveItem: "Draggable Test Components",
       sideNavItems: [
@@ -533,28 +494,28 @@ export default defineComponent({
           name: "Library",
           icon: "search",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "d8108f1f-61e8-4d88-a0a1-59aa122b5725",
           name: "View Definition",
           icon: "menu_alt_1",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "8986aceb-0e8f-4429-8b42-d408250e91f1",
           name: "Draggable Test Components",
           icon: "template",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "5a24a424-2b15-4255-a076-ac1a992fb4fc",
           name: "Data Output",
           icon: "cube",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "dbb23c7f-7f8a-4457-ad60-9096e9de3eb7",
@@ -562,66 +523,74 @@ export default defineComponent({
           icon: "question_mark_circle",
           visible: true,
           children: [],
-          seperator: true,
+          seperator: true
         },
         {
           id: "65308e3e-a381-4c3b-b41a-08a674a35531",
           name: "Sources",
           icon: "office_building",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "ac43dd48-3bf8-4be9-87fb-045c1f245277",
           name: "Main Data Type",
           icon: "collection",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "1cece6bf-2bf5-448b-b3c3-3c578ce4412b",
           name: "Steps",
           icon: "template",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "af92a57b-9d1e-45db-a783-eaaf00970e23",
           name: "Output",
           icon: "cube",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "c813a2cb-2edd-4e42-a1d0-097e68a941e6",
           name: "Save or Export",
           icon: "download",
           visible: true,
-          children: [],
+          children: []
         },
         {
           id: "b160ce1e-1bd3-4172-914a-ea127af6a756",
           name: "View Data",
           icon: "cube_transparent",
           visible: true,
-          children: [],
-        },
+          children: []
+        }
       ],
-      openFiles: [] as any[],
+      // openFiles: [] as any[],
       selectedFile: "",
       selectedFileItems: [] as any[],
-      fileItems: [] as any[],
+      fileItems: [] as any[]
     };
   },
 
   computed: {
+    openFiles: {
+      get(): any {
+        return this.$store.state.openFiles;
+      },
+      set(value: any): void {
+        this.$store.commit("updateOpenFiles", value);
+      }
+    },
     isLoading: {
       get(): any {
         return this.$store.state.isLoading;
       },
       set(value: any): void {
         this.$store.commit("updateIsLoading", value);
-      },
+      }
     },
     queryBuilder: {
       get(): any {
@@ -630,9 +599,9 @@ export default defineComponent({
       set({ action, payload }: any): void {
         this.$store.commit("queryBuilder", {
           action: action,
-          payload: payload,
+          payload: payload
         });
-      },
+      }
     },
     ontology: {
       get(): any {
@@ -640,12 +609,12 @@ export default defineComponent({
       },
       set(value: any): void {
         return;
-      },
-    },
+      }
+    }
   },
 
   async mounted() {
-     this.getData("CEG-Queries-edited.json");
+    this.$store.dispatch("loadUserData");
 
     await this.$store.dispatch("fetchDatamodelIris");
   },
@@ -671,44 +640,13 @@ export default defineComponent({
     getFilteredEntities(): any {
       if (this.selectedFilterTypes.length) {
         return this.openFiles[0]["entities"].filter((entity: any) =>
-          this.selectedFilterTypes.some(
-            (selectedFilterType: any) =>
-              selectedFilterType.value == entity["rdf:type"][0]["@id"]
-          )
+          this.selectedFilterTypes.some((selectedFilterType: any) => selectedFilterType.value == entity["rdf:type"][0]["@id"])
         );
       } else {
         return this.openFiles[0]["entities"];
       }
     },
-    async getData(filename) {
-      await DataService.getData(filename)
-        .then((obj) => {
-          this.openFiles = [];
-          this.openFiles.push(obj);
-          console.log(obj);
 
-          this.queryBuilder.loadJSON(JSON.stringify(obj));
-
-          // useful if you want to filter the entities 
-          this.filterTypes = this.queryBuilder.entityTypes.map((item: any) => {
-            const _label =
-              item.substring(0, 1) == ":"
-                ? item.substring(1)
-                : item.split(":")[1];
-
-            return {
-              value: item,
-              label: _label,
-            };
-          });
-          return obj;
-        })
-        .catch((err) => {
-          this.$toast.add(
-            LoggerService.error("Failed to load sample queries.", err)
-          );
-        });
-    },
     async onUploadFiles(): Promise<void> {
       const _inputElement = this.$refs.upload as HTMLInputElement;
       const _files = [...(_inputElement.files ? _inputElement.files : [])];
@@ -722,28 +660,23 @@ export default defineComponent({
         this.queryBuilder.loadJSON(e.target.result);
 
         this.filterTypes = this.queryBuilder.entityTypes.map((item: any) => {
-          const _label =
-            item.substring(0, 1) == ":"
-              ? item.substring(1)
-              : item.split(":")[1];
+          const _label = item.substring(0, 1) == ":" ? item.substring(1) : item.split(":")[1];
 
           return {
             value: item,
-            label: _label,
+            label: _label
           };
         });
       };
       fileReader.readAsText(_files[0]);
     },
     getQueries(): any {
-      return this.openFiles[0]["entities"].filter(
-        (entity: any) => entity["rdf:type"][0]["@id"] == "im:Query"
-      );
+      return this.openFiles[0]["entities"].filter((entity: any) => entity["rdf:type"][0]["@id"] == "im:Query");
     },
 
     async getEntitySummary(iri: string): Promise<any> {
       await EntityService.getEntitySummary(iri)
-        .then((res) => {
+        .then(res => {
           // console.log("summary fetched " + iri + " :", res.data);
           this.$store.state.datamodel.map((entity: any) => {
             if ((entity.iri = iri)) {
@@ -753,13 +686,8 @@ export default defineComponent({
 
           return res.data;
         })
-        .catch((err) => {
-          this.$toast.add(
-            LoggerService.error(
-              "Failed to get data model properties from server",
-              err
-            )
-          );
+        .catch(err => {
+          this.$toast.add(LoggerService.error("Failed to get data model properties from server", err));
         });
     },
 
@@ -782,15 +710,12 @@ export default defineComponent({
       return items.map((item: any) => {
         return { id: "temp_" + v4(), ...items };
       });
-    },
-  },
+    }
+  }
 });
 </script>
 
-<style>
-
-
-</style>
+<style></style>
 
 <style scoped>
 .non-selectable {

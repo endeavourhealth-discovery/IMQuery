@@ -13,9 +13,10 @@ import { ConceptReference } from "@/models/TTConcept/ConceptReference";
 import axios from "axios";
 import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
-import {QueryBuilder} from "@/models/query/QueryTools";
+import { QueryBuilder } from "@/models/query/QueryTools";
 import Ontology from "@/models/query/OntologyTools";
 import _ from "lodash";
+import DataService from "@/services/DataService";
 
 
 export default createStore({
@@ -4133,6 +4134,11 @@ export default createStore({
     isCardDragged: false,
   },
   mutations: {
+    openFile(state, file) {
+      // state.openFiles = [...state.openFiles, file];
+      console.log("file", file)
+      state.queryBuilder.loadJSON(JSON.stringify(file));
+    },
     queryBuilder(state, { action, payload }) {
       switch (action) {
         case "loadJSON":
@@ -4270,6 +4276,35 @@ export default createStore({
     }
   },
   actions: {
+    async loadUserData({ commit, dispatch }) {
+
+      //example 
+      const _filenames = ["userdata_ceg.json"];
+
+
+      _filenames.forEach(async (filename: string) => {
+        await DataService.getData(filename)
+          .then(data => {
+            commit("openFile", data)
+            console.log("opened file:", data);
+
+          })
+          .catch(err => {
+            console.error("Failed to fetch userdata", err);
+          });
+
+
+        // useful if you want to filter the entities
+        // this.filterTypes = this.queryBuilder.entityTypes.map((item: any) => {
+        //   const _label = item.substring(0, 1) == ":" ? item.substring(1) : item.split(":")[1];
+
+        //   return {
+        //     value: item,
+        //     label: _label
+        //   };
+        // });
+      });
+    },
     async fetchSearchResults(
       { commit },
       data: { searchRequest: SearchRequest; cancelToken: any }

@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div class="gmap relative">
-      Clustered Google Map Here
+      <!-- <GMap/>  -->
     </div>
 
     <!-- Sidenav  -->
@@ -88,6 +88,8 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
+import GMap from "@/components/GMap/GMap.vue"
+
 
 import VerticalButtonGroup from "@/components/dataset/VerticalButtonGroup.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
@@ -104,6 +106,7 @@ export default defineComponent({
     RoundButton,
     HeroIcon,
     ListItem,
+    // GMap
     // OrganisationMap,
   },
   data() {

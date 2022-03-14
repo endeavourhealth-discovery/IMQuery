@@ -13,7 +13,8 @@
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <header :class="'header relative flex items-center justify-between w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
+      <header :class="'hidden header relative flex items-center justify-between w-full b-bottom' + [activeTabName == 'Home' ? ' ' : ' ']">
+      
         <!-- Left Side  -->
         <div :class="'left pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
           <!-- Menu Toggler  -->
@@ -89,7 +90,7 @@
           <UserWidget class="ml-10" :modelValue="userMeta" />
         </div>
       </header>
-
+<ResponsiveNav/>
       <!-- Tabs -->
       <div class="page-content">
         <!-- Tab: Home -->
@@ -240,6 +241,7 @@ import UserWidget from "@/components/dataset/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import CardButton from "@/components/dataset/CardButton.vue";
+import ResponsiveNav from "@/components/dataset/ResponsiveNav.vue";
 import ProgressBar from "@/components/search/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
@@ -267,7 +269,8 @@ export default defineComponent({
     RoundButton,
     OrganisationBrowser,
     UserWidget,
-    CardButton
+    CardButton,
+    ResponsiveNav
   },
   $refs: {
     OverlayPanel: HTMLElement

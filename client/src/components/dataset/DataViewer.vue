@@ -295,7 +295,7 @@ export default {
               };
               this.columns.push(_column);
             });
-            console.log(this.columns);
+            // console.log(this.columns);
             this.selectedColumns = this.columns;
           }
 
