@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import Home from "@/views/Home.vue";
+import Home from "@/views/oldHome.vue";
 import SidebarControl from "@/components/home/SidebarControl.vue";
 import SideNav from "@/components/home/SideNav.vue";
 

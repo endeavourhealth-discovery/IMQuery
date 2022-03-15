@@ -7,21 +7,22 @@
     @mouseleave="isHover = false"
   >
     <RoundButton
-      class="title non-selectable px-2 transition duration-500 ease-in-out shadow-sm ring ring-5"
+      class="title non-selectable px-2 transition duration-500 ease-in-out shadow-sm ring-white ring-1"
       :rounded="true"
       :showRing="false"
       focusTextColor="white"
-      textColor="blue-500"
+      textColor="white"
       hoverTextColor="white"
-      backgroundColor="white"
-      hoverBackgroundColor="blue-600"
-      borderColor="blue-600"
+      backgroundColor="transparent"
+      hoverBackgroundColor="gray-700"
+      borderColor="white"
+      ringColor="white"
       @blur="isHover ? null : [(expanded = false)]"
-      a
+      
     >
       {{ modelValue.firstName.substring(0, 1) + modelValue.lastName.substring(0, 1) }}
     </RoundButton>
-    <div v-if="modelValue && expanded" class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white ring-1 focus:outline-none" role="menu">
+    <div v-if="modelValue && expanded" class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white dark:bg-ray-900 ring-1 focus:outline-none" role="menu">
       <div class="non-selectable block px-4 py-2 text-2xl border-b">
         <div class="text-black font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
         <div class="text-gray-700 font-regular">
@@ -42,11 +43,11 @@
       </div>
     </div>
   </div>
-  <div v-else class="non-selectable relative pt-3 flex text-3xl font-semibold">
-    <div class="hover:underline text-blue-600 " @click="$router.push({ name: 'Register' })">
+  <div v-else class="non-selectable relative mt-3 flex text-3xl font-semibold">
+    <div class="hover:underline text-blue-600 dark:text-yellow-400  " @click="$router.push({ name: 'Register' })">
       Sign Up
     </div>
-    <div class="hover:underline text-purple-600 ml-7" @click="$router.push({ name: 'Login' })">
+    <div class="hover:underline text-purple-600 dark:text-blue-400 ml-7" @click="$router.push({ name: 'Login' })">
       Log In
     </div>
   </div>

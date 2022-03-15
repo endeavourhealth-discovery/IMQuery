@@ -3,7 +3,7 @@
     :class="
       `select-none  group cursor-pointer flex flex-col py-4 rounded-lg mx-3 bg-${backgroundColor} hover:bg-${darken(
         backgroundColor
-      )}  border  border-gray-200 hover:border-gray-300 max-w-200 hover:shadow-md trasition ease-in-out duration-500`
+      )}  dark:border-0 border  border-gray-200 hover:border-gray-300 max-w-200 hover:shadow-md trasition ease-in-out duration-500`
     "
     v-wave="{
     color: 'currentColor',
@@ -54,8 +54,8 @@ export default defineComponent({
         } else {
           _weighing += 100;
         }
-        console.log("_weighing", _weighing);
-        console.log("color", _color);
+        // console.log("_weighing", _weighing);
+        // console.log("color", _color);
         return _color + _weighing.toString();
       }
     },

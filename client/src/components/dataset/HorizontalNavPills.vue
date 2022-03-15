@@ -1,22 +1,30 @@
 <template>
   <div
-    class="tab-buttons transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center group rounded-lg bg-white hover:bg-gray-100"
+    class="tab-buttons transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 hover:bg-gray-100"
   >
     <template v-for="item in items" :key="item.id">
       <button
         @click="$emit('update:modelValue', item.id)"
         type="button"
         :class="
-          'tab-button px-2 py-1 non-selectable inline-flex items-center justify-center rounded-md  font-regular text-base text-gray-400 hover:text-gray-900 border border-transparent' +
+          'tab-button transition duration-500 ease-in-out px-2 py-2 non-selectable inline-flex items-center justify-center font-regular text-base  hover:text-gray-900  dark:hover:text-white' +
             [
               modelValue == item.id
-                ? ' active bg-white border-gray-300 shadow-sm '
-                : '',
+                ? 'active border dark:text-white dark:border-yellow-500 border-2 border-gray-300   bg-white dark:bg-gray-900  shadow-sm'
+                : 'border border-2 border-transparent dark:border-gray-600 dark:text-gray-400 '
             ]
         "
+        v-wave="{
+          color: 'currentColor',
+          easing: 'ease-out',
+          duration: 0.3,
+          initialOpacity: 0.2,
+          finalOpacity: 0.1,
+          cancellationPeriod: 75
+        }"
       >
         <!-- Icon -->
-        <div class="inline-flex">
+        <!-- <div class="inline-flex">
           <HeroIcon
             :class="[
               modelValue == item.id ? ' text-yellow-500' : ' text-gray-500',
@@ -26,25 +34,15 @@
             width="24"
             height="24"
           />
-        </div>
+        </div> -->
 
-        <div class="inline-flex text-base font-medium ml-2">
+        <!-- Name  -->
+        <div class="inline-flex font-medium text-2xl ml-2">
           {{ item.name }}
         </div>
+        <!-- x button  -->
         <div v-if="closable" class="button-close inline-flex">
-          <HeroIcon
-            class="text-gray-400 hover:text-red-500"
-            strokewidth="2"
-            width="16"
-            height="16"
-            icon="x"
-            @click="
-              $emit(
-                'update:items',
-                items.filter((query: any) => query.id != item.id)
-              )
-            "
-          />
+          <HeroIcon class="text-gray-400 hover:text-red-500" strokewidth="2" width="16" height="16" icon="x" @click="closeItem(item.id)" />
         </div>
       </button>
     </template>
@@ -60,8 +58,26 @@ export default defineComponent({
   props: ["items", "modelValue", "closable"],
   emits: ["update:modelValue", "update:items"],
   components: {
-    HeroIcon,
+    HeroIcon
   },
+  methods: {
+    closeItem(itemId: string) {
+      //#todo:saveFile via api then remove from state
+
+      //removes item from state
+      this.$emit(
+        "update:items",
+        this.items.filter((item: any) => item.id != itemId)
+      );
+
+      // state.activeFileId = state.openFiles.length > 0 ? state.openFiles[0].id : "";
+
+      //sets first item as active
+      // if (this.modelValue == itemId && this.items.length > 0) {
+      //   this.$emit("update:modelValue", this.items[1].id);
+      // }
+    }
+  }
 });
 </script>
 
@@ -73,12 +89,18 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
+.tab-button {
+  /* height: 30px; */
+  border-radius: 30px;
+}
+
 .tab-buttons {
   padding: 10px 3px;
 }
 
 .tab-button.active {
-  color: black;
+  /* color: black; */
+  /* border: 3px solid #eab308; */
 }
 
 .button-close {

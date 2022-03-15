@@ -1,8 +1,8 @@
 <template>
   <!-- Content Wrapper -->
-  <div class="wrapper relative flex w-full h-full bg-white">
+  <div class="wrapper relative flex w-full h-full bg-white dark:bg-gray-900">
     <!-- Sidenav  -->
-    <div class="wrapper-sidenav bg-white flex flex-col align-center" @mouseenter="expanded = true" @mouseleave="expanded = false">
+    <div class="wrapper-sidenav bg-white dark:bg-gray-900 flex flex-col align-center" @mouseenter="expanded = true" @mouseleave="expanded = false">
       <div class="flex pl-3 border-right">
         <RoundButton
           :class="'button-create ' + [expanded ? ' expanded' : '']"
@@ -27,7 +27,7 @@
 
     <!-- Sidenav  -->
 
-    <BackgroundCards class="bg-wrapper hidden" />
+    <!-- <BackgroundCards class="bg-wrapper hidden" /> -->
 
     <template
       v-if="
@@ -614,7 +614,6 @@ export default defineComponent({
   },
 
   async mounted() {
-    this.$store.dispatch("loadUserData");
 
     await this.$store.dispatch("fetchDatamodelIris");
   },

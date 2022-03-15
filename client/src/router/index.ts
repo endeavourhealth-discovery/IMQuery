@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "../views/oldHome.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Datamodel from "../views/Concept.vue";
 import Workflow from "../views/Workflow.vue";
 // import UPRN from "../views/Uprn.vue";
 import User from "../views/User.vue";
 import Editor from "../views/Editor.vue";
-import Search from "../views/Search.vue";
+import Home from "../views/Home.vue";
 import Datasets from "../views/Datasets.vue";
 import DatasetBrowser from "../views/DatasetBrowser.vue";
 import DatasetWizard from "../views/DatasetWizard.vue";
@@ -94,12 +94,44 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: Search,
+    component: Home,
     // redirect: { name: "Dashboard" },
     meta: {
       requiresLicense: true
     }
   },
+  // {
+  //   path: "/create",
+  //   name: "Create",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+  // {
+  //   path: "/create/:iri",
+  //   name: "Create",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+  // {
+  //   path: "/explore",
+  //   name: "Explore",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+  // {
+  //   path: "/explore/:iri",
+  //   name: "Explore",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
   {
     path: "/oldhome",
     name: "oldhome",
@@ -168,7 +200,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/search",
     name: "Search",
-    component: Search,
+    component: Home,
   },
   {
     path: "/workflow",

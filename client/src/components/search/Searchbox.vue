@@ -4,55 +4,28 @@
   <!-- "searchbox','w-full','transition','duration-500','ease-in-out','appearance-none','rounded-none','border','border-gray-300','rounded-md','focus:z-10" -->
   <div
     :class="
-      'searchbox relative w-full h-full transition duration-500 ease-in-out appearance-none border border-gray-200 hover:border-gray-300 rounded-md focus:z-10' +
+      'searchbox bg-gray-100 dark:bg-gray-800 relative w-full h-full transition duration-500 ease-in-out appearance-none border border-gray-200 hover:border-gray-300 dark:border-0 rounded-md focus:z-10' +
         [componentState == 'hover' ? ' hover' : ''] +
         [componentState == 'focus' ? ' focus' : '']
     "
   >
     <!-- Searchbox  -->
     <div class="flex items-center w-full h-full">
-      <HeroIcon
-          class="widget-icon text-gray- ml-3"
-          icon="search"
-          strokewidth="2"
-          width="20"
-          height="20"
-        />
+      <HeroIcon class="widget-icon text-black dark:text-white ml-3" icon="search" strokewidth="2" width="20" height="20" />
       <input
         type="text"
-        class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900 font-medium rounded-md focus:outline-none"
+        class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900  dark:text-white font-medium rounded-md focus:outline-none"
         placeholder="Type to Search for Data, Apps and Resources"
         :value="modelValue"
         @input="onInput($event)"
         @keyup.enter="onEnter($event)"
         @focus="componentState = 'focus'"
-        @blur="
-          autocompleteHover
-            ? (componentState = 'focus')
-            : (componentState = 'default')
-        "
-        @mouseenter="
-          componentState == 'focus'
-            ? (componentState = 'focus')
-            : (componentState = 'hover')
-        "
-        @mouseleave="
-          componentState == 'focus'
-            ? (componentState = 'focus')
-            : (componentState = 'default')
-        "
+        @blur="autocompleteHover ? (componentState = 'focus') : (componentState = 'default')"
+        @mouseenter="componentState == 'focus' ? (componentState = 'focus') : (componentState = 'hover')"
+        @mouseleave="componentState == 'focus' ? (componentState = 'focus') : (componentState = 'default')"
       />
-      <div
-        v-if="modelValue && modelValue != ''"
-        @click="$emit('update:modelValue', '')"
-      >
-        <HeroIcon
-          class="text-gray-600 hover:text-red-500 mr-3"
-          strokewidth="2"
-          width="24"
-          height="24"
-          icon="x"
-        />
+      <div v-if="modelValue && modelValue != ''" @click="$emit('update:modelValue', '')">
+        <HeroIcon class="text-gray-600 hover:text-red-500 mr-3" strokewidth="2" width="24" height="24" icon="x" />
       </div>
     </div>
     <!-- / Searchbox  -->
@@ -60,15 +33,15 @@
     <!-- Autocomplete  -->
     <div
       v-if="filteredHits() && modelValue != '' && componentState == 'focus'"
-      class="autocomplete w-full rounded-t-none rounded-b-md  border border-gray-300 hover:border-gray-300 non-selectable shadow-lg"
+      class="autocomplete w-full rounded-t-none rounded-b-md bg-white dark:bg-gray-800 dark:border-0  border border-gray-300 hover:border-gray-300 non-selectable shadow-lg"
       @mouseenter="autocompleteHover = true"
       @mouseleave="autocompleteHover = false"
     >
       <div
         v-for="item in filteredHits()"
         :key="item.id"
-        class="transition duration-500 ease-in-out appearance-none relative w-full px-4 py-3 text-gray-400 font-medium hover:text-gray-900 hover:bg-gray-100 focus:z-10"
-        v-html="item._formatted.searchString"
+        class="transition duration-500 ease-in-out appearance-none relative w-full px-4 py-3 text-gray-400 dark:text-gray-300 dark:hover:text-white  font-medium hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600 focus:z-10"
+        v-html="item.searchString"
         @click.prevent="onAutocompleteClick(item.searchString)"
       ></div>
     </div>
@@ -86,38 +59,35 @@ export default defineComponent({
   props: ["modelValue", "autocompleteData"],
   emits: ["update:modelValue", "search"],
   components: {
-    HeroIcon,
+    HeroIcon
   },
   data() {
     return {
       exampleAutocompleteHits: [
         {
           id: 0,
-          searchString: "Heart rate for diabetics",
+          searchString: "Heart rate for diabetics"
         },
         {
           id: 1,
-          searchString: "Blood pressure for patients with stroke",
+          searchString: "Blood pressure for patients with stroke"
         },
         {
           id: 2,
-          searchString: "Patients with asthma",
-        },
+          searchString: "Patients with asthma"
+        }
       ],
       initialAutocompleteData: this.autocompleteData,
       autocompleteHits: [],
       autocompleteHover: false,
-      componentState: "default", // Options #"default", #"hover", #"focus", #""
+      componentState: "default" // Options #"default", #"hover", #"focus", #""
     };
   },
   methods: {
     filteredHits(): any {
       /* Todo: instead of overriding <em> globally use _matchedInfo property to highlight text  */
       if (this.autocompleteData && this.autocompleteData.hits.length > 0) {
-        let _maxHits =
-          this.autocompleteData.hits.length < 5
-            ? this.autocompleteData.hits.length
-            : 5;
+        let _maxHits = this.autocompleteData.hits.length < 5 ? this.autocompleteData.hits.length : 5;
         return this.autocompleteData.hits.slice(0, _maxHits);
       }
     },
@@ -130,12 +100,12 @@ export default defineComponent({
     onInput(event: any): void {
       this.$emit("update:modelValue", event.target.value);
     },
-    onEnter( event: any): void {
+    onEnter(event: any): void {
       event.target.blur();
       this.$emit("search");
       this.componentState = "default";
-    },
-  },
+    }
+  }
 });
 </script>
 
@@ -157,7 +127,7 @@ em {
 }
 
 .searchbox {
-    min-height: 40px;
+  min-height: 40px;
   max-height: 40px;
 }
 
@@ -165,25 +135,30 @@ em {
 .autocomplete {
   font-size: 14px !important;
   z-index: 999;
-
-
 }
 
 .autocomplete {
-  position: absolute;
-  background: #fff;
-  margin-top: -3px;
   margin-left: -1px;
   width: calc(100% + 2px);
+    position: absolute;
+  /* background: #fff; */
+  margin-top: -3px;
   cursor: default;
   border-bottom: 1px solid rgb(207, 210, 218);
   border-left: 1px solid rgb(207, 210, 218);
   border-right: 1px solid rgb(207, 210, 218);
 }
 
+.dark .autocomplete {
+
+    margin-left: 0;
+  width: calc(100% );
+
+}
+
 .hover,
 .focus {
-  background: #fff;
+  /* background: #fff; */
   border-color: rgb(207, 210, 218);
   box-shadow: rgb(207, 210, 218) 0px 0px 6px;
 }

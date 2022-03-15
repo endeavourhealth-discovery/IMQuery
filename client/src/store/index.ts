@@ -1,3 +1,4 @@
+import { Description } from '@/components/concept/Description.vue';
 import { SearchRequest } from "./../models/search/SearchRequest";
 import { createStore } from "vuex";
 import EntityService from "../services/EntityService";
@@ -17,7 +18,7 @@ import { QueryBuilder } from "@/models/query/QueryTools";
 import Ontology from "@/models/query/OntologyTools";
 import _ from "lodash";
 import DataService from "@/services/DataService";
-
+import { v4 } from "uuid";
 
 export default createStore({
   // update stateType.ts when adding new state!
@@ -78,7 +79,10 @@ export default createStore({
     JSONContent: "",
     LabelContent: [] as any[],
     isLoading: false,
-    activeQueryId: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
+    activeFileId: "",
+    openFiles: [] as any[],
+    userFiles: [] as any[],
+    activeQueryId: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
     openQueries: [
       {
         id: "9ee8061d-267f-4b4d-95ad-1a435db7fdc5",
@@ -4134,10 +4138,57 @@ export default createStore({
     isCardDragged: false,
   },
   mutations: {
-    openFile(state, file) {
+    updateUserFiles(state, entities) {
       // state.openFiles = [...state.openFiles, file];
-      console.log("file", file)
-      state.queryBuilder.loadJSON(JSON.stringify(file));
+
+      // dont loaded if already loaded
+      if (state.userFiles.length > 0) return;
+
+
+      entities.forEach((entity: any) => {
+
+        //any file belonging to the user
+        const _userFile = {
+          id: `urn:uuid:${v4()}`,
+          iri: entity["@id"],
+          name: entity["rdfs:label"],
+          comment: entity["rdfs:comment"],
+          type: entity["rdf:type"][0]["@id"],
+        };
+
+        //files after their content is fetched via service (i.e. when the user opens them)
+        const _openFile = {
+          ..._userFile,
+          content: entity
+        };
+
+
+        state.userFiles.push(_userFile);
+
+
+
+        //#todo let user decide which profiles they want to open
+        //opens all profiles
+        //loads querybuilder
+        state.openFiles.push(_openFile);
+        state.queryBuilder.loadJSON(entity);
+
+
+      });
+
+
+      // ensures 1 item is active
+      if (state.openFiles.length > 0 && state.activeFileId == "") {
+        state.activeFileId = state.openFiles[0].id;
+      }
+
+
+
+
+      // console.log()
+      console.log("openFiles", state.openFiles)
+
+
     },
     queryBuilder(state, { action, payload }) {
       switch (action) {
@@ -4198,13 +4249,14 @@ export default createStore({
     updateSelectedEntityType(state, type) {
       state.selectedEntityType = type;
     },
-    updateOpenQueries(state, openQueries) {
+    updateOpenFiles(state, openFiles) {
       //if no active file exists, create one
       // console.log("openPQLFiles.some((file: any) => file.uuid == state.activePQLFile)", openPQLFiles.some((file: any) => file.uuid == state.activePQLFile));
-      state.openQueries = openQueries;
+      state.openFiles = openFiles;
+
     },
-    updateActiveQueryId(state, activeQueryId) {
-      state.activeQueryId = activeQueryId;
+    updateActiveFileId(state, activeFileId) {
+      state.activeFileId = activeFileId;
     },
     updateActiveQuery(state, activeQuery) {
       let _activeIndex = -1;
@@ -4279,14 +4331,14 @@ export default createStore({
     async loadUserData({ commit, dispatch }) {
 
       //example 
-      const _filenames = ["userdata_ceg.json"];
+      const _filenames = ["userdata_profiles.json"];
 
 
       _filenames.forEach(async (filename: string) => {
         await DataService.getData(filename)
           .then(data => {
-            commit("openFile", data)
-            console.log("opened file:", data);
+            commit("updateUserFiles", data)
+            // console.log("opened file:", data);
 
           })
           .catch(err => {

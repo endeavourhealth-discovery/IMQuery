@@ -1,33 +1,111 @@
 <template>
-  <div class="flex flex-col pl-10 pt-10">
-    <div class="mb-20 font-bold text-gray-700 text-2xl">SMI Population</div>
-    <nestedDraggable class="profile mx-5" :data="profile1" :children="profile1" />
+  <div class="card-profile px-6 py-5 flex flex-col  mt-8 mb-12 rounded-xl overflow-hidden bg-gradient-to-r ">
+    <div class="flex items-center  mb-5">
+      <!-- Left  -->
+
+      <!-- Icon -->
+      <div class=" bg-black flex justify-center items-center rounded-full bg-opacity-40 w-14 h-14">
+        <UserIcon class="h-8 w-8 text-white" aria-hidden="true" />
+      </div>
+      <!-- Icon -->
+
+      <!-- Main Entity  -->
+      <div class="select-none text-white font-bold text-3xl ml-7 mt-2">
+        Person
+      </div>
+      <!-- Main Entity  -->
+      <!-- Left  -->
+
+      <div class="flex-grow"></div>
+
+      <!-- Right  -->
+      <!-- <div class="">
+        Definition
+      </div> -->
+      <!-- Right  -->
+    </div>
+    <!-- Definition  -->
+    <button type="button" class="profile px-4 py-2 text-sm font-medium text-white bg-black rounded-lg bg-opacity-20 hover:bg-opacity-30 outline-none">
+      <DraggableClause class="profile-content mx-5" :data="profile1" :children="profile1" />
+    </button>
+    <!-- Definition  -->
   </div>
-  <div class="flex flex-col pl-10 pt-10">
+  <!-- <div class="flex flex-col pl-10 pt-10">
     <div class="mb-20 font-bold text-gray-700 text-2xl">Priority1</div>
     <nestedDraggable class="profile mx-5" :data="profile2" :children="profile2" />
   </div>
   <div class="flex flex-col pl-10 pt-10">
     <div class="mb-20 font-bold text-gray-700 text-2xl">Heart rate variability vs blood glucose in diabetics</div>
     <nestedDraggable class="profile mx-5" :data="profile3" :children="profile3" />
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
 import nestedDraggable from "@/components/dataset/draggable/nested.vue";
 // import rawDisplayer from "@/components/dataset/draggable/rawDisplayer.vue";
 import { ref, onMounted, defineComponent } from "vue";
+import DraggableClause from "./DraggableClause.vue";
+// import HeroIcon from "@/components/search/HeroIcon.vue";
+import { UserIcon } from "@heroicons/vue/solid";
 
 export default defineComponent({
-  name: "nestedExample",
-  display: "Nested",
-  order: 15,
+  name: "Profile",
+  props: ["definition"],
   components: {
-    nestedDraggable
+    // nestedDraggable,
+    DraggableClause,
+    UserIcon
+    // HeroIcon
   },
   data() {
     return {
       profile1: [
+        {
+          uuid: "d55338e0-16c2-4f83-ad17-d4db64197b86",
+          type: "operator",
+          include: true,
+          operator: "and",
+          children: [
+            {
+              uuid: "fe7f7980-e6ba-4560-bd80-02f8be9a0f69",
+              type: "match",
+              name: "GP Register",
+              include: true,
+              children: []
+            },
+            {
+              uuid: "d0d3dcc1-9157-4557-a593-bf3eb8fbf936",
+              type: "operator",
+              include: true,
+              operator: "and",
+              children: [
+                {
+                  uuid: "b198eef5-3037-4460-b86e-20c2b0e8881e",
+                  type: "match",
+                  name: "Regular Patient",
+                  include: true,
+                  children: []
+                },
+                {
+                  uuid: "156f87f3-a7c2-4d03-9b8a-6d2d2ff7521e",
+                  type: "match",
+                  name: "Age over 18",
+                  include: true,
+                  children: []
+                }
+              ]
+            },
+            {
+              uuid: "daffba38-05dd-4f77-b7bd-e55119c64968",
+              type: "match",
+              name: "Unresolved SMI",
+              include: true,
+              children: []
+            }
+          ]
+        }
+      ],
+      profile12: [
         {
           uuid: "d55338e0-16c2-4f83-ad17-d4db64197b86",
           type: "operator",
@@ -282,7 +360,14 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+.card-profile {
+  width: 100%;
+  max-width: 400px;
+}
+
 .profile {
-  height: 300px;
+  /* height: 300px; */
+  width: 100%;
+  /* max-width: 350px; */
 }
 </style>

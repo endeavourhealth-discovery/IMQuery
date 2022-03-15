@@ -1,12 +1,12 @@
 <template>
-  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
     <div class="max-w-md w-full space-y-24">
       <div class="mb-10">
           <img class="app-logo h-10 w-10 mx-auto h-12 w-auto" src="app-icon.png" alt="" />
 
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
-          <div @click="$router.push({ name: 'Register' })" class="select-none text-xl font-medium text-blue-600 hover:underline"> I don't have an account yet</div>
+          <div @click="$router.push({ name: 'Register' })" class="select-none text-xl font-medium text-blue-600 dark:text-white hover:underline"> I don't have an account yet</div>
         </p>
       </div>
       <div class="mt-10 space-y-20">
@@ -56,12 +56,12 @@
       
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-                       <div @click="$router.push({ name: 'ConfirmCode' })" class="text-lg hover:underline select-none font-medium text-blue-600 ">Enter Password Reset Code </div>
+                       <div @click="$router.push({ name: 'ConfirmCode' })" class="text-lg hover:underline select-none font-medium text-blue-600 dark:text-white ">Enter Password Reset Code </div>
 
           </div>
 
           <div class="text-sm">
-            <div @click="$router.push({ name: 'ForgotPassword' })"  class="text-lg font-medium text-blue-600 hover:underline select-none ">Forgot your password? </div>
+            <div @click="$router.push({ name: 'ForgotPassword' })"  class="text-lg font-medium text-blue-600 dark:text-white hover:underline select-none ">Forgot your password? </div>
           </div>
         </div>
 

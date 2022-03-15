@@ -49,28 +49,40 @@ export class QueryBuilder {
     }
 
 
-    private reset(): void {
-        this._entities = [] as any[];
-        this._entityTypes = [] as any[];
-        this._profiles = new Map<string, any>()
-        this._clauses = new Map<string, any>();
-    }
+    // private reset(): void {
+    //     this._entities = [] as any[];
+    //     this._entityTypes = [] as any[];
+    //     this._profiles = new Map<string, any>()
+    //     this._clauses = new Map<string, any>();
+    //     this._path = new Map<string, string>();
+    //     this._graph = new Map<string, any>();
+    // }
 
 
 
+    // properties belonging to JSON file
+    // '_file': any;
+    // '_@context': any;
+    // '_@graph': any;
 
+    // "_data": any[];
 
 
     // loads JSON file 
 
     loadJSON(entity: any): QueryBuilder {
 
-        // console.log("loadJSON", entity);
+        console.log("loadJSON", entity);
+
+
+
         try {
             const _type = entity["rdf:type"][0]["@id"];
 
             // add entities
             this._entities.push(entity);
+
+
 
             // entityTypes - useful for filtering
             if (!this._entityTypes.includes(_type)) {
@@ -79,17 +91,89 @@ export class QueryBuilder {
 
             // filter out {rpfo;es} 
             if (_type === "im:Profile") {
-                const _definition = JSON.parse(entity);
-                // console.log("_definition", _definition)
-                // this._profiles.set(entity['@id'], _definition);
+                this._profiles.set(entity['@id'], entity);
             }
 
+
+
         } catch (error) {
-            console.log("Error with loadJSON:", error)
+
+            console.log("Error with loadEntities:", error)
+        } finally {
+
+
+
+            if (this.loadEntity(data["im:definition"]) == true) {
+                this.Loaded = true;
+            } else {
+                throw new Error("JSON content structure not recognised");
+            }
+            return this;
         }
     }
 
+    // load JSON file containing entity definitions
+    // private loadEntities(file: any): boolean {
 
+    //     try {
+    //         // this['_@context'] = file["@context"];
+    //         // this['_@graph'] = file["@graph"];
+    //         this['_entities'] = file["entities"];
+
+    //         // separate out types, queries, definitions and _clauses
+    //         file["entities"].forEach((entity: any) => {
+
+    //             const _type = entity["rdf:type"][0]["@id"];
+
+    //             // filter out entities
+    //             this._entities.push(entity);
+
+
+
+    //             //filter out entityTypes
+    //             if (!this._entityTypes.includes(_type)) {
+    //                 this._entityTypes.push(_type);
+    //             }
+
+
+
+    //             // filter out {rpfo;es} 
+    //             if (_type === "im:Profile") {
+    //                 this._profiles.set(entity['@id'], entity);
+    //             }
+
+    //         });
+
+    //         return true;
+
+    //     } catch (error) {
+
+    //         console.log("Error with loadEntities:", error)
+    //         return false;
+    //     } finally {
+    //         // console.log("_entities:", this._entities);
+    //         // console.log("_profiles:", this._profiles);
+    //         // console.log("profilesAsArray", this.profilesAsArray);
+    //         // console.log("_clauses:", this._clauses);
+
+    //     }
+    // }
+
+
+
+    // get all profiles in a folder
+    // public getProfilesByFolder(folderIri: string): any {
+    //     const _q = `entities[?
+    //         "rdf:type"[?"@id" == \`im:Profile\`] && 
+    //         "im:isContainedIn"[?"@id" == \`${folderIri}\`]]
+    //             ."im:definition" 
+    //             | []`;
+
+    //     // const _result = jmp.search(this._file, _q);
+    //     console.log("_result:", _result)
+
+    //     return _result;
+    // }
 
     // get profile by iri
     // special characters in keys are replaced for JSON queries
@@ -138,6 +222,9 @@ export class QueryBuilder {
     get activeClause(): any {
         return this._activeClause;
     }
+
+
+
 
 
     //examples of templates

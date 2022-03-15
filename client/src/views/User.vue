@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col justify-center user-container">
   
-      <button-bar class="absolute top-20 left-2/4 -translate-x-2/4 bg-white" />
+      <button-bar class="absolute top-20 left-2/4 -translate-x-2/4 " />
 
     <div class="flex w-full justify-start card-button-container">
       <div class="h-full w-full overflow-y-auto">

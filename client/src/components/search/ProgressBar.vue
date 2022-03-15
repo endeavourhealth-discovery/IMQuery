@@ -4,7 +4,7 @@
     :class="{ 'flex-row-reverse': !isDirectionLTR }"
   >
     <div
-      class="progress-container bg-blue-500"
+      class="progress-container bg-blue-600 dark:bg-white"
       :style="{ width: widthPercentage + '%' }"
     ></div>
   </div>
@@ -102,7 +102,7 @@ export default defineComponent({
 .parent-container {
   position: fixed;
   display: flex;
-  top: 0;
+  top: 60px;
   width: 100%;
   height: 2px;
 }

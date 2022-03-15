@@ -5,8 +5,8 @@
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex items-center border-b border-b-2 justify-center transition duration-500 ease-in-out hover:text-blue-600 ' +
-            [modelValue == item.name ? ' text-blue-600 border-b-blue-500' : ' text-black border-b-transparent']
+          'tab-button non-selectable inline-flex items-center border-b border-b-2 dark:border-0 justify-center transition duration-500 ease-in-out dark:hover:text-white ' +
+            [modelValue == item.name ? ' dark:text-white border-b-white' : ' text-black dark:text-gray-400 border-b-transparent']
         ]"
         @click="onClick(item.name, item.hyperlink ? item.hyperlink : '')"
             v-wave="{
