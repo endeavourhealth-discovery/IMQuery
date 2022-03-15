@@ -53,7 +53,13 @@
         <!-- /Searchbox  -->
 
         <div class="right flex mr-7 ml-4">
-          <SplitButton v-if="isLoggedIn" class="mr-10 h-14 mt-2 " label="New" icon="pi pi-plus" :model="newItems"></SplitButton>
+          <SplitButton
+            v-if="isLoggedIn"
+            class="p-button-rounded mr-10 h-14 mt-2 #p-button-outlined"
+            label="New"
+            icon="pi pi-plus"
+            :model="newItems"
+          ></SplitButton>
           <!-- Apps  -->
           <div class="select-none flex mt-3" @click="onToggleApps">
             <div class="app-title ml-5 font-medium text-black dark:text-white text-3xl">
@@ -192,17 +198,21 @@
         <div v-if="activeTabName == 'Create'" class="tab-content ">
           <!-- Tabs  -->
           <div class="flex py-5 justify-center items-center w-full">
-            <HorizontalNavPills class="nav" v-model:items="openFiles" v-model="activeFileId" :closable="true" />
+            <HorizontalNavPills class="nav" v-model:items="openFiles" v-model="activeFileIri" :closable="true" />
           </div>
+
+          <!-- <div class="text-white" @click="test()">
+            Test
+          </div> -->
 
           <!-- Viewer  -->
           <div class="w-full h-full bg-white dark:bg-gray-900">
-            <div class="mt-10 flex justify-center space-x-5">
-              <template v-for="item in colours" :key="item">
+            <div class="mt-10 flex justify-center space-x-5 text-white" @click="">
+              <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
                 <div class="">
-                    <div class="text-black dark:text-white font-bold text-3xl">Title</div>
-                    <div class="text-black dark:text-gray-400 font-semibold  text-xl">Description as subtitle</div>
-                  <Profile :class="'' + item" />
+                  <div class="text-black dark:text-white font-bold text-3xl">{{ profile["rdfs:label"] }}</div>
+                  <div class="text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"]  }}</div>
+                  <Profile :definition="profile.definitionTree" :class="' ' + colours[index]" />
                 </div>
               </template>
             </div>
@@ -302,7 +312,7 @@ export default defineComponent({
   },
   data() {
     return {
-      colours: ["to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500"],
+      colours: ["to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500","to-amber-300 from-orange-500", "from-pink-500 to-rose-500", "to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500"],
       newItems: [
         {
           label: "Search Profile",
@@ -435,6 +445,17 @@ export default defineComponent({
   },
   computed: {
     ...mapState(["currentUser", "isLoggedIn"]),
+    queryBuilder: {
+      get(): any {
+        return this.$store.state.queryBuilder;
+      },
+      set({ action, payload }: any): void {
+        this.$store.commit("queryBuilder", {
+          action: action,
+          payload: payload
+        });
+      }
+    },
     isLoading: {
       get(): any {
         return this.$store.state.isLoading;
@@ -452,12 +473,12 @@ export default defineComponent({
         //sets an active file if A. there are openfiles left and B. there there is no longer an active file
       }
     },
-    activeFileId: {
+    activeFileIri: {
       get(): string {
-        return this.$store.state.activeFileId;
+        return this.$store.state.activeFileIri;
       },
       set(value: any): void {
-        this.$store.commit("updateActiveFileId", value);
+        this.$store.commit("updateActiveFileIri", value);
       }
     }
   },
@@ -500,6 +521,13 @@ export default defineComponent({
     // this.getInitialData();
   },
   methods: {
+    test(): void {
+      // console.log(this.activeFileIri);
+      // console.log(this.queryBuilder.profiles.get(this.activeFileIri));
+      for (const profile in this.queryBuilder.profiles) {
+        console.log("prof", profile);
+      }
+    },
     onToggleApps(event: any): void {
       console.log(event);
       (this.$refs["overlay-apps"] as any).toggle(event);

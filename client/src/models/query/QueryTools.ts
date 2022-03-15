@@ -1,3 +1,4 @@
+import { entityTypes } from './OntologyTools';
 import { v4 } from "uuid";
 import _ from "lodash";
 // import jmp from "jmp";
@@ -17,12 +18,9 @@ export class QueryBuilder {
     //all other properties belonging to this class
 
     // all entities
-    public _entities = [] as any[];
-    get entities(): any[] {
-        return this._entities;
-    }
+    public entities = new Map<string, any>();
 
-
+    // #todo use Set to hold unique items?
     // all filetypes (rdf:type) 
     private _entityTypes = [] as any[];
     get entityTypes(): any[] {
@@ -35,10 +33,13 @@ export class QueryBuilder {
     get profiles(): Map<string, any> {
         return this._profiles;
     }
+    // set profiles(): Map<string, any> {
+    //     this_.profiles
+    // }
 
-    get profilesAsArray(): any {
-        return [...this._profiles.values()];
-    }
+    // get profilesAsArray(): any {
+    //     return [...this._profiles.values()];
+    // }
 
 
     // (keys) iri i.e. '@id'  -> (values) mapped to clauses i.e. ':and', ':or'
@@ -59,33 +60,48 @@ export class QueryBuilder {
 
 
 
+    private addEntity(entity: any): void {
+        const _type = entity["rdf:type"][0]["@id"];
+
+        // add entities
+        this.entities.set(entity["@id"], entity);
+
+        // entitiesTypes - useful for filtering
+        if (!this._entityTypes.includes(_type)) {
+            this._entityTypes.push(_type);
+        }
+
+        // instantiate profiles
+        if (_type === "im:Profile") {
+            this._profiles.set(entity['@id'], new Profile(entity));
+        }
+    }
 
 
     // loads JSON file 
 
-    loadJSON(entity: any): QueryBuilder {
+    load(entities: any): QueryBuilder {
 
-        // console.log("loadJSON", entity);
+
         try {
-            const _type = entity["rdf:type"][0]["@id"];
 
-            // add entities
-            this._entities.push(entity);
-
-            // entityTypes - useful for filtering
-            if (!this._entityTypes.includes(_type)) {
-                this._entityTypes.push(_type);
+            //if json parse
+            if (typeof (entities) == "string") {
+                entities = JSON.parse(entities)
             }
 
-            // filter out {rpfo;es} 
-            if (_type === "im:Profile") {
-                const _definition = JSON.parse(entity);
-                // console.log("_definition", _definition)
-                // this._profiles.set(entity['@id'], _definition);
+
+            if (Array.isArray(entities)) {
+                // all entities in array
+                entities.forEach((entity: any) => this.addEntity(entity));
+            } else {
+                // single entity
+                this.addEntity(entities)
             }
 
+            // console.log("this._profiles", this._profiles)
         } catch (error) {
-            console.log("Error with loadJSON:", error)
+            console.log("Error loading  :", error)
         }
     }
 
@@ -461,32 +477,27 @@ export class QueryBuilder {
 
 
     private populateHierarchyTree() {
-
         // .set(state.openQueries[_activeQueryIndex], payload.propertyPath + ".name", payload.name)
-        const getChildren = (targetEntity: any): any => {
-            let _children = this.entities.filter((ent: any) => ent["im:isContainedIn"] && ent["im:isContainedIn"][0]["@id"] == targetEntity["@id"])
+        const getChildren = (parent: any): any => {
+
+            let _children = this.entities.filter((ent: any) => ent["im:isContainedIn"] && ent["im:isContainedIn"][0]["@id"] == parent["@id"])
             _children = _children.map((item: any) => {
                 return {
                     ...item,
                     currentPath: '',
                     children: [] as any[]
-
                 }
             })
-
-
-
             // populates children's currentpath (a key that tells you the path to the current object) required by _currentItem['currentPath' ]
+            // path is either children[i] (first item)
+            // or [parentPath].children[i] (the rest) 
             for (let i = 0; i < _children.length; i++) {
-                if (targetEntity['currentPath'] == '') {
+                if (parent['currentPath'] == '') {
                     _children[i]['currentPath'] = `children[${i.toString()}]`
                 } else {
-                    _children[i]['currentPath'] = `${targetEntity['currentPath']}.children[${i.toString()}]`
+                    _children[i]['currentPath'] = `${parent['currentPath']}.children[${i.toString()}]`
                 }
-
-
             }
-
             return _children;
         };
 
@@ -500,7 +511,9 @@ export class QueryBuilder {
             const _currentItem = _queue.shift(); // gets the next item from the queue
             const _children = getChildren(_currentItem);
 
+            // add children to .children[] key in new object-model            
             if (_currentItem['@id'] == this._hierarchyTree['@id']) {
+
 
                 _.set(this._hierarchyTree, 'children', _children)
                 // console.log("2.children: ", _children)
@@ -513,7 +526,6 @@ export class QueryBuilder {
                 // console.log("3. path: ", _currentItem['currentPath'] + '.children')
                 // console.log("4. tree: ", this._hierarchyTree)
             }
-
             //add children to queue if they're not already visited
             for (const _child of _children) {
                 if (!_visited.has(_child['@id'])) {
@@ -557,43 +569,198 @@ export class Entity {
 // Profile\\\\\
 export class Profile extends Entity {
     public 'im:definition'?: any | null;
-    public 'im:entityType'?: Entity | null;
 
-    constructor(entity?: any)
-    constructor(entity: any) {
-        super(entity);
-        this["im:entityType"] = entity["im:entityType"] ? entity["im:entityType"] : null;
+    //outstanding problems user must solve in order to ensure validity of Profile
+    public "problems": any[];
+    public addProblem(type, description, meta): Profile {
+        this.problems.push({ id: `urn:uuid:${v4()}`, type: type, description: description, meta: meta })
+        return this;
+    }
 
-
-        if (entity["im:definition"]) {
-            this["im:definition"] = this["_graph"] = entity["im:definition"];
-        }
-
+    public removeProblem(id): Profile {
+        this.problems = this.problems.filter((problem: any) => problem.id != id);
         return this;
     }
 
 
 
-    private '_graph'?: Graph | null;
-    public get graph(): any {
-        return this._graph;
+    constructor(entity?: any)
+    constructor(entity: any) {
+        super(entity);
+
+        //parse definition
+        if (entity["im:definition"]) {
+            const _definition = JSON.parse(entity["im:definition"]);
+            this["im:definition"] = _definition;
+            // populate definitionTree (this is the UI's object model and maps 1 to 1 onto Profiles written in RDF) 
+            this.convertToDefinitionTree(_definition);
+
+        }
+
+        return this;
     }
-    public set graph(profileDefinition: any) {
-        this._graph = new Graph(profileDefinition);
 
+    get mainEntity(): any {
+        return {
+            "@id": this["im:definition"].entityType[0]["@id"],
+            "name": this["im:definition"].entityType[0]["@id"].split("#")[1] //###todo: populate name from Ontology
+        };
+    }
+    set mainEntity(value: any): void {
+        this["im:definition"].entityType[0] = value;
     }
 
 
+    private _definitionTree: any;
+    get definitionTree(): any {
+        return this._definitionTree;
+    }
 
 
+    private convertToDefinitionTree(definition: any): void {
+
+
+        console.log("definition", definition);
+
+
+        // change rdf to UI-model
+        // only works if the first clause in the definition is wrapped with and: [] / or: [] 
+        const _firstClause = definition.and || definition.or ?
+            {
+                uuid: `urn:uuid:${v4()}`,
+                type: "operator", //assumes first item is always an operator 
+                include: true, //###todo:code dynamically once profile model is corrected 
+                name: definition.and ? "and" : "or",
+                // originalObjectPath: "",
+                currentObjectPath: "[0]",
+                data: definition,
+                children: [],
+            }
+            : null;
+
+        if (!_firstClause) throw console.error("JSON Profile Definition must contain and 'and' or 'or' operator clause at the root of the definition")
+
+        // create tree and add first item
+        let _definitionTree: any[] = [];
+        _definitionTree.push(_firstClause);
+
+
+        // gets children for each operator clause in UI-model format
+        const getChildren = (parent: any): any => {
+
+            if (parent.type == "match") {
+                return null;
+            }
+
+            let _children = parent.data.and || parent.data.or;
+
+            _children = _children.map((item: any, index: number) => {
+
+
+                const _isChildMatchClause = item["property"] || item["pathTo"];
+
+                //log conversion problem (e.g. non-match clauses should not have a name)
+                //###todo connect details in meta key to UI
+                if (!_isChildMatchClause && item["name"]) {
+                    this.addProblem("conversion", "The following labels were generated automatically, please double check their meaning.", { parent: parent, item: item, index: index })
+                    console.log("conversion problem", { parent: parent, item: item, index: index })
+                }
+
+
+
+                let _name;
+                if (_isChildMatchClause) {
+                    console.log("item", item)
+                    _name = item["name"] ? item["name"] : "Unnamed Feature"
+                } else {
+                    _name = parent.data.and ? "and" : "or";
+                }
+
+                return {
+                    uuid: `urn:uuid:${v4()}`,
+                    type: _isChildMatchClause ? "match" : "operator",
+                    include: true, //###todo:code dynamically once profile model is corrected 
+                    name: _name,
+                    // originalObjectPath: "",
+                    currentObjectPath: "",
+                    data: item,
+                    children: [],
+                }
+            })
+
+
+            // populates children's currentpath (a key that tells you the path to the current object) required below by _currentItem['currentPath'] to set children
+            // path is either children[i] (first item)
+            // or [parentPath].children[i] (the rest) 
+            _children.forEach((item: any, index: number) => {
+                if (parent['currentObjectPath'] == '') {
+                    _children[index]['currentObjectPath'] = `children[${index.toString()}]`
+                } else {
+                    _children[index]['currentObjectPath'] = `${parent['currentObjectPath']}.children[${index.toString()}]`
+                }
+            });
+
+            return _children;
+        };
+
+
+        //breadth-first addition of items and children to the definition  tree:
+        //  of children
+        //  const _visited = new Set();
+        const _queue = [_firstClause]
+
+        while (_queue.length > 0) {
+
+            const _currentItem = _queue.shift(); // gets the next item from the queue
+            const _children = getChildren(_currentItem);
+
+
+            // add children to .children[] key in new object-model            
+            if (_children && _currentItem['currentObjectPath'] == "") {
+                // root path
+                _.set(_definitionTree, 'children', _children)
+
+            } else if (_children) {
+                // console.log("_definitionTree", _definitionTree);
+                // console.log("_currentItem ", _currentItem)
+                // console.log("children", _children)
+                // console.log("_currentItem['currentObjectPath'] ", _currentItem['currentObjectPath'] + '.children')
+                // console.log("_currentItem  at objectpath", _.get(_definitionTree, _currentItem['currentObjectPath'] + '.children'))
+                // all other paths (almost always)
+                _.set(_definitionTree, _currentItem['currentObjectPath'] + '.children', _children)
+
+            }
+
+            // pushes children to queue if they're not match clauses
+            if (_children && _children.length) {
+                for (const _child of _children) {
+                    const _isChildMatchClause = _child["property"] || _child["pathTo"];
+                    if (!_isChildMatchClause) {
+                        _queue.push(_child);
+                    }
+                }
+            }
+
+        }
+
+        console.log("definition Tree", _definitionTree);
+
+        this._definitionTree = _definitionTree;
+
+        // console.log("_firstClause", _firstClause)
+        // console.log("children", getChildren(_firstClause));
+
+
+    };
 
 
     get asString(): string {
-        //stringified  and prettified
+
+        //stringified  and prettified (e.g. for text-editor)
         return QueryTools.prettifyJSON(JSON.stringify(this));
-
-
     }
+
+    //#todo create json() getter to return Profile in RDF format for storage, ensure im:definition is JSONified
 
 }
 
@@ -839,28 +1006,3 @@ export default class QueryTools {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-    // superceded by jp.stringify() but may be handy if custom method is required
-    // private toPathString(array: any): string {
-    //     let _path = "";
-
-    //     for (let i = 0; i < array.length; i++) {
-    //         if (typeof (array[i]) == "number") {
-    //             _path = _path + `[${array[i]}]`
-    //         } else if (typeof (array[i]) == "string") {
-    //             _path = _path + (i != 0 ? '.' : '') + array[i];
-    //         }
-    //     }
-    //     console.log("_path", _path);
-
-    //     return _path;
-    // }

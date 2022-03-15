@@ -79,7 +79,7 @@ export default createStore({
     JSONContent: "",
     LabelContent: [] as any[],
     isLoading: false,
-    activeFileId: "",
+    activeFileIri: "",
     openFiles: [] as any[],
     userFiles: [] as any[],
     activeQueryId: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
@@ -4153,6 +4153,7 @@ export default createStore({
           iri: entity["@id"],
           name: entity["rdfs:label"],
           comment: entity["rdfs:comment"],
+          folder: entity["im:isContainedIn"] ? entity["im:isContainedIn"] : "",
           type: entity["rdf:type"][0]["@id"],
         };
 
@@ -4171,15 +4172,16 @@ export default createStore({
         //opens all profiles
         //loads querybuilder
         state.openFiles.push(_openFile);
-        state.queryBuilder.loadJSON(entity);
+        console.log("entity", entity)
+        state.queryBuilder.load(entity);
 
 
       });
 
 
       // ensures 1 item is active
-      if (state.openFiles.length > 0 && state.activeFileId == "") {
-        state.activeFileId = state.openFiles[0].id;
+      if (state.openFiles.length > 0 && state.activeFileIri == "") {
+        state.activeFileIri = state.openFiles[0].iri;
       }
 
 
@@ -4192,8 +4194,8 @@ export default createStore({
     },
     queryBuilder(state, { action, payload }) {
       switch (action) {
-        case "loadJSON":
-          state.queryBuilder.loadJSON(payload);
+        case "load":
+          state.queryBuilder.load(payload);
           break;
         case "option":
           break;
@@ -4255,8 +4257,8 @@ export default createStore({
       state.openFiles = openFiles;
 
     },
-    updateActiveFileId(state, activeFileId) {
-      state.activeFileId = activeFileId;
+    updateActiveFileIri(state, activeFileIri) {
+      state.activeFileIri = activeFileIri;
     },
     updateActiveQuery(state, activeQuery) {
       let _activeIndex = -1;

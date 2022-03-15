@@ -26,7 +26,7 @@
     </div>
     <!-- Definition  -->
     <button type="button" class="profile px-4 py-2 text-sm font-medium text-white bg-black rounded-lg bg-opacity-20 hover:bg-opacity-30 outline-none">
-      <DraggableClause class="profile-content mx-5" :data="profile1" :children="profile1" />
+      <DraggableClause class="profile-content mx-5" :data="definition" :children="definition" />
     </button>
     <!-- Definition  -->
   </div>

@@ -2,14 +2,14 @@
   <div
     class="tab-buttons transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 hover:bg-gray-100"
   >
-    <template v-for="item in items" :key="item.id">
+    <template v-for="item in items" :key="item.iri">
       <button
-        @click="$emit('update:modelValue', item.id)"
+        @click="$emit('update:modelValue', item.iri)"
         type="button"
         :class="
           'tab-button transition duration-500 ease-in-out px-2 py-2 non-selectable inline-flex items-center justify-center font-regular text-base  hover:text-gray-900  dark:hover:text-white' +
             [
-              modelValue == item.id
+              modelValue == item.iri
                 ? 'active border dark:text-white dark:border-yellow-500 border-2 border-gray-300   bg-white dark:bg-gray-900  shadow-sm'
                 : 'border border-2 border-transparent dark:border-gray-600 dark:text-gray-400 '
             ]
@@ -61,13 +61,13 @@ export default defineComponent({
     HeroIcon
   },
   methods: {
-    closeItem(itemId: string) {
+    closeItem(itemIri: string) {
       //#todo:saveFile via api then remove from state
 
       //removes item from state
       this.$emit(
         "update:items",
-        this.items.filter((item: any) => item.id != itemId)
+        this.items.filter((item: any) => item.iri != itemIri)
       );
 
       // state.activeFileId = state.openFiles.length > 0 ? state.openFiles[0].id : "";

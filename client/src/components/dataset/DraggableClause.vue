@@ -168,25 +168,25 @@ export default defineComponent({
         return true;
       }
     },
-    toggleOperator(element: any): void {
-      if (element.operator == "or") {
-        element.operator = "and";
-      } else {
-        element.operator = "or";
-      }
-    },
+    // toggleOperator(element: any): void {
+    //   if (element.operator == "or") {
+    //     element.operator = "and";
+    //   } else {
+    //     element.operator = "or";
+    //   }
+    // },
     toggleInclude(element: any): void {
       element.include = !element.include;
     },
-    operatorLabel(element: any): string {
-      if (this.children.length == 1) {
-        return this.childrenText[1][element.operator];
-      } else if (this.children.length == 2) {
-        return this.childrenText[2][element.operator];
-      } else {
-        return this.childrenText.default[element.operator];
-      }
-    }
+    // operatorLabel(element: any): string {
+    //   if (this.children.length == 1) {
+    //     return this.childrenText[1][element.operator];
+    //   } else if (this.children.length == 2) {
+    //     return this.childrenText[2][element.operator];
+    //   } else {
+    //     return this.childrenText.default[element.operator];
+    //   }
+    // }
   },
   computed: {
     isCardDragged: {

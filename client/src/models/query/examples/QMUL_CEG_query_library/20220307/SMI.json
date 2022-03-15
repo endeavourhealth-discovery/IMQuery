@@ -72,7 +72,7 @@
             ]
         },
         {
-            "name": "Serious mental illness (not resolved)",
+            "name": "Serious Mental Illness (not resolved)",
             "pathTo": {
                 "@id": "http://endhealth.info/im#isSubjectOf"
             },

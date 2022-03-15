@@ -102,6 +102,7 @@ export default defineComponent({
 .parent-container {
   position: fixed;
   display: flex;
+  left: 0;
   top: 60px;
   width: 100%;
   height: 2px;
