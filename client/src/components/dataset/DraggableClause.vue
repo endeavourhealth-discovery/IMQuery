@@ -50,8 +50,9 @@
               <template v-if="true">
                 <button
                   class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10  outline-none"
+                  v-tooltip.bottom="`<b> </b>    <br>`"
                 >
-                  {{ element.name }}
+                  {{ getLabel(element) }}
                 </button>
               </template>
               <template v-else-if="false">
@@ -158,11 +159,31 @@ export default defineComponent({
     };
   },
   methods: {
+    getLabel(clause: any): string {
+      // if (clause.name) {
+      //   return clause.name;
+      // } else {
+      // console.log(clause)
+      let _entityType = clause.data.entityType ? clause.data.entityType["@id"].split("#")[1] : "";
+      let _property = clause.data.property ? clause.data.property["@id"].split("#")[1] : "";
+      
+      //adds spaces in between capital letters
+      _entityType = _entityType.match(/([A-Z]?[^A-Z]*)/g).slice(0,-1).join(" ");
+      
+
+      // turns hasProfile in Profile
+      if ((_property = "hasProfile")) {
+        _property = "Profile";
+      }
+      // const _label = `${_entityType} ${_property}`
+      return _entityType || _property;
+      // }
+    },
     showCircle(index: number, uuid: number): boolean {
       return true;
       if (this.data && this.data[0] && this.data[0].uuid == uuid) {
-        console.log("uuid", uuid);
-        console.log("data", this.data);
+        // console.log("uuid", uuid);
+        // console.log("data", this.data);
         return false;
       } else {
         return true;
@@ -177,7 +198,7 @@ export default defineComponent({
     // },
     toggleInclude(element: any): void {
       element.include = !element.include;
-    },
+    }
     // operatorLabel(element: any): string {
     //   if (this.children.length == 1) {
     //     return this.childrenText[1][element.operator];
@@ -226,7 +247,6 @@ export default defineComponent({
 /* .clause-connector {
   width: 60px;
 } */
-
 
 .ghost {
   background-color: #93c5fd;
@@ -301,10 +321,8 @@ export default defineComponent({
   min-height: 40px;
 }
 
-
 .ghost .space-h,
 .ghost .line-v {
-visibility: hidden;
+  visibility: hidden;
 }
-
 </style>

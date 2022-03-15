@@ -312,7 +312,7 @@ export default defineComponent({
   },
   data() {
     return {
-      colours: ["to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500","to-amber-300 from-orange-500", "from-pink-500 to-rose-500", "to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500"],
+      colours: ["to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500","to-amber-400 from-orange-500", "from-pink-500 to-rose-500", "to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500"],
       newItems: [
         {
           label: "Search Profile",

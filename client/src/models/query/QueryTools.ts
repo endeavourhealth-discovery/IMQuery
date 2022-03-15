@@ -616,11 +616,11 @@ export class Profile extends Entity {
         return this._definitionTree;
     }
 
-
+ 
     private convertToDefinitionTree(definition: any): void {
 
 
-        console.log("definition", definition);
+        // console.log("definition", definition);
 
 
         // change rdf to UI-model
@@ -670,8 +670,7 @@ export class Profile extends Entity {
 
                 let _name;
                 if (_isChildMatchClause) {
-                    console.log("item", item)
-                    _name = item["name"] ? item["name"] : "Unnamed Feature"
+                    _name = item["name"] ? item["name"] : ""
                 } else {
                     _name = parent.data.and ? "and" : "or";
                 }

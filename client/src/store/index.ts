@@ -4172,7 +4172,7 @@ export default createStore({
         //opens all profiles
         //loads querybuilder
         state.openFiles.push(_openFile);
-        console.log("entity", entity)
+        // console.log("entity", entity)
         state.queryBuilder.load(entity);
 
 
