@@ -13,44 +13,41 @@
   >
     <!-- Each item in list  -->
     <template #item="{ element, index }">
-      <div class="clause-item flex flex-col relative">
+      <div
+        class="clause-item flex flex-col relative rounded"
+        v-wave="{
+          color: 'currentColor',
+          easing: 'ease-out',
+          duration: 0.7,
+          initialOpacity: 0.6,
+          finalOpacity: 0.1,
+          cancellationPeriod: 75
+        }"
+      >
         <!-- <div
           v-if="index == 0"
           class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
         ></div> -->
-        <div class="inline-flex">
-          <div class="clause-connector inline-flex flex">
-            <div v-if="index == 0" :class="'space-h inline-block text-white font-semibold '">
-              ––
-            </div>
-            <div v-else class="space-h"></div>
+        <div class="clause-container clause inline-flex">
+          <div class="connector-h dark:hover:bg-opacity-30 dark:hover:bg-black rounded-sm inline-flex flex">
+            <div v-if="showLineH(index, element.uuid)" :class="'line-h'"></div>
+            <div v-if="showSpaceH(index, element.uuid)" class="space-h"></div>
             <!-- <div v-else class="line-v"> -->
             <!-- </div> -->
-            <div class="inline-flex flex-col">
+            <div class="connector-v inline-flex flex-col">
               <!-- circle  -->
-              <div v-if="showCircle(index, element.uuid)" :class="'circle inline border  b-2 border-white'"></div>
+              <div v-if="showCircle(index, element.uuid)" :class="'circle inline border b-2 border-white'"></div>
               <!-- :line  -->
               <div v-if="index != children.length - 1" :class="'line-v inline border-l b-2 border-l-white'"></div>
             </div>
           </div>
 
-          <div
-            class="clause-content inline flex-col relative rounded-md"
-            v-wave="{
-              color: 'currentColor',
-              easing: 'ease-out',
-              duration: 0.3,
-              initialOpacity: 0.2,
-              finalOpacity: 0.1,
-              cancellationPeriod: 75
-            }"
-          >
+          <div class="clause-content inline flex-col relative rounded-md">
             <!-- Named Clause - Name  -->
             <template v-if="element.type == 'match'">
               <template v-if="true">
                 <button
                   class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10  outline-none"
-                  v-tooltip.bottom="`<b> </b>    <br>`"
                 >
                   {{ getLabel(element) }}
                 </button>
@@ -133,6 +130,7 @@
 <script lang="ts">
 import draggable from "vuedraggable";
 import { ref, onMounted, defineComponent } from "vue";
+import _ from "lodash";
 
 export default defineComponent({
   props: ["data", "children", "isParentNegated", "isTopLevelNode"],
@@ -166,10 +164,12 @@ export default defineComponent({
       // console.log(clause)
       let _entityType = clause.data.entityType ? clause.data.entityType["@id"].split("#")[1] : "";
       let _property = clause.data.property ? clause.data.property["@id"].split("#")[1] : "";
-      
+
       //adds spaces in between capital letters
-      _entityType = _entityType.match(/([A-Z]?[^A-Z]*)/g).slice(0,-1).join(" ");
-      
+      _entityType = _entityType
+        .match(/([A-Z]?[^A-Z]*)/g)
+        .slice(0, -1)
+        .join(" ");
 
       // turns hasProfile in Profile
       if ((_property = "hasProfile")) {
@@ -179,8 +179,46 @@ export default defineComponent({
       return _entityType || _property;
       // }
     },
+    showConnectorV(index: number, uuid: number): boolean {
+      //first item at the top
+      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+        return false;
+      }
+      {
+        return true;
+      }
+    },
+    showSpaceH(index: number, uuid: string): boolean {
+ 
+      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+        //if you want the entire clause to be draggable set to true
+        return false;
+      }else if (_.get(this.data, `[0].children[${index}].uuid`) == uuid) {
+        //hide first item in topmost item
+        return false;
+      }  else if (index > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    showLineH(index: number, uuid: number): boolean {
+      //first item at the top
+      // console.log(this.data);
+      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+        //hide topmost item
+        return false;
+      } else if (index > 0) {
+        return false;
+      } else if (_.get(this.data, "[0].children[0].uuid") == uuid) {
+        //hide first item in topmost item
+        return false;
+      } else {
+        return true;
+      }
+    },
     showCircle(index: number, uuid: number): boolean {
-      return true;
+      //first item at the top
       if (this.data && this.data[0] && this.data[0].uuid == uuid) {
         // console.log("uuid", uuid);
         // console.log("data", this.data);
@@ -290,7 +328,7 @@ export default defineComponent({
 .circle {
   /* visibility: hidden; */
 
-  margin: 3px 0px 5px 0px;
+  margin: 3px 3px 5px 0px;
   min-width: 13px;
   min-height: 13px;
   width: 13px;
@@ -303,12 +341,17 @@ export default defineComponent({
   box-sizing: border-box;
 }
 
+.clause-container {
+  min-height: 30px;
+}
+
 .line-v {
   /* visibility: hidden; */
   min-width: 10px;
-  max-width: 10px;
+  /* max-width: 10px; */
   margin-left: 6px;
   /* padding-left: 20px; */
+  /* margin-right: -3 */
   height: 100%;
   min-height: 5px;
 }
@@ -316,9 +359,26 @@ export default defineComponent({
 .space-h {
   /* visibility: hidden; */
   min-width: 10px;
-  margin: 0 5px 0 0;
+  margin-right: 3px;
+  /* min-height: 25px; */
+
+  /* margin: 0 5px 0 0; */
   /* height: 100%; */
-  min-height: 40px;
+}
+
+.line-h {
+  /* visibility: hidden; */
+  min-width: 10px;
+  margin: 9px 3px 0 0;
+  border-top: 1px solid #fff;
+  /* min-height: 25px; */
+
+  /* height: 100%; */
+  /* min-height: 40px; */
+}
+
+.connector-h {
+  /* padding: 5px; */
 }
 
 .ghost .space-h,

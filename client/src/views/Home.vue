@@ -206,13 +206,13 @@
           </div> -->
 
           <!-- Viewer  -->
-          <div class="w-full h-full bg-white dark:bg-gray-900">
-            <div class="mt-10 flex justify-center space-x-5 text-white" @click="">
+          <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
+            <div class="kanban mt-8 flex justify-center space-x-5 text-white" @click="">
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
-                <div class="">
-                  <div class="text-black dark:text-white font-bold text-3xl">{{ profile["rdfs:label"] }}</div>
-                  <div class="text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"]  }}</div>
-                  <Profile :definition="profile.definitionTree" :class="' ' + colours[index]" />
+                <div class="profile-column">
+                  <div class="select-none text-black dark:text-white font-bold text-3xl">{{ profile["rdfs:label"] }}</div>
+                  <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"]  }}</div>
+                  <Profile class="mt-5" :definition="profile.definitionTree" :class="' ' + colours[index]" />
                 </div>
               </template>
             </div>
@@ -674,7 +674,9 @@ export default defineComponent({
   overflow-y: auto;
   /* border: 1px solid #dde1e2; */
 }
-
+.profile-column{
+  margin-bottom: 150px
+}
 .main-container::-webkit-scrollbar {
   width: 10px;
 }
@@ -684,8 +686,29 @@ export default defineComponent({
 }
 
 .main-container::-webkit-scrollbar-thumb {
-  background-color: #d3d3d3;
+  background-color: #f3f3f3;
   /* outline: 1px solid slategrey; */
+}
+
+.viewer::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.viewer::-webkit-scrollbar-track {
+  background: transparent;
+  /* darker colour: #f1f1f1; */
+}
+
+/* Handle */
+.viewer::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #f3f3f3;
+}
+
+/* Handle on hover */
+.viewer::-webkit-scrollbar-thumb:hover {
+  background: #9b9b9b;
 }
 
 .tab-content {

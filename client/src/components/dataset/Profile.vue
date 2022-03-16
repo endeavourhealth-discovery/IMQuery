@@ -1,6 +1,6 @@
 <template>
-  <div class="card-profile px-6 py-5 flex flex-col  mt-8 mb-12 rounded-xl overflow-hidden bg-gradient-to-r ">
-    <div class="flex items-center  mb-5">
+  <div class="card-profile px-6 py-5 flex flex-col  mb-12 rounded-xl overflow-hidden bg-gradient-to-r ">
+    <div class="flex items-center mb-5">
       <!-- Left  -->
 
       <!-- Icon -->
@@ -25,7 +25,7 @@
       <!-- Right  -->
     </div>
     <!-- Definition  -->
-    <button type="button" class="profile px-4 py-2 text-sm font-medium text-white bg-black rounded-lg bg-opacity-20 hover:bg-opacity-30 outline-none">
+    <button type="button" class="profile py-2 text-sm font-medium text-white bg-black rounded-lg bg-opacity-20 hover:bg-opacity-30 outline-none">
       <DraggableClause class="profile-content mx-5" :data="definition" :children="definition" />
     </button>
     <!-- Definition  -->
