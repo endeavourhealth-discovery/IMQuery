@@ -654,7 +654,7 @@ export class Profile extends Entity {
                 return null;
             }
 
-            let _children = parent.data.and || parent.data.or;
+            let _children = parent.data.and || parent.data.or || parent.data.not;
 
             _children = _children.map((item: any, index: number) => {
 

@@ -209,13 +209,12 @@
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <div class="kanban mt-8 flex justify-center space-x-5 text-white" @click="">
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
-                <div v-show="isVisible(iri)" class="profile-column">
-                  <div class="select-none text-black dark:text-white font-bold text-3xl">{{ profile["rdfs:label"] }}</div>
-                  <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"] }}</div>
+                <div class="profile-column">
                   <TransitionRoot
                     appear
+            
                     :show="isVisible(iri)"
-                    as="template"
+                    as="div"
                     enter="transform transition duration-[400ms]"
                     enter-from="opacity-0 rotate-[-10deg] scale-50"
                     enter-to="opacity-100 rotate-0 scale-100"
@@ -223,6 +222,9 @@
                     leave-from="opacity-100 rotate-0 scale-100"
                     leave-to="opacity-0 scale-95 "
                   >
+                    <div class="select-none text-black dark:text-white font-bold text-3xl">{{ profile["rdfs:label"] }}</div>
+                    <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"] }}</div>
+
                     <Profile class="mt-5" :definition="profile.definitionTree" :class="' ' + colours[index]" />
                   </TransitionRoot>
                 </div>
@@ -234,8 +236,11 @@
 
         <!-- Tab: Explore  -->
 
-        <div v-if="activeTabName == 'Learn'" class="tab-content ">
-          <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe>
+        <div v-if="activeTabName == 'Learn'" class="tab-content flex justify-center items-center">
+          <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
+                    <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" />
+                    <!-- <img class="" src="animation2.gif" alt="" /> -->
+
         </div>
         <!-- /Tab: Explore  -->
 

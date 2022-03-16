@@ -1,0 +1,209 @@
+
+{
+    "uuid": "urn:uuid:82ad294d-2e4d-43cf-9971-17d13a613f11",
+    "type": "operator",
+    "include": true,
+    "name": "and",
+    "currentObjectPath": "[0]",
+    "data": {
+        "id": {
+            "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+        },
+        "name": "Priority 2",
+        "entityType": {
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "and": [
+            {
+                "name": "SMI Population",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [
+                    {
+                        "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                    }
+                ],
+                "id": {
+                    "@id": "urn:uuid:99abb140-efae-40a1-805c-80ba8380dc53"
+                }
+            },
+            {
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [
+                    {
+                        "name": "Priority 1",
+                        "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                    }
+                ],
+                "id": {
+                    "@id": "urn:uuid:f3fe55d9-dfac-422e-90f5-e4874d6eee41"
+                }
+            },
+            {
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#Event"
+                },
+                "id": {
+                    "@id": "urn:uuid:187d074d-bc00-4fa6-a92f-f68011d1d0a6"
+                },
+                "and": [
+                    {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [
+                            {
+                                "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                "@id": "urn:uuid:118bc280-b5a4-44cc-ab13-0f7c9a1cdd1c"
+                            }
+                        ],
+                        "valueVar": "concept86"
+                    },
+                    {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-18"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [
+                                {
+                                    "parameter": "units",
+                                    "valueData": "MONTH"
+                                },
+                                {
+                                    "parameter": "firstDate",
+                                    "valueData": "$referenceDate"
+                                },
+                                {
+                                    "parameter": "secondDate",
+                                    "valueData": "effectiveDate87"
+                                }
+                            ]
+                        },
+                        "valueVar": "effectiveDate87"
+                    }
+                ]
+            }
+        ]
+    },
+    "children": [
+        {
+            "uuid": "urn:uuid:5a2dc7e7-3413-4e49-bdc4-1d31033e31bf",
+            "type": "match",
+            "include": true,
+            "name": "SMI Population",
+            "currentObjectPath": "[0].children[0]",
+            "data": {
+                "name": "SMI Population",
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [
+                    {
+                        "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                    }
+                ],
+                "id": {
+                    "@id": "urn:uuid:99abb140-efae-40a1-805c-80ba8380dc53"
+                }
+            },
+            "children": []
+        },
+        {
+            "uuid": "urn:uuid:f3330cd0-7a6f-4615-81db-4656cd06b213",
+            "type": "match",
+            "include": true,
+            "name": "",
+            "currentObjectPath": "[0].children[1]",
+            "data": {
+                "property": {
+                    "@id": "http://endhealth.info/im#hasProfile"
+                },
+                "valueIn": [
+                    {
+                        "name": "Priority 1",
+                        "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                    }
+                ],
+                "id": {
+                    "@id": "urn:uuid:f3fe55d9-dfac-422e-90f5-e4874d6eee41"
+                }
+            },
+            "children": []
+        },
+        {
+            "uuid": "urn:uuid:67c4e178-0aeb-4de1-a7a1-a0b1c202bd6a",
+            "type": "match",
+            "include": true,
+            "name": "",
+            "currentObjectPath": "[0].children[2]",
+            "data": {
+                "pathTo": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "entityType": {
+                    "@id": "http://endhealth.info/im#Event"
+                },
+                "id": {
+                    "@id": "urn:uuid:187d074d-bc00-4fa6-a92f-f68011d1d0a6"
+                },
+                "and": [
+                    {
+                        "property": {
+                            "@id": "http://endhealth.info/im#concept"
+                        },
+                        "valueIn": [
+                            {
+                                "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                "@id": "urn:uuid:118bc280-b5a4-44cc-ab13-0f7c9a1cdd1c"
+                            }
+                        ],
+                        "valueVar": "concept86"
+                    },
+                    {
+                        "property": {
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "valueCompare": {
+                            "comparison": "GREATER_THAN_OR_EQUAL",
+                            "valueData": "-18"
+                        },
+                        "valueFunction": {
+                            "id": {
+                                "@id": "http://endhealth.info/im#TimeDifference"
+                            },
+                            "argument": [
+                                {
+                                    "parameter": "units",
+                                    "valueData": "MONTH"
+                                },
+                                {
+                                    "parameter": "firstDate",
+                                    "valueData": "$referenceDate"
+                                },
+                                {
+                                    "parameter": "secondDate",
+                                    "valueData": "effectiveDate87"
+                                }
+                            ]
+                        },
+                        "valueVar": "effectiveDate87"
+                    }
+                ]
+            },
+            "children": []
+        }
+    ]
+}

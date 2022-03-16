@@ -74,7 +74,7 @@ export default defineComponent({
       this.$emit(
         "update:items",
         this.items.filter((item: any) => item.iri != itemIri)
-      );
+      ); 
 
       // state.activeFileId = state.openFiles.length > 0 ? state.openFiles[0].id : "";
 

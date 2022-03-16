@@ -39,6 +39,16 @@
               <div v-if="showCircle(index, element.uuid)" :class="'circle inline border b-2 border-white'"></div>
               <!-- :line  -->
               <div v-if="index != children.length - 1" :class="'line-v inline border-l b-2 border-l-white'"></div>
+<!-- 
+              <div
+              v-if="element.type == 'operator'"
+                :class="
+                  'clause-item__operatorlabel inline-block absolute bg-white font-semibold hover:text-blue-600 hover:underline' +
+                    [element.type == 'operator' && element.name == 'and' ? ` text-${colors.and}-700` : ` text-${colors.or}-700`]
+                "
+              >
+                {{ element.name }}
+              </div> -->
             </div>
           </div>
 
@@ -49,7 +59,7 @@
                 <button
                   class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10  outline-none"
                 >
-                  {{ getLabel(element) }}
+                  {{ matchLabel(element) }}
                 </button>
               </template>
               <template v-else-if="false">
@@ -140,6 +150,12 @@ export default defineComponent({
   name: "nested-draggable",
   data() {
     return {
+      colors: {
+        and: "purple",
+        or: "purple",
+        include: "purple",
+        exclude: "red"
+      },
       childrenText: {
         1: {
           or: "",
@@ -157,7 +173,16 @@ export default defineComponent({
     };
   },
   methods: {
-    getLabel(clause: any): string {
+    // operatorLabel(): any {
+    //   // console.log("item", item);
+    //   const _keys = Object.keys(this.clause);
+    //   const _iri = _keys.filter((key: any) => {
+    //     return this.operatorIris.includes(key);
+    //   })[0];
+    //   const _label = _iri.split(":")[1];
+    //   return _label[0].toUpperCase() + _label.substring(1);
+    // },
+    matchLabel(clause: any): string {
       // if (clause.name) {
       //   return clause.name;
       // } else {
@@ -189,14 +214,13 @@ export default defineComponent({
       }
     },
     showSpaceH(index: number, uuid: string): boolean {
- 
       if (this.data && this.data[0] && this.data[0].uuid == uuid) {
         //if you want the entire clause to be draggable set to true
         return false;
-      }else if (_.get(this.data, `[0].children[${index}].uuid`) == uuid) {
+      } else if (_.get(this.data, `[0].children[${index}].uuid`) == uuid) {
         //hide first item in topmost item
         return false;
-      }  else if (index > 0) {
+      } else if (index > 0) {
         return true;
       } else {
         return false;
@@ -236,7 +260,8 @@ export default defineComponent({
     // },
     toggleInclude(element: any): void {
       element.include = !element.include;
-    }
+    },
+    
     // operatorLabel(element: any): string {
     //   if (this.children.length == 1) {
     //     return this.childrenText[1][element.operator];
@@ -248,6 +273,7 @@ export default defineComponent({
     // }
   },
   computed: {
+    
     isCardDragged: {
       get(): boolean {
         return this.$store.state.isCardDragged;
