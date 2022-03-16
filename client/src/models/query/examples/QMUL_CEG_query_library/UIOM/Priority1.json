@@ -1,10 +1,13 @@
 [
     {
-        "uuid": "urn:uuid:ef07a2b8-3af4-43df-a19e-e5da86dad1e5",
+        "uuid": "urn:uuid:7fc7b4e6-7778-4b2c-9822-515521f1aaab",
         "type": "operator",
         "include": true,
         "name": "and",
-        "currentObjectPath": "[0]",
+        "currentPath": "[0]",
+        "originalName": "[and]",
+        "originalLocation": "",
+        "childPath": "[and]",
         "data": {
             "id": {
                 "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
@@ -25,7 +28,7 @@
                         }
                     ],
                     "id": {
-                        "@id": "urn:uuid:1114069e-5fc5-4184-848b-c0d5f83d852e"
+                        "@id": "urn:uuid:43fa2abf-4e6b-42e6-ae39-721c2ee22de8"
                     }
                 },
                 {
@@ -109,7 +112,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                        "@id": "urn:uuid:da5bbc22-e573-4b58-bdf2-27a35ff9a429"
+                                                        "@id": "urn:uuid:f7628515-675f-4323-a2bb-e46df2573e0c"
                                                     }
                                                 ],
                                                 "valueVar": "concept12"
@@ -137,7 +140,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:b2c01458-bdb9-4a09-ac7e-9cc766b5fc78"
+                                                    "@id": "urn:uuid:0b7d75a1-9f65-47cc-b5d0-b471c81f508d"
                                                 }
                                             ],
                                             "valueVar": "concept9"
@@ -260,7 +263,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                        "@id": "urn:uuid:2370ef35-eb96-4b5b-b749-19e36047c766"
+                                                        "@id": "urn:uuid:6a8e9fe4-7e76-4be8-86e0-d9abb5f235d5"
                                                     }
                                                 ],
                                                 "valueVar": "concept20"
@@ -288,7 +291,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:5db7d5c2-d843-4077-9382-7518d80196da"
+                                                    "@id": "urn:uuid:75ed08fe-03ea-4f5d-8570-be8c7aa54ee9"
                                                 }
                                             ],
                                             "valueVar": "concept17"
@@ -411,7 +414,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home systolic blood pressure, Home systolic blood pressure, 24 hour systolic blood pressure, Ambulatory systolic blood pressure, Ambulatory systolic BP (blood pressure), Average day interval systolic blood pressure, Average 24 hour systolic blood pressure",
-                                                        "@id": "urn:uuid:871eefd1-3cbb-4b78-91cc-4b6a73a19f63"
+                                                        "@id": "urn:uuid:50c24cbe-fb0c-4a50-a216-6eefad19fd76"
                                                     }
                                                 ],
                                                 "valueVar": "concept28"
@@ -439,7 +442,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:7a55a0f6-72d3-4887-9e3b-036227325b25"
+                                                    "@id": "urn:uuid:174304f1-21bb-4d37-831a-753a5a117ec6"
                                                 }
                                             ],
                                             "valueVar": "concept25"
@@ -562,7 +565,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home diastolic blood pressure, Home diastolic blood pressure, 24 hour diastolic blood pressure, Ambulatory diastolic blood pressure, Ambulatory diastolic BP (blood pressure), Average day interval diastolic blood pressure, Average 24 hour diastolic blood pressure",
-                                                        "@id": "urn:uuid:2c225f89-c8b0-489f-b958-7f4f6765a81a"
+                                                        "@id": "urn:uuid:2057ed3d-74df-4a01-acbb-cab788caa2a2"
                                                     }
                                                 ],
                                                 "valueVar": "concept36"
@@ -590,7 +593,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:62b7c7ad-c447-4e4f-b722-8bbeed708001"
+                                                    "@id": "urn:uuid:5e6b3f3c-21d0-4fc8-89fe-c46fd98e9ceb"
                                                 }
                                             ],
                                             "valueVar": "concept33"
@@ -725,7 +728,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised, HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised, HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised",
-                                                    "@id": "urn:uuid:484593eb-1f1b-42e1-aa9c-d0875104e47f"
+                                                    "@id": "urn:uuid:a14ed28c-5917-430f-8aa8-6bc865fa15f3"
                                                 }
                                             ],
                                             "valueVar": "concept41"
@@ -780,7 +783,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "QRISK2 cardiovascular disease 10 year risk score, QRISK3 cardiovascular disease 10 year risk calculator score",
-                                                    "@id": "urn:uuid:13cf8490-7a6f-403d-a59d-ef2174524165"
+                                                    "@id": "urn:uuid:b02028af-4949-422e-acdd-26b58fff603d"
                                                 }
                                             ],
                                             "valueVar": "concept44"
@@ -812,7 +815,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more",
-                                                    "@id": "urn:uuid:b0664247-1ec4-4ae0-9f7d-e711e55bf00d"
+                                                    "@id": "urn:uuid:68abddf4-3454-480d-81de-2457d2d8933d"
                                                 }
                                             ],
                                             "valueVar": "medication47"
@@ -903,7 +906,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more",
-                                                    "@id": "urn:uuid:47f727ea-3085-400d-bc0c-0afd10b7a3e9"
+                                                    "@id": "urn:uuid:1f6ba3da-8b28-4a3d-8080-c79a3d9672c8"
                                                 }
                                             ],
                                             "valueVar": "medication50"
@@ -1032,7 +1035,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score",
-                                                    "@id": "urn:uuid:73e025ad-4575-4ee3-9ee5-3646c39f531a"
+                                                    "@id": "urn:uuid:125960c8-9045-405e-b4d1-e9f451a70f5e"
                                                 }
                                             ],
                                             "valueVar": "concept55"
@@ -1064,7 +1067,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Warfarin, Warfarin Sodium, Edoxaban tosilate, Dabigatran Etexilate, Apixaban, Rivaroxaban, Phenindione, Acenocoumarol",
-                                                    "@id": "urn:uuid:d9d0a5e2-949e-427a-bc09-b253ff5889d0"
+                                                    "@id": "urn:uuid:2baa4ee6-8690-4750-9272-73d3540d10a0"
                                                 }
                                             ],
                                             "valueVar": "medication58"
@@ -1142,7 +1145,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:34563db0-80ff-4143-8084-c4a80a10e7ee"
+                                                    "@id": "urn:uuid:34ae8c0d-3398-43a8-aaca-0797d20b72f5"
                                                 }
                                             ],
                                             "valueVar": "concept60"
@@ -1173,7 +1176,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:da74ef81-7eba-4d74-8f6d-824e314afeaa"
+                                                    "@id": "urn:uuid:094a5562-438f-4890-b076-2d904ada65b7"
                                                 }
                                             ],
                                             "valueVar": "medication63"
@@ -1251,7 +1254,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:104d1087-7399-49c5-a4bb-355f876882ac"
+                                                    "@id": "urn:uuid:cde5d8f0-f0dd-4155-861e-1d7a2327b1ee"
                                                 }
                                             ],
                                             "valueVar": "concept65"
@@ -1282,7 +1285,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:7cf070c5-3870-4572-8772-9cad424aaa79"
+                                                    "@id": "urn:uuid:84df4249-1a63-4c4c-a439-7f2298fa3654"
                                                 }
                                             ],
                                             "valueVar": "medication68"
@@ -1331,7 +1334,7 @@
                                     "valueIn": [
                                         {
                                             "name": "Indians (Hindi-speaking), Pakistani (Urduspeakers), Todas, Naiars, Sri Lankan - ethnic category 2001 census, Irula, Pakistani or British Pakistani - ethnic category 2001 census, Bangladeshi or British Bangladeshi - ethnic category 2001 census, Other Asian background - ethnic category 2001 census..more",
-                                            "@id": "urn:uuid:3f46616a-3987-41d7-b677-4209b6d25e77"
+                                            "@id": "urn:uuid:d024e339-8837-4bf7-9942-098df3771027"
                                         }
                                     ],
                                     "id": {
@@ -1414,7 +1417,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:918e45e4-b78e-401d-b611-2ac5b593bd40"
+                                                    "@id": "urn:uuid:d740fc6e-769e-47d4-8f85-63e116c68d52"
                                                 }
                                             ],
                                             "valueVar": "medication73"
@@ -1478,7 +1481,7 @@
                                         "valueIn": [
                                             {
                                                 "name": "Diabetes mellitus without complication, Brittle diabetes, Diabetic nephropathy, Insulin-dependent diabetes mellitus with ulcer, Insulin-dependent diabetes maturity onset, Diabetic neuropathic arthropathy, Diabetic mononeuropathy, Hypoglycaemic event in diabetes, Diabetic eye disease..more",
-                                                "@id": "urn:uuid:0855d4c9-ae5f-488a-9547-de94875a9c78"
+                                                "@id": "urn:uuid:425fb5bf-455e-43c6-a70d-93c0bf7b1dc3"
                                             }
                                         ],
                                         "valueVar": "concept77"
@@ -1494,7 +1497,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Diabetes mellitus without complication, Lipoatrophic diabetes mellitus without complication, Brittle diabetes, Lipoatrophic diabetes, Diabetic nephropathy, Type 1 diabetes mellitus with ulcer, Type 1 diabetes mellitus maturity onset, Type 2 diabetes mellitus with multiple complications, Type 2 diabetes mellitus with ulcer..more",
-                                                    "@id": "urn:uuid:4ae14e93-600e-4bb8-9543-947c5ac8baea"
+                                                    "@id": "urn:uuid:3adcbf5b-dee5-4517-a301-6b1fb08dced1"
                                                 }
                                             ],
                                             "valueVar": "concept75"
@@ -1555,7 +1558,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:19b0081e-40ab-414b-a9a1-3d0e3d3e4b7a"
+                                                    "@id": "urn:uuid:6567d44e-167c-47c0-80b1-6d53e5841281"
                                                 }
                                             ],
                                             "valueVar": "medication79"
@@ -1668,7 +1671,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:69518ed7-a305-4e9a-9900-e05e4004d924"
+                                                    "@id": "urn:uuid:1ef5f432-c928-4bf1-9fa1-1d73c2639baa"
                                                 }
                                             ],
                                             "valueVar": "concept84"
@@ -1712,11 +1715,14 @@
         },
         "children": [
             {
-                "uuid": "urn:uuid:1ea48b72-a3f2-43ee-b56d-fe14f14abdbb",
+                "uuid": "urn:uuid:5f607546-3aee-4c28-bc80-9821e55fac36",
                 "type": "match",
                 "include": true,
-                "name": "SMI Population",
-                "currentObjectPath": "[0].children[0]",
+                "name": "",
+                "currentPath": "[0].children[0]",
+                "originalName": "[0]",
+                "originalLocation": "[and][0]",
+                "childPath": "",
                 "data": {
                     "name": "SMI Population",
                     "property": {
@@ -1728,17 +1734,20 @@
                         }
                     ],
                     "id": {
-                        "@id": "urn:uuid:1114069e-5fc5-4184-848b-c0d5f83d852e"
+                        "@id": "urn:uuid:43fa2abf-4e6b-42e6-ae39-721c2ee22de8"
                     }
                 },
                 "children": []
             },
             {
-                "uuid": "urn:uuid:6384f070-45ba-479f-afbb-5e9b2f1428e5",
+                "uuid": "urn:uuid:364dee45-641a-4472-9ff3-335d37675ec9",
                 "type": "operator",
                 "include": true,
-                "name": "and",
-                "currentObjectPath": "[0].children[1]",
+                "name": "or",
+                "currentPath": "[0].children[1]",
+                "originalName": "[1]",
+                "originalLocation": "[and][1]",
+                "childPath": "[and][1][or]",
                 "data": {
                     "or": [
                         {
@@ -1820,7 +1829,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                        "@id": "urn:uuid:da5bbc22-e573-4b58-bdf2-27a35ff9a429"
+                                                        "@id": "urn:uuid:f7628515-675f-4323-a2bb-e46df2573e0c"
                                                     }
                                                 ],
                                                 "valueVar": "concept12"
@@ -1848,7 +1857,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:b2c01458-bdb9-4a09-ac7e-9cc766b5fc78"
+                                                    "@id": "urn:uuid:0b7d75a1-9f65-47cc-b5d0-b471c81f508d"
                                                 }
                                             ],
                                             "valueVar": "concept9"
@@ -1971,7 +1980,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                        "@id": "urn:uuid:2370ef35-eb96-4b5b-b749-19e36047c766"
+                                                        "@id": "urn:uuid:6a8e9fe4-7e76-4be8-86e0-d9abb5f235d5"
                                                     }
                                                 ],
                                                 "valueVar": "concept20"
@@ -1999,7 +2008,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:5db7d5c2-d843-4077-9382-7518d80196da"
+                                                    "@id": "urn:uuid:75ed08fe-03ea-4f5d-8570-be8c7aa54ee9"
                                                 }
                                             ],
                                             "valueVar": "concept17"
@@ -2122,7 +2131,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home systolic blood pressure, Home systolic blood pressure, 24 hour systolic blood pressure, Ambulatory systolic blood pressure, Ambulatory systolic BP (blood pressure), Average day interval systolic blood pressure, Average 24 hour systolic blood pressure",
-                                                        "@id": "urn:uuid:871eefd1-3cbb-4b78-91cc-4b6a73a19f63"
+                                                        "@id": "urn:uuid:50c24cbe-fb0c-4a50-a216-6eefad19fd76"
                                                     }
                                                 ],
                                                 "valueVar": "concept28"
@@ -2150,7 +2159,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:7a55a0f6-72d3-4887-9e3b-036227325b25"
+                                                    "@id": "urn:uuid:174304f1-21bb-4d37-831a-753a5a117ec6"
                                                 }
                                             ],
                                             "valueVar": "concept25"
@@ -2273,7 +2282,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home diastolic blood pressure, Home diastolic blood pressure, 24 hour diastolic blood pressure, Ambulatory diastolic blood pressure, Ambulatory diastolic BP (blood pressure), Average day interval diastolic blood pressure, Average 24 hour diastolic blood pressure",
-                                                        "@id": "urn:uuid:2c225f89-c8b0-489f-b958-7f4f6765a81a"
+                                                        "@id": "urn:uuid:2057ed3d-74df-4a01-acbb-cab788caa2a2"
                                                     }
                                                 ],
                                                 "valueVar": "concept36"
@@ -2301,7 +2310,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:62b7c7ad-c447-4e4f-b722-8bbeed708001"
+                                                    "@id": "urn:uuid:5e6b3f3c-21d0-4fc8-89fe-c46fd98e9ceb"
                                                 }
                                             ],
                                             "valueVar": "concept33"
@@ -2436,7 +2445,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised, HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised, HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised",
-                                                    "@id": "urn:uuid:484593eb-1f1b-42e1-aa9c-d0875104e47f"
+                                                    "@id": "urn:uuid:a14ed28c-5917-430f-8aa8-6bc865fa15f3"
                                                 }
                                             ],
                                             "valueVar": "concept41"
@@ -2491,7 +2500,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "QRISK2 cardiovascular disease 10 year risk score, QRISK3 cardiovascular disease 10 year risk calculator score",
-                                                    "@id": "urn:uuid:13cf8490-7a6f-403d-a59d-ef2174524165"
+                                                    "@id": "urn:uuid:b02028af-4949-422e-acdd-26b58fff603d"
                                                 }
                                             ],
                                             "valueVar": "concept44"
@@ -2523,7 +2532,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more",
-                                                    "@id": "urn:uuid:b0664247-1ec4-4ae0-9f7d-e711e55bf00d"
+                                                    "@id": "urn:uuid:68abddf4-3454-480d-81de-2457d2d8933d"
                                                 }
                                             ],
                                             "valueVar": "medication47"
@@ -2614,7 +2623,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more",
-                                                    "@id": "urn:uuid:47f727ea-3085-400d-bc0c-0afd10b7a3e9"
+                                                    "@id": "urn:uuid:1f6ba3da-8b28-4a3d-8080-c79a3d9672c8"
                                                 }
                                             ],
                                             "valueVar": "medication50"
@@ -2743,7 +2752,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score",
-                                                    "@id": "urn:uuid:73e025ad-4575-4ee3-9ee5-3646c39f531a"
+                                                    "@id": "urn:uuid:125960c8-9045-405e-b4d1-e9f451a70f5e"
                                                 }
                                             ],
                                             "valueVar": "concept55"
@@ -2775,7 +2784,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Warfarin, Warfarin Sodium, Edoxaban tosilate, Dabigatran Etexilate, Apixaban, Rivaroxaban, Phenindione, Acenocoumarol",
-                                                    "@id": "urn:uuid:d9d0a5e2-949e-427a-bc09-b253ff5889d0"
+                                                    "@id": "urn:uuid:2baa4ee6-8690-4750-9272-73d3540d10a0"
                                                 }
                                             ],
                                             "valueVar": "medication58"
@@ -2853,7 +2862,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:34563db0-80ff-4143-8084-c4a80a10e7ee"
+                                                    "@id": "urn:uuid:34ae8c0d-3398-43a8-aaca-0797d20b72f5"
                                                 }
                                             ],
                                             "valueVar": "concept60"
@@ -2884,7 +2893,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:da74ef81-7eba-4d74-8f6d-824e314afeaa"
+                                                    "@id": "urn:uuid:094a5562-438f-4890-b076-2d904ada65b7"
                                                 }
                                             ],
                                             "valueVar": "medication63"
@@ -2962,7 +2971,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:104d1087-7399-49c5-a4bb-355f876882ac"
+                                                    "@id": "urn:uuid:cde5d8f0-f0dd-4155-861e-1d7a2327b1ee"
                                                 }
                                             ],
                                             "valueVar": "concept65"
@@ -2993,7 +3002,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:7cf070c5-3870-4572-8772-9cad424aaa79"
+                                                    "@id": "urn:uuid:84df4249-1a63-4c4c-a439-7f2298fa3654"
                                                 }
                                             ],
                                             "valueVar": "medication68"
@@ -3042,7 +3051,7 @@
                                     "valueIn": [
                                         {
                                             "name": "Indians (Hindi-speaking), Pakistani (Urduspeakers), Todas, Naiars, Sri Lankan - ethnic category 2001 census, Irula, Pakistani or British Pakistani - ethnic category 2001 census, Bangladeshi or British Bangladeshi - ethnic category 2001 census, Other Asian background - ethnic category 2001 census..more",
-                                            "@id": "urn:uuid:3f46616a-3987-41d7-b677-4209b6d25e77"
+                                            "@id": "urn:uuid:d024e339-8837-4bf7-9942-098df3771027"
                                         }
                                     ],
                                     "id": {
@@ -3125,7 +3134,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:918e45e4-b78e-401d-b611-2ac5b593bd40"
+                                                    "@id": "urn:uuid:d740fc6e-769e-47d4-8f85-63e116c68d52"
                                                 }
                                             ],
                                             "valueVar": "medication73"
@@ -3189,7 +3198,7 @@
                                         "valueIn": [
                                             {
                                                 "name": "Diabetes mellitus without complication, Brittle diabetes, Diabetic nephropathy, Insulin-dependent diabetes mellitus with ulcer, Insulin-dependent diabetes maturity onset, Diabetic neuropathic arthropathy, Diabetic mononeuropathy, Hypoglycaemic event in diabetes, Diabetic eye disease..more",
-                                                "@id": "urn:uuid:0855d4c9-ae5f-488a-9547-de94875a9c78"
+                                                "@id": "urn:uuid:425fb5bf-455e-43c6-a70d-93c0bf7b1dc3"
                                             }
                                         ],
                                         "valueVar": "concept77"
@@ -3205,7 +3214,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Diabetes mellitus without complication, Lipoatrophic diabetes mellitus without complication, Brittle diabetes, Lipoatrophic diabetes, Diabetic nephropathy, Type 1 diabetes mellitus with ulcer, Type 1 diabetes mellitus maturity onset, Type 2 diabetes mellitus with multiple complications, Type 2 diabetes mellitus with ulcer..more",
-                                                    "@id": "urn:uuid:4ae14e93-600e-4bb8-9543-947c5ac8baea"
+                                                    "@id": "urn:uuid:3adcbf5b-dee5-4517-a301-6b1fb08dced1"
                                                 }
                                             ],
                                             "valueVar": "concept75"
@@ -3266,7 +3275,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:19b0081e-40ab-414b-a9a1-3d0e3d3e4b7a"
+                                                    "@id": "urn:uuid:6567d44e-167c-47c0-80b1-6d53e5841281"
                                                 }
                                             ],
                                             "valueVar": "medication79"
@@ -3379,7 +3388,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:69518ed7-a305-4e9a-9900-e05e4004d924"
+                                                    "@id": "urn:uuid:1ef5f432-c928-4bf1-9fa1-1d73c2639baa"
                                                 }
                                             ],
                                             "valueVar": "concept84"
@@ -3421,11 +3430,14 @@
                 },
                 "children": [
                     {
-                        "uuid": "urn:uuid:837501d5-9ea1-4569-bc3e-b719e52a4de9",
+                        "uuid": "urn:uuid:f6d605b1-7463-4e06-a5b0-99f4c1fccc58",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[0]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[0]",
+                        "originalName": "[0]",
+                        "originalLocation": "[and][1][or][0]",
+                        "childPath": "[and][1][or][0][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:990f1c0b-1676-45f0-b321-d2e710dd7336"
@@ -3505,7 +3517,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                        "@id": "urn:uuid:da5bbc22-e573-4b58-bdf2-27a35ff9a429"
+                                                        "@id": "urn:uuid:f7628515-675f-4323-a2bb-e46df2573e0c"
                                                     }
                                                 ],
                                                 "valueVar": "concept12"
@@ -3533,7 +3545,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:b2c01458-bdb9-4a09-ac7e-9cc766b5fc78"
+                                                    "@id": "urn:uuid:0b7d75a1-9f65-47cc-b5d0-b471c81f508d"
                                                 }
                                             ],
                                             "valueVar": "concept9"
@@ -3579,11 +3591,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:2940bdbb-4a30-4791-8708-814063373e54",
+                                "uuid": "urn:uuid:5b4e9a47-d1cf-4f71-83cd-aeacbfa3510b",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[0].children[0]",
+                                "currentPath": "[0].children[1].children[0].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][0][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -3638,11 +3653,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:66798226-3ff2-4cea-9455-58e9ca4ff2d8",
+                                "uuid": "urn:uuid:2166f86a-2188-41aa-af06-e850a5a7ccc6",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[0].children[1]",
+                                "currentPath": "[0].children[1].children[0].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][0][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -3666,7 +3684,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                        "@id": "urn:uuid:da5bbc22-e573-4b58-bdf2-27a35ff9a429"
+                                                        "@id": "urn:uuid:f7628515-675f-4323-a2bb-e46df2573e0c"
                                                     }
                                                 ],
                                                 "valueVar": "concept12"
@@ -3694,7 +3712,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:b2c01458-bdb9-4a09-ac7e-9cc766b5fc78"
+                                                    "@id": "urn:uuid:0b7d75a1-9f65-47cc-b5d0-b471c81f508d"
                                                 }
                                             ],
                                             "valueVar": "concept9"
@@ -3741,11 +3759,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:92f8f4a8-fa86-49c1-984c-1558f661974b",
+                        "uuid": "urn:uuid:fddbdb1e-8592-460a-bf4d-d2078097a58d",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[1]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[1]",
+                        "originalName": "[1]",
+                        "originalLocation": "[and][1][or][1]",
+                        "childPath": "[and][1][or][1][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:16465b73-385e-44bb-b1cc-3b5a162415a4"
@@ -3825,7 +3846,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                        "@id": "urn:uuid:2370ef35-eb96-4b5b-b749-19e36047c766"
+                                                        "@id": "urn:uuid:6a8e9fe4-7e76-4be8-86e0-d9abb5f235d5"
                                                     }
                                                 ],
                                                 "valueVar": "concept20"
@@ -3853,7 +3874,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:5db7d5c2-d843-4077-9382-7518d80196da"
+                                                    "@id": "urn:uuid:75ed08fe-03ea-4f5d-8570-be8c7aa54ee9"
                                                 }
                                             ],
                                             "valueVar": "concept17"
@@ -3899,11 +3920,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:6f611b03-11de-4df8-9584-239450c754d6",
+                                "uuid": "urn:uuid:7f0c6ea0-63ac-4133-ae0e-baadfcf17257",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[1].children[0]",
+                                "currentPath": "[0].children[1].children[1].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][1][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -3958,11 +3982,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:97e9dc54-e9f8-4b15-bbff-9d63385fe604",
+                                "uuid": "urn:uuid:4018e398-a98d-42e2-b297-064c3bdcb03f",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[1].children[1]",
+                                "currentPath": "[0].children[1].children[1].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][1][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -3986,7 +4013,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                        "@id": "urn:uuid:2370ef35-eb96-4b5b-b749-19e36047c766"
+                                                        "@id": "urn:uuid:6a8e9fe4-7e76-4be8-86e0-d9abb5f235d5"
                                                     }
                                                 ],
                                                 "valueVar": "concept20"
@@ -4014,7 +4041,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:5db7d5c2-d843-4077-9382-7518d80196da"
+                                                    "@id": "urn:uuid:75ed08fe-03ea-4f5d-8570-be8c7aa54ee9"
                                                 }
                                             ],
                                             "valueVar": "concept17"
@@ -4061,11 +4088,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:5cf377c0-a1e2-4262-80f1-0f2b9c592525",
+                        "uuid": "urn:uuid:0f1bc6e5-cc27-4946-a7a4-d252d050a88d",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[2]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[2]",
+                        "originalName": "[2]",
+                        "originalLocation": "[and][1][or][2]",
+                        "childPath": "[and][1][or][2][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:d31a5d4b-62b2-4ebe-9391-ffb74d12b0c8"
@@ -4145,7 +4175,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home systolic blood pressure, Home systolic blood pressure, 24 hour systolic blood pressure, Ambulatory systolic blood pressure, Ambulatory systolic BP (blood pressure), Average day interval systolic blood pressure, Average 24 hour systolic blood pressure",
-                                                        "@id": "urn:uuid:871eefd1-3cbb-4b78-91cc-4b6a73a19f63"
+                                                        "@id": "urn:uuid:50c24cbe-fb0c-4a50-a216-6eefad19fd76"
                                                     }
                                                 ],
                                                 "valueVar": "concept28"
@@ -4173,7 +4203,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:7a55a0f6-72d3-4887-9e3b-036227325b25"
+                                                    "@id": "urn:uuid:174304f1-21bb-4d37-831a-753a5a117ec6"
                                                 }
                                             ],
                                             "valueVar": "concept25"
@@ -4219,11 +4249,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:7afc6533-85b9-4210-b758-dbde2ac64763",
+                                "uuid": "urn:uuid:d8690e91-d547-49e2-8d99-ab7e82f8dc47",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[2].children[0]",
+                                "currentPath": "[0].children[1].children[2].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][2][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -4278,11 +4311,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:1fbe3a92-4588-40fc-a080-a5c79afa4047",
+                                "uuid": "urn:uuid:3f14550e-3b08-4432-89a9-7917f3a980e2",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[2].children[1]",
+                                "currentPath": "[0].children[1].children[2].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][2][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -4306,7 +4342,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home systolic blood pressure, Home systolic blood pressure, 24 hour systolic blood pressure, Ambulatory systolic blood pressure, Ambulatory systolic BP (blood pressure), Average day interval systolic blood pressure, Average 24 hour systolic blood pressure",
-                                                        "@id": "urn:uuid:871eefd1-3cbb-4b78-91cc-4b6a73a19f63"
+                                                        "@id": "urn:uuid:50c24cbe-fb0c-4a50-a216-6eefad19fd76"
                                                     }
                                                 ],
                                                 "valueVar": "concept28"
@@ -4334,7 +4370,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:7a55a0f6-72d3-4887-9e3b-036227325b25"
+                                                    "@id": "urn:uuid:174304f1-21bb-4d37-831a-753a5a117ec6"
                                                 }
                                             ],
                                             "valueVar": "concept25"
@@ -4381,11 +4417,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:7ef70282-b086-4177-85eb-57d1f6d0a04e",
+                        "uuid": "urn:uuid:a174bc7a-2399-44d6-a0cb-b3fc03bf1976",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[3]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[3]",
+                        "originalName": "[3]",
+                        "originalLocation": "[and][1][or][3]",
+                        "childPath": "[and][1][or][3][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:fb967373-d30b-46aa-aba2-bcfb1898d1d8"
@@ -4465,7 +4504,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home diastolic blood pressure, Home diastolic blood pressure, 24 hour diastolic blood pressure, Ambulatory diastolic blood pressure, Ambulatory diastolic BP (blood pressure), Average day interval diastolic blood pressure, Average 24 hour diastolic blood pressure",
-                                                        "@id": "urn:uuid:2c225f89-c8b0-489f-b958-7f4f6765a81a"
+                                                        "@id": "urn:uuid:2057ed3d-74df-4a01-acbb-cab788caa2a2"
                                                     }
                                                 ],
                                                 "valueVar": "concept36"
@@ -4493,7 +4532,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:62b7c7ad-c447-4e4f-b722-8bbeed708001"
+                                                    "@id": "urn:uuid:5e6b3f3c-21d0-4fc8-89fe-c46fd98e9ceb"
                                                 }
                                             ],
                                             "valueVar": "concept33"
@@ -4539,11 +4578,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:c7d26536-69f1-4853-9499-7945ae9eddba",
+                                "uuid": "urn:uuid:7fc09d7e-6276-4bde-bafe-397685a483b6",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[3].children[0]",
+                                "currentPath": "[0].children[1].children[3].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][3][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -4598,11 +4640,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:75d7afb7-5a97-4d7f-b7a8-0e9b0fab9b5d",
+                                "uuid": "urn:uuid:1151ccd2-5b54-4024-91c3-04104713b406",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[3].children[1]",
+                                "currentPath": "[0].children[1].children[3].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][3][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -4626,7 +4671,7 @@
                                                 "valueIn": [
                                                     {
                                                         "name": "Average home diastolic blood pressure, Home diastolic blood pressure, 24 hour diastolic blood pressure, Ambulatory diastolic blood pressure, Ambulatory diastolic BP (blood pressure), Average day interval diastolic blood pressure, Average 24 hour diastolic blood pressure",
-                                                        "@id": "urn:uuid:2c225f89-c8b0-489f-b958-7f4f6765a81a"
+                                                        "@id": "urn:uuid:2057ed3d-74df-4a01-acbb-cab788caa2a2"
                                                     }
                                                 ],
                                                 "valueVar": "concept36"
@@ -4654,7 +4699,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
-                                                    "@id": "urn:uuid:62b7c7ad-c447-4e4f-b722-8bbeed708001"
+                                                    "@id": "urn:uuid:5e6b3f3c-21d0-4fc8-89fe-c46fd98e9ceb"
                                                 }
                                             ],
                                             "valueVar": "concept33"
@@ -4701,11 +4746,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:424a6ab3-c7f8-4ce3-ae5b-2266eca98848",
+                        "uuid": "urn:uuid:18fd4030-75d0-4d27-b55e-95ef6862423e",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[4]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[4]",
+                        "originalName": "[4]",
+                        "originalLocation": "[and][1][or][4]",
+                        "childPath": "[and][1][or][4][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:d6fabb84-7a47-46d6-b215-2eade45bad68"
@@ -4797,7 +4845,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised, HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised, HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised",
-                                                    "@id": "urn:uuid:484593eb-1f1b-42e1-aa9c-d0875104e47f"
+                                                    "@id": "urn:uuid:a14ed28c-5917-430f-8aa8-6bc865fa15f3"
                                                 }
                                             ],
                                             "valueVar": "concept41"
@@ -4814,11 +4862,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:5e154ffe-b9c4-4439-afde-25faf6d570f3",
+                                "uuid": "urn:uuid:b105537a-985a-4b1d-ac2d-6b0cabe696b1",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[4].children[0]",
+                                "currentPath": "[0].children[1].children[4].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][4][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -4873,11 +4924,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:76455a3e-d097-4fe7-b230-2bc3770e276c",
+                                "uuid": "urn:uuid:3ce169cb-c4a3-4969-8912-4af7970c4fe8",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[4].children[1]",
+                                "currentPath": "[0].children[1].children[4].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][4][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -4913,7 +4967,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised, HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised, HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised",
-                                                    "@id": "urn:uuid:484593eb-1f1b-42e1-aa9c-d0875104e47f"
+                                                    "@id": "urn:uuid:a14ed28c-5917-430f-8aa8-6bc865fa15f3"
                                                 }
                                             ],
                                             "valueVar": "concept41"
@@ -4931,11 +4985,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:e736b4f5-66fc-4426-aa48-a46a557db59c",
+                        "uuid": "urn:uuid:c488124d-8669-4158-abbb-3d2f59538154",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[5]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[5]",
+                        "originalName": "[5]",
+                        "originalLocation": "[and][1][or][5]",
+                        "childPath": "[and][1][or][5][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:f3a97116-59b0-4b84-ab06-9fe4ae7d1e5c"
@@ -4976,7 +5033,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "QRISK2 cardiovascular disease 10 year risk score, QRISK3 cardiovascular disease 10 year risk calculator score",
-                                                    "@id": "urn:uuid:13cf8490-7a6f-403d-a59d-ef2174524165"
+                                                    "@id": "urn:uuid:b02028af-4949-422e-acdd-26b58fff603d"
                                                 }
                                             ],
                                             "valueVar": "concept44"
@@ -5008,7 +5065,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more",
-                                                    "@id": "urn:uuid:b0664247-1ec4-4ae0-9f7d-e711e55bf00d"
+                                                    "@id": "urn:uuid:68abddf4-3454-480d-81de-2457d2d8933d"
                                                 }
                                             ],
                                             "valueVar": "medication47"
@@ -5048,11 +5105,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:7bfa169a-061c-4bc8-bba4-0f541db3621f",
+                                "uuid": "urn:uuid:7a73d327-4ae2-41a1-a7fc-8cef8db425bd",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[5].children[0]",
+                                "currentPath": "[0].children[1].children[5].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][5][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -5088,7 +5148,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "QRISK2 cardiovascular disease 10 year risk score, QRISK3 cardiovascular disease 10 year risk calculator score",
-                                                    "@id": "urn:uuid:13cf8490-7a6f-403d-a59d-ef2174524165"
+                                                    "@id": "urn:uuid:b02028af-4949-422e-acdd-26b58fff603d"
                                                 }
                                             ],
                                             "valueVar": "concept44"
@@ -5104,11 +5164,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:54e8c5fe-3188-4239-b561-89d3989c4d5f",
+                                "uuid": "urn:uuid:cdbcfa01-077d-4b98-adf5-8b795aaf4b3f",
                                 "type": "match",
-                                "include": true,
+                                "include": false,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[5].children[1]",
+                                "currentPath": "[0].children[1].children[5].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][5][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "notExist": true,
                                     "pathTo": {
@@ -5128,7 +5191,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more",
-                                                    "@id": "urn:uuid:b0664247-1ec4-4ae0-9f7d-e711e55bf00d"
+                                                    "@id": "urn:uuid:68abddf4-3454-480d-81de-2457d2d8933d"
                                                 }
                                             ],
                                             "valueVar": "medication47"
@@ -5169,11 +5232,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:d0cde87b-4e44-4e0f-80d3-d22f07870311",
+                        "uuid": "urn:uuid:8c4e93df-f9b9-45a2-ae57-0f781b20dfec",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[6]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[6]",
+                        "originalName": "[6]",
+                        "originalLocation": "[and][1][or][6]",
+                        "childPath": "[and][1][or][6][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:0afc83aa-6fe3-48a4-a20b-d738f5935d66"
@@ -5227,7 +5293,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more",
-                                                    "@id": "urn:uuid:47f727ea-3085-400d-bc0c-0afd10b7a3e9"
+                                                    "@id": "urn:uuid:1f6ba3da-8b28-4a3d-8080-c79a3d9672c8"
                                                 }
                                             ],
                                             "valueVar": "medication50"
@@ -5267,11 +5333,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:b68761bd-3272-4a1a-aade-44f4ddc85d79",
+                                "uuid": "urn:uuid:4c00ead7-c15f-479e-8b34-ddf7516dedf3",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[6].children[0]",
+                                "currentPath": "[0].children[1].children[6].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][6][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -5304,11 +5373,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:ab36f4c6-ea24-4f2f-a3fc-bcb4d6637aa9",
+                                "uuid": "urn:uuid:c7b8e580-c27f-47d5-aeb4-9d4ddee75fa4",
                                 "type": "match",
-                                "include": true,
+                                "include": false,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[6].children[1]",
+                                "currentPath": "[0].children[1].children[6].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][6][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "notExist": true,
                                     "pathTo": {
@@ -5328,7 +5400,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more",
-                                                    "@id": "urn:uuid:47f727ea-3085-400d-bc0c-0afd10b7a3e9"
+                                                    "@id": "urn:uuid:1f6ba3da-8b28-4a3d-8080-c79a3d9672c8"
                                                 }
                                             ],
                                             "valueVar": "medication50"
@@ -5369,11 +5441,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:a9393f8b-29b2-4ac9-a6f2-f483a66accf3",
+                        "uuid": "urn:uuid:557c8a35-f06d-4fa6-96ff-ead9f5e72838",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[7]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[7]",
+                        "originalName": "[7]",
+                        "originalLocation": "[and][1][or][7]",
+                        "childPath": "[and][1][or][7][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:838bf170-ad28-4c93-9139-69d23ac49ec8"
@@ -5465,7 +5540,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score",
-                                                    "@id": "urn:uuid:73e025ad-4575-4ee3-9ee5-3646c39f531a"
+                                                    "@id": "urn:uuid:125960c8-9045-405e-b4d1-e9f451a70f5e"
                                                 }
                                             ],
                                             "valueVar": "concept55"
@@ -5497,7 +5572,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Warfarin, Warfarin Sodium, Edoxaban tosilate, Dabigatran Etexilate, Apixaban, Rivaroxaban, Phenindione, Acenocoumarol",
-                                                    "@id": "urn:uuid:d9d0a5e2-949e-427a-bc09-b253ff5889d0"
+                                                    "@id": "urn:uuid:2baa4ee6-8690-4750-9272-73d3540d10a0"
                                                 }
                                             ],
                                             "valueVar": "medication58"
@@ -5537,11 +5612,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:09c413b4-4b10-4146-b98e-1a7710079c3a",
+                                "uuid": "urn:uuid:7c60b377-e93c-4618-9573-598603fb1e12",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[7].children[0]",
+                                "currentPath": "[0].children[1].children[7].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][7][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -5596,11 +5674,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:949a8abd-208f-4548-b0fb-2aed88a334d1",
+                                "uuid": "urn:uuid:062f7a57-181b-498e-9958-b2940cb0d9b8",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[7].children[1]",
+                                "currentPath": "[0].children[1].children[7].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][7][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -5636,7 +5717,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score",
-                                                    "@id": "urn:uuid:73e025ad-4575-4ee3-9ee5-3646c39f531a"
+                                                    "@id": "urn:uuid:125960c8-9045-405e-b4d1-e9f451a70f5e"
                                                 }
                                             ],
                                             "valueVar": "concept55"
@@ -5652,11 +5733,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:316d078d-c4a5-49c8-a6ac-09bbbccc9f70",
+                                "uuid": "urn:uuid:81b6249f-2451-43fc-a559-22b02c3596d0",
                                 "type": "match",
-                                "include": true,
+                                "include": false,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[7].children[2]",
+                                "currentPath": "[0].children[1].children[7].children[2]",
+                                "originalName": "[2]",
+                                "originalLocation": "[and][1][or][7][and][2]",
+                                "childPath": "",
                                 "data": {
                                     "notExist": true,
                                     "pathTo": {
@@ -5676,7 +5760,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Warfarin, Warfarin Sodium, Edoxaban tosilate, Dabigatran Etexilate, Apixaban, Rivaroxaban, Phenindione, Acenocoumarol",
-                                                    "@id": "urn:uuid:d9d0a5e2-949e-427a-bc09-b253ff5889d0"
+                                                    "@id": "urn:uuid:2baa4ee6-8690-4750-9272-73d3540d10a0"
                                                 }
                                             ],
                                             "valueVar": "medication58"
@@ -5717,11 +5801,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:473a3337-3a22-45c1-b060-de6304c3a86e",
+                        "uuid": "urn:uuid:665807e7-8c4a-4d7a-8797-d7eed0c2b0bc",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[8]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[8]",
+                        "originalName": "[8]",
+                        "originalLocation": "[and][1][or][8]",
+                        "childPath": "[and][1][or][8][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:ffd7d69b-a1c2-480f-9e94-1fad925b06f8"
@@ -5762,7 +5849,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:34563db0-80ff-4143-8084-c4a80a10e7ee"
+                                                    "@id": "urn:uuid:34ae8c0d-3398-43a8-aaca-0797d20b72f5"
                                                 }
                                             ],
                                             "valueVar": "concept60"
@@ -5793,7 +5880,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:da74ef81-7eba-4d74-8f6d-824e314afeaa"
+                                                    "@id": "urn:uuid:094a5562-438f-4890-b076-2d904ada65b7"
                                                 }
                                             ],
                                             "valueVar": "medication63"
@@ -5833,11 +5920,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:b5bc9531-4a8c-4dc4-afa8-2717618a1aed",
+                                "uuid": "urn:uuid:8fee0ca8-0ba0-4216-9e8b-bbf10795a181",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[8].children[0]",
+                                "currentPath": "[0].children[1].children[8].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][8][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -5873,7 +5963,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:34563db0-80ff-4143-8084-c4a80a10e7ee"
+                                                    "@id": "urn:uuid:34ae8c0d-3398-43a8-aaca-0797d20b72f5"
                                                 }
                                             ],
                                             "valueVar": "concept60"
@@ -5889,11 +5979,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:0cb55111-2d98-4b72-b3a2-cfdbab9e3542",
+                                "uuid": "urn:uuid:cac861c4-9bf9-4553-b17d-cf0791e372e5",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[8].children[1]",
+                                "currentPath": "[0].children[1].children[8].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][8][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -5912,7 +6005,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:da74ef81-7eba-4d74-8f6d-824e314afeaa"
+                                                    "@id": "urn:uuid:094a5562-438f-4890-b076-2d904ada65b7"
                                                 }
                                             ],
                                             "valueVar": "medication63"
@@ -5953,11 +6046,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:c0a651b7-6829-4a06-8e42-742ec4f32917",
+                        "uuid": "urn:uuid:75c7fdc7-b3c7-4528-94ff-2a04d245658b",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[9]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[9]",
+                        "originalName": "[9]",
+                        "originalLocation": "[and][1][or][9]",
+                        "childPath": "[and][1][or][9][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:36a15439-592a-4f8e-9703-ed8aab03aea7"
@@ -5998,7 +6094,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:104d1087-7399-49c5-a4bb-355f876882ac"
+                                                    "@id": "urn:uuid:cde5d8f0-f0dd-4155-861e-1d7a2327b1ee"
                                                 }
                                             ],
                                             "valueVar": "concept65"
@@ -6029,7 +6125,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:7cf070c5-3870-4572-8772-9cad424aaa79"
+                                                    "@id": "urn:uuid:84df4249-1a63-4c4c-a439-7f2298fa3654"
                                                 }
                                             ],
                                             "valueVar": "medication68"
@@ -6078,7 +6174,7 @@
                                     "valueIn": [
                                         {
                                             "name": "Indians (Hindi-speaking), Pakistani (Urduspeakers), Todas, Naiars, Sri Lankan - ethnic category 2001 census, Irula, Pakistani or British Pakistani - ethnic category 2001 census, Bangladeshi or British Bangladeshi - ethnic category 2001 census, Other Asian background - ethnic category 2001 census..more",
-                                            "@id": "urn:uuid:3f46616a-3987-41d7-b677-4209b6d25e77"
+                                            "@id": "urn:uuid:d024e339-8837-4bf7-9942-098df3771027"
                                         }
                                     ],
                                     "id": {
@@ -6090,11 +6186,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:06c0469c-4d85-49ed-9bb6-5c5ed1057d4a",
+                                "uuid": "urn:uuid:304cdada-f7dc-491c-9a4c-c8739a8b220d",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[9].children[0]",
+                                "currentPath": "[0].children[1].children[9].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][9][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6130,7 +6229,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                                    "@id": "urn:uuid:104d1087-7399-49c5-a4bb-355f876882ac"
+                                                    "@id": "urn:uuid:cde5d8f0-f0dd-4155-861e-1d7a2327b1ee"
                                                 }
                                             ],
                                             "valueVar": "concept65"
@@ -6146,11 +6245,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:3de3c3d4-d56c-43d7-9887-7f8476216b72",
+                                "uuid": "urn:uuid:bb3bae00-be3a-4bdd-afd4-2ce6ef23d26c",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[9].children[1]",
+                                "currentPath": "[0].children[1].children[9].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][9][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6169,7 +6271,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
-                                                    "@id": "urn:uuid:7cf070c5-3870-4572-8772-9cad424aaa79"
+                                                    "@id": "urn:uuid:84df4249-1a63-4c4c-a439-7f2298fa3654"
                                                 }
                                             ],
                                             "valueVar": "medication68"
@@ -6208,11 +6310,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:10432a1f-a628-4490-b5f2-6fff05176d9e",
+                                "uuid": "urn:uuid:0bf9e5f0-8feb-4e45-b102-6336e76d681b",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[9].children[2]",
+                                "currentPath": "[0].children[1].children[9].children[2]",
+                                "originalName": "[2]",
+                                "originalLocation": "[and][1][or][9][and][2]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6226,7 +6331,7 @@
                                     "valueIn": [
                                         {
                                             "name": "Indians (Hindi-speaking), Pakistani (Urduspeakers), Todas, Naiars, Sri Lankan - ethnic category 2001 census, Irula, Pakistani or British Pakistani - ethnic category 2001 census, Bangladeshi or British Bangladeshi - ethnic category 2001 census, Other Asian background - ethnic category 2001 census..more",
-                                            "@id": "urn:uuid:3f46616a-3987-41d7-b677-4209b6d25e77"
+                                            "@id": "urn:uuid:d024e339-8837-4bf7-9942-098df3771027"
                                         }
                                     ],
                                     "id": {
@@ -6239,11 +6344,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:2990a1ef-4f31-4a19-b2b2-ab442b0e493c",
+                        "uuid": "urn:uuid:10c0cfe3-0fe2-4991-84a6-d70b876db988",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[10]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[10]",
+                        "originalName": "[10]",
+                        "originalLocation": "[and][1][or][10]",
+                        "childPath": "[and][1][or][10][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:73cc6420-7c47-4ba2-8b22-9a2a8379d7f1"
@@ -6317,7 +6425,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:918e45e4-b78e-401d-b611-2ac5b593bd40"
+                                                    "@id": "urn:uuid:d740fc6e-769e-47d4-8f85-63e116c68d52"
                                                 }
                                             ],
                                             "valueVar": "medication73"
@@ -6357,11 +6465,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:7a213011-3c0b-4db0-bcdc-3b5c66b4fff1",
+                                "uuid": "urn:uuid:74efe428-938a-47a8-9265-30d7f070bcf6",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[10].children[0]",
+                                "currentPath": "[0].children[1].children[10].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][10][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6385,11 +6496,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:61b92c61-cd01-4edd-b33a-0806392c6ac0",
+                                "uuid": "urn:uuid:5c4cfe61-a94d-4350-b761-0b8f00b7a5ad",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[10].children[1]",
+                                "currentPath": "[0].children[1].children[10].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][10][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6423,11 +6537,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:317793b9-73c6-40b4-b8c2-2040d93fc976",
+                                "uuid": "urn:uuid:33b72c8e-0e60-4951-90c7-eee39dc99d5f",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[10].children[2]",
+                                "currentPath": "[0].children[1].children[10].children[2]",
+                                "originalName": "[2]",
+                                "originalLocation": "[and][1][or][10][and][2]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6446,7 +6563,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:918e45e4-b78e-401d-b611-2ac5b593bd40"
+                                                    "@id": "urn:uuid:d740fc6e-769e-47d4-8f85-63e116c68d52"
                                                 }
                                             ],
                                             "valueVar": "medication73"
@@ -6487,11 +6604,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:f94bf429-f8c1-400f-90cf-6d398f42cc98",
+                        "uuid": "urn:uuid:be36f0b2-cedf-4863-b3bd-63f1f99eba29",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[11]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[11]",
+                        "originalName": "[11]",
+                        "originalLocation": "[and][1][or][11]",
+                        "childPath": "[and][1][or][11][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:9ba683d9-1816-40b0-b591-857cbb086d3e"
@@ -6518,7 +6638,7 @@
                                         "valueIn": [
                                             {
                                                 "name": "Diabetes mellitus without complication, Brittle diabetes, Diabetic nephropathy, Insulin-dependent diabetes mellitus with ulcer, Insulin-dependent diabetes maturity onset, Diabetic neuropathic arthropathy, Diabetic mononeuropathy, Hypoglycaemic event in diabetes, Diabetic eye disease..more",
-                                                "@id": "urn:uuid:0855d4c9-ae5f-488a-9547-de94875a9c78"
+                                                "@id": "urn:uuid:425fb5bf-455e-43c6-a70d-93c0bf7b1dc3"
                                             }
                                         ],
                                         "valueVar": "concept77"
@@ -6534,7 +6654,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Diabetes mellitus without complication, Lipoatrophic diabetes mellitus without complication, Brittle diabetes, Lipoatrophic diabetes, Diabetic nephropathy, Type 1 diabetes mellitus with ulcer, Type 1 diabetes mellitus maturity onset, Type 2 diabetes mellitus with multiple complications, Type 2 diabetes mellitus with ulcer..more",
-                                                    "@id": "urn:uuid:4ae14e93-600e-4bb8-9543-947c5ac8baea"
+                                                    "@id": "urn:uuid:3adcbf5b-dee5-4517-a301-6b1fb08dced1"
                                                 }
                                             ],
                                             "valueVar": "concept75"
@@ -6595,7 +6715,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:19b0081e-40ab-414b-a9a1-3d0e3d3e4b7a"
+                                                    "@id": "urn:uuid:6567d44e-167c-47c0-80b1-6d53e5841281"
                                                 }
                                             ],
                                             "valueVar": "medication79"
@@ -6635,11 +6755,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:f2dfd207-3274-414e-9134-827305922710",
+                                "uuid": "urn:uuid:85910172-9209-4210-802b-c38a92c9f353",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[11].children[0]",
+                                "currentPath": "[0].children[1].children[11].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][11][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6661,7 +6784,7 @@
                                         "valueIn": [
                                             {
                                                 "name": "Diabetes mellitus without complication, Brittle diabetes, Diabetic nephropathy, Insulin-dependent diabetes mellitus with ulcer, Insulin-dependent diabetes maturity onset, Diabetic neuropathic arthropathy, Diabetic mononeuropathy, Hypoglycaemic event in diabetes, Diabetic eye disease..more",
-                                                "@id": "urn:uuid:0855d4c9-ae5f-488a-9547-de94875a9c78"
+                                                "@id": "urn:uuid:425fb5bf-455e-43c6-a70d-93c0bf7b1dc3"
                                             }
                                         ],
                                         "valueVar": "concept77"
@@ -6677,7 +6800,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Diabetes mellitus without complication, Lipoatrophic diabetes mellitus without complication, Brittle diabetes, Lipoatrophic diabetes, Diabetic nephropathy, Type 1 diabetes mellitus with ulcer, Type 1 diabetes mellitus maturity onset, Type 2 diabetes mellitus with multiple complications, Type 2 diabetes mellitus with ulcer..more",
-                                                    "@id": "urn:uuid:4ae14e93-600e-4bb8-9543-947c5ac8baea"
+                                                    "@id": "urn:uuid:3adcbf5b-dee5-4517-a301-6b1fb08dced1"
                                                 }
                                             ],
                                             "valueVar": "concept75"
@@ -6693,11 +6816,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:3b996541-40e3-427a-b790-ee5ef9d5e449",
+                                "uuid": "urn:uuid:cbaae672-9c05-41c6-8a52-1704e36a9ed0",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[11].children[1]",
+                                "currentPath": "[0].children[1].children[11].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][11][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6731,11 +6857,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:189147fb-08a5-4bcb-a1e7-9a6ba279b1ee",
+                                "uuid": "urn:uuid:80e68f04-5c2d-4a88-9fb4-4d06019a3c33",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[11].children[2]",
+                                "currentPath": "[0].children[1].children[11].children[2]",
+                                "originalName": "[2]",
+                                "originalLocation": "[and][1][or][11][and][2]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6754,7 +6883,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
-                                                    "@id": "urn:uuid:19b0081e-40ab-414b-a9a1-3d0e3d3e4b7a"
+                                                    "@id": "urn:uuid:6567d44e-167c-47c0-80b1-6d53e5841281"
                                                 }
                                             ],
                                             "valueVar": "medication79"
@@ -6795,11 +6924,14 @@
                         ]
                     },
                     {
-                        "uuid": "urn:uuid:da1b1a93-12ce-4c60-bc3f-7df2a0f4501a",
+                        "uuid": "urn:uuid:0429cbd5-6cea-40a6-9614-854d48593e97",
                         "type": "operator",
                         "include": true,
-                        "name": "or",
-                        "currentObjectPath": "[0].children[1].children[12]",
+                        "name": "and",
+                        "currentPath": "[0].children[1].children[12]",
+                        "originalName": "[12]",
+                        "originalLocation": "[and][1][or][12]",
+                        "childPath": "[and][1][or][12][and]",
                         "data": {
                             "id": {
                                 "@id": "urn:uuid:a08079c6-2bf7-41e5-9473-c8ff5a50d6fa"
@@ -6875,7 +7007,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:69518ed7-a305-4e9a-9900-e05e4004d924"
+                                                    "@id": "urn:uuid:1ef5f432-c928-4bf1-9fa1-1d73c2639baa"
                                                 }
                                             ],
                                             "valueVar": "concept84"
@@ -6915,11 +7047,14 @@
                         },
                         "children": [
                             {
-                                "uuid": "urn:uuid:9987a73f-9930-4e99-9138-35f61bf8bdcd",
+                                "uuid": "urn:uuid:46294c04-f544-484c-9323-fabddf5c2c1f",
                                 "type": "match",
                                 "include": true,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[12].children[0]",
+                                "currentPath": "[0].children[1].children[12].children[0]",
+                                "originalName": "[0]",
+                                "originalLocation": "[and][1][or][12][and][0]",
+                                "childPath": "",
                                 "data": {
                                     "pathTo": {
                                         "@id": "http://endhealth.info/im#isSubjectOf"
@@ -6974,11 +7109,14 @@
                                 "children": []
                             },
                             {
-                                "uuid": "urn:uuid:6abbe30f-de12-40ff-aa6e-ac93b77788ef",
+                                "uuid": "urn:uuid:5676d403-193f-485a-a49d-00f917705a2b",
                                 "type": "match",
-                                "include": true,
+                                "include": false,
                                 "name": "",
-                                "currentObjectPath": "[0].children[1].children[12].children[1]",
+                                "currentPath": "[0].children[1].children[12].children[1]",
+                                "originalName": "[1]",
+                                "originalLocation": "[and][1][or][12][and][1]",
+                                "childPath": "",
                                 "data": {
                                     "notExist": true,
                                     "pathTo": {
@@ -6998,7 +7136,7 @@
                                             "valueIn": [
                                                 {
                                                     "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
-                                                    "@id": "urn:uuid:69518ed7-a305-4e9a-9900-e05e4004d924"
+                                                    "@id": "urn:uuid:1ef5f432-c928-4bf1-9fa1-1d73c2639baa"
                                                 }
                                             ],
                                             "valueVar": "concept84"

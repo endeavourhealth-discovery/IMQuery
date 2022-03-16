@@ -713,6 +713,7 @@ export default defineComponent({
 }
 .profile-column {
   margin-bottom: 150px;
+  max-width: 300px;
 }
 .main-container::-webkit-scrollbar {
   width: 10px;

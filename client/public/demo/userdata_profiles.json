@@ -38,7 +38,7 @@
         "@id": "im:Profile"
     }],
     "rdfs:label": "Priority 3a",
-    "rdfs:comment": "SMI Population with Priority 1, 2, 3a Comorbidities",
+    "rdfs:comment": "SMI Population with Priority 3a Comorbidities and without Priority 1, 2  Comorbidities",
     "im:isContainedIn": [{
         "@id": "urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca"
     }],

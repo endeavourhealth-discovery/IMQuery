@@ -1,10 +1,13 @@
 [
     {
-        "uuid": "urn:uuid:2492c63d-2f30-4beb-b5cc-dbe7e40b5c10",
+        "uuid": "urn:uuid:9e8348da-b914-4af9-8a33-c415f44641fb",
         "type": "operator",
         "include": true,
         "name": "and",
-        "currentObjectPath": "[0]",
+        "currentPath": "[0]",
+        "originalName": "[and]",
+        "originalLocation": "",
+        "childPath": "[and]",
         "data": {
             "id": {
                 "@id": "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6"
@@ -15,45 +18,17 @@
             },
             "and": [
                 {
-                    "name": "SMI Population",
                     "property": {
                         "@id": "http://endhealth.info/im#hasProfile"
                     },
                     "valueIn": [
                         {
+                            "name": "SMI Population",
                             "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
                         }
                     ],
                     "id": {
-                        "@id": "urn:uuid:e66f3fc1-f907-4579-93f2-e74ba6a684e7"
-                    }
-                },
-                {
-                    "property": {
-                        "@id": "http://endhealth.info/im#hasProfile"
-                    },
-                    "valueIn": [
-                        {
-                            "name": "Priority 1",
-                            "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
-                        }
-                    ],
-                    "id": {
-                        "@id": "urn:uuid:3eced22f-4cbd-413d-badf-014366a6f5f7"
-                    }
-                },
-                {
-                    "property": {
-                        "@id": "http://endhealth.info/im#hasProfile"
-                    },
-                    "valueIn": [
-                        {
-                            "name": "Priority 2",
-                            "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
-                        }
-                    ],
-                    "id": {
-                        "@id": "urn:uuid:b2c0bff4-7b9b-4ad5-86de-185419a13b6b"
+                        "@id": "urn:uuid:17a78af6-01fb-4678-8380-ce4cc11ad7bd"
                     }
                 },
                 {
@@ -250,7 +225,7 @@
                                     "valueIn": [
                                         {
                                             "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                            "@id": "urn:uuid:fb601257-6777-419a-9abc-68ad75732900"
+                                            "@id": "urn:uuid:05db4f72-57e5-4c60-8c10-4034698acfb4"
                                         }
                                     ],
                                     "valueVar": "concept96"
@@ -264,82 +239,79 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:13518ddb-b699-412a-85a5-bf494aece814"
+                    },
+                    "not": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#hasProfile"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Priority 1",
+                                    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:3eced22f-4cbd-413d-badf-014366a6f5f7"
+                            }
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#hasProfile"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Priority 2",
+                                    "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:b2c0bff4-7b9b-4ad5-86de-185419a13b6b"
+                            }
+                        }
+                    ]
                 }
             ]
         },
         "children": [
             {
-                "uuid": "urn:uuid:b05b17e3-4fc3-490f-8634-1fe12aa66067",
+                "uuid": "urn:uuid:33f562ed-186d-4ee7-a577-f9a9db92aeef",
                 "type": "match",
                 "include": true,
-                "name": "SMI Population",
-                "currentObjectPath": "[0].children[0]",
+                "name": "",
+                "currentPath": "[0].children[0]",
+                "originalName": "[0]",
+                "originalLocation": "[and][0]",
+                "childPath": "",
                 "data": {
-                    "name": "SMI Population",
                     "property": {
                         "@id": "http://endhealth.info/im#hasProfile"
                     },
                     "valueIn": [
                         {
+                            "name": "SMI Population",
                             "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
                         }
                     ],
                     "id": {
-                        "@id": "urn:uuid:e66f3fc1-f907-4579-93f2-e74ba6a684e7"
+                        "@id": "urn:uuid:17a78af6-01fb-4678-8380-ce4cc11ad7bd"
                     }
                 },
                 "children": []
             },
             {
-                "uuid": "urn:uuid:3e3f4726-96a9-4145-bf2d-dbd3ee7d2b25",
-                "type": "match",
-                "include": true,
-                "name": "",
-                "currentObjectPath": "[0].children[1]",
-                "data": {
-                    "property": {
-                        "@id": "http://endhealth.info/im#hasProfile"
-                    },
-                    "valueIn": [
-                        {
-                            "name": "Priority 1",
-                            "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
-                        }
-                    ],
-                    "id": {
-                        "@id": "urn:uuid:3eced22f-4cbd-413d-badf-014366a6f5f7"
-                    }
-                },
-                "children": []
-            },
-            {
-                "uuid": "urn:uuid:1f2147e1-ac27-41e4-b3b9-3a4438ef90f9",
-                "type": "match",
-                "include": true,
-                "name": "",
-                "currentObjectPath": "[0].children[2]",
-                "data": {
-                    "property": {
-                        "@id": "http://endhealth.info/im#hasProfile"
-                    },
-                    "valueIn": [
-                        {
-                            "name": "Priority 2",
-                            "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
-                        }
-                    ],
-                    "id": {
-                        "@id": "urn:uuid:b2c0bff4-7b9b-4ad5-86de-185419a13b6b"
-                    }
-                },
-                "children": []
-            },
-            {
-                "uuid": "urn:uuid:a036cf08-61a6-4e71-a5f2-5d2d03bdcc8d",
+                "uuid": "urn:uuid:4bf63ab3-4770-4ae7-98f2-08a1b1bfa4a2",
                 "type": "operator",
                 "include": true,
-                "name": "and",
-                "currentObjectPath": "[0].children[3]",
+                "name": "or",
+                "currentPath": "[0].children[1]",
+                "originalName": "[1]",
+                "originalLocation": "[and][1]",
+                "childPath": "[and][1][or]",
                 "data": {
                     "id": {
                         "@id": "urn:uuid:d1b0d8a1-81bf-4307-91eb-ec7116ecabcf"
@@ -534,7 +506,7 @@
                                     "valueIn": [
                                         {
                                             "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                            "@id": "urn:uuid:fb601257-6777-419a-9abc-68ad75732900"
+                                            "@id": "urn:uuid:05db4f72-57e5-4c60-8c10-4034698acfb4"
                                         }
                                     ],
                                     "valueVar": "concept96"
@@ -551,11 +523,14 @@
                 },
                 "children": [
                     {
-                        "uuid": "urn:uuid:8a5fb08e-ab35-4395-9479-56654f778298",
+                        "uuid": "urn:uuid:606535bc-0371-488a-9dd0-68761ca1c419",
                         "type": "match",
                         "include": true,
                         "name": "",
-                        "currentObjectPath": "[0].children[3].children[0]",
+                        "currentPath": "[0].children[1].children[0]",
+                        "originalName": "[0]",
+                        "originalLocation": "[and][1][or][0]",
+                        "childPath": "",
                         "data": {
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -610,11 +585,14 @@
                         "children": []
                     },
                     {
-                        "uuid": "urn:uuid:c468126f-e5fd-4e3d-8c6d-b0977740ccee",
+                        "uuid": "urn:uuid:ab04faf2-9487-4b70-a497-fd1df3f54e6b",
                         "type": "match",
                         "include": true,
                         "name": "",
-                        "currentObjectPath": "[0].children[3].children[1]",
+                        "currentPath": "[0].children[1].children[1]",
+                        "originalName": "[1]",
+                        "originalLocation": "[and][1][or][1]",
+                        "childPath": "",
                         "data": {
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -669,11 +647,14 @@
                         "children": []
                     },
                     {
-                        "uuid": "urn:uuid:deddfd1a-e286-498c-a261-747564fa0184",
+                        "uuid": "urn:uuid:474b13b4-2910-4586-964c-690f21ca48d2",
                         "type": "match",
                         "include": true,
                         "name": "",
-                        "currentObjectPath": "[0].children[3].children[2]",
+                        "currentPath": "[0].children[1].children[2]",
+                        "originalName": "[2]",
+                        "originalLocation": "[and][1][or][2]",
+                        "childPath": "",
                         "data": {
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -706,11 +687,14 @@
                         "children": []
                     },
                     {
-                        "uuid": "urn:uuid:a972e464-d8b4-45f1-a916-14603fa05eeb",
+                        "uuid": "urn:uuid:0919954f-c75f-4d10-8e60-5fc786d3a2c7",
                         "type": "match",
                         "include": true,
                         "name": "",
-                        "currentObjectPath": "[0].children[3].children[3]",
+                        "currentPath": "[0].children[1].children[3]",
+                        "originalName": "[3]",
+                        "originalLocation": "[and][1][or][3]",
+                        "childPath": "",
                         "data": {
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -737,11 +721,14 @@
                         "children": []
                     },
                     {
-                        "uuid": "urn:uuid:a2127fce-a74d-4bf3-afee-cc355329acab",
+                        "uuid": "urn:uuid:82530832-8949-408a-963a-5b8e3c18dd45",
                         "type": "match",
                         "include": true,
                         "name": "",
-                        "currentObjectPath": "[0].children[3].children[4]",
+                        "currentPath": "[0].children[1].children[4]",
+                        "originalName": "[4]",
+                        "originalLocation": "[and][1][or][4]",
+                        "childPath": "",
                         "data": {
                             "pathTo": {
                                 "@id": "http://endhealth.info/im#isSubjectOf"
@@ -777,7 +764,7 @@
                                     "valueIn": [
                                         {
                                             "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                            "@id": "urn:uuid:fb601257-6777-419a-9abc-68ad75732900"
+                                            "@id": "urn:uuid:05db4f72-57e5-4c60-8c10-4034698acfb4"
                                         }
                                     ],
                                     "valueVar": "concept96"
@@ -789,6 +776,103 @@
                                     "valueVar": "effectiveDate97"
                                 }
                             ]
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "uuid": "urn:uuid:dd4b0fbf-5ad9-4f9d-b641-a286d8a4f1f1",
+                "type": "operator",
+                "include": false,
+                "name": "not",
+                "currentPath": "[0].children[2]",
+                "originalName": "[2]",
+                "originalLocation": "[and][2]",
+                "childPath": "[and][2][not]",
+                "data": {
+                    "id": {
+                        "@id": "urn:uuid:13518ddb-b699-412a-85a5-bf494aece814"
+                    },
+                    "not": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#hasProfile"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Priority 1",
+                                    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:3eced22f-4cbd-413d-badf-014366a6f5f7"
+                            }
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#hasProfile"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Priority 2",
+                                    "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:b2c0bff4-7b9b-4ad5-86de-185419a13b6b"
+                            }
+                        }
+                    ]
+                },
+                "children": [
+                    {
+                        "uuid": "urn:uuid:f432ec48-45f7-4baa-87cf-232b873d9bbc",
+                        "type": "match",
+                        "include": true,
+                        "name": "",
+                        "currentPath": "[0].children[2].children[0]",
+                        "originalName": "[0]",
+                        "originalLocation": "[and][2][not][0]",
+                        "childPath": "",
+                        "data": {
+                            "property": {
+                                "@id": "http://endhealth.info/im#hasProfile"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Priority 1",
+                                    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:3eced22f-4cbd-413d-badf-014366a6f5f7"
+                            }
+                        },
+                        "children": []
+                    },
+                    {
+                        "uuid": "urn:uuid:cd5cdfd4-2e7e-421e-a750-612fbc851e3c",
+                        "type": "match",
+                        "include": true,
+                        "name": "",
+                        "currentPath": "[0].children[2].children[1]",
+                        "originalName": "[1]",
+                        "originalLocation": "[and][2][not][1]",
+                        "childPath": "",
+                        "data": {
+                            "property": {
+                                "@id": "http://endhealth.info/im#hasProfile"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Priority 2",
+                                    "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:b2c0bff4-7b9b-4ad5-86de-185419a13b6b"
+                            }
                         },
                         "children": []
                     }

@@ -8,15 +8,13 @@
     },
     "and": [
         {
-            "name": "SMI Population",
             "property": {
                 "@id": "http://endhealth.info/im#hasProfile"
             },
-            "valueIn": [
-                {
-                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
-                }
-            ],
+            "valueIn": [{
+                "name": "SMI Population",
+                "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+            }],
             "id": {
                 "@id": "urn:uuid:17a78af6-01fb-4678-8380-ce4cc11ad7bd"
             }
@@ -25,8 +23,7 @@
             "id": {
                 "@id": "urn:uuid:d1b0d8a1-81bf-4307-91eb-ec7116ecabcf"
             },
-            "or": [
-                {
+            "or": [{
                     "pathTo": {
                         "@id": "http://endhealth.info/im#isSubjectOf"
                     },
@@ -44,23 +41,19 @@
                         "property": {
                             "@id": "http://endhealth.info/im#concept"
                         },
-                        "valueIn": [
-                            {
-                                "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
-                            }
-                        ],
+                        "valueIn": [{
+                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                        }],
                         "valueVar": "concept90"
                     },
                     "id": {
                         "@id": "urn:uuid:9aa3ca5c-b724-4a13-900f-8f41f24621af"
                     },
-                    "and": [
-                        {
+                    "and": [{
                             "property": {
                                 "@id": "http://endhealth.info/im#concept"
                             },
-                            "valueIn": [
-                                {
+                            "valueIn": [{
                                     "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
                                 },
                                 {
@@ -95,23 +88,19 @@
                         "property": {
                             "@id": "http://endhealth.info/im#concept"
                         },
-                        "valueIn": [
-                            {
-                                "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
-                            }
-                        ],
+                        "valueIn": [{
+                            "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                        }],
                         "valueVar": "concept93"
                     },
                     "id": {
                         "@id": "urn:uuid:cc94257d-661b-48dc-bd73-3c0714c0089d"
                     },
-                    "and": [
-                        {
+                    "and": [{
                             "property": {
                                 "@id": "http://endhealth.info/im#concept"
                             },
-                            "valueIn": [
-                                {
+                            "valueIn": [{
                                     "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
                                 },
                                 {
@@ -138,8 +127,7 @@
                     "property": {
                         "@id": "http://endhealth.info/im#concept"
                     },
-                    "valueIn": [
-                        {
+                    "valueIn": [{
                             "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
                         },
                         {
@@ -167,8 +155,7 @@
                     "property": {
                         "@id": "http://endhealth.info/im#concept"
                     },
-                    "valueIn": [
-                        {
+                    "valueIn": [{
                             "@id": "urn:uuid:15bd20c8-c92f-496c-8560-896299a632e5"
                         },
                         {
@@ -207,17 +194,14 @@
                     "id": {
                         "@id": "urn:uuid:19d4a778-740c-4106-95c7-efda9bb38c33"
                     },
-                    "and": [
-                        {
+                    "and": [{
                             "property": {
                                 "@id": "http://endhealth.info/im#concept"
                             },
-                            "valueIn": [
-                                {
-                                    "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
-                                    "@id": "urn:uuid:05db4f72-57e5-4c60-8c10-4034698acfb4"
-                                }
-                            ],
+                            "valueIn": [{
+                                "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
+                                "@id": "urn:uuid:05db4f72-57e5-4c60-8c10-4034698acfb4"
+                            }],
                             "valueVar": "concept96"
                         },
                         {
@@ -229,36 +213,38 @@
                     ]
                 }
             ]
-        }
-    ],
-    "not": [
-        {
-            "property": {
-                "@id": "http://endhealth.info/im#hasProfile"
-            },
-            "valueIn": [
-                {
-                    "name": "Priority 1",
-                    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
-                }
-            ],
-            "id": {
-                "@id": "urn:uuid:3eced22f-4cbd-413d-badf-014366a6f5f7"
-            }
         },
         {
-            "property": {
-                "@id": "http://endhealth.info/im#hasProfile"
-            },
-            "valueIn": [
-                {
-                    "name": "Priority 2",
-                    "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
-                }
-            ],
             "id": {
-                "@id": "urn:uuid:b2c0bff4-7b9b-4ad5-86de-185419a13b6b"
-            }
+                "@id": "urn:uuid:13518ddb-b699-412a-85a5-bf494aece814"
+            },
+
+            "not": [{
+                    "property": {
+                        "@id": "http://endhealth.info/im#hasProfile"
+                    },
+                    "valueIn": [{
+                        "name": "Priority 1",
+                        "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                    }],
+                    "id": {
+                        "@id": "urn:uuid:3eced22f-4cbd-413d-badf-014366a6f5f7"
+                    }
+                },
+                {
+                    "property": {
+                        "@id": "http://endhealth.info/im#hasProfile"
+                    },
+                    "valueIn": [{
+                        "name": "Priority 2",
+                        "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+                    }],
+                    "id": {
+                        "@id": "urn:uuid:b2c0bff4-7b9b-4ad5-86de-185419a13b6b"
+                    }
+                }
+            ]
         }
     ]
+
 }

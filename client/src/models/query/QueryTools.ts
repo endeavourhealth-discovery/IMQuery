@@ -616,48 +616,85 @@ export class Profile extends Entity {
         return this._definitionTree;
     }
 
- 
+
     private convertToDefinitionTree(definition: any): void {
 
-
         // console.log("definition", definition);
+        let _definitionTree: any[] = [];
 
+        const _operators = ["and", "or", "not"];
+        // let _firstClauses: any[];
 
         // change rdf to UI-model
         // only works if the first clause in the definition is wrapped with and: [] / or: [] 
-        const _firstClause = definition.and || definition.or ?
-            {
-                uuid: `urn:uuid:${v4()}`,
-                type: "operator", //assumes first item is always an operator 
-                include: true, //###todo:code dynamically once profile model is corrected 
-                name: definition.and ? "and" : "or",
-                // originalObjectPath: "",
-                currentObjectPath: "[0]",
-                data: definition,
-                children: [],
+        const _keys = Object.keys(definition);
+
+        // console.log(definition.name, " keys: ", _keys)
+        for (let i = 0; i < _keys.length; i++) {
+            if (_operators.includes(_keys[i])) {
+
+                const _currentIndex = _definitionTree.length;
+                const _currentKey = _keys[i];
+
+                _definitionTree.push(
+                    {
+                        uuid: `urn:uuid:${v4()}`,
+                        type: "operator",
+                        include: _currentKey != "not",  //###todo:code dynamically once profile model is corrected 
+                        name: _currentKey,
+                        currentPath: `[${_currentIndex}]`,
+                        originalName: `[${_currentKey}]`,
+                        originalLocation: "",
+                        childPath: `[${_currentKey}]`,
+                        // childPath: `[${_currentKey}]`,
+                        data: definition,
+                        children: [],
+                    }
+                )
+
             }
-            : null;
+        }
 
-        if (!_firstClause) throw console.error("JSON Profile Definition must contain and 'and' or 'or' operator clause at the root of the definition")
-
-        // create tree and add first item
-        let _definitionTree: any[] = [];
-        _definitionTree.push(_firstClause);
-
+        if (!_definitionTree.length) {
+            console.error("JSON Profile Definition must contain and 'and' or 'or' operator clause at the root of the definition")
+            return;
+        }
 
         // gets children for each operator clause in UI-model format
         const getChildren = (parent: any): any => {
-
+            console.log(" definition[name]", definition["name"])
 
             //match clauses don't have "children" 
             if (parent.type == "match") {
                 return null;
             }
 
-            let _children = parent.data.and || parent.data.or || parent.data.not;
+
+            // console.log("parent.childPath", parent.originalLocation)
+
+            // parent.originalPath = _path;
+
+
+            // const _childPath = parent.originalLocation == "" ? parent.originalPath : parent.originalPath +  `[${_key}]`
+            // const _currentClause =  _.get(definition, parent.originalLocation);
+            console.log(" parent", parent.data)
+
+            let _key = Object.keys(parent.data).filter((_childKey: string) => _operators.includes(_childKey))[0];
+            console.log(" parent key", _key)
+
+
+
+            let _childPath = parent.childPath;
+
+            console.log("_childPath", _childPath)
+
+            let _children = parent.data[_key];
+
+            // let _children = _.get(definition, _childPath) //.and || parent.data.or || parent.data.not;
+
+            console.log("children", _children)
 
             _children = _children.map((item: any, index: number) => {
-
 
                 const _isMatchClause = item["property"] || item["pathTo"];
 
@@ -668,24 +705,45 @@ export class Profile extends Entity {
                 //     console.log("conversion problem", { parent: parent, item: item, index: index })
                 // }
 
-
+                let _key = Object.keys(item).filter((_childKey: string) => _operators.includes(_childKey))[0];
 
                 let _name;
                 if (_isMatchClause) {
-                    _name = item["name"] ? item["name"] : ""
+                    _name = ""; //item["name"] ? item["name"] : ""
                 } else {
-                    _name = parent.data.and ? "and" : "or";
+                    _name = _key; //parent.data.and ? "and" : "or";
                 }
+
+
+                const _currentKey = (_isMatchClause ? `[${_key}]` : `[${index}]`)
+
+
+                let _include;
+                if (_isMatchClause) {
+                    _include = (item["notExist"] == true) ? false : true;
+                } else {
+                    _include = (_key == "not") ? false : true; 
+
+                }
+
+
+                let _childPath = _isMatchClause ? "" : parent.childPath + `[${index}]` + `[${_key}]`
+
+                // console.log("currentkey", _currentKey)
 
                 return {
                     uuid: `urn:uuid:${v4()}`,
                     type: _isMatchClause ? "match" : "operator",
-                    include: true, //###todo:code dynamically once profile model is corrected 
+                    include: _include,//###todo:code dynamically once profile model is corrected 
                     name: _name,
+                    currentPath: parent.currentPath + ".children" + + `[${index}]`,
                     // originalObjectPath: "",
-                    currentObjectPath: "",
+                    originalName: `[${index}]`,
+                    originalLocation: parent.childPath + `[${index}]`,
+                    childPath: _childPath,
                     data: item,
                     children: [],
+
                 }
             })
 
@@ -694,10 +752,10 @@ export class Profile extends Entity {
             // path is either children[i] (first item)
             // or [parentPath].children[i] (the rest) 
             _children.forEach((item: any, index: number) => {
-                if (parent['currentObjectPath'] == '') {
-                    _children[index]['currentObjectPath'] = `children[${index.toString()}]`
+                if (parent['currentPath'] == '') {
+                    _children[index]['currentPath'] = `children[${index.toString()}]`
                 } else {
-                    _children[index]['currentObjectPath'] = `${parent['currentObjectPath']}.children[${index.toString()}]`
+                    _children[index]['currentPath'] = `${parent['currentPath']}.children[${index.toString()}]`
                 }
             });
 
@@ -705,19 +763,20 @@ export class Profile extends Entity {
         };
 
 
-        //breadth-first addition of items and children to the definition  tree:
-        //  of children
         //  const _visited = new Set();
-        const _queue = [_firstClause]
 
+
+        //breadth-first addition of  items and children to the definition  tree:
+        const _queue = _.cloneDeep(_definitionTree); //adds top level operator clauses to the queue
+        console.log("_queue", _.cloneDeep(_queue))
         while (_queue.length > 0) {
 
             const _currentItem = _queue.shift(); // gets the next item from the queue
-            const _children = getChildren(_currentItem);
+            let _children = getChildren(_currentItem);
 
 
             // add children to .children[] key in new object-model            
-            if (_children && _currentItem['currentObjectPath'] == "") {
+            if (_children && _currentItem['currentPath'] == "") {
                 // root path
                 _.set(_definitionTree, 'children', _children)
 
@@ -725,10 +784,10 @@ export class Profile extends Entity {
                 // console.log("_definitionTree", _definitionTree);
                 // console.log("_currentItem ", _currentItem)
                 // console.log("children", _children)
-                // console.log("_currentItem['currentObjectPath'] ", _currentItem['currentObjectPath'] + '.children')
-                // console.log("_currentItem  at objectpath", _.get(_definitionTree, _currentItem['currentObjectPath'] + '.children'))
+                // console.log("_currentItem['currentPath'] ", _currentItem['currentPath'] + '.children')
+                // console.log("_currentItem  at objectpath", _.get(_definitionTree, _currentItem['currentPath'] + '.children'))
                 // all other paths (almost always)
-                _.set(_definitionTree, _currentItem['currentObjectPath'] + '.children', _children)
+                _.set(_definitionTree, _currentItem['currentPath'] + '.children', _children)
 
             }
 

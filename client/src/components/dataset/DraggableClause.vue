@@ -39,8 +39,8 @@
               <div v-if="showCircle(index, element.uuid)" :class="'circle inline border b-2 border-white'"></div>
               <!-- :line  -->
               <div v-if="index != children.length - 1" :class="'line-v inline border-l b-2 border-l-white'"></div>
-<!-- 
-              <div
+
+              <!-- <div
               v-if="element.type == 'operator'"
                 :class="
                   'clause-item__operatorlabel inline-block absolute bg-white font-semibold hover:text-blue-600 hover:underline' +
@@ -48,7 +48,7 @@
                 "
               >
                 {{ element.name }}
-              </div> -->
+              </div>  -->
             </div>
           </div>
 
