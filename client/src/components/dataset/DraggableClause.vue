@@ -381,8 +381,9 @@ export default defineComponent({
   /* padding: 5px; */
 }
 
+.ghost .line-h,
 .ghost .space-h,
 .ghost .line-v {
-  visibility: hidden;
+  display: none;
 }
 </style>

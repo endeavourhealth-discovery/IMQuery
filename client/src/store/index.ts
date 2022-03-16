@@ -79,7 +79,7 @@ export default createStore({
     JSONContent: "",
     LabelContent: [] as any[],
     isLoading: false,
-    activeFileIri: "",
+    activeFileIri: [] as any[],
     openFiles: [] as any[],
     userFiles: [] as any[],
     activeQueryId: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
@@ -4149,7 +4149,7 @@ export default createStore({
 
         //any file belonging to the user
         const _userFile = {
-          id: `urn:uuid:${v4()}`,
+          uuid: `urn:uuid:${v4()}`,
           iri: entity["@id"],
           name: entity["rdfs:label"],
           comment: entity["rdfs:comment"],
@@ -4160,6 +4160,7 @@ export default createStore({
         //files after their content is fetched via service (i.e. when the user opens them)
         const _openFile = {
           ..._userFile,
+          isVisible: true,
           content: entity
         };
 
@@ -4257,8 +4258,21 @@ export default createStore({
       state.openFiles = openFiles;
 
     },
+    toggleVisibleOpenFile(state, fileIri) {
+      state.openFiles.forEach((item: any, index) => {
+        if (item.iri == fileIri) {
+          console.log(item.iri)
+          console.log(fileIri)
+          state.openFiles[index].isVisible = !state.openFiles[index].isVisible
+        }
+      })
+    },
     updateActiveFileIri(state, activeFileIri) {
-      state.activeFileIri = activeFileIri;
+      if (state.activeFileIri.includes(activeFileIri)) {
+        state.activeFileIri = state.activeFileIri.filter((item: any) => item.iri != activeFileIri)
+      } else {
+        state.activeFileIri.push(activeFileIri)
+      }
     },
     updateActiveQuery(state, activeQuery) {
       let _activeIndex = -1;

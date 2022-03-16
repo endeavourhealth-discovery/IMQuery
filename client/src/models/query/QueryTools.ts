@@ -51,7 +51,7 @@ export class QueryBuilder {
 
 
     private reset(): void {
-        this._entities = [] as any[];
+        this.entities.clear();
         this._entityTypes = [] as any[];
         this._profiles = new Map<string, any>()
         this._clauses = new Map<string, any>();
@@ -114,7 +114,7 @@ export class QueryBuilder {
     //     this._activeProfile = new Profile(_profile as Entity);
     //     this._openProfiles.push(new Profile(_profile as Entity));
     //     // temporarily convert if JSON queries are required
-    //     // if (replaceKeys) _profile = QueryTools.replaceKeys(_profile);
+    //     // if (replaceKeys) _profile = QueryUtils.replaceKeys(_profile);
     // }
 
     private _activeProfile: Entity;
@@ -648,6 +648,8 @@ export class Profile extends Entity {
         // gets children for each operator clause in UI-model format
         const getChildren = (parent: any): any => {
 
+
+            //match clauses don't have "children" 
             if (parent.type == "match") {
                 return null;
             }
@@ -657,19 +659,19 @@ export class Profile extends Entity {
             _children = _children.map((item: any, index: number) => {
 
 
-                const _isChildMatchClause = item["property"] || item["pathTo"];
+                const _isMatchClause = item["property"] || item["pathTo"];
 
                 //log conversion problem (e.g. non-match clauses should not have a name)
                 //###todo connect details in meta key to UI
-                if (!_isChildMatchClause && item["name"]) {
-                    this.addProblem("conversion", "The following labels were generated automatically, please double check their meaning.", { parent: parent, item: item, index: index })
-                    console.log("conversion problem", { parent: parent, item: item, index: index })
-                }
+                // if (!_isMatchClause && item["name"]) {
+                //     this.addProblem("conversion", "The following labels were generated automatically, please double check their meaning.", { parent: parent, item: item, index: index })
+                //     console.log("conversion problem", { parent: parent, item: item, index: index })
+                // }
 
 
 
                 let _name;
-                if (_isChildMatchClause) {
+                if (_isMatchClause) {
                     _name = item["name"] ? item["name"] : ""
                 } else {
                     _name = parent.data.and ? "and" : "or";
@@ -677,7 +679,7 @@ export class Profile extends Entity {
 
                 return {
                     uuid: `urn:uuid:${v4()}`,
-                    type: _isChildMatchClause ? "match" : "operator",
+                    type: _isMatchClause ? "match" : "operator",
                     include: true, //###todo:code dynamically once profile model is corrected 
                     name: _name,
                     // originalObjectPath: "",
@@ -733,8 +735,8 @@ export class Profile extends Entity {
             // pushes children to queue if they're not match clauses
             if (_children && _children.length) {
                 for (const _child of _children) {
-                    const _isChildMatchClause = _child["property"] || _child["pathTo"];
-                    if (!_isChildMatchClause) {
+                    const _isMatchClause = _child["property"] || _child["pathTo"];
+                    if (!_isMatchClause) {
                         _queue.push(_child);
                     }
                 }
@@ -756,7 +758,7 @@ export class Profile extends Entity {
     get asString(): string {
 
         //stringified  and prettified (e.g. for text-editor)
-        return QueryTools.prettifyJSON(JSON.stringify(this));
+        return QueryUtils.prettifyJSON(JSON.stringify(this));
     }
 
     //#todo create json() getter to return Profile in RDF format for storage, ensure im:definition is JSONified
@@ -764,108 +766,7 @@ export class Profile extends Entity {
 }
 
 
-export class Graph {
-
-
-    private '_graph'?: any | null;
-
-
-
-    constructor(input?: any)
-    constructor(input: any) {
-        this["_graph"] = Graph.convertToGraph(input);
-        return this;
-    }
-
-
-
-    public static convertToGraph(input: any) {
-
-
-
-        // must populate a map
-        // iterate until named clause         // v-if="!item['rdfs:label
-        // ensure every key has _uuid, path, childnode
-
-
-
-
-        const inputTree = { _childNode: [], _originalPath: '', ...input }
-
-
-
-
-        const getChildren = (propertyPath: string): any | null => {
-
-            const _expectedChildKeys = ['im:and', 'im:or', 'im:not'];
-
-
-
-            // get node at current property path
-            const _node = _.get(input, propertyPath);
-            if (_node) {
-                // check if node has children
-                const _childKey = _expectedChildKeys.filter((key: any) => _node.some((child: any) => child[key]));
-                if (_childKey.length) {
-                    // return first child
-                    return _node[_childKey[0]];
-                }
-            }
-
-            return null;
-        }
-
-
-        // const populateTree = () => {
-
-        //     // breadth-first addition of children
-        //     const _visited = new Set();
-        //     const _queue = ['']
-
-        //     while (_queue.length > 0) {
-
-        //         const _currentItem = _queue.shift(); // gets the next item from the queue
-        //         const _children = getChildren(_currentItem);
-
-        //         if (_currentItem['@id'] == this._hierarchyTree['@id']) {
-
-        //             _.set(this._hierarchyTree, 'children', _children)
-        //             // console.log("2.children: ", _children)
-        //             // console.log("3. path: ", 'children')
-        //             // console.log("4. tree: ", this._hierarchyTree)
-        //         } else {
-
-        //             _.set(this._hierarchyTree, _currentItem['currentPath'] + '.children', _children)
-        //             // console.log("2.children: ", _children)
-        //             // console.log("3. path: ", _currentItem['currentPath'] + '.children')
-        //             // console.log("4. tree: ", this._hierarchyTree)
-        //         }
-
-        //         //add current item to queue if its not a duplicate
-        //         for (const _child of _children) {
-        //             if (!_visited.has(_child['@id'])) {
-        //                 _visited.add(_child['@id']);
-        //                 _queue.push(_child);
-        //             }
-        //         }
-        //     }
-
-        // }
-
-
-
-
-        return;
-
-
-    }
-
-
-
-}
-
-
-export default class QueryTools {
+export default class QueryUtils {
 
     // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
     public static findPlaceholders(text: string): any {
@@ -963,7 +864,7 @@ export default class QueryTools {
         // deep nested replacement of keys if they are string
         const replaceKeysDeep = (o: any) => {
             return _.transform(o, function (result: any, value: any, key: any) {
-                const _currentKey = typeof (key) == "string" ? QueryTools.replaceChars(key) : key;
+                const _currentKey = typeof (key) == "string" ? QueryUtils.replaceChars(key) : key;
                 result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
             });
         }
@@ -983,8 +884,8 @@ export default class QueryTools {
     //replaces all keys in an object using  key-value pairs in character map
     public static replaceChars = (text: string) => {
         let _text = text;
-        Object.keys(QueryTools._characterMap).forEach((key: string) => {
-            _text = _text.replaceAll(key, QueryTools._characterMap[key])
+        Object.keys(QueryUtils._characterMap).forEach((key: string) => {
+            _text = _text.replaceAll(key, QueryUtils._characterMap[key])
         });
         return _text;
 
@@ -1005,3 +906,106 @@ export default class QueryTools {
 
 
 }
+
+
+
+
+// export class Graph {
+
+
+//     private '_graph'?: any | null;
+
+
+
+//     constructor(input?: any)
+//     constructor(input: any) {
+//         this["_graph"] = Graph.convertToGraph(input);
+//         return this;
+//     }
+
+
+
+//     public static convertToGraph(input: any) {
+
+
+
+//         // must populate a map
+//         // iterate until named clause         // v-if="!item['rdfs:label
+//         // ensure every key has _uuid, path, childnode
+
+
+
+
+//         const inputTree = { _childNode: [], _originalPath: '', ...input }
+
+
+
+
+//         const getChildren = (propertyPath: string): any | null => {
+
+//             const _expectedChildKeys = ['im:and', 'im:or', 'im:not'];
+
+
+
+//             // get node at current property path
+//             const _node = _.get(input, propertyPath);
+//             if (_node) {
+//                 // check if node has children
+//                 const _childKey = _expectedChildKeys.filter((key: any) => _node.some((child: any) => child[key]));
+//                 if (_childKey.length) {
+//                     // return first child
+//                     return _node[_childKey[0]];
+//                 }
+//             }
+
+//             return null;
+//         }
+
+
+//         // const populateTree = () => {
+
+//         //     // breadth-first addition of children
+//         //     const _visited = new Set();
+//         //     const _queue = ['']
+
+//         //     while (_queue.length > 0) {
+
+//         //         const _currentItem = _queue.shift(); // gets the next item from the queue
+//         //         const _children = getChildren(_currentItem);
+
+//         //         if (_currentItem['@id'] == this._hierarchyTree['@id']) {
+
+//         //             _.set(this._hierarchyTree, 'children', _children)
+//         //             // console.log("2.children: ", _children)
+//         //             // console.log("3. path: ", 'children')
+//         //             // console.log("4. tree: ", this._hierarchyTree)
+//         //         } else {
+
+//         //             _.set(this._hierarchyTree, _currentItem['currentPath'] + '.children', _children)
+//         //             // console.log("2.children: ", _children)
+//         //             // console.log("3. path: ", _currentItem['currentPath'] + '.children')
+//         //             // console.log("4. tree: ", this._hierarchyTree)
+//         //         }
+
+//         //         //add current item to queue if its not a duplicate
+//         //         for (const _child of _children) {
+//         //             if (!_visited.has(_child['@id'])) {
+//         //                 _visited.add(_child['@id']);
+//         //                 _queue.push(_child);
+//         //             }
+//         //         }
+//         //     }
+
+//         // }
+
+
+
+
+//         return;
+
+
+//     }
+
+
+
+// }

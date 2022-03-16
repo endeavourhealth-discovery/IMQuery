@@ -65,7 +65,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import{ v4 } from "uuid";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import InputDescription from "@/components/dataset/InputDescription.vue";
-import QueryTools from "@/models/query/QueryTools";
+import QueryUtils from "@/models/query/QueryTools";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";
@@ -83,7 +83,7 @@ export default defineComponent({
     modelValue() {
       console.log("active template", this.queryBuilder.activeTemplate);
       console.log("clause", this.modelValue);
-      QueryTools.flattenObject(this.modelValue);
+      QueryUtils.flattenObject(this.modelValue);
     },
   },
   data() {

@@ -182,7 +182,7 @@ export class QueryBuilder {
     //     this._activeProfile = new Profile(_profile as Entity);
     //     this._openProfiles.push(new Profile(_profile as Entity));
     //     // temporarily convert if JSON queries are required
-    //     // if (replaceKeys) _profile = QueryTools.replaceKeys(_profile);
+    //     // if (replaceKeys) _profile = QueryUtils.replaceKeys(_profile);
     // }
 
     private _activeProfile: Entity;
@@ -677,7 +677,7 @@ export class Profile extends Entity {
 
     get asString(): string {
         //stringified  and prettified
-        return QueryTools.prettifyJSON(JSON.stringify(this));
+        return QueryUtils.prettifyJSON(JSON.stringify(this));
 
 
     }
@@ -786,7 +786,7 @@ export class Graph {
 }
 
 
-export default class QueryTools {
+export default class QueryUtils {
 
     // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
     public static findPlaceholders(text: string): any {
@@ -884,7 +884,7 @@ export default class QueryTools {
         // deep nested replacement of keys if they are string
         const replaceKeysDeep = (o: any) => {
             return _.transform(o, function (result: any, value: any, key: any) {
-                const _currentKey = typeof (key) == "string" ? QueryTools.replaceChars(key) : key;
+                const _currentKey = typeof (key) == "string" ? QueryUtils.replaceChars(key) : key;
                 result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
             });
         }
@@ -904,8 +904,8 @@ export default class QueryTools {
     //replaces all keys in an object using  key-value pairs in character map
     public static replaceChars = (text: string) => {
         let _text = text;
-        Object.keys(QueryTools._characterMap).forEach((key: string) => {
-            _text = _text.replaceAll(key, QueryTools._characterMap[key])
+        Object.keys(QueryUtils._characterMap).forEach((key: string) => {
+            _text = _text.replaceAll(key, QueryUtils._characterMap[key])
         });
         return _text;
 

@@ -171,7 +171,7 @@ import InputRadioButtons from "@/components/dataset/InputRadioButtons.vue";
 import Network from "@/components/dataset/Network.vue";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup"; //optional for column grouping
-import QueryTools, { QueryBuilder } from "@/models/query/QueryTools";
+import QueryUtils, { QueryBuilder } from "@/models/query/QueryTools";
 import { entityTypes } from "@/models/query/OntologyTools";
 import HierarchyTreeItem from "@/components/dataset/HierarchyTreeItem.vue";
 import LabelView from "@/components/dataset/LabelView.vue";

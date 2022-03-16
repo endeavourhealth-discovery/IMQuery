@@ -1,16 +1,16 @@
 <template>
-  <div class="card-profile px-6 py-5 flex flex-col  mb-12 rounded-xl overflow-hidden bg-gradient-to-r ">
+  <div class="card-profile px-6 py-6 flex flex-col  mb-12 rounded-xl overflow-hidden bg-gradient-to-r ">
     <div class="flex items-center mb-5">
       <!-- Left  -->
 
       <!-- Icon -->
-      <div class=" bg-black flex justify-center items-center rounded-full bg-opacity-40 w-14 h-14">
-        <UserIcon class="h-8 w-8 text-white" aria-hidden="true" />
+      <div class=" bg-black flex justify-center items-center rounded-full bg-opacity-40 w-12 h-12 ml-1">
+        <UserIcon class="h-7 w-7 text-white" aria-hidden="true" />
       </div>
       <!-- Icon -->
 
       <!-- Main Entity  -->
-      <div class="select-none text-white font-bold text-3xl ml-7 mt-2">
+      <div class="select-none text-white font-semibold text-3xl ml-4">
         Person
       </div>
       <!-- Main Entity  -->
@@ -25,19 +25,13 @@
       <!-- Right  -->
     </div>
     <!-- Definition  -->
+
     <button type="button" class="profile py-2 text-sm font-medium text-white bg-black rounded-lg bg-opacity-20 hover:bg-opacity-30 outline-none">
       <DraggableClause class="profile-content mx-5" :data="definition" :children="definition" />
     </button>
+
     <!-- Definition  -->
   </div>
-  <!-- <div class="flex flex-col pl-10 pt-10">
-    <div class="mb-20 font-bold text-gray-700 text-2xl">Priority1</div>
-    <nestedDraggable class="profile mx-5" :data="profile2" :children="profile2" />
-  </div>
-  <div class="flex flex-col pl-10 pt-10">
-    <div class="mb-20 font-bold text-gray-700 text-2xl">Heart rate variability vs blood glucose in diabetics</div>
-    <nestedDraggable class="profile mx-5" :data="profile3" :children="profile3" />
-  </div> -->
 </template>
 
 <script lang="ts">
@@ -54,11 +48,13 @@ export default defineComponent({
   components: {
     // nestedDraggable,
     DraggableClause,
-    UserIcon
+    UserIcon,
+    
     // HeroIcon
   },
   data() {
     return {
+      isShowing: true,
       profile1: [
         {
           uuid: "d55338e0-16c2-4f83-ad17-d4db64197b86",

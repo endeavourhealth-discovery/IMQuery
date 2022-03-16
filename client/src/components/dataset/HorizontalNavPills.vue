@@ -4,12 +4,12 @@
   >
     <template v-for="item in items" :key="item.iri">
       <button
-        @click="$emit('update:modelValue', item.iri)"
+        @click="onClick(item.iri)"
         type="button"
         :class="
           'tab-button transition duration-500 ease-in-out px-2 py-2 non-selectable inline-flex items-center justify-center font-regular text-base  hover:text-gray-900  dark:hover:text-white' +
             [
-              modelValue == item.iri
+              item.isVisible
                 ? 'active border dark:text-white dark:border-yellow-500 border-2 border-gray-300   bg-white dark:bg-gray-900  shadow-sm'
                 : 'border border-2 border-transparent dark:border-gray-600 dark:text-gray-400 '
             ]
@@ -61,6 +61,12 @@ export default defineComponent({
     HeroIcon
   },
   methods: {
+    onClick(itemIri: string) {
+      // this.$emit("update:modelValue", itemIri);
+       this.$store.commit("toggleVisibleOpenFile", itemIri);
+
+      // this.$emit("update:modelValue", itemIri);
+    },
     closeItem(itemIri: string) {
       //#todo:saveFile via api then remove from state
 

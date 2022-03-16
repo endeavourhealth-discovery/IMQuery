@@ -209,10 +209,22 @@
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <div class="kanban mt-8 flex justify-center space-x-5 text-white" @click="">
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
-                <div class="profile-column">
+                <div v-show="isVisible(iri)" class="profile-column">
                   <div class="select-none text-black dark:text-white font-bold text-3xl">{{ profile["rdfs:label"] }}</div>
-                  <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"]  }}</div>
-                  <Profile class="mt-5" :definition="profile.definitionTree" :class="' ' + colours[index]" />
+                  <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"] }}</div>
+                  <TransitionRoot
+                    appear
+                    :show="isVisible(iri)"
+                    as="template"
+                    enter="transform transition duration-[400ms]"
+                    enter-from="opacity-0 rotate-[-10deg] scale-50"
+                    enter-to="opacity-100 rotate-0 scale-100"
+                    leave="transform duration-200 transition ease-in-out"
+                    leave-from="opacity-100 rotate-0 scale-100"
+                    leave-to="opacity-0 scale-95 "
+                  >
+                    <Profile class="mt-5" :definition="profile.definitionTree" :class="' ' + colours[index]" />
+                  </TransitionRoot>
                 </div>
               </template>
             </div>
@@ -282,6 +294,7 @@ import DataStudio from "./DataStudio.vue";
 
 import OrganisationBrowser from "@/components/dataset/OrganisationBrowser.vue";
 import HorizontalNavPills from "@/components/dataset/HorizontalNavPills.vue";
+import { TransitionRoot } from "@headlessui/vue";
 
 // import Dataset from "@/components/dataset/Dataset.ts";
 
@@ -305,14 +318,25 @@ export default defineComponent({
     CardButton,
     ResponsiveNav,
     HorizontalNavPills,
-    Profile
+    Profile,
+    TransitionRoot
   },
   $refs: {
     OverlayPanel: HTMLElement
   },
   data() {
     return {
-      colours: ["to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500","to-amber-400 from-orange-500", "from-pink-500 to-rose-500", "to-sky-500 from-blue-600", "to-purple-600 via-indigo-700 from-indigo-600", "from-cyan-600 to-green-500"],
+      isShowing: true,
+      colours: [
+        "to-sky-500 from-blue-600",
+        "to-purple-600 via-indigo-700 from-indigo-600",
+        "from-cyan-600 to-green-500",
+        "to-amber-400 from-orange-500",
+        "from-pink-500 to-rose-500",
+        "to-sky-500 from-blue-600",
+        "to-purple-600 via-indigo-700 from-indigo-600",
+        "from-cyan-600 to-green-500"
+      ],
       newItems: [
         {
           label: "Search Profile",
@@ -521,6 +545,14 @@ export default defineComponent({
     // this.getInitialData();
   },
   methods: {
+    isVisible(iri: string): boolean {
+      // console.log(profile["@id"])
+
+      const _item = this.openFiles.filter((item: any, index: number) => item.iri == iri);
+      // console.log(this.openFiles)
+
+      return _item[0].isVisible;
+    },
     test(): void {
       // console.log(this.activeFileIri);
       // console.log(this.queryBuilder.profiles.get(this.activeFileIri));
@@ -674,8 +706,8 @@ export default defineComponent({
   overflow-y: auto;
   /* border: 1px solid #dde1e2; */
 }
-.profile-column{
-  margin-bottom: 150px
+.profile-column {
+  margin-bottom: 150px;
 }
 .main-container::-webkit-scrollbar {
   width: 10px;
