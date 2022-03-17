@@ -34,21 +34,25 @@
             <div v-if="showSpaceH(index, element.uuid)" class="space-h"></div>
             <!-- <div v-else class="line-v"> -->
             <!-- </div> -->
-            <div class="connector-v inline-flex flex-col">
+            <div class="connector-v relative inline-flex flex-col">
               <!-- circle  -->
-              <div v-if="showCircle(index, element.uuid)" :class="'circle inline border border-2 border-white' + [element.include  ?  ' bg-green-700' : ' bg-red-600']"></div>
+              <div
+                v-if="showCircle(index, element.uuid)"
+                :class="'circle inline border border-2 border-white' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600' : ' bg-green-700']"
+                v-tooltip.left="!element.include || parent(element)['name'] == 'not' ?  `${tooltip.exclude}` : `${tooltip.include}`"
+              ></div>
               <!-- :line  -->
               <div v-if="index != children.length - 1" :class="'line-v inline border-l border-l-2 border-l-white'"></div>
 
-              <!-- <div
-              v-if="element.type == 'operator'"
+              <div
+                v-if="parent(element) != null && index != siblingCount -1"
                 :class="
-                  'clause-item__operatorlabel inline-block absolute bg-white font-semibold hover:text-blue-600 hover:underline' +
+                  'clause-item__operatorlabel inline-block absolute rounded-sm hover:bg-white hover:text-black text-md font-semibold text-white ' +
                     [element.type == 'operator' && element.name == 'and' ? ` text-${colors.and}-700` : ` text-${colors.or}-700`]
                 "
               >
-                {{ element.name }}
-              </div>  -->
+                {{ parent(element)["name"] == "not" ? "or" : parent(element)["name"] }}
+              </div>
             </div>
           </div>
 
@@ -123,6 +127,7 @@
                   [isCardDragged && !element.children.length ? ' min-h bg-blue-100' : ' '] +
                   [!isCardDragged && !element.children.length ? ' hidden' : ' ']
               "
+              :siblingCount="element.children.length"
               :children="element.children"
               item-key="name"
               @drag="isCardDragged = true"
@@ -143,13 +148,19 @@ import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
 
 export default defineComponent({
-  props: ["data", "children", "isParentNegated", "isTopLevelNode"],
+  props: ["data", "children", "isParentNegated", "isTopLevelNode", "siblingCount" ],
   components: {
     draggable
   },
   name: "nested-draggable",
   data() {
     return {
+      tooltip: {
+        include: '<span style="background-color: green; color: white; padding: 5px 20px; border-radius: 3px;"><b>INCLUDE </b></span>',
+        exclude: '<span style="background-color: red; color: white; padding: 5px 20px; border-radius: 3px;"><b>EXCLUDE </b></span>'
+      },
+      lastParentPath: "",
+      lastParent: {},
       colors: {
         and: "purple",
         or: "purple",
@@ -182,6 +193,27 @@ export default defineComponent({
     //   const _label = _iri.split(":")[1];
     //   return _label[0].toUpperCase() + _label.substring(1);
     // },
+    parent(clause: any): any {
+      if (this.lastParentPath == clause.lastParentPath) {
+        return this.lastParent;
+      } else {
+        const _parentPath = clause.currentPath
+          .split(".")
+          .slice(0, -1)
+          .join(".");
+
+        this.lastParent = _.get(this.data, _parentPath);
+
+        return this.lastParent;
+      }
+
+      // console.log("clause", clause.uuid);
+      // console.log("parent path", _parentPath);
+
+      // console.log(" UI _parent", _parent);
+
+      // return JSON.stringify(_parent);
+    },
     matchLabel(clause: any): string {
       // if (clause.name) {
       //   return clause.name;
@@ -260,8 +292,8 @@ export default defineComponent({
     // },
     toggleInclude(element: any): void {
       element.include = !element.include;
-    },
-    
+    }
+
     // operatorLabel(element: any): string {
     //   if (this.children.length == 1) {
     //     return this.childrenText[1][element.operator];
@@ -273,7 +305,6 @@ export default defineComponent({
     // }
   },
   computed: {
-    
     isCardDragged: {
       get(): boolean {
         return this.$store.state.isCardDragged;
@@ -375,7 +406,7 @@ export default defineComponent({
   /* visibility: hidden; */
   min-width: 10px;
   /* max-width: 10px; */
-  margin-left: 6px;
+  margin-left: 5px;
   /* padding-left: 20px; */
   /* margin-right: -3 */
   height: 100%;
@@ -395,8 +426,8 @@ export default defineComponent({
 .line-h {
   /* visibility: hidden; */
   min-width: 10px;
-  margin: 9px 3px 0 0;
-  border-top: 1px solid #fff;
+  margin: 8px 3px 0 0;
+  border-top: 2px solid #fff;
   /* min-height: 25px; */
 
   /* height: 100%; */
@@ -411,5 +442,30 @@ export default defineComponent({
 .ghost .space-h,
 .ghost .line-v {
   display: none;
+}
+
+
+.clause-item__operatorlabel {
+  top: calc(50%);
+  right: 15px;
+  /* width: 30px; */
+  /* text-align: right; */
+  visibility: hidden;
+}
+/* 
+.clause-item_arrow {
+  margin-top: 4px;
+  min-width: 20px;
+  width: 20px;
+} */
+/* 
+.definition-editor .hover .circle,
+.definition-editor .hover .line-h,
+.definition-editor .hover .linebutton {
+  visibility: visible;
+} */
+
+.profile:hover .clause-item__operatorlabel {
+  visibility: visible !important;
 }
 </style>

@@ -4,14 +4,14 @@
       <!-- Left  -->
 
       <!-- Icon -->
-      <div class=" bg-black flex justify-center items-center rounded-full bg-opacity-40 w-12 h-12 ml-1">
+      <div class=" bg-black flex justify-center items-center rounded-full bg-opacity-40 w-12 h-12 ml-5">
         <UserIcon class="h-7 w-7 text-white" aria-hidden="true" />
       </div>
       <!-- Icon -->
 
       <!-- Main Entity  -->
       <div class="select-none text-white font-semibold text-3xl ml-4">
-        {{ profile.mainEntity.name}}
+        {{ profile.mainEntity.name }}
       </div>
       <!-- Main Entity  -->
       <!-- Left  -->
@@ -26,8 +26,16 @@
     </div>
     <!-- Definition  -->
 
-    <button type="button" class="profile py-2 text-sm font-medium text-white bg-black rounded-lg bg-opacity-20 hover:bg-opacity-30 outline-none">
-      <DraggableClause class="profile-content mx-5" :data="profile.definitionTree" :children="profile.definitionTree" />
+    <button
+      type="button"
+      class="profile transition duration-500 ease-in-out py-2 px-3 text-sm font-medium text-white bg-black rounded-lg bg-opacity-20 hover:bg-opacity-40 outline-none"
+    >
+      <DraggableClause
+        class="profile-content mx-5"
+        @siblingCount="profile.definitionTree.length"
+        :data="profile.definitionTree"
+        :children="profile.definitionTree"
+      />
     </button>
 
     <!-- Definition  -->
@@ -63,8 +71,7 @@ export default defineComponent({
           payload: payload
         });
       }
-    },
-    
+    }
   },
   data() {
     return {
