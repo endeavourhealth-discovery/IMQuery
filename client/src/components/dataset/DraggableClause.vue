@@ -36,9 +36,9 @@
             <!-- </div> -->
             <div class="connector-v inline-flex flex-col">
               <!-- circle  -->
-              <div v-if="showCircle(index, element.uuid)" :class="'circle inline border b-2 border-white'"></div>
+              <div v-if="showCircle(index, element.uuid)" :class="'circle inline border border-2 border-white' + [element.include  ?  ' bg-green-700' : ' bg-red-600']"></div>
               <!-- :line  -->
-              <div v-if="index != children.length - 1" :class="'line-v inline border-l b-2 border-l-white'"></div>
+              <div v-if="index != children.length - 1" :class="'line-v inline border-l border-l-2 border-l-white'"></div>
 
               <!-- <div
               v-if="element.type == 'operator'"

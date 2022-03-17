@@ -225,7 +225,7 @@
                     <div class="select-none text-black dark:text-white font-bold text-3xl">{{ profile["rdfs:label"] }}</div>
                     <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl">{{ profile["rdfs:comment"] }}</div>
 
-                    <Profile class="mt-5" :definition="profile.definitionTree" :class="' ' + colours[index]" />
+                    <Profile class="mt-5" :profile="profile" :class="' ' + colours[index]" />
                   </TransitionRoot>
                 </div>
               </template>

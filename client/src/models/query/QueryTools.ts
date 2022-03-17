@@ -593,6 +593,7 @@ export class Profile extends Entity {
             const _definition = JSON.parse(entity["im:definition"]);
             this["im:definition"] = _definition;
             // populate definitionTree (this is the UI's object model and maps 1 to 1 onto Profiles written in RDF) 
+
             this.convertToDefinitionTree(_definition);
 
         }
@@ -600,10 +601,13 @@ export class Profile extends Entity {
         return this;
     }
 
+
+    // public mainEntity: string;
+
     get mainEntity(): any {
         return {
-            "@id": this["im:definition"].entityType[0]["@id"],
-            "name": this["im:definition"].entityType[0]["@id"].split("#")[1] //###todo: populate name from Ontology
+            "@id": this["im:definition"]["entityType"]["@id"],
+            "name": this["im:definition"]["entityType"]["@id"].split("#")[1] //###todo: populate name from Ontology
         };
     }
     set mainEntity(value: any): void {
@@ -722,7 +726,7 @@ export class Profile extends Entity {
                 if (_isMatchClause) {
                     _include = (item["notExist"] == true) ? false : true;
                 } else {
-                    _include = (_key == "not") ? false : true; 
+                    _include = (_key == "not") ? false : true;
 
                 }
 
