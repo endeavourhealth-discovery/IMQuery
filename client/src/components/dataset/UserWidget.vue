@@ -6,23 +6,19 @@
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >
-    <RoundButton
-      class="title non-selectable px-2 transition duration-500 ease-in-out shadow-sm ring-white ring-1"
-      :rounded="true"
-      :showRing="false"
-      focusTextColor="white"
-      textColor="white"
-      hoverTextColor="white"
-      backgroundColor="transparent"
-      hoverBackgroundColor="gray-700"
-      borderColor="white"
-      ringColor="white"
-      @blur="isHover ? null : [(expanded = false)]"
-      
-    >
+    <div class="select-none text-blue-700 font-bold dark:text-white hover:bg-blue-50 dark:hover:bg-gray-700 text-3xl border border-2 border-blue-600 dark:border-white rounded-full p-3"    v-wave="{
+          color: 'currentColor',
+          easing: 'ease-out',
+          duration: 0.7,
+          initialOpacity: 0.6,
+          finalOpacity: 0.1,
+          cancellationPeriod: 75
+        }">
       {{ modelValue.firstName.substring(0, 1) + modelValue.lastName.substring(0, 1) }}
-    </RoundButton>
-    <div v-if="modelValue && expanded" class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white dark:bg-ray-900 ring-1 focus:outline-none" role="menu">
+    </div>
+
+
+    <div v-if="modelValue && expanded" class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white  ring-1 focus:outline-none" role="menu">
       <div class="non-selectable block px-4 py-2 text-2xl border-b">
         <div class="text-black font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
         <div class="text-gray-700 font-regular">
@@ -62,13 +58,12 @@ import Swal from "sweetalert2";
 import { CustomAlert } from "@/models/user/CustomAlert";
 import LoggerService from "@/services/LoggerService";
 
-
 export default defineComponent({
   name: "UserWidget",
   props: ["modelValue"],
   components: {
     // HeroIcon,
-    RoundButton
+    // RoundButton
   },
   data() {
     return {
@@ -78,8 +73,8 @@ export default defineComponent({
   computed: mapState(["currentUser", "isLoggedIn"]),
   methods: {
     onLogOut(): void {
-      this.$store.dispatch("logoutCurrentUser")
-            this.$toast.add(LoggerService.success("Logged Out Successfully."));
+      this.$store.dispatch("logoutCurrentUser");
+      this.$toast.add(LoggerService.success("Logged Out Successfully."));
 
       // Swal.fire({
       //   icon: "warning",

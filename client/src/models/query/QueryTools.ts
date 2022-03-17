@@ -666,7 +666,7 @@ export class Profile extends Entity {
 
         // gets children for each operator clause in UI-model format
         const getChildren = (parent: any): any => {
-            console.log(" definition[name]", definition["name"])
+            // console.log(" definition[name]", definition["name"])
 
             //match clauses don't have "children" 
             if (parent.type == "match") {
@@ -681,33 +681,20 @@ export class Profile extends Entity {
 
             // const _childPath = parent.originalLocation == "" ? parent.originalPath : parent.originalPath +  `[${_key}]`
             // const _currentClause =  _.get(definition, parent.originalLocation);
-            console.log(" parent", parent.data)
+            // console.log(" parent", parent.data)
 
             let _key = Object.keys(parent.data).filter((_childKey: string) => _operators.includes(_childKey))[0];
-            console.log(" parent key", _key)
-
-
-
             let _childPath = parent.childPath;
-
-            console.log("_childPath", _childPath)
-
             let _children = parent.data[_key];
-
             // let _children = _.get(definition, _childPath) //.and || parent.data.or || parent.data.not;
-
+            
+            console.log("_childPath", _childPath)
+            console.log(" parent key", _key)
             console.log("children", _children)
 
             _children = _children.map((item: any, index: number) => {
 
                 const _isMatchClause = item["property"] || item["pathTo"];
-
-                //log conversion problem (e.g. non-match clauses should not have a name)
-                //###todo connect details in meta key to UI
-                // if (!_isMatchClause && item["name"]) {
-                //     this.addProblem("conversion", "The following labels were generated automatically, please double check their meaning.", { parent: parent, item: item, index: index })
-                //     console.log("conversion problem", { parent: parent, item: item, index: index })
-                // }
 
                 let _key = Object.keys(item).filter((_childKey: string) => _operators.includes(_childKey))[0];
 

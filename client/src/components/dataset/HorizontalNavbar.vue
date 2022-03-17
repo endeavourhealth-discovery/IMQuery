@@ -5,18 +5,22 @@
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex items-center border-b border-b-2 dark:border-0 justify-center transition duration-500 ease-in-out dark:hover:text-white ' +
-            [modelValue == item.name ? ' dark:text-white border-b-white' : ' text-black dark:text-gray-400 border-b-transparent']
+          'tab-button non-selectable inline-flex items-center justify-center transition duration-500 ease-in-out dark:hover:text-white ' +
+            [
+              modelValue == item.name
+                ? ' dark:text-white  text-blue-600 border-b border-b-2 border-b-blue-600 dark:border-b-0 '
+                : ' text-black dark:text-gray-400 border-b-transparent'
+            ]
         ]"
         @click="onClick(item.name, item.hyperlink ? item.hyperlink : '')"
-            v-wave="{
-    color: 'currentColor',
-    easing: 'ease-out',
-    duration: 0.3,
-    initialOpacity: 0.2,
-    finalOpacity: 0.1,
-    cancellationPeriod: 75
-  }"
+        v-wave="{
+          color: 'currentColor',
+          easing: 'ease-out',
+          duration: 0.3,
+          initialOpacity: 0.2,
+          finalOpacity: 0.1,
+          cancellationPeriod: 75
+        }"
       >
         <!-- Icon -->
         <div v-if="showicon" class="inline-flex mr-2">

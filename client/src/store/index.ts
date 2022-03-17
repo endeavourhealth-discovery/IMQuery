@@ -79,6 +79,7 @@ export default createStore({
     JSONContent: "",
     LabelContent: [] as any[],
     isLoading: false,
+    theme: "",
     activeFileIri: [] as any[],
     openFiles: [] as any[],
     userFiles: [] as any[],
@@ -4138,6 +4139,29 @@ export default createStore({
     isCardDragged: false,
   },
   mutations: {
+    updateTheme(state, newTheme) {
+      // const _currentTheme = state.theme;
+      state.theme = newTheme;
+      const _rootElement = document.getElementById("html");
+
+      const _currentStoredTheme: string = localStorage.getItem(
+        "themeName",
+        ) as string;
+
+      if (_currentStoredTheme && _currentStoredTheme != "") {
+        _rootElement?.classList.remove(_currentStoredTheme);
+      }
+
+
+      localStorage.setItem("themeName", newTheme);
+      _rootElement?.classList.add(newTheme);
+
+
+    
+
+
+
+    },
     updateUserFiles(state, entities) {
       // state.openFiles = [...state.openFiles, file];
 
@@ -4344,6 +4368,17 @@ export default createStore({
     }
   },
   actions: {
+    async loadTheme({ commit, dispatch }) {
+      //sets theme
+
+
+      const _storedTheme = localStorage.getItem("themeName");
+      const _defaultTheme = "dark";
+      const _themeName = (_storedTheme && _storedTheme != "") ? _storedTheme : _defaultTheme;
+      commit("updateTheme", _themeName);
+
+
+    },
     async loadUserData({ commit, dispatch }) {
 
       //example 

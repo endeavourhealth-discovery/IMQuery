@@ -11,7 +11,7 @@
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <header :class="'header  mx-auto relative flex items-center justify-between w-full b-bottom dark:border-0' + [activeTabName == 'Home' ? ' ' : ' ']">
+      <header :class="'header  mx-auto relative flex items-center justify-between w-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
         <!-- Left Side  -->
         <div :class="'pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
           <!-- Menu Toggler  -->
@@ -50,6 +50,7 @@
           :autocompleteData="autocompleteData"
           @search="showSearchResults(searchString)"
         />
+
         <!-- /Searchbox  -->
 
         <div class="right flex mr-7 ml-4">
@@ -87,6 +88,11 @@
             </div>
             <!-- /Apps -->
           </div>
+
+          <button class="theme-toggler  ml-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+            <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+            <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
+          </button>
 
           <!-- User Widget -->
           <UserWidget class="ml-10" :modelValue="userMeta" />
@@ -412,7 +418,7 @@ export default defineComponent({
           index: 2,
           name: "Data",
           icon: "newspaper",
-          visible: true
+          visible: false
         },
         {
           index: 3,
@@ -509,24 +515,22 @@ export default defineComponent({
       set(value: any): void {
         this.$store.commit("updateActiveFileIri", value);
       }
+    },
+    currentTheme: {
+      get(): string {
+        return this.$store.state.theme;
+      },
+      set(value: any): void {
+        this.$store.commit("updateTheme", value);
+      }
     }
   },
   async mounted() {
+    this.$store.dispatch("loadTheme");
+    console.log("current THeme", localStorage.getItem("themeName"));
+
+    // this.currenTheme = "dark";
     this.$store.dispatch("loadUserData");
-
-    //sets theme
-
-    const _themeCode: string = localStorage.getItem("themeCode") as string;
-
-    const _rootElement = document.getElementById("html");
-    if (_themeCode && _themeCode != "") {
-      // if already stored
-      _rootElement?.classList.add(_themeCode);
-    } else {
-      // first time
-      localStorage.setItem("themeCode", "dark");
-      _rootElement?.classList.add("dark");
-    }
 
     await this.$store.dispatch("authenticateCurrentUser");
 
@@ -550,6 +554,13 @@ export default defineComponent({
     // this.getInitialData();
   },
   methods: {
+    toggleTheme(): void {
+      if (this.currentTheme == "dark") {
+        this.currentTheme = "light";
+      } else {
+        this.currentTheme = "dark";
+      }
+    },
     isVisible(iri: string): boolean {
       // console.log(profile["@id"])
 

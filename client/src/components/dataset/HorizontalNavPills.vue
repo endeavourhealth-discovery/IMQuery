@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tab-buttons transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 hover:bg-gray-100"
+    class="tab-buttons transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 "
   >
     <template v-for="item in items" :key="item.iri">
       <button

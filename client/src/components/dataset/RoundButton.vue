@@ -1,9 +1,9 @@
 <template>
   <button
     :class="
-      `non-selectable roundbutton transition duration-300 ease-in-out flex items-center justify-center rounded-md border border-${borderColor} bg-${backgroundColor} hover:bg-${hoverBackgroundColor} hover:text-${hoverTextColor} text-${textColor} focus:bg-${hoverBackgroundColor} focus:bg-${focusBackgroundColor} focus:text-${focusTextColor} focus:border-transparent focus:ring-${ringColor}` +
+      `non-selectable roundbutton focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out flex items-center justify-center rounded-md border border-${borderColor} bg-${backgroundColor} hover:bg-${hoverBackgroundColor} hover:text-${hoverTextColor} text-${textColor} focus:bg-${hoverBackgroundColor} focus:bg-${focusBackgroundColor} focus:text-${focusTextColor} focus:border-transparent focus:ring-${ringColor}` +
       [ rounded ? ' rounded': '' ] +
-      [ showRing ? ' focus:outline-none focus:ring-2 focus:ring-offset-2' :'' ] 
+      [ showRing ? ' ' :'' ] 
     "
     @click="$emit('click')"
   >

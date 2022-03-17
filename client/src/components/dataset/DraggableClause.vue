@@ -39,16 +39,16 @@
               <div
                 v-if="showCircle(index, element.uuid)"
                 :class="'circle inline border border-2 border-white' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600' : ' bg-green-700']"
-                v-tooltip.left="!element.include || parent(element)['name'] == 'not' ?  `${tooltip.exclude}` : `${tooltip.include}`"
+                v-tooltip.left="!element.include || parent(element)['name'] == 'not' ? `${tooltip.exclude}` : `${tooltip.include}`"
               ></div>
               <!-- :line  -->
               <div v-if="index != children.length - 1" :class="'line-v inline border-l border-l-2 border-l-white'"></div>
 
               <div
-                v-if="parent(element) != null && index != siblingCount -1"
+                v-if="parent(element) != null && parent(element)['name'] && index != siblingCount - 1"
                 :class="
                   'clause-item__operatorlabel inline-block absolute rounded-sm hover:bg-white hover:text-black text-md font-semibold text-white ' +
-                    [element.type == 'operator' && element.name == 'and' ? ` text-${colors.and}-700` : ` text-${colors.or}-700`]
+                    [element && element.type == 'operator' && element.name && element.name == 'and' ? ` text-${colors.and}-700` : ` text-${colors.or}-700`]
                 "
               >
                 {{ parent(element)["name"] == "not" ? "or" : parent(element)["name"] }}
@@ -67,11 +67,11 @@
                 </button>
               </template>
               <template v-else-if="false">
-                <textarea
+                <!-- <textarea
                   :value="element.name"
                   class="clause-named__name ml-5 text-xl select-none cursor-pointer text-black font-medium text-left bg-white rounded-sm  pr-2 pt-1 py-2 relative"
                 >
-                </textarea>
+                </textarea> -->
               </template>
             </template>
 
@@ -148,7 +148,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
 
 export default defineComponent({
-  props: ["data", "children", "isParentNegated", "isTopLevelNode", "siblingCount" ],
+  props: ["data", "children", "isParentNegated", "isTopLevelNode", "siblingCount"],
   components: {
     draggable
   },
@@ -443,7 +443,6 @@ export default defineComponent({
 .ghost .line-v {
   display: none;
 }
-
 
 .clause-item__operatorlabel {
   top: calc(50%);
