@@ -43,12 +43,15 @@
 </template>
 
 <script lang="ts">
-import nestedDraggable from "@/components/dataset/draggable/nested.vue";
+// import nestedDraggable from "@/components/dataset/draggable/nested.vue";
+// import vueDraggable from "@/components/dataset/draggable/vueDraggable";
 // import rawDisplayer from "@/components/dataset/draggable/rawDisplayer.vue";
 import { ref, onMounted, defineComponent } from "vue";
 import DraggableClause from "./DraggableClause.vue";
 // import HeroIcon from "@/components/search/HeroIcon.vue";
 import { UserIcon } from "@heroicons/vue/solid";
+import _ from "lodash";
+
 
 export default defineComponent({
   name: "Profile",
@@ -75,6 +78,7 @@ export default defineComponent({
   },
   data() {
     return {
+      definition: _.cloneDeep(this.profile),
       isShowing: true
     };
   }

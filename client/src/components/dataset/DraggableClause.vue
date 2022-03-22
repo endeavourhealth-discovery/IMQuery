@@ -28,7 +28,7 @@
           v-if="index == 0"
           class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
         ></div> -->
-        <div class="clause-container clause inline-flex">
+        <div class="clause-container clause inline-flex" >
           <div class="connector-h dark:hover:bg-opacity-30 dark:hover:bg-black rounded-sm inline-flex flex">
             <div v-if="showLineH(index, element.uuid)" :class="'line-h'"></div>
             <div v-if="showSpaceH(index, element.uuid)" class="space-h"></div>
@@ -45,7 +45,7 @@
               <div v-if="index != children.length - 1" :class="'line-v inline border-l border-l-2 border-l-white'"></div>
 
               <div
-                v-if="parent(element) != null && parent(element)['name'] && index != siblingCount - 1"
+                v-if="parent(element) != null && index != siblingCount - 1"
                 :class="
                   'clause-item__operatorlabel inline-block absolute rounded-sm hover:bg-white hover:text-black text-md font-semibold text-white ' +
                     [element && element.type == 'operator' && element.name && element.name == 'and' ? ` text-${colors.and}-700` : ` text-${colors.or}-700`]
@@ -56,15 +56,17 @@
             </div>
           </div>
 
-          <div class="clause-content inline flex-col relative rounded-md">
+          <button class="clause-content inline flex-col relative rounded-md">
             <!-- Named Clause - Name  -->
             <template v-if="element.type == 'match'">
               <template v-if="true">
                 <button
+                @click="handleClick(element)"
                   class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10  outline-none"
                 >
                   {{ matchLabel(element) }}
                 </button>
+
               </template>
               <template v-else-if="false">
                 <!-- <textarea
@@ -134,7 +136,7 @@
               @dragend="isCardDragged = false"
               @drop="isCardDragged = false"
             />
-          </div>
+          </button>
         </div>
       </div>
     </template>
@@ -144,13 +146,14 @@
 
 <script lang="ts">
 import draggable from "vuedraggable";
+// import { VueDraggableNext } from './draggable/@'
 import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
 
 export default defineComponent({
   props: ["data", "children", "isParentNegated", "isTopLevelNode", "siblingCount"],
   components: {
-    draggable
+    draggable,
   },
   name: "nested-draggable",
   data() {
@@ -184,6 +187,10 @@ export default defineComponent({
     };
   },
   methods: {
+    handleClick(clause: any): any {
+      console.log("clause",clause )
+
+    },
     // operatorLabel(): any {
     //   // console.log("item", item);
     //   const _keys = Object.keys(this.clause);

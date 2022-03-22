@@ -1,9 +1,10 @@
 <template>
   <div
-    class="tab-buttons transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 "
+    class="tab-buttons drop-zone transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 "
   >
     <template v-for="item in items" :key="item.iri">
       <button
+      draggable="true"
         @click="onClick(item.iri)"
         type="button"
         :class="
@@ -14,14 +15,7 @@
                 : 'border border-2 border-transparent dark:border-gray-600 dark:text-gray-400 '
             ]
         "
-        v-wave="{
-          color: 'currentColor',
-          easing: 'ease-out',
-          duration: 0.3,
-          initialOpacity: 0.2,
-          finalOpacity: 0.1,
-          cancellationPeriod: 75
-        }"
+       
       >
         <!-- Icon -->
         <!-- <div class="inline-flex">
@@ -94,6 +88,18 @@ export default defineComponent({
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
 }
+
+ .drop-zone {
+    background-color: #eee;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  .drag-el {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
 
 .tab-button {
   /* height: 30px; */

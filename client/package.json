@@ -14,6 +14,7 @@
     "test:e2e:ci": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "im-library": "https://endeavour-codebuild-output.s3.eu-west-2.amazonaws.com/im-library-1.0.0.tgz",
     "@babel/preset-flow": "7.16.7",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
