@@ -28,7 +28,7 @@
           v-if="index == 0"
           class="inline-flex select-none cursor-pointer text-gray-700 font-medium pb-2 "
         ></div> -->
-        <div class="clause-container clause inline-flex" >
+        <div class="clause-container clause inline-flex">
           <div class="connector-h dark:hover:bg-opacity-30 dark:hover:bg-black rounded-sm inline-flex flex">
             <div v-if="showLineH(index, element.uuid)" :class="'line-h'"></div>
             <div v-if="showSpaceH(index, element.uuid)" class="space-h"></div>
@@ -61,12 +61,11 @@
             <template v-if="element.type == 'match'">
               <template v-if="true">
                 <button
-                @click="handleClick(element)"
+                  @click="handleClick(element)"
                   class="clause-named__name ml-5 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent relative z-0 focus:z-10  outline-none"
                 >
                   {{ matchLabel(element) }}
                 </button>
-
               </template>
               <template v-else-if="false">
                 <!-- <textarea
@@ -121,7 +120,7 @@
             </template> -->
 
             <nested-draggable
-              :data="data"
+              :profile="profile"
               :isTopLevelNode="false"
               :isParentNegated="element.include == false"
               :class="
@@ -151,9 +150,10 @@ import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
 
 export default defineComponent({
-  props: ["data", "children", "isParentNegated", "isTopLevelNode", "siblingCount"],
+  props: ["profile", "test", "children", "siblingCount"],
+  emits: ["view"],
   components: {
-    draggable,
+    draggable
   },
   name: "nested-draggable",
   data() {
@@ -188,8 +188,23 @@ export default defineComponent({
   },
   methods: {
     handleClick(clause: any): any {
-      console.log("clause",clause )
-
+      // console.log(this.profile)
+      // console.log(this.test);
+      // console.log(this.profile[0].data.id)
+      const _profileId =  this.profile[0].data.id["@id"];
+      const _currentClausePath = clause.currentPath;
+      // console.log("_currentPath", _currentPath)
+      console.log(this.queryBuilder.profiles.get(_profileId).toTemplates(_currentClausePath))
+      // console.log(this.queryBuilder.profiles.get(_id))
+      // console.log()
+      // this.$emit("view", clause)
+      // this.$emit("view", this.profile[0].data.id)
+      // this.$emit("view", this.queryBuilder.profiles);
+      // console.log("clause",clause )
+      // console.log(this.clause)
+      // const _template = this.queryBuilder.profiles.get(this.profile[0].data.id);
+      // console.log(_template);
+      // 
     },
     // operatorLabel(): any {
     //   // console.log("item", item);
@@ -209,7 +224,7 @@ export default defineComponent({
           .slice(0, -1)
           .join(".");
 
-        this.lastParent = _.get(this.data, _parentPath);
+        this.lastParent = _.get(this.profile, _parentPath);
 
         return this.lastParent;
       }
@@ -245,7 +260,7 @@ export default defineComponent({
     },
     showConnectorV(index: number, uuid: number): boolean {
       //first item at the top
-      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+      if (this.profile && this.profile[0] && this.profile[0].uuid == uuid) {
         return false;
       }
       {
@@ -253,10 +268,10 @@ export default defineComponent({
       }
     },
     showSpaceH(index: number, uuid: string): boolean {
-      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+      if (this.profile && this.profile[0] && this.profile[0].uuid == uuid) {
         //if you want the entire clause to be draggable set to true
         return false;
-      } else if (_.get(this.data, `[0].children[${index}].uuid`) == uuid) {
+      } else if (_.get(this.profile, `[0].children[${index}].uuid`) == uuid) {
         //hide first item in topmost item
         return false;
       } else if (index > 0) {
@@ -267,13 +282,13 @@ export default defineComponent({
     },
     showLineH(index: number, uuid: number): boolean {
       //first item at the top
-      // console.log(this.data);
-      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+      // console.log(this.profile);
+      if (this.profile && this.profile[0] && this.profile[0].uuid == uuid) {
         //hide topmost item
         return false;
       } else if (index > 0) {
         return false;
-      } else if (_.get(this.data, "[0].children[0].uuid") == uuid) {
+      } else if (_.get(this.profile, "[0].children[0].uuid") == uuid) {
         //hide first item in topmost item
         return false;
       } else {
@@ -282,9 +297,9 @@ export default defineComponent({
     },
     showCircle(index: number, uuid: number): boolean {
       //first item at the top
-      if (this.data && this.data[0] && this.data[0].uuid == uuid) {
+      if (this.profile && this.profile[0] && this.profile[0].uuid == uuid) {
         // console.log("uuid", uuid);
-        // console.log("data", this.data);
+        // console.log("data", this.profile);
         return false;
       } else {
         return true;
@@ -318,6 +333,17 @@ export default defineComponent({
       },
       set(val: boolean): void {
         this.$store.commit("updateIsCardDragged", val);
+      }
+    },
+    queryBuilder: {
+      get(): any {
+        return this.$store.state.queryBuilder;
+      },
+      set({ action, payload }: any): void {
+        this.$store.commit("queryBuilder", {
+          action: action,
+          payload: payload
+        });
       }
     }
   }

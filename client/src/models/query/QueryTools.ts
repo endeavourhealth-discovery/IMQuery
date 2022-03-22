@@ -6,6 +6,7 @@ import jsonpath from "jsonpath";
 import prettier from "prettier/standalone";
 import prettierBabylon from "prettier/parser-babylon";
 
+import Templates from "@/models/query/Templates";
 
 
 export class QueryBuilder {
@@ -79,7 +80,7 @@ export class QueryBuilder {
 
     // loads JSON file 
 
-    load(entities: any): QueryBuilder {
+    load(entities: any): void {
 
 
         try {
@@ -140,16 +141,16 @@ export class Profile extends Entity {
     public 'im:definition'?: any | null;
 
     //outstanding problems user must solve in order to ensure validity of Profile
-    public "problems": any[];
-    public addProblem(type, description, meta): Profile {
-        this.problems.push({ id: `urn:uuid:${v4()}`, type: type, description: description, meta: meta })
-        return this;
-    }
+    // public "problems": any[];
+    // public addProblem(type, description, meta): Profile {
+    //     this.problems.push({ id: `urn:uuid:${v4()}`, type: type, description: description, meta: meta })
+    //     return this;
+    // }
 
-    public removeProblem(id): Profile {
-        this.problems = this.problems.filter((problem: any) => problem.id != id);
-        return this;
-    }
+    // public removeProblem(id): Profile {
+    //     this.problems = this.problems.filter((problem: any) => problem.id != id);
+    //     return this;
+    // }
 
 
 
@@ -187,10 +188,14 @@ export class Profile extends Entity {
     private _definitionTree: any;
     get definitionTree(): any {
         return _.cloneDeep(this._definitionTree);
+        // return this._definitionTree;
     }
 
 
     private convertToDefinitionTree(definition: any): void {
+
+
+        //###todo populate names and types at runtime
 
         // console.log("definition", definition);
         let _definitionTree: any[] = [];
@@ -257,7 +262,7 @@ export class Profile extends Entity {
             let _childPath = parent.childPath;
             let _children = parent.data[_key];
             // let _children = _.get(definition, _childPath) //.and || parent.data.or || parent.data.not;
-            
+
             // console.log("_childPath", _childPath)
             // console.log(" parent key", _key)
             // console.log("children", _children)
@@ -374,6 +379,12 @@ export class Profile extends Entity {
 
 
     };
+
+
+    public toTemplates(clausePath: string): void {
+        const _templates = Templates.toTemplates(this.mainEntity, this._definitionTree, clausePath)
+        console.log("templates", _templates);
+    }
 
 
     get asString(): string {

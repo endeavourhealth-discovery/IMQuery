@@ -6,9 +6,9 @@ import jsonpath from "jsonpath";
 
 
 const valueToTokenMap = {
-    indefiniteArticle: {
-        true: "a",
-        false: "an",
+    firstLetterVowel: {
+        true: "an",
+        false: "a",
         default: null,
     },
     include: {
@@ -17,9 +17,15 @@ const valueToTokenMap = {
         default: null,
     },
     entityName: {
-        event: "Health Record",
+        Event: "Health Record",
         default: null, //returns input itself
-    }
+    },
+    animatePronoun: {
+        true: "they",
+        false: "it",
+        default: "it"
+    },
+
 
 }
 
@@ -27,7 +33,7 @@ const valueToTokenMap = {
 function phrase(tokenType, value) {
 
     let _tokenType = tokenType;
-    let _value = value;
+    let _value = typeof (value) == "string" ? value : value.toString();
 
     // if (args.length == 2) {
     //     _tokenType = args[0];
@@ -125,13 +131,23 @@ const IncludeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 
     const _include = mutable(phrase("include", isTrue(parentClause.include, currentClause.include)));
 
+    // console.log("_include", _include)
+
     const _mainEntity = mutable(phrase("entityName", mainEntity.name));
 
-    const _a = variable(phrase("indefiniteArticle", firstLetterIsVowel(_mainEntity.text)));
+    // console.log("_mainEntity", _mainEntity)
+
+
+    const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_mainEntity.text)));
+
+    // console.log("_a", _a)
 
     const _if = constant("if");
 
-    const _pronoun = variable(phrase("prounoun", isObjectAnimate(_mainEntity.text)));
+    // console.log("_pronoun", isObjectAnimate(_mainEntity.text))
+
+    const _pronoun = variable(phrase("animatePronoun", isObjectAnimate(_mainEntity.text)));
+
 
     const _had = constant("had");
 
@@ -143,10 +159,13 @@ const IncludeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any) => {
 
 
+    console.log("currentClause", currentClause)
+    
+    const _entity = mutable(phrase("entityName", currentClause.data.entityType.name));
+    
+    console.log("_entity", _entity)
 
-    const _entity = mutable(phrase("dataModelEntity", currentClause.data.entityType.name));
-
-    const _a = variable(phrase("indefiniteArticle", firstLetterIsVowel(_entity.text)));
+    const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_entity.text)));
 
     const _with = constant("with");
 
@@ -167,7 +186,7 @@ const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any)
 // #todo: add requirements for template matchin
 const CascadingTemplates = [
     {
-        get: IncludeMainEntity,
+        get: "IncludeMainEntity",
         set: null,
         meta: {
             min: 1,
@@ -176,41 +195,42 @@ const CascadingTemplates = [
             matchIf: []
         },
         data: [],
-        children: [{
-            get: AnyLinkedEntity,
-            set: null,
-            meta: {
-                min: 1,
-                max: 1,
-                mutableCount: 0,
-                matchIf: []
+        children: [
+            {
+                get: "AnyLinkedEntity",
+                set: null,
+                meta: {
+                    min: 1,
+                    max: 1,
+                    mutableCount: 0,
+                    matchIf: []
+                },
+                data: [],
+                children: [
+                    // {
+                    //     template: LinkedEntityProperty,
+                    //     meta: {
+                    //         min: 0,
+                    //         max: 1,
+                    //         mutableCount: 0,
+                    //         requirements: []
+                    //     },
+                    //     data: [],
+                    //     children: []
+                    // },
+                    // {
+                    //     template: LinkedEntityCriteria,
+                    //     meta: {
+                    //         min: 1,
+                    //         max: 1,
+                    //         mutableCount: 0,
+                    //         requirements: []
+                    //     },
+                    //     data: [],
+                    //     children: []
+                    // }
+                ]
             },
-            data: [],
-            children: [
-                // {
-                //     template: LinkedEntityProperty,
-                //     meta: {
-                //         min: 0,
-                //         max: 1,
-                //         mutableCount: 0,
-                //         requirements: []
-                //     },
-                //     data: [],
-                //     children: []
-                // },
-                // {
-                //     template: LinkedEntityCriteria,
-                //     meta: {
-                //         min: 1,
-                //         max: 1,
-                //         mutableCount: 0,
-                //         requirements: []
-                //     },
-                //     data: [],
-                //     children: []
-                // }
-            ]
-        },
             // {
             //     template: ActiveState,
             //     meta: {
@@ -227,53 +247,68 @@ const CascadingTemplates = [
 ];
 
 
-export default function toEnglish(mainEntity: any, profile: any, clausePath: string) {
+const templateFunctions = {
+    "IncludeMainEntity": IncludeMainEntity,
+    "AnyLinkedEntity": AnyLinkedEntity,
+}
 
 
-    // get mainentity, current clause, parrent clause first
-
-    // then call function with above args on each cascade function
-
-    // then return cascade
 
 
-    const _queue = [];
-
-    //add all paths of templates then recursively go through each in order to populate data[]
-    const _cascadingTemplates = _.cloneDeep(CascadingTemplates)
-
-    _cascadingTemplates.forEach((item: any, index: number) => _queue.push(`[${index}]`));
-
-    while (_queue.length > 0) {
-        const _currentItemPath = _queue.shift();
-        const _template = _.get(_cascadingTemplates, _currentItemPath)
-
-        const _currentClause = _.get(profile, clausePath);
-        const _parentPath = clausePath
-            .split(".")
-            .slice(0, -1)
-            .join(".");
-
-        const _parentClause = _.get(profile, _parentPath);
+export default class Templates {
 
 
-        const _templateFunction = _template.get;
+    public static toTemplates(mainEntity: any, profile: any, clausePath: string) {
 
-        const _data = _templateFunction(mainEntity, _currentClause, _parentClause);
+        console.log("args", arguments);
 
-        _.set(_cascadingTemplates, _currentItemPath + "[data]", _data)
+        // debugger;
+
+        const _queue = [];
+
+        //add all paths of templates then recursively go through each in order to populate data[]
+        const _cascadingTemplates = _.cloneDeep(CascadingTemplates)
+
+        _cascadingTemplates.forEach((item: any, index: number) => _queue.push(`[${index}]`));
+
+        
+        while (_queue.length > 0) {
+            const _currentItemPath = _queue.shift();
+            const _template = _.get(_cascadingTemplates, _currentItemPath)
+            
+            // console.log("current template", _template)
+            
+            const _currentClause = _.get(profile, clausePath);
+            
+            // console.log("_queue _currentClause", _currentClause)
+            
+            const _parentPath = clausePath
+                .split(".")
+                .slice(0, -1)
+                .join(".");
+
+            const _parentClause = _.get(profile, _parentPath);
 
 
-        //adds children to the queue
-        if (_currentClause.children.length > 0) {
-            _currentClause.children.forEach((item: any, index: number) => _queue.push(_currentItemPath + `[children][${index}]`))
+            const _templateFunction = templateFunctions[_template.get];
+
+            const _data = _templateFunction(mainEntity, _parentClause, _currentClause);
+
+            _.set(_cascadingTemplates, _currentItemPath + "[data]", _data)
+
+            //adds children to the queue
+            if (_template.children.length > 0) {
+                // console.log("_template.children.length ", _template.children.length )
+
+                _template.children.forEach((item: any, index: number) => _queue.push(_currentItemPath + `[children][${index}]`))
+            }
+            // console.log("_queue", _queue)
+
         }
+
+        return _cascadingTemplates
+
     }
-
-    return _cascadingTemplates
-
-
-
 
 
 }
@@ -313,11 +348,6 @@ export default function toEnglish(mainEntity: any, profile: any, clausePath: str
 // }
 
 
-// const functions_v1 = {
-//     "pathExists": pathExist,
-//     "firstLetterEquals": firstLetterIsVowel,
-//     "equals": equals
-// }
 
 
 // export { functions_v1 };

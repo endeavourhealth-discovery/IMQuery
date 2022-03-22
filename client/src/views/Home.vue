@@ -278,7 +278,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import { mapState } from "vuex";
 
 import ConfirmDialog from "primevue/confirmdialog";
-import LoggerService from "@/services/LoggerService";
+// import LoggerService from "@/services/LoggerService";
 import Tooltip from "primevue/tooltip";
 
 import Chips from "primevue/chips";

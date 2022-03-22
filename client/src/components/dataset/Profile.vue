@@ -32,8 +32,10 @@
     >
       <DraggableClause
         class="profile-content mx-5"
-        @siblingCount="profile.definitionTree.length"
-        :data="profile.definitionTree"
+        test="test"
+        @view="viewClause"
+        :siblingCount="profile.definitionTree.length"
+        :profile="profile.definitionTree"
         :children="profile.definitionTree"
       />
     </button>
@@ -63,6 +65,12 @@ export default defineComponent({
 
     // HeroIcon
   },
+  methods: {
+    viewClause(value: any) {
+      alert("hi")
+      console.log("value", value)
+    }
+  },
   computed: {
     queryBuilder: {
       get(): any {
@@ -78,7 +86,7 @@ export default defineComponent({
   },
   data() {
     return {
-      definition: _.cloneDeep(this.profile),
+      // definition: _.cloneDeep(this.profile),
       isShowing: true
     };
   }
