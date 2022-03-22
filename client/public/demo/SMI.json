@@ -72,7 +72,7 @@
                         "name": "Patient Type",
                         "@id": "http://endhealth.info/im#patientType"
                     },
-                    "valueIn": [{
+                    "valueIn": [{a
                         "entityType": "http://endhealth.info/im#Concept",
                         "name": "Regular",
                         "@id": "urn:uuid:3833d921-af98-4d15-86fa-7c024a2a9c2a"

@@ -3,7 +3,8 @@ import _ from "lodash";
 // import jmp from "jmp";
 import jsonpath from "jsonpath";
 
-
+//#todo: create map for Paths to each entity to keep code DRY
+//#todo: create map for 
 
 const valueToTokenMap = {
     firstLetterVowel: {
@@ -25,44 +26,86 @@ const valueToTokenMap = {
         false: "it",
         default: "it"
     },
-
-
+    had: {
+        true: "had",
+        false: "didn't have",
+        default: "it"
+    },
+    were: {
+        true: "were",
+        false: "were not",
+        default: "were"
+    },
 }
 
-//maps function outcomes against values
-function phrase(tokenType, value) {
+const is = [{ text: "text" }, "test"];
 
-    let _tokenType = tokenType;
-    let _value = typeof (value) == "string" ? value : value.toString();
+const propertyTokens = {
+    "http://endhealth.info/im#hasProfile": "features that match the Profile of a Person {{isValueIn}}"
+};
 
-    // if (args.length == 2) {
-    //     _tokenType = args[0];
-    //     _value = args[1];
+//  entities change the importance of a phrase e.g. from required -> optional. E.g. based on name or entityType. 
+// const optionalPhrases = [{ entityType:}]
 
-    // } else if (args.length == 3) {
-    //     _tokenType = args[0];
-    //     const _f = args[1];
-    //     const _args = args[2];
-    //     _value = _f(args).toString();
-    // }
-    let _phrase = "";
-    if (valueToTokenMap[_tokenType][_value]) {
-        _phrase = valueToTokenMap[_tokenType][_value];
-    } else if (valueToTokenMap[_tokenType]["default"]) {
-        _phrase = valueToTokenMap[_tokenType]["default"];
+
+//maps function outcomes against values in valueToTokenMap
+function phrase(targetPhrase, returnValue) {
+
+
+    let _targetPhrase = targetPhrase;
+    let _value = typeof (returnValue) == "string" ? returnValue : returnValue.toString();
+
+    let _text = "";
+    if (valueToTokenMap[_targetPhrase][_value]) {
+        _text = valueToTokenMap[_targetPhrase][_value];
+    } else if (valueToTokenMap[_targetPhrase]["default"]) {
+        _text = valueToTokenMap[_targetPhrase]["default"];
     } else {
-        _phrase = _value;
+        _text = _value;
+    }
+
+    const _phrase = {
+        text: _text,
+        importance: "required",
+        meta: {
+            phraseType: "transformation",
+            input: _value,
+            target: _targetPhrase,
+        }
     }
 
     return _phrase;
 }
 
+function collection(targetClause: any, propertyPath: string) {
+
+    const jsonDefinition = targetClause.data
+    const _text = _.get(jsonDefinition, propertyPath);
+
+    const _collection = {
+        text: _text,
+        importance: "required",
+        meta: {
+            phraseType: "collection",
+            input: propertyPath,
+        }
+    }
+
+    return _collection;
+}
+
 
 
 // checks if a path exists - e.g. for template matching
-function pathExist(testObject: any, testPath: string): boolean {
+function pathExists(testObject: any, testPath: string): boolean {
     return (typeof (_.get(testObject, testPath)) != "undefined");
 };
+
+function pathValueIs(testObject: any, testPath: string, comparatorObject: string): boolean {
+    const _value = _.get(testObject, testPath);
+    return (_value && _value == comparatorObject);
+};
+
 function fromPath(testObject: any, testPath: string): boolean {
     return (_.get(testObject, testPath));
 };
@@ -73,7 +116,7 @@ function firstLetterIsVowel(testString: string): boolean {
 }
 
 // compares the value of a string (testString) against an array (of strings for comparison) - e.g. useful for valueIn
-function equals(testString: string, stringArray: string[]): boolean {
+function includes(testString: string, stringArray: string[]): boolean {
     return stringArray.includes(testString);
 }
 
@@ -89,40 +132,42 @@ function isTrue(...args): boolean {
 
 // a phrase that is static and not mutable by user
 // #todo: populate meta with info for querybuilding  
-const constant = (phrase: string) => {
+const constant = (text: any) => {
     return {
-        text: phrase,
+        text: text,
+        importance: "required",
         type: "constant",
-        mutable: false,
-        meta: {},
+        meta: {}
     }
 };
 
 // a phrase derived from a function, not mutable by user
-const variable = (phrase: string) => {
+const variable = (object: any) => {
     return {
-        text: phrase,
+        ...object,
         type: "variable",
-        mutable: false,
-        meta: {},
     }
 };
 
 // a phrase derived from a function, mutable by user (i.e. when querybuilding)
-const mutable = (phrase: string) => {
+const mutable = (object: any) => {
     return {
-        text: phrase,
-        type: "variable",
-        mutable: true,
-        meta: {},
+        ...object,
+        type: "mutable",
     }
 };
 
 
+const optional = (object: any) => {
 
-const entityPathMap = {
-    "mainEntity": "entityType"
+    if (Array.isArray(object)) {
+        object.forEach((item: any, index: number) => object[index].importance = "optional");
+    } else {
+        object.importance = "optional";
+    }
+    return object;
 };
+
 
 
 
@@ -142,6 +187,8 @@ const IncludeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 
     // console.log("_a", _a)
 
+    const _inFinalResults = optional(constant("in the final results of my search"))
+
     const _if = constant("if");
 
     // console.log("_pronoun", isObjectAnimate(_mainEntity.text))
@@ -149,9 +196,8 @@ const IncludeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
     const _pronoun = variable(phrase("animatePronoun", isObjectAnimate(_mainEntity.text)));
 
 
-    const _had = constant("had");
 
-    const _sentence = [_include, _a, _mainEntity, _if, _pronoun, _had];
+    const _sentence = [_include, _a, _mainEntity, _inFinalResults, _if, _pronoun];
 
     return _sentence;
 };
@@ -159,20 +205,53 @@ const IncludeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any) => {
 
 
-    console.log("currentClause", currentClause)
-    
+    // const _had = constant("had");
+
+    const _had = mutable(phrase("had", isTrue(!currentClause?.data?.notExists || currentClause?.data?.notExists == false)))
+
+
+    // console.log("AnyLinkedEntity currentClause", currentClause)
+
     const _entity = mutable(phrase("entityName", currentClause.data.entityType.name));
-    
-    console.log("_entity", _entity)
+
+    // console.log("_entity", _entity)
 
     const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_entity.text)));
 
     const _with = constant("with");
 
-    const _sentence = [_a, _entity, _with];
+    const _sentence = [_had, _a, _entity, _with];
 
     return _sentence;
 };
+
+
+const hasProfile = (mainEntity: any, parentClause: any, currentClause: any) => {
+
+    console.log("MainEntityProperty currentClause", currentClause)
+
+
+
+    const _were = mutable(phrase("were", isTrue(!currentClause?.data?.notExist || currentClause?.data?.notExist == false)))
+
+
+    const _partOf = constant("part of");
+
+    const _resultsOf = optional(constant("the final results of the Search"));
+
+    // const _features = constant("the profile of");
+    // const _property = mutable(phrase("entityName", currentClause.data.pathTo.name));
+
+    // console.log("_entity", _property)
+
+
+    const _profiles = mutable(collection(currentClause, "valueIn"))
+
+    const _sentence = [_were, _partOf, _resultsOf, _profiles];
+
+    return _sentence;
+};
+
 
 
 // const LinkedEntityProperty = Template([had, a, entity, with])
@@ -189,59 +268,78 @@ const CascadingTemplates = [
         get: "IncludeMainEntity",
         set: null,
         meta: {
-            min: 1,
+            min: 0,
             max: 1,
             mutableCount: 0,
-            matchIf: []
+            matchIf: [
+
+            ]
         },
         data: [],
         children: [
-            {
-                get: "AnyLinkedEntity",
-                set: null,
-                meta: {
-                    min: 1,
-                    max: 1,
-                    mutableCount: 0,
-                    matchIf: []
-                },
-                data: [],
-                children: [
-                    // {
-                    //     template: LinkedEntityProperty,
-                    //     meta: {
-                    //         min: 0,
-                    //         max: 1,
-                    //         mutableCount: 0,
-                    //         requirements: []
-                    //     },
-                    //     data: [],
-                    //     children: []
-                    // },
-                    // {
-                    //     template: LinkedEntityCriteria,
-                    //     meta: {
-                    //         min: 1,
-                    //         max: 1,
-                    //         mutableCount: 0,
-                    //         requirements: []
-                    //     },
-                    //     data: [],
-                    //     children: []
-                    // }
-                ]
-            },
             // {
-            //     template: ActiveState,
+            //     get: "AnyLinkedEntity",
+            //     set: null,
             //     meta: {
-            //         min: 1,
+            //         min: 0,
             //         max: 1,
-            //         mutableCount: 2, //sum of all counts
-            //         requirements: []
+            //         mutableCount: 0,
+            //         matchIf: {
+            //             all: [
+            //                 {
+            //                     test: "pathExists",
+            //                     input: ["#currentClause", "entityType.@id"],
+            //                     expect: true
+            //                 }
+            //             ]
+            //         }
             //     },
             //     data: [],
-            //     children: []
-            // }
+            //     children: [
+            //         // {
+            //         //     template: LinkedEntityProperty,
+            //         //     meta: {
+            //         //         min: 0,
+            //         //         max: 1,
+            //         //         mutableCount: 0,
+            //         //         requirements: []
+            //         //     },
+            //         //     data: [],
+            //         //     children: []
+            //         // },
+            //         // {
+            //         //     template: LinkedEntityCriteria,
+            //         //     meta: {
+            //         //         min: 1,
+            //         //         max: 1,
+            //         //         mutableCount: 0,
+            //         //         requirements: []
+            //         //     },
+            //         //     data: [],
+            //         //     children: []
+            //         // }
+            //     ]
+            // },
+            {
+                get: 'hasProfile',
+                set: null,
+                meta: {
+                    min: 0,
+                    max: 0,
+                    mutableCount: 0,
+                    matchIf: {
+                        all: [
+                            {
+                                test: "pathValueIs",
+                                input: ["#currentClause", "property.@id", "http://endhealth.info/im#hasProfile"],
+                                expect: true
+                            }
+                        ]
+                    }
+                },
+                data: [],
+                children: []
+            }
         ]
     }
 ];
@@ -250,6 +348,7 @@ const CascadingTemplates = [
 const templateFunctions = {
     "IncludeMainEntity": IncludeMainEntity,
     "AnyLinkedEntity": AnyLinkedEntity,
+    "hasProfile": hasProfile,
 }
 
 
@@ -258,7 +357,14 @@ const templateFunctions = {
 export default class Templates {
 
 
+
+
     public static toTemplates(mainEntity: any, profile: any, clausePath: string) {
+
+
+        const doesTemplateMatch = (mainEntity: any, profile: any, clausePath: string) => {
+            return true;
+        }
 
         console.log("args", arguments);
 
@@ -271,17 +377,20 @@ export default class Templates {
 
         _cascadingTemplates.forEach((item: any, index: number) => _queue.push(`[${index}]`));
 
-        
+
         while (_queue.length > 0) {
             const _currentItemPath = _queue.shift();
+
             const _template = _.get(_cascadingTemplates, _currentItemPath)
-            
+
+
+
             // console.log("current template", _template)
-            
+
             const _currentClause = _.get(profile, clausePath);
-            
+
             // console.log("_queue _currentClause", _currentClause)
-            
+
             const _parentPath = clausePath
                 .split(".")
                 .slice(0, -1)
@@ -289,20 +398,26 @@ export default class Templates {
 
             const _parentClause = _.get(profile, _parentPath);
 
+            //check template requirements are met
+            if (doesTemplateMatch(mainEntity, _parentClause, _currentClause)) {
 
-            const _templateFunction = templateFunctions[_template.get];
+                const _templateFunction = templateFunctions[_template.get];
 
-            const _data = _templateFunction(mainEntity, _parentClause, _currentClause);
+                const _data = _templateFunction(mainEntity, _parentClause, _currentClause);
 
-            _.set(_cascadingTemplates, _currentItemPath + "[data]", _data)
+                _.set(_cascadingTemplates, _currentItemPath + "[data]", _data)
 
-            //adds children to the queue
-            if (_template.children.length > 0) {
-                // console.log("_template.children.length ", _template.children.length )
+                //adds children to the queue
+                if (_template.children.length > 0) {
+                    // console.log("_template.children.length ", _template.children.length )
 
-                _template.children.forEach((item: any, index: number) => _queue.push(_currentItemPath + `[children][${index}]`))
+                    _template.children.forEach((item: any, index: number) => _queue.push(_currentItemPath + `[children][${index}]`))
+                }
+                // console.log("_queue", _queue)
             }
-            // console.log("_queue", _queue)
+
+
+
 
         }
 
@@ -312,82 +427,3 @@ export default class Templates {
 
 
 }
-
-
-//function factory for template creation?
-
-// function Template(sentence: any) {
-
-
-//     const _function = (profile: any, clausePath: string) => {
-
-//     };
-
-
-//     // const _vars = [
-//     //     {
-//     //        had  : "jsonPath"
-
-
-//     // ];
-
-
-//     // const _f = f;
-
-//     return _function;
-
-// }
-
-
-
-// const Templates = {
-//     "LinkedEntity": _linkedEntity,
-//     "LinkedEntityProperty": _linkedEntityProperty,
-//     "LinkedEntityCriteria": _linkedEntityCriteria
-
-// }
-
-
-
-
-// export { functions_v1 };
-
-
-
-
-
-// const phrase_v1 = {
-//     "indefiniteArticle": {
-//         ifTrue: "an", // firstLetterIsVowel = true
-//         ifFalse: "a"
-//     },
-//     "inclusion": {
-//         ifTrue: "include",
-//         ifFalse: "exclude"
-//     }
-// }
-
-
-
-
-// function LinkedEntity(phrase) {
-//     return {
-//         text: phrase,
-//         type: "LinkedEntity",
-//         meta: {},
-//     }
-// }
-// function Property(phrase) {
-//     return {
-//         text: phrase,
-//         type: "Property",
-//         meta: {},
-//     }
-// }
-// function Criteria(phrase) {
-//     return {
-//         text: phrase,
-//         type: "Criteria",
-//         meta: {},
-//     }
-// }
