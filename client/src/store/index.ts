@@ -14,7 +14,7 @@ import { ConceptReference } from "@/models/TTConcept/ConceptReference";
 import axios from "axios";
 import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
-import { QueryBuilder } from "@/models/query/QueryTools";
+import { QueryBuilder } from "@/models/query/Query";
 import Ontology from "@/models/query/OntologyTools";
 import _ from "lodash";
 import DataService from "@/services/DataService";
@@ -4285,8 +4285,8 @@ export default createStore({
     toggleVisibleOpenFile(state, fileIri) {
       state.openFiles.forEach((item: any, index) => {
         if (item.iri == fileIri) {
-          console.log(item.iri)
-          console.log(fileIri)
+          // console.log(item.iri)
+          // console.log(fileIri)
           state.openFiles[index].isVisible = !state.openFiles[index].isVisible
         }
       })

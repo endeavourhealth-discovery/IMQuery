@@ -65,7 +65,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import{ v4 } from "uuid";
 import SectionToggler from "@/components/dataset/SectionToggler.vue";
 import InputDescription from "@/components/dataset/InputDescription.vue";
-import QueryUtils from "@/models/query/QueryTools";
+import QueryUtils from "@/models/query/QueryUtils";
 import HeroIcon from "@/components/search/HeroIcon.vue";
 
 // import Constraint from "@/components/dataset/Constraint.vue";

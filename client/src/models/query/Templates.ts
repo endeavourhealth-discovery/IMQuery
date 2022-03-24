@@ -79,7 +79,7 @@ function phrase(targetPhrase, returnValue) {
 
 function collection(targetClause: any, propertyPath: string) {
 
-    const jsonDefinition = targetClause.data
+    const jsonDefinition = targetClause.json
     const _text = _.get(jsonDefinition, propertyPath);
 
     const _collection = {
@@ -207,12 +207,12 @@ const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any)
 
     // const _had = constant("had");
 
-    const _had = mutable(phrase("had", isTrue(!currentClause?.data?.notExists || currentClause?.data?.notExists == false)))
+    const _had = mutable(phrase("had", isTrue(!currentClause?.json?.notExists || currentClause?.json?.notExists == false)))
 
 
     // console.log("AnyLinkedEntity currentClause", currentClause)
 
-    const _entity = mutable(phrase("entityName", currentClause.data.entityType.name));
+    const _entity = mutable(phrase("entityName", currentClause.json.entityType.name));
 
     // console.log("_entity", _entity)
 
@@ -228,11 +228,11 @@ const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any)
 
 const hasProfile = (mainEntity: any, parentClause: any, currentClause: any) => {
 
-    console.log("MainEntityProperty currentClause", currentClause)
+    // console.log("MainEntityProperty currentClause", currentClause)
 
 
 
-    const _were = mutable(phrase("were", isTrue(!currentClause?.data?.notExist || currentClause?.data?.notExist == false)))
+    const _were = mutable(phrase("were", isTrue(!currentClause?.json?.notExist || currentClause?.json?.notExist == false)))
 
 
     const _partOf = constant("part of");
@@ -240,7 +240,7 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any) => {
     const _resultsOf = optional(constant("the final results of the Search"));
 
     // const _features = constant("the profile of");
-    // const _property = mutable(phrase("entityName", currentClause.data.pathTo.name));
+    // const _property = mutable(phrase("entityName", currentClause.json.pathTo.name));
 
     // console.log("_entity", _property)
 
@@ -271,55 +271,53 @@ const CascadingTemplates = [
             min: 0,
             max: 1,
             mutableCount: 0,
-            matchIf: [
-
-            ]
+            matchIf: null,
         },
         data: [],
         children: [
-            // {
-            //     get: "AnyLinkedEntity",
-            //     set: null,
-            //     meta: {
-            //         min: 0,
-            //         max: 1,
-            //         mutableCount: 0,
-            //         matchIf: {
-            //             all: [
-            //                 {
-            //                     test: "pathExists",
-            //                     input: ["#currentClause", "entityType.@id"],
-            //                     expect: true
-            //                 }
-            //             ]
-            //         }
-            //     },
-            //     data: [],
-            //     children: [
-            //         // {
-            //         //     template: LinkedEntityProperty,
-            //         //     meta: {
-            //         //         min: 0,
-            //         //         max: 1,
-            //         //         mutableCount: 0,
-            //         //         requirements: []
-            //         //     },
-            //         //     data: [],
-            //         //     children: []
-            //         // },
-            //         // {
-            //         //     template: LinkedEntityCriteria,
-            //         //     meta: {
-            //         //         min: 1,
-            //         //         max: 1,
-            //         //         mutableCount: 0,
-            //         //         requirements: []
-            //         //     },
-            //         //     data: [],
-            //         //     children: []
-            //         // }
-            //     ]
-            // },
+            {
+                get: "AnyLinkedEntity",
+                set: null,
+                meta: {
+                    min: 0,
+                    max: 1,
+                    mutableCount: 0,
+                    matchIf: {
+                        all: [
+                            {
+                                test: "pathExists",
+                                input: ["#currentClause", "entityType.@id"],
+                                expect: true
+                            }
+                        ]
+                    }
+                },
+                data: [],
+                children: [
+                    // {
+                    //     template: LinkedEntityProperty,
+                    //     meta: {
+                    //         min: 0,
+                    //         max: 1,
+                    //         mutableCount: 0,
+                    //         requirements: []
+                    //     },
+                    //     data: [],
+                    //     children: []
+                    // },
+                    // {
+                    //     template: LinkedEntityCriteria,
+                    //     meta: {
+                    //         min: 1,
+                    //         max: 1,
+                    //         mutableCount: 0,
+                    //         requirements: []
+                    //     },
+                    //     data: [],
+                    //     children: []
+                    // }
+                ]
+            },
             {
                 get: 'hasProfile',
                 set: null,
@@ -344,7 +342,6 @@ const CascadingTemplates = [
     }
 ];
 
-
 const templateFunctions = {
     "IncludeMainEntity": IncludeMainEntity,
     "AnyLinkedEntity": AnyLinkedEntity,
@@ -352,27 +349,99 @@ const templateFunctions = {
 }
 
 
+const matchFunctions = {
+    "pathExists": pathExists,
+    "pathValueIs": pathValueIs,
+}
 
 
 export default class Templates {
 
 
-
-
     public static toTemplates(mainEntity: any, profile: any, clausePath: string) {
 
 
-        const doesTemplateMatch = (mainEntity: any, profile: any, clausePath: string) => {
-            return true;
+        const doesTemplateMatch = (mainEntity: any, profile: any, parentClause: any, currentClause: any, template: any): boolean => {
+            //do a depth first recursive function OR queue like below through matchIf
+            // check every child in matchIf - if it's an "all" -> use array.every, otherwise use array.some
+
+
+            // if no criteria are specified
+            if (!template.meta.matchIf) return true;
+
+            // in order to support arguments such as #currentClause #profile, #mainEntity, #parentClause use the object vars
+            const _vars = {
+                "#mainEntity": mainEntity,
+                "#profile": profile,
+                "#currentClause": currentClause.json,
+                "#parentClause": parentClause.json,
+                "#temmplate": template
+            };
+
+            let _shouldMatch = false;
+
+            // console.log("template", _.cloneDeep(template))
+
+            if (template.meta.matchIf.all && template.meta.matchIf.all.length) {
+
+                //test all criteria using "every"
+                const _criteria = template.meta.matchIf.all;
+                _shouldMatch = _criteria.every((criteria: any) => {
+
+                    const _f = matchFunctions[criteria.test];
+                    let _args = criteria.input;
+
+                    //replaces args with vars
+                    _args.forEach((arg: any, index: number) => {
+                        if (typeof (arg) == "string" && arg.substring(0, 1) == "#") {
+                            // console.log("variable found", arg, _vars[arg]);
+                            return _args[index] = _vars[arg];
+                        }
+                    })
+
+                    // console.log("f", _f(..._args) == criteria.expect)
+                    return _f(..._args) == criteria.expect;
+                })
+
+            } else if (template.meta.matchIf.all && template.meta.matchIf.all.length) {
+                
+                
+                //test all criteria using "every"
+                const _criteria = template.meta.matchIf.all;
+                _shouldMatch = _criteria.every((criteria: any) => {
+
+                    const _f = matchFunctions[criteria.test];
+                    let _args = criteria.input;
+
+                    //replaces args with vars
+                    _args.forEach((arg: any, index: number) => {
+                        if (typeof (arg) == "string" && arg.substring(0, 1) == "#") {
+                            // console.log("variable found", arg, _vars[arg]);
+                            return _args[index] = _vars[arg];
+                        }
+                    })
+
+                    // console.log("f", _f(..._args) == criteria.expect)
+                    return _f(..._args) == criteria.expect;
+                })
+                
+            }
+
+
+            //#todo: select multiple compatible phrases templates and pick the shortest one (currently it only picks one
+            console.log("template ", template.get, " should match: ", _shouldMatch)
+            return _shouldMatch;
         }
 
-        console.log("args", arguments);
+        // console.log("args", arguments);
 
         // debugger;
 
         const _queue = [];
 
-        //add all paths of templates then recursively go through each in order to populate data[]
+        const _deleteQueue = [];
+
+        //add all paths of templates then recursively go through each in order to populate json[]
         const _cascadingTemplates = _.cloneDeep(CascadingTemplates)
 
         _cascadingTemplates.forEach((item: any, index: number) => _queue.push(`[${index}]`));
@@ -382,6 +451,8 @@ export default class Templates {
             const _currentItemPath = _queue.shift();
 
             const _template = _.get(_cascadingTemplates, _currentItemPath)
+
+            console.log("current template", _template.get)
 
 
 
@@ -399,7 +470,7 @@ export default class Templates {
             const _parentClause = _.get(profile, _parentPath);
 
             //check template requirements are met
-            if (doesTemplateMatch(mainEntity, _parentClause, _currentClause)) {
+            if (doesTemplateMatch(mainEntity, profile, _parentClause, _currentClause, _template)) {
 
                 const _templateFunction = templateFunctions[_template.get];
 
@@ -414,14 +485,43 @@ export default class Templates {
                     _template.children.forEach((item: any, index: number) => _queue.push(_currentItemPath + `[children][${index}]`))
                 }
                 // console.log("_queue", _queue)
+            } else {
+                // remove template from cascade if not matching
+                _deleteQueue.push(_currentItemPath);
+
             }
+        }
 
 
+        // removes templates not matched 
+        while (_deleteQueue.length > 0) {
 
+            const _lastIndex = _deleteQueue.length - 1; 
+            const _currentItemPath = _deleteQueue[_lastIndex];
+
+
+            const _start : number = _currentItemPath.lastIndexOf("[");
+            const _end : number = _currentItemPath.lastIndexOf("]");
+            const _index = _currentItemPath.substring(_start + 1, _end);
+            const _parentPath = _currentItemPath.substring(0, _start);
+
+            // console.log("path", _currentItemPath);
+            // console.log("_start", _start);
+            // console.log("_end", _end);
+            // console.log("_diff", _diff);
+            // console.log("index", _index);
+            // console.log("_parentPath", _parentPath)
+
+            const _parent = _.get(_cascadingTemplates, _parentPath);
+            _parent.splice(_index, 1)
+            _deleteQueue.splice(_lastIndex, 1);
+
+            //does not remove object propery
+            // _.unset(_cascadingTemplates, _currentItemPath)
 
         }
 
-        return _cascadingTemplates
+        return _cascadingTemplates;
 
     }
 

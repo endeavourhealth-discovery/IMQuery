@@ -1,12 +1,15 @@
 <template @mouseleave="isCardDragged = false">
+  <!--  "ghost" class and drag/drop disabled  -->
   <draggable
     :list="children"
     item-key="name"
     :class="'clause before:select-none cursor-pointer dragArea rounded-md order-color-300 ' + [isCardDragged ? ' ' : '']"
-    ghost-class="ghost"
+    ghost-class=""
     :group="{ name: 'g1' }"
     tag="div"
     h="auto"
+    ondragstart="return false;"
+    ondrop="return false;"
     @drag="isCardDragged = true"
     @dragend="isCardDragged = false"
     @drop="isCardDragged = false"
@@ -151,13 +154,17 @@ import _ from "lodash";
 
 export default defineComponent({
   props: ["profile", "test", "children", "siblingCount"],
-  emits: ["view"],
+  emits: ["viewClause"],
   components: {
     draggable
   },
   name: "nested-draggable",
   data() {
     return {
+      activeClause: {
+        uuid: "",
+        path: "",
+      },
       tooltip: {
         include: '<span style="background-color: green; color: white; padding: 5px 20px; border-radius: 3px;"><b>INCLUDE </b></span>',
         exclude: '<span style="background-color: red; color: white; padding: 5px 20px; border-radius: 3px;"><b>EXCLUDE </b></span>'
@@ -170,20 +177,6 @@ export default defineComponent({
         include: "purple",
         exclude: "red"
       },
-      childrenText: {
-        1: {
-          or: "",
-          and: ""
-        },
-        2: {
-          or: "either feature",
-          and: "both features"
-        },
-        default: {
-          or: "any feature",
-          and: "all features"
-        }
-      }
     };
   },
   methods: {
@@ -191,20 +184,30 @@ export default defineComponent({
       // console.log(this.profile)
       // console.log(this.test);
       // console.log(this.profile[0].data.id)
-      const _profileId =  this.profile[0].data.id["@id"];
+      const _profileId = this.profile[0].json.id["@id"];
       const _currentClausePath = clause.currentPath;
+      this.activeClause.uuid = this.profile[0].uuid;
+      this.activeClause.path = clause.currentPath;;
       // console.log("_currentPath", _currentPath)
-      console.log(this.queryBuilder.profiles.get(_profileId).toTemplates(_currentClausePath))
-      // console.log(this.queryBuilder.profiles.get(_id))
-      // console.log()
-      // this.$emit("view", clause)
-      // this.$emit("view", this.profile[0].data.id)
-      // this.$emit("view", this.queryBuilder.profiles);
-      // console.log("clause",clause )
-      // console.log(this.clause)
-      // const _template = this.queryBuilder.profiles.get(this.profile[0].data.id);
-      // console.log(_template);
-      // 
+
+      const _templates = this.queryBuilder.profiles.get(_profileId).toTemplates(_currentClausePath);
+      console.log("Template objects", _templates);
+
+      const joinArry = (arr: any[]): string => {
+        let _textArr = [] as any[];
+        arr.forEach((item: any) => _textArr.push(item.name));
+        let str = _textArr.join(" or ");
+        return str;
+      };
+
+      let _sentence = "";
+      _templates[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
+      _templates[0].children[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
+
+      console.log(_sentence);
+
+
+      //
     },
     // operatorLabel(): any {
     //   // console.log("item", item);
@@ -228,21 +231,12 @@ export default defineComponent({
 
         return this.lastParent;
       }
-
-      // console.log("clause", clause.uuid);
-      // console.log("parent path", _parentPath);
-
-      // console.log(" UI _parent", _parent);
-
-      // return JSON.stringify(_parent);
     },
     matchLabel(clause: any): string {
-      // if (clause.name) {
-      //   return clause.name;
-      // } else {
-      // console.log(clause)
-      let _entityType = clause.data.entityType ? clause.data.entityType["@id"].split("#")[1] : "";
-      let _property = clause.data.property ? clause.data.property["@id"].split("#")[1] : "";
+
+      // derives labels from Iri
+      let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
+      let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
 
       //adds spaces in between capital letters
       _entityType = _entityType
@@ -250,13 +244,13 @@ export default defineComponent({
         .slice(0, -1)
         .join(" ");
 
-      // turns hasProfile in Profile
-      if ((_property = "hasProfile")) {
-        _property = "Profile";
-      }
-      // const _label = `${_entityType} ${_property}`
+      _property = _property
+        .match(/([A-Z]?[^A-Z]*)/g)
+        .slice(0, -1)
+        .join(" ");
+
+
       return _entityType || _property;
-      // }
     },
     showConnectorV(index: number, uuid: number): boolean {
       //first item at the top
@@ -299,7 +293,7 @@ export default defineComponent({
       //first item at the top
       if (this.profile && this.profile[0] && this.profile[0].uuid == uuid) {
         // console.log("uuid", uuid);
-        // console.log("data", this.profile);
+        // console.log("json", this.profile);
         return false;
       } else {
         return true;
@@ -315,7 +309,6 @@ export default defineComponent({
     toggleInclude(element: any): void {
       element.include = !element.include;
     }
-
     // operatorLabel(element: any): string {
     //   if (this.children.length == 1) {
     //     return this.childrenText[1][element.operator];
@@ -351,9 +344,6 @@ export default defineComponent({
 </script>
 <style scoped>
 .dragArea {
-  /* max-height: 800px; */
-  /* overflow-y: visible; */
-  /* display: absolute; */
   min-width: 200px;
 }
 
@@ -361,31 +351,14 @@ export default defineComponent({
 }
 
 .clause-operator__header {
-  /* height: 30px; */
   padding-bottom: 20px;
 }
 
-.min-h {
-  /* min-height: 25px; */
-  /* height: 25px; */
-  /* min-width: 200px; */
-  /* width: 200px; */
-}
 
-/* .clause-connector {
-  width: 60px;
-} */
 
 .ghost {
   background-color: #93c5fd;
   border-radius: 5px;
-}
-
-.non-selectable {
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none; /* Likely future */
 }
 
 /* Scrollbar */
@@ -416,8 +389,6 @@ export default defineComponent({
 }
 
 .circle {
-  /* visibility: hidden; */
-
   margin: 3px 3px 5px 0px;
   min-width: 13px;
   min-height: 13px;
@@ -436,40 +407,23 @@ export default defineComponent({
 }
 
 .line-v {
-  /* visibility: hidden; */
   min-width: 10px;
-  /* max-width: 10px; */
   margin-left: 5px;
-  /* padding-left: 20px; */
-  /* margin-right: -3 */
   height: 100%;
   min-height: 5px;
 }
 
 .space-h {
-  /* visibility: hidden; */
   min-width: 10px;
   margin-right: 3px;
-  /* min-height: 25px; */
-
-  /* margin: 0 5px 0 0; */
-  /* height: 100%; */
 }
 
 .line-h {
-  /* visibility: hidden; */
   min-width: 10px;
   margin: 8px 3px 0 0;
   border-top: 2px solid #fff;
-  /* min-height: 25px; */
-
-  /* height: 100%; */
-  /* min-height: 40px; */
 }
 
-.connector-h {
-  /* padding: 5px; */
-}
 
 .ghost .line-h,
 .ghost .space-h,
@@ -480,22 +434,8 @@ export default defineComponent({
 .clause-item__operatorlabel {
   top: calc(50%);
   right: 15px;
-  /* width: 30px; */
-  /* text-align: right; */
   visibility: hidden;
 }
-/* 
-.clause-item_arrow {
-  margin-top: 4px;
-  min-width: 20px;
-  width: 20px;
-} */
-/* 
-.definition-editor .hover .circle,
-.definition-editor .hover .line-h,
-.definition-editor .hover .linebutton {
-  visibility: visible;
-} */
 
 .profile:hover .clause-item__operatorlabel {
   visibility: visible !important;

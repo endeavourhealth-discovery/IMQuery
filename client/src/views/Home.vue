@@ -232,7 +232,7 @@
                       {{ profile["rdfs:comment"] }}
                     </div>
 
-                    <Profile class="mt-5" :profile="profile" :class="' ' + colours[index]" />
+                    <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" />
                   </TransitionRoot>
                 </div>
               </template>
@@ -296,7 +296,7 @@ import SearchResults from "@/components/search/SearchResults.vue";
 import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
 import CardButton from "@/components/dataset/CardButton.vue";
 import ResponsiveNav from "@/components/dataset/ResponsiveNav.vue";
-import Profile from "@/components/dataset/Profile.vue";
+import Profile from "@/components/query/Profile.vue";
 import ProgressBar from "@/components/search/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
@@ -338,16 +338,7 @@ export default defineComponent({
   data() {
     return {
       isShowing: true,
-      colours: [
-        "to-sky-500 from-blue-600",
-        "to-purple-600 via-indigo-700 from-indigo-600",
-        "from-cyan-600 to-green-500",
-        "to-amber-400 from-orange-500",
-        "from-pink-500 to-rose-500",
-        "to-sky-500 from-blue-600",
-        "to-purple-600 via-indigo-700 from-indigo-600",
-        "from-cyan-600 to-green-500"
-      ],
+      colours: ["blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
       newItems: [
         {
           label: "Search Profile",

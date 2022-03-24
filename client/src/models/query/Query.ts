@@ -1,10 +1,5 @@
-import { entityTypes } from './OntologyTools';
 import { v4 } from "uuid";
 import _ from "lodash";
-// import jmp from "jmp";
-import jsonpath from "jsonpath";
-import prettier from "prettier/standalone";
-import prettierBabylon from "prettier/parser-babylon";
 
 import Templates from "@/models/query/Templates";
 
@@ -107,15 +102,13 @@ export class QueryBuilder {
 
 }
 
-
 // Entity
-export class Entity {
+class Entity {
     public '@id'?: string | null;
     public 'rdfs:label'?: string | null;
     public 'rdf:type'?: Entity | null;
     public 'rdfs:comment'?: string | null;
     public 'im:isContainedIn'?: Entity | null;
-    // public 'children'?: Entity | null;
 
 
     constructor(entity?: any)
@@ -125,12 +118,6 @@ export class Entity {
         this["rdfs:label"] = entity["rdfs:label"] ? entity["rdfs:label"] : "";
         this["rdfs:comment"] = entity["rdfs:comment"] ? entity["rdfs:comment"] : "";
         this["im:isContainedIn"] = entity["im:isContainedIn"] ? entity["im:isContainedIn"] as Entity : null;
-        // this["iri"] = entity["iri"] ? entity["iri"] : null;
-        // this["name"] = entity["name"] ? entity["name"] : null;
-        // this["type"] = entity["type"] ? entity["type"] : null;
-        // this["description"] = entity["description"] ? entity["description"] : null;
-        // this["children"] = entity["children"] ? entity["children"] : null;
-
         return this;
     }
 }
@@ -140,30 +127,15 @@ export class Entity {
 export class Profile extends Entity {
     public 'im:definition'?: any | null;
 
-    //outstanding problems user must solve in order to ensure validity of Profile
-    // public "problems": any[];
-    // public addProblem(type, description, meta): Profile {
-    //     this.problems.push({ id: `urn:uuid:${v4()}`, type: type, description: description, meta: meta })
-    //     return this;
-    // }
-
-    // public removeProblem(id): Profile {
-    //     this.problems = this.problems.filter((problem: any) => problem.id != id);
-    //     return this;
-    // }
-
-
-
     constructor(entity?: any)
     constructor(entity: any) {
         super(entity);
 
-        //parse definition
+        //parse definition 
         if (entity["im:definition"]) {
             const _definition = JSON.parse(entity["im:definition"]);
             this["im:definition"] = _definition;
             // populate definitionTree (this is the UI's object model and maps 1 to 1 onto Profiles written in RDF) 
-
             this.convertToDefinitionTree(_definition);
 
         }
@@ -172,12 +144,23 @@ export class Profile extends Entity {
     }
 
 
-    // public mainEntity: string;
-
     get mainEntity(): any {
+
+        const _id = this["im:definition"]["entityType"]["@id"];
+
+        const _name = this["im:definition"]["entityType"]["name"]
+            ? this["im:definition"]["entityType"]["name"]
+            : this["im:definition"]["entityType"]["@id"].split("#")[1];
+
+        const _entityType = this["im:definition"]["entityType"]["entityType"]
+            ? this["im:definition"]["entityType"]["entityType"]
+            : "http://www.w3.org/ns/shacl#Nodeshape";
+
         return {
-            "@id": this["im:definition"]["entityType"]["@id"],
-            "name": this["im:definition"]["entityType"]["@id"].split("#")[1] //###todo: populate name from Ontology
+            "@id": _id,
+            "name": _name,
+            "entityType": _entityType
+
         };
     }
     set mainEntity(value: any): void {
@@ -187,7 +170,8 @@ export class Profile extends Entity {
 
     private _definitionTree: any;
     get definitionTree(): any {
-        return _.cloneDeep(this._definitionTree);
+
+        return this._definitionTree;
         // return this._definitionTree;
     }
 
@@ -195,13 +179,10 @@ export class Profile extends Entity {
     private convertToDefinitionTree(definition: any): void {
 
 
-        //###todo populate names and types at runtime
 
-        // console.log("definition", definition);
         let _definitionTree: any[] = [];
 
         const _operators = ["and", "or", "not"];
-        // let _firstClauses: any[];
 
         // change rdf to UI-model
         // only works if the first clause in the definition is wrapped with and: [] / or: [] 
@@ -218,16 +199,15 @@ export class Profile extends Entity {
                     {
                         uuid: `urn:uuid:${v4()}`,
                         type: "operator",
-                        include: _currentKey != "not",  //###todo:code dynamically once profile model is corrected 
+                        include: _currentKey != "not",
                         name: _currentKey,
                         currentPath: `[${_currentIndex}]`,
                         originalName: `[${_currentKey}]`,
                         originalLocation: "",
                         childPath: `[${_currentKey}]`,
-                        // childPath: `[${_currentKey}]`,
-                        data: definition,
+                        json: definition,
+                        templates: [],
                         children: [],
-                        english: [],
                     }
                 )
 
@@ -241,7 +221,6 @@ export class Profile extends Entity {
 
         // gets children for each operator clause in UI-model format
         const getChildren = (parent: any): any => {
-            // console.log(" definition[name]", definition["name"])
 
             //match clauses don't have "children" 
             if (parent.type == "match") {
@@ -249,23 +228,10 @@ export class Profile extends Entity {
             }
 
 
-            // console.log("parent.childPath", parent.originalLocation)
-
-            // parent.originalPath = _path;
-
-
-            // const _childPath = parent.originalLocation == "" ? parent.originalPath : parent.originalPath +  `[${_key}]`
-            // const _currentClause =  _.get(definition, parent.originalLocation);
-            // console.log(" parent", parent.data)
-
-            let _key = Object.keys(parent.data).filter((_childKey: string) => _operators.includes(_childKey))[0];
+            let _key = Object.keys(parent.json).filter((_childKey: string) => _operators.includes(_childKey))[0];
             let _childPath = parent.childPath;
-            let _children = parent.data[_key];
-            // let _children = _.get(definition, _childPath) //.and || parent.data.or || parent.data.not;
+            let _children = parent.json[_key];
 
-            // console.log("_childPath", _childPath)
-            // console.log(" parent key", _key)
-            // console.log("children", _children)
 
             _children = _children.map((item: any, index: number) => {
 
@@ -277,7 +243,7 @@ export class Profile extends Entity {
                 if (_isMatchClause) {
                     _name = ""; //item["name"] ? item["name"] : ""
                 } else {
-                    _name = _key; //parent.data.and ? "and" : "or";
+                    _name = _key; //parent.jsons.and ? "and" : "or";
                 }
 
 
@@ -300,16 +266,15 @@ export class Profile extends Entity {
                 return {
                     uuid: `urn:uuid:${v4()}`,
                     type: _isMatchClause ? "match" : "operator",
-                    include: _include,//###todo:code dynamically once profile model is corrected 
+                    include: _include,
                     name: _name,
                     currentPath: parent.currentPath + ".children" + + `[${index}]`,
-                    // originalObjectPath: "",
                     originalName: `[${index}]`,
                     originalLocation: parent.childPath + `[${index}]`,
                     childPath: _childPath,
-                    data: item,
+                    json: item,
+                    templates: [],
                     children: [],
-                    english: [],
 
                 }
             })
@@ -330,12 +295,10 @@ export class Profile extends Entity {
         };
 
 
-        //  const _visited = new Set();
 
 
-        //breadth-first addition of  items and children to the definition  tree:
+        //recursive addition of json clauses and their children to the definition tree:
         const _queue = _.cloneDeep(_definitionTree); //adds top level operator clauses to the queue
-        // console.log("_queue", _.cloneDeep(_queue))
         while (_queue.length > 0) {
 
             const _currentItem = _queue.shift(); // gets the next item from the queue
@@ -348,12 +311,8 @@ export class Profile extends Entity {
                 _.set(_definitionTree, 'children', _children)
 
             } else if (_children) {
-                // console.log("_definitionTree", _definitionTree);
-                // console.log("_currentItem ", _currentItem)
-                // console.log("children", _children)
-                // console.log("_currentItem['currentPath'] ", _currentItem['currentPath'] + '.children')
-                // console.log("_currentItem  at objectpath", _.get(_definitionTree, _currentItem['currentPath'] + '.children'))
-                // all other paths (almost always)
+
+                // all other paths 
                 _.set(_definitionTree, _currentItem['currentPath'] + '.children', _children)
 
             }
@@ -374,8 +333,6 @@ export class Profile extends Entity {
 
         this._definitionTree = _definitionTree;
 
-        // console.log("_firstClause", _firstClause)
-        // console.log("children", getChildren(_firstClause));
 
 
     };
@@ -383,154 +340,22 @@ export class Profile extends Entity {
 
     public toTemplates(clausePath: string): void {
         const _templates = Templates.toTemplates(this.mainEntity, this._definitionTree, clausePath)
-        console.log("templates", _templates);
+
+        // console.log("templates", _templates);
+        return _templates;
     }
 
 
     get asString(): string {
 
-        //stringified  and prettified (e.g. for text-editor)
-        return QueryUtils.prettifyJSON(JSON.stringify(this));
+        //stringified  
+        return JSON.stringify(this);
+        // if prettification is desired e.g. for tex editor
+        // return QueryUtils.prettifyJSON(JSON.stringify(this));
     }
 
     //#todo create json() getter to return Profile in RDF format for storage, ensure im:definition is JSONified
 
 }
 
-
-export default class QueryUtils {
-
-    // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
-    public static findPlaceholders(text: string): any {
-
-        // eslint-disable-next-line
-        const _regExPlaceholders = /{{\s*[\S\.]+\s*}}/g;
-        // eslint-disable-next-line
-        const _regExPlaceholderIri = /[\w+\:\w]+/;
-
-
-        return text.match(_regExPlaceholders)
-            .map(function (x) { return x.match(_regExPlaceholderIri)[0]; });
-
-
-        // const escapeRegExp = (expString: string) => {
-        //     return expString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-        // }
-        // return text.match(/{{\s*[\S\.]+\s*}}/g)
-        // .map(function(x) { return x.match(/\s*[\S\.]+\s*/g)[0]; })
-        // return text.match(/{{\s*[\w\.]+\s*}}/g)
-        //     .map((x: string) => x.match(/[\w\.]+/)[0]);
-    }
-
-
-    //flattens a JS object to its constituent paths (lodash compatible)
-    public static flattenObject(object: any): any {
-
-        const result = {} as any;
-        function recurse(cur: any, prop: any) {
-            if (Object(cur) !== cur) {
-                result[prop] = cur;
-            } else if (Array.isArray(cur)) {
-                // for (var i = 0, l = cur.length; i < l; i++)
-                for (let i = 0; i < cur.length; i++)
-                    recurse(cur[i], prop + "[" + i + "]");
-                // if (l == 0)
-                if (cur.length == 0)
-                    result[prop] = [];
-            } else {
-                let isEmpty = true;
-                for (const p in cur) {
-                    isEmpty = false;
-                    recurse(cur[p], prop ? prop + "." + p : p);
-                }
-                if (isEmpty && prop)
-                    result[prop] = {};
-            }
-        }
-        recurse(object, "");
-        console.log("flattened result", result)
-        return result;
-
-
-
-    }
-
-    //unflattens JS object
-    // public static unflattenObject(object: any): any {
-    //     if (Object(object) !== object || Array.isArray(object))
-    //         return object;
-    //     var regex = /\.?([^.\[\]]+)|\[(\d+)\]/g,
-    //         resultholder = {} as any;
-    //     for (var p in object) {
-    //         var cur = resultholder as any,
-    //             prop = "",
-    //             m;
-    //         while (m = regex.exec(p)) {
-    //             cur = cur[prop] || (cur[prop] = (m[2] ? [] : {}));
-    //             prop = m[2] || m[1];
-    //         }
-    //         cur[prop] = object[p];
-    //     }
-    //     return resultholder[""] || resultholder;
-    // }
-
-
-
-
-
-    // prettify JSON
-    public static prettifyJSON(value: string): string {
-        const _json = prettier.format(value, {
-            parser: "json",
-            plugins: [prettierBabylon],
-        }) as string;
-        return _json;
-
-    }
-
-
-    //replaces all ":"" and "@" with __ and ___ respectively to enable JMESPath and JsonPath tools
-    public static replaceKeys(object: any): any {
-
-
-        // deep nested replacement of keys if they are string
-        const replaceKeysDeep = (o: any) => {
-            return _.transform(o, function (result: any, value: any, key: any) {
-                const _currentKey = typeof (key) == "string" ? QueryUtils.replaceChars(key) : key;
-                result[_currentKey] = _.isObject(value) ? replaceKeysDeep(value) : value; // if the key is an object run it through the inner function - replaceKeys
-            });
-        }
-
-
-        return replaceKeysDeep(object);
-    }
-
-
-    //characters and their replacements
-    private static _characterMap: any = {
-        ':': "__c__",
-        '@': "__a__",
-    };
-
-
-    //replaces all keys in an object using  key-value pairs in character map
-    public static replaceChars = (text: string) => {
-        let _text = text;
-        Object.keys(QueryUtils._characterMap).forEach((key: string) => {
-            _text = _text.replaceAll(key, QueryUtils._characterMap[key])
-        });
-        return _text;
-    };
-
-    // adds random uuid only used in frontend to provide a :key for v-for iterators in UI components  
-    private addUUID(array: any): any {
-        return array.map((item: any) => {
-            return {
-                'temp_id': `urn:uuid${v4()}`,
-                'item': item
-            }
-        })
-    }
-
-}
 
