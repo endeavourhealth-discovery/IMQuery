@@ -10,6 +10,10 @@ import jsonpath from "jsonpath";
 
 
 const valueToTokenMap = {
+    reserved: {
+        "GREATER_THAN_OR_EQUAL": "greather than or equal to",
+        "LESS_THAN_OR_EQUAL": "less than or equal to"
+    },
     firstLetterVowel: {
         true: "an",
         false: "a",
@@ -85,13 +89,14 @@ function phrase(targetPhrase, returnValue) {
     return _phrase;
 }
 
+// used for valueIn/valueNotIn or things that point to Entities
 function collection(targetClause: any, propertyPath: string) {
 
-    const jsonDefinition = targetClause.json
-    const _text = _.get(jsonDefinition, propertyPath);
+    const jsonDefinition = targetClause?.json ? targetClause.json : targetClause;
+    const _values = _.get(jsonDefinition, propertyPath);
 
     const _collection = {
-        text: _text,
+        text: _values,
         importance: "required",
         meta: {
             subtype: "collection",
@@ -284,13 +289,50 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
         const _isNegated = currentClause.valueNotIn ? true : false;
 
-        console.log("is", currentClause.json)
 
 
         const _was = variable(phrase("was", !_isNegated))
 
+        const _recorded = constant("as part of their health record");
 
 
+
+
+        //scenario 1: nothing besides property is declared
+        // ?? display "exists" instead of ?was
+
+
+        // // scenario 2: valueCompare / valueFunction
+        const _comparison = currentClause?.valueCompare?.comparison  ? variable(phrase("reserved", currentClause?.valueCompare?.comparison)) : null;
+        const _valueData = currentClause?.valueCompare?.comparison  ? variable(phrase("entityName", currentClause?.valueCompare?.valueData)) : null;
+
+        // // secnario 3: valueIn
+        const _valueIn = currentClause?.valueIn ?  mutable(collection(currentClause, "valueIn")) : null;
+        const _valueNotIn = currentClause?.valueNotIn  ?  mutable(collection(currentClause, "valueNotIn")) : null;
+
+        console.log("_valueIn", _valueIn)
+
+
+        let _sentence = [_a, _property, _recorded];
+
+
+        const _variations = {
+            valueCompare: [_a, _property, _that, _was, _comparison, _valueData],
+            valueIn: [_a, _property, _that, _was, _valueIn],
+            valueNotIn: [_a, _property, _that, _was, _valueNotIn],
+        };
+
+        const _expectedKeys = ["valueIn", "valueNotIn", "valueCompare"];
+
+        Object.keys(currentClause).forEach((key: string) => {
+            if (_expectedKeys.includes(key)) {
+                _sentence = _variations[key]
+            }
+        })
+
+
+        // const _
+        // if (Object.Keys.includes xyz -> select variant
 
 
 
@@ -306,7 +348,6 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
         // const _profiles = mutable(collection(currentClause, "valueIn"))
 
-        const _sentence = [_a, _property, _that, _was];
 
 
         return _sentence;
