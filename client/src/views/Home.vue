@@ -338,7 +338,7 @@ export default defineComponent({
   data() {
     return {
       isShowing: true,
-      colours: ["blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
+      colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
       newItems: [
         {
           label: "Search Profile",

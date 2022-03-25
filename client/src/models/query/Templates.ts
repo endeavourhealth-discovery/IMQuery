@@ -3,8 +3,11 @@ import _ from "lodash";
 // import jmp from "jmp";
 import jsonpath from "jsonpath";
 
+
+// Future updates
 //#todo: create map for Paths to each entity to keep code DRY
-//#todo: create map for 
+
+
 
 const valueToTokenMap = {
     firstLetterVowel: {
@@ -35,6 +38,11 @@ const valueToTokenMap = {
         true: "were",
         false: "were not",
         default: "were"
+    },
+    was: {
+        true: "was",
+        false: "was not",
+        default: "was"
     },
 }
 
@@ -68,7 +76,7 @@ function phrase(targetPhrase, returnValue) {
         text: _text,
         importance: "required",
         meta: {
-            phraseType: "transformation",
+            subtype: "phrase",
             input: _value,
             target: _targetPhrase,
         }
@@ -86,7 +94,7 @@ function collection(targetClause: any, propertyPath: string) {
         text: _text,
         importance: "required",
         meta: {
-            phraseType: "collection",
+            subtype: "collection",
             input: propertyPath,
         }
     }
@@ -171,7 +179,7 @@ const optional = (object: any) => {
 
 
 
-const IncludeMainEntity = (mainEntity: any, parentClause: any, currentClause: any) => {
+const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
 
 
     const _include = mutable(phrase("include", isTrue(parentClause.include, currentClause.include)));
@@ -202,7 +210,7 @@ const IncludeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
     return _sentence;
 };
 
-const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any) => {
+const linkedEntity = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
 
 
     // const _had = constant("had");
@@ -210,7 +218,7 @@ const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any)
     const _had = mutable(phrase("had", isTrue(!currentClause?.json?.notExists || currentClause?.json?.notExists == false)))
 
 
-    // console.log("AnyLinkedEntity currentClause", currentClause)
+    // console.log("linkedEntity currentClause", currentClause)
 
     const _entity = mutable(phrase("entityName", currentClause.json.entityType.name));
 
@@ -226,7 +234,7 @@ const AnyLinkedEntity = (mainEntity: any, parentClause: any, currentClause: any)
 };
 
 
-const hasProfile = (mainEntity: any, parentClause: any, currentClause: any) => {
+const hasProfile = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
 
     // console.log("MainEntityProperty currentClause", currentClause)
 
@@ -237,7 +245,7 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any) => {
 
     const _partOf = constant("part of");
 
-    const _resultsOf = optional(constant("the final results of the Search"));
+    const _resultsOf = optional(constant("the final results of the search"));
 
     // const _features = constant("the profile of");
     // const _property = mutable(phrase("entityName", currentClause.json.pathTo.name));
@@ -252,6 +260,147 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any) => {
     return _sentence;
 };
 
+const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
+
+    console.log("entityProperty currentClause", currentClause)
+
+
+    const _sentence = (currentClause: any): any => {
+
+        console.log("_sentence currentClause", currentClause)
+
+
+
+
+
+        const _property = mutable(phrase("entityName", currentClause.property.name));
+
+        const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_property.text)));
+
+        // const _were = mutable(phrase("were", isTrue(!currentClause?.json?.notExist || currentClause?.json?.notExist == false)))
+
+        const _that = constant("that");
+
+
+        const _isNegated = currentClause.valueNotIn ? true : false;
+
+        console.log("is", currentClause.json)
+
+
+        const _was = variable(phrase("was", !_isNegated))
+
+
+
+
+
+
+        // const _partOf = constant("part of");
+
+        // const _resultsOf = optional(constant("the final results of the Search"));
+
+        // // const _features = constant("the profile of");
+        // // const _property = mutable(phrase("entityName", currentClause.json.pathTo.name));
+
+        // // console.log("_entity", _property)
+
+
+        // const _profiles = mutable(collection(currentClause, "valueIn"))
+
+        const _sentence = [_a, _property, _that, _was];
+
+
+        return _sentence;
+    }
+
+
+    let _sentences = [] as any[];
+
+    //#todo: if there is an and/or/not key -> go through it recursively in case there are other children
+    const _paths = _.get(args, "[0][paths]");
+
+    if (_paths) {
+        console.log("_paths", _paths)
+
+        //check each path for a property to translate
+        _paths.forEach((_path: string) => {
+
+
+            // "" = root object
+            let _clauses = (_path == "") ? currentClause.json : _.get(currentClause.json, _path);
+            console.log("_path", _path)
+            console.log("_clause", _clauses)
+
+            //arrays e.g. and/or/nots
+            if (_clauses && Array.isArray(_clauses)) {
+                console.log("array", _clauses)
+
+                _clauses.forEach((_clause: any) => {
+                    if (_clause?.property) {
+                        _sentences.push(_sentence(_clause))
+                    }
+
+                });
+
+                // single properties e.g. at root path of a match clause clause
+            } else if (_clauses && _clauses?.property) {
+                console.log("single", _clauses)
+
+                _sentences.push(_sentence(_clauses));
+            }
+
+        })
+
+    } else {
+        console.log("no argument specified for entityProperty template function inside the cascade")
+        return null;
+    }
+
+
+    return _sentences;
+
+
+
+};
+
+
+
+const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
+
+    //this can have as its child (another property test clause )
+
+
+    const _and = constant("and the")
+
+    const _timeSort = "a phrase specific to sorting by date?";
+
+    const _quantitySort = "a phrase specific to sorting by value?";
+
+    const _anySort = "a phrase for any sorting that will expos DESCENDING etc "
+
+
+    const _propertyName = variable(phrase("entityName", currentClause.json.test.property))
+
+    const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_propertyName.text)));
+
+
+
+
+
+
+
+
+    //  have a generic default for each property's IRI
+    // #todo: this map of metadata can be configured by user / added to an entity's definition?
+
+
+    const _sentences = {
+        "": "",
+
+
+    };
+
+    return "test";
+};
 
 
 // const LinkedEntityProperty = Template([had, a, entity, with])
@@ -265,7 +414,7 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any) => {
 // #todo: add requirements for template matchin
 const CascadingTemplates = [
     {
-        get: "IncludeMainEntity",
+        get: { function: "includeMainEntity", input: [] },
         set: null,
         meta: {
             min: 0,
@@ -276,7 +425,7 @@ const CascadingTemplates = [
         data: [],
         children: [
             {
-                get: "AnyLinkedEntity",
+                get: { function: "linkedEntity", input: [] },
                 set: null,
                 meta: {
                     min: 0,
@@ -294,32 +443,89 @@ const CascadingTemplates = [
                 },
                 data: [],
                 children: [
+                    {
+                        get: { function: "entityProperty", input: [{ paths: ["", "and", "or", "not"] }] },
+                        set: null,
+                        meta: {
+                            min: 0,
+                            max: 1,
+                            mutableCount: 0,
+                            matchIf: {
+                                any: [
+                                    {
+                                        test: "pathExists",
+                                        input: ["#currentClause", "property"],
+                                        expect: true
+                                    },
+                                    {
+                                        test: "pathExists",
+                                        input: ["#currentClause", "and"],
+                                        expect: true
+                                    },
+
+                                ]
+                            }
+                        },
+                        data: [],
+                        children: []
+                    }
                     // {
-                    //     template: LinkedEntityProperty,
+                    //     get: "PropertySort",
+                    //     set: null,
                     //     meta: {
                     //         min: 0,
                     //         max: 1,
                     //         mutableCount: 0,
-                    //         requirements: []
+                    //         matchIf: {
+                    //             all: [
+                    //                 {
+                    //                     test: "pathExists",
+                    //                     input: ["#currentClause", "sort"],
+                    //                     expect: true
+                    //                 },
+                    //                 {
+                    //                     test: "pathExists",
+                    //                     input: ["#currentClause", "test"],
+                    //                     expect: true
+                    //                 }
+                    //             ]
+                    //         }
                     //     },
                     //     data: [],
-                    //     children: []
-                    // },
+                    //     children: [
+                    //         {
+                    //             get: "LinkedEntityProperty = requires an argument to point it to test instead of root object",
+                    //             set: null,
+                    //             meta: {
+                    //                 min: 0,
+                    //                 max: 1,
+                    //                 mutableCount: 0,
+                    //                 matchIf: {
+                    //                     any: [
+                    //                         {
+                    //                             test: "pathExists",
+                    //                             input: ["#currentClause", "entityType.@id"],
+                    //                             expect: true
+                    //                         },
                     // {
-                    //     template: LinkedEntityCriteria,
-                    //     meta: {
-                    //         min: 1,
-                    //         max: 1,
-                    //         mutableCount: 0,
-                    //         requirements: []
-                    //     },
-                    //     data: [],
-                    //     children: []
+                    //     test: "pathExists",
+                    //     input: ["#currentClause", "and"],
+                    //     expect: true
                     // }
+                    //                     ]
+                    //                 }
+                    //             },
+                    //             data: [],
+                    //             children: []
+                    //         }
+
+
+                    //     ]
+                    // },
                 ]
             },
             {
-                get: 'hasProfile',
+                get: { function: 'hasProfile', input: [] },
                 set: null,
                 meta: {
                     min: 0,
@@ -341,11 +547,13 @@ const CascadingTemplates = [
         ]
     }
 ];
-
+// #todo: ensure all templateFunctions return empty placeholders if functions are called without paramters -> this is to generate metadata for querybuilding
 const templateFunctions = {
-    "IncludeMainEntity": IncludeMainEntity,
-    "AnyLinkedEntity": AnyLinkedEntity,
+    "includeMainEntity": includeMainEntity,
+    "linkedEntity": linkedEntity,
     "hasProfile": hasProfile,
+    "PropertySort": PropertySort,
+    "entityProperty": entityProperty,
 }
 
 
@@ -382,49 +590,44 @@ export default class Templates {
 
             // console.log("template", _.cloneDeep(template))
 
+
+            const _testCriteria = (criteria: any) => {
+
+
+                const _f = matchFunctions[criteria.test];
+                let _args = criteria.input;
+
+                //replaces args with vars
+                _args.forEach((arg: any, index: number) => {
+                    if (typeof (arg) == "string" && arg.substring(0, 1) == "#") {
+                        // console.log("variable found", arg, _vars[arg]);
+                        return _args[index] = _vars[arg];
+                    }
+                })
+
+                // console.log("f", _f(..._args) == criteria.expect)
+                return _f(..._args) == criteria.expect;
+            }
+
+
+            // #todo: add support multiple templates matching a single clause -> generate all of them
+            // #display to the user first the template with the most specificity (most matchIf requirements) or least amount of placeholders (count mutables?)
+
             if (template.meta.matchIf.all && template.meta.matchIf.all.length) {
 
                 //test all criteria using "every"
                 const _criteria = template.meta.matchIf.all;
-                _shouldMatch = _criteria.every((criteria: any) => {
+                _shouldMatch = _criteria.every(_testCriteria)
 
-                    const _f = matchFunctions[criteria.test];
-                    let _args = criteria.input;
+            } else if (template.meta.matchIf.any && template.meta.matchIf.any.length) {
 
-                    //replaces args with vars
-                    _args.forEach((arg: any, index: number) => {
-                        if (typeof (arg) == "string" && arg.substring(0, 1) == "#") {
-                            // console.log("variable found", arg, _vars[arg]);
-                            return _args[index] = _vars[arg];
-                        }
-                    })
 
-                    // console.log("f", _f(..._args) == criteria.expect)
-                    return _f(..._args) == criteria.expect;
-                })
-
-            } else if (template.meta.matchIf.all && template.meta.matchIf.all.length) {
-                
-                
                 //test all criteria using "every"
-                const _criteria = template.meta.matchIf.all;
-                _shouldMatch = _criteria.every((criteria: any) => {
+                const _criteria = template.meta.matchIf.any;
+                _shouldMatch = _criteria.some(_testCriteria)
 
-                    const _f = matchFunctions[criteria.test];
-                    let _args = criteria.input;
-
-                    //replaces args with vars
-                    _args.forEach((arg: any, index: number) => {
-                        if (typeof (arg) == "string" && arg.substring(0, 1) == "#") {
-                            // console.log("variable found", arg, _vars[arg]);
-                            return _args[index] = _vars[arg];
-                        }
-                    })
-
-                    // console.log("f", _f(..._args) == criteria.expect)
-                    return _f(..._args) == criteria.expect;
-                })
-                
+            } else {
+                _shouldMatch = false;
             }
 
 
@@ -472,11 +675,17 @@ export default class Templates {
             //check template requirements are met
             if (doesTemplateMatch(mainEntity, profile, _parentClause, _currentClause, _template)) {
 
-                const _templateFunction = templateFunctions[_template.get];
+                // console.log("_template f", _template)
 
-                const _data = _templateFunction(mainEntity, _parentClause, _currentClause);
+                const _templateFunction = templateFunctions[_template.get.function];
 
-                _.set(_cascadingTemplates, _currentItemPath + "[data]", _data)
+                const _data = _templateFunction(mainEntity, _parentClause, _currentClause, _template.get.input);
+
+                // if data is a collection of arrays (e.g. a function executing itself more than once ).
+                // the data:[] key in the cascade acts as an "AND" operator clause and can contain and/or/not
+                let _currentCascade = _.get(_cascadingTemplates, _currentItemPath)
+                _currentCascade.data.push(_data)
+                // _.set(_cascadingTemplates, _currentItemPath + "[data]", _data)
 
                 //adds children to the queue
                 if (_template.children.length > 0) {
@@ -496,21 +705,16 @@ export default class Templates {
         // removes templates not matched 
         while (_deleteQueue.length > 0) {
 
-            const _lastIndex = _deleteQueue.length - 1; 
+            //deletes items starting with last time to avoid shifting array indices
+            const _lastIndex = _deleteQueue.length - 1;
             const _currentItemPath = _deleteQueue[_lastIndex];
 
 
-            const _start : number = _currentItemPath.lastIndexOf("[");
-            const _end : number = _currentItemPath.lastIndexOf("]");
+            const _start: number = _currentItemPath.lastIndexOf("[");
+            const _end: number = _currentItemPath.lastIndexOf("]");
             const _index = _currentItemPath.substring(_start + 1, _end);
             const _parentPath = _currentItemPath.substring(0, _start);
 
-            // console.log("path", _currentItemPath);
-            // console.log("_start", _start);
-            // console.log("_end", _end);
-            // console.log("_diff", _diff);
-            // console.log("index", _index);
-            // console.log("_parentPath", _parentPath)
 
             const _parent = _.get(_cascadingTemplates, _parentPath);
             _parent.splice(_index, 1)
