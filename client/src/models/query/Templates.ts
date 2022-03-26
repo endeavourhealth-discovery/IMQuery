@@ -6,10 +6,10 @@ import jsonpath from "jsonpath";
 
 // Future updates
 //#todo: create map for Paths to each entity to keep code DRY
+// _vars should only be declared once for all metadata inside a JSON definition -> becomes avaialble by reference e.g. #currentClause
 
 
-
-const valueToTokenMap = {
+const valueToPhraseMap = {
     reserved: {
         "GREATER_THAN_OR_EQUAL": "greather than or equal to",
         "LESS_THAN_OR_EQUAL": "less than or equal to"
@@ -25,6 +25,8 @@ const valueToTokenMap = {
         default: null,
     },
     entityName: {
+        "GREATER_THAN_OR_EQUAL": "greather than or equal to",
+        "LESS_THAN_OR_EQUAL": "less than or equal to",
         Event: "Health Record",
         default: null, //returns input itself
     },
@@ -50,62 +52,207 @@ const valueToTokenMap = {
     },
 }
 
-const is = [{ text: "text" }, "test"];
 
-const propertyTokens = {
-    "http://endhealth.info/im#hasProfile": "features that match the Profile of a Person {{isValueIn}}"
-};
 
 //  entities change the importance of a phrase e.g. from required -> optional. E.g. based on name or entityType. 
 // const optionalPhrases = [{ entityType:}]
 
 
-//maps function outcomes against values in valueToTokenMap
-function phrase(targetPhrase, returnValue) {
+
+// - consider short syntax e.g. Include Person, with a record where [concept is BP AND value >140 AND effective date exists]
+// types of words that exist
 
 
+// [phrase tyes 1-3] each must go through word transformation map [using #phrase]
+// [phrase types 1-3] each must preserve both a reference to the  value and the path from of the original JSON profile [hence why they're called REF] 
+
+
+// THIS IS NOT A PHRASE TYPE BUT A TEMPLATE RECURSIVE TEMPLATE FUNCTION
+// 1. [JOIN with 1 AND/OR/NOT] collection of property joined with and/or/not -> linkedEntityProperty function  e.g.  and [effective date exists, numeric value >140, concept is]
+
+
+// #REF -> references to one or more (entities or values) at paths 
+// e.g. references to a match clauses containing properties (not match clauses containing linked entities, these are dealt with in Profile.vue/ UI OM (definitionTree)) 
+// for now it is assumed that only 1 parent and/or/not is used 
+// [ ] 2 [JOIN with 1 OR] collection of values of a property (profile, concept sets) - e.g. person hasProfile [collection], concept valueIn [collection], valueNotIn [collection] -> this may reference a single entity, or multiple entities
+// 3. single value in at propertyPath -e.g. valueCompare, descending, equaltoorgreaterthan, valueFunction 
+
+// #PHRASE -> valueToPhraseMap - adds an additional key to Entity "_text"
+// [1-2] -> 4 transformations applied to existing names of entitties?
+// [3] -> 5. words derived from the outcome of a function applied to values from types 1-3 (i.e. function applied iteratively to [2-2]) [e.g. descending + propert with entitytype datetime = latest]
+
+// THIS IS NOR A PHRASE but a repetition of 5 as another word in the sentence
+// [5] -> 6. words derived from other words (also using a function) (a / an) ( was, was not, include, exclude)
+
+// #CONSTANT -> prewritten, immutable words or phrases 
+// 6. completely static words ("with" "had")
+
+
+function transform(targetPhrase, returnValue): any {
+
+    //mapping words to the outcome of a function's value
     let _targetPhrase = targetPhrase;
+    console.log("transform", targetPhrase, returnValue)
     let _value = typeof (returnValue) == "string" ? returnValue : returnValue.toString();
 
     let _text = "";
-    if (valueToTokenMap[_targetPhrase][_value]) {
-        _text = valueToTokenMap[_targetPhrase][_value];
-    } else if (valueToTokenMap[_targetPhrase]["default"]) {
-        _text = valueToTokenMap[_targetPhrase]["default"];
+    if (valueToPhraseMap[_targetPhrase][_value]) {
+        _text = valueToPhraseMap[_targetPhrase][_value];
+    } else if (valueToPhraseMap[_targetPhrase]["default"]) {
+        _text = valueToPhraseMap[_targetPhrase]["default"];
     } else {
         _text = _value;
     }
-
-    const _phrase = {
-        text: _text,
-        importance: "required",
-        meta: {
-            subtype: "phrase",
-            input: _value,
-            target: _targetPhrase,
-        }
-    }
-
-    return _phrase;
+    return _text
 }
 
-// used for valueIn/valueNotIn or things that point to Entities
-function collection(targetClause: any, propertyPath: string) {
+//maps function outcomes against values in valueToPhraseMap
+function phrase(phraseType: string, input: any, references = []): any {
 
-    const jsonDefinition = targetClause?.json ? targetClause.json : targetClause;
-    const _values = _.get(jsonDefinition, propertyPath);
+    // let _input;
 
-    const _collection = {
-        text: _values,
-        importance: "required",
-        meta: {
-            subtype: "collection",
-            input: propertyPath,
+    // transforming one or more references [1-2] -> 4 AND  [3] -> 5.
+
+    // [1-2]
+    if (input?.type == "reference") {
+        console.log("0")
+
+
+        // _input = input.data;
+
+        // [1]
+        const _entityPaths = ["json.hasProfile", "json.valueIn", "json.valueNotIn"];
+        // [2]
+        const _valuePaths = ["json.valueCompare", "json.valueCompare"];
+
+        const _isEntityReference = _entityPaths.includes(input?.meta?.args?.propertyPath)
+        const _isValueReference = _valuePaths.includes(input?.meta?.args?.propertyPath)
+
+        if (_isEntityReference && Array.isArray(input.data)) {
+            console.log("1")
+            input.data.forEach((entity: any, index: any) => {
+                //adds new "text" key to entity reference
+                input.data[index]["_text"] = transform("entityName", entity.name)
+            })
+        } else if (_isValueReference) {
+            console.log("2")
+
+            //adds new "text" key to value at path
+            input.data["_text"] = transform("entityName", input.data.name)
+        } else {
+
+            console.log("phrase not found: [type] [input]", phraseType, input)
+            return null;
         }
+
+
+        // transforming 1 existing phrase [5-> 6]
+    } else if (typeof (input == "string")) {
+        console.log("3")
+       
+        console.log("typeof (input == 'string'): [type] [input]", phraseType, input)
+
+
+
+
+        // if the object returned is just a string e.g. isTrue() it may have had metadata
+        if (references.length > 0) {
+
+            const _text = transform(phraseType, input);
+            const _transformedReferences = {
+                text: _text,
+                type: "transformedReferences",
+                importance: "required",
+                mutable: false,
+                meta: {
+                    transformations: [], //record subsequent transformations using phrase
+                    args: {
+                        data: references,
+                        "transformationType": phraseType,
+                        "transformationInput": input
+                    },
+                }
+            };
+
+            return _transformedReferences;
+
+        } else {
+            console.log("4")
+
+            //if it doesnt have references it most likely isnt mutable, but some other variable 
+            const _text = transform(phraseType, input)
+
+            const _transformedReferences = {
+                text: _text,
+                type: "transformedText",
+                importance: "required",
+                mutable: false,
+                meta: {
+                    transformations: [], //record subsequent transformations using phrase
+                    args: {
+                        "transformationType": phraseType,
+                        "transformationInput": input
+                    },
+                }
+            };
+
+            return _transformedReferences;
+
+        }
+
+
+    } else {
+
     }
 
-    return _collection;
+    // const _phrase = {
+    //     text: _text,
+    //     importance: "required",
+    //     meta: {
+    //         subtype: "phrase",
+    //         input: _value,
+    //         target: _targetPhrase,
+    //     }
+
+    // }
+
+    return input;
 }
+
+// used for hasPRofile/valueIn/valueNotIn or things that point to Entities
+function reference(targetClause: any, propertyPath: string) {
+
+    // const jsonDefinition = targetClause?.json ? targetClause.json : targetClause;
+    const _values = _.get(targetClause, propertyPath);
+
+
+    const _reference = {
+        text: "",
+        data: _values,
+        type: "reference",
+        importance: "required",
+        mutable: false,
+        meta: {
+            transformations: [], //record subsequent transformations using phrase
+            args: {
+                "propertyPath": propertyPath
+            },
+        }
+    };
+
+    //sets uuid (definitionTree) or id (if json definition)
+    // if not avaialble (e.g. main entity) sets the actual clause data.
+    const _idKey = targetClause?.uuid ? "uuid" : targetClause?.id ? "id" : null;
+    if (_idKey) {
+        _reference.meta.args[_idKey] = targetClause[_idKey];
+
+    } else {
+        _reference.meta.args["targetClause"] = targetClause
+    }
+
+    return _reference;
+}
+
 
 
 
@@ -148,26 +295,34 @@ function isTrue(...args): boolean {
 const constant = (text: any) => {
     return {
         text: text,
-        importance: "required",
         type: "constant",
-        meta: {}
+        importance: "required",
+        mutable: false,
+        data: [],
+        meta: {},
     }
 };
 
 // a phrase derived from a function, not mutable by user
-const variable = (object: any) => {
-    return {
-        ...object,
-        type: "variable",
-    }
-};
+// const variable = (object: any) => {
+//     return {
+//         ...object,
+//         type: "variable",
+//     }
+// };
 
 // a phrase derived from a function, mutable by user (i.e. when querybuilding)
 const mutable = (object: any) => {
-    return {
-        ...object,
-        type: "mutable",
+    // return {
+    //     ...object,
+    //     type: "mutable",
+    // }
+    if (Array.isArray(object)) {
+        object.forEach((item: any, index: number) => object[index].mutable = true);
+    } else {
+        object.mutable = true;
     }
+    return object;
 };
 
 
@@ -187,18 +342,19 @@ const optional = (object: any) => {
 const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
 
 
-    const _include = mutable(phrase("include", isTrue(parentClause.include, currentClause.include)));
-
-    // console.log("_include", _include)
-
-    const _mainEntity = mutable(phrase("entityName", mainEntity.name));
-
-    // console.log("_mainEntity", _mainEntity)
+    const _ref1 = reference(parentClause, "include")
+    const _ref2 = reference(currentClause, "include")
+    const _include = mutable(phrase("include", isTrue(_ref1.data, _ref2.data), [_ref1, _ref2]));
 
 
-    const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_mainEntity.text)));
 
-    // console.log("_a", _a)
+    const _ref3 = reference(mainEntity, "name")
+    const _mainEntity = mutable(phrase("entityName", _ref3.data, [_ref3]));
+
+
+
+    const _a = phrase("firstLetterVowel", firstLetterIsVowel(_mainEntity.text));
+
 
     const _inFinalResults = optional(constant("in the final results of my search"))
 
@@ -206,11 +362,14 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 
     // console.log("_pronoun", isObjectAnimate(_mainEntity.text))
 
-    const _pronoun = variable(phrase("animatePronoun", isObjectAnimate(_mainEntity.text)));
+    //doesnt require a refernece since it wil not be mutable by the user
+    const _pronoun = phrase("animatePronoun", isObjectAnimate(_mainEntity.text));
 
 
 
     const _sentence = [_include, _a, _mainEntity, _inFinalResults, _if, _pronoun];
+
+
 
     return _sentence;
 };
@@ -218,22 +377,20 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 const linkedEntity = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
 
 
-    // const _had = constant("had");
-
-    const _had = mutable(phrase("had", isTrue(!currentClause?.json?.notExists || currentClause?.json?.notExists == false)))
+    const _had = constant("had");
 
 
-    // console.log("linkedEntity currentClause", currentClause)
+    const _ref1 = reference(currentClause, "json.entityType.name")
+    const _entity = mutable(phrase("entityName", _ref1.data, [_ref1]));
 
-    const _entity = mutable(phrase("entityName", currentClause.json.entityType.name));
-
-    // console.log("_entity", _entity)
-
-    const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_entity.text)));
+    const _a = phrase("firstLetterVowel", firstLetterIsVowel(_entity.text));
 
     const _with = constant("with");
 
+
     const _sentence = [_had, _a, _entity, _with];
+
+    // console.log("_sentence", _sentence)
 
     return _sentence;
 };
@@ -241,26 +398,25 @@ const linkedEntity = (mainEntity: any, parentClause: any, currentClause: any, ar
 
 const hasProfile = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
 
-    // console.log("MainEntityProperty currentClause", currentClause)
 
-
-
-    const _were = mutable(phrase("were", isTrue(!currentClause?.json?.notExist || currentClause?.json?.notExist == false)))
+    const _ref1 = reference(currentClause, "json.notExist")
+    const _were = mutable(phrase("were", isTrue(!_ref1.data), [_ref1]))
 
 
     const _partOf = constant("part of");
 
     const _resultsOf = optional(constant("the final results of the search"));
 
-    // const _features = constant("the profile of");
-    // const _property = mutable(phrase("entityName", currentClause.json.pathTo.name));
 
-    // console.log("_entity", _property)
+    //don't need to pass references as an argument
+    const _ref2 = reference(currentClause, "json.valueIn");
+    // console.log("_ref2", _ref2)
 
-
-    const _profiles = mutable(collection(currentClause, "valueIn"))
+    const _profiles = mutable(phrase("entityName", _ref2))
+    // console.log("_profiles", _profiles)
 
     const _sentence = [_were, _partOf, _resultsOf, _profiles];
+    // console.log("_sentence", _sentence)
 
     return _sentence;
 };
@@ -279,8 +435,8 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
 
         const _property = mutable(phrase("entityName", currentClause.property.name));
-
-        const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_property.text)));
+        //todo
+        // const _a = phrase("firstLetterVowel", firstLetterIsVowel(_property.text));
 
         // const _were = mutable(phrase("were", isTrue(!currentClause?.json?.notExist || currentClause?.json?.notExist == false)))
 
@@ -290,8 +446,8 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         const _isNegated = currentClause.valueNotIn ? true : false;
 
 
-
-        const _was = variable(phrase("was", !_isNegated))
+        //todo
+        // const _was = phrase("was", !_isNegated)
 
         const _recorded = constant("as part of their health record");
 
@@ -303,24 +459,32 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
 
         // // scenario 2: valueCompare / valueFunction
-        const _comparison = currentClause?.valueCompare?.comparison  ? variable(phrase("reserved", currentClause?.valueCompare?.comparison)) : null;
-        const _valueData = currentClause?.valueCompare?.comparison  ? variable(phrase("entityName", currentClause?.valueCompare?.valueData)) : null;
+        const _comparison = currentClause?.valueCompare?.comparison ? phrase("reserved", currentClause?.valueCompare?.comparison) : null;
+        const _valueData = currentClause?.valueCompare?.comparison ? phrase("entityName", currentClause?.valueCompare?.valueData) : null;
 
         // // secnario 3: valueIn
-        const _valueIn = currentClause?.valueIn ?  mutable(collection(currentClause, "valueIn")) : null;
-        const _valueNotIn = currentClause?.valueNotIn  ?  mutable(collection(currentClause, "valueNotIn")) : null;
+        const _valueIn = currentClause?.valueIn ? mutable(reference(currentClause, "valueIn")) : null;
+        const _valueNotIn = currentClause?.valueNotIn ? mutable(reference(currentClause, "valueNotIn")) : null;
 
         console.log("_valueIn", _valueIn)
 
 
-        let _sentence = [_a, _property, _recorded];
+        //todo
 
+        // let _sentence = [_a, _property, _recorded];
+        // const _variations = {
+        //     valueCompare: [_a, _property, _that, _was, _comparison, _valueData],
+        //     valueIn: [_a, _property, _that, _was, _valueIn],
+        //     valueNotIn: [_a, _property, _that, _was, _valueNotIn],
+        // };
 
+        let _sentence = [_property, _recorded];
         const _variations = {
-            valueCompare: [_a, _property, _that, _was, _comparison, _valueData],
-            valueIn: [_a, _property, _that, _was, _valueIn],
-            valueNotIn: [_a, _property, _that, _was, _valueNotIn],
+            valueCompare: [_property, _that, _comparison, _valueData],
+            valueIn: [_property, _that, _valueIn],
+            valueNotIn: [_property, _that, _valueNotIn],
         };
+
 
         const _expectedKeys = ["valueIn", "valueNotIn", "valueCompare"];
 
@@ -346,7 +510,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         // // console.log("_entity", _property)
 
 
-        // const _profiles = mutable(collection(currentClause, "valueIn"))
+        // const _profiles = mutable(reference(currentClause, "valueIn"))
 
 
 
@@ -419,9 +583,10 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
     const _anySort = "a phrase for any sorting that will expos DESCENDING etc "
 
 
-    const _propertyName = variable(phrase("entityName", currentClause.json.test.property))
+    const _propertyName = phrase("entityName", currentClause.json.test.property)
 
-    const _a = variable(phrase("firstLetterVowel", firstLetterIsVowel(_propertyName.text)));
+    // todo
+    // const _a = phrase("firstLetterVowel", firstLetterIsVowel(_propertyName.text));
 
 
 
