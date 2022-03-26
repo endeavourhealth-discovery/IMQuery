@@ -33,7 +33,7 @@
                     },
                     "entityType": {
                         "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
-                        "name": "Personal Details Record",
+                        "name": "Personal Details",
                         "@id": "http://endhealth.info/im#PersonDetails"
                     },
                     "property": {
