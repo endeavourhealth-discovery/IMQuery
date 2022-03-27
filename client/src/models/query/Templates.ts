@@ -2,6 +2,7 @@ import { v4 } from "uuid";
 import _ from "lodash";
 // import jmp from "jmp";
 import jsonpath from "jsonpath";
+import { ConsoleLogger } from "@aws-amplify/core";
 
 
 // Future updates
@@ -25,6 +26,8 @@ const valueToPhraseMap = {
         default: null,
     },
     entityName: {
+        "DESCENDING": "descending",
+        "ASCENDING": "ascending",
         "GREATER_THAN_OR_EQUAL": "greather than or equal to",
         "LESS_THAN_OR_EQUAL": "less than or equal to",
         Event: "Health Record",
@@ -51,6 +54,24 @@ const valueToPhraseMap = {
         false: "was not",
         default: "was"
     },
+    entry: {
+        singular: "entry",
+        plural: "entries"
+    },
+    records: {
+        singular: "record",
+        plural: "records"
+    },
+    DESCENDING: {
+        "http://endhealth.info/im#DateTime": "latest",
+        "default": null
+
+    },
+    ASCENDING: {
+        "http://endhealth.info/im#DateTime": "earliest",
+        "default": null
+    }
+
 }
 
 
@@ -87,6 +108,12 @@ const valueToPhraseMap = {
 
 // #CONSTANT -> prewritten, immutable words or phrases 
 // 6. completely static words ("with" "had")
+
+
+
+
+//////// referneces and phrase transformations
+
 
 
 function transform(targetPhrase, returnValue): any {
@@ -229,7 +256,7 @@ function reference(targetClause: any, propertyPath: string) {
 
 
     const _reference = {
-        text: "",
+        // text: "",
         data: _values,
         type: "reference",
         importance: "required",
@@ -258,6 +285,11 @@ function reference(targetClause: any, propertyPath: string) {
 
 
 
+
+////// functions
+
+
+
 // checks if a path exists - e.g. for template matching
 function pathExists(testObject: any, testPath: string): boolean {
     return (typeof (_.get(testObject, testPath)) != "undefined");
@@ -271,6 +303,15 @@ function pathValueIs(testObject: any, testPath: string, comparatorObject: string
 function fromPath(testObject: any, testPath: string): boolean {
     return (_.get(testObject, testPath));
 };
+
+function isSingular(testObject: any): boolean {
+    if (typeof (testObject) == "number") {
+        if (testObject == 1 || testObject == -1) return true
+    } else if (typeof (testObject) == "string") {
+        // #todo compare testObject against an array of strings that represent signular, all else is plural
+    }
+    return false
+}
 
 // (case-insensitive) tests the first letter for a string against an array of letters - e.g. indefiniteArticle
 function firstLetterIsVowel(testString: string): boolean {
@@ -291,6 +332,10 @@ function isTrue(...args): boolean {
     return args.every((arg, index) => arg == true);
 }
 
+function hasTransformation(phraseType, input) {
+    // console.log("hasTransformation type input isnull?", phraseType, input, valueToPhraseMap[phraseType][input] == null)
+    return valueToPhraseMap[phraseType][input] == null ? false : true;
+}
 
 // a phrase that is static and not mutable by user
 // #todo: populate meta with info for querybuilding  
@@ -485,7 +530,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         // console.log("_valueNotIn", _valueIn)
 
 
-        
+
         let _sentence = [_a, _property, _exists]; //default sentence is "exists"
         const _sentenceVariants = {
             valueCompare: [_a, _property, _that, _was, _comparison, _valueData], //add _units
@@ -493,7 +538,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
             valueNotIn: [_a, _property, _that, _was, _partOf, _valueNotIn],
         };
 
- 
+
         //select the sentence based on json path otherwise use default sentence.
         const _expectedKeys = ["valueIn", "valueNotIn", "valueCompare"];
         Object.keys(currentClause).forEach((key: string) => {
@@ -510,9 +555,9 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
     let _sentences = [] as any[];
 
     //#todo: if there is an and/or/not key -> go through it recursively in case there are other children (not required at present)
-    
+
     //gets the arguments specified in the cascade object 
-    // [0][paths] is the path of a clause to check for properties e.g. and/or/nots, "" (Root)
+    // [0][paths] is the path of a clause to check for properties e.g. 1 and/or/nots, 2 "" (Root), 3 test
     const _paths = _.get(args, "[0][paths]");
     if (_paths) {
         console.log("_paths", _paths)
@@ -561,38 +606,59 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
     //this can have as its child (another property test clause )
 
 
-    const _and = constant("and the")
 
-    const _timeSort = "a phrase specific to sorting by date?";
-
-    const _quantitySort = "a phrase specific to sorting by value?";
-
-    const _anySort = "a phrase for any sorting that will expos DESCENDING etc "
-
-
-    const _propertyName = phrase("entityName", currentClause.json.test.property)
-
-    // todomy
-    // const _a = phrase("firstLetterVowel", firstLetterIsVowel(_propertyName.text));
+    const _refDirection = reference(currentClause, "json.sort.direction"); //e.g. descending
+    const _refOrderBy = reference(currentClause, "json.sort.orderBy");  //e.g. effectivedate
+    const _refCount = reference(currentClause, "json.sort.count");  //e.g. 1
 
 
 
+    const _andAfter = constant("and after sorting by"); //[descending] [effective date]
+    // console.log("_refDirection",_refDirection)
+    // console.log("_refOrderBy",_refDirection)
+    // console.log("_refCount",_refDirection)
+    const _direction = phrase("entityName", _refDirection.data)
+    
+    const _propertyName = phrase("entityName", _refOrderBy.data.name, [_refOrderBy])
+
+    const _theFirst = constant("the first"); //[1]
+    const _count = phrase("entityName", _refCount.data)
 
 
+    const _phraseValue = isSingular(_refCount.data) ? "singular" : "plural";
+    const _items = phrase("entry", _phraseValue, [_refCount]) //entry/entries //record(s)
 
+
+    const _had = constant("had")
 
 
     //  have a generic default for each property's IRI
     // #todo: this map of metadata can be configured by user / added to an entity's definition?
+    const _andThe = constant("and the")
+    const _hasTransformation = hasTransformation("DESCENDING", _refOrderBy.data.entityType);
+    // console.log("_hasTransformation",_hasTransformation)
+
+    const _latestHighest = hasTransformation ? phrase(_refDirection.data, _refOrderBy.data.entityType, [_refDirection, _refOrderBy]) : null; //  e.g. latest 
 
 
-    const _sentences = {
-        "": "",
 
 
-    };
+    let _sentence;
+    if (_hasTransformation) {
+        // sentence with transformed phrases = and the [latest] [1] entry had
+        _sentence = [_andThe, _latestHighest, _count, _items, _had]
+        // console.log("1st variant",_sentence )
 
-    return "test";
+        //default sentence = and after sorting by [descending] [effective date] the first [1] entry/entries had
+    } else {
+        _sentence = [_andAfter, _direction, _propertyName, _theFirst, _count, _items, _had]
+        // console.log("2nd variant",_sentence )
+
+    }
+
+    console.log("_sentence", _sentence)
+    return _sentence;
+
 };
 
 
@@ -661,60 +727,56 @@ const CascadingTemplates = [
                         },
                         data: [],
                         children: []
-                    }
-                    // {
-                    //     get: "PropertySort",
-                    //     set: null,
-                    //     meta: {
-                    //         min: 0,
-                    //         max: 1,
-                    //         mutableCount: 0,
-                    //         matchIf: {
-                    //             all: [
-                    //                 {
-                    //                     test: "pathExists",
-                    //                     input: ["#currentClause", "sort"],
-                    //                     expect: true
-                    //                 },
-                    //                 {
-                    //                     test: "pathExists",
-                    //                     input: ["#currentClause", "test"],
-                    //                     expect: true
-                    //                 }
-                    //             ]
-                    //         }
-                    //     },
-                    //     data: [],
-                    //     children: [
-                    //         {
-                    //             get: "LinkedEntityProperty = requires an argument to point it to test instead of root object",
-                    //             set: null,
-                    //             meta: {
-                    //                 min: 0,
-                    //                 max: 1,
-                    //                 mutableCount: 0,
-                    //                 matchIf: {
-                    //                     any: [
-                    //                         {
-                    //                             test: "pathExists",
-                    //                             input: ["#currentClause", "entityType.@id"],
-                    //                             expect: true
-                    //                         },
-                    // {
-                    //     test: "pathExists",
-                    //     input: ["#currentClause", "and"],
-                    //     expect: true
-                    // }
-                    //                     ]
-                    //                 }
-                    //             },
-                    //             data: [],
-                    //             children: []
-                    //         }
+                    },
+                    {
+                        get: { function: "PropertySort", input: [] }, 
+                        set: null,
+                        meta: {
+                            min: 0,
+                            max: 1,
+                            mutableCount: 0,
+                            matchIf: {
+                                all: [
+                                    {
+                                        test: "pathExists",
+                                        input: ["#currentClause", "sort"],
+                                        expect: true
+                                    },
+
+                                ]
+                            }
+                        },
+                        data: [],
+                        children: [
+                            //         {
+                            // get: { function: "entityProperty", input: [{ paths: ["test"] }] },
+                            //             set: null,
+                            //             meta: {
+                            //                 min: 0,
+                            //                 max: 1,
+                            //                 mutableCount: 0,
+                            //                 matchIf: {
+                            //                     any: [
+                            // //                        {
+                            //                     test: "pathExists",
+                            //                     input: ["#currentClause", "test"],
+                            //                     expect: true
+                            //                 }
+                            // {
+                            //     test: "pathExists",
+                            //     input: ["#currentClause", "and"],
+                            //     expect: true
+                            // }
+                            //                     ]
+                            //                 }
+                            //             },
+                            //             data: [],
+                            //             children: []
+                            //         }
 
 
-                    //     ]
-                    // },
+                        ]
+                    },
                 ]
             },
             {
@@ -740,6 +802,7 @@ const CascadingTemplates = [
         ]
     }
 ];
+
 // #todo: ensure all templateFunctions return empty placeholders if functions are called without paramters -> this is to generate metadata for querybuilding
 const templateFunctions = {
     "includeMainEntity": includeMainEntity,
@@ -747,6 +810,7 @@ const templateFunctions = {
     "hasProfile": hasProfile,
     "PropertySort": PropertySort,
     "entityProperty": entityProperty,
+    
 }
 
 
