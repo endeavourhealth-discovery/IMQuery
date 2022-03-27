@@ -618,7 +618,7 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
     // console.log("_refOrderBy",_refDirection)
     // console.log("_refCount",_refDirection)
     const _direction = phrase("entityName", _refDirection.data)
-    
+
     const _propertyName = phrase("entityName", _refOrderBy.data.name, [_refOrderBy])
 
     const _theFirst = constant("the first"); //[1]
@@ -729,7 +729,7 @@ const CascadingTemplates = [
                         children: []
                     },
                     {
-                        get: { function: "PropertySort", input: [] }, 
+                        get: { function: "PropertySort", input: [] },
                         set: null,
                         meta: {
                             min: 0,
@@ -748,33 +748,27 @@ const CascadingTemplates = [
                         },
                         data: [],
                         children: [
-                            //         {
-                            // get: { function: "entityProperty", input: [{ paths: ["test"] }] },
-                            //             set: null,
-                            //             meta: {
-                            //                 min: 0,
-                            //                 max: 1,
-                            //                 mutableCount: 0,
-                            //                 matchIf: {
-                            //                     any: [
-                            // //                        {
-                            //                     test: "pathExists",
-                            //                     input: ["#currentClause", "test"],
-                            //                     expect: true
-                            //                 }
-                            // {
-                            //     test: "pathExists",
-                            //     input: ["#currentClause", "and"],
-                            //     expect: true
-                            // }
-                            //                     ]
-                            //                 }
-                            //             },
-                            //             data: [],
-                            //             children: []
-                            //         }
+                            {
+                                get: { function: "entityProperty", input: [{ paths: ["test"] }] },
+                                set: null,
+                                meta: {
+                                    min: 0,
+                                    max: 1,
+                                    mutableCount: 0,
+                                    matchIf: {
+                                        any: [
+                                            {
+                                                test: "pathExists",
+                                                input: ["#currentClause", "test"],
+                                                expect: true
+                                            }
 
-
+                                        ]
+                                    }
+                                },
+                                data: [],
+                                children: []
+                            },
                         ]
                     },
                 ]
@@ -810,7 +804,7 @@ const templateFunctions = {
     "hasProfile": hasProfile,
     "PropertySort": PropertySort,
     "entityProperty": entityProperty,
-    
+
 }
 
 
