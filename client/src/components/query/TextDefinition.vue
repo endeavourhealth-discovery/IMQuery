@@ -2,15 +2,23 @@
   <div class="text-definition text-black text-2xl text-bold">
     <div class="flex flex-col">
       <!-- A sentence from the template    -->
-      <div v-for="sentence in children.data" :key="sentence.uuid" class="sentence flex">
+      <div v-for="(sentence, sentenceIndex) in children.data" :key="sentence.uuid" class="sentence flex">
         <!-- Words in a sentence   -->
         <template v-for="(phrase, phraseIndex) in sentence" :key="phrase.uuid">
           <!-- References  -->
-         
-          <div v-if="phrase.type == 'reference'" class="flex flex-col">
-            <div v-for="entity in phrase.data" :key="entity['@id']">
-              {{ entity._text || entity.name }}
+
+          <div v-if="phrase.type == 'reference'" :class="'reference flex flex-col '">
+            <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex ' ">
+            <div v-if="entityIndex != 0" class="inline mr-5 text-red-500" > or  </div>
+            <div :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'" >  {{ entity._text || entity.name || entity["rdfs:label"] }}</div>
             </div>
+          </div>
+
+          <div
+            v-else-if="phrase.type == 'transformedReferences'"
+            :class="'transformedReferences ' + 'text-indigo-700 font-medium cursor-pointer hover:underline'"
+          >
+            {{ phrase.text }}
           </div>
 
           <div v-else class="phrase flex">
@@ -19,10 +27,14 @@
 
           <div class="space inline-block"></div>
         </template>
+
+      
       </div>
 
       <!-- Child sentence - assumes only the first resulting template is used (others unmatched ones are removed)  -->
-      <TextDefinition v-if="children.children[0]" :children="children.children[0]" class="ml-10 flex" />
+      <template v-if="children?.children?.length > 0">
+        <TextDefinition v-for="child in children.children" :key="child.uuid" :children="child" class="ml-14 flex" />
+      </template>
     </div>
   </div>
 </template>

@@ -84,7 +84,7 @@
        Criteria Definition  
       </div>
       <!-- Header -->
-      <TextDefinition v-if="templates.length > 0" :children="templates[0]" :activeClausePath="activeClausePath"  class="w-full h-full"/>
+      <TextDefinition v-if="templates.length > 0" :children="templates[0]" :activeClausePath="activeClausePath" :theme="theme" :themeClasses="themeClasses" class="w-full h-full"/>
         
 
 
@@ -168,6 +168,7 @@ export default defineComponent({
       // definitionTree: this.data ? this.loadData(this.data) : null,
       themeClasses: {
         light: {
+          phrases: {reference: "text-blue-700 font-bold hover:underline"},
           background: " bg-white hover:shadow-sm border transition duration-700 ease-in-out border-transparent hover:border-gray-200",
           text: " text-gray-800",
           icon: " text-blue-700 bg-gray-100",
@@ -176,6 +177,7 @@ export default defineComponent({
           connectorOutline: true
         },
         blue: {
+          phrases: {reference: "text-blue-700 font-bold hover:underline"},
           background: " to-sky-500 from-blue-600",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -184,6 +186,7 @@ export default defineComponent({
           connectorOutline: false
         },
         purple: {
+          phrases: {reference: "text-blue-700 font-bold hover:underline"},
           background: " to-purple-600 via-indigo-700 from-indigo-600",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -192,6 +195,7 @@ export default defineComponent({
           connectorOutline: false
         },
         green: {
+          phrases: {reference: "text-blue-700 font-bold hover:underline"},
           background: " from-cyan-600 to-green-500",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -200,6 +204,7 @@ export default defineComponent({
           connectorOutline: false
         },
         orange: {
+          phrases: {reference: "text-blue-700 font-bold hover:underline"},
           background: " to-amber-400 from-orange-500",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -208,6 +213,7 @@ export default defineComponent({
           connectorOutline: false
         },
         pink: {
+          phrases: {reference: "text-blue-700 font-bold hover:underline"},
           background: " from-pink-500 to-rose-500",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
