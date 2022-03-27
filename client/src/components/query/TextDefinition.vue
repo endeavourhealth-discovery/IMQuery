@@ -8,15 +8,17 @@
           <!-- References  -->
 
           <div v-if="phrase.type == 'reference'" :class="'reference flex flex-col '">
-            <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex ' ">
-            <div v-if="entityIndex != 0" class="inline mr-5 text-red-500" > or  </div>
-            <div :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'" >  {{ entity._text || entity.name || entity["rdfs:label"] }}</div>
+            <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex '">
+              <div v-if="entityIndex != 0" class="inline mr-5 text-green-500 font-bold">or</div>
+              <div   :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
+                {{ entity._text || entity.name || entity["rdfs:label"] }}
+              </div>
             </div>
           </div>
 
           <div
             v-else-if="phrase.type == 'transformedReferences'"
-            :class="'transformedReferences ' + 'text-indigo-700 font-medium cursor-pointer hover:underline'"
+            :class="'transformedReferences ' + 'text-indigo-700 font-medium cursor-pointer  '"
           >
             {{ phrase.text }}
           </div>
@@ -27,8 +29,6 @@
 
           <div class="space inline-block"></div>
         </template>
-
-      
       </div>
 
       <!-- Child sentence - assumes only the first resulting template is used (others unmatched ones are removed)  -->
@@ -46,6 +46,11 @@ export default defineComponent({
   name: "TextDefinition",
   props: ["templates", "activeClausePath", "children", "theme", "themeClasses"],
   methods: {
+    click(entity: any): void {
+      const _entityIri = encodeURIComponent(entity["@id"]);
+      const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_entityIri}`;
+      window.open(_url, "_blank");
+    },
     capitalise(obj: any) {
       return typeof obj == "string" ? obj.charAt(0).toUpperCase() + obj.slice(1) : obj;
     }

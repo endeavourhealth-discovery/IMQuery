@@ -252,10 +252,14 @@ function phrase(phraseType: string, input: any, references = []): any {
 }
 
 // used for hasPRofile/valueIn/valueNotIn or things that point to Entities
-function reference(targetClause: any, propertyPath: string) {
+function reference(targetClause: any, propertyPath = "") {
 
     // const jsonDefinition = targetClause?.json ? targetClause.json : targetClause;
+    
+    // const _values = _.get(targetClause, propertyPath);
     const _values = _.get(targetClause, propertyPath);
+    // const _values = propertyPath && propertyPath != "" ? _.get(targetClause, propertyPath) : targetClause;
+
 
 
     const _reference = {
@@ -403,6 +407,7 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 
     const _ref3 = reference(mainEntity, "name")
     const _mainEntity = mutable(phrase("entityName", _ref3.data, [_ref3]));
+    // const _mainEntity = mutable(reference(mainEntity, ""));
 
 
 
