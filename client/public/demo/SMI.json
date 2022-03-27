@@ -4,6 +4,8 @@
     },
     "name": "SMI Population",
     "entityType": {
+        "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
+        "name": "Person",
         "@id": "http://endhealth.info/im#Person"
     },
     "and": [{
@@ -33,7 +35,7 @@
                     },
                     "entityType": {
                         "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
-                        "name": "Personal Details",
+                        "name": "Person Details",
                         "@id": "http://endhealth.info/im#PersonDetails"
                     },
                     "property": {
@@ -64,7 +66,7 @@
                     },
                     "entityType": {
                         "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
-                        "name": "Patient Registration Record",
+                        "name": "Patient Registration",
                         "@id": "http://endhealth.info/im#PatientRegistration"
                     },
                     "property": {

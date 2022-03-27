@@ -232,7 +232,7 @@
                       {{ profile["rdfs:comment"] }}
                     </div>
 
-                    <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" />
+                    <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" :activeClausePath="activeClausePath" />
                   </TransitionRoot>
                 </div>
               </template>
@@ -471,6 +471,14 @@ export default defineComponent({
   },
   computed: {
     ...mapState(["currentUser", "isLoggedIn"]),
+      activeClausePath: {
+        get(): any {
+          return this.$store.state.activeClausePath;
+        },
+        set(value: any): void {
+          this.$store.commit("updateActiveClausePath", value);
+        }
+      },
     queryBuilder: {
       get(): any {
         return this.$store.state.queryBuilder;
@@ -715,7 +723,7 @@ export default defineComponent({
 }
 .profile-column {
   margin-bottom: 150px;
-  max-width: 300px;
+  /* max-width: 300px; */
 }
 .main-container::-webkit-scrollbar {
   width: 10px;

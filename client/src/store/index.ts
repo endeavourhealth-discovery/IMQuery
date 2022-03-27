@@ -76,6 +76,7 @@ export default createStore({
       selectedSchemes: ConceptReference[];
       selectedTypes: string[];
     },
+    activeClausePath: "",
     JSONContent: "",
     LabelContent: [] as any[],
     isLoading: false,
@@ -4137,8 +4138,12 @@ export default createStore({
     queryBuilder: new QueryBuilder(),
     ontology: new Ontology(),
     isCardDragged: false,
+
   },
   mutations: {
+    updateActiveClausePath(state, newPath){
+      state.activeClausePath = newPath;
+    },
     updateTheme(state, newTheme) {
       // const _currentTheme = state.theme;
       state.theme = newTheme;

@@ -21,8 +21,8 @@ const valueToPhraseMap = {
         default: null,
     },
     include: {
-        true: "include",
-        false: "exclude",
+        true: "Include",
+        false: "Exclude",
         default: null,
     },
     entityName: {
@@ -200,7 +200,8 @@ function phrase(phraseType: string, input: any, references = []): any {
                         "transformationType": phraseType,
                         "transformationInput": input
                     },
-                }
+                },
+                uuid: `urn:uuid:${v4()}`,
             };
 
             return _transformedReferences;
@@ -222,7 +223,9 @@ function phrase(phraseType: string, input: any, references = []): any {
                         "transformationType": phraseType,
                         "transformationInput": input
                     },
-                }
+                },
+                uuid: `urn:uuid:${v4()}`,
+
             };
 
             return _transformedReferences;
@@ -266,7 +269,9 @@ function reference(targetClause: any, propertyPath: string) {
             args: {
                 "propertyPath": propertyPath
             },
-        }
+        },
+        uuid: `urn:uuid:${v4()}`,
+
     };
 
     //sets uuid (definitionTree) or id (if json definition)
@@ -347,6 +352,7 @@ const constant = (text: any) => {
         mutable: false,
         data: [],
         meta: {},
+        uuid: `urn:uuid:${v4()}`,
     }
 };
 
@@ -673,6 +679,8 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
 // #todo: add requirements for template matchin
 const CascadingTemplates = [
     {
+        uuid: `urn:uuid:${v4()}`,
+
         get: { function: "includeMainEntity", input: [] },
         set: null,
         meta: {
@@ -684,6 +692,8 @@ const CascadingTemplates = [
         data: [],
         children: [
             {
+                uuid: `urn:uuid:${v4()}`,
+
                 get: { function: "linkedEntity", input: [] },
                 set: null,
                 meta: {
@@ -703,6 +713,8 @@ const CascadingTemplates = [
                 data: [],
                 children: [
                     {
+                        uuid: `urn:uuid:${v4()}`,
+
                         get: { function: "entityProperty", input: [{ paths: ["", "and", "or", "not"] }] },
                         set: null,
                         meta: {
@@ -729,6 +741,8 @@ const CascadingTemplates = [
                         children: []
                     },
                     {
+                        uuid: `urn:uuid:${v4()}`,
+
                         get: { function: "PropertySort", input: [] },
                         set: null,
                         meta: {
@@ -774,6 +788,8 @@ const CascadingTemplates = [
                 ]
             },
             {
+                uuid: `urn:uuid:${v4()}`,
+
                 get: { function: 'hasProfile', input: [] },
                 set: null,
                 meta: {
@@ -818,6 +834,9 @@ export default class Templates {
 
 
     public static toTemplates(mainEntity: any, profile: any, clausePath: string) {
+
+        console.log("current clausePath 1", clausePath)
+
 
 
         const doesTemplateMatch = (mainEntity: any, profile: any, parentClause: any, currentClause: any, template: any): boolean => {
@@ -906,7 +925,7 @@ export default class Templates {
 
             const _template = _.get(_cascadingTemplates, _currentItemPath)
 
-            console.log("current template", _template.get)
+            console.log("current template", _template.get.function)
 
 
 
@@ -916,10 +935,19 @@ export default class Templates {
 
             // console.log("_queue _currentClause", _currentClause)
 
+            console.log("current mainEntity", mainEntity)
+
+            console.log("current profile", profile)
+
+            console.log("current clausePath", clausePath)
+
+
             const _parentPath = clausePath
                 .split(".")
                 .slice(0, -1)
                 .join(".");
+
+
 
             const _parentClause = _.get(profile, _parentPath);
 
@@ -935,7 +963,15 @@ export default class Templates {
                 // if data is a collection of arrays (e.g. a function executing itself more than once ).
                 // the data:[] key in the cascade acts as an "AND" operator clause and can contain and/or/not
                 let _currentCascade = _.get(_cascadingTemplates, _currentItemPath)
-                _currentCascade.data.push(_data)
+
+                // if there are multiple sentences, push all sentences individually, otherwise push the single sentence
+                if (Array.isArray(_data[0])) {
+                    _currentCascade.data = _data;
+
+                } else {
+                    _currentCascade.data.push(_data)
+
+                }
                 // _.set(_cascadingTemplates, _currentItemPath + "[data]", _data)
 
                 //adds children to the queue

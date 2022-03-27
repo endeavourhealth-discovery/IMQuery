@@ -51,29 +51,32 @@
             </div>
           </div>
 
-          <div class="clause-content w-full inline flex-col rounded-md" >
-          
-              <!-- Match Clause - Name  -->
+          <div class="clause-content w-full inline flex-col rounded-md">
+            <!-- Match Clause - Name  -->
 
-            <div v-if="element.type == 'match'" >
-                <button
-                 v-wave="{
-                    color: 'currentColor',
-                    easing: 'ease-out',
-                    duration: 0.7,
-                    initialOpacity: 0.6,
-                    finalOpacity: 0.1,
-                    cancellationPeriod: 75
-                  }" 
-                  @click="handleClick(element)"
-                  class="clause__matchLabel w-full pl-5 pr-2  py-1 relative -top-1 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none"
-                >
-                  {{ matchLabel(element) }}
-                </button>
+            <div v-if="element.type == 'match'">
+              <button
+                v-wave="{
+                  color: 'currentColor',
+                  easing: 'ease-out',
+                  duration: 0.7,
+                  initialOpacity: 0.6,
+                  finalOpacity: 0.1,
+                  cancellationPeriod: 75
+                }"
+                @click="handleClick(element)"
+                :class="
+                  'clause__matchLabel w-full pl-5 pr-2  py-1 relative -top-1 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
+                    [activeClausePath == element.uuid ? ' bg-red-700' : ' ']
+                "
+              >
+                {{ matchLabel(element) }}
+              </button>
             </div>
 
             <!-- Child   -->
             <nested-draggable
+              :activeClausePath="activeClausePath"
               :mainEntity="mainEntity"
               :themeClasses="themeClasses"
               :theme="theme"
@@ -110,7 +113,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
 
 export default defineComponent({
-  props: ["profile", "definitionTree", "mainEntity", "children", "siblingCount", "theme", "themeClasses", "templates"],
+  props: ["activeClausePath", "profile", "definitionTree", "mainEntity", "children", "siblingCount", "theme", "themeClasses", "templates"],
   emits: ["viewClause"],
   components: {
     draggable
@@ -146,6 +149,15 @@ export default defineComponent({
   },
   methods: {
     handleClick(clause: any): any {
+
+      // console.log("this.activeClausePath", this.activeClausePath)
+      // console.log("clause.currentPath", clause.currentPath)
+
+      const _currentClausePath = clause.currentPath;
+      this.$store.commit("updateActiveClausePath", _currentClausePath);
+      
+      this.activeClause.uuid = clause.uuid;
+      this.activeClause.path = clause.currentPath;
       // console.log("theme", this.themeClasses);
       // console.log("profile", this.profile)
       // console.log("mainEntity", this.mainEntity)
@@ -153,43 +165,35 @@ export default defineComponent({
       // console.log(this.profile[0].data.id)
       // alert(clause.currentPath);
 
-
       //###todo
       // emit does not work inside here or parent component reliably? Element returns only the topmost element when emitted or nothing.
-      // fix: 
+      // fix:
       // [ ] translate all clauses upon conversion so you already have the template data.
-      // [ ] don't emit, commit: activeClause: [] in state. Pass it to Profile as prop via computed getter in order to allow , 
+      // [ ] don't emit, commit: activeClause: [] in state. Pass it to Profile as prop via computed getter in order to allow ,
 
       // this.$emit('viewClause', "data1")
       // const _profileId = this.definitionTree[0].json.id["@id"];#
-      const _currentClausePath = clause.currentPath;
-      this.activeClause.uuid = clause.uuid;
-      this.activeClause.path = clause.currentPath;
+
       // console.log("_currentPath", _currentPath)
 
       // const _templates = this.profile.toTemplates(this.profile[0].json.entityType, this.profile, _currentClausePath)
 
-      const _templates = this.profile.toTemplates(_currentClausePath);
       //if using query builder
       // const _templates = this.queryBuilder.profiles.get(_profileId).toTemplates(_currentClausePath);
 
-      ///sentence generation
-       console.log("Template objects", _templates);
+      // const joinArry = (arr: any[]): string => {
+      //   let _textArr = [] as any[];
+      //   arr.forEach((item: any) => _textArr.push(item.name));
+      //   let str = _textArr.join(" or ");
+      //   return str;
+      // };
 
-          // const joinArry = (arr: any[]): string => {
-          //   let _textArr = [] as any[];
-          //   arr.forEach((item: any) => _textArr.push(item.name));
-          //   let str = _textArr.join(" or ");
-          //   return str;
-          // };
+      // let _sentence = "";
+      // _templates[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
+      // _templates[0].children[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
+      // // _templates[0].children[0].children[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
 
-          // let _sentence = "";
-          // _templates[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
-          // _templates[0].children[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
-          // // _templates[0].children[0].children[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
-
-          // console.log(_sentence);
-
+      // console.log(_sentence);
     },
     operatorLabel(element: any): string {
       return this.parent(element)["name"] == "not" ? "or" : this.parent(element)["name"];
