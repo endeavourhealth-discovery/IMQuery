@@ -3,6 +3,7 @@ import _ from "lodash";
 // import jmp from "jmp";
 import jsonpath from "jsonpath";
 import axios, { AxiosResponse } from "axios";
+import DataService from "@/services/DataService";
 
 export enum entityTypes {
     datamodel = 'sh:NodeShape',
@@ -14,16 +15,14 @@ export enum entityTypes {
 export default class Ontology {
 
 
-
-
     private _ontology: any;
     public get ontology(): any {
         return this["_ontology"];
     }
     public set ontology(value: any) {
-        if (value["_@context"] && value["_@graph"] || value["entities"]) {
-            this["@context"] = value["@context"];
-            this["@graph"] = value["@graph"];
+        if (value["@context"] && value["@graph"] || value["entities"]) {
+            this["_@context"] = value["@context"];
+            this["_@graph"] = value["@graph"];
             this["_entities"] = value["entities"];
         } else {
 
@@ -32,13 +31,16 @@ export default class Ontology {
     }
 
 
-    public '@context': any;
+    public '_@context': any;
 
-    public '@graph': any;
+    public '_@graph': any;
 
     private '_entities': any;
 
 
+    public loadEntities(entities: any) {
+        this._entities = [...this._entities, ...entities];
+    }
 
     public entities = new class {
 
@@ -48,7 +50,9 @@ export default class Ontology {
 
         public byIri(iri: string): any {
             if (iri != "") {
-                return;
+                const _results = this.superThis._entities.filter((entity: any) => entity["@id"] == iri);
+                // console.log("", )
+                return _results;
                 // return jmp.search(this.superThis._entities, `[?"@id" == \`${iri}\`]`)[0]
             }
             else {
@@ -56,39 +60,63 @@ export default class Ontology {
             }
         }
 
-        public byType(entityType: entityTypes): any {
-            return;
-            // return jmp.search(this.superThis._entities, `[?"rdf:type"[?"@id" == \`${entityType}\`]]`)
-        }
+
+
+        // public byType(entityType: entityTypes | string): any {
+        //     console.log("entityType", entityType)
+
+        //     const _results = this._entities.filter((entity: any) => {
+        //         // console.log(entity["rdf:type"])
+        //         return entity["rdf:type"]?.includes(entityType)
+        //     });
+        //     // const _results = this._entities.filter((entity: any) => entity["rdf:type"]?.includes(entityType));
+        //     return _results;
+        //     // return jmp.search(this.superThis._entities, `[?"rdf:type"[?"@id" == \`${entityType}\`]]`)
+        // }
 
     }(this);
 
 
+    constructor() {
+        const _filenames = ["CoreOntology.json", "AdditionalOntology.json"]; //can add your own definitions e.g. for profiles and random concept sets.
 
+        _filenames.forEach(async (filename: string) => {
+            await DataService.getData(filename)
+                .then(data => {
+                    if (data["entities"]) {
+                        this._entities = data["entities"]
+                    } else {
+                        data.forEach((item: any) => this._entities.push(item));
+                    }
 
-
-    // the url to the cloudfront url / S3 bucket containing the ontology file 
-    constructor(ontologyURL = import.meta.env.VITE_ONTOLOGY_URL as string) {
-
-        if (!ontologyURL || ontologyURL == "") {
-
-            throw new Error("No Ontology URL specified on instantiation. Pass a URL to entities in your ontology in JSON-LD format i.e. '@context', '@graph' and 'entities'");
-        }
-
-        this.fetchOntology(ontologyURL)
-            .then((res) => {
-                this.ontology = res;
-                console.log("ontology loaded", res);
-            })
-            .catch((err) => {
-                throw new Error("Failed to fetch Ontology from specified URL. Error message:" + err);
-            });;
-
-
-        return this;
-
-
+                })
+                .catch(err => {
+                    console.error("Failed to fetch userdata", err);
+                });
+        });
     }
+
+
+
+    // if you want to load the file from cloud
+    // the url to the cloudfront url / S3 bucket containing the ontology file
+    // constructor(ontologyURL = import.meta.env.VITE_ONTOLOGY_URL as string) {
+
+    //     if (!ontologyURL || ontologyURL == "") {
+
+    //         throw new Error("No Ontology URL specified on instantiation. Pass a URL to entities in your ontology in JSON-LD format i.e. '@context', '@graph' and 'entities'");
+    //     }
+
+    //     this.fetchOntology(ontologyURL)
+    //         .then((res) => {
+    //             this.ontology = res;
+    //             console.log("ontology loaded", res);
+    //         })
+    //         .catch((err) => {
+    //             throw new Error("Failed to fetch Ontology from specified URL. Error message:" + err);
+    //         });;
+    //     return this;
+    // }
 
 
     public async fetchOntology(ontologyURL: string): Promise<AxiosResponse<any>> {

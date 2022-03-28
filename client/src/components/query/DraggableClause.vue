@@ -149,13 +149,12 @@ export default defineComponent({
   },
   methods: {
     handleClick(clause: any): any {
-
       // console.log("this.activeClausePath", this.activeClausePath)
       // console.log("clause.currentPath", clause.currentPath)
 
       const _currentClausePath = clause.currentPath;
       this.$store.commit("updateActiveClausePath", _currentClausePath);
-      
+
       this.activeClause.uuid = clause.uuid;
       this.activeClause.path = clause.currentPath;
       // console.log("theme", this.themeClasses);
@@ -214,19 +213,25 @@ export default defineComponent({
     },
     matchLabel(clause: any): string {
       // derives labels from Iri
-      let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
-      let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
 
-      //adds spaces in between capital letters
-      _entityType = _entityType
-        .match(/([A-Z]?[^A-Z]*)/g)
-        .slice(0, -1)
-        .join(" ");
+      // console.log("clause json", clause.json)
+      //
+      let _entityType = clause.json.entityType ? clause.json.entityType["rdfs:label"] : "";
+      let _property = clause.json.property ? clause.json.property["rdfs:label"] : "";
 
-      _property = _property
-        .match(/([A-Z]?[^A-Z]*)/g)
-        .slice(0, -1)
-        .join(" ");
+      // let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
+      // let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
+
+      // //adds spaces in between capital letters
+      // _entityType = _entityType
+      //   .match(/([A-Z]?[^A-Z]*)/g)
+      //   .slice(0, -1)
+      //   .join(" ");
+
+      // _property = _property
+      //   .match(/([A-Z]?[^A-Z]*)/g)
+      //   .slice(0, -1)
+      //   .join(" ");
 
       return _entityType || _property;
     },

@@ -1,3 +1,6 @@
+import jp from 'jsonpath';
+// const jp = require('jsonpath');
+import { entityTypes } from './../models/query/OntologyTools';
 import { Description } from '@/components/concept/Description.vue';
 import { SearchRequest } from "./../models/search/SearchRequest";
 import { createStore } from "vuex";
@@ -15,7 +18,7 @@ import axios from "axios";
 import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
 import { QueryBuilder } from "@/models/query/Query";
-import Ontology from "@/models/query/OntologyTools";
+import Ontology, { entityTypes } from "@/models/query/OntologyTools";
 import _ from "lodash";
 import DataService from "@/services/DataService";
 import { v4 } from "uuid";
@@ -4141,7 +4144,7 @@ export default createStore({
 
   },
   mutations: {
-    updateActiveClausePath(state, newPath){
+    updateActiveClausePath(state, newPath) {
       state.activeClausePath = newPath;
     },
     updateTheme(state, newTheme) {
@@ -4151,7 +4154,7 @@ export default createStore({
 
       const _currentStoredTheme: string = localStorage.getItem(
         "themeName",
-        ) as string;
+      ) as string;
 
       if (_currentStoredTheme && _currentStoredTheme != "") {
         _rootElement?.classList.remove(_currentStoredTheme);
@@ -4162,7 +4165,7 @@ export default createStore({
       _rootElement?.classList.add(newTheme);
 
 
-    
+
 
 
 
@@ -4174,7 +4177,89 @@ export default createStore({
       if (state.userFiles.length > 0) return;
 
 
-      entities.forEach((entity: any) => {
+      //populate name and entityType
+      // state.ontology.byIri("im:MedicationOrder")
+
+
+      // console.log(
+      //   "entities",
+      //   state.ontology.entities.byIri("im:MedicationOrder")
+      // );
+      // console.log(
+      //   "datamodels",
+      //   state.ontology.byType("im:Folder")
+      // );
+
+
+      entities.forEach((entity: any, index: number) => {
+
+        //populate name and entityType in JSON definition
+
+        if (entity["im:definition"]) {
+          const _json = JSON.parse(entity["im:definition"]);
+
+          console.log("definition", _json)
+          let _entityReferences = jp.paths(_json, `$..[?(@.@id)]`);
+          //filters out paths that are UUIDs for clauses (and not UUID's of entities);
+          _entityReferences = _entityReferences.filter((reference: any) => reference[reference.length - 1] != "id");
+
+          // populates each path with entity from ontology
+          _entityReferences = _entityReferences.map((reference: any) => {
+
+            const jpPath = jp.stringify(reference);
+            const _path = jp.stringify(reference).substring(2);
+            let _entityIri = _.get(_json, _path)["@id"];
+
+
+            // changes http//endhealth.info/im#effectiveDate to im:effectiveDate (as an example)
+            if (_entityIri.substring(0, 4) == "http") {
+              const _arr = _entityIri.split("/")
+              let _last = _arr[_arr.length - 1].replace("#", ":");
+              _entityIri = _last;
+            }
+
+            const _entity = state.ontology.entities.byIri(_entityIri)
+            const _shortEntity = { "@id": _entity[0]["@id"], "rdf:type": _entity[0]["rdf:type"], "rdfs:label": _entity[0]["rdfs:label"], "rdfs:comment": _entity[0]["rdfs:comment"] }
+
+            return {
+              // uuid: `urn:uuid:${v4()}`,
+              // pathExpression: reference,
+              jpPath: jpPath,
+              path: _path,
+              iri: _entityIri,
+              entityData: _shortEntity, //state.ontology.entities.byIri(entityIri)
+            }
+          })
+
+
+          //populates definition 
+          _entityReferences.forEach((reference: any) => {
+            _.set(_json, reference.path, reference.entityData);
+          });
+
+          // console.log("1", JSON.stringify(_json) )
+          entities[index]["im:definition"] = JSON.stringify(_json);
+
+          console.log("populated JSON", _json)
+
+
+          //for debugging
+          let _entitiesWithoutData = _entityReferences.filter((entity: any) => entity.entityData.length == 0);
+          _entitiesWithoutData = _entitiesWithoutData.map((entity: any) => {
+            return {
+              "@id": entity["iri"],
+              "rdf:type": [],
+              "rdfs:label": "",
+              "rdfs:comment": ""
+            }
+          })
+
+          console.log("_entityReferences", _entityReferences)
+          console.log("_entitiesWithoutData", _entitiesWithoutData)
+
+
+        }
+
 
         //any file belonging to the user
         const _userFile = {
@@ -4386,8 +4471,8 @@ export default createStore({
     },
     async loadUserData({ commit, dispatch }) {
 
-      //example 
-      const _filenames = ["userdata_profiles1603.json"];
+      //example  
+      const _filenames = ["userdata_profiles1703.json"];
 
 
       _filenames.forEach(async (filename: string) => {

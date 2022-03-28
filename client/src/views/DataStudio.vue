@@ -627,10 +627,10 @@ export default defineComponent({
       //   "all",
       //   this.ontology.entities
       // );
-      // console.log(
-      //   "entities",
-      //   this.ontology.entities.byIri("im:MedicationOrder")
-      // );
+      console.log(
+        "entities",
+        this.ontology.entities.byIri("im:MedicationOrder")
+      );
       // console.log(
       //   "datamodels",
       //   this.ontology.entities.byType(entityTypes.datamodel)

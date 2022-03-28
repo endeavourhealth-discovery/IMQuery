@@ -4,43 +4,54 @@
     },
     "name": "SMI Population",
     "entityType": {
-        "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
-        "name": "Person",
         "@id": "http://endhealth.info/im#Person"
     },
-    "and": [{
+    "and": [
+        {
+            "name": "Registered with GP for GMS services on the reference date",
             "property": {
-                "entityType": "http://endhealth.info/im#Property",
-                "name": "profile",
                 "@id": "http://endhealth.info/im#hasProfile"
             },
-            "valueIn": [{
-                "entityType": "http://endhealth.info/im#Profile",
-                "name": "GP Registration for GMS Services before the reference date",
-                "@id": "http://endhealth.info/im#Q_RegisteredGMS"
-            }],
+            "valueIn": [
+                {
+                    "@id": "http://endhealth.info/im#Q_RegisteredGMS"
+                }
+            ],
             "id": {
-                "@id": "urn:uuid:0b7aabe5-0e7c-4ff9-88dc-be1a290d785d"
+                "@id": "urn:uuid:20a3f31c-97f8-4ccd-8da5-017305bacce1"
             }
         },
         {
             "id": {
                 "@id": "urn:uuid:cebe3297-5f54-4556-81f0-0ca14f27922e"
             },
-            "and": [{
+            "and": [
+                {
                     "pathTo": {
-                        "entityType": "http://endhealth.info/im#Property",
-                        "name": "is subject of",
                         "@id": "http://endhealth.info/im#isSubjectOf"
                     },
                     "entityType": {
-                        "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
-                        "name": "Person Details",
+                        "@id": "http://endhealth.info/im#PatientRegistration"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#patientType"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Regular",
+                            "@id": "urn:uuid:6f7cc0f8-e23d-4838-9233-e0f32b36a6f3"
+                        }
+                    ],
+                    "valueVar": "patientType1"
+                },
+                {
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
                         "@id": "http://endhealth.info/im#PersonDetails"
                     },
                     "property": {
-                        "entityType": "http://www.w3.org/2001/XMLSchema#Integer",
-                        "name": "Age",
                         "@id": "http://endhealth.info/im#age"
                     },
                     "valueCompare": {
@@ -51,53 +62,26 @@
                         "id": {
                             "@id": "http://endhealth.info/im#AgeFunction"
                         },
-                        "argument": [{
-                            "parameter": "units",
-                            "valueData": "YEAR"
-                        }]
+                        "argument": [
+                            {
+                                "parameter": "units",
+                                "valueData": "YEAR"
+                            }
+                        ]
                     },
-                    "valueVar": "age1"
-                },
-                {
-                    "pathTo": {
-                        "entityType": "http://endhealth.info/im#Property",
-                        "name": "is subject of",
-                        "@id": "http://endhealth.info/im#isSubjectOf"
-                    },
-                    "entityType": {
-                        "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
-                        "name": "Patient Registration",
-                        "@id": "http://endhealth.info/im#PatientRegistration"
-                    },
-                    "property": {
-                        "entityType": "http://endhealth.info/im#Property",
-                        "name": "Patient Type",
-                        "@id": "http://endhealth.info/im#patientType"
-                    },
-                    "valueIn": [{
-                        "entityType": "http://endhealth.info/im#Concept",
-                        "name": "Regular",
-                        "@id": "urn:uuid:3833d921-af98-4d15-86fa-7c024a2a9c2a"
-                    }],
-                    "valueVar": "patientType2"
+                    "valueVar": "age2"
                 }
             ]
         },
         {
             "pathTo": {
-                "entityType": "http://endhealth.info/im#Property",
-                "name": "is subject of",
                 "@id": "http://endhealth.info/im#isSubjectOf"
             },
             "entityType": {
-                "entityType": "http://www.w3.org/ns/shacl#Nodeshape",
-                "name": "Event",
                 "@id": "http://endhealth.info/im#Event"
             },
             "sort": {
                 "orderBy": {
-                    "entityType": "http://endhealth.info/im#DateTime",
-                    "name": "effective date",
                     "@id": "http://endhealth.info/im#effectiveDate"
                 },
                 "count": 1,
@@ -105,43 +89,35 @@
             },
             "test": {
                 "property": {
-                    "entityType": "http://endhealth.info/im#Property",
-                    "name": "concept",
                     "@id": "http://endhealth.info/im#concept"
                 },
-                "valueIn": [{
-                    "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                    "entityType": "http://endhealth.info/im#Concept",
-                    "rdfs:label": "Serious Mental Illness"
-                }],
+                "valueIn": [
+                    {
+                        "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
+                    }
+                ],
                 "valueVar": "concept5"
             },
             "id": {
                 "@id": "urn:uuid:36817d95-6552-43f1-9c7a-85c46b1a77b5"
             },
-            "and": [{
+            "and": [
+                {
                     "property": {
-                        "entityType": "http://endhealth.info/im#Property",
-                        "name": "concept",
                         "@id": "http://endhealth.info/im#concept"
                     },
-                    "valueIn": [{
-                            "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11",
-                            "entityType": "http://endhealth.info/im#Concept",
-                            "rdfs:label": "Serious Mental Illness (Resolved)"
+                    "valueIn": [
+                        {
+                            "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11"
                         },
                         {
-                            "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
-                            "entityType": "http://endhealth.info/im#Concept",
-                            "rdfs:label": "Serious Mental Illness"
+                            "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
                         }
                     ],
                     "valueVar": "concept3"
                 },
                 {
                     "property": {
-                        "entityType": "http://endhealth.info/im#DateTime",
-                        "name": "effective date",
                         "@id": "http://endhealth.info/im#effectiveDate"
                     },
                     "valueVar": "effectiveDate4"

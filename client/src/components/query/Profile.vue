@@ -1,16 +1,16 @@
 <template>
-  <div :class="'profile  w-full px-5 py-5 flex  mb-12 rounded-xl overflow-hidden bg-gradient-to-r ' + themeClasses[theme].background">
+  <div :class="'profile w-full px-5 py-5 flex  mb-12 rounded-xl overflow-hidden bg-gradient-to-r ' + themeClasses[theme].background">
     <!-- Left Side  -->
     <div class="flex flex-col">
       <!-- Header -->
       <div class="flex items-center mb-5">
         <!-- Icon -->
         <div :class="' flex justify-center items-center rounded-full w-12 h-12 ml-5  ' + themeClasses[theme].icon">
-          <svg v-if="modelValue.mainEntity.name == 'Person'" xmlns="http://www.w3.org/2000/svg" :class="'h-7 w-7'" viewBox="0 0 20 20" fill="currentColor">
+          <svg v-if="modelValue.mainEntity['rdfs:label'] == 'Person'" xmlns="http://www.w3.org/2000/svg" :class="'h-7 w-7'" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
           </svg>
           <svg
-            v-else-if="modelValue.mainEntity.name == 'Appointment'"
+            v-else-if="modelValue.mainEntity['rdfs:label'] == 'Appointment'"
             xmlns="http://www.w3.org/2000/svg"
             :class="'h-7 w-7'"
             viewBox="0 0 20 20"
@@ -23,7 +23,7 @@
             />
           </svg>
           <svg
-            v-else-if="modelValue.mainEntity.name == 'Organisation'"
+            v-else-if="modelValue.mainEntity['rdfs:label'] == 'Organisation'"
             xmlns="http://www.w3.org/2000/svg"
             :class="'h-7 w-7'"
             viewBox="0 0 20 20"
@@ -44,7 +44,7 @@
 
         <!-- Main Entity  -->
         <div :class="'select-none font-semibold text-3xl ml-4 ' + themeClasses[theme].text">
-          {{ profile.mainEntity ? profile.mainEntity.name : "Search Profile" }}
+          {{ profile.mainEntity ? profile.mainEntity["rdfs:label"] : "Search Profile" }}
         </div>
         <!-- Main Entity  -->
 
@@ -81,7 +81,7 @@
     <div v-if="this.activeClausePath " class="flex flex-col">
       <!-- Header -->
       <div :class="'select-none font-semibold text-3xl' + themeClasses[theme].text">
-       Criteria Definition  
+       Criteria  
       </div>
       <!-- Header -->
       <TextDefinition v-if="templates.length > 0" :children="templates[0]" :activeClausePath="activeClausePath" :theme="theme" :themeClasses="themeClasses" class="w-full h-full"/>
@@ -169,7 +169,7 @@ export default defineComponent({
       themeClasses: {
         light: {
           phrases: {reference: "text-blue-700 font-bold hover:underline"},
-          background: " bg-white hover:shadow-sm border transition duration-700 ease-in-out border-transparent hover:border-gray-200",
+          background: " bg-white hover:shadow-sm hover:bg-gray-50 border transition duration-700 ease-in-out border-gray-200",
           text: " text-gray-800",
           icon: " text-blue-700 bg-gray-100",
           bodyClasses: " text-black",

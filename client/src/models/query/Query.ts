@@ -81,7 +81,7 @@ export class QueryBuilder {
         try {
 
             //if json parse
-            if (typeof (entities) == "string") {
+            if (typeof (entities) == "string" ) {
                 entities = JSON.parse(entities)
             }
 
@@ -146,25 +146,27 @@ export class Profile extends Entity {
 
     get mainEntity(): any {
 
-        const _id = this["im:definition"]["entityType"]["@id"];
+        return this["im:definition"]["entityType"];
 
-        const _name = this["im:definition"]["entityType"]["name"]
-            ? this["im:definition"]["entityType"]["name"]
-            : this["im:definition"]["entityType"]["@id"].split("#")[1];
+        // const _id = this["im:definition"]["entityType"]["@id"];
 
-        const _entityType = this["im:definition"]["entityType"]["entityType"]
-            ? this["im:definition"]["entityType"]["entityType"]
-            : "http://www.w3.org/ns/shacl#Nodeshape";
+        // const _name = this["im:definition"]["entityType"]["rdfs:label"]
+        //     ? this["im:definition"]["entityType"]["rdfs:label"]
+        //     : this["im:definition"]["entityType"]["@id"].split("#")[1];
 
-        return {
-            "@id": _id,
-            "name": _name,
-            "entityType": _entityType
+        // const _entityType = this["im:definition"]["entityType"]["rdf:type"]
+        //     ? this["im:definition"]["entityType"]["rdf:type"]
+        //     : "http://www.w3.org/ns/shacl#Nodeshape";
 
-        };
+        // return {
+        //     "@id": _id,
+        //     "name": _name,
+        //     "entityType": _entityType
+
+        // };
     }
     set mainEntity(value: any): void {
-        this["im:definition"].entityType[0] = value;
+        this["im:definition"].entityType = value;
     }
 
 
@@ -339,6 +341,7 @@ export class Profile extends Entity {
 
 
     public toTemplates(clausePath: string): void {
+        console.log("this.mainEntity",this.mainEntity )
         const _templates = Templates.toTemplates(this.mainEntity, this._definitionTree, clausePath)
 
         // console.log("templates", _templates);

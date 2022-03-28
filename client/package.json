@@ -14,7 +14,6 @@
     "test:e2e:ci": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "im-library": "https://endeavour-codebuild-output.s3.eu-west-2.amazonaws.com/im-library-1.0.0.tgz",
     "@babel/preset-flow": "7.16.7",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
@@ -35,6 +34,7 @@
     "d3": "^7.0.0",
     "esbuild-windows-64": "^0.14.25",
     "google-palette": "^1.1.0",
+    "im-library": "https://endeavour-codebuild-output.s3.eu-west-2.amazonaws.com/im-library-1.0.0.tgz",
     "jmespath": "^0.16.0",
     "jsonpath": "^1.1.1",
     "lodash": "^4.17.21",

@@ -151,8 +151,9 @@ function phrase(phraseType: string, input: any, references = []): any {
         // [1]
         const _entityPaths = ["json.hasProfile", "json.valueIn", "json.valueNotIn"];
         // [2]
-        const _valuePaths = ["json.valueCompare", "json.valueCompare"];
+        const _valuePaths = ["json.valueCompare"];
 
+        // is it a reference to an entity or a value at a JSON path?
         const _isEntityReference = _entityPaths.includes(input?.meta?.args?.propertyPath)
         const _isValueReference = _valuePaths.includes(input?.meta?.args?.propertyPath)
 
@@ -160,13 +161,14 @@ function phrase(phraseType: string, input: any, references = []): any {
             console.log("1")
             input.data.forEach((entity: any, index: any) => {
                 //adds new "text" key to entity reference
-                input.data[index]["_text"] = transform("entityName", entity.name)
+                console.log("entity", entity)
+                input.data[index]["_text"] = transform("entityName", entity["rdfs:label"])
             })
-        } else if (_isValueReference) {
+        } else if (_isEntityReference ) {
             console.log("2")
-
             //adds new "text" key to value at path
-            input.data["_text"] = transform("entityName", input.data.name)
+            const _text = transform("entityName", input.data.name);
+            input.data["_text"] = _text;
         } else {
 
             console.log("phrase not found: [type] [input]", phraseType, input)
@@ -255,15 +257,13 @@ function phrase(phraseType: string, input: any, references = []): any {
 function reference(targetClause: any, propertyPath = "") {
 
     // const jsonDefinition = targetClause?.json ? targetClause.json : targetClause;
-    
     // const _values = _.get(targetClause, propertyPath);
-    const _values = _.get(targetClause, propertyPath);
-    // const _values = propertyPath && propertyPath != "" ? _.get(targetClause, propertyPath) : targetClause;
+    const _values = propertyPath && propertyPath != "" ? _.get(targetClause, propertyPath) : targetClause;
 
 
 
     const _reference = {
-        // text: "",
+        text: "",
         data: _values,
         type: "reference",
         importance: "required",
@@ -405,11 +405,9 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 
 
 
-    const _ref3 = reference(mainEntity, "name")
+    const _ref3 = reference(mainEntity, "rdfs:label")
     const _mainEntity = mutable(phrase("entityName", _ref3.data, [_ref3]));
     // const _mainEntity = mutable(reference(mainEntity, ""));
-
-
 
     const _a = phrase("firstLetterVowel", firstLetterIsVowel(_mainEntity.text));
 
@@ -474,7 +472,7 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any, args
     // console.log("_profiles", _profiles)
 
     const _sentence = [_were, _partOf, _resultsOf, _profiles];
-    // console.log("_sentence", _sentence)
+    console.log("_sentence", _sentence)
 
     return _sentence;
 };
@@ -488,7 +486,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         // console.log("_sentence currentClause", currentClause)
 
         const _ref1 = reference(currentClause, "property.name");
-        const _property = mutable(phrase("entityName", _ref1.data));
+        const _property = mutable(phrase("entityName", _ref1.data, [_ref1]));
         // console.log("_property", _property)
 
         const _a = phrase("firstLetterVowel", firstLetterIsVowel(_property.text));
@@ -805,7 +803,7 @@ const CascadingTemplates = [
                         all: [
                             {
                                 test: "pathValueIs",
-                                input: ["#currentClause", "property.@id", "http://endhealth.info/im#hasProfile"],
+                                input: ["#currentClause", "property.@id", "im:hasProfile"],
                                 expect: true
                             }
                         ]

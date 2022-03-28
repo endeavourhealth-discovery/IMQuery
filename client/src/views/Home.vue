@@ -214,6 +214,7 @@
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <div class="kanban mt-8 flex justify-center space-x-6 text-white" @click="">
+              <button @click="testQuery()"> test</button>
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
                 <div class="profile-column">
                   <TransitionRoot
@@ -338,7 +339,8 @@ export default defineComponent({
   data() {
     return {
       isShowing: true,
-      colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
+      colours: ["light", "light", "light", "light", "light", "light", "blue", "purple", "green", "orange", "pink"],
+      // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
       newItems: [
         {
           label: "Search Profile",
@@ -469,16 +471,25 @@ export default defineComponent({
       tableHeight: 600
     };
   },
+
   computed: {
     ...mapState(["currentUser", "isLoggedIn"]),
-      activeClausePath: {
-        get(): any {
-          return this.$store.state.activeClausePath;
-        },
-        set(value: any): void {
-          this.$store.commit("updateActiveClausePath", value);
-        }
+    ontology: {
+      get(): any {
+        return this.$store.state.ontology;
       },
+      set(value: any): void {
+        return;
+      }
+    },
+    activeClausePath: {
+      get(): any {
+        return this.$store.state.activeClausePath;
+      },
+      set(value: any): void {
+        this.$store.commit("updateActiveClausePath", value);
+      }
+    },
     queryBuilder: {
       get(): any {
         return this.$store.state.queryBuilder;
@@ -526,7 +537,7 @@ export default defineComponent({
   },
   async mounted() {
     this.$store.dispatch("loadTheme");
-    console.log("current THeme", localStorage.getItem("themeName"));
+    // console.log("current THeme", localStorage.getItem("themeName"));
 
     // this.currenTheme = "dark";
     this.$store.dispatch("loadUserData");
@@ -553,6 +564,21 @@ export default defineComponent({
     // this.getInitialData();
   },
   methods: {
+    testQuery(): any {
+      // console.log(
+      //   "ontology",
+      //   this.ontology
+      // );
+      // console.log(
+      //   "all",
+      //   this.ontology.entities
+      // );
+      // console.log("entities", this.ontology.byIri("im:MedicationOrder"));
+      // console.log(
+      //   "datamodels",
+      //   this.ontology.entities.byType(entityTypes.datamodel)
+      // );
+    },
     toggleTheme(): void {
       if (this.currentTheme == "dark") {
         this.currentTheme = "light";

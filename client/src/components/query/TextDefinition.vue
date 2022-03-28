@@ -2,24 +2,22 @@
   <div class="text-definition text-black text-2xl text-bold">
     <div class="flex flex-col">
       <!-- A sentence from the template    -->
-      <div v-for="(sentence, sentenceIndex) in children.data" :key="sentence.uuid" class="sentence flex">
+      <div v-for="(sentence, sentenceIndex) in children.data" :key="sentence.uuid" class="sentence flex flex-wrap">
         <!-- Words in a sentence   -->
         <template v-for="(phrase, phraseIndex) in sentence" :key="phrase.uuid">
           <!-- References  -->
 
-          <div v-if="phrase.type == 'reference'" :class="'reference flex flex-col '">
+          <div v-if="phrase.type == 'reference'" :class="'reference flex flex-col'">
             <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex '">
-              <div v-if="entityIndex != 0" class="inline mr-5 text-green-500 font-bold">or</div>
-              <div   :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
+              <div class="inline mr-4 text-green-500 font-bold w-7">{{ entityIndex != 0 ? "or" : "" }}</div>
+              <div @click="click(entity)" :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
                 {{ entity._text || entity.name || entity["rdfs:label"] }}
+                <!-- {{entity}} -->
               </div>
             </div>
           </div>
 
-          <div
-            v-else-if="phrase.type == 'transformedReferences'"
-            :class="'transformedReferences ' + 'text-indigo-700 font-medium cursor-pointer  '"
-          >
+          <div v-else-if="phrase.type == 'transformedReferences'" :class="'transformedReferences ' + 'text-indigo-700 font-medium cursor-pointer  '">
             {{ phrase.text }}
           </div>
 
@@ -29,11 +27,12 @@
 
           <div class="space inline-block"></div>
         </template>
+        <span>...</span>
       </div>
 
       <!-- Child sentence - assumes only the first resulting template is used (others unmatched ones are removed)  -->
       <template v-if="children?.children?.length > 0">
-        <TextDefinition v-for="child in children.children" :key="child.uuid" :children="child" class="ml-14 flex" />
+        <TextDefinition v-for="child in children.children" :key="child.uuid" :children="child" class="ml-10 flex" />
       </template>
     </div>
   </div>
@@ -45,10 +44,38 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "TextDefinition",
   props: ["templates", "activeClausePath", "children", "theme", "themeClasses"],
+  data() {
+    return {
+      context: {
+        rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        im: "http://endhealth.info/im#",
+        imq: "http://endhealth.info/imq#",
+        bc: "http://endhealth.info/bc#",
+        rdfs: "http://www.w3.org/2000/01/rdf-schema#",
+        emis: "http://endhealth.info/emis#",
+        sn: "http://snomed.info/sct#",
+        ods: "http://endhealth.info/ods#",
+        owl: "http://www.w3.org/2002/07/owl#",
+        prov: "http://www.w3.org/ns/prov#",
+        tpp: "http://endhealth.info/tpp#",
+        xml: "http://www.w3.org/XML/1998/namespace#",
+        sh: "http://www.w3.org/ns/shacl#",
+        opcs4: "http://endhealth.info/opcs4#",
+        vis: "http://endhealth.info/vision#",
+        orole: "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRole-1#",
+        xsd: "http://www.w3.org/2001/XMLSchema#"
+      }
+    };
+  },
   methods: {
     click(entity: any): void {
-      const _entityIri = encodeURIComponent(entity["@id"]);
-      const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_entityIri}`;
+      const _iri = entity["@id"].replace(":", "#");
+      const _contextKey = _iri.split("#")[0];
+      const _iriKey = _iri.split("#")[1];
+      console.log(_contextKey);
+      const _encodedIri = encodeURIComponent(this.context[_contextKey] + _iriKey);
+
+      const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_encodedIri}`;
       window.open(_url, "_blank");
     },
     capitalise(obj: any) {

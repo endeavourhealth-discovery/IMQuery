@@ -75,13 +75,13 @@ $..["im:var"]
 $..["im:and"][?(@.["im:var"] && @.["im:valueIn"])]
 
 
-
 to get any statement
 $..[?(@.property && (@.valueIn || @.value))]
 
 
 
 First get all named clauses 
+$..[?(@.@id)]
 $..[?(@.rdfs:label)]
 
 

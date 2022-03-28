@@ -1,0 +1,32 @@
+[
+    {
+        "@id": "im:Q_RegisteredGMS",
+        "rdf:type": [{"@id": "im:Profile"}],
+        "rdfs:label": "Patients registered for GMS services on the reference date",
+        "rdfs:comment": "The type of agent involved"
+    },
+    {
+        "@id": "urn:uuid:6f7cc0f8-e23d-4838-9233-e0f32b36a6f3",
+        "rdf:type": [{"@id": "im:ConceptSet"}],
+        "rdfs:label": "Regular",
+        "rdfs:comment": ""
+    },
+    {
+        "@id": "im:age",
+        "rdf:type": [{"@id": "owl:ObjectProperty"}],
+        "rdfs:label": "Age",
+        "rdfs:comment": ""
+    },
+    {
+        "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c",
+        "rdf:type": [{"@id": "im:ConceptSet"}],
+        "rdfs:label": "Significant Mental Illness",
+        "rdfs:comment": ""
+    },
+    {
+        "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11",
+        "rdf:type": [{"@id": "im:ConceptSet"}],
+        "rdfs:label": "Significant Mental Illness (Not Resolved)",
+        "rdfs:comment": ""
+    }
+]
