@@ -80,7 +80,7 @@ export default createStore({
       selectedSchemes: ConceptReference[];
       selectedTypes: string[];
     },
-    activeClausePath: "",
+    activeProfile: { uuid: "", activeClausePath: "" },
     JSONContent: "",
     LabelContent: [] as any[],
     isLoading: false,
@@ -4145,8 +4145,8 @@ export default createStore({
 
   },
   mutations: {
-    updateActiveClausePath(state, newPath) {
-      state.activeClausePath = newPath;
+    updateActiveProfile(state, value) {
+      state.activeProfile = value;
     },
     updateTheme(state, newTheme) {
       // const _currentTheme = state.theme;
@@ -4218,86 +4218,92 @@ export default createStore({
             }
 
 
+            // console.log("_entityIri", _entityIri)
             const _entity = state.ontology.entities.byIri(_entityIri)
+            // console.log("_entity", _entity)
+
+
+            let _shortEntity;
+            if (_entity && _entity.length > 0) {
+              // console.log(_entity)
+              _shortEntity = {
+                "@id": _entity[0]["@id"],
+                "rdf:type": _entity[0]["rdf:type"],
+                "rdfs:label": _entity[0]["rdfs:label"],
+                "rdfs:comment": _entity[0]["rdfs:comment"]
+              };
+
+
+              //populate range for each property based on the datamodel (entityType inside the same clause)
+              const _propertyTypes = ["owl:ObjectProperty", "owl:DatatypeProperty"];
+              const _isObjectProperty = _shortEntity["rdf:type"].some((rdfType: any) => _propertyTypes.includes(rdfType["@id"]));
+              if (_isObjectProperty) {
+                // console.log("reference", reference)
+                // console.log("_path", _path)
+
+
+                //get datamodel entity
+                const _pathQueue = _.cloneDeep(reference);
+                // console.log("_pathQueue", jp.stringify(_pathQueue))
 
 
 
+                //finds nearest parent that is datamodel entity (i.e. has entityType json path)
+                let _parentIri = "";
+                while (_pathQueue.length > 1) {
+
+                  const _valueAtPath = jp.query(_json, jp.stringify(_pathQueue))[0];
+                  // console.log("_valueAtPath", _valueAtPath)
+
+                  if (_valueAtPath["entityType"]) {
+                    // console.log("entityType", _valueAtPath)
+                    // console.log("entityType id", _valueAtPath["entityType"]["@id"])
+
+                    _parentIri = _valueAtPath["entityType"]["@id"];
+                    // console.log("_parentIri", _parentIri)
 
 
-            const _shortEntity = {
-              "@id": _entity[0]["@id"],
-              "rdf:type": _entity[0]["rdf:type"],
-              "rdfs:label": _entity[0]["rdfs:label"],
-              "rdfs:comment": _entity[0]["rdfs:comment"]
-            }
-
-
-
-            //populate range for each property based on the datamodel (entityType inside the same clause)
-            const _propertyTypes = ["owl:ObjectProperty", "owl:DatatypeProperty"];
-            const _isObjectProperty = _shortEntity["rdf:type"].some((rdfType: any) => _propertyTypes.includes(rdfType["@id"]));
-            if (_isObjectProperty) {
-              // console.log("reference", reference)
-              // console.log("_path", _path)
-
-
-              //get datamodel entity
-              const _pathQueue = _.cloneDeep(reference);
-              // console.log("_pathQueue", jp.stringify(_pathQueue))
-
-
-
-              //finds nearest parent that is datamodel entity (i.e. has entityType json path)
-              let _parentIri = "";
-              while (_pathQueue.length > 1) {
-
-                const _valueAtPath = jp.query(_json, jp.stringify(_pathQueue))[0];
-                // console.log("_valueAtPath", _valueAtPath)
-
-                if (_valueAtPath["entityType"]) {
-                  // console.log("entityType", _valueAtPath)
-                  // console.log("entityType id", _valueAtPath["entityType"]["@id"])
-
-                  _parentIri = _valueAtPath["entityType"]["@id"];
-                  // console.log("_parentIri", _parentIri)
-
-
-                  if (_parentIri.substring(0, 4) == "http") {
-                    _parentIri = QueryUtils.toIri(_parentIri);
+                    if (_parentIri.substring(0, 4) == "http") {
+                      _parentIri = QueryUtils.toIri(_parentIri);
+                    }
+                    break;
                   }
-                  break;
+
+                  _pathQueue.pop();
                 }
 
-                _pathQueue.pop();
-              }
+                // if datamodel entity found, find the the range 
+                if (_parentIri != "") {
 
-              // if datamodel entity found, find the the range 
-              if (_parentIri != "") {
+                  const _datamodelEntity = state.ontology.entities.byIri(_parentIri);
 
-                const _datamodelEntity = state.ontology.entities.byIri(_parentIri);
+                  // console.log("_parentIri", _parentIri)
+                  // console.log("_datamodelEntity", _datamodelEntity)
 
-                // console.log("_parentIri", _parentIri)
-                // console.log("_datamodelEntity", _datamodelEntity)
-
-                // find the properties range
-                const _rangeProperty = _datamodelEntity[0]["sh:property"].filter((_property: any) => {
-                  return _property["sh:path"].some((path: any) => {
-                    const _isMatch = path["@id"] == _shortEntity["@id"]
-                    // console.log("_match", _property)
-                    return _isMatch;
-                  })
-                });
+                  // find the properties range
+                  const _rangeProperty = _datamodelEntity[0]["sh:property"].filter((_property: any) => {
+                    return _property["sh:path"].some((path: any) => {
+                      const _isMatch = path["@id"] == _shortEntity["@id"]
+                      // console.log("_match", _property)
+                      return _isMatch;
+                    })
+                  });
 
 
-                if (_rangeProperty.length > 0) {
- 
-                  _shortEntity["rdfs:range"] = _.get(_rangeProperty, "0.sh:datatype.0");
+                  if (_rangeProperty.length > 0) {
+
+                    _shortEntity["rdfs:range"] = _.get(_rangeProperty, "0.sh:datatype.0");
+                  }
                 }
               }
+
+
             }
+
+
 
             return {
-              // uuid: `urn:uuid:${v4()}`,
+              uuid: `urn:uuid:${v4()}`,
               jpPath: jpPath,
               path: _path,
               iri: _entityIri,
@@ -4309,17 +4315,23 @@ export default createStore({
 
           //populates definition 
           _entityReferences.forEach((reference: any) => {
-            _.set(_json, reference.path, reference.entityData);
+
+            // console.log("reference.path", reference.path)
+            // console.log("reference.path", referenc?e.path.substring(reference.path.length - 5, reference.path.length - 2))
+            // if (reference.path.substring(-10, -2) )
+            if (reference.entityData != undefined) _.set(_json, reference.path, reference.entityData);
           });
 
           // console.log("1", JSON.stringify(_json) )
           entities[index]["im:definition"] = JSON.stringify(_json);
+          
+          // console.log("_entityReferences", _entityReferences)
 
           console.log("populated JSON", _json)
 
-
           //for debugging
-          let _entitiesWithoutData = _entityReferences.filter((entity: any) => entity.entityData.length == 0);
+          let _entitiesWithoutData = _entityReferences.filter((entity: any) => entity.entityData == undefined);
+
           _entitiesWithoutData = _entitiesWithoutData.map((entity: any) => {
             return {
               "@id": entity["iri"],
@@ -4328,6 +4340,10 @@ export default createStore({
               "rdfs:comment": ""
             }
           })
+
+
+          entities[index]["entityReferences"] = _entityReferences;
+          entities[index]["entitiesWithoutData"] = _entitiesWithoutData;
 
           console.log("_entityReferences", _entityReferences)
           console.log("_entitiesWithoutData", _entitiesWithoutData)
@@ -4549,7 +4565,7 @@ export default createStore({
     async loadUserData({ commit, dispatch }) {
 
       //example  
-      const _filenames = ["userdata_profiles1703.json"];
+      const _filenames = ["userdata_profiles1705.json"];
 
 
       _filenames.forEach(async (filename: string) => {

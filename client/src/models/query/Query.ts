@@ -126,6 +126,9 @@ class Entity {
 // Profile\\\\\
 export class Profile extends Entity {
     public 'im:definition'?: any | null;
+    public 'entityReferences'?: any | null;
+    public 'entitiesWithoutData'?: any | null;
+
 
     constructor(entity?: any)
     constructor(entity: any) {

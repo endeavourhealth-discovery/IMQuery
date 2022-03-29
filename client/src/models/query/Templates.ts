@@ -155,19 +155,21 @@ function phrase(phraseType: string, input: any, references = []): any {
 
         // _input = input.data;
 
-        // [1]
-        const _entityPaths = ["json.hasProfile", "json.valueIn", "json.valueNotIn"];
-        // [2]
-        const _valuePaths = ["json.valueCompare"];
+        // // [1]
+        // const _entityPaths = ["json.hasProfile", "json.valueIn", "json.valueNotIn"];
+        // // [2]
+        // const _valuePaths = ["json.valueCompare"];
 
-        // is it a reference to an entity or a value at a JSON path?
-        const _isEntityReference = _entityPaths.includes(input?.meta?.args?.propertyPath)
-        const _isValueReference = _valuePaths.includes(input?.meta?.args?.propertyPath)
+        // // is it a reference to an entity or a value at a JSON path?
+        // const _isEntityReference = _entityPaths.includes(input?.meta?.args?.propertyPath)
+        // const _isValueReference = _valuePaths.includes(input?.meta?.args?.propertyPath)
 
         if (Array.isArray(input.data)) {
             console.log("1")
             input.data.forEach((entity: any, index: any) => {
                 //adds new "text" key to entity reference
+                console.log("input", input)
+
                 console.log("entity", entity)
                 input.data[index]["_text"] = transform("entityName", entity["rdfs:label"])
             })
@@ -884,7 +886,7 @@ export default class Templates {
                     }
                 })
 
-                console.log("_f(..._args) == criteria.expect", _f, _args, criteria.expect)
+                // console.log("_f(..._args) == criteria.expect", _f, _args, criteria.expect)
                 return _f(..._args) == criteria.expect;
             }
 

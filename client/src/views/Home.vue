@@ -209,7 +209,7 @@
 
 
               <!-- <button @click="testQuery()"> test</button> -->
-
+4
 
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
@@ -232,7 +232,7 @@
                       {{ profile["rdfs:comment"] }}
                     </div>
 
-                    <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" :activeClausePath="activeClausePath" />
+                    <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
                   </TransitionRoot>
                 </div>
               </template>
@@ -481,12 +481,12 @@ export default defineComponent({
         return;
       }
     },
-    activeClausePath: {
+    activeProfile: {
       get(): any {
-        return this.$store.state.activeClausePath;
+        return this.$store.state.activeProfile;
       },
       set(value: any): void {
-        this.$store.commit("updateActiveClausePath", value);
+        this.$store.commit("updateActiveProfile", value);
       }
     },
     queryBuilder: {

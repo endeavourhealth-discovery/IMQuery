@@ -85,8 +85,9 @@ export default defineComponent({
       const _iri = entity["@id"].replace(":", "#");
       const _contextKey = _iri.split("#")[0];
       const _iriKey = _iri.split("#")[1];
-      
-      const _encodedIri = encodeURIComponent(this.context[_contextKey] + _iriKey);
+      const _contextUrl = this.context[_contextKey];
+
+      const _encodedIri = encodeURIComponent(_contextUrl ? _contextUrl + _iriKey : entity["@id"]);
 
       const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_encodedIri}`;
       window.open(_url, "_blank");

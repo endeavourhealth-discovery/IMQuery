@@ -244,7 +244,7 @@
                             },
                             "valueIn": [
                                 {
-                                    "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
+                                    "name": "Body Mass Index (BMI)",
                                     "@id": "urn:uuid:289c8092-10c9-4273-8751-97282ee85ab2"
                                 }
                             ],

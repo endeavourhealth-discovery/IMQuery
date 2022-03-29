@@ -1,0 +1,2916 @@
+{
+    "id": {
+        "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+    },
+    "name": "Priority 1",
+    "entityType": {
+        "@id": "im:Person",
+        "rdf:type": [
+            {
+                "@id": "rdfs:Class"
+            },
+            {
+                "@id": "sh:NodeShape"
+            }
+        ],
+        "rdfs:label": "Person",
+        "rdfs:comment": "An id of a person to which entries refer. A person identifier may not be 1:1 with an actual person as each organisation has there own id for example a patient id"
+    },
+    "and": [
+        {
+            "name": "SMI Population",
+            "property": {
+                "@id": "im:hasProfile",
+                "rdf:type": [
+                    {
+                        "@id": "owl:ObjectProperty"
+                    }
+                ],
+                "rdfs:label": "has profile",
+                "rdfs:comment": "Points to a profile that this entity complies with e.g. a patient aged 30 has profile of patients aged >18"
+            },
+            "valueIn": [
+                {
+                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                }
+            ],
+            "id": {
+                "@id": "urn:uuid:afce4575-92cd-49e3-8ed1-d2bf6deca220"
+            }
+        },
+        {
+            "or": [
+                {
+                    "id": {
+                        "@id": "urn:uuid:990f1c0b-1676-45f0-b321-d2e710dd7336"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    }
+                                ],
+                                "valueVar": "concept8"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:b46ee284-fbb2-4d0e-b766-25cb5e7e32a9"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                        },
+                                        {
+                                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                        }
+                                    ],
+                                    "valueVar": "concept6"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate7"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "and": [
+                                    {
+                                        "property": {
+                                            "@id": "im:concept",
+                                            "rdf:type": [
+                                                {
+                                                    "@id": "owl:ObjectProperty"
+                                                }
+                                            ],
+                                            "rdfs:label": "codeable expression",
+                                            "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                                "@id": "urn:uuid:20e8846d-099a-4075-a308-154a249c27b6"
+                                            }
+                                        ],
+                                        "valueVar": "concept12"
+                                    },
+                                    {
+                                        "property": {
+                                            "@id": "http://endhealth.info/im#numericValue"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "140"
+                                        },
+                                        "valueVar": "numericValue13"
+                                    }
+                                ]
+                            },
+                            "id": {
+                                "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                            "@id": "urn:uuid:9ce559ad-7ca9-41d8-99c3-6a2fa97dbe58"
+                                        }
+                                    ],
+                                    "valueVar": "concept9"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate10"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-18"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate11"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate11"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:16465b73-385e-44bb-b1cc-3b5a162415a4"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    }
+                                ],
+                                "valueVar": "concept16"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:3bc2d33f-778a-465e-9c50-68fea6dd7317"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                        },
+                                        {
+                                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                        }
+                                    ],
+                                    "valueVar": "concept14"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate15"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "and": [
+                                    {
+                                        "property": {
+                                            "@id": "im:concept",
+                                            "rdf:type": [
+                                                {
+                                                    "@id": "owl:ObjectProperty"
+                                                }
+                                            ],
+                                            "rdfs:label": "codeable expression",
+                                            "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
+                                                "@id": "urn:uuid:04017632-afff-49a9-9f2a-ab9ce203925f"
+                                            }
+                                        ],
+                                        "valueVar": "concept20"
+                                    },
+                                    {
+                                        "property": {
+                                            "@id": "http://endhealth.info/im#numericValue"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "90"
+                                        },
+                                        "valueVar": "numericValue21"
+                                    }
+                                ]
+                            },
+                            "id": {
+                                "@id": "urn:uuid:bbdaa84b-ffef-43e4-b54c-12dd71dae6cd"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
+                                            "@id": "urn:uuid:0e954b48-abbb-4ea5-9399-ebaa576c48fe"
+                                        }
+                                    ],
+                                    "valueVar": "concept17"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate18"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-18"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate19"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate19"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:d31a5d4b-62b2-4ebe-9391-ffb74d12b0c8"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    }
+                                ],
+                                "valueVar": "concept24"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:5cf4ba51-6e57-4672-9c49-4b8a1c2d7d87"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                        },
+                                        {
+                                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                        }
+                                    ],
+                                    "valueVar": "concept22"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate23"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "and": [
+                                    {
+                                        "property": {
+                                            "@id": "im:concept",
+                                            "rdf:type": [
+                                                {
+                                                    "@id": "owl:ObjectProperty"
+                                                }
+                                            ],
+                                            "rdfs:label": "codeable expression",
+                                            "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Average home systolic blood pressure, Home systolic blood pressure, 24 hour systolic blood pressure, Ambulatory systolic blood pressure, Ambulatory systolic BP (blood pressure), Average day interval systolic blood pressure, Average 24 hour systolic blood pressure",
+                                                "@id": "urn:uuid:d8e39456-8245-414c-8eba-221ba467d86c"
+                                            }
+                                        ],
+                                        "valueVar": "concept28"
+                                    },
+                                    {
+                                        "property": {
+                                            "@id": "http://endhealth.info/im#numericValue"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "135"
+                                        },
+                                        "valueVar": "numericValue29"
+                                    }
+                                ]
+                            },
+                            "id": {
+                                "@id": "urn:uuid:12847f67-d2bb-4646-9de9-bfd77a9eb821"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                            "@id": "urn:uuid:459c42f3-e2ce-4f9c-8324-bdab2a0c4444"
+                                        }
+                                    ],
+                                    "valueVar": "concept25"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate26"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-18"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate27"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate27"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:fb967373-d30b-46aa-aba2-bcfb1898d1d8"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    }
+                                ],
+                                "valueVar": "concept32"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:82f4fbfe-dece-464d-976a-89191e39dac0"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                        },
+                                        {
+                                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                        }
+                                    ],
+                                    "valueVar": "concept30"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate31"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "and": [
+                                    {
+                                        "property": {
+                                            "@id": "im:concept",
+                                            "rdf:type": [
+                                                {
+                                                    "@id": "owl:ObjectProperty"
+                                                }
+                                            ],
+                                            "rdfs:label": "codeable expression",
+                                            "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Average home diastolic blood pressure, Home diastolic blood pressure, 24 hour diastolic blood pressure, Ambulatory diastolic blood pressure, Ambulatory diastolic BP (blood pressure), Average day interval diastolic blood pressure, Average 24 hour diastolic blood pressure",
+                                                "@id": "urn:uuid:dc197a96-2621-44d1-889d-f1712760d1ce"
+                                            }
+                                        ],
+                                        "valueVar": "concept36"
+                                    },
+                                    {
+                                        "property": {
+                                            "@id": "http://endhealth.info/im#numericValue"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "85"
+                                        },
+                                        "valueVar": "numericValue37"
+                                    }
+                                ]
+                            },
+                            "id": {
+                                "@id": "urn:uuid:556f28a3-8c42-42d5-99d1-30f8acb604e6"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "DAP - Diastolic arterial pressure, DBP - Diastolic blood pressure, Diastolic arterial pressure, Diastolic blood pressure, Baseline diastolic blood pressure, Diastolic arterial pressure, Lying diastolic blood pressure, Sitting diastolic blood pressure, Standing diastolic blood pressure..more",
+                                            "@id": "urn:uuid:7e05deda-650b-4ce5-9664-482170c9abe1"
+                                        }
+                                    ],
+                                    "valueVar": "concept33"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate34"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-18"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate35"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate35"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:d6fabb84-7a47-46d6-b215-2eade45bad68"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                                    }
+                                ],
+                                "valueVar": "concept40"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:55d78b69-1f74-4c7c-af11-cacc4da4c8f3"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                                        },
+                                        {
+                                            "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
+                                        }
+                                    ],
+                                    "valueVar": "concept38"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate39"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#numericValue"
+                                },
+                                "valueCompare": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "59"
+                                },
+                                "valueVar": "numericValue43"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:6fabf76c-4078-4ee1-8788-34614722df83"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised, HbA1c (haemoglobin A1c) level (diagnostic reference range) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised, HbA1c (haemoglobin A1c) level (monitoring ranges) - IFCC (International Federation of Clinical Chemistry and Laboratory Medicine) standardised",
+                                            "@id": "urn:uuid:cdb5787d-413d-468d-9390-4cfe4b190f8c"
+                                        }
+                                    ],
+                                    "valueVar": "concept41"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate42"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:f3a97116-59b0-4b84-ab06-9fe4ae7d1e5c"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#numericValue"
+                                },
+                                "valueCompare": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "10"
+                                },
+                                "valueVar": "numericValue46"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:310ffb9c-2013-47a9-9c4d-1945133e1132"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "QRISK2 cardiovascular disease 10 year risk score, QRISK3 cardiovascular disease 10 year risk calculator score",
+                                            "@id": "urn:uuid:102ec381-93d8-49f9-8518-8696ffdba7ca"
+                                        }
+                                    ],
+                                    "valueVar": "concept44"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate45"
+                                }
+                            ]
+                        },
+                        {
+                            "notExist": true,
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:MedicationOrder",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Medication order or prescription (entry type)",
+                                "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:d5398de3-a724-4da1-9cc9-9d8f8577ef06"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "http://endhealth.info/im#medication"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more",
+                                            "@id": "urn:uuid:477b3dd6-f834-4deb-8de9-b5919e302cb4"
+                                        }
+                                    ],
+                                    "valueVar": "medication47"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-6"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate48"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate48"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:0afc83aa-6fe3-48a4-a20b-d738f5935d66"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "property": {
+                                "@id": "im:concept",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "codeable expression",
+                                "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                            },
+                            "valueIn": [
+                                {
+                                    "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
+                                },
+                                {
+                                    "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d"
+                                },
+                                {
+                                    "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4"
+                                },
+                                {
+                                    "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:deaf1a83-9c5f-414c-83eb-18ff7e9656db"
+                            },
+                            "valueVar": "concept49"
+                        },
+                        {
+                            "notExist": true,
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:MedicationOrder",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Medication order or prescription (entry type)",
+                                "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:e6786a04-e856-47c6-8130-f632633f9e41"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "http://endhealth.info/im#medication"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more",
+                                            "@id": "urn:uuid:f94a8f26-2b67-4eef-9a94-6ff05e33564e"
+                                        }
+                                    ],
+                                    "valueVar": "medication50"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-6"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate51"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate51"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:838bf170-ad28-4c93-9139-69d23ac49ec8"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                                    }
+                                ],
+                                "valueVar": "concept54"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:e4ab0abb-d248-48f7-945b-8a1712f5243a"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "@id": "urn:uuid:b8e618ac-9a75-40d7-a3f9-698c94c6591c"
+                                        },
+                                        {
+                                            "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                                        }
+                                    ],
+                                    "valueVar": "concept52"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate53"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#numericValue"
+                                },
+                                "valueCompare": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "2"
+                                },
+                                "valueVar": "numericValue57"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:53849fc3-0b25-44c6-84ba-5ef42eea179b"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "CHA2DS2-VASc (congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category) stroke risk score",
+                                            "@id": "urn:uuid:7b3ae166-343f-43b7-a18d-260e1ce24498"
+                                        }
+                                    ],
+                                    "valueVar": "concept55"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate56"
+                                }
+                            ]
+                        },
+                        {
+                            "notExist": true,
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:MedicationOrder",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Medication order or prescription (entry type)",
+                                "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:eb34618b-c421-4033-8efa-084a8500466c"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "http://endhealth.info/im#medication"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Warfarin, Warfarin Sodium, Edoxaban tosilate, Dabigatran Etexilate, Apixaban, Rivaroxaban, Phenindione, Acenocoumarol",
+                                            "@id": "urn:uuid:f4d8a26a-1321-4cb1-b075-2231ac98b024"
+                                        }
+                                    ],
+                                    "valueVar": "medication58"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-6"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate59"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate59"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:ffd7d69b-a1c2-480f-9e94-1fad925b06f8"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#numericValue"
+                                },
+                                "valueCompare": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "30"
+                                },
+                                "valueVar": "numericValue62"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:3be8ae58-e020-43d1-bd60-966da838be32"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
+                                            "@id": "urn:uuid:62ca9db1-ce0d-4a7b-a4d6-1d6694bfcf84"
+                                        }
+                                    ],
+                                    "valueVar": "concept60"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate61"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:MedicationOrder",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Medication order or prescription (entry type)",
+                                "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:6b56f2da-a542-40a7-9172-4d21ef663527"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "http://endhealth.info/im#medication"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
+                                            "@id": "urn:uuid:29c27af4-b296-4005-b740-321f6ddcc7de"
+                                        }
+                                    ],
+                                    "valueVar": "medication63"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-6"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate64"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate64"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:36a15439-592a-4f8e-9703-ed8aab03aea7"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#numericValue"
+                                },
+                                "valueCompare": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "27.5"
+                                },
+                                "valueVar": "numericValue67"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:150b48a3-4f93-4e1c-9c62-dbca8ea4cb6b"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Body mass index, BMI - Body mass index, Body mass index, Quetelet index, Weight: body mass",
+                                            "@id": "urn:uuid:842b1f0c-8441-4818-b84d-e3fa4cf182dd"
+                                        }
+                                    ],
+                                    "valueVar": "concept65"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate66"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:MedicationOrder",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Medication order or prescription (entry type)",
+                                "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:a61e833d-4515-40ec-84e8-7cc7326f9629"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "http://endhealth.info/im#medication"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Olanzapine, Olanzapine Pamoate Monohydrate, Clozapine",
+                                            "@id": "urn:uuid:b8e16f3f-0d96-4a12-944b-570048105e76"
+                                        }
+                                    ],
+                                    "valueVar": "medication68"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-6"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate69"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate69"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "property": {
+                                "@id": "im:concept",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "codeable expression",
+                                "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Indians (Hindi-speaking), Pakistani (Urduspeakers), Todas, Naiars, Sri Lankan - ethnic category 2001 census, Irula, Pakistani or British Pakistani - ethnic category 2001 census, Bangladeshi or British Bangladeshi - ethnic category 2001 census, Other Asian background - ethnic category 2001 census..more",
+                                    "@id": "urn:uuid:26f2c99e-0b68-430f-ba92-06ffa4936946"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:c1e45cbf-11cd-4f7a-a6df-d8435211aa05"
+                            },
+                            "valueVar": "concept70"
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:73cc6420-7c47-4ba2-8b22-9a2a8379d7f1"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "property": {
+                                "@id": "im:concept",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "codeable expression",
+                                "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                            },
+                            "valueIn": [
+                                {
+                                    "@id": "urn:uuid:5a0192fd-27ea-4b30-8f8d-db17ab89284a"
+                                }
+                            ],
+                            "id": {
+                                "@id": "urn:uuid:bc852b08-1c52-4f49-85bb-0bdb88ccf5a2"
+                            },
+                            "valueVar": "concept71"
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:PersonDetails",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Person details",
+                                "rdfs:comment": "Record of the core details of  a person client patient or service covering the 'who' data and demographics"
+                            },
+                            "property": {
+                                "@id": "im:age",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "Age",
+                                "rdfs:comment": ""
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "18"
+                            },
+                            "valueFunction": {
+                                "id": {
+                                    "@id": "http://endhealth.info/im#AgeFunction"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "valueData": "YEAR"
+                                    }
+                                ]
+                            },
+                            "id": {
+                                "@id": "urn:uuid:daaa2db1-a973-40d7-a573-65178c5b7c7c"
+                            },
+                            "valueVar": "age72"
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:MedicationOrder",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Medication order or prescription (entry type)",
+                                "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:3912027d-bffe-44f0-91a4-d1151b9e4abc"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "http://endhealth.info/im#medication"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
+                                            "@id": "urn:uuid:19fe0fa1-2f49-4f89-a2b4-602b36c52b37"
+                                        }
+                                    ],
+                                    "valueVar": "medication73"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-6"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate74"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate74"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:9ba683d9-1816-40b0-b591-857cbb086d3e"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Diabetes mellitus without complication, Brittle diabetes, Diabetic nephropathy, Insulin-dependent diabetes mellitus with ulcer, Insulin-dependent diabetes maturity onset, Diabetic neuropathic arthropathy, Diabetic mononeuropathy, Hypoglycaemic event in diabetes, Diabetic eye disease..more",
+                                        "@id": "urn:uuid:413162d7-75cf-4960-8bfc-ee5e563a95a6"
+                                    }
+                                ],
+                                "valueVar": "concept77"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:bebe5d71-9f40-440e-9f39-6f0c6e6fbc76"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Diabetes mellitus without complication, Lipoatrophic diabetes mellitus without complication, Brittle diabetes, Lipoatrophic diabetes, Diabetic nephropathy, Type 1 diabetes mellitus with ulcer, Type 1 diabetes mellitus maturity onset, Type 2 diabetes mellitus with multiple complications, Type 2 diabetes mellitus with ulcer..more",
+                                            "@id": "urn:uuid:cd955051-a3c2-4799-9e06-458e61e218fd"
+                                        }
+                                    ],
+                                    "valueVar": "concept75"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate76"
+                                }
+                            ]
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:PersonDetails",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Person details",
+                                "rdfs:comment": "Record of the core details of  a person client patient or service covering the 'who' data and demographics"
+                            },
+                            "property": {
+                                "@id": "im:age",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "Age",
+                                "rdfs:comment": ""
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "40"
+                            },
+                            "valueFunction": {
+                                "id": {
+                                    "@id": "http://endhealth.info/im#AgeFunction"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "valueData": "YEAR"
+                                    }
+                                ]
+                            },
+                            "id": {
+                                "@id": "urn:uuid:cb998aed-97d6-475d-b09c-15ce4fa90f47"
+                            },
+                            "valueVar": "age78"
+                        },
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:MedicationOrder",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Medication order or prescription (entry type)",
+                                "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:5c301847-c448-4b4c-849b-2e8d90ed279f"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "http://endhealth.info/im#medication"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin",
+                                            "@id": "urn:uuid:15a5fd10-e7c4-4172-92ff-4466caa94b3a"
+                                        }
+                                    ],
+                                    "valueVar": "medication79"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-6"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate80"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate80"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": {
+                        "@id": "urn:uuid:a08079c6-2bf7-41e5-9473-c8ff5a50d6fa"
+                    },
+                    "and": [
+                        {
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "sort": {
+                                "orderBy": {
+                                    "@id": "im:effectiveDate",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:DatatypeProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "effective `date",
+                                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                    "rdfs:range": {
+                                        "@id": "im:DateTime"
+                                    }
+                                },
+                                "count": 1,
+                                "direction": "DESCENDING"
+                            },
+                            "test": {
+                                "property": {
+                                    "@id": "im:concept",
+                                    "rdf:type": [
+                                        {
+                                            "@id": "owl:ObjectProperty"
+                                        }
+                                    ],
+                                    "rdfs:label": "codeable expression",
+                                    "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                },
+                                "valueIn": [
+                                    {
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    }
+                                ],
+                                "valueVar": "concept83"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:ba740b88-1614-4aa5-b749-79f43545ce77"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                        },
+                                        {
+                                            "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                        }
+                                    ],
+                                    "valueVar": "concept81"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueVar": "effectiveDate82"
+                                }
+                            ]
+                        },
+                        {
+                            "notExist": true,
+                            "pathTo": {
+                                "@id": "im:isSubjectOf",
+                                "rdf:type": [
+                                    {
+                                        "@id": "owl:ObjectProperty"
+                                    }
+                                ],
+                                "rdfs:label": "is subject of ",
+                                "rdfs:comment": "references the event which this person is the subject of"
+                            },
+                            "entityType": {
+                                "@id": "im:Event",
+                                "rdf:type": [
+                                    {
+                                        "@id": "sh:NodeShape"
+                                    },
+                                    {
+                                        "@id": "rdfs:Class"
+                                    }
+                                ],
+                                "rdfs:label": "Event",
+                                "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration"
+                            },
+                            "id": {
+                                "@id": "urn:uuid:01e73690-c5ce-4f21-b8fb-5222172e8645"
+                            },
+                            "and": [
+                                {
+                                    "property": {
+                                        "@id": "im:concept",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:ObjectProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "codeable expression",
+                                        "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets"
+                                    },
+                                    "valueIn": [
+                                        {
+                                            "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                            "@id": "urn:uuid:e0064030-b85f-46b7-9e46-6d13118c04a0"
+                                        }
+                                    ],
+                                    "valueVar": "concept84"
+                                },
+                                {
+                                    "property": {
+                                        "@id": "im:effectiveDate",
+                                        "rdf:type": [
+                                            {
+                                                "@id": "owl:DatatypeProperty"
+                                            }
+                                        ],
+                                        "rdfs:label": "effective `date",
+                                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                                        "rdfs:range": {
+                                            "@id": "im:DateTime"
+                                        }
+                                    },
+                                    "valueCompare": {
+                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                        "valueData": "-18"
+                                    },
+                                    "valueFunction": {
+                                        "id": {
+                                            "@id": "http://endhealth.info/im#TimeDifference"
+                                        },
+                                        "argument": [
+                                            {
+                                                "parameter": "units",
+                                                "valueData": "MONTH"
+                                            },
+                                            {
+                                                "parameter": "firstDate",
+                                                "valueData": "$referenceDate"
+                                            },
+                                            {
+                                                "parameter": "secondDate",
+                                                "valueData": "effectiveDate85"
+                                            }
+                                        ]
+                                    },
+                                    "valueVar": "effectiveDate85"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

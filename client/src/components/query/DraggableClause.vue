@@ -153,7 +153,8 @@ export default defineComponent({
       // console.log("clause.currentPath", clause.currentPath)
 
       const _currentClausePath = clause.currentPath;
-      this.$store.commit("updateActiveClausePath", _currentClausePath);
+      // console.log("this.profile.uuid", this.profile)
+      this.$store.commit("updateActiveProfile", {uuid: this.profile["@id"], activeClausePath: _currentClausePath});
 
       this.activeClause.uuid = clause.uuid;
       this.activeClause.path = clause.currentPath;

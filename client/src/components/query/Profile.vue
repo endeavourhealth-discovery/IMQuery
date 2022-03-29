@@ -6,7 +6,13 @@
       <div class="flex items-center mb-5">
         <!-- Icon -->
         <div :class="' flex justify-center items-center rounded-full w-12 h-12 ml-5  ' + themeClasses[theme].icon">
-          <svg v-if="modelValue.mainEntity['rdfs:label'] == 'Person'" xmlns="http://www.w3.org/2000/svg" :class="'h-7 w-7'" viewBox="0 0 20 20" fill="currentColor">
+          <svg
+            v-if="modelValue.mainEntity['rdfs:label'] == 'Person'"
+            xmlns="http://www.w3.org/2000/svg"
+            :class="'h-7 w-7'"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
           </svg>
           <svg
@@ -61,7 +67,7 @@
         "
       >
         <DraggableClause
-        :activeClausePath="activeClausePath"
+          :activeClausePath="activeProfile.activeClausePath"
           :themeClasses="themeClasses"
           :theme="theme"
           v-if="definitionTree"
@@ -73,24 +79,56 @@
           :children="definitionTree"
         />
       </button>
+
       <!-- definitionTree  -->
     </div>
     <!-- Left Side  -->
 
     <!-- right side  -->
-    <div v-if="this.activeClausePath " class="flex flex-col">
-      <!-- Header -->
-      <div :class="'select-none font-semibold text-3xl' + themeClasses[theme].text">
-       Criteria  
+    <div v-if="activeProfile.uuid == profile['@id']" class="flex flex-col">
+      <div v-show="activeTab == 'criteria'"> 
+        <!-- Header -->
+        <div :class="'select-none font-semibold text-3xl' + themeClasses[theme].text">
+          Criteria
+        </div>
+        <!-- Header -->
+        <!-- Text Templates  -->
+        <TextDefinition
+          v-if="templates.length > 0"
+          :children="templates[0]"
+          :activeClausePath="activeProfile.activeClausePath"
+          :theme="theme"
+          :themeClasses="themeClasses"
+          class="w-full h-full"
+        />
+        <!-- Text Templates  -->
       </div>
-      <!-- Header -->
-      <TextDefinition v-if="templates.length > 0" :children="templates[0]" :activeClausePath="activeClausePath" :theme="theme" :themeClasses="themeClasses" class="w-full h-full"/>
-        
-
-
-      <!-- Text Templates  -->
-      
-      <!-- Text Templates  -->
+      <!-- Codes  -->
+      <div>
+        <div
+          class="tab-buttons #drop-zone transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 "
+        >
+          <template v-for="item in profile.entityReferences" :key="item.uuid">
+            <button
+              @click="activeTab == 'concepts'"
+              type="button"
+              :class="
+                'tab-button transition duration-500 ease-in-out px-2 py-2 non-selectable inline-flex items-center justify-center font-regular text-base  hover:text-gray-900  dark:hover:text-white' +
+                  [
+                    activeTab == 'concepts'
+                      ? 'active border dark:text-white dark:border-yellow-500 border-2 border-gray-300   bg-white dark:bg-gray-900  shadow-sm'
+                      : 'border border-2 border-transparent dark:border-gray-600 dark:text-gray-400 '
+                  ]
+              "
+            >
+              <div class="inline-flex font-medium text-2xl ml-2">
+                {{ item.entityData["@id"] }}
+              </div>
+            </button>
+          </template>
+        </div>
+      </div>
+      <!-- Codes  -->
     </div>
     <!-- right side  -->
   </div>
@@ -107,11 +145,10 @@ import _ from "lodash";
 
 export default defineComponent({
   name: "Profile",
-  props: ["theme", "modelValue", "activeClausePath"],
+  props: ["theme", "modelValue", "activeProfile"],
   components: {
     TextDefinition,
-    DraggableClause,
-    
+    DraggableClause
   },
   methods: {
     loadData(data: any) {
@@ -128,9 +165,9 @@ export default defineComponent({
     }
   },
   watch: {
-    activeClausePath() {
-      this.templates  = this.profile ? this.profile.toTemplates(this.activeClausePath) : null;
-      console.log("_templates", this.templates );
+    activeProfile() {
+      this.templates = this.profile ? this.profile.toTemplates(this.activeProfile.activeClausePath) : null;
+      console.log("_templates", this.templates);
     }
   },
   computed: {
@@ -163,12 +200,13 @@ export default defineComponent({
   },
   data() {
     return {
+      activeTab: "criteria",
       templates: [] as any[],
       profile: this.modelValue, // optional _.cloneDeep(),
       // definitionTree: this.data ? this.loadData(this.data) : null,
       themeClasses: {
         light: {
-          phrases: {reference: "text-blue-700 font-bold hover:underline"},
+          phrases: { reference: "text-blue-700 font-bold hover:underline" },
           background: " bg-white hover:shadow-sm hover:bg-gray-50 border transition duration-700 ease-in-out border-gray-200",
           text: " text-gray-800",
           icon: " text-blue-700 bg-gray-100",
@@ -177,7 +215,7 @@ export default defineComponent({
           connectorOutline: true
         },
         blue: {
-          phrases: {reference: "text-blue-700 font-bold hover:underline"},
+          phrases: { reference: "text-blue-700 font-bold hover:underline" },
           background: " to-sky-500 from-blue-600",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -186,7 +224,7 @@ export default defineComponent({
           connectorOutline: false
         },
         purple: {
-          phrases: {reference: "text-blue-700 font-bold hover:underline"},
+          phrases: { reference: "text-blue-700 font-bold hover:underline" },
           background: " to-purple-600 via-indigo-700 from-indigo-600",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -195,7 +233,7 @@ export default defineComponent({
           connectorOutline: false
         },
         green: {
-          phrases: {reference: "text-blue-700 font-bold hover:underline"},
+          phrases: { reference: "text-blue-700 font-bold hover:underline" },
           background: " from-cyan-600 to-green-500",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -204,7 +242,7 @@ export default defineComponent({
           connectorOutline: false
         },
         orange: {
-          phrases: {reference: "text-blue-700 font-bold hover:underline"},
+          phrases: { reference: "text-blue-700 font-bold hover:underline" },
           background: " to-amber-400 from-orange-500",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
@@ -213,7 +251,7 @@ export default defineComponent({
           connectorOutline: false
         },
         pink: {
-          phrases: {reference: "text-blue-700 font-bold hover:underline"},
+          phrases: { reference: "text-blue-700 font-bold hover:underline" },
           background: " from-pink-500 to-rose-500",
           text: " text-white",
           icon: " bg-opacity-40 bg-black text-white",
