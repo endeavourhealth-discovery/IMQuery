@@ -25,6 +25,10 @@ const valueToPhraseMap = {
         false: "Exclude",
         default: null,
     },
+    entityIri: {
+        "im:PersonDetails": "Personal Details Record",
+        default: null,
+    },
     entityName: {
         "DESCENDING": "descending",
         "ASCENDING": "ascending",
@@ -116,7 +120,7 @@ const valueToPhraseMap = {
 
 
 
-function transform(targetPhrase, returnValue): any {
+function transform(targetPhrase, returnValue, references = []): any {
 
     //mapping words to the outcome of a function's value
     let _targetPhrase = targetPhrase;
@@ -130,6 +134,9 @@ function transform(targetPhrase, returnValue): any {
         _text = valueToPhraseMap[_targetPhrase]["default"];
     } else {
         _text = _value;
+        // show rdfs label or iri 
+        // console.log("references", _references)
+        // _text = (targetPhrase == "entityIri") ? references[0]["data"]["rdfs:label"] : _value;
     }
     return _text
 }
@@ -162,12 +169,12 @@ function phrase(phraseType: string, input: any, references = []): any {
             input.data.forEach((entity: any, index: any) => {
                 //adds new "text" key to entity reference
                 console.log("entity", entity)
-                input.data[index]["_text"] = transform("entityName", entity["rdfs:label"])
+                input.data[index]["_text"] = transform("entityName", entity["rdfs:label"], references)
             })
-        } else if (_isEntityReference ) {
+        } else if (_isEntityReference) {
             console.log("2")
             //adds new "text" key to value at path
-            const _text = transform("entityName", input.data.name);
+            const _text = transform("entityName", input.data["rdfs:label"], references);
             input.data["_text"] = _text;
         } else {
 
@@ -180,7 +187,7 @@ function phrase(phraseType: string, input: any, references = []): any {
     } else if (typeof (input == "string")) {
         console.log("3")
 
-        console.log("typeof (input == 'string'): [type] [input]", phraseType, input)
+        console.log("phraseType input", phraseType, input)
 
 
 
@@ -259,8 +266,6 @@ function reference(targetClause: any, propertyPath = "") {
     // const jsonDefinition = targetClause?.json ? targetClause.json : targetClause;
     // const _values = _.get(targetClause, propertyPath);
     const _values = propertyPath && propertyPath != "" ? _.get(targetClause, propertyPath) : targetClause;
-
-
 
     const _reference = {
         text: "",
@@ -431,13 +436,17 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 };
 
 const linkedEntity = (mainEntity: any, parentClause: any, currentClause: any, args: any) => {
+    console.log("linkedEntity parentClause currentClause args", mainEntity, parentClause, currentClause, args)
 
 
     const _had = constant("had");
 
 
-    const _ref1 = reference(currentClause, "json.entityType.name")
-    const _entity = mutable(phrase("entityName", _ref1.data, [_ref1]));
+    const _ref1 = reference(currentClause, "json.entityType")
+
+    console.log("_ref1", _ref1)
+
+    const _entity = mutable(phrase("entityName", _ref1.data["rdfs:label"], [_ref1]));
 
     const _a = phrase("firstLetterVowel", firstLetterIsVowel(_entity.text));
 
@@ -446,7 +455,7 @@ const linkedEntity = (mainEntity: any, parentClause: any, currentClause: any, ar
 
     const _sentence = [_had, _a, _entity, _with];
 
-    // console.log("_sentence", _sentence)
+    console.log("_sentence", _sentence)
 
     return _sentence;
 };
@@ -485,8 +494,9 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
     const _sentence = (currentClause: any): any => {
         // console.log("_sentence currentClause", currentClause)
 
-        const _ref1 = reference(currentClause, "property.name");
-        const _property = mutable(phrase("entityName", _ref1.data, [_ref1]));
+        const _ref1 = reference(currentClause, "json.property");
+        console.log("ref1", _ref1)
+        const _property = mutable(phrase("entityName", _ref1, [_ref1]));
         // console.log("_property", _property)
 
         const _a = phrase("firstLetterVowel", firstLetterIsVowel(_property.text));
@@ -582,7 +592,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
             //arrays e.g. and/or/nots
             if (_clauses && Array.isArray(_clauses)) {
-                console.log("array", _clauses)
+                // console.log("array of clauses", _clauses)
 
                 _clauses.forEach((_clause: any) => {
                     if (_clause?.property) {
@@ -593,7 +603,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
                 // single properties e.g. at root path of a match clause clause
             } else if (_clauses && _clauses?.property) {
-                console.log("single", _clauses)
+                // console.log("one clause", _clauses)
 
                 _sentences.push(_sentence(_clauses));
             }
@@ -707,7 +717,7 @@ const CascadingTemplates = [
                         all: [
                             {
                                 test: "pathExists",
-                                input: ["#currentClause", "entityType.@id"],
+                                input: ["#currentClause", "json.entityType.@id"],
                                 expect: true
                             }
                         ]
@@ -728,12 +738,12 @@ const CascadingTemplates = [
                                 any: [
                                     {
                                         test: "pathExists",
-                                        input: ["#currentClause", "property"],
+                                        input: ["#currentClause", "json.property"],
                                         expect: true
                                     },
                                     {
                                         test: "pathExists",
-                                        input: ["#currentClause", "and"],
+                                        input: ["#currentClause", "json.and"],
                                         expect: true
                                     },
 
@@ -803,7 +813,7 @@ const CascadingTemplates = [
                         all: [
                             {
                                 test: "pathValueIs",
-                                input: ["#currentClause", "property.@id", "im:hasProfile"],
+                                input: ["#currentClause", "json.property.@id", "im:hasProfile"],
                                 expect: true
                             }
                         ]
@@ -854,8 +864,8 @@ export default class Templates {
             const _vars = {
                 "#mainEntity": mainEntity,
                 "#profile": profile,
-                "#currentClause": currentClause.json,
-                "#parentClause": parentClause.json,
+                "#currentClause": currentClause,
+                "#parentClause": parentClause,
                 "#temmplate": template
             };
 
