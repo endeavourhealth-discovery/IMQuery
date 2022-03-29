@@ -1,5 +1,5 @@
 <template>
-  <div class="text-definition text-black text-2xl text-bold">
+  <div class="text-definition text-black text-xl text-bold">
     <div class="flex flex-col">
       <!-- A sentence from the template    -->
       <div v-for="(sentence, sentenceIndex) in children.data" :key="sentence.uuid" class="sentence flex flex-wrap">
@@ -12,7 +12,11 @@
             <template v-if="Array.isArray(phrase.data)">
               <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex '">
                 <div class="inline mr-4 text-orange-500 font-bold w-7">{{ entityIndex != 0 ? "or" : "" }}</div>
-                <div @click="click(entity)" :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
+                <div
+                  @click="click(entity)"
+                  :class="'entity-text inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'"
+                  v-tooltip.bottom="entity._text || entity.name || entity['rdfs:label']"
+                >
                   {{ entity._text || entity.name || entity["rdfs:label"] }}
                 </div>
               </div>
@@ -22,7 +26,11 @@
             <!-- Single References -->
             <template v-else>
               <div :class="'entity flex '">
-                <div @click="click(phrase.data)" :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
+                <div
+                  @click="click(phrase.data)"
+                  :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'"
+                  v-tooltip.bottom="phrase.data._text || phrase.data.name || phrase.data['rdfs:label']"
+                >
                   {{ phrase.data._text || phrase.data["rdfs:label"] || phrase.data.name }}
                 </div>
               </div>
@@ -109,5 +117,12 @@ export default defineComponent({
 
 .sentence .space {
   min-width: 5px;
+}
+
+.entity-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of visible lines */
+  -webkit-box-orient: vertical;
 }
 </style>

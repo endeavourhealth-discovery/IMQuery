@@ -86,46 +86,41 @@
 
     <!-- right side  -->
     <div v-if="activeProfile.uuid == profile['@id']" class="flex flex-col">
-      <div v-show="activeTab == 'criteria'"> 
-        <!-- Header -->
-        <div :class="'select-none font-semibold text-3xl' + themeClasses[theme].text">
-          Criteria
-        </div>
-        <!-- Header -->
-        <!-- Text Templates  -->
-        <TextDefinition
-          v-if="templates.length > 0"
-          :children="templates[0]"
-          :activeClausePath="activeProfile.activeClausePath"
-          :theme="theme"
-          :themeClasses="themeClasses"
-          class="w-full h-full"
-        />
-        <!-- Text Templates  -->
-      </div>
-      <!-- Codes  -->
-      <div>
+      <!-- Header -->
+
+      <div :class="'select-none flex space-x-5 font-semibold text-2xl mb-8 mt-1' + themeClasses[theme].text">
         <div
-          class="tab-buttons #drop-zone transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 "
+          v-for="tab in tabs"
+          :key="tab.uuid"
+          @click="activeTab = tab.name"
+          :class="'inline rounded-md px-3 py-1' + [activeTab == tab.name ? ' text-white bg-blue-600 ' : ' text-gray-400']"
         >
-          <template v-for="item in profile.entityReferences" :key="item.uuid">
-            <button
-              @click="activeTab == 'concepts'"
-              type="button"
-              :class="
-                'tab-button transition duration-500 ease-in-out px-2 py-2 non-selectable inline-flex items-center justify-center font-regular text-base  hover:text-gray-900  dark:hover:text-white' +
-                  [
-                    activeTab == 'concepts'
-                      ? 'active border dark:text-white dark:border-yellow-500 border-2 border-gray-300   bg-white dark:bg-gray-900  shadow-sm'
-                      : 'border border-2 border-transparent dark:border-gray-600 dark:text-gray-400 '
-                  ]
-              "
-            >
-              <div class="inline-flex font-medium text-2xl ml-2">
-                {{ item.entityData["@id"] }}
-              </div>
-            </button>
-          </template>
+          {{ tab.name }}
+        </div>
+      </div>
+      <!-- Header -->
+      <!-- Text Templates  -->
+      <TextDefinition
+        @onClick="click"
+        v-if="templates.length > 0"
+        v-show="activeTab == 'Criteria'"
+        :children="templates[0]"
+        :activeClausePath="activeProfile.activeClausePath"
+        :theme="theme"
+        :themeClasses="themeClasses"
+        class="textdefinition w-full h-full "
+      />
+      <!-- Text Templates  -->
+      <!-- Codes  -->
+
+      <div v-show="activeTab == 'References'" class="references flex-col ml-3">
+        <div
+          @click="click(reference.entityData)"
+          v-for="reference in profile.entityReferences"
+          :key="reference.uuid"
+          class="reference text-xl text-gray-700  hover:text-blue-700 font-medium cursor-pointer hover:underline"
+        >
+          {{ reference.entityData["rdfs:label"] }}
         </div>
       </div>
       <!-- Codes  -->
@@ -151,6 +146,18 @@ export default defineComponent({
     DraggableClause
   },
   methods: {
+    click(entity: any): void {
+     console.log(entity)
+      const _iri = entity["@id"].replace(":", "#");
+      const _contextKey = _iri.split("#")[0];
+      const _iriKey = _iri.split("#")[1];
+      const _contextUrl = this.context[_contextKey];
+
+      const _encodedIri = encodeURIComponent(_contextUrl ? _contextUrl + _iriKey : entity["@id"]);
+
+      const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_encodedIri}`;
+      window.open(_url, "_blank");
+    },
     loadData(data: any) {
       // if (typeOf )
       console.log("data", data);
@@ -200,7 +207,36 @@ export default defineComponent({
   },
   data() {
     return {
-      activeTab: "criteria",
+      context: {
+        rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        im: "http://endhealth.info/im#",
+        imq: "http://endhealth.info/imq#",
+        bc: "http://endhealth.info/bc#",
+        rdfs: "http://www.w3.org/2000/01/rdf-schema#",
+        emis: "http://endhealth.info/emis#",
+        sn: "http://snomed.info/sct#",
+        ods: "http://endhealth.info/ods#",
+        owl: "http://www.w3.org/2002/07/owl#",
+        prov: "http://www.w3.org/ns/prov#",
+        tpp: "http://endhealth.info/tpp#",
+        xml: "http://www.w3.org/XML/1998/namespace#",
+        sh: "http://www.w3.org/ns/shacl#",
+        opcs4: "http://endhealth.info/opcs4#",
+        vis: "http://endhealth.info/vision#",
+        orole: "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRole-1#",
+        xsd: "http://www.w3.org/2001/XMLSchema#"
+      },
+      tabs: [
+        {
+          uuid: "255582e4-67d5-4307-934f-30a383b12944",
+          name: "Criteria"
+        },
+        {
+          uuid: "c47f6016-358d-480d-a018-d9c2da748002",
+          name: "References"
+        }
+      ],
+      activeTab: "Criteria",
       templates: [] as any[],
       profile: this.modelValue, // optional _.cloneDeep(),
       // definitionTree: this.data ? this.loadData(this.data) : null,
@@ -267,5 +303,35 @@ export default defineComponent({
 <style scoped>
 .profile {
   /* max-width: 1000px; */
+}
+
+.textdefinition {
+  max-width: 600px;
+}
+
+.references {
+  overflow: auto;
+  min-width: 300px;
+  max-height: 400px;
+}
+
+.reference {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of visible lines */
+  -webkit-box-orient: vertical;
+}
+
+.references::-webkit-scrollbar {
+  width: 8px;
+}
+
+.references::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+
+.references::-webkit-scrollbar-thumb {
+  background-color: #e2e8f0;
+  /* outline: 1px solid slategrey; */
 }
 </style>

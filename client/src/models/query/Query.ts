@@ -81,7 +81,7 @@ export class QueryBuilder {
         try {
 
             //if json parse
-            if (typeof (entities) == "string" ) {
+            if (typeof (entities) == "string") {
                 entities = JSON.parse(entities)
             }
 
@@ -126,8 +126,8 @@ class Entity {
 // Profile\\\\\
 export class Profile extends Entity {
     public 'im:definition'?: any | null;
-    public 'entityReferences'?: any | null;
-    public 'entitiesWithoutData'?: any | null;
+    public 'entityReferences' = [];
+    public 'entitiesWithoutData' = [];
 
 
     constructor(entity?: any)
@@ -137,6 +137,8 @@ export class Profile extends Entity {
         //parse definition 
         if (entity["im:definition"]) {
             const _definition = JSON.parse(entity["im:definition"]);
+            this["im:definition"] = _definition;
+            this["entityReferences"] = entity?.entityReferences;
             this["im:definition"] = _definition;
             // populate definitionTree (this is the UI's object model and maps 1 to 1 onto Profiles written in RDF) 
             this.convertToDefinitionTree(_definition);
@@ -344,7 +346,7 @@ export class Profile extends Entity {
 
 
     public toTemplates(clausePath: string): void {
-        console.log("this.mainEntity",this.mainEntity )
+        console.log("this.mainEntity", this.mainEntity)
         const _templates = Templates.toTemplates(this.mainEntity, this._definitionTree, clausePath)
 
         // console.log("templates", _templates);

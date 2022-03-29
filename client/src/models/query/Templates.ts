@@ -184,9 +184,8 @@ function phrase(phraseType: string, input: any, references = []): any {
             console.log("1")
             input.data.forEach((entity: any, index: any) => {
                 //adds new "text" key to entity reference
-                console.log("input", input)
-
-                console.log("entity", entity)
+                // console.log("input", input)
+                // console.log("entity", entity)
                 input.data[index]["_text"] = transform("entityName", entity["rdfs:label"])
             })
         } else if (input.data) {
@@ -205,7 +204,7 @@ function phrase(phraseType: string, input: any, references = []): any {
     } else if (typeof (input == "string")) {
         console.log("3")
 
-        console.log("phraseType input", phraseType, input)
+        // console.log("phraseType input", phraseType, input)
 
 
 
@@ -522,7 +521,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
         const _that = constant("that");
 
-        const _partOf = constant("part the sets of values in");
+        const _partOf = constant("part of the set of values in");
 
 
         // old
@@ -558,10 +557,11 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         // #todo: valueFunction for units
         const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].valueData") : null;
         console.log("_ref5", _ref5)
-
-        const _phraseQuantity = isSingular(_ref4.data) ? "singular" : "plural";
+        
+        console.log("_ref4", _ref4)
+        const _phraseQuantity = _ref4 ? isSingular(_ref4.data) ? "singular" : "plural" : null;
         console.log("_phraseValue", _phraseQuantity)
-        const _units = phrase(_ref5.data, _phraseQuantity, [_ref5]) //entry/entries //record(s)
+        const _units = _ref5 && _phraseQuantity ? phrase(_ref5.data, _phraseQuantity, [_ref5]): null; //entry/entries //record(s)
 
 
         // secnario 3: valueIn / valueNotIn
@@ -571,17 +571,18 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
         let _sentence = [_a, _property, _exists]; //default sentence is "exists"
         const _sentenceVariants = {
-            valueCompare: [_a, _property, _that, _was, _comparison, _valueData, _units],
+            valueCompare: [_a, _property, _that, _was, _comparison, _valueData],
+            valueFunction: [_a, _property, _that, _was, _comparison, _valueData, _units],
             valueIn: [_a, _property, _that, _was, _partOf, _valueIn],
             valueNotIn: [_a, _property, _that, _was, _partOf, _valueNotIn],
         };
 
 
         //select the sentence based on json path otherwise use default sentence.
-        const _expectedKeys = ["valueIn", "valueNotIn", "valueCompare"];
+        const _expectedKeys = ["valueIn", "valueNotIn", "valueCompare", "valueFunction"];
         Object.keys(currentClause).forEach((key: string) => {
             if (_expectedKeys.includes(key)) {
-                _sentence = _sentenceVariants[key]
+                _sentence = _sentenceVariants[key] //chooses valueFunction over valueCompare i.e. if units are present
             }
         })
 

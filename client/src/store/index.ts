@@ -4345,6 +4345,7 @@ export default createStore({
           entities[index]["entityReferences"] = _entityReferences;
           entities[index]["entitiesWithoutData"] = _entitiesWithoutData;
 
+          console.log("entity", entity)
           console.log("_entityReferences", _entityReferences)
           console.log("_entitiesWithoutData", _entitiesWithoutData)
 
