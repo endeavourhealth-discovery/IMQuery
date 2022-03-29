@@ -154,7 +154,7 @@ export default defineComponent({
 
       const _currentClausePath = clause.currentPath;
       // console.log("this.profile.uuid", this.profile)
-      this.$store.commit("updateActiveProfile", {uuid: this.profile["@id"], activeClausePath: _currentClausePath});
+      this.$store.commit("updateActiveProfile", { uuid: this.profile["@id"], activeClausePath: _currentClausePath });
 
       this.activeClause.uuid = clause.uuid;
       this.activeClause.path = clause.currentPath;
@@ -217,8 +217,8 @@ export default defineComponent({
 
       // console.log("clause json", clause.json)
       //
-      let _entityType = clause.json.entityType ? clause.json.entityType["rdfs:label"] : "";
-      let _property = clause.json.property ? clause.json.property["rdfs:label"] : "";
+      let _entityType = clause.json.entityType ?  clause.json.entityType["rdfs:label"] : "";
+      let _property = clause.json.property ?  clause.json.property["rdfs:label"] : "";
 
       // let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
       // let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";

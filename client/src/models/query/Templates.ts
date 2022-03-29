@@ -66,6 +66,22 @@ const valueToPhraseMap = {
         singular: "record",
         plural: "records"
     },
+    DAY: {
+        singular: "day",
+        plural: "days"
+    },
+    WEEK: {
+        singular: "week",
+        plural: "weeks"
+    },
+    MONTH: {
+        singular: "month",
+        plural: "months"
+    },
+    YEAR: {
+        singular: "year",
+        plural: "years"
+    },
     DESCENDING: {
         "im:DateTime": "latest",
         "default": null
@@ -540,8 +556,12 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         // const _valueData = currentClause?.valueCompare ? mutable(reference(currentClause, "valueCompare.valueData")) : null;
 
         // #todo: valueFunction for units
-        // const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].paramter"):  null;  
-        // const _units = _ref5 ? mutable(phrase("entityName", _ref5, [_ref5])) : null;
+        const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].valueData") : null;
+        console.log("_ref5", _ref5)
+
+        const _phraseQuantity = isSingular(_ref4.data) ? "singular" : "plural";
+        console.log("_phraseValue", _phraseQuantity)
+        const _units = phrase(_ref5.data, _phraseQuantity, [_ref5]) //entry/entries //record(s)
 
 
         // secnario 3: valueIn / valueNotIn
@@ -551,7 +571,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
         let _sentence = [_a, _property, _exists]; //default sentence is "exists"
         const _sentenceVariants = {
-            valueCompare: [_a, _property, _that, _was, _comparison, _valueData], //add _units
+            valueCompare: [_a, _property, _that, _was, _comparison, _valueData, _units],
             valueIn: [_a, _property, _that, _was, _partOf, _valueIn],
             valueNotIn: [_a, _property, _that, _was, _partOf, _valueNotIn],
         };
@@ -585,7 +605,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
             // "" = root object
             let _clauses = (_path == "") ? currentClause.json : _.get(currentClause, _path);
-            
+
             console.log("_path", _path)
             console.log("_clause", _clauses)
 
@@ -872,7 +892,7 @@ export default class Templates {
 
 
             const _testCriteria = (criteria: any) => {
-                
+
 
 
                 const _f = matchFunctions[criteria.test];

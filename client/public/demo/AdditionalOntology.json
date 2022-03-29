@@ -125,13 +125,6 @@
         "rdfs:comment": ""
     },
     {
-        "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452",
-        "rdf:type": [],
-        "rdfs:label": "",
-        "rdfs:comment": ""
-    },
-
-    {
         "@id": "im:medication",
         "rdf:type": [],
         "rdfs:label": "",
