@@ -18,6 +18,7 @@ import axios from "axios";
 import SearchClient from "@/services/SearchClient";
 import SearchService from "@/services/SearchService";
 import { QueryBuilder } from "@/models/query/Query";
+import QueryUtils from "@/models/query/QueryUtils";
 import Ontology, { entityTypes } from "@/models/query/OntologyTools";
 import _ from "lodash";
 import DataService from "@/services/DataService";
@@ -4213,21 +4214,95 @@ export default createStore({
 
             // changes http//endhealth.info/im#effectiveDate to im:effectiveDate (as an example)
             if (_entityIri.substring(0, 4) == "http") {
-              const _arr = _entityIri.split("/")
-              let _last = _arr[_arr.length - 1].replace("#", ":");
-              _entityIri = _last;
+              _entityIri = QueryUtils.toIri(_entityIri);
             }
 
+
             const _entity = state.ontology.entities.byIri(_entityIri)
-            const _shortEntity = { "@id": _entity[0]["@id"], "rdf:type": _entity[0]["rdf:type"], "rdfs:label": _entity[0]["rdfs:label"], "rdfs:comment": _entity[0]["rdfs:comment"] }
+
+
+
+
+
+            const _shortEntity = {
+              "@id": _entity[0]["@id"],
+              "rdf:type": _entity[0]["rdf:type"],
+              "rdfs:label": _entity[0]["rdfs:label"],
+              "rdfs:comment": _entity[0]["rdfs:comment"]
+            }
+
+
+
+            //populate range for each property based on the datamodel (entityType inside the same clause)
+            const _propertyTypes = ["owl:ObjectProperty", "owl:DatatypeProperty"];
+            const _isObjectProperty = _shortEntity["rdf:type"].some((rdfType: any) => _propertyTypes.includes(rdfType["@id"]));
+            if (_isObjectProperty) {
+              // console.log("reference", reference)
+              // console.log("_path", _path)
+
+
+              //get datamodel entity
+              const _pathQueue = _.cloneDeep(reference);
+              // console.log("_pathQueue", jp.stringify(_pathQueue))
+
+
+
+              //finds nearest parent that is datamodel entity (i.e. has entityType json path)
+              let _parentIri = "";
+              while (_pathQueue.length > 1) {
+
+                const _valueAtPath = jp.query(_json, jp.stringify(_pathQueue))[0];
+                // console.log("_valueAtPath", _valueAtPath)
+
+                if (_valueAtPath["entityType"]) {
+                  // console.log("entityType", _valueAtPath)
+                  // console.log("entityType id", _valueAtPath["entityType"]["@id"])
+
+                  _parentIri = _valueAtPath["entityType"]["@id"];
+                  // console.log("_parentIri", _parentIri)
+
+
+                  if (_parentIri.substring(0, 4) == "http") {
+                    _parentIri = QueryUtils.toIri(_parentIri);
+                  }
+                  break;
+                }
+
+                _pathQueue.pop();
+              }
+
+              // if datamodel entity found, find the the range 
+              if (_parentIri != "") {
+
+                const _datamodelEntity = state.ontology.entities.byIri(_parentIri);
+
+                // console.log("_parentIri", _parentIri)
+                // console.log("_datamodelEntity", _datamodelEntity)
+
+                // find the properties range
+                const _rangeProperty = _datamodelEntity[0]["sh:property"].filter((_property: any) => {
+                  return _property["sh:path"].some((path: any) => {
+                    const _isMatch = path["@id"] == _shortEntity["@id"]
+                    // console.log("_match", _property)
+                    return _isMatch;
+                  })
+                });
+
+
+                if (_rangeProperty.length > 0) {
+ 
+                  _shortEntity["rdfs:range"] = _.get(_rangeProperty, "0.sh:datatype.0");
+                }
+              }
+            }
 
             return {
               // uuid: `urn:uuid:${v4()}`,
-              // pathExpression: reference,
               jpPath: jpPath,
               path: _path,
               iri: _entityIri,
               entityData: _shortEntity, //state.ontology.entities.byIri(entityIri)
+              pathArray: reference,
             }
           })
 
@@ -4259,6 +4334,8 @@ export default createStore({
 
 
         }
+
+
 
 
         //any file belonging to the user

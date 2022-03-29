@@ -207,14 +207,13 @@
             <HorizontalNavPills class="nav" v-model:items="openFiles" v-model="activeFileIri" :closable="true" />
           </div>
 
-          <!-- <div class="text-white" @click="test()">
-            Test
-          </div> -->
+
+              <!-- <button @click="testQuery()"> test</button> -->
+
 
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <div class="kanban mt-8 flex justify-center space-x-6 text-white" @click="">
-              <button @click="testQuery()"> test</button>
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
                 <div class="profile-column">
                   <TransitionRoot
