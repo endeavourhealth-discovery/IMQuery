@@ -18,6 +18,47 @@ export default class QueryUtils {
     }
 
 
+    public static toIri(url: string) {
+
+        const _arr = url.split("/")
+        const _iri = _arr[_arr.length - 1].replace("#", ":");
+        return _iri;
+
+
+    }
+
+    public static toUrl(iri: string) {
+
+        const _context = {
+            rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+            im: "http://endhealth.info/im#",
+            imq: "http://endhealth.info/imq#",
+            bc: "http://endhealth.info/bc#",
+            rdfs: "http://www.w3.org/2000/01/rdf-schema#",
+            emis: "http://endhealth.info/emis#",
+            sn: "http://snomed.info/sct#",
+            ods: "http://endhealth.info/ods#",
+            owl: "http://www.w3.org/2002/07/owl#",
+            prov: "http://www.w3.org/ns/prov#",
+            tpp: "http://endhealth.info/tpp#",
+            xml: "http://www.w3.org/XML/1998/namespace#",
+            sh: "http://www.w3.org/ns/shacl#",
+            opcs4: "http://endhealth.info/opcs4#",
+            vis: "http://endhealth.info/vision#",
+            orole: "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRole-1#",
+            xsd: "http://www.w3.org/2001/XMLSchema#"
+        }
+
+        const _iri = iri.replace(":", "#");
+        const _contextKey = _iri.split("#")[0];
+        const _iriKey = _iri.split("#")[1];
+        const _url = _context[_contextKey] + _iriKey;
+
+        return _url;
+
+    }
+
+
 
 
 
@@ -73,7 +114,7 @@ export default class QueryUtils {
     }
 
 
-    
+
     //flattens a JS object to its constituent paths (lodash compatible)
     public static flattenObject(object: any): any {
 

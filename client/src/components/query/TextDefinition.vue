@@ -8,20 +8,33 @@
           <!-- References  -->
 
           <div v-if="phrase.type == 'reference'" :class="'reference flex flex-col'">
-            <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex '">
-              <div class="inline mr-4 text-green-500 font-bold w-7">{{ entityIndex != 0 ? "or" : "" }}</div>
-              <div @click="click(entity)" :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
-                {{ entity._text || entity.name || entity["rdfs:label"] }}
-                <!-- {{entity}} -->
+            <!-- Array of References  -->
+            <template v-if="Array.isArray(phrase.data)">
+              <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex '">
+                <div class="inline mr-4 text-orange-500 font-bold w-7">{{ entityIndex != 0 ? "or" : "" }}</div>
+                <div @click="click(entity)" :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
+                  {{ entity._text || entity.name || entity["rdfs:label"] }}
+                </div>
               </div>
-            </div>
+            </template>
+            <!-- Array of References  -->
+
+            <!-- Single References -->
+            <template v-else>
+              <div :class="'entity flex '">
+                <div @click="click(phrase.data)" :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'">
+                  {{ phrase.data._text || phrase.data["rdfs:label"] || phrase.data.name }}
+                </div>
+              </div>
+            </template>
+            <!-- Single References -->
           </div>
 
-          <div v-else-if="phrase.type == 'transformedReferences'" :class="'transformedReferences ' + 'text-indigo-700 font-medium cursor-pointer  '">
+          <div v-else-if="phrase.type == 'transformedReferences'" :class="'transformedReferences ' + 'text-purple-700 font-bold cursor-pointer  '">
             {{ phrase.text }}
           </div>
 
-          <div v-else class="phrase flex">
+          <div v-else class="phrase flex font-regular text-black">
             {{ phrase.text }}
           </div>
 
@@ -72,7 +85,7 @@ export default defineComponent({
       const _iri = entity["@id"].replace(":", "#");
       const _contextKey = _iri.split("#")[0];
       const _iriKey = _iri.split("#")[1];
-      console.log(_contextKey);
+      
       const _encodedIri = encodeURIComponent(this.context[_contextKey] + _iriKey);
 
       const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_encodedIri}`;

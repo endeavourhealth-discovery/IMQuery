@@ -184,7 +184,10 @@
                         }
                     ],
                     "rdfs:label": "effective `date",
-                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                    "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                    "rdfs:range": {
+                        "@id": "im:DateTime"
+                    }
                 },
                 "count": 1,
                 "direction": "DESCENDING"
@@ -262,7 +265,10 @@
                             }
                         ],
                         "rdfs:label": "effective `date",
-                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date"
+                        "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
+                        "rdfs:range": {
+                            "@id": "im:DateTime"
+                        }
                     },
                     "valueVar": "effectiveDate4"
                 }
