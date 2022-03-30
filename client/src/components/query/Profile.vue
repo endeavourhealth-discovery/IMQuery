@@ -1,7 +1,7 @@
 <template>
   <div :class="'profile w-full px-5 py-5 flex  mb-12 rounded-xl overflow-hidden bg-gradient-to-r ' + themeClasses[theme].background">
     <!-- Left Side  -->
-    <div class="flex flex-col">
+    <div class="body flex flex-col ">
       <!-- Header -->
       <div class="flex items-center mb-5">
         <!-- Icon -->
@@ -85,7 +85,7 @@
     <!-- Left Side  -->
 
     <!-- right side  -->
-    <div v-if="activeProfile.uuid == profile['@id']" class="flex flex-col">
+    <div v-if="activeProfile.uuid == profile['@id']" class="ml-10 flex flex-col">
       <!-- Header -->
 
       <div :class="'select-none flex space-x-5 font-semibold text-2xl mb-8 mt-1' + themeClasses[theme].text">
@@ -93,7 +93,7 @@
           v-for="tab in tabs"
           :key="tab.uuid"
           @click="activeTab = tab.name"
-          :class="'inline rounded-md px-3 py-1' + [activeTab == tab.name ? ' text-white bg-blue-600 ' : ' text-gray-400']"
+          :class="'inline rounded-md px-3 py-1' + [activeTab == tab.name ? ' text-white bg-blue-700 ' : ' text-gray-400']"
         >
           {{ tab.name }}
         </div>
@@ -108,22 +108,22 @@
         :activeClausePath="activeProfile.activeClausePath"
         :theme="theme"
         :themeClasses="themeClasses"
-        class="textdefinition w-full h-full "
+        class="sticky textdefinition w-full h-full "
       />
       <!-- Text Templates  -->
-      <!-- Codes  -->
-
+      <!-- References  -->
       <div v-show="activeTab == 'References'" class="references flex-col ml-3">
         <div
           @click="click(reference.entityData)"
           v-for="reference in profile.entityReferences"
           :key="reference.uuid"
-          class="reference text-xl text-gray-700  hover:text-blue-700 font-medium cursor-pointer hover:underline"
+          class="reference inline text-xl text-gray-700  hover:text-blue-700 font-medium cursor-pointer hover:underline"
+          v-tooltip.left="get(reference, 'entityData.rdfs:label') || `Unnamed Item ${reference.iri}` || `Unnamed Item`"
         >
-          {{ reference.entityData["rdfs:label"] }}
+          {{ get(reference, "entityData.rdfs:label") || `Unnamed Item ${reference.iri}` || `Unnamed Item` }}
         </div>
       </div>
-      <!-- Codes  -->
+      <!-- References  -->
     </div>
     <!-- right side  -->
   </div>
@@ -146,8 +146,11 @@ export default defineComponent({
     DraggableClause
   },
   methods: {
+    get(object: any, path: string): any {
+      return _.get(object, path);
+    },
     click(entity: any): void {
-     console.log(entity)
+      console.log(entity);
       const _iri = entity["@id"].replace(":", "#");
       const _contextKey = _iri.split("#")[0];
       const _iriKey = _iri.split("#")[1];
@@ -305,33 +308,46 @@ export default defineComponent({
   /* max-width: 1000px; */
 }
 
-.textdefinition {
+.textdefinition,
+.references {
   max-width: 600px;
 }
 
 .references {
-  overflow: auto;
+      overflow-y: auto;
   min-width: 300px;
-  max-height: 400px;
+  max-height: 530px;
 }
 
+
 .reference {
+
+
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of visible lines */
   -webkit-box-orient: vertical;
 }
 
+.profile .body::-webkit-scrollbar,
 .references::-webkit-scrollbar {
   width: 8px;
 }
 
+.profile .body::-webkit-scrollbar-track,
 .references::-webkit-scrollbar-track {
   /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
 }
 
-.references::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: #e2e8f0;
+  border-radius: 20px;
   /* outline: 1px solid slategrey; */
+}
+
+.profile .body {
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 </style>

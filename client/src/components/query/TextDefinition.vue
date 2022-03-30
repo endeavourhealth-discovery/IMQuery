@@ -15,9 +15,9 @@
                 <div
                   @click="click(entity)"
                   :class="'entity-text inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'"
-                  v-tooltip.bottom="entity._text || entity.name || entity['rdfs:label']"
+                  v-tooltip.bottom="tooltipText(entity)"
                 >
-                  {{ entity._text || entity.name || entity["rdfs:label"] }}
+                  {{ phraseText(entity) }}
                 </div>
               </div>
             </template>
@@ -29,9 +29,9 @@
                 <div
                   @click="click(phrase.data)"
                   :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'"
-                  v-tooltip.bottom="phrase.data._text || phrase.data.name || phrase.data['rdfs:label']"
+                  v-tooltip.bottom="tooltipText(phrase.data)"
                 >
-                  {{ phrase.data._text || phrase.data["rdfs:label"] || phrase.data.name }}
+                  {{ phraseText(phrase.data)  }}
                 </div>
               </div>
             </template>
@@ -39,11 +39,11 @@
           </div>
 
           <div v-else-if="phrase.type == 'transformedReferences'" :class="'transformedReferences ' + 'text-purple-700 font-bold cursor-pointer  '">
-            {{ phrase.text }}
+            {{ phrase.text || "Unnamed Item" }}
           </div>
 
           <div v-else class="phrase flex font-regular text-black">
-            {{ phrase.text }}
+            {{ phrase.text || "Unnamed Item" }}
           </div>
 
           <div class="space inline-block"></div>
@@ -89,6 +89,26 @@ export default defineComponent({
     };
   },
   methods: {
+    tooltipText(entity: any): string {
+      if (entity["rdfs:label"]?.length > 40 || entity?._text?.length > 40) {
+        return entity["rdfs:label"] || entity?._text;
+      } else {
+        return entity["@id"] ||  entity._text || entity.name ;
+      }
+    },
+    phraseText(entity: any): string {
+      const _splitIri =
+        entity["@id"].substring(0, 3) != "urn"
+          ? entity["@id"]
+              .split(":")[1]
+              .match(/([A-Z]?[^A-Z]*)/g)
+              .slice(0, -1)
+              .join(" ")
+          : null;
+
+      //either shows _text (post transformation), original label, name, a name derived from its Iri or Unnamed item
+      return entity._text || entity["rdfs:label"] || entity.name || _splitIri || `Unnamed Item: ${entity["@id"]}`;
+    },
     click(entity: any): void {
       const _iri = entity["@id"].replace(":", "#");
       const _contextKey = _iri.split("#")[0];

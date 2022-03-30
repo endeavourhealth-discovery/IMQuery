@@ -67,7 +67,7 @@
                 @click="handleClick(element)"
                 :class="
                   'clause__matchLabel w-full pl-5 pr-2  py-1 relative -top-1 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
-                    [activeClausePath == element.uuid ? ' bg-red-700' : ' ']
+                    [activeClausePath == element.currentPath ? ' active bg-blue-700 text-white' : ' ']
                 "
               >
                 {{ matchLabel(element) }}
@@ -411,11 +411,11 @@ export default defineComponent({
   border-top: 2px solid #000;
 }
 
-.clause__matchLabel:hover {
+.clause__matchLabel:hover:not(.clause__matchLabel.active) {
   background: rgba(0, 0, 0, 0.4);
 }
 
-.clause.light .clause__matchLabel:hover {
+.clause.light .clause__matchLabel:hover:not(.clause__matchLabel.active) {
   background: #e2e8f0;
 }
 

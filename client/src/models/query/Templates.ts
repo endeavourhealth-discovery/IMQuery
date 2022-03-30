@@ -30,6 +30,8 @@ const valueToPhraseMap = {
         default: null,
     },
     entityName: {
+        // "codeable expression": "Terminological Concept",
+        "Medication order or prescription (entry type)": "Order or Prescription",
         "DESCENDING": "descending",
         "ASCENDING": "ascending",
         "GREATER_THAN_OR_EQUAL": "greather than or equal to",
@@ -612,7 +614,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
             //arrays e.g. and/or/nots
             if (_clauses && Array.isArray(_clauses)) {
-                // console.log("array of clauses", _clauses)
+                console.log("array of clauses", _clauses)
 
                 _clauses.forEach((_clause: any) => {
                     if (_clause?.property) {
@@ -623,6 +625,9 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
             } else if (_clauses && _clauses?.property) {
                 // console.log("one clause", _clauses)
                 _sentences.push(_sentence(_clauses));
+            } else {
+            console.log("clause not recognised for transformation using entityProperty template")
+
             }
         })
     } else {
@@ -794,7 +799,7 @@ const CascadingTemplates = [
                         data: [],
                         children: [
                             {
-                                get: { function: "entityProperty", input: [{ paths: ["json.test"] }] },
+                                get: { function: "entityProperty", input: [{ paths: ["json.test.and", "json.test.or", "json.test.not", "json.test"] }] },
                                 set: null,
                                 meta: {
                                     min: 0,

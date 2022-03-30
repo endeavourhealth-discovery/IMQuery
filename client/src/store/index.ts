@@ -4324,7 +4324,7 @@ export default createStore({
 
           // console.log("1", JSON.stringify(_json) )
           entities[index]["im:definition"] = JSON.stringify(_json);
-          
+
           // console.log("_entityReferences", _entityReferences)
 
           console.log("populated JSON", _json)
@@ -4340,6 +4340,18 @@ export default createStore({
               "rdfs:comment": ""
             }
           })
+
+          //removes duplicates
+          const unique = new Set()
+          _entityReferences = _entityReferences.filter((item: any) => {
+            if (unique.has(item.iri)) {
+              return false;
+            } else {
+              unique.add(item.iri)
+              return true;
+            }
+          });
+
 
 
           entities[index]["entityReferences"] = _entityReferences;
