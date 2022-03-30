@@ -67,7 +67,7 @@
                 @click="handleClick(element)"
                 :class="
                   'clause__matchLabel w-full pl-5 pr-2  py-1 relative -top-1 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
-                    [activeClausePath == element.currentPath ? ' active bg-blue-700 text-white' : ' ']
+                    [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white' : ' ']
                 "
               >
                 {{ matchLabel(element) }}
@@ -76,6 +76,7 @@
 
             <!-- Child   -->
             <nested-draggable
+            :activeProfile="activeProfile"
               :activeClausePath="activeClausePath"
               :mainEntity="mainEntity"
               :themeClasses="themeClasses"
@@ -113,7 +114,7 @@ import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
 
 export default defineComponent({
-  props: ["activeClausePath", "profile", "definitionTree", "mainEntity", "children", "siblingCount", "theme", "themeClasses", "templates"],
+  props: ["activeProfile", "activeClausePath", "profile", "definitionTree", "mainEntity", "children", "siblingCount", "theme", "themeClasses", "templates"],
   emits: ["viewClause"],
   components: {
     draggable

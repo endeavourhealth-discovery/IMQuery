@@ -1,0 +1,45 @@
+[{
+  "@id": "urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562",
+  "rdf:type": [{
+    "@id": "im:Profile"
+  }],
+  "rdfs:label": "01 Older adults resident in a care home",
+  "rdfs:comment": "",
+  "im:isContainedIn": [{
+    "@id": "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+  }],
+  "im:definition": "{\"id\":{\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"},\"rdfs:label\":\"01 Older adults resident in a care home\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"rdfs:label\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:9f7d87a1-b357-4c6f-a9ff-87d024f5f62b\"}},{\"id\":{\"@id\":\"urn:uuid:508e615f-8827-4d5d-a345-239c8fe7ffc0\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"Aged 65-69\",\"@id\":\"urn:uuid:9f9f1d94-1d7c-4418-92bc-8208dbd1ef04\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"Aged 70-74\",\"@id\":\"urn:uuid:e0dadef9-b429-48f7-b69f-faa39d103673\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"Aged 75-79\",\"@id\":\"urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"Aged 80+\",\"@id\":\"urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51\"}]}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"Care home resident aged 16+\",\"@id\":\"urn:uuid:5920d4f0-cfb2-4bb3-8f7c-c3728aba925c\"}],\"id\":{\"@id\":\"urn:uuid:4736a19a-7ebe-47f2-b658-e4765e338f49\"}}]}"
+}, {
+  "@id": "urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3",
+  "rdf:type": [{
+    "@id": "im:Profile"
+  }],
+  "rdfs:label": "Vaccination process stages",
+  "rdfs:comment": "",
+  "im:isContainedIn": [{
+    "@id": "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+  }],
+  "im:definition": "{\"id\":{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"},\"rdfs:label\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"rdfs:label\":\"01 Older adults resident in a care home\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}],\"id\":{\"@id\":\"urn:uuid:5ec60fc0-cbda-43d1-9752-262a47b2c0a5\"}}]}"
+}, {
+  "@id": "urn:uuid:d720a6cb-65e9-4188-bdcb-0091cf11d960",
+  "rdf:type": [{
+    "@id": "im:Profile"
+  }],
+  "rdfs:label": "02 Aged 80 and over (excluding cohort 1)",
+  "rdfs:comment": "",
+  "im:isContainedIn": [{
+    "@id": "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+  }],
+  "im:definition": "{\"id\":{\"@id\":\"urn:uuid:d720a6cb-65e9-4188-bdcb-0091cf11d960\"},\"rdfs:label\":\"02 Aged 80 and over (excluding cohort 1)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"rdfs:label\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:1dc03868-bb94-4181-b608-59f6798a26c0\"}},{\"not\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"01 Older adults resident in a care home\",\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}],\"id\":{\"@id\":\"urn:uuid:e9f1e226-8b9b-4edb-b8fa-725438e2315b\"}}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"Aged 80+\",\"@id\":\"urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51\"}],\"id\":{\"@id\":\"urn:uuid:53abd4b9-ce2c-4c32-996a-46318614bae2\"}}]}"
+}, {
+  "@id": "urn:uuid:22a0527a-d689-4dcb-9b5a-5dee65bff72d",
+  "rdf:type": [{
+    "@id": "im:Profile"
+  }],
+  "rdfs:label": "03 Aged 75-79 (excl previous cohorts)",
+  "rdfs:comment": "",
+  "im:isContainedIn": [{
+    "@id": "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+  }],
+  "im:definition": "{\"id\":{\"@id\":\"urn:uuid:22a0527a-d689-4dcb-9b5a-5dee65bff72d\"},\"rdfs:label\":\"03 Aged 75-79 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"rdfs:label\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:865ebc49-29b9-4930-944e-9358125f0934\"}},{\"not\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"01 Older adults resident in a care home\",\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}],\"id\":{\"@id\":\"urn:uuid:bb339bd1-c35a-4fd7-8d8d-77f27d707319\"}}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"rdfs:label\":\"Aged 75-79\",\"@id\":\"urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}]}"
+}]

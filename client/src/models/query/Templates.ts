@@ -284,7 +284,30 @@ function reference(targetClause: any, propertyPath = "") {
 
     // const jsonDefinition = targetClause?.json ? targetClause.json : targetClause;
     // const _values = _.get(targetClause, propertyPath);
-    const _values = propertyPath && propertyPath != "" ? _.get(targetClause, propertyPath) : targetClause;
+    let _values = propertyPath && propertyPath != "" ? _.get(targetClause, propertyPath) : targetClause;
+
+    //generaetes an empty reference if none were found
+    if (!_values) {
+        console.log("reference did not return any entity or value")
+        return;
+    }
+
+
+    if (Array.isArray(_values)) {
+        _values = _values.map((entity: any) => {
+            return {
+                "@id": entity["@id"],
+                "rdf:type": [],
+                "rdfs:label": "",
+            }
+        })
+    } else {
+        _values = {
+            "@id": _values["@id"],
+            "rdf:type": [],
+            "rdfs:label": "",
+        }
+    }
 
     const _reference = {
         text: "",
@@ -425,7 +448,7 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
 
     const _ref1 = reference(parentClause, "include")
     const _ref2 = reference(currentClause, "include")
-    const _include = mutable(phrase("include", isTrue(_ref1.data, _ref2.data), [_ref1, _ref2]));
+    const _include = mutable(phrase("include", isTrue(_ref1?.data, _ref2?.data), [_ref1, _ref2]));
 
 
 
@@ -434,7 +457,7 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
     const _ref3 = reference(mainEntity, "")
     const _mainEntity = mutable(phrase("entityName", _ref3));
 
-    const _a = phrase("firstLetterVowel", firstLetterIsVowel(_mainEntity.data._text));
+    const _a = phrase("firstLetterVowel", firstLetterIsVowel(_mainEntity?.data?._text));
 
 
     const _inFinalResults = optional(constant("in the final results of this search"))
@@ -444,7 +467,7 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
     // console.log("_pronoun", isObjectAnimate(_mainEntity.text))
 
     //doesnt require a refernece since it wil not be mutable by the user
-    const _pronoun = phrase("animatePronoun", isObjectAnimate(_mainEntity.data["_text"]));
+    const _pronoun = phrase("animatePronoun", isObjectAnimate(_mainEntity?.data["_text"]));
 
     const _sentence = [_include, _a, _mainEntity, _inFinalResults, _if, _pronoun];
 
@@ -468,7 +491,7 @@ const linkedEntity = (mainEntity: any, parentClause: any, currentClause: any, ar
     // const _entity = mutable(phrase("entityName", _ref1.data["rdfs:label"], [_ref1]));
     // const _entity = mutable(phrase("entityName", _ref1));
 
-    const _a = phrase("firstLetterVowel", firstLetterIsVowel(_entity.data._text));
+    const _a = phrase("firstLetterVowel", firstLetterIsVowel(_entity?.data?._text));
 
     const _with = constant("with");
 
@@ -486,7 +509,7 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any, args
 
     const _ref1 = reference(currentClause, "json.notExist")
 
-    const _were = mutable(phrase("were", isTrue(!_ref1.data), [_ref1]))
+    const _were = mutable(phrase("were", isTrue(!_ref1?.data), [_ref1]))
 
 
     const _partOf = constant("part of");
@@ -559,11 +582,11 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         // #todo: valueFunction for units
         const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].valueData") : null;
         console.log("_ref5", _ref5)
-        
+
         console.log("_ref4", _ref4)
         const _phraseQuantity = _ref4 ? isSingular(_ref4.data) ? "singular" : "plural" : null;
         console.log("_phraseValue", _phraseQuantity)
-        const _units = _ref5 && _phraseQuantity ? phrase(_ref5.data, _phraseQuantity, [_ref5]): null; //entry/entries //record(s)
+        const _units = _ref5 && _phraseQuantity ? phrase(_ref5.data, _phraseQuantity, [_ref5]) : null; //entry/entries //record(s)
 
 
         // secnario 3: valueIn / valueNotIn
@@ -626,7 +649,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
                 // console.log("one clause", _clauses)
                 _sentences.push(_sentence(_clauses));
             } else {
-            console.log("clause not recognised for transformation using entityProperty template")
+                console.log("clause not recognised for transformation using entityProperty template")
 
             }
         })

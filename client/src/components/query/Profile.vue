@@ -67,6 +67,7 @@
         "
       >
         <DraggableClause
+          :activeProfile="activeProfile.uuid"
           :activeClausePath="activeProfile.activeClausePath"
           :themeClasses="themeClasses"
           :theme="theme"
