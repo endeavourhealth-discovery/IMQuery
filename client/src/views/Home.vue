@@ -232,6 +232,7 @@
                       {{ profile["rdfs:comment"] }}
                     </div>
 
+                    <!-- <Profile class="mt-5" :theme="light" :modelValue="profile" :activeProfile="activeProfile" /> -->
                     <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
                   </TransitionRoot>
                 </div>

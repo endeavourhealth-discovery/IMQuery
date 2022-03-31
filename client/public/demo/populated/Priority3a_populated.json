@@ -38,7 +38,7 @@
                         }
                     ],
                     "rdfs:label": "SMI Population",
-                    "rdfs:comment": "p3a"
+                    "rdfs:comment": ""
                 }
             ],
             "id": {
@@ -67,7 +67,7 @@
                                 }
                             ],
                             "rdfs:label": "Priority 1",
-                            "rdfs:comment": "p3a"
+                            "rdfs:comment": ""
                         }
                     ],
                     "id": {
@@ -94,7 +94,7 @@
                                 }
                             ],
                             "rdfs:label": "Priority 2",
-                            "rdfs:comment": "p3a"
+                            "rdfs:comment": ""
                         }
                     ],
                     "id": {
@@ -163,9 +163,13 @@
                         "valueIn": [
                             {
                                 "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f",
-                                "rdf:type": [],
-                                "rdfs:label": "",
-                                "rdfs:comment": "p1"
+                                "rdf:type": [
+                                    {
+                                        "@id": "im:ConceptSet"
+                                    }
+                                ],
+                                "rdfs:label": "Hypertension",
+                                "rdfs:comment": ""
                             }
                         ],
                         "valueVar": "concept90"
@@ -188,9 +192,13 @@
                             "valueIn": [
                                 {
                                     "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f",
-                                    "rdf:type": [],
-                                    "rdfs:label": "",
-                                    "rdfs:comment": "p1"
+                                    "rdf:type": [
+                                        {
+                                            "@id": "im:ConceptSet"
+                                        }
+                                    ],
+                                    "rdfs:label": "Hypertension",
+                                    "rdfs:comment": ""
                                 },
                                 {
                                     "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d",
@@ -199,8 +207,8 @@
                                             "@id": "im:ConceptSet"
                                         }
                                     ],
-                                    "rdfs:label": "Hypertension",
-                                    "rdfs:comment": "p3a"
+                                    "rdfs:label": "Hypertension (Resolved)",
+                                    "rdfs:comment": ""
                                 }
                             ],
                             "valueVar": "concept88"
@@ -284,7 +292,7 @@
                                     }
                                 ],
                                 "rdfs:label": "Diabetes",
-                                "rdfs:comment": "p3a"
+                                "rdfs:comment": ""
                             }
                         ],
                         "valueVar": "concept93"
@@ -313,13 +321,17 @@
                                         }
                                     ],
                                     "rdfs:label": "Diabetes",
-                                    "rdfs:comment": "p3a"
+                                    "rdfs:comment": ""
                                 },
                                 {
                                     "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d",
-                                    "rdf:type": [],
-                                    "rdfs:label": "",
-                                    "rdfs:comment": "p1"
+                                    "rdf:type": [
+                                        {
+                                            "@id": "im:ConceptSet"
+                                        }
+                                    ],
+                                    "rdfs:label": "Diabetes (Resolved)",
+                                    "rdfs:comment": ""
                                 }
                             ],
                             "valueVar": "concept91"
@@ -378,28 +390,28 @@
                     },
                     "valueIn": [
                         {
-                            "@id": "urn:uuid:22575230-a13e-431d-983c-ce888b5b0f3d",
+                            "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452",
                             "rdf:type": [],
                             "rdfs:label": "",
-                            "rdfs:comment": "p1"
+                            "rdfs:comment": "Unknown from Priority 3a"
                         },
                         {
                             "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d",
                             "rdf:type": [],
                             "rdfs:label": "",
-                            "rdfs:comment": "p1"
+                            "rdfs:comment": "Unknown from Priority 3a"
                         },
                         {
                             "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4",
                             "rdf:type": [],
                             "rdfs:label": "",
-                            "rdfs:comment": "p1"
+                            "rdfs:comment": "Unknown from Priority 3a"
                         },
                         {
                             "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0",
                             "rdf:type": [],
                             "rdfs:label": "",
-                            "rdfs:comment": "p1"
+                            "rdfs:comment": "Unknown from Priority 3a"
                         }
                     ],
                     "id": {
@@ -444,23 +456,15 @@
                     "valueIn": [
                         {
                             "@id": "urn:uuid:15bd20c8-c92f-496c-8560-896299a632e5",
-                            "rdf:type": [
-                                {
-                                    "@id": "im:ConceptSet"
-                                }
-                            ],
-                            "rdfs:label": "Unnamed Set of Values",
-                            "rdfs:comment": "p3a"
+                            "rdf:type": [],
+                            "rdfs:label": "",
+                            "rdfs:comment": "Unknown from Priority 3a"
                         },
                         {
                             "@id": "urn:uuid:c97f55a2-fe6e-4da2-8865-a95b7cc80f4f",
-                            "rdf:type": [
-                                {
-                                    "@id": "im:ConceptSet"
-                                }
-                            ],
-                            "rdfs:label": "Unnamed Set of Values",
-                            "rdfs:comment": "p3a"
+                            "rdf:type": [],
+                            "rdfs:label": "",
+                            "rdfs:comment": "Unknown from Priority 3a"
                         }
                     ],
                     "id": {
@@ -512,9 +516,13 @@
                     "test": {
                         "property": {
                             "@id": "im:numericValue",
-                            "rdf:type": [],
-                            "rdfs:label": "",
-                            "rdfs:comment": "p1"
+                            "rdf:type": [
+                                {
+                                    "@id": "owl:DatatypeProperty"
+                                }
+                            ],
+                            "rdfs:label": "Numeric Value",
+                            "rdfs:comment": ""
                         },
                         "valueCompare": {
                             "comparison": "GREATER_THAN_OR_EQUAL",
@@ -545,8 +553,8 @@
                                             "@id": "im:ConceptSet"
                                         }
                                     ],
-                                    "rdfs:label": "",
-                                    "rdfs:comment": "p3a"
+                                    "rdfs:label": "Body Mass Index (BMI)",
+                                    "rdfs:comment": ""
                                 }
                             ],
                             "valueVar": "concept96"

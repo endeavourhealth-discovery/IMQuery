@@ -1,13 +1,10 @@
 import { v4 } from "uuid";
 import _ from "lodash";
-// import jmp from "jmp";
-import jsonpath from "jsonpath";
-import { ConsoleLogger } from "@aws-amplify/core";
-import { match } from "assert";
+// import jsonpath from "jsonpath";
 
 
 // Future updates
-//#todo: create map for Paths to each entity to keep code DRY
+//#todo: create map for Paths to each entity to keep code DRY and so you can change the path to references in one places
 // _vars should only be declared once for all metadata inside a JSON definition -> becomes avaialble by reference e.g. #currentClause
 
 

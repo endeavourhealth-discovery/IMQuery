@@ -240,7 +240,7 @@
                                     "@id": "im:ConceptSet"
                                 }
                             ],
-                            "rdfs:label": "Significant Mental Illness (Not Resolved)",
+                            "rdfs:label": "Significant Mental Illness (Resolved)",
                             "rdfs:comment": ""
                         },
                         {

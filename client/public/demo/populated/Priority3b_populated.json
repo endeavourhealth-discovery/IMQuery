@@ -38,7 +38,7 @@
                         }
                     ],
                     "rdfs:label": "SMI Population",
-                    "rdfs:comment": "p3a"
+                    "rdfs:comment": ""
                 }
             ],
             "id": {
@@ -67,7 +67,7 @@
                                 }
                             ],
                             "rdfs:label": "Priority 1",
-                            "rdfs:comment": "p3a"
+                            "rdfs:comment": ""
                         }
                     ],
                     "id": {
@@ -94,7 +94,7 @@
                                 }
                             ],
                             "rdfs:label": "Priority 2",
-                            "rdfs:comment": "p3a"
+                            "rdfs:comment": ""
                         }
                     ],
                     "id": {
@@ -121,7 +121,7 @@
                                 }
                             ],
                             "rdfs:label": "Priority 3a",
-                            "rdfs:comment": "p3b"
+                            "rdfs:comment": ""
                         }
                     ],
                     "id": {

@@ -28,11 +28,9 @@
             <!-- Horizontal Line or Space -->
             <div v-if="showLineH(index, element.uuid)" :class="'line-h'"></div>
             <div v-if="showSpaceH(index, element.uuid)" class="space-h"></div>
-            
-            
+
             <!-- Vertical Line, Space Or Label  -->
             <div class="connector-v relative inline-flex flex-col">
-
               <!-- circle  -->
               <div
                 v-if="showCircle(index, element.uuid)"
@@ -155,7 +153,6 @@ export default defineComponent({
     handleClick(clause: any): any {
       const _currentClausePath = clause.currentPath;
       this.$store.commit("updateActiveProfile", { uuid: this.profile["@id"], activeClausePath: _currentClausePath });
-
     },
     operatorLabel(element: any): string {
       return this.parent(element)["name"] == "not" ? "or" : this.parent(element)["name"];
@@ -175,7 +172,15 @@ export default defineComponent({
       }
     },
     matchLabel(clause: any): string {
-      
+      const toName = (iri: string) => {
+        const _iriArray = iri.split("/");
+        return _iriArray[_iriArray.length - 1]
+          .split("#")[1]
+          .match(/([A-Z]?[^A-Z]*)/g)
+          .slice(0, -1)
+          .join(" ");
+      };
+
       let _entityType = clause.json.entityType ? clause.json.entityType["rdfs:label"] : "";
       let _property = clause.json.property ? clause.json.property["rdfs:label"] : "";
 
@@ -188,7 +193,7 @@ export default defineComponent({
       // let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
       // let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
 
-      return _entityType  || _property;
+      return _entityType || _property || toName(clause.json.property["@id"] || toName(clause.json.entityType["@id"]));
     },
     showConnectorV(index: number, uuid: number): boolean {
       //first item at the top
@@ -317,7 +322,6 @@ export default defineComponent({
   box-sizing: border-box;
   border: 2px solid #fff;
 }
-
 
 .clause-container {
   min-height: 30px;

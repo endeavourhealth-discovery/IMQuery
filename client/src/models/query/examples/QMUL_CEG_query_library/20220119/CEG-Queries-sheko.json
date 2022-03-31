@@ -39,7 +39,7 @@
     "im:isContainedIn": [{
       "@id": "http://endhealth.info/ceg/qry#Q_CEGQueries"
     }]
-  },{
+  }, {
     "@id": "http://org.endhealth.info/im#QMUL_CEG",
     "rdf:type": [{
       "@id": "im:Organisation"
@@ -259,7 +259,7 @@
         "im:order": 0
       }, {
         "im:or": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -269,7 +269,7 @@
           }],
           "im:order": 0
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile2",
@@ -279,7 +279,7 @@
           }],
           "im:order": 1
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile3",
@@ -289,7 +289,7 @@
           }],
           "im:order": 2
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile4",
@@ -469,7 +469,7 @@
         "im:order": 0
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -571,7 +571,7 @@
         "im:order": 0
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -1415,9 +1415,8 @@
         }],
         "im:order": 1
       }, {
-        "im:and": [
-          {
-           "im:property": [{
+        "im:and": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -3143,7 +3142,7 @@
         "im:order": 1
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -3156,7 +3155,7 @@
         "im:order": 2
       }, {
         "im:or": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile2",
@@ -3166,7 +3165,7 @@
           }],
           "im:order": 0
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile3",
@@ -3176,7 +3175,7 @@
           }],
           "im:order": 1
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile4",
@@ -3186,7 +3185,7 @@
           }],
           "im:order": 2
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile5",
@@ -3196,7 +3195,7 @@
           }],
           "im:order": 3
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile6",
@@ -3206,7 +3205,7 @@
           }],
           "im:order": 4
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile7",
@@ -3216,7 +3215,7 @@
           }],
           "im:order": 5
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile8",
@@ -3226,7 +3225,7 @@
           }],
           "im:order": 6
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile9",
@@ -3236,7 +3235,7 @@
           }],
           "im:order": 7
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile10",
@@ -3246,7 +3245,7 @@
           }],
           "im:order": 8
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile11",
@@ -3256,7 +3255,7 @@
           }],
           "im:order": 9
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile12",
@@ -3266,7 +3265,7 @@
           }],
           "im:order": 10
         }, {
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile13",
@@ -12584,7 +12583,7 @@
         "im:order": 0
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -55891,7 +55890,7 @@
     "im:definition": [{
       "im:and": [{
           "rdfs:label": "Significant Mental Illness (SMI)",
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -56214,7 +56213,7 @@
         "im:order": 0
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -56373,7 +56372,7 @@
         "im:order": 0
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile1",
@@ -56386,7 +56385,7 @@
         "im:order": 1
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile2",
@@ -56637,7 +56636,7 @@
         "im:order": 0
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile2",
@@ -56650,7 +56649,7 @@
         "im:order": 1
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile3",
@@ -56663,7 +56662,7 @@
         "im:order": 2
       }, {
         "im:not": [{
-           "im:property": [{
+          "im:property": [{
             "@id": "im:hasProfile"
           }],
           "im:var": "profile4",

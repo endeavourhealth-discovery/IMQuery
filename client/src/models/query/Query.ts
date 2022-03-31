@@ -346,7 +346,7 @@ export class Profile extends Entity {
 
 
     public toTemplates(clausePath: string): void {
-        console.log("this.mainEntity", this.mainEntity)
+        // console.log("this.mainEntity", this.mainEntity)
         const _templates = Templates.toTemplates(this.mainEntity, this._definitionTree, clausePath)
 
         // console.log("templates", _templates);

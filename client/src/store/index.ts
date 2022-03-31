@@ -4236,6 +4236,7 @@ export default createStore({
 
               //populate range for each property based on the datamodel (entityType inside the same clause)
               const _propertyTypes = ["owl:ObjectProperty", "owl:DatatypeProperty"];
+              // console.log("_shortEntity", _shortEntity)
               const _isObjectProperty = _shortEntity["rdf:type"].some((rdfType: any) => _propertyTypes.includes(rdfType["@id"]));
               if (_isObjectProperty) {
                 // console.log("reference", reference)
@@ -4313,7 +4314,7 @@ export default createStore({
           })
 
 
-          //populates definition 
+          //populates definition with entities
           _entityReferences.forEach((reference: any) => {
 
             // console.log("reference.path", reference.path)
@@ -4579,6 +4580,7 @@ export default createStore({
 
       //example  
       const _filenames = ["userdata_profiles1705.json"];
+      // const _filenames = ["raw/UCLP-CEG SMI EMIS v5-profiles-ld.json"];
 
 
       _filenames.forEach(async (filename: string) => {

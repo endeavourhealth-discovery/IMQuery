@@ -96,7 +96,7 @@
           @click="activeTab = tab.name"
           :class="'inline rounded-md px-3 py-1' + [activeTab == tab.name ? ' text-white bg-blue-700 ' : ' text-gray-400']"
         >
-          {{ tab.name }}
+          {{ tab.visible ? tab.name : "" }}
         </div>
       </div>
       <!-- Header -->
@@ -121,7 +121,8 @@
           class="reference inline text-xl text-gray-700  hover:text-blue-700 font-medium cursor-pointer hover:underline"
           v-tooltip.left="get(reference, 'entityData.rdfs:label') || `Unnamed Item ${reference.iri}` || `Unnamed Item`"
         >
-          {{ get(reference, "entityData.rdfs:label") || `Unnamed Item ${reference.iri}` || `Unnamed Item` }}
+            {{ get(reference, "entityData.rdfs:label") || `Unnamed Item ${reference.iri}` || `Unnamed Item` }}
+        
         </div>
       </div>
       <!-- References  -->
@@ -134,6 +135,7 @@
 import { defineComponent } from "vue";
 import DraggableClause from "./DraggableClause.vue";
 import TextDefinition from "./TextDefinition.vue";
+
 import { Profile } from "@/models/query/Query";
 
 import _ from "lodash";
@@ -161,7 +163,7 @@ export default defineComponent({
     },
     viewClause(value: string) {
       // testing with $emit - $emit is not propopagated, vuex used instead./
-      console.log("value", value);
+      console.log("value", value); 
       return;
     }
   },
@@ -212,16 +214,18 @@ export default defineComponent({
       tabs: [
         {
           uuid: "255582e4-67d5-4307-934f-30a383b12944",
-          name: "Criteria"
+          name: "Criteria",
+          visible: true,
         },
         {
           uuid: "c47f6016-358d-480d-a018-d9c2da748002",
-          name: "References"
+          name: "References",
+          visible:  false,
         }
       ],
       activeTab: "Criteria",
       templates: [] as any[],
-      profile: this.modelValue, // optional _.cloneDeep(),
+      profile: this.modelValue, 
       themeClasses: {
         light: {
           phrases: { reference: "text-blue-700 font-bold hover:underline" },
@@ -283,9 +287,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.profile {
-  /* max-width: 1000px; */
-}
 
 .textdefinition,
 .references {
@@ -310,16 +311,9 @@ export default defineComponent({
 .references::-webkit-scrollbar {
   width: 8px;
 }
-
-.profile .body::-webkit-scrollbar-track,
-.references::-webkit-scrollbar-track {
-  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
-}
-
 ::-webkit-scrollbar-thumb {
   background-color: #e2e8f0;
   border-radius: 20px;
-  /* outline: 1px solid slategrey; */
 }
 
 .profile .body {

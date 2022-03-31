@@ -1636,8 +1636,12 @@
                                     "valueIn": [
                                         {
                                             "@id": "urn:uuid:477b3dd6-f834-4deb-8de9-b5919e302cb4",
-                                            "rdf:type": [],
-                                            "rdfs:label": "",
+                                            "rdf:type": [
+                                                {
+                                                    "@id": "im:ConceptSet"
+                                                }
+                                            ],
+                                            "rdfs:label": "Statin",
                                             "rdfs:comment": ""
                                         }
                                     ],
@@ -1725,43 +1729,27 @@
                             "valueIn": [
                                 {
                                     "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452",
-                                    "rdf:type": [
-                                        {
-                                            "@id": "im:ConceptSet"
-                                        }
-                                    ],
+                                    "rdf:type": [],
                                     "rdfs:label": "",
-                                    "rdfs:comment": ""
+                                    "rdfs:comment": "Unknown from Priority 3a"
                                 },
                                 {
                                     "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d",
-                                    "rdf:type": [
-                                        {
-                                            "@id": "im:ConceptSet"
-                                        }
-                                    ],
+                                    "rdf:type": [],
                                     "rdfs:label": "",
-                                    "rdfs:comment": ""
+                                    "rdfs:comment": "Unknown from Priority 3a"
                                 },
                                 {
                                     "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4",
-                                    "rdf:type": [
-                                        {
-                                            "@id": "im:ConceptSet"
-                                        }
-                                    ],
+                                    "rdf:type": [],
                                     "rdfs:label": "",
-                                    "rdfs:comment": ""
+                                    "rdfs:comment": "Unknown from Priority 3a"
                                 },
                                 {
                                     "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0",
-                                    "rdf:type": [
-                                        {
-                                            "@id": "im:ConceptSet"
-                                        }
-                                    ],
+                                    "rdf:type": [],
                                     "rdfs:label": "",
-                                    "rdfs:comment": ""
+                                    "rdfs:comment": "Unknown from Priority 3a"
                                 }
                             ],
                             "id": {
@@ -1808,7 +1796,11 @@
                                     "valueIn": [
                                         {
                                             "@id": "urn:uuid:f94a8f26-2b67-4eef-9a94-6ff05e33564e",
-                                            "rdf:type": [],
+                                            "rdf:type": [
+                                                {
+                                                    "@id": "im:ConceptSet"
+                                                }
+                                            ],
                                             "rdfs:label": "",
                                             "rdfs:comment": ""
                                         }
@@ -2773,7 +2765,7 @@
                                                     "@id": "im:ConceptSet"
                                                 }
                                             ],
-                                            "rdfs:label": "Atorvastatin 20mg chewable tablets sugar free, Atorvastatin 20mg tablets, Atorvastatin 20mg/5ml oral solution, Atorvastatin 20mg/5ml oral suspension, Atorvastatin 30mg tablets, Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 20mg chewable tablets (Upjohn UK Ltd)..more"
+                                            "rdfs:label": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin"
                                         }
                                     ],
                                     "valueVar": "medication73"
@@ -3031,7 +3023,7 @@
                                                     "@id": "im:ConceptSet"
                                                 }
                                             ],
-                                            "rdfs:label": "Atorvastatin 40mg tablets, Atorvastatin 60mg tablets, Atorvastatin 80mg tablets, Lipitor 40mg tablets (Upjohn UK Ltd), Lipitor 80mg tablets (Upjohn UK Ltd), Crestor 20mg tablets (AstraZeneca UK Ltd), Crestor 40mg tablets (AstraZeneca UK Ltd), Rosuvastatin 20mg tablets, Rosuvastatin 40mg tablets..more"
+                                            "rdfs:label": "Atorvastatin, Rosuvastatin, Pravastatin, Fluvastatin, Simvastatin"
                                         }
                                     ],
                                     "valueVar": "medication79"
