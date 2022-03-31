@@ -86,7 +86,7 @@
     <!-- Left Side  -->
 
     <!-- right side  -->
-    <div v-if="activeProfile.uuid == profile['@id']" class="ml-10 flex flex-col">
+    <div v-if="activeProfile.uuid == profile['@id']" class="pl-10 flex flex-col border-l border-l-gray-200">
       <!-- Header -->
 
       <div :class="'select-none flex space-x-5 font-semibold text-2xl mb-8 mt-1' + themeClasses[theme].text">
@@ -113,7 +113,7 @@
       />
       <!-- Text Templates  -->
       <!-- References  -->
-      <div v-show="activeTab == 'References'" class="references flex-col ml-3">
+      <div v-show="activeTab == 'References'" class="references flex-col pl-3">
         <div
           @click="click(reference.entityData)"
           v-for="reference in profile.entityReferences"
@@ -134,7 +134,6 @@
 import { defineComponent } from "vue";
 import DraggableClause from "./DraggableClause.vue";
 import TextDefinition from "./TextDefinition.vue";
-
 import { Profile } from "@/models/query/Query";
 
 import _ from "lodash";
@@ -151,28 +150,19 @@ export default defineComponent({
       return _.get(object, path);
     },
     click(entity: any): void {
-      console.log(entity);
       const _iri = entity["@id"].replace(":", "#");
       const _contextKey = _iri.split("#")[0];
       const _iriKey = _iri.split("#")[1];
       const _contextUrl = this.context[_contextKey];
-
       const _encodedIri = encodeURIComponent(_contextUrl ? _contextUrl + _iriKey : entity["@id"]);
 
       const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_encodedIri}`;
       window.open(_url, "_blank");
     },
-    loadData(data: any) {
-      // if (typeOf )
-      console.log("data", data);
-      return data;
-    },
     viewClause(value: string) {
-      // alert(value);
+      // testing with $emit - $emit is not propopagated, vuex used instead./
       console.log("value", value);
-
       return;
-      // console.log("value", value)
     }
   },
   watch: {
@@ -184,7 +174,7 @@ export default defineComponent({
   computed: {
     definitionTree: {
       get(): any {
-        // instantiate Profile if not already done (e.g. QueryBuilder.profiles provides instantiated classes
+        // instantiate Profile if not already done (e.g. QueryBuilder.profiles provides instantiated classes) but you can equally pass raw JSON as a prop
         // Profile class = UI Object Model required for displaying clauses and text templates
         if (Object.keys(this.profile).includes("_definitionTree")) {
           return this.profile.definitionTree;
@@ -197,17 +187,6 @@ export default defineComponent({
         return;
       }
     },
-    queryBuilder: {
-      get(): any {
-        return this.$store.state.queryBuilder;
-      },
-      set({ action, payload }: any): void {
-        this.$store.commit("queryBuilder", {
-          action: action,
-          payload: payload
-        });
-      }
-    }
   },
   data() {
     return {
@@ -243,7 +222,6 @@ export default defineComponent({
       activeTab: "Criteria",
       templates: [] as any[],
       profile: this.modelValue, // optional _.cloneDeep(),
-      // definitionTree: this.data ? this.loadData(this.data) : null,
       themeClasses: {
         light: {
           phrases: { reference: "text-blue-700 font-bold hover:underline" },
@@ -315,15 +293,13 @@ export default defineComponent({
 }
 
 .references {
-      overflow-y: auto;
+  overflow-y: auto;
   min-width: 300px;
   max-height: 530px;
 }
 
 
 .reference {
-
-
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of visible lines */

@@ -3,6 +3,7 @@ import _ from "lodash";
 // import jmp from "jmp";
 import jsonpath from "jsonpath";
 import { ConsoleLogger } from "@aws-amplify/core";
+import { match } from "assert";
 
 
 // Future updates
@@ -11,9 +12,13 @@ import { ConsoleLogger } from "@aws-amplify/core";
 
 
 const valueToPhraseMap = {
-    reserved: {
-        "GREATER_THAN_OR_EQUAL": "greather than or equal to",
-        "LESS_THAN_OR_EQUAL": "less than or equal to"
+    GREATER_THAN_OR_EQUAL: {
+        "false": "more than",
+        "true": "less than",
+    },
+    LESS_THAN_OR_EQUAL: {
+        "true": "more than",
+        "false": "less than",
     },
     firstLetterVowel: {
         true: "an",
@@ -31,10 +36,11 @@ const valueToPhraseMap = {
     },
     entityName: {
         // "codeable expression": "Terminological Concept",
+        "$referenceDate": "the Reference Date",
         "Medication order or prescription (entry type)": "Order or Prescription",
         "DESCENDING": "descending",
         "ASCENDING": "ascending",
-        "GREATER_THAN_OR_EQUAL": "greather than or equal to",
+        "GREATER_THAN_OR_EQUAL": "greater than or equal to",
         "LESS_THAN_OR_EQUAL": "less than or equal to",
         Event: "Health Record",
         "Person Details": "Personal Details Record",
@@ -142,7 +148,7 @@ function transform(targetPhrase, returnValue): any {
 
     //mapping words to the outcome of a function's value
     let _targetPhrase = targetPhrase;
-    console.log("transform", targetPhrase, returnValue)
+    // console.log("transform", targetPhrase, returnValue)
     let _value = typeof (returnValue) == "string" ? returnValue : returnValue.toString();
 
     let _text = "";
@@ -168,7 +174,7 @@ function phrase(phraseType: string, input: any, references = []): any {
 
     // [1-2]
     if (input?.type == "reference") {
-        console.log("0")
+     //   console.log("0")
 
 
         // _input = input.data;
@@ -183,7 +189,7 @@ function phrase(phraseType: string, input: any, references = []): any {
         // const _isValueReference = _valuePaths.includes(input?.meta?.args?.propertyPath)
 
         if (Array.isArray(input.data)) {
-            console.log("1")
+         //   console.log("1")
             input.data.forEach((entity: any, index: any) => {
                 //adds new "text" key to entity reference
                 // console.log("input", input)
@@ -191,20 +197,20 @@ function phrase(phraseType: string, input: any, references = []): any {
                 input.data[index]["_text"] = transform("entityName", entity["rdfs:label"])
             })
         } else if (input.data) {
-            console.log("2")
+         //   console.log("2")
             //adds new "text" key to value at path
             const _text = transform("entityName", input.data["rdfs:label"]);
             input.data["_text"] = _text;
         } else {
 
-            console.log("phrase not found: [type] [input]", phraseType, input)
+         //   console.log("phrase not found: [type] [input]", phraseType, input)
             return null;
         }
 
 
         // transforming 1 existing phrase [5-> 6]
     } else if (typeof (input == "string")) {
-        console.log("3")
+     //   console.log("3")
 
         // console.log("phraseType input", phraseType, input)
 
@@ -215,7 +221,7 @@ function phrase(phraseType: string, input: any, references = []): any {
         if (references.length > 0) {
 
             const _text = transform(phraseType, input);
-            console.log("_text transform(phraseType, input)", _text, phraseType, input)
+         //   console.log("_text transform(phraseType, input)", _text, phraseType, input)
             const _transformedReferences = {
                 text: _text,
                 type: "transformedReferences",
@@ -235,7 +241,7 @@ function phrase(phraseType: string, input: any, references = []): any {
             return _transformedReferences;
 
         } else {
-            console.log("4")
+         //   console.log("4")
 
             //if it doesnt have references it most likely isnt mutable, but some other variable 
             const _text = transform(phraseType, input)
@@ -288,24 +294,36 @@ function reference(targetClause: any, propertyPath = "") {
 
     //generaetes an empty reference if none were found
     if (!_values) {
-        console.log("reference did not return any entity or value")
+     //   console.log("reference did not return any entity or value")
         return;
     }
 
+ //   console.log("_values", _values)
 
+
+    //generates empty entities so not references are not completely empty
     if (Array.isArray(_values)) {
         _values = _values.map((entity: any) => {
-            return {
-                "@id": entity["@id"],
+
+            if (entity["@id"] && !entity["rdfs:label"]) {
+                return {
+                    "@id": entity["@id"],
+                    "rdf:type": [],
+                    "rdfs:label": "",
+                }
+            } else {
+                return entity;
+            }
+
+
+        })
+    } else {
+        if (_values["@id"] && !_values["rdfs:label"]) {
+            _values = {
+                "@id": _values["@id"],
                 "rdf:type": [],
                 "rdfs:label": "",
             }
-        })
-    } else {
-        _values = {
-            "@id": _values["@id"],
-            "rdf:type": [],
-            "rdfs:label": "",
         }
     }
 
@@ -391,6 +409,15 @@ function isTrue(...args): boolean {
 function hasTransformation(phraseType, input) {
     // console.log("hasTransformation type input isnull?", phraseType, input, valueToPhraseMap[phraseType][input] == null)
     return valueToPhraseMap[phraseType][input] == null ? false : true;
+}
+
+function isNegative(testNumber: number): boolean {
+    const _sign = Math.sign(testNumber);
+    if (_sign == 1 || _sign == 0) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 // a phrase that is static and not mutable by user
@@ -525,7 +552,7 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any, args
     // console.log("_profiles", _profiles)
 
     const _sentence = [_were, _partOf, _resultsOf, _profiles];
-    console.log("_sentence", _sentence)
+ //   console.log("_sentence", _sentence)
 
     return _sentence;
 };
@@ -537,29 +564,21 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
     //a function that returns an array of objects that represents a single sentence (i.e. the description one property)
     const _sentence = (currentClause: any): any => {
         // console.log("#####################################################")
-        console.log("_sentence currentClause", currentClause)
+     //   console.log("_sentence currentClause", currentClause)
 
         const _ref1 = reference(currentClause, "property");
         const _property = mutable(phrase("entityName", _ref1));
 
-        const _a = phrase("firstLetterVowel", firstLetterIsVowel(_property.data._text));
+        const _a = phrase("firstLetterVowel", firstLetterIsVowel(_property?.data?._text));
 
         const _that = constant("that");
 
         const _partOf = constant("part of the set of values in");
 
-
-        // old
-        // const _isNegated = currentClause.valueNotIn ? true : false;
-        // const _was = phrase("was", !_isNegated)
-
         // applies to scenario 3/4
         const _ref2 = reference(currentClause, "valueNotIn");
-        const _was = phrase("was", _ref2.data == undefined, [_ref2])
-
+        const _was = phrase("was", _ref2?.data == undefined, [_ref2])
         // console.log("_ref2", _ref2)
-
-
 
         //scenario 1: nothing besides property [entity reference] is declared [e.g. property opreator clause  effectiveDate4]
 
@@ -569,24 +588,41 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
 
         // // scenario 2: valueCompare / valueFunction
-        // const _comparison = currentClause?.valueCompare?.comparison ? phrase("entityName", currentClause?.valueCompare?.comparison) : null;
-        // const _valueData = currentClause?.valueCompare?.comparison ? phrase("entityName", currentClause?.valueCompare?.valueData) : null;
 
         const _ref3 = currentClause?.valueCompare ? reference(currentClause, "valueCompare.comparison") : null;
-        const _comparison = _ref3 ? mutable(phrase("entityName", _ref3.data, [_ref3])) : null;
+        let _comparison = _ref3 ? mutable(phrase("entityName", _ref3?.data, [_ref3])) : null;
 
         const _ref4 = currentClause?.valueCompare ? reference(currentClause, "valueCompare.valueData") : null;
-        const _valueData = _ref4 ? mutable(phrase("entityName", _ref4.data, [_ref4])) : null;
+        let _valueData = _ref4 ? mutable(phrase("entityName", _ref4?.data, [_ref4])) : null;
         // const _valueData = currentClause?.valueCompare ? mutable(reference(currentClause, "valueCompare.valueData")) : null;
 
-        // #todo: valueFunction for units
-        const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].valueData") : null;
-        console.log("_ref5", _ref5)
 
-        console.log("_ref4", _ref4)
-        const _phraseQuantity = _ref4 ? isSingular(_ref4.data) ? "singular" : "plural" : null;
-        console.log("_phraseValue", _phraseQuantity)
-        const _units = _ref5 && _phraseQuantity ? phrase(_ref5.data, _phraseQuantity, [_ref5]) : null; //entry/entries //record(s)
+
+        //units
+        const _phraseQuantityType = _ref4 ? isSingular(_ref4.data) ? "singular" : "plural" : null;
+        // console.log("_ref4", _ref4)
+        const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].valueData") : null;
+        // console.log("_ref5", _ref5)
+        const _units = _ref5 && _phraseQuantityType ? phrase(_ref5?.data, _phraseQuantityType, [_ref5]) : null; //entry/entries //record(s)
+
+
+        // simplified comparison for dates if rdfs is date-time AND the _valueData is negative (e.g. greater than -18 months before turns into "less than 18 months before")
+        // requires rdfs:range in order to work e.g. only applies this function to DateTime!
+        const _isDateTime = _.get(_ref1, "data.rdfs:range.@id") != undefined && _ref1?.data["rdfs:range"]["@id"] == "im:DateTime";
+        if (_isDateTime && _valueData?.text ) {
+            //turns greater than into less than and vice versa
+            const _isNegative = isNegative(parseInt(_valueData?.text));
+            _comparison = _ref3 ? mutable(phrase(_ref3?.data, _isNegative, [_ref3])) : null;
+
+            //changes negative to postive
+            _valueData.text = _valueData.text.substring(1);
+        }
+
+        // comparator e.g. reference date
+        const _ref6 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[1].valueData") : null;
+        const _before = constant("before")
+        const _comparator = _ref6 ? phrase("entityName", _ref6.data, [_ref6]) : null; //entry/entries //record(s)
+
 
 
         // secnario 3: valueIn / valueNotIn
@@ -596,22 +632,26 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
 
         let _sentence = [_a, _property, _exists]; //default sentence is "exists"
         const _sentenceVariants = {
-            valueCompare: [_a, _property, _that, _was, _comparison, _valueData],
-            valueFunction: [_a, _property, _that, _was, _comparison, _valueData, _units],
             valueIn: [_a, _property, _that, _was, _partOf, _valueIn],
             valueNotIn: [_a, _property, _that, _was, _partOf, _valueNotIn],
+            valueCompare: [_a, _property, _that, _was, _comparison, _valueData],
+            valueFunction: [_a, _property, _that, _was, _comparison, _valueData, _units],
+            "valueFunction.argument[1]": [_a, _property, _that, _was, _comparison, _valueData, _units, _before, _comparator],
         };
 
 
         //select the sentence based on json path otherwise use default sentence.
-        const _expectedKeys = ["valueIn", "valueNotIn", "valueCompare", "valueFunction"];
-        Object.keys(currentClause).forEach((key: string) => {
-            if (_expectedKeys.includes(key)) {
+        const _expectedKeys = ["valueIn", "valueNotIn", "valueCompare", "valueFunction", "valueFunction.argument[1]"];
+
+        //gets the last matching template in the array (most specific)
+        _expectedKeys.forEach((key: string) => {
+            if (_.get(currentClause, key) != undefined) {
                 _sentence = _sentenceVariants[key] //chooses valueFunction over valueCompare i.e. if units are present
             }
         })
 
-        console.log("_sentence", _sentence)
+
+        // console.log("_sentence", _sentence)
         return _sentence;
     }
 
@@ -632,12 +672,12 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
             // "" = root object
             let _clauses = (_path == "") ? currentClause.json : _.get(currentClause, _path);
 
-            console.log("_path", _path)
-            console.log("_clause", _clauses)
+            // console.log("_path", _path)
+            // console.log("_clause", _clauses)
 
             //arrays e.g. and/or/nots
             if (_clauses && Array.isArray(_clauses)) {
-                console.log("array of clauses", _clauses)
+                // console.log("array of clauses", _clauses)
 
                 _clauses.forEach((_clause: any) => {
                     if (_clause?.property) {
@@ -649,12 +689,12 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
                 // console.log("one clause", _clauses)
                 _sentences.push(_sentence(_clauses));
             } else {
-                console.log("clause not recognised for transformation using entityProperty template")
+             //   console.log("clause not recognised for transformation using entityProperty template")
 
             }
         })
     } else {
-        console.log("no argument specified for entityProperty template function inside the cascade")
+     //   console.log("no argument specified for entityProperty template function inside the cascade")
         return null;
     }
     return _sentences;
@@ -721,7 +761,7 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
 
     }
 
-    console.log("_sentence", _sentence)
+ //   console.log("_sentence", _sentence)
     return _sentence;
 
 };
@@ -894,7 +934,7 @@ export default class Templates {
 
     public static toTemplates(mainEntity: any, profile: any, clausePath: string) {
 
-        console.log("current clausePath 1", clausePath)
+        // console.log("current clausePath 1", clausePath)
 
 
 
@@ -962,7 +1002,7 @@ export default class Templates {
 
 
             //#todo: select multiple compatible phrases templates and pick the shortest one (currently it only picks one
-            console.log("template ", template.get.function, " should match: ", _shouldMatch)
+         //   console.log("template ", template.get.function, " should match: ", _shouldMatch)
             return _shouldMatch;
         }
 
@@ -985,7 +1025,7 @@ export default class Templates {
 
             const _template = _.get(_cascadingTemplates, _currentItemPath)
 
-            console.log("current template", _template.get.function)
+            // console.log("current template", _template.get.function)
 
 
 
@@ -995,13 +1035,10 @@ export default class Templates {
 
             // console.log("_queue _currentClause", _currentClause)
 
-            console.log("current mainEntity", mainEntity)
-
-            console.log("current profile", profile)
-
-            console.log("current clausePath", clausePath)
-
-            console.log("current _currentClause", _currentClause)
+            // console.log("current mainEntity", mainEntity)
+            // console.log("current profile", profile)
+            // console.log("current clausePath", clausePath)
+            // console.log("current _currentClause", _currentClause)
 
 
             const _parentPath = clausePath

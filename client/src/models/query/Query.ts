@@ -336,7 +336,7 @@ export class Profile extends Entity {
 
         }
 
-        console.log("definition Tree", _definitionTree);
+        console.log("UI object model (Profile.definitionTree)", _definitionTree);
 
         this._definitionTree = _definitionTree;
 

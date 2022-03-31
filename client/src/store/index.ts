@@ -4199,7 +4199,7 @@ export default createStore({
         if (entity["im:definition"]) {
           const _json = JSON.parse(entity["im:definition"]);
 
-          console.log("definition", _json)
+          console.log("JSON definition", _json)
           let _entityReferences = jp.paths(_json, `$..[?(@.@id)]`);
           //filters out paths that are UUIDs for clauses (and not UUID's of entities);
           _entityReferences = _entityReferences.filter((reference: any) => reference[reference.length - 1] != "id");
@@ -4327,7 +4327,7 @@ export default createStore({
 
           // console.log("_entityReferences", _entityReferences)
 
-          console.log("populated JSON", _json)
+          console.log("JSON definition (populated)", _json)
 
           //for debugging
           let _entitiesWithoutData = _entityReferences.filter((entity: any) => entity.entityData == undefined);
@@ -4357,9 +4357,9 @@ export default createStore({
           entities[index]["entityReferences"] = _entityReferences;
           entities[index]["entitiesWithoutData"] = _entitiesWithoutData;
 
-          console.log("entity", entity)
-          console.log("_entityReferences", _entityReferences)
-          console.log("_entitiesWithoutData", _entitiesWithoutData)
+          // console.log("entity", entity)
+          console.log("Entities References", _entityReferences)
+          console.log("Entities without data", _entitiesWithoutData)
 
 
         }
@@ -4578,7 +4578,7 @@ export default createStore({
     async loadUserData({ commit, dispatch }) {
 
       //example  
-      const _filenames = ["userdata_profiles1706.json"];
+      const _filenames = ["userdata_profiles1705.json"];
 
 
       _filenames.forEach(async (filename: string) => {

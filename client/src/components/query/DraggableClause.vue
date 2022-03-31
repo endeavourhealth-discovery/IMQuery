@@ -21,23 +21,26 @@
     @drop="isCardDragged = false"
   >
     <!-- Each item in list  -->
-
     <template #item="{ element, index }">
       <div :class="'clause-item flex flex-col relative rounded'">
         <div class="clause-container clause inline-flex">
           <div class="connector-h rounded-sm inline-flex flex">
+            <!-- Horizontal Line or Space -->
             <div v-if="showLineH(index, element.uuid)" :class="'line-h'"></div>
             <div v-if="showSpaceH(index, element.uuid)" class="space-h"></div>
-            <!-- <div v-else class="line-v"> -->
-            <!-- </div> -->
+            
+            
+            <!-- Vertical Line, Space Or Label  -->
             <div class="connector-v relative inline-flex flex-col">
+
               <!-- circle  -->
               <div
                 v-if="showCircle(index, element.uuid)"
                 :class="'circle inline' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600' : ' bg-green-700']"
                 v-tooltip.left="!element.include || parent(element)['name'] == 'not' ? `${tooltip.exclude}` : `${tooltip.include}`"
               ></div>
-              <!-- :line  -->
+
+              <!-- Vertical Line  -->
               <div v-if="index != children.length - 1" :class="'line-v inline '"></div>
 
               <!-- operator labels - displays "or" / "and" and converst "not" into "or" (only the label) -->
@@ -76,7 +79,7 @@
 
             <!-- Child   -->
             <nested-draggable
-            :activeProfile="activeProfile"
+              :activeProfile="activeProfile"
               :activeClausePath="activeClausePath"
               :mainEntity="mainEntity"
               :themeClasses="themeClasses"
@@ -128,7 +131,7 @@ export default defineComponent({
       },
       tooltip: {
         notor:
-          '<div style="background-color: red; color: white; padding: 5px 20px; margin: -6px;  border-radius: 3px; font-size: 12x;"><b>NEITHER OF THESE CRITERIA MUST BE MET</b></div>',
+          '<div style="background-color: red; color: white; padding: 5px 20px; margin: -6px;  border-radius: 3px; font-size: 12x;"><b>EITHER OF THESE CRITERIA MUST BE MET</b></div>',
         or:
           '<div style="background-color: green; color: white; padding: 5px 20px; margin: -6px;  border-radius: 3px; font-size: 12px;"><b>EITHER OF THESE CRITERIA MUST BE MET</b></div>',
         and:
@@ -150,51 +153,9 @@ export default defineComponent({
   },
   methods: {
     handleClick(clause: any): any {
-      // console.log("this.activeClausePath", this.activeClausePath)
-      // console.log("clause.currentPath", clause.currentPath)
-
       const _currentClausePath = clause.currentPath;
-      // console.log("this.profile.uuid", this.profile)
       this.$store.commit("updateActiveProfile", { uuid: this.profile["@id"], activeClausePath: _currentClausePath });
 
-      this.activeClause.uuid = clause.uuid;
-      this.activeClause.path = clause.currentPath;
-      // console.log("theme", this.themeClasses);
-      // console.log("profile", this.profile)
-      // console.log("mainEntity", this.mainEntity)
-      // console.log(this.test);
-      // console.log(this.profile[0].data.id)
-      // alert(clause.currentPath);
-
-      //###todo
-      // emit does not work inside here or parent component reliably? Element returns only the topmost element when emitted or nothing.
-      // fix:
-      // [ ] translate all clauses upon conversion so you already have the template data.
-      // [ ] don't emit, commit: activeClause: [] in state. Pass it to Profile as prop via computed getter in order to allow ,
-
-      // this.$emit('viewClause', "data1")
-      // const _profileId = this.definitionTree[0].json.id["@id"];#
-
-      // console.log("_currentPath", _currentPath)
-
-      // const _templates = this.profile.toTemplates(this.profile[0].json.entityType, this.profile, _currentClausePath)
-
-      //if using query builder
-      // const _templates = this.queryBuilder.profiles.get(_profileId).toTemplates(_currentClausePath);
-
-      // const joinArry = (arr: any[]): string => {
-      //   let _textArr = [] as any[];
-      //   arr.forEach((item: any) => _textArr.push(item.name));
-      //   let str = _textArr.join(" or ");
-      //   return str;
-      // };
-
-      // let _sentence = "";
-      // _templates[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
-      // _templates[0].children[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
-      // // _templates[0].children[0].children[0].data.forEach((item: any) => (_sentence = _sentence + (typeof item.text == "string" ? item.text : joinArry(item.text)) + " "));
-
-      // console.log(_sentence);
     },
     operatorLabel(element: any): string {
       return this.parent(element)["name"] == "not" ? "or" : this.parent(element)["name"];
@@ -214,28 +175,20 @@ export default defineComponent({
       }
     },
     matchLabel(clause: any): string {
-      // derives labels from Iri
+      
+      let _entityType = clause.json.entityType ? clause.json.entityType["rdfs:label"] : "";
+      let _property = clause.json.property ? clause.json.property["rdfs:label"] : "";
 
-      // console.log("clause json", clause.json)
-      //
-      let _entityType = clause.json.entityType ?  clause.json.entityType["rdfs:label"] : "";
-      let _property = clause.json.property ?  clause.json.property["rdfs:label"] : "";
+      // improved matchLabel
+      // let _valueData = clause.json.valueCompare.valueData ? clause.json.valueCompare.valueData : null;
+      // let _valueIn = clause.json.valueIn.valueData ? clause.json.valueIn.valueData : null;
+      // let _valueNotIn = clause.json.valueNotIn ? clause.json.valueNotIn : null;
 
+      // let _valueTest = clause.json.test ? clause.json.test.valueIn[0]
       // let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
       // let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
 
-      // //adds spaces in between capital letters
-      // _entityType = _entityType
-      //   .match(/([A-Z]?[^A-Z]*)/g)
-      //   .slice(0, -1)
-      //   .join(" ");
-
-      // _property = _property
-      //   .match(/([A-Z]?[^A-Z]*)/g)
-      //   .slice(0, -1)
-      //   .join(" ");
-
-      return _entityType || _property;
+      return _entityType  || _property;
     },
     showConnectorV(index: number, uuid: number): boolean {
       //first item at the top
@@ -277,23 +230,11 @@ export default defineComponent({
     showCircle(index: number, uuid: number): boolean {
       //first item at the top
       if (this.definitionTree && this.definitionTree[0] && this.definitionTree[0].uuid == uuid) {
-        // console.log("uuid", uuid);
-        // console.log("json", this.definitionTree);
         return false;
       } else {
         return true;
       }
     }
-    // toggleOperator(element: any): void {
-    //   if (element.operator == "or") {
-    //     element.operator = "and";
-    //   } else {
-    //     element.operator = "or";
-    //   }
-    // },
-    // toggleInclude(element: any): void {
-    //   element.include = !element.include;
-    // }
   },
   computed: {
     isCardDragged: {
@@ -377,9 +318,6 @@ export default defineComponent({
   border: 2px solid #fff;
 }
 
-.clause.light .circle {
-  /* border: 2px solid transparent; */
-}
 
 .clause-container {
   min-height: 30px;

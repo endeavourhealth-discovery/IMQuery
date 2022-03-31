@@ -107,6 +107,7 @@ export default defineComponent({
           : null;
 
       //either shows _text (post transformation), original label, name, a name derived from its Iri or Unnamed item
+      // console.log("entity['rdfs:label']", entity)
       return entity._text || entity["rdfs:label"] || entity.name || _splitIri || `Unnamed Item: ${entity["@id"]}`;
     },
     click(entity: any): void {
