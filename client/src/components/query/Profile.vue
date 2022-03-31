@@ -121,8 +121,7 @@
           class="reference inline text-xl text-gray-700  hover:text-blue-700 font-medium cursor-pointer hover:underline"
           v-tooltip.left="get(reference, 'entityData.rdfs:label') || `Unnamed Item ${reference.iri}` || `Unnamed Item`"
         >
-            {{ get(reference, "entityData.rdfs:label") || `Unnamed Item ${reference.iri}` || `Unnamed Item` }}
-        
+          {{ get(reference, "entityData.rdfs:label") || `Unnamed Item ${reference.iri}` || `Unnamed Item` }}
         </div>
       </div>
       <!-- References  -->
@@ -163,14 +162,16 @@ export default defineComponent({
     },
     viewClause(value: string) {
       // testing with $emit - $emit is not propopagated, vuex used instead./
-      console.log("value", value); 
+      console.log("value", value);
       return;
     }
   },
   watch: {
     activeProfile() {
-      this.templates = this.profile ? this.profile.toTemplates(this.activeProfile.activeClausePath) : null;
-      console.log("_templates", this.templates);
+      if (this.profile && this.profile["@id"] == this.activeProfile.uuid) {
+        this.templates = this.profile.toTemplates(this.activeProfile.activeClausePath);
+        console.log("_templates", this.templates);
+      }
     }
   },
   computed: {
@@ -188,7 +189,7 @@ export default defineComponent({
       set({ action, payload }: any): void {
         return;
       }
-    },
+    }
   },
   data() {
     return {
@@ -215,17 +216,17 @@ export default defineComponent({
         {
           uuid: "255582e4-67d5-4307-934f-30a383b12944",
           name: "Criteria",
-          visible: true,
+          visible: true
         },
         {
           uuid: "c47f6016-358d-480d-a018-d9c2da748002",
           name: "References",
-          visible:  false,
+          visible: false
         }
       ],
       activeTab: "Criteria",
       templates: [] as any[],
-      profile: this.modelValue, 
+      profile: this.modelValue,
       themeClasses: {
         light: {
           phrases: { reference: "text-blue-700 font-bold hover:underline" },
@@ -287,7 +288,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-
 .textdefinition,
 .references {
   max-width: 600px;
@@ -298,7 +298,6 @@ export default defineComponent({
   min-width: 300px;
   max-height: 530px;
 }
-
 
 .reference {
   overflow: hidden;

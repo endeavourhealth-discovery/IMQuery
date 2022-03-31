@@ -172,13 +172,25 @@ export default defineComponent({
       }
     },
     matchLabel(clause: any): string {
-      const toName = (iri: string) => {
-        const _iriArray = iri.split("/");
-        return _iriArray[_iriArray.length - 1]
-          .split("#")[1]
-          .match(/([A-Z]?[^A-Z]*)/g)
-          .slice(0, -1)
-          .join(" ");
+        const toName = (iri: string) => {
+        const _iri3 = iri.substring(0, 3);
+
+        if (_iri3 == "urn") {
+          return iri;
+        } else if (_iri3 == "http") {
+          const _iriArray = iri.split("/");
+          return _iriArray[_iriArray.length - 1]
+            .split("#")[1]
+            .match(/([A-Z]?[^A-Z]*)/g)
+            .slice(0, -1)
+            .join(" ");
+        } else if (iri.split(":").length == 2) {
+          return iri
+            .split(":")[1]
+            .match(/([A-Z]?[^A-Z]*)/g)
+            .slice(0, -1)
+            .join(" ");
+        }
       };
 
       let _entityType = clause.json.entityType ? clause.json.entityType["rdfs:label"] : "";

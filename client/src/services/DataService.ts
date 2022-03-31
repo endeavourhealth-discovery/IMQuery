@@ -23,6 +23,7 @@ export default class DataService {
 
   public static async getData(filename: string): Promise<any> {
     return fetch(`demo/${filename}`).then(res => res.json());
+    // return fetch(`demo/${filename}`);
   }
 
 

@@ -31,7 +31,7 @@
                   :class="'inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'"
                   v-tooltip.bottom="tooltipText(phrase.data)"
                 >
-                  {{ phraseText(phrase.data)  }}
+                  {{ phraseText(phrase.data) }}
                 </div>
               </div>
             </template>
@@ -93,18 +93,35 @@ export default defineComponent({
       if (entity["rdfs:label"]?.length > 40 || entity?._text?.length > 40) {
         return entity["rdfs:label"] || entity?._text;
       } else {
-        return entity["@id"] ||  entity._text || entity.name ;
+        return entity["@id"] || entity._text || entity.name;
       }
     },
     phraseText(entity: any): string {
-      const _splitIri =
-        entity["@id"].substring(0, 3) != "urn"
-          ? entity["@id"]
-              .split(":")[1]
-              .match(/([A-Z]?[^A-Z]*)/g)
-              .slice(0, -1)
-              .join(" ")
-          : null;
+      const toName = (iri: string) => {
+        const _iri3 = iri.substring(0, 4);
+
+        if (_iri3 == "urn:") {
+          return iri;
+        } else if (_iri3 == "http") {
+          const _iriArray = iri.split("/");
+          return _iriArray[_iriArray.length - 1]
+            .split("#")[1]
+            .match(/([A-Z]?[^A-Z]*)/g)
+            .slice(0, -1)
+            .join(" ");
+        } else if (iri.split(":").length == 2) {
+          return iri
+            .split(":")[1]
+            .match(/([A-Z]?[^A-Z]*)/g)
+            .slice(0, -1)
+            .join(" ");
+        } else {
+          return null;
+        }
+      };
+      console.log("entity", entity);
+
+      const _splitIri = toName(entity["@id"]);
 
       //either shows _text (post transformation), original label, name, a name derived from its Iri or Unnamed item
       // console.log("entity['rdfs:label']", entity)

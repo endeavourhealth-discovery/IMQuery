@@ -4276,25 +4276,31 @@ export default createStore({
                 // if datamodel entity found, find the the range 
                 if (_parentIri != "") {
 
+
+
                   const _datamodelEntity = state.ontology.entities.byIri(_parentIri);
 
                   // console.log("_parentIri", _parentIri)
                   // console.log("_datamodelEntity", _datamodelEntity)
 
                   // find the properties range
-                  const _rangeProperty = _datamodelEntity[0]["sh:property"].filter((_property: any) => {
-                    return _property["sh:path"].some((path: any) => {
-                      const _isMatch = path["@id"] == _shortEntity["@id"]
-                      // console.log("_match", _property)
-                      return _isMatch;
-                    })
-                  });
 
+                  if (_datamodelEntity.length) {
+                    const _rangeProperty = _datamodelEntity[0]["sh:property"].filter((_property: any) => {
+                      return _property["sh:path"].some((path: any) => {
+                        const _isMatch = path["@id"] == _shortEntity["@id"]
+                        // console.log("_match", _property)
+                        return _isMatch;
+                      })
+                    });
 
-                  if (_rangeProperty.length > 0) {
+                    if (_rangeProperty.length > 0) {
 
-                    _shortEntity["rdfs:range"] = _.get(_rangeProperty, "0.sh:datatype.0");
+                      _shortEntity["rdfs:range"] = _.get(_rangeProperty, "0.sh:datatype.0");
+                    }
+
                   }
+
                 }
               }
 
@@ -4579,15 +4585,17 @@ export default createStore({
     async loadUserData({ commit, dispatch }) {
 
       //example  
-      const _filenames = ["userdata_profiles1705.json"];
-      // const _filenames = ["raw/UCLP-CEG SMI EMIS v5-profiles-ld.json"];
+      // const _filenames = ["userdata_profiles1707.json"];
+      // const _filenames = ["userdata_profiles1705.json"];
+      // const _filenames = ["raw/COVID 2nd Vaccine-profiles-ld"];
+      const _filenames = ["raw/UCLP-CEG SMI EMIS v5-profiles-ld.json"];
 
 
       _filenames.forEach(async (filename: string) => {
         await DataService.getData(filename)
           .then(data => {
             commit("updateUserFiles", data)
-            // console.log("opened file:", data);
+            console.log("opened file:", data);
 
           })
           .catch(err => {
