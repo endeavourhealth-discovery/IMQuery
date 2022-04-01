@@ -24,7 +24,7 @@
     <template #item="{ element, index }">
       <div :class="'group clause-item flex flex-col relative rounded'">
         <div class="clause-container clause inline-flex">
-          <div class="connector-h rounded-sm inline-flex flex">
+          <div :class="'connector-h rounded-sm inline-flex flex'">
             <!-- Horizontal Line or Space -->
             <div v-if="showLineH(index, element.uuid)" :class="'line-h'"></div>
             <div v-if="showSpaceH(index, element.uuid)" class="space-h"></div>
@@ -34,7 +34,14 @@
               <!-- circle  -->
               <div
                 v-if="showCircle(index, element.uuid)"
-                :class="'circle inline' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600  ring-1 ring-transparent group-hover:ring-red-500 hover:ring-4 hover:ring-red-500' : ' bg-green-700 ring-1 hover:ring-4 ring-transparent group-hover:ring-green-600 hover:ring-green-700']"
+                :class="
+                  'circle inline' +
+                    [
+                      !element.include || parent(element)['name'] == 'not'
+                        ? ' bg-red-600  ring-1 ring-transparent group-hover:ring-red-500 hover:ring-4 hover:ring-red-500'
+                        : ' bg-green-700 ring-1 hover:ring-4 ring-transparent group-hover:ring-green-600 hover:ring-green-700'
+                    ]
+                "
                 v-tooltip.left="!element.include || parent(element)['name'] == 'not' ? `${tooltip.exclude}` : `${tooltip.include}`"
               ></div>
 
@@ -123,6 +130,7 @@ export default defineComponent({
   name: "nested-draggable",
   data() {
     return {
+      hoverIndex: null,
       activeClause: {
         uuid: "",
         path: ""
@@ -172,7 +180,7 @@ export default defineComponent({
       }
     },
     matchLabel(clause: any): string {
-        const toName = (iri: string) => {
+      const toName = (iri: string) => {
         const _iri3 = iri.substring(0, 3);
 
         if (_iri3 == "urn") {
@@ -255,11 +263,13 @@ export default defineComponent({
   },
   computed: {
     isCardDragged: {
-      get(): boolean {
-        return this.$store.state.isCardDragged;
+      get(): boolean | null {
+        return null;
+        // return this.$store.state.isCardDragged;
       },
       set(val: boolean): void {
-        this.$store.commit("updateIsCardDragged", val);
+        return;
+        // this.$store.commit("updateIsCardDragged", val);
       }
     },
     queryBuilder: {
@@ -376,13 +386,11 @@ export default defineComponent({
   max-width: 200px;
 }
 
-
-
 .clause-content:hover .clause__matchLabel:not(.clause__matchLabel.active) {
   background: rgba(0, 0, 0, 0.4);
 }
 
- .clause.light .clause-content:hover .clause__matchLabel:not(.clause__matchLabel.active) {
+.clause.light .clause-content:hover .clause__matchLabel:not(.clause__matchLabel.active) {
   background: #e2e8f0;
 }
 .clause__matchLabel:hover:not(.clause__matchLabel.active) {
@@ -390,11 +398,9 @@ export default defineComponent({
   border: 1px solid #000;
 }
 
- .clause.light  .clause__matchLabel:hover:not(.clause__matchLabel.active) {
+.clause.light .clause__matchLabel:hover:not(.clause__matchLabel.active) {
   background: #e2e8f0;
 }
-
-
 
 .ghost .line-h,
 .ghost .space-h,
