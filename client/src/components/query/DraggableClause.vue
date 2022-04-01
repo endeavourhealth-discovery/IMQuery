@@ -22,7 +22,7 @@
   >
     <!-- Each item in list  -->
     <template #item="{ element, index }">
-      <div :class="'clause-item flex flex-col relative rounded'">
+      <div :class="'group clause-item flex flex-col relative rounded'">
         <div class="clause-container clause inline-flex">
           <div class="connector-h rounded-sm inline-flex flex">
             <!-- Horizontal Line or Space -->
@@ -34,7 +34,7 @@
               <!-- circle  -->
               <div
                 v-if="showCircle(index, element.uuid)"
-                :class="'circle inline' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600  ring-1 ring-red-500 hover:ring-4 hover:ring-red-500' : ' bg-green-700 ring-1 hover:ring-4 ring-green-500 hover:ring-green-600']"
+                :class="'circle inline' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600  ring-1 ring-transparent group-hover:ring-red-500 hover:ring-4 hover:ring-red-500' : ' bg-green-700 ring-1 hover:ring-4 ring-transparent group-hover:ring-green-600 hover:ring-green-700']"
                 v-tooltip.left="!element.include || parent(element)['name'] == 'not' ? `${tooltip.exclude}` : `${tooltip.include}`"
               ></div>
 
@@ -67,8 +67,8 @@
                 }"
                 @click="handleClick(element)"
                 :class="
-                  'clause__matchLabel ml-2 pl-3 pr-4  py-1  cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
-                    [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white sticky -top-1' : ' text-black relative -top-1']
+                  'clause__matchLabel ml-2 pl-3 pr-4  py-1  relative -top-1 cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
+                    [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white' : ' text-black ']
                 "
               >
                 {{ matchLabel(element) }}

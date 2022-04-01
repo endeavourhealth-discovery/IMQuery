@@ -8,7 +8,7 @@
     <!-- Left Side  -->
     <div class="body flex flex-col ">
       <!-- Header -->
-      <div class="flex items-center mb-5">
+      <div class="header flex items-center mb-5">
         <!-- Icon -->
         <div :class="' flex justify-center items-center rounded-full w-12 h-12 ml-5  ' + themeClasses[theme].icon">
           <svg
@@ -67,7 +67,7 @@
       <button
         type="button"
         :class="
-          'profile-clause w-full transition duration-500 ease-in-out py-2 px-2 text-sm font-medium  rounded-lg  outline-none ' +
+          'profile-clause overflow-y-auto overflow-x-hidden w-full transition duration-500 ease-in-out py-2 px-2 text-sm font-medium  rounded-lg  outline-none ' +
             themeClasses[theme].bodyBackground
         "
       >
@@ -311,7 +311,7 @@ export default defineComponent({
   -webkit-box-orient: vertical;
 }
 
-.profile .body::-webkit-scrollbar,
+.profile .profile-clause::-webkit-scrollbar,
 .references::-webkit-scrollbar {
   width: 8px;
 }
@@ -322,7 +322,27 @@ export default defineComponent({
 
 .profile .body {
   max-height: 600px;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
+
+.header:after {
+	/* content: '';
+	position: absolute;
+	bottom: -1rem;
+	left: 0rem;
+	height: 1.1rem;
+	display: block;
+	width: 100%;
+	z-index: 97; */
+	/* background: -moz-linear-gradient(top, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
+	/* FF3.6-15 */
+	/* background: -webkit-linear-gradient(top, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
+	/* Chrome10-25,Safari5.1-6 */
+	/* background: linear-gradient(to bottom, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	/* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EDEDEE', endColorstr='#00ffffff', GradientType=0); */
+	/* IE6-9 */
+	
+}
+
+
 </style>
