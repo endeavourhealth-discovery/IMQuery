@@ -339,7 +339,7 @@ export default defineComponent({
   data() {
     return {
       isShowing: true,
-      colours: ["light", "light", "light", "light", "light", "light", "blue", "purple", "green", "orange", "pink"],
+      colours: ["light", "light",  "blue", "purple", "green", "orange", "pink"],
       // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
       newItems: [
         {

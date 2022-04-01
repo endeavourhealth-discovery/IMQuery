@@ -34,25 +34,25 @@
               <!-- circle  -->
               <div
                 v-if="showCircle(index, element.uuid)"
-                :class="'circle inline' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600' : ' bg-green-700']"
+                :class="'circle inline' + [!element.include || parent(element)['name'] == 'not' ? ' bg-red-600  ring-1 ring-red-500 hover:ring-4 hover:ring-red-500' : ' bg-green-700 ring-1 hover:ring-4 ring-green-500 hover:ring-green-600']"
                 v-tooltip.left="!element.include || parent(element)['name'] == 'not' ? `${tooltip.exclude}` : `${tooltip.include}`"
               ></div>
 
               <!-- Vertical Line  -->
-              <div v-if="index != children.length - 1" :class="'line-v inline '"></div>
+              <div v-if="index != children.length - 1" :class="'line-v inline ' + `operator-${operatorLabel(element)}`"></div>
 
               <!-- operator labels - displays "or" / "and" and converst "not" into "or" (only the label) -->
               <div
                 v-if="parent(element) != null && index != siblingCount - 1"
                 v-tooltip.left="parent(element)['name'] == 'not' ? `${tooltip.notor}` : operatorLabel(element) == 'and' ? `${tooltip.and}` : `${tooltip.or}`"
-                :class="'clause-item__operatorlabel inline-block absolute rounded-sm text-lg font-semibold  '"
+                :class="'clause-item__operatorlabel inline-block absolute rounded-sm text-lg text-gray-700 font-bold  '"
               >
                 {{ operatorLabel(element) }}
               </div>
             </div>
           </div>
 
-          <div class="clause-content w-full inline flex-col rounded-md">
+          <div :class="'clause-content w-full inline flex-col rounded-md'">
             <!-- Match Clause - Name  -->
 
             <div v-if="element.type == 'match'">
@@ -67,8 +67,8 @@
                 }"
                 @click="handleClick(element)"
                 :class="
-                  'clause__matchLabel w-full pl-5 pr-2  py-1 relative -top-1 cursor-pointer font-medium text-left text-xl block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
-                    [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white' : ' ']
+                  'clause__matchLabel ml-2 pl-3 pr-4  py-1  cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
+                    [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white sticky -top-1' : ' text-black relative -top-1']
                 "
               >
                 {{ matchLabel(element) }}
@@ -344,11 +344,17 @@ export default defineComponent({
   margin-left: 5px;
   height: 100%;
   min-height: 5px;
-  border-left: 2px solid #fff;
+  border-left: 3px solid #fff;
+}
+.line-v.operator-or {
+  border-left: 3px dotted #fff;
 }
 
 .clause.light .line-v {
-  border-left: 2px solid #000;
+  border-left: 3px solid #475569;
+}
+.clause.light .line-v.operator-or {
+  border-left: 3px dotted #475569;
 }
 
 .space-h {
@@ -366,13 +372,29 @@ export default defineComponent({
   border-top: 2px solid #000;
 }
 
-.clause__matchLabel:hover:not(.clause__matchLabel.active) {
+.clause__matchLabel {
+  max-width: 200px;
+}
+
+
+
+.clause-content:hover .clause__matchLabel:not(.clause__matchLabel.active) {
   background: rgba(0, 0, 0, 0.4);
 }
 
-.clause.light .clause__matchLabel:hover:not(.clause__matchLabel.active) {
+ .clause.light .clause-content:hover .clause__matchLabel:not(.clause__matchLabel.active) {
   background: #e2e8f0;
 }
+.clause__matchLabel:hover:not(.clause__matchLabel.active) {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #000;
+}
+
+ .clause.light  .clause__matchLabel:hover:not(.clause__matchLabel.active) {
+  background: #e2e8f0;
+}
+
+
 
 .ghost .line-h,
 .ghost .space-h,
