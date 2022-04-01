@@ -1,0 +1,70 @@
+[{
+        "id": "im:T_MainEntity_001",
+        "type": "MainEntity",
+        "description": "A natural language template that describes a profile's main entity",
+        "matchIf": [{
+            "any": [{
+                "input": [{
+                    "name": "path1",
+                    "type": "transform",
+                    "function": "valueFromPath",
+                    "arguments": [
+                        ""
+                        "im:entityType.@id"
+                    ]
+                }],
+                "transform": [],
+                "test": [{
+                    "all": [{
+                        "name": "pathExists1",
+                        "type": "test",
+                        "function": "pathExists",
+                        "arguments": [
+                            "path1"
+                        ]
+
+                    }]
+                }],
+                "expectedOutput": [{
+                    "input": "pathExists1",
+                    "test":
+                }]
+            }]
+        }]
+    },
+    {
+        "id": "im:T_LinkedEntity_001",
+        "type": "T_LinkedEntity",
+        "description": "",
+        "matchIf": [{
+            "any": [{
+                "input": [{
+                    "name": "path1",
+                    "type": "transform",
+                    "function": "valueFromPath",
+                    "arguments": [
+                        ""
+                        "im:entityType.@id"
+                    ] 
+                }],
+                "transform": [],
+                "test": [{
+                    "all": [{
+                        "name": "pathExists1",
+                        "type": "function"
+                        "input": [
+                            "path1"
+                        ]
+
+                    }]
+                }],
+                "expectedOutput": [{
+                    "input": "pathExists1",
+                    "test":
+                }]
+            }]
+        }],
+        "template": ["had", "{{phrase:indefiniteArticle}}", "{{phrase:linkedEntity}}", "with"],
+
+    }
+]

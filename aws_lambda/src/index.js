@@ -1,6 +1,6 @@
 "use strict";
 const { MeiliSearch } = require('meilisearch');
-const { v4 } = require('uuid');
+import { v4 } from "uuid";
 const _meili_api = process.env.meili_api;
 const _meili_api_key_public = process.env.meili_api_key_public;
 const _client = new MeiliSearch({

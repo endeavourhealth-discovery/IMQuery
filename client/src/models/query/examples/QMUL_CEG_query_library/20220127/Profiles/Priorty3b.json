@@ -1,0 +1,86 @@
+{
+    "@id": "urn:uuid:3f04bc73-fb03-4d50-bae4-49a866ad5033",
+    "rdf:type": [{
+        "@id": "im:Profile"
+    }],
+    "rdfs:label": "Priority 3b",
+    "rdfs:comment": "",
+    "im:isContainedIn": [{
+        "@id": "urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca"
+    }],
+    "im:definition": [{
+        "rdf:type": [{
+            "@id": "im:MatchClause"
+        }],
+        "im:and": [{
+
+                "rdfs:label": "SMI Population",
+                "rdf:type": [{
+                    "@id": "im:MatchClause"
+                }],
+                "im:property": [{
+                    "@id": "im:hasProfile"
+                }],
+                "im:valueIn": [{
+                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                }],
+                "im:order": 0
+            },
+            {
+                "rdfs:label": "Untitled Clause",
+                "rdf:type": [{
+                    "@id": "im:MatchClause"
+                }],
+                "im:property": [{
+                    "@id": "im:hasProfile"
+                }],
+                "im:valueIn": [{
+                    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
+                    "name": "Priority 1"
+                }],
+                "im:order": 0
+
+            },
+            {
+                "rdfs:label": "Untitled Clause",
+                "rdf:type": [{
+                    "@id": "im:MatchClause"
+                }],
+                "im:not": [{
+                    "rdf:type": [{
+                        "@id": "im:MatchClause"
+                    }],
+                    "im:property": [{
+                        "@id": "im:hasProfile"
+                    }],
+                    "im:valueIn": [{
+                        "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd",
+                        "name": "Priority 2"
+                    }],
+                    "im:order": 0
+                }],
+                "im:order": 2
+            },
+            {
+                "rdfs:label": "Untitled Clause",
+                "rdf:type": [{
+                    "@id": "im:MatchClause"
+                }],
+                "im:not": [{
+                    "rdf:type": [{
+                        "@id": "im:MatchClause"
+                    }],
+                    "im:property": [{
+                        "@id": "im:hasProfile"
+                    }],
+                    "im:valueIn": [{
+                        "@id": "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6",
+                        "name": "Priority 3a"
+                    }],
+                    "im:order": 0
+                }],
+                "im:order": 3
+            }
+        ]
+    }]
+}
