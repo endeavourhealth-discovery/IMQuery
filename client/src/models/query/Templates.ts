@@ -33,6 +33,7 @@ const valueToPhraseMap = {
     },
     entityName: {
         // "codeable expression": "Terminological Concept",
+        "codeable expression": "clinical code",
         "$referenceDate": "the Reference Date",
         "Medication order or prescription (entry type)": "Order or Prescription",
         "DESCENDING": "descending",

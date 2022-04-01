@@ -1,5 +1,10 @@
 <template>
-  <div :class="'profile w-full px-5 py-5 flex  mb-12 rounded-xl overflow-hidden bg-gradient-to-r ' + themeClasses[theme].background">
+  <div
+    :class="
+      'profile w-full px-5 py-5 flex  mb-12 rounded-xl overflow-hidden border-gray-200 hover:border-gray-300 hover:shadow-md trasition ease-in-out duration-500 bg-gradient-to-r ' +
+        themeClasses[theme].background
+    "
+  >
     <!-- Left Side  -->
     <div class="body flex flex-col ">
       <!-- Header -->
@@ -230,7 +235,7 @@ export default defineComponent({
       themeClasses: {
         light: {
           phrases: { reference: "text-blue-700 font-bold hover:underline" },
-          background: " bg-white hover:shadow-sm hover:bg-gray-50 border transition duration-700 ease-in-out border-gray-200",
+          background: " bg-white hover:shadow-md border transition duration-700 ease-in-out border-gray-200",
           text: " text-gray-800",
           icon: " text-blue-700 bg-gray-100",
           bodyClasses: " text-black",

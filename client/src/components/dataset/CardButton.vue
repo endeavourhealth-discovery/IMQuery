@@ -6,13 +6,13 @@
       )}  dark:border-0 border  border-gray-200 hover:border-gray-300 max-w-200 hover:shadow-md trasition ease-in-out duration-500`
     "
     v-wave="{
-    color: 'currentColor',
-    easing: 'ease-out',
-    duration: 0.3,
-    initialOpacity: 0.2,
-    finalOpacity: 0.1,
-    cancellationPeriod: 75
-  }"
+      color: 'currentColor',
+      easing: 'ease-out',
+      duration: 0.3,
+      initialOpacity: 0.5,
+      finalOpacity: 0.1,
+      cancellationPeriod: 75
+    }"
   >
     <div class="flex w-full">
       <HeroIcon :class="`ml-4 inline my-3 text-${iconColor} w-10 h-10`" strokewidth="2" width="24" height="24" :icon="icon" />
