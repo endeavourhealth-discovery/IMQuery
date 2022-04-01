@@ -90,11 +90,7 @@ export default defineComponent({
   },
   methods: {
     tooltipText(entity: any): string {
-      if (entity["rdfs:label"]?.length > 40 || entity?._text?.length > 40) {
-        return entity["rdfs:label"] || entity?._text;
-      } else {
-        return entity["@id"] || entity._text || entity.name;
-      }
+        return `<span><b>${entity["@id"] || entity?.id || entity?.uuid}</b><br><br>${entity["rdfs:label"] || entity?._text}<span>`;
     },
     phraseText(entity: any): string {
       const toName = (iri: string) => {
