@@ -1,0 +1,415 @@
+[{
+    "@id": "im:T_MainEntity_001",
+    "rdfs:label": "Main Entity",
+    "rdfs:comment": "A natural language template that describes a profile's main entity",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": null,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "im:templateType": ["im:T_MainEntity"],
+    "im:target": [{
+        "im:targetEntity": "im:Profile",
+        "im:targetValue": "im:entityType[0].@id",
+        "im:targetValueType": "im:jsonPath",
+        "im:transformationFunction": [""],
+        "im:testName": ["pathExists"],
+        "im:matchIf": true
+    }],
+
+    "im:template": [{
+        "im:text": ["{{phrase:inclusion}}", "{{phrase:indefiniteArticle}}", "{{variable:mainEntity}}", "if", "{{phrase:pronoun}}", "{{template:linkedEntity}}"],
+        "im:phrases": [{
+                "im:placeholder": "phrase:inclusion",
+                "im:getter": null,
+                "im:setter": {
+                    "im:targetEntity": "im:Profile",
+                    "im:targetValue": "{{jsonPath:im:definition[0].im:not}}",
+                    "im:transformation": [],
+                    "im:test": [{
+                        "im:functionIri": [{
+                            "@id": "im:pathExists"
+                        }],
+                        "im:matchIf": true
+                    }]
+                }
+            },
+            {
+                "im:placeholder": "phrase:indefiniteArticle",
+                "im:getter": null,
+                "im:setter": {
+                    "im:targetEntity": "im:Profile",
+                    "im:targetValue": "im:entityType[0].@id",
+                    "im:targetValueType": "im:jsonPath",
+                    "im:transformation": [{
+                        "im:trasnformationVar": "t1",
+                        "im:functionIri": [{
+                            "@id": "im:TF_getEntityLabel"
+                        }]
+                    }],
+                    
+                    "im:test": [{
+                        "im:functionIri": [{
+                            "@id": "im:firstLetterIsVowel"
+                        }],
+                        "im:argument": [{
+                            "rdf:type": [{
+                                "@id": "im:ArgumentClause"
+                            }],
+                            "im:parameter": [{
+                                "@id": "im:testString"
+                            }],
+                            "im:targetValue": "{{transformationVar:t1}}"
+                        }],
+                        "im:matchIf": true
+                    }]
+                }
+            },
+            {
+                "im:placeholder": "phrase:pronoun",
+                "im:targetEntity": "im:Profile",
+                "im:jsonPath": "im:entityType[0].@id",
+                "im:testName": "equals",
+                "im:comparison": [{
+                    "im:valueIn": ["im:Person"],
+                    "im:phraseIfTrue": "they",
+                    "im:phraseIfFalse": "it"
+                }]
+            }
+        ],
+        "im:variables": [{
+            "im:placeholder": "variable:mainEntity",
+            "im:targetEntity": "im:Profile",
+            "im:jsonPath": "im:entityType[0].rdfs:label"
+        }],
+        "im:childTemplateType": [{
+            "im:placeholder": "template:linkedEntity",
+            "im:templateType": "im:T_linkedEntity",
+            "im:minCount": 0,
+            "im:maxCount": null
+        }],
+        "im:parentTemplateType": []
+    }]
+}, {
+    "@id": "im:T_LinkedEntity_001",
+    "rdfs:label": "Main Entity Properties",
+    "rdfs:comment": "A natural language template that describes a property of the Main Entity (e.g. hasProfile)",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": null,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "im:target": [{
+        "im:targetEntity": "im:MatchClause",
+        "im:jsonPath": "im:property[0].@id",
+        "im:testName": "equals",
+        "im:value": "im:hasProfile"
+    }],
+    "im:templateType": ["im:T_LinkedEntity"],
+    "im:template": [{
+        "im:text": ["matched the profile of", "{{variable:valueIn}}"],
+        "im:phrases": [],
+        "im:variables": [{
+            "im:placeholder": "variable:valueIn",
+            "im:targetEntity": "im:MatchClause",
+            "im:jsonPath": "im:valueIn"
+        }],
+        "im:childTemplateType": [],
+        "im:parentTemplateType": ["im:T_MainEntity"]
+    }]
+}, {
+    "@id": "im:T_LinkedEntity_002",
+    "rdfs:label": "Linked Entity",
+    "rdfs:comment": "A natural language template that describes an datamodel entity after transforming its name(e.g. 'Event' -> 'health record') related to the Main Entity (e.g. Person - is subject of -> Event)",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": null,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "im:target": [{
+        "im:targetEntity": "im:MatchClause",
+        "im:jsonPath": "im:pathTo[0].@id",
+        "im:testName": "equals",
+        "im:value": "im:isSubjectOf"
+    }],
+    "im:templateType": ["im:T_LinkedEntity"],
+    "im:template": [{
+        "im:text": ["had", "{{phrase:indefiniteArticle}}", "{{phrase:linkedEntity}}", "where", "{{template:linkedEntityCriteria}}"],
+        "im:phrases": [{
+            "im:placeholder": "phrase:indefiniteArticle",
+            "im:targetEntity": "im:Profile",
+            "im:jsonPath": "im:entityType[0].rdfs:label",
+            "im:testName": "firstLetterEquals",
+            "im:comparison": [{
+                "im:valueIn": ["a", "e", "i", "o", "u"],
+                "im:phraseIfTrue": "an",
+                "im:phraseIfFalse": "a"
+            }]
+        }, {
+            "im:placeholder": "phrase:linkedEntity",
+            "im:targetEntity": "im:MatchClause",
+            "im:jsonPath": "im:entityType[0].@id",
+            "im:testName": "equals",
+            "im:comparison": [{
+                "im:valueIn": ["im:Event"],
+                "im:phraseIfTrue": "health record",
+                "im:phraseIfFalse": null
+            }, {
+                "im:valueIn": ["im:MedicationOrder", "MedicationAuthorisationsOrCourses"],
+                "im:phraseIfTrue": "medication",
+                "im:phraseIfFalse": null
+            }, {
+                "im:valueIn": ["im:Event", "im:MedicationOrder", "MedicationAuthorisationsOrCourses"],
+                "im:jsonPathIfTrue": null,
+                "im:jsonPathIfFalse": "im:entityType[0].rdfs:label"
+            }]
+        }],
+        "im:variables": [],
+        "im:childTemplateType": [{
+            "im:placeholder": "template:linkedEntityCriteria",
+            "im:templateType": "im:T_LinkedEntityCriteria",
+            "im:minCount": 1,
+            "im:maxCount": null
+        }],
+        "im:parentTemplateType": ["im:T_MainEntity"]
+    }]
+}, {
+    "@id": "im:T_LinkedEntityCriteria_001",
+    "rdfs:label": "Order Limit",
+    "rdfs:comment": "A function that describes that sorts the instances of a linked Entity and returns a limited quantity specified",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": null,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "im:target": [{
+            "im:targetEntity": "im:MatchClause",
+            "im:jsonPath": "im:function[0].im:functionIri[0].@id",
+            "im:testName": "equals",
+            "im:value": "im:OrderLimit"
+        },
+        {
+            "im:targetEntity": "im:MatchClause",
+            "im:jsonPath": "im:test",
+            "im:testName": "pathExists",
+            "im:value": true
+        }
+    ],
+    "im:templateType": ["im:T_LinkedEntityCriteria"],
+    "im:template": [{
+        "im:text": ["the", "{{phrase:property}}", "{{phrase:is}}", "{{phrase:valueIn1}}", "and the", "{{phrase:timeModifier}}", "{{phrase:quantityModifier}}", "{{phrase:quantityModifier}}", "Clinical Code is part of the Value Set", "{{variable:valueIn}}", "and the"],
+        "im:phrases": [{
+                "im:placeholder": "{{phrase:property}}",
+                "im:targetEntity": "im:MatchClause",
+                "im:jsonPath": "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:property[0].@id",
+                "im:testName": "equals",
+                "im:comparison": [{
+                    "im:value": "im:Concept",
+                    "im:phraseIfTrue": "the Clinical Code is",
+                    "im:phraseIfFalse": null
+                }]
+            },
+            {
+                "im:placeholder": "{{phrase:timeModifier}}",
+                "im:targetEntity": "im:MatchClause",
+                "im:jsonPath": "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:property[0].@id",
+                "im:testName": "equals",
+                "im:comparison": [{
+                    "im:value": "im:Concept",
+                    "im:phraseIfTrue": "the Clinical Code is",
+                    "im:phraseIfFalse": null
+                }]
+            },
+            {
+                "im:placeholder": "{{phrase:quantityModifier}}",
+                "im:targetEntity": "im:MatchClause",
+                "im:jsonPath": "im:function[0].im:argument[2].im:valueData",
+                "im:testName": "equals",
+                "im:comparison": [{
+                    "im:valueNot": "1",
+                    "im:jsonPathIfTrue": "im:function[0].im:argument[2].im:valueData",
+                    "im:jsonPathIfFalse": ""
+                }]
+            }
+
+        ],
+        "im:variables": [{
+            "im:placeholder": "{{variable:valueIn1}}",
+            "im:targetEntity": "im:MatchClause",
+            "im:jsonPath": "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn"
+        }],
+        "im:childTemplateType": [],
+        "im:parentTemplateType": ["im:T_LinkedEntity"]
+    }]
+}, {
+    "@id": "im:T_LinkedEntityCriteria_001",
+    "rdfs:label": "Property",
+    "rdfs:comment": "",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": null,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "im:target": [{
+        "im:targetEntity": "im:MatchClause",
+        "im:jsonPath": "im:function[0].im:functionIri[0].@id",
+        "im:testName": "equals",
+        "im:value": "im:OrderLimit"
+    }],
+    "im:templateType": ["im:T_LinkedEntityProperty"],
+    "im:template": [{
+        "im:text": ["{{phrase:function}}", "{{phrase:test}}"],
+        "im:phrases": [],
+        "im:variables": [],
+        "im:childTemplateType": [],
+        "im:parentTemplateType": ["im:T_LinkedEntity"]
+    }]
+}, {
+    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+    "rdfs:label": "disease status",
+    "rdfs:comment": "",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": -1,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "target": [{
+        "pathTo": "im:isSubjectOf",
+        "rdf:type": "im:event",
+        "property": null,
+        "propertyPaths": [{
+                "path": "im:function[0].im:functionIri[0].@id",
+                "value": "im:OrderLimit"
+            },
+            {
+                "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
+                "value": "im:effectiveDate"
+            },
+            {
+                "path": "im:test[0].im:property[0].@id",
+                "value": "im:concept"
+            }
+        ]
+    }],
+    "im:definition": [{
+        "text": "they had a health record coded as either {{0}} or {{1}} but the most recent record was: {{2}} ",
+        "variables": [
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+            "im:test[0].im:valueIn[0].rdfs:label"
+        ]
+    }],
+    "im:usedIn": [{
+        "@id": ""
+    }]
+}, {
+    "@id": "urn:uuid:e5d0c200-6f21-4b38-8c68-4fd540e14e77",
+    "rdfs:label": "disease status",
+    "rdfs:comment": "",
+    "rdf:type": [{
+        "@id": "http://endhealth.info/im#CascadingTextTemplate",
+        "rdfs:label": "Cascading Text Template"
+    }],
+    "im:code": -1,
+    "im:scheme": {
+        "@id": "http://endhealth.info/im#"
+    },
+    "im:status": {
+        "@id": "http://endhealth.info/im#Draft"
+    },
+    "target": [{
+        "pathTo": "im:isSubjectOf",
+        "rdf:type": "im:event",
+        "property": null,
+        "propertyPaths": [{
+                "path": "im:function[0].im:functionIri[0].@id",
+                "value": "im:OrderLimit"
+            },
+            {
+                "path": "im:function[0].im:argument[1].im:valueIrI[0].@id",
+                "value": "im:effectiveDate"
+            },
+            {
+                "path": "im:test[0].im:property[0].@id",
+                "value": "im:concept"
+            }
+        ]
+    }],
+    "im:definition": [{
+        "text": [
+            [
+                ["Search for a person who had a"],
+                [" {{0}}"]
+            ],
+            [
+                ["Filter health records coded as"],
+                [" {{1}}"],
+                [" or"],
+                [" {{2}}"]
+            ],
+            [
+                ["Sort the results by"],
+                [" {{3}}"],
+                [" {{4}}"]
+            ],
+            [
+                ["Check the top"],
+                [" {{5}} entry "]
+            ],
+            [
+                ["If the value is"],
+                [" {{6}}"]
+            ],
+            [
+                ["{{include}} a person in the final search results"]
+            ]
+        ],
+        "variables": [
+            "im:entityType[0].@id",
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[0].rdfs:label",
+            "im:function[0].im:argument[3].im:valueMatch[0].im:and[0].im:valueIn[1].rdfs:label",
+            "im:function[0].im:argument[0].im:valueIrI[0].@id",
+            "im:function[0].im:argument[2].im:valueData",
+            "im:test[0].im:valueIn[0].rdfs:label"
+        ]
+    }],
+    "im:usedIn": [{
+        "@id": ""
+    }]
+}]

@@ -1,4 +1,0 @@
-{"@id": "im:Profile"}
-{"@id": "im:NodeShape"}
-{"@id": "im:ConceptSet"}
-{"@id": "owl:ObjectProperty"}
