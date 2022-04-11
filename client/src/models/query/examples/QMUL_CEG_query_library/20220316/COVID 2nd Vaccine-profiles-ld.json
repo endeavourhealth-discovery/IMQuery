@@ -1,0 +1,1596 @@
+{
+  "@context" : {
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "ceg13" : "http://endhealth.info/ceg16#",
+    "kchwinpath" : "http://endhealth.info/kchwinpath#",
+    "im" : "http://endhealth.info/im#",
+    "bc" : "http://endhealth.info/bc#",
+    "prsb" : "http://endhealth.info/prsb#",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "emis" : "http://endhealth.info/emis#",
+    "reports" : "http://endhealth.info/reports#",
+    "nhse2001" : "http://endhealth.info/nhsethnic2001#",
+    "sn" : "http://snomed.info/sct#",
+    "ods" : "http://endhealth.info/ods#",
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "tpp" : "http://endhealth.info/tpp#",
+    "sh" : "http://www.w3.org/ns/shacl#",
+    "opcs4" : "http://endhealth.info/opcs4#",
+    "icd10" : "http://endhealth.info/icd10#",
+    "orole" : "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRole-1#",
+    "vis" : "http://endhealth.info/vision#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "kchapex" : "http://endhealth.info/kchapex#",
+    "entities" : {
+      "@id" : "http://envhealth.info/im#entities",
+      "@container" : "@set"
+    }
+  },
+  "@graph" : {
+    "@id" : "http://endhealth.info/ceg/qry#"
+  },
+  "entities" : [ {
+    "@id" : "urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "01 Older adults resident in a care home",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"},\"name\":\"01 Older adults resident in a care home\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:475b032e-708a-45e1-9e30-eb5e97207d68\"}},{\"id\":{\"@id\":\"urn:uuid:508e615f-8827-4d5d-a345-239c8fe7ffc0\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 65-69\",\"@id\":\"urn:uuid:9f9f1d94-1d7c-4418-92bc-8208dbd1ef04\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 70-74\",\"@id\":\"urn:uuid:e0dadef9-b429-48f7-b69f-faa39d103673\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 75-79\",\"@id\":\"urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 80+\",\"@id\":\"urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51\"}]}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Care home resident aged 16+\",\"@id\":\"urn:uuid:5920d4f0-cfb2-4bb3-8f7c-c3728aba925c\"}],\"id\":{\"@id\":\"urn:uuid:4736a19a-7ebe-47f2-b658-e4765e338f49\"}}]}"
+  }, {
+    "@id" : "urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"01 Older adults resident in a care home\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}],\"id\":{\"@id\":\"urn:uuid:d9718475-4e34-41a0-bfaa-bc9755d0e7eb\"}}]}"
+  }, {
+    "@id" : "urn:uuid:d720a6cb-65e9-4188-bdcb-0091cf11d960",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "02 Aged 80 and over (excluding cohort 1)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:d720a6cb-65e9-4188-bdcb-0091cf11d960\"},\"name\":\"02 Aged 80 and over (excluding cohort 1)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:bd0dd1bf-636d-44e1-9151-f78f2c8f9030\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 80+\",\"@id\":\"urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51\"}],\"id\":{\"@id\":\"urn:uuid:53abd4b9-ce2c-4c32-996a-46318614bae2\"}}],\"not\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"01 Older adults resident in a care home\",\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}],\"id\":{\"@id\":\"urn:uuid:e9f1e226-8b9b-4edb-b8fa-725438e2315b\"}}]}"
+  }, {
+    "@id" : "urn:uuid:22a0527a-d689-4dcb-9b5a-5dee65bff72d",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "03 Aged 75-79 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:22a0527a-d689-4dcb-9b5a-5dee65bff72d\"},\"name\":\"03 Aged 75-79 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:5458fcdc-c276-45ed-82ea-1cb5ef945de9\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 75-79\",\"@id\":\"urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"01 Older adults resident in a care home\",\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}],\"id\":{\"@id\":\"urn:uuid:bb339bd1-c35a-4fd7-8d8d-77f27d707319\"}}]}"
+  }, {
+    "@id" : "urn:uuid:da496f54-dca5-4df7-8ffc-98c671d054b9",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04a Aged 70-74",
+    "rdfs:comment" : "All those 70 years of age and over",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:da496f54-dca5-4df7-8ffc-98c671d054b9\"},\"name\":\"04a Aged 70-74\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:7218e449-b800-44ca-86e9-1d97a3e7eec0\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 70-74\",\"@id\":\"urn:uuid:e0dadef9-b429-48f7-b69f-faa39d103673\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:ee27dddd-88c5-4c3e-a36d-59eacd34e9b9\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"01 Older adults resident in a care home\",\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID Risk High = shielding = CEV aged 16+\",\"@id\":\"urn:uuid:5910e110-12a2-4f28-9c98-59eb850881f8\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:36071929-01f3-449a-8a8e-d4ccd8995740",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "01a Vaccinated (at least one dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:36071929-01f3-449a-8a8e-d4ccd8995740\"},\"name\":\"01a Vaccinated (at least one dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"}],\"id\":{\"@id\":\"urn:uuid:52f97deb-a2ef-46ba-b0e9-9bda59fb9d89\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:236b3d58-8946-4ae5-9125-9f3c8043f93b",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "01b Contraindicated (inc allergies, exclu vaccinated)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:236b3d58-8946-4ae5-9125-9f3c8043f93b\"},\"name\":\"01b Contraindicated (inc allergies, exclu vaccinated)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"}],\"id\":{\"@id\":\"urn:uuid:ebe79cd5-74a0-43d6-ac5c-bd88b38a50ff\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:12ea9d63-ecce-4ee2-9b1a-b0539fe6bfae",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "01c Declined (excl vaccinated or contraindicated)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:12ea9d63-ecce-4ee2-9b1a-b0539fe6bfae\"},\"name\":\"01c Declined (excl vaccinated or contraindicated)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"}],\"id\":{\"@id\":\"urn:uuid:f32b32af-e543-4f45-8470-5dc6b1e53159\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:640f07ac-6c11-4055-85ff-207c203b34b9",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "01f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:640f07ac-6c11-4055-85ff-207c203b34b9\"},\"name\":\"01f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"}],\"id\":{\"@id\":\"urn:uuid:7a31d835-70dd-4a1c-8de9-75f5b0c9588a\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"02 Aged 80 and over (excluding cohort 1)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d720a6cb-65e9-4188-bdcb-0091cf11d960\"}],\"id\":{\"@id\":\"urn:uuid:c64e6b18-e4af-46aa-be01-a21738c55ca0\"}}]}"
+  }, {
+    "@id" : "urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"03 Aged 75-79 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:22a0527a-d689-4dcb-9b5a-5dee65bff72d\"}],\"id\":{\"@id\":\"urn:uuid:0deb60b6-80ac-469b-a371-fa5f2de2be5d\"}}]}"
+  }, {
+    "@id" : "urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"04a Aged 70-74\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:da496f54-dca5-4df7-8ffc-98c671d054b9\"}],\"id\":{\"@id\":\"urn:uuid:a0a77470-6a90-444e-8731-6f2e197f9d6e\"}}]}"
+  }, {
+    "@id" : "urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04b CEV=high risk (excl previous cohorts)",
+    "rdfs:comment" : "Clinically extremely vulnerable individuals",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"},\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:4b404d67-1294-494a-a80d-a396658489f5\"}},{\"id\":{\"@id\":\"urn:uuid:9f851059-ad3e-4ad3-a8af-aad006b76f68\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID Risk High = shielding = CEV aged 16+\",\"@id\":\"urn:uuid:5910e110-12a2-4f28-9c98-59eb850881f8\"}]},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"16\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#AgeFunction\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"}]},\"id\":{\"@id\":\"urn:uuid:8e5a90c7-b0d2-45ba-a395-f949949a5078\"},\"valueVar\":\"age1\"}]}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:ee27dddd-88c5-4c3e-a36d-59eacd34e9b9\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"01 Older adults resident in a care home\",\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"02 Aged 80 and over (excluding cohort 1)\",\"@id\":\"urn:uuid:d720a6cb-65e9-4188-bdcb-0091cf11d960\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"03 Aged 75-79 (excl previous cohorts)\",\"@id\":\"urn:uuid:22a0527a-d689-4dcb-9b5a-5dee65bff72d\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04a Aged 70-74\",\"@id\":\"urn:uuid:da496f54-dca5-4df7-8ffc-98c671d054b9\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:6e2b5621-144f-40f6-bef6-6d41eca16f97",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "01d Invited no outcome (excl vac, contr, decl)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:6e2b5621-144f-40f6-bef6-6d41eca16f97\"},\"name\":\"01d Invited no outcome (excl vac, contr, decl)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"}],\"id\":{\"@id\":\"urn:uuid:67170afd-2e46-4f39-9d86-45e2bc0d27fa\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:b055e4e0-894e-42fa-bcaf-13e8fbb50421",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "02a Vaccinated (at least one dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b055e4e0-894e-42fa-bcaf-13e8fbb50421\"},\"name\":\"02a Vaccinated (at least one dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316\"}],\"id\":{\"@id\":\"urn:uuid:8dae0482-181c-4692-a5c3-3a8171ccbc6f\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:a2384559-9f8e-42ca-a6ab-07da1d25494d",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "02b Contraindicated (inc allergies, exclu vaccinated)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a2384559-9f8e-42ca-a6ab-07da1d25494d\"},\"name\":\"02b Contraindicated (inc allergies, exclu vaccinated)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316\"}],\"id\":{\"@id\":\"urn:uuid:4b653e84-acdd-4e2f-8139-45c172a75966\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:768365e5-9b1a-4750-b6df-928fddaed684",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "02c Declined (excl vaccinated or contraindicated)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:768365e5-9b1a-4750-b6df-928fddaed684\"},\"name\":\"02c Declined (excl vaccinated or contraindicated)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316\"}],\"id\":{\"@id\":\"urn:uuid:b24130ac-84ba-4455-a3e0-e52005649fe3\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:bc74aa30-410e-4cf5-ab8c-3c442c993088",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "02d Invited no outcome (excl vac, contr, decl)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:bc74aa30-410e-4cf5-ab8c-3c442c993088\"},\"name\":\"02d Invited no outcome (excl vac, contr, decl)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316\"}],\"id\":{\"@id\":\"urn:uuid:b286a1ab-60a4-40a4-ab51-dd3e081d53fd\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:9712d4a8-bc17-4907-b078-b34e00aa1f7a",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "02f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:9712d4a8-bc17-4907-b078-b34e00aa1f7a\"},\"name\":\"02f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316\"}],\"id\":{\"@id\":\"urn:uuid:fd20b1e5-aed5-4a79-918d-a16686266f39\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:cb87c000-fdb6-4331-a764-ed3fd6e8dc0d",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "03a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:cb87c000-fdb6-4331-a764-ed3fd6e8dc0d\"},\"name\":\"03a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2\"}],\"id\":{\"@id\":\"urn:uuid:a0867f8d-2c7f-4010-836e-8f0bdde302cf\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:371236bf-bfee-4a5e-b9ce-88fa4e593b2e",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "03b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:371236bf-bfee-4a5e-b9ce-88fa4e593b2e\"},\"name\":\"03b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2\"}],\"id\":{\"@id\":\"urn:uuid:920f7953-76d8-4d86-a7e8-0411c650911b\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:7a5e6c6e-3a0b-414e-9d6c-66ed0656b863",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "03c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:7a5e6c6e-3a0b-414e-9d6c-66ed0656b863\"},\"name\":\"03c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2\"}],\"id\":{\"@id\":\"urn:uuid:b6715c20-0a2f-4856-b0a8-ce34091d851b\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:9e7e4b46-2204-4d6b-b3ce-a8ab93a0bf70",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "03d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:9e7e4b46-2204-4d6b-b3ce-a8ab93a0bf70\"},\"name\":\"03d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2\"}],\"id\":{\"@id\":\"urn:uuid:41862055-e492-444c-8b88-ea40d4418f84\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:a00887e7-6566-45c4-95da-251e47554122",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "03f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a00887e7-6566-45c4-95da-251e47554122\"},\"name\":\"03f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2\"}],\"id\":{\"@id\":\"urn:uuid:4defc762-ccf1-4d85-9362-c026cd19298a\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:3a88273f-eac3-4df9-8357-debcf433beac",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04aa Vaccinated",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:3a88273f-eac3-4df9-8357-debcf433beac\"},\"name\":\"04aa Vaccinated\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9\"}],\"id\":{\"@id\":\"urn:uuid:68229161-737e-4673-9084-308f67fc3ce5\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:fa7edbe6-1da2-4944-9948-3631d502ea4f",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04ab Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:fa7edbe6-1da2-4944-9948-3631d502ea4f\"},\"name\":\"04ab Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9\"}],\"id\":{\"@id\":\"urn:uuid:75878309-7e65-43a0-8acf-e0c144d49035\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:13f2340a-56ac-48de-a0cd-0c458ace62c7",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04ac Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:13f2340a-56ac-48de-a0cd-0c458ace62c7\"},\"name\":\"04ac Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9\"}],\"id\":{\"@id\":\"urn:uuid:ad9de7ae-cc3e-4646-aaae-d6abbee3e340\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:a2f6ebc6-45ab-4668-96d7-c9358183f185",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04ad Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a2f6ebc6-45ab-4668-96d7-c9358183f185\"},\"name\":\"04ad Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9\"}],\"id\":{\"@id\":\"urn:uuid:c140a1aa-c86a-4928-9711-509fcaadb709\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:b38512ea-0df8-4c06-8991-864deb7ecef5",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04af Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b38512ea-0df8-4c06-8991-864deb7ecef5\"},\"name\":\"04af Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9\"}],\"id\":{\"@id\":\"urn:uuid:a35aa7ba-0fb1-44de-a883-6365ad7d634a\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}],\"id\":{\"@id\":\"urn:uuid:8b3340e1-fc87-425b-badc-4ebf1deea6c7\"}}]}"
+  }, {
+    "@id" : "urn:uuid:fa5963d5-9c29-4e46-bce7-71859c8949b2",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "05 Aged 65-69 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:fa5963d5-9c29-4e46-bce7-71859c8949b2\"},\"name\":\"05 Aged 65-69 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:9d61a9cf-58fc-48b1-9a46-a33789b0e2bf\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 65-69\",\"@id\":\"urn:uuid:9f9f1d94-1d7c-4418-92bc-8208dbd1ef04\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:0f03627b-c861-43ac-9b8a-8d7c4a6318d3\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"01 Older adults resident in a care home\",\"@id\":\"urn:uuid:263b8a88-a896-473a-b49b-f2dee29fd562\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "06 Moderate risk aged 16-64 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"},\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:20aea24f-c333-4ac4-b7e7-25c31e7432d7\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 16-64\",\"@id\":\"urn:uuid:81614097-9bc5-494b-8121-646dedf8b087\"}],\"id\":{\"@id\":\"urn:uuid:ffcd02b3-d85d-4d6b-91fd-8f331a3623a4\"}},{\"id\":{\"@id\":\"urn:uuid:e303bd80-0e5b-4bbf-bb3d-f7896bacd9ed\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Chronic heart disease (CHD)\",\"@id\":\"urn:uuid:2fa3c8d3-9d5c-4513-85fa-7edf454d8a1e\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Chronic kidney disease (CKD)\",\"@id\":\"urn:uuid:09d960fc-ab20-45bb-a6e2-34b10b87118c\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Chronic liver disease (CLD)\",\"@id\":\"urn:uuid:0d334461-759c-44df-b089-13d5bcff6022\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Chronic respiratory disease (CRD)\",\"@id\":\"urn:uuid:ae9b9934-2bc5-4279-b86c-285d6c703691\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Diabetes\",\"@id\":\"urn:uuid:c339d6ff-f475-4843-ad29-6781f68491b8\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Immune deficiency diagnosis (code)\",\"@id\":\"urn:uuid:ed7eecab-7ff4-45a6-8d55-ed059ea67d96\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Immunosuppressant medication (drug)\",\"@id\":\"urn:uuid:b44f715e-3292-4d66-8b8c-f7cc699e3203\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Patients with Asplenia or dysfunction of the spleen\",\"@id\":\"urn:uuid:4848461d-4140-4e34-843f-e4c216a10725\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Patients with CNS disease including significant learning disorder\",\"@id\":\"urn:uuid:22f49920-0f80-4862-bf75-b05e74564b26\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Patients with morbid obesity\",\"@id\":\"urn:uuid:f528f948-3886-4e74-a4a8-80ae61dbbc4f\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Wider learning disability\",\"@id\":\"urn:uuid:c1b5dec8-ba26-4d4b-b5cd-2c9b85d2fcb8\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"COVID-19 Severe mental illness\",\"@id\":\"urn:uuid:4793f789-cb3b-4f1a-a027-9da0b5374110\"}]}]}],\"not\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}],\"id\":{\"@id\":\"urn:uuid:88609e78-3fe9-4aae-9e3d-4f9ec19c268c\"}}]}"
+  }, {
+    "@id" : "urn:uuid:b8c2da13-b8cc-438b-9028-46a54cda047f",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "01e No contact coded [CALL]",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b8c2da13-b8cc-438b-9028-46a54cda047f\"},\"name\":\"01e No contact coded [CALL]\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7000386b-c622-4c90-ae6d-3c7507b287f3\"}],\"id\":{\"@id\":\"urn:uuid:d429945d-9b3e-4d11-9fdd-a0daa85a4d7c\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:7d2396ba-eafb-4783-8516-80082aad716c",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "02e No contact coded [CALL]",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:7d2396ba-eafb-4783-8516-80082aad716c\"},\"name\":\"02e No contact coded [CALL]\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:63beb483-82f5-44a3-a1e8-4ea1a4012316\"}],\"id\":{\"@id\":\"urn:uuid:d97d8be2-1b45-49b2-b4f9-29ca98188bec\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:78f1e738-b6e8-486f-b3a7-9884df5d2179",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "03e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:78f1e738-b6e8-486f-b3a7-9884df5d2179\"},\"name\":\"03e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:162697ed-0912-4f7f-8cd5-aea2c1c350b2\"}],\"id\":{\"@id\":\"urn:uuid:361e0d24-c6f4-4c83-afcb-00c6fdf6d26c\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:601b4c49-7f48-44c6-bb5b-7e655bcfbcc3",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04ae No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:601b4c49-7f48-44c6-bb5b-7e655bcfbcc3\"},\"name\":\"04ae No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:bd61d523-0133-47ef-bc76-12024cbaaba9\"}],\"id\":{\"@id\":\"urn:uuid:572aee3f-8703-4f52-b241-61f2c83be0f7\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:3d3e9b73-c4fe-4ee1-abf8-ac9704850706",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04ba Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:3d3e9b73-c4fe-4ee1-abf8-ac9704850706\"},\"name\":\"04ba Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928\"}],\"id\":{\"@id\":\"urn:uuid:9ba35673-6340-4c48-ace9-e95a9a1dc8d5\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:1eacd3cc-fb08-40fd-bf98-5cbf62777bd7",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04bb Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:1eacd3cc-fb08-40fd-bf98-5cbf62777bd7\"},\"name\":\"04bb Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928\"}],\"id\":{\"@id\":\"urn:uuid:efbba917-3927-413c-9fcc-7e016f62264b\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:0d1df981-4d1b-45ab-9a14-84b37e815849",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04bc Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:0d1df981-4d1b-45ab-9a14-84b37e815849\"},\"name\":\"04bc Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928\"}],\"id\":{\"@id\":\"urn:uuid:e1f1603f-7fff-4f5e-8675-9d318e38a589\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:90332035-6974-4338-b6df-b22527456741",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04bd Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:90332035-6974-4338-b6df-b22527456741\"},\"name\":\"04bd Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928\"}],\"id\":{\"@id\":\"urn:uuid:83a12acc-94a2-481a-b1e7-08d78e60ae6d\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:ab1045a1-2e8a-4fea-8ed7-02329b2411eb",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04be No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ab1045a1-2e8a-4fea-8ed7-02329b2411eb\"},\"name\":\"04be No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928\"}],\"id\":{\"@id\":\"urn:uuid:c47eb1d2-e6a6-41bb-96e8-a67060d48f06\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:e747b5c2-59c2-4789-a76c-cf2eb12ae850",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "04bf Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:e747b5c2-59c2-4789-a76c-cf2eb12ae850\"},\"name\":\"04bf Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:58570c4b-44af-4024-8fe8-f4e386fe1928\"}],\"id\":{\"@id\":\"urn:uuid:068096c9-d58a-47ab-a876-f976088e08f6\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"05 Aged 65-69 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:fa5963d5-9c29-4e46-bce7-71859c8949b2\"}],\"id\":{\"@id\":\"urn:uuid:e26df834-c4c5-4a98-affd-3f187378900b\"}}]}"
+  }, {
+    "@id" : "urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"}],\"id\":{\"@id\":\"urn:uuid:bcfd4063-f0bf-4a9e-9ebd-a4fcd0a4d38d\"}}]}"
+  }, {
+    "@id" : "urn:uuid:4f5c16ab-5b77-4c7b-85c6-41d3a143fd10",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "07 Aged 60-64 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:4f5c16ab-5b77-4c7b-85c6-41d3a143fd10\"},\"name\":\"07 Aged 60-64 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:cda37f81-2b9e-4159-9cd0-05c2c746e28b\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 60-64\",\"@id\":\"urn:uuid:4caa375d-3ddd-44d1-a66a-dd4181205c02\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:1bbc12b6-0fb2-44aa-ba7a-de62244aa93e\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:177f8862-0278-4bd7-bad3-e0c152151e89",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "08 Aged 55-59 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:177f8862-0278-4bd7-bad3-e0c152151e89\"},\"name\":\"08 Aged 55-59 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:953a1643-ca91-4fd1-b031-7165f5c183ad\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 55-59\",\"@id\":\"urn:uuid:b34cf369-6f86-4d26-adca-391520bf65f2\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:102cf18f-c2cb-4358-92fa-40119fa28435\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:9ce1dab7-8ede-4d06-a89c-493ed7cba856",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "09 Aged 50-54 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:9ce1dab7-8ede-4d06-a89c-493ed7cba856\"},\"name\":\"09 Aged 50-54 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:65fbfe83-cf1e-47bd-8d0b-f00a630169da\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 50-54\",\"@id\":\"urn:uuid:a4a23ccd-beac-499b-8ecb-a3f3a246cf96\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:f48f7fbf-dec6-4500-a0cb-078866aeb6ee\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:d778f772-ecf1-4c57-8a13-96a5d729a05e",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "10 Aged 40-49 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:d778f772-ecf1-4c57-8a13-96a5d729a05e\"},\"name\":\"10 Aged 40-49 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:653f64ac-4305-449a-9b69-8010d5a737a2\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 40-49\",\"@id\":\"urn:uuid:cfe55be8-215c-4455-bbec-4818cb726ded\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:f48f7fbf-dec6-4500-a0cb-078866aeb6ee\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:e7c6faab-3316-47a9-af59-bb66f6708e61",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "11 Aged 30-39 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:e7c6faab-3316-47a9-af59-bb66f6708e61\"},\"name\":\"11 Aged 30-39 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:b758e87d-1d01-477b-9f0c-2bcc0269f8b2\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 30-39\",\"@id\":\"urn:uuid:6ca23bdd-d44f-4052-9ea0-e69ffea97276\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:f48f7fbf-dec6-4500-a0cb-078866aeb6ee\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:a7f77587-9c75-486b-88ae-f0ed8bc6d1ae",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "05a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a7f77587-9c75-486b-88ae-f0ed8bc6d1ae\"},\"name\":\"05a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b\"}],\"id\":{\"@id\":\"urn:uuid:46687558-249a-4c03-8132-3fb614f2389a\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:b0125928-7a02-41ee-8a4b-16a28c35eee5",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "05b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b0125928-7a02-41ee-8a4b-16a28c35eee5\"},\"name\":\"05b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b\"}],\"id\":{\"@id\":\"urn:uuid:839f8b6c-91a7-40a4-81f5-287de79cb6e0\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:f24495e6-1c1c-469f-a1fd-61b3a24fc970",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "05c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:f24495e6-1c1c-469f-a1fd-61b3a24fc970\"},\"name\":\"05c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b\"}],\"id\":{\"@id\":\"urn:uuid:f905793b-6ff7-4f0d-96a8-80b05fe87c20\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:06be5426-2f75-40a1-bda6-93018f4bf169",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "05d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:06be5426-2f75-40a1-bda6-93018f4bf169\"},\"name\":\"05d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b\"}],\"id\":{\"@id\":\"urn:uuid:4e1e2771-cd97-4f06-bc3b-1065b85a614d\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:001ad17a-5d6d-49d2-9599-9ca824701aae",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "05e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:001ad17a-5d6d-49d2-9599-9ca824701aae\"},\"name\":\"05e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b\"}],\"id\":{\"@id\":\"urn:uuid:6bf5d9c7-6c3a-4be2-9e0e-0c169fc31c90\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:638fcedc-31fa-4fcb-89e1-f814450c093e",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "05f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:638fcedc-31fa-4fcb-89e1-f814450c093e\"},\"name\":\"05f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:08feace4-bb7c-4f67-bfcb-bc7c9992e85b\"}],\"id\":{\"@id\":\"urn:uuid:0e4d5e9d-0b18-4e15-9d55-85ba7f9f3776\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:7f0458c7-6188-4c3b-a8a9-9d0b91cf4bc7",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "06a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:7f0458c7-6188-4c3b-a8a9-9d0b91cf4bc7\"},\"name\":\"06a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d\"}],\"id\":{\"@id\":\"urn:uuid:435471fb-dd81-4ebe-8f8b-10a63adc4aa0\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:71166ca4-23a9-4d02-9cb6-e72e8a36d015",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "06b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:71166ca4-23a9-4d02-9cb6-e72e8a36d015\"},\"name\":\"06b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d\"}],\"id\":{\"@id\":\"urn:uuid:8abeb90e-c93d-4770-942d-6b91c7935b4a\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:f7cc190a-ff13-443a-a94b-e94fe1fe1048",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "06c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:f7cc190a-ff13-443a-a94b-e94fe1fe1048\"},\"name\":\"06c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d\"}],\"id\":{\"@id\":\"urn:uuid:e3cf164f-bbc1-4531-9329-0433bc0ee2e7\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:bc0cf166-584d-4711-b423-c052a2430a75",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "06d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:bc0cf166-584d-4711-b423-c052a2430a75\"},\"name\":\"06d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d\"}],\"id\":{\"@id\":\"urn:uuid:54a25fc6-1f5e-4f38-bb99-dd25bbcca405\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:eae5c543-d98b-41cd-82d1-3001ec421e6a",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "06e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:eae5c543-d98b-41cd-82d1-3001ec421e6a\"},\"name\":\"06e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d\"}],\"id\":{\"@id\":\"urn:uuid:1bde3af7-687c-4c1e-a724-34206a59d94f\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:587b8892-76c3-410a-bae8-bde4cda38a91",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "06f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:587b8892-76c3-410a-bae8-bde4cda38a91\"},\"name\":\"06f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:2e34aa78-25b2-49ac-9250-bb1a0d8e3c7d\"}],\"id\":{\"@id\":\"urn:uuid:c7109508-e08b-41b2-b41e-242c6d6cf6b8\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"07 Aged 60-64 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:4f5c16ab-5b77-4c7b-85c6-41d3a143fd10\"}],\"id\":{\"@id\":\"urn:uuid:dc7bc63b-d6c7-4c14-9cba-8f877bd37f41\"}}]}"
+  }, {
+    "@id" : "urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"08 Aged 55-59 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:177f8862-0278-4bd7-bad3-e0c152151e89\"}],\"id\":{\"@id\":\"urn:uuid:c8c8820b-86eb-4c47-a4e0-34cc5c461b08\"}}]}"
+  }, {
+    "@id" : "urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"09 Aged 50-54 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:9ce1dab7-8ede-4d06-a89c-493ed7cba856\"}],\"id\":{\"@id\":\"urn:uuid:4e6adab4-a964-4df1-8c10-440721ae0f72\"}}]}"
+  }, {
+    "@id" : "urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"10 Aged 40-49 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d778f772-ecf1-4c57-8a13-96a5d729a05e\"}],\"id\":{\"@id\":\"urn:uuid:123215ca-3596-4dde-b6d4-e93018069b4d\"}}]}"
+  }, {
+    "@id" : "urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"11 Aged 30-39 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:e7c6faab-3316-47a9-af59-bb66f6708e61\"}],\"id\":{\"@id\":\"urn:uuid:d08d3851-f3ae-4c38-bd47-fcb28641c7ea\"}}]}"
+  }, {
+    "@id" : "urn:uuid:c0a4288b-73e9-4453-860f-664245321721",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "07a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:c0a4288b-73e9-4453-860f-664245321721\"},\"name\":\"07a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96\"}],\"id\":{\"@id\":\"urn:uuid:a1e7b892-3cf0-43c9-9f8c-ddca513ea897\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:a970d6b0-b4a0-4e42-8f74-95cc7e26d7ab",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "07b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a970d6b0-b4a0-4e42-8f74-95cc7e26d7ab\"},\"name\":\"07b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96\"}],\"id\":{\"@id\":\"urn:uuid:cb569550-47ee-48dc-ba55-266589525044\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:47c278fd-5592-4e19-a179-ba4c8ba068e2",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "07c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:47c278fd-5592-4e19-a179-ba4c8ba068e2\"},\"name\":\"07c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96\"}],\"id\":{\"@id\":\"urn:uuid:000aa7a2-a589-4662-bffd-0fb86117b8fc\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:c8993a1f-bd64-4952-91bc-68b9091714fc",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "07d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:c8993a1f-bd64-4952-91bc-68b9091714fc\"},\"name\":\"07d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96\"}],\"id\":{\"@id\":\"urn:uuid:fa3d5c19-c93a-4647-8534-ef50c9f51d02\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:45e4aff6-c251-4395-984b-f908d9c7a171",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "07e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:45e4aff6-c251-4395-984b-f908d9c7a171\"},\"name\":\"07e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96\"}],\"id\":{\"@id\":\"urn:uuid:b16940ea-f5c2-4462-9b0d-88cb51990e31\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:c7c75b1e-b241-4bf2-b796-9db1c6b7b5d1",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "07f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:c7c75b1e-b241-4bf2-b796-9db1c6b7b5d1\"},\"name\":\"07f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:8238ee6d-5564-4046-9ace-86158f0c5a96\"}],\"id\":{\"@id\":\"urn:uuid:a279df8b-1ceb-48a4-89a1-bc45ad2162a2\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:4e191c3c-7173-445a-9987-1506859f3a75",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "08a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:4e191c3c-7173-445a-9987-1506859f3a75\"},\"name\":\"08a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d\"}],\"id\":{\"@id\":\"urn:uuid:f41159b0-702d-4042-aaaa-b75a76d0e012\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:2911fadc-a66f-4a63-9dd4-b52643b79545",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "08b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:2911fadc-a66f-4a63-9dd4-b52643b79545\"},\"name\":\"08b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d\"}],\"id\":{\"@id\":\"urn:uuid:b5cf9d97-15b3-4963-8d8a-f4101b5a06a9\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:148f9d95-d42e-4567-9c3d-f7f02772be9c",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "08c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:148f9d95-d42e-4567-9c3d-f7f02772be9c\"},\"name\":\"08c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d\"}],\"id\":{\"@id\":\"urn:uuid:7adbcf66-1afd-4298-b637-22a54c6b8457\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:fe517bbd-7444-4ce5-a951-327f125f1cb5",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "08d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:fe517bbd-7444-4ce5-a951-327f125f1cb5\"},\"name\":\"08d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d\"}],\"id\":{\"@id\":\"urn:uuid:4541eaaf-158f-4053-bb5a-2570bc2791a6\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:ef5d9516-9980-4a81-ac47-dcba6e7de5ab",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "08e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ef5d9516-9980-4a81-ac47-dcba6e7de5ab\"},\"name\":\"08e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d\"}],\"id\":{\"@id\":\"urn:uuid:ba944738-1d4d-4383-b6a9-e00c34498ac6\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:3e372d39-c931-4b83-b272-d31c50700515",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "08f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:3e372d39-c931-4b83-b272-d31c50700515\"},\"name\":\"08f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:3f9c89f7-470a-4c81-af1f-1f7718c7166d\"}],\"id\":{\"@id\":\"urn:uuid:401bbe91-b1b2-414c-a1df-bf4f8951f6fc\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:ba7715ea-f110-4349-88b3-198210c496a3",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "09a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ba7715ea-f110-4349-88b3-198210c496a3\"},\"name\":\"09a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8\"}],\"id\":{\"@id\":\"urn:uuid:a66e3e09-d20c-4890-a5df-0d8f5220b7ad\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:8a828442-ab04-4f0f-ad62-f684652dcedf",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "09b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:8a828442-ab04-4f0f-ad62-f684652dcedf\"},\"name\":\"09b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8\"}],\"id\":{\"@id\":\"urn:uuid:9d71faf9-d17a-434d-aa0f-cc2020fc8363\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:8d143a9e-6bee-47fb-9ae9-af4b0a7281a7",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "09c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:8d143a9e-6bee-47fb-9ae9-af4b0a7281a7\"},\"name\":\"09c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8\"}],\"id\":{\"@id\":\"urn:uuid:177480a5-de7a-4b3b-8e0c-254bb2de8dc4\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:d10a17f0-6e86-45ad-940d-dcdcf231a59b",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "09d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:d10a17f0-6e86-45ad-940d-dcdcf231a59b\"},\"name\":\"09d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8\"}],\"id\":{\"@id\":\"urn:uuid:3bf88184-2332-4d45-9c47-db3a76a7b4a2\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:e92855a9-059b-416e-bb70-643968741f08",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "09e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:e92855a9-059b-416e-bb70-643968741f08\"},\"name\":\"09e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8\"}],\"id\":{\"@id\":\"urn:uuid:e9d49de7-21f7-438d-85e5-74330ed3ac0f\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:dacdb3a4-b7eb-4996-8387-fa7db5cd07f3",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "09f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:dacdb3a4-b7eb-4996-8387-fa7db5cd07f3\"},\"name\":\"09f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:7de2fa51-d9bc-4ae8-a5e8-288616da1df8\"}],\"id\":{\"@id\":\"urn:uuid:2a30d130-53ce-4aa3-a304-782931ef7a6a\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:8ce6c17b-7951-4125-8585-c74891594e66",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "10a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:8ce6c17b-7951-4125-8585-c74891594e66\"},\"name\":\"10a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8\"}],\"id\":{\"@id\":\"urn:uuid:fff2293f-cd0a-4530-8516-672222efe49f\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:fd02fed9-b0db-44b0-99cc-caa09db1d08e",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "10b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:fd02fed9-b0db-44b0-99cc-caa09db1d08e\"},\"name\":\"10b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8\"}],\"id\":{\"@id\":\"urn:uuid:e34ed4de-abe7-407b-9f1f-b5c6a5481500\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:c298a506-4622-45eb-932b-b3b9c226a55e",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "10c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:c298a506-4622-45eb-932b-b3b9c226a55e\"},\"name\":\"10c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8\"}],\"id\":{\"@id\":\"urn:uuid:55474c46-613a-4367-b5ef-3bc8ce7568cb\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:cbf8bbe3-16d2-4cf5-be72-4d625d1ccd67",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "10d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:cbf8bbe3-16d2-4cf5-be72-4d625d1ccd67\"},\"name\":\"10d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8\"}],\"id\":{\"@id\":\"urn:uuid:9428e2cb-ad99-4e83-85d1-0eb5a636ab7b\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:0b7dc7fa-0a18-401f-bba8-40a8e7473e5a",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "10e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:0b7dc7fa-0a18-401f-bba8-40a8e7473e5a\"},\"name\":\"10e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8\"}],\"id\":{\"@id\":\"urn:uuid:f407449e-6872-4304-8e60-b6d4b2a448e8\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:ff7fe952-1c97-4677-8733-f54f7870bd83",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "10f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ff7fe952-1c97-4677-8733-f54f7870bd83\"},\"name\":\"10f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d6834755-ba8e-43e8-8bfd-358e3ab8e0d8\"}],\"id\":{\"@id\":\"urn:uuid:de62e1af-0595-4b61-b265-5e5fe1553867\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:5214a442-8e60-4769-bd6d-7ae432d1e3a4",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "11a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:5214a442-8e60-4769-bd6d-7ae432d1e3a4\"},\"name\":\"11a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e\"}],\"id\":{\"@id\":\"urn:uuid:7518b4f8-6916-4944-b4d0-e43bab5890d9\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:1b86b685-a0ed-44e9-affb-3839c969d534",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "11b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:1b86b685-a0ed-44e9-affb-3839c969d534\"},\"name\":\"11b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e\"}],\"id\":{\"@id\":\"urn:uuid:2ddc5b91-6812-4caf-ab24-27db4ee1b283\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:1411ca7e-26de-4e20-b5ce-0ba5fb879b33",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "11c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:1411ca7e-26de-4e20-b5ce-0ba5fb879b33\"},\"name\":\"11c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e\"}],\"id\":{\"@id\":\"urn:uuid:a58caa4e-23ac-4206-ace8-ac9261f3c8ee\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:d6373f8a-41f7-4b77-9bec-24938ce6db23",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "11d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:d6373f8a-41f7-4b77-9bec-24938ce6db23\"},\"name\":\"11d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e\"}],\"id\":{\"@id\":\"urn:uuid:f3945786-44e2-444f-bbab-7f79db50bb2d\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:13bb02d4-2b1d-42ac-9b19-3a10b3a651ab",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "11e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:13bb02d4-2b1d-42ac-9b19-3a10b3a651ab\"},\"name\":\"11e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e\"}],\"id\":{\"@id\":\"urn:uuid:65af02b4-bf29-4603-b9ff-95b9ac69c80c\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:f87649ad-6c97-4659-b6ce-8b03ed6b1904",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "11f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:f87649ad-6c97-4659-b6ce-8b03ed6b1904\"},\"name\":\"11f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:686cadf2-b0d1-4c5f-af11-93eb5050533e\"}],\"id\":{\"@id\":\"urn:uuid:54d076af-3173-4c47-81a4-dced97552449\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:ab8b3c1a-5e7a-4af9-aa42-1395eb2efc70",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "12 Aged 18-29 (excl previous cohorts)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ab8b3c1a-5e7a-4af9-aa42-1395eb2efc70\"},\"name\":\"12 Aged 18-29 (excl previous cohorts)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:5b585523-6c7d-4ddb-a06a-7826fda0835d\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"Aged 18-29\",\"@id\":\"urn:uuid:f7c8edff-2f2e-4032-af44-ed45e12ebbb3\"}],\"id\":{\"@id\":\"urn:uuid:4e66115d-cd30-4d1a-8e67-9a3df2eb6a55\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:f48f7fbf-dec6-4500-a0cb-078866aeb6ee\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"04b CEV=high risk (excl previous cohorts)\",\"@id\":\"urn:uuid:6624c3de-3740-484a-9433-47a17463b2ec\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"06 Moderate risk aged 16-64 (excl previous cohorts)\",\"@id\":\"urn:uuid:5467792f-9f91-4eeb-91a7-28423ca060f0\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Vaccination process stages",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052\"},\"name\":\"Vaccination process stages\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"12 Aged 18-29 (excl previous cohorts)\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:ab8b3c1a-5e7a-4af9-aa42-1395eb2efc70\"}],\"id\":{\"@id\":\"urn:uuid:21472faf-0713-4cdf-80d6-4a8b6d1dba30\"}}]}"
+  }, {
+    "@id" : "urn:uuid:b5df3052-ed2b-4e1e-8cd4-e0ed0b2c35eb",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "12a Vaccinated (1st dose)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b5df3052-ed2b-4e1e-8cd4-e0ed0b2c35eb\"},\"name\":\"12a Vaccinated (1st dose)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052\"}],\"id\":{\"@id\":\"urn:uuid:c9fa8c83-9926-401b-b86d-5306396868db\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:ccb4c402-1374-4f34-982c-72e0784dd8d1",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "12b Contraindicated (inc allergies)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ccb4c402-1374-4f34-982c-72e0784dd8d1\"},\"name\":\"12b Contraindicated (inc allergies)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052\"}],\"id\":{\"@id\":\"urn:uuid:6416ed28-7c0c-4ca5-8a5a-c3aee3107d36\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:fd0f2ed3-348d-47ee-bd0c-66d745990a61",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "12c Declined",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:fd0f2ed3-348d-47ee-bd0c-66d745990a61\"},\"name\":\"12c Declined\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052\"}],\"id\":{\"@id\":\"urn:uuid:ebc99104-36f5-4688-ae5d-d83c7bc24d20\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:1a068faf-0521-43f5-872e-3d0f7662575d",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "12d Invited",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:1a068faf-0521-43f5-872e-3d0f7662575d\"},\"name\":\"12d Invited\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052\"}],\"id\":{\"@id\":\"urn:uuid:c8712da6-fa1f-4039-bd0c-943d6d60ca20\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:1c41dbd8-6efc-4365-b33a-9a9fae2a3284",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "12e No contact coded",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:1c41dbd8-6efc-4365-b33a-9a9fae2a3284\"},\"name\":\"12e No contact coded\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052\"}],\"id\":{\"@id\":\"urn:uuid:c14f009f-d468-411d-85bb-d8b6de5b15d0\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"E) No coded invite or other contact\",\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"}],\"id\":{\"@id\":\"urn:uuid:3d51ce98-8d71-4e38-9aa1-5f3bf07904dc\"}}]}"
+  }, {
+    "@id" : "urn:uuid:a739c7dd-2292-408b-8e1c-8375f95a9722",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "12f Second Vaccination",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:c8cba85c-c9ca-4f19-8956-779f24653aef"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a739c7dd-2292-408b-8e1c-8375f95a9722\"},\"name\":\"12f Second Vaccination\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Vaccination process stages\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:b4e9e9d4-a650-4aed-ba0a-b1a920916052\"}],\"id\":{\"@id\":\"urn:uuid:ef1713fe-91d4-4d16-bcf3-3c2c683f3524\"}},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"}],\"id\":{\"@id\":\"urn:uuid:d5b2e06a-22db-4387-959e-b7cd12f2488a\"}}]}"
+  }, {
+    "@id" : "urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Currently Registered Patients Aged 16+",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"},\"name\":\"Currently Registered Patients Aged 16+\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:2d5c3e4e-a00e-4e20-ade8-d18af2251f87\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"16\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#AgeFunction\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"}]},\"id\":{\"@id\":\"urn:uuid:d256e130-729c-4c3b-a9ec-587b3a33d4a9\"},\"valueVar\":\"age2\"}]}"
+  }, {
+    "@id" : "urn:uuid:81614097-9bc5-494b-8121-646dedf8b087",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 16-64",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:81614097-9bc5-494b-8121-646dedf8b087\"},\"name\":\"Aged 16-64\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:6ddfd403-1078-43dc-a81b-180d111eb37c\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"16\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age3\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"65\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age3\"}]}}},\"id\":{\"@id\":\"urn:uuid:0efebb74-b38c-4b8a-83f7-e31ad8f9f66f\"},\"valueVar\":\"age3\"}]}"
+  }, {
+    "@id" : "urn:uuid:cfe55be8-215c-4455-bbec-4818cb726ded",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 40-49",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:cfe55be8-215c-4455-bbec-4818cb726ded\"},\"name\":\"Aged 40-49\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:d4e0c227-bb15-448a-95ce-d599752bace1\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"40\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age4\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"50\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age4\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age4\"}]}"
+  }, {
+    "@id" : "urn:uuid:6bd0074f-a196-494f-84e1-8eab90b6e0e4",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 45-49",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:6bd0074f-a196-494f-84e1-8eab90b6e0e4\"},\"name\":\"Aged 45-49\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:08647124-9269-4a5e-9d9e-8b4bd0aa7f15\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"45\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age5\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"50\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age5\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age5\"}]}"
+  }, {
+    "@id" : "urn:uuid:a4a23ccd-beac-499b-8ecb-a3f3a246cf96",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 50-54",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a4a23ccd-beac-499b-8ecb-a3f3a246cf96\"},\"name\":\"Aged 50-54\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:10b5e806-c6c5-4396-8743-9b68f7b6124d\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"50\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age6\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"55\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age6\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age6\"}]}"
+  }, {
+    "@id" : "urn:uuid:b34cf369-6f86-4d26-adca-391520bf65f2",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 55-59",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b34cf369-6f86-4d26-adca-391520bf65f2\"},\"name\":\"Aged 55-59\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:f0ff3360-093b-4291-8295-c4ff7ba8608c\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"55\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age7\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"60\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age7\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age7\"}]}"
+  }, {
+    "@id" : "urn:uuid:4caa375d-3ddd-44d1-a66a-dd4181205c02",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 60-64",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:4caa375d-3ddd-44d1-a66a-dd4181205c02\"},\"name\":\"Aged 60-64\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:caa7e6e0-13b0-4522-b7c6-0033b66eb490\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"60\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age8\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"65\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age8\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age8\"}]}"
+  }, {
+    "@id" : "urn:uuid:9f9f1d94-1d7c-4418-92bc-8208dbd1ef04",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 65-69",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:9f9f1d94-1d7c-4418-92bc-8208dbd1ef04\"},\"name\":\"Aged 65-69\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:2cda9453-8652-4308-9d6a-ebaca49ea77b\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"65\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age9\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"70\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age9\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age9\"}]}"
+  }, {
+    "@id" : "urn:uuid:e0dadef9-b429-48f7-b69f-faa39d103673",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 70-74",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:e0dadef9-b429-48f7-b69f-faa39d103673\"},\"name\":\"Aged 70-74\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:900da860-ede2-493e-ad2c-0e4bba2d150c\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"70\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age10\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"75\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age10\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age10\"}]}"
+  }, {
+    "@id" : "urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 75-79",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:8c311f04-667a-4758-8f46-33ce5b2e4dc9\"},\"name\":\"Aged 75-79\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:4a389a0c-e833-4c53-b213-a84445010ae7\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"75\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age11\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"80\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age11\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age11\"}]}"
+  }, {
+    "@id" : "urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 80+",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:511dafd8-7b9f-457e-bb6e-8a1fecd76d51\"},\"name\":\"Aged 80+\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:52c0e17c-1273-4cda-a3bb-aff1edcafe2b\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"80\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#AgeFunction\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"}]},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age12\"}]}"
+  }, {
+    "@id" : "urn:uuid:5920d4f0-cfb2-4bb3-8f7c-c3728aba925c",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Care home resident aged 16+",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:5920d4f0-cfb2-4bb3-8f7c-c3728aba925c\"},\"name\":\"Care home resident aged 16+\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:bb2dddc4-afe5-4efc-b97a-7bd1c727dea6\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Lives in a nursing home, Lives in a residential home, Lives in care home\",\"@id\":\"urn:uuid:28a537e5-a12f-4463-a664-7f14de23e8fe\"}],\"valueVar\":\"concept15\"},\"id\":{\"@id\":\"urn:uuid:c2bf0d44-6291-45ec-ab18-cd3ab745e18b\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Lives in a residential home, No longer lives in a residential home, Lives in a nursing home, No longer lives in a nursing home, Lives in care home\",\"@id\":\"urn:uuid:532b1f33-b0f0-401c-aa6f-ec26f9d4966e\"}],\"valueVar\":\"concept13\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate14\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:5910e110-12a2-4f28-9c98-59eb850881f8",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID Risk High = shielding = CEV aged 16+",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:5910e110-12a2-4f28-9c98-59eb850881f8\"},\"name\":\"COVID Risk High = shielding = CEV aged 16+\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:fdda2758-9ca1-4f7e-9838-544f2ba2bc78\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"High risk category for developing complication from COVID-19 infection\",\"@id\":\"urn:uuid:a43be8cc-b4b4-4e19-ae0a-96d6d4bb9d47\"}],\"valueVar\":\"concept19\"},\"id\":{\"@id\":\"urn:uuid:a636ab0b-d7da-4093-afc3-28c982403cb8\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"High risk category for developing complication from COVID-19 infection, Moderate risk category for developing complication from COVID-19 infection, Low risk category for developing complication from COVID-19 infection\",\"@id\":\"urn:uuid:5c90e15f-50ad-4389-a7ef-7304bbb0b528\"}],\"valueVar\":\"concept16\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate17\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"20/03/2020\"},\"valueVar\":\"effectiveDate18\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:306ecacb-4c35-4d66-9d27-9205dbc61ce5",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Housebound (incl temporarily housebound, aged 16+)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:306ecacb-4c35-4d66-9d27-9205dbc61ce5\"},\"name\":\"Housebound (incl temporarily housebound, aged 16+)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:fa2cc33d-3fa7-40c1-a458-a9c9fc7b02bf\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Housebound, Temporarily housebound\",\"@id\":\"urn:uuid:40baadc4-72b9-49aa-9456-386f932a1594\"}],\"valueVar\":\"concept22\"},\"id\":{\"@id\":\"urn:uuid:2d3b563c-7970-4297-a450-18269ecc2b40\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Housebound, No longer housebound, Temporarily housebound\",\"@id\":\"urn:uuid:4684cdbf-867c-4017-9387-53c4d2eb7f0f\"}],\"valueVar\":\"concept20\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate21\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:6ca23bdd-d44f-4052-9ea0-e69ffea97276",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 30-39",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:6ca23bdd-d44f-4052-9ea0-e69ffea97276\"},\"name\":\"Aged 30-39\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:6723c5cc-eea1-402f-af72-333f3381b1c8\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"30\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age23\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"40\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age23\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age23\"}]}"
+  }, {
+    "@id" : "urn:uuid:a770ff55-ab58-443e-b674-1aad6e65dec7",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 20-29",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:a770ff55-ab58-443e-b674-1aad6e65dec7\"},\"name\":\"Aged 20-29\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:cccd9162-057b-4dff-97a7-a605042ea729\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"20\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age24\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"30\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age24\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age24\"}]}"
+  }, {
+    "@id" : "urn:uuid:36e09ad3-b3a0-4db9-beba-5261ce4358b3",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 18+",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:36e09ad3-b3a0-4db9-beba-5261ce4358b3\"},\"name\":\"Aged 18+\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:4fbd1555-459f-4c64-be75-b00d0c3a9dd7\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"18\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#AgeFunction\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"}]},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age25\"}]}"
+  }, {
+    "@id" : "urn:uuid:f7c8edff-2f2e-4032-af44-ed45e12ebbb3",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Aged 18-29",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:22647599-841f-4022-b2e8-04383d8b1104"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:f7c8edff-2f2e-4032-af44-ed45e12ebbb3\"},\"name\":\"Aged 18-29\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:a39c5aba-eed4-477b-bce2-3eeeb720a3ad\"}],\"id\":{\"@id\":\"urn:uuid:eb09dd81-3146-4c5f-836b-249abb920912\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"18\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age26\"}]}},\"to\":{\"comparison\":\"LESS_THAN\",\"valueData\":\"30\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"age26\"}]}}},\"id\":{\"@id\":\"urn:uuid:7b6e43f8-713a-4182-bd77-e0e19e2853a1\"},\"valueVar\":\"age26\"}]}"
+  }, {
+    "@id" : "urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "A1) All patients who have received any COVID-19 vaccination dose",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:05551ae8-e39d-4a81-902e-557440a342f7"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"},\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:0c4d384d-f0b2-466d-aa3a-7bf3726d6ff5\"}},{\"id\":{\"@id\":\"urn:uuid:83959040-d1fb-46e7-bb24-691468f19eda\"},\"or\":[{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Administration of first dose of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccine, Administration of second dose of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccine, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) immunisation course started, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccination, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccination\",\"@id\":\"urn:uuid:ffcfd538-7db5-4ad4-b580-54e39daff623\"}],\"id\":{\"@id\":\"urn:uuid:fd4098d6-5d78-4857-b893-c9f5b4c9c590\"},\"valueVar\":\"concept27\"},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#MedicationOrder\"},\"property\":{\"@id\":\"http://endhealth.info/im#medication\"},\"valueIn\":[{\"name\":\"Courageous 30micrograms/0.3ml dose concentrate for suspension for injection multidose vials (Secretary of State for Health)\",\"@id\":\"urn:uuid:71033bc6-a21c-4065-9606-f854f7e6b069\"},{\"name\":\"Talent\",\"@id\":\"urn:uuid:600a3f0e-f155-45c6-aca9-e1fee5b39bc4\"}],\"id\":{\"@id\":\"urn:uuid:ea57b639-310c-4e2a-90a5-d5905975452c\"},\"valueVar\":\"medication28\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "A2) All patients who have received a second COVID-19 vaccination dose",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:05551ae8-e39d-4a81-902e-557440a342f7"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:24e136d0-22ee-4a8e-9571-db5ffe7360e9\"},\"name\":\"A2) All patients who have received a second COVID-19 vaccination dose\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:edafb0e0-034b-4c79-8293-b56470bc7dae\"}},{\"id\":{\"@id\":\"urn:uuid:83959040-d1fb-46e7-bb24-691468f19eda\"},\"or\":[{\"id\":{\"@id\":\"urn:uuid:fd4098d6-5d78-4857-b893-c9f5b4c9c590\"},\"and\":[{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"ASCENDING\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Administration of first dose of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccine, Administration of second dose of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccine, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) immunisation course started, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccination, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccination\",\"@id\":\"urn:uuid:2b9b5f95-9a0e-4a34-8061-0c18f3e0669f\"}],\"valueVar\":\"concept29\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate30\"}]},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Administration of first dose of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccine, Administration of second dose of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccine, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) immunisation course started, Severe acute respiratory syndrome coronavirus 2 vaccination, 2019 novel coronavirus vaccination\",\"@id\":\"urn:uuid:f28b3ea2-9768-4d35-8dbe-9f3bde4c5f40\"}],\"valueVar\":\"concept31\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate32\"}]},{\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"14\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"effectiveDate30\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate32\"}]}}]},{\"id\":{\"@id\":\"urn:uuid:ea57b639-310c-4e2a-90a5-d5905975452c\"},\"and\":[{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#MedicationOrder\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"ASCENDING\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#medication\"},\"valueIn\":[{\"name\":\"Courageous 30micrograms/0.3ml dose concentrate for suspension for injection multidose vials (Secretary of State for Health)\",\"@id\":\"urn:uuid:018e8e4d-82a5-49d2-a4da-e361d85c8db6\"},{\"name\":\"Talent\",\"@id\":\"urn:uuid:7692fdc2-05ee-43d2-85b3-34bec02eaac6\"}],\"valueVar\":\"medication33\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate34\"}]},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#MedicationOrder\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#medication\"},\"valueIn\":[{\"name\":\"Talent, Covid-19 mRna Vaccine Bnt162b2 (Pfizer-BioNtech)\",\"@id\":\"urn:uuid:a1c41888-bd2f-429d-9944-f7dd610ed62a\"}],\"valueVar\":\"medication35\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate36\"}]},{\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"14\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"effectiveDate34\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate36\"}]}}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "B) contraindicated for COVID-19 vaccination (excl vaccinated)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:05551ae8-e39d-4a81-902e-557440a342f7"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"},\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:c4ef2b4e-d027-4c31-887b-0f0e347b6f3e\"}},{\"id\":{\"@id\":\"urn:uuid:61b10bc8-22a1-4aba-a18b-df81983f968f\"},\"or\":[{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) immunisation course contraindicated\",\"@id\":\"urn:uuid:b92ecb8d-166e-4ca1-ba93-4f695fd89d73\"}],\"id\":{\"@id\":\"urn:uuid:cdc7e578-dedb-4a5a-8efb-6993df9f93b1\"},\"valueVar\":\"concept37\"},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) immunisation course contraindicated\",\"@id\":\"urn:uuid:f4e31650-afbf-4ee3-8417-285bec773f4f\"}],\"id\":{\"@id\":\"urn:uuid:19f04507-ed35-43bd-95b3-5be08fae5275\"},\"valueVar\":\"concept38\"}]}],\"not\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}],\"id\":{\"@id\":\"urn:uuid:9cbb55a0-116c-4de0-af8b-81fa705add09\"}}]}"
+  }, {
+    "@id" : "urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "C) declined COVID-19 vaccination (excl vaccinated and contraindicated)",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:05551ae8-e39d-4a81-902e-557440a342f7"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"},\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:44f29dd3-1211-4fc3-befe-4bec27d40f4d\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) immunisation course declined, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccination dose declined, SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccination declined\",\"@id\":\"urn:uuid:4a232e81-cd32-4ead-affb-037f9b5a9ead\"}],\"id\":{\"@id\":\"urn:uuid:9d3d6f7e-91df-406b-98c9-a3d197471cb2\"},\"valueVar\":\"concept39\"}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:28e9efc2-af48-4eae-926c-cc83fef0b3dc\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)",
+    "rdfs:comment" : "There is a coded invitation but no outcome. Suitable for recall",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:05551ae8-e39d-4a81-902e-557440a342f7"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"},\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:07896add-6b53-4d6c-8378-5e7f8dda19fd\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) vaccination invitation SMS (short message service) text message sent\",\"@id\":\"urn:uuid:4973e6e0-5277-4cf3-861c-61b8d05cc9bf\"}],\"id\":{\"@id\":\"urn:uuid:9d3d6f7e-91df-406b-98c9-a3d197471cb2\"},\"valueVar\":\"concept40\"}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:7ed577f3-7c0d-418d-a4af-953984cdb997\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "E) No coded invite or other contact",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:05551ae8-e39d-4a81-902e-557440a342f7"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:fac893f8-deff-49e1-8e4a-ebd66f1e3088\"},\"name\":\"E) No coded invite or other contact\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:4c809992-d7a6-4bd8-bbce-bbc6e690f93d\"}}],\"not\":[{\"id\":{\"@id\":\"urn:uuid:a021c7e2-b5bb-433a-b9cc-08167a5d0800\"},\"or\":[{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"A1) All patients who have received any COVID-19 vaccination dose\",\"@id\":\"urn:uuid:d42a3506-725d-44eb-ac0a-7df5c45fe213\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"B) contraindicated for COVID-19 vaccination (excl vaccinated)\",\"@id\":\"urn:uuid:7791e2b7-79e9-4973-9269-e17beff02033\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"C) declined COVID-19 vaccination (excl vaccinated and contraindicated)\",\"@id\":\"urn:uuid:65f568b8-cf56-4f6b-b022-b2c933f87224\"}]},{\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"name\":\"D) Invited for COVID-19 vaccination (excl vaccinated, declined, contraind)\",\"@id\":\"urn:uuid:c0b7fa0c-3c57-4f03-9d60-60a193eec593\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "Currently Registered Patients Aged 16+",
+    "rdfs:comment" : "",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"},\"name\":\"Currently Registered Patients Aged 16+\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Registered with GP for GMS services on the reference date\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"http://endhealth.info/im#Q_RegisteredGMS\"}],\"id\":{\"@id\":\"urn:uuid:e1d4f34b-0d22-4e37-80d5-1ddb770b8e09\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#PersonDetails\"},\"property\":{\"@id\":\"http://endhealth.info/im#age\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"16\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#AgeFunction\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"YEAR\"}]},\"id\":{\"@id\":\"urn:uuid:d386c4e0-cc96-4164-8280-0a1e3501a46a\"},\"valueVar\":\"age41\"}]}"
+  }, {
+    "@id" : "urn:uuid:2fa3c8d3-9d5c-4513-85fa-7edf454d8a1e",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Chronic heart disease (CHD)",
+    "rdfs:comment" : "COVID-19 Chronic heart disease (CHD)",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:2fa3c8d3-9d5c-4513-85fa-7edf454d8a1e\"},\"name\":\"COVID-19 Chronic heart disease (CHD)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:f9f41ce2-8c07-4dd1-97b8-46619f99e2aa\"}},{\"description\":\"COVID-19 At Risk CHD\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"COVID-19 Chronic heart disease codes, Congenital supravalvular aortic stenosis, Coarctation of aorta, Double outlet left ventricle, Thrombophlebitis of tibial vein, Congenital atresia of aorta, Double outlet right ventricle, Congenital absence of pulmonary valve, Ventricular dilatation, Dilated cardiomyopathy secondary to sarcoidosis..more\",\"@id\":\"urn:uuid:2825bcbd-cec7-46ca-916c-9dd0dfa52054\"}],\"id\":{\"@id\":\"urn:uuid:59749114-b352-459e-914e-66d47fa9f4c1\"},\"valueVar\":\"concept42\"}]}"
+  }, {
+    "@id" : "urn:uuid:09d960fc-ab20-45bb-a6e2-34b10b87118c",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Chronic kidney disease (CKD)",
+    "rdfs:comment" : "COVID-19 Chronic kidney disease (CKD)\n\nChecks for patient's who have either a Chronic Kidney Disease diagnosis code, or, patients who have a Chronic Kidney Disease Stage 1-5 coded where the latest code is a Stage 3-5 code.",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:09d960fc-ab20-45bb-a6e2-34b10b87118c\"},\"name\":\"COVID-19 Chronic kidney disease (CKD)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:388be1fb-4caa-4034-9beb-9127aee24dd3\"}},{\"id\":{\"@id\":\"urn:uuid:37d824ff-1c0a-4b1b-ad2a-236e86f476d5\"},\"or\":[{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Melnick-Fraser syndrome, Peritoneal dialysis including cannulation, Necrotising glomerulonephritis, Bilateral total nephrectomy, Empty and measure peritoneal dialysis fluid, Diffuse endocapillary proliferative glomerulonephritis, Lithium nephropathy, Removal of peritoneal dialysis catheter, SLE glomerulonephritis syndrome, WHO class VI..more\",\"@id\":\"urn:uuid:e91c662f-e628-4afe-998c-98c531088eb0\"}],\"id\":{\"@id\":\"urn:uuid:67186607-6a48-4350-a581-5738097a3c83\"},\"valueVar\":\"concept43\"},{\"description\":\"SCT CKD latest between 3 and 5 (Flu Primis)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Chronic kidney disease codes-stages 3 - 5 SSCT, Anaemia co-occurrent and due to chronic kidney disease stage 3, Chronic kidney disease stage 3, Chronic kidney disease stage 3 due to benign hypertension, Chronic kidney disease stage 3 due to hypertension, Chronic kidney disease stage 3 due to type 1 diabetes mellitus, Chronic kidney disease stage 3 due to type 2 diabetes mellitus, Chronic kidney disease stage 3 with proteinuria, Chronic kidney disease stage 3 without proteinuria, Chronic kidney disease stage 3A..more\",\"@id\":\"urn:uuid:32b22f81-d0b8-41c3-8fbd-382d98d84c0e\"}],\"valueVar\":\"concept47\"},\"id\":{\"@id\":\"urn:uuid:034b2b42-4d53-4674-abc3-cd0266ee5a6c\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Anaemia co-occurrent and due to chronic kidney disease stage 3, Chronic kidney disease stage 1, Chronic kidney disease stage 1 due to benign hypertension, Chronic kidney disease stage 1 due to hypertension, Chronic kidney disease stage 1 due to type 1 diabetes mellitus, Chronic kidney disease stage 1 due to type 2 diabetes mellitus, Chronic kidney disease stage 1 with proteinuria, Chronic kidney disease stage 1 without proteinuria, Chronic kidney disease stage 2..more\",\"@id\":\"urn:uuid:56b4da00-b044-4f07-8517-50616b92c976\"}],\"valueVar\":\"concept44\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate45\"},{\"property\":{\"@id\":\"http://endhealth.info/im#problemEpisode \"},\"valueNotIn\":[{\"@id\":\"urn:uuid:97a7d9f8-094f-4f36-b26d-a1789ddf3161\"}],\"valueVar\":\"problemEpisode 46\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:0d334461-759c-44df-b089-13d5bcff6022",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Chronic liver disease (CLD)",
+    "rdfs:comment" : "COVID-19 Chronic liver disease (CLD)",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:0d334461-759c-44df-b089-13d5bcff6022\"},\"name\":\"COVID-19 Chronic liver disease (CLD)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:bfb83f59-7124-4ebc-8a41-6b5f559adfb4\"}},{\"description\":\"SCT Chronic Liver Disease\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Chronic Liver disease codes SSCT, Accelerated rejection of liver transplant, Acute hepatitis B with delta-agent (coinfection) without hepatic coma, Acute hepatitis B with hepatic coma, Acute on chronic alcoholic liver disease, Acute rejection of liver transplant, Adult polyglucosan body disease, Advanced cirrhosis, Aftercare for liver transplant done, Alcoholic cirrhosis..more\",\"@id\":\"urn:uuid:d8672eb5-fddc-4a82-8ea8-c2f5e9e56054\"}],\"id\":{\"@id\":\"urn:uuid:ba84eeca-a42e-4b3d-91d5-119dfd0385a7\"},\"valueVar\":\"concept48\"}]}"
+  }, {
+    "@id" : "urn:uuid:ae9b9934-2bc5-4279-b86c-285d6c703691",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Chronic respiratory disease (CRD)",
+    "rdfs:comment" : "COVID-19 Chronic respiratory disease (CRD)\n\nChecks for patient who have:\nEither an emergency admission for Asthma\nOr, that they have an Asthma code where they have a medication issue every 30 days for the last 3months.\nOr, has a chronic respiratory disease code.",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ae9b9934-2bc5-4279-b86c-285d6c703691\"},\"name\":\"COVID-19 Chronic respiratory disease (CRD)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:8f4d4241-fd6e-469b-96d7-90781637fdcc\"}},{\"or\":[{\"description\":\"SCT Asthma Admission\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Asthma Admission codes SSCT, Emergency asthma admission since last encounter, Emergency hospital admission for asthma\",\"@id\":\"urn:uuid:b45f917c-d2c2-4a23-a232-7671cc2ec869\"}],\"id\":{\"@id\":\"urn:uuid:9c193461-1f07-454d-b743-bf4a2308e5d6\"},\"valueVar\":\"concept49\"},{\"id\":{\"@id\":\"urn:uuid:518707ee-f9cb-4734-97be-c2dcff97f973\"},\"and\":[{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Millers' asthma, Intrinsic asthma without status asthmaticus, Meat-wrappers' asthma, Exercise-induced asthma, Allergic bronchopulmonary aspergillosis, Detergent asthma, Asthma without status asthmaticus, Occupational asthma, Extrinsic asthma without status asthmaticus..more\",\"@id\":\"urn:uuid:271a7bf9-8218-49ae-adc5-8cc16104ac16\"}],\"id\":{\"@id\":\"urn:uuid:1164973a-1eaa-4d94-9972-630e5da66913\"},\"valueVar\":\"concept50\"},{\"description\":\"SCT Patients Taking Steroid Inhalers since 01/09/2019\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#MedicationOrder\"},\"id\":{\"@id\":\"urn:uuid:b9afd66a-5bcd-411a-96aa-830da53c47d6\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#medication\"},\"valueIn\":[{\"name\":\"Asthma steroid medication SSCT, Prednisolone 2.5mg gastro-resistant tablets, Prednisolone 5mg gastro-resistant tablets, Prednisolone 5mg soluble tablets, Prednisolone 25mg tablets, Prednisolone 1mg tablets, Prednisolone 2.5mg tablets, Prednisolone 5mg tablets, Prednisolone 15mg/5ml oral solution, Prednisolone 10mg tablets..more\",\"@id\":\"urn:uuid:51d6835a-c28b-44f0-aac3-ee9e853d1b67\"}],\"valueVar\":\"medication51\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN\",\"valueData\":\"-30\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate52\"}]},\"valueVar\":\"effectiveDate52\"}]},{\"description\":\"SCT Patients Taking Steroid Inhalers since 01/09/2019\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#MedicationOrder\"},\"id\":{\"@id\":\"urn:uuid:25b50bb2-9c6a-4749-8bf0-e1a51145c406\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#medication\"},\"valueIn\":[{\"name\":\"Asthma steroid medication SSCT, Prednisolone 2.5mg gastro-resistant tablets, Prednisolone 5mg gastro-resistant tablets, Prednisolone 5mg soluble tablets, Prednisolone 25mg tablets, Prednisolone 1mg tablets, Prednisolone 2.5mg tablets, Prednisolone 5mg tablets, Prednisolone 15mg/5ml oral solution, Prednisolone 10mg tablets..more\",\"@id\":\"urn:uuid:6041ce2c-604e-453f-ad7b-dbf9595eb9c1\"}],\"valueVar\":\"medication53\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"-60\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate54\"}]}},\"to\":{\"comparison\":\"LESS_THAN_OR_EQUAL\",\"valueData\":\"-30\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate54\"}]}}},\"valueVar\":\"effectiveDate54\"}]},{\"description\":\"SCT Patients Taking Steroid Inhalers since 01/09/2019\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#MedicationOrder\"},\"id\":{\"@id\":\"urn:uuid:07037837-cf1a-41bd-b423-157076f8b53b\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#medication\"},\"valueIn\":[{\"name\":\"Asthma steroid medication SSCT, Prednisolone 2.5mg gastro-resistant tablets, Prednisolone 5mg gastro-resistant tablets, Prednisolone 5mg soluble tablets, Prednisolone 25mg tablets, Prednisolone 1mg tablets, Prednisolone 2.5mg tablets, Prednisolone 5mg tablets, Prednisolone 15mg/5ml oral solution, Prednisolone 10mg tablets..more\",\"@id\":\"urn:uuid:57b826af-299b-46cb-a4d1-c50a59de38d5\"}],\"valueVar\":\"medication55\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueRange\":{\"from\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"-90\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate56\"}]}},\"to\":{\"comparison\":\"LESS_THAN_OR_EQUAL\",\"valueData\":\"-60\",\"function\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate56\"}]}}},\"valueVar\":\"effectiveDate56\"}]}]},{\"description\":\"SCT Respiratory Flu Risk (Not Asthma)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Chronic pneumothorax, Pneumoconiosis due to silica, Schistosis, Cystic-bullous disease of the lung, Peribronchial fibrosis of lung, Panacinar emphysema, Liparitosis, Alveolar pneumopathy, Rheumatic pneumonia..more\",\"@id\":\"urn:uuid:0e656e52-57d8-4715-bba8-e55797bc2488\"}],\"id\":{\"@id\":\"urn:uuid:ba1bd353-43a5-443f-8535-46e8c942fda4\"},\"valueVar\":\"concept57\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:c339d6ff-f475-4843-ad29-6781f68491b8",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Diabetes",
+    "rdfs:comment" : "COVID-19 Diabetes\n\nChecks for patients who have a diabetes code or diabetes resolved code, sorts them by the latest and only includes patients that do not have the latest code as diabetes resolved.",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:c339d6ff-f475-4843-ad29-6781f68491b8\"},\"name\":\"COVID-19 Diabetes\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:4d0779eb-898a-4815-af8a-cd3f7b6a888e\"}},{\"description\":\"SCT Diabetes Register (PRIMIS)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Diabetes diagnosis codes SSCT, Abnormal metabolic state in diabetes mellitus, Absence of lower limb due to diabetes mellitus, Acidosis due to type 1 diabetes mellitus, Acidosis due to type 2 diabetes mellitus, Acute complication with diabetes mellitus, Acute painful diabetic neuropathy, Advanced diabetic maculopathy, Advanced diabetic retinal disease, Amyotrophy due to type 1 diabetes mellitus..more\",\"@id\":\"urn:uuid:461cd13f-bb7a-4829-921a-55d84832a09c\"}],\"valueVar\":\"concept60\"},\"id\":{\"@id\":\"urn:uuid:07c3dc9a-e3d0-417a-8165-f51520ade0cc\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Diabetes diagnosis codes SSCT, Abnormal metabolic state in diabetes mellitus, Absence of lower limb due to diabetes mellitus, Acidosis due to type 1 diabetes mellitus, Acidosis due to type 2 diabetes mellitus, Acute complication with diabetes mellitus, Acute painful diabetic neuropathy, Advanced diabetic maculopathy, Advanced diabetic retinal disease, Amyotrophy due to type 1 diabetes mellitus..more\",\"@id\":\"urn:uuid:bf75a339-b6f7-44e5-a8fb-d3d0670e116d\"},{\"name\":\"Diabetes resolved codes SSCT\",\"@id\":\"urn:uuid:ac5befe3-53a7-4a7c-af28-6924a0e0ceed\"}],\"valueVar\":\"concept58\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate59\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:ed7eecab-7ff4-45a6-8d55-ed059ea67d96",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Immune deficiency diagnosis (code)",
+    "rdfs:comment" : "COVID-19 Immune deficiency diagnosis (code)",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:ed7eecab-7ff4-45a6-8d55-ed059ea67d96\"},\"name\":\"COVID-19 Immune deficiency diagnosis (code)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:0855c9d6-fb65-495a-8643-f9f4a81f7b5f\"}},{\"description\":\"SCT Immunosuppressed Disease\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Autoimmune pancytopenia, Angioimmunoblastic T-cell lymphoma, Malignant lymphoma, non-Hodgkin, Peripheral T-cell lymphoma, Lymphocyte disorder, SCID due to absent peripheral T cell maturation, Non dose-related drug-induced neutropenia, Bloom syndrome, Sezary syndrome..more\",\"@id\":\"urn:uuid:db56f9ce-3ff9-43f4-b14d-7ca79ba63df5\"}],\"id\":{\"@id\":\"urn:uuid:b2631a04-6db1-4b0b-bb5b-7cd2013e8669\"},\"valueVar\":\"concept61\"}]}"
+  }, {
+    "@id" : "urn:uuid:b44f715e-3292-4d66-8b8c-f7cc699e3203",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Immunosuppressant medication (drug)",
+    "rdfs:comment" : "COVID-19 Immunosuppressant medication (drug)",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:b44f715e-3292-4d66-8b8c-f7cc699e3203\"},\"name\":\"COVID-19 Immunosuppressant medication (drug)\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:c2ec5a4f-82da-4422-8695-070304be4b62\"}},{\"description\":\"SCT Immune suppressing medication since 01/03/2020\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#MedicationOrder\"},\"id\":{\"@id\":\"urn:uuid:99f68c0a-65a7-40b9-86e8-4c57354ffddd\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#medication\"},\"valueIn\":[{\"name\":\"Immune suppressant medication SSCT, Cyclophosphamide 50mg tablets, Daunorubicin 20mg powder for solution for infusion vials, Dacarbazine 200mg powder for solution for injection vials, Fluorouracil 250mg/10ml solution for injection vials, Fluorouracil 500mg/20ml solution for injection vials, Fluorouracil 2.5g/100ml solution for infusion vials, Fludara 50mg powder for solution for injection vials (Sanofi), Etoposide 50mg capsules, Etoposide 100mg capsules..more\",\"@id\":\"urn:uuid:fd9d32f7-fd36-4c64-b0ee-ce56dcc55903\"}],\"valueVar\":\"medication62\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"01/07/2020\"},\"valueVar\":\"effectiveDate63\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:786ca593-b629-4ab4-85fa-8776a659fe48",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Patients recorded as pregnant",
+    "rdfs:comment" : "COVID-19 Patients recorded as pregnant\n\nChecks for patients who are currently pregnant, excluding those who may have delivery, miscarriage or termination codes.",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:786ca593-b629-4ab4-85fa-8776a659fe48\"},\"name\":\"COVID-19 Patients recorded as pregnant\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:320de202-4e85-4aeb-b034-063712ee4870\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Abnormal amniotic fluid, Abnormal biochemical finding on antenatal screening of mother, Abnormal chromosomal and genetic finding on antenatal screening of mother, Abnormal cytological finding on antenatal screening of mother, Abnormal findings on antenatal screening of mother, Abnormal haematologic finding on antenatal screening of mother, Abnormal immature chorion, Abnormal placental secretion of chorionic gonadotropin, Abnormal pregnancy..more\",\"@id\":\"urn:uuid:0dc368fc-ff76-4003-903c-63c449b1a070\"}],\"valueVar\":\"concept67\"},\"id\":{\"@id\":\"urn:uuid:dc17c5f3-99d1-418c-8994-e9f9bce50e70\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Miscarriage with laceration of cervix, Illegal termination of pregnancy with endometritis, Tumour of body of uterus affecting pregnancy, Cervical dilatation, 1cm, Cystocele affecting pregnancy, Contracted pelvis, Pinard's sign, Gestation period, 9 weeks, Sepsis during labour..more\",\"@id\":\"urn:uuid:39af8106-15ca-41ef-8a0e-a12d80542943\"}],\"valueVar\":\"concept64\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate65\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"-254\"},\"valueFunction\":{\"id\":{\"@id\":\"http://endhealth.info/im#TimeDifference\"},\"argument\":[{\"parameter\":\"units\",\"valueData\":\"DAY\"},{\"parameter\":\"firstDate\",\"valueData\":\"$referenceDate\"},{\"parameter\":\"secondDate\",\"valueData\":\"effectiveDate66\"}]},\"valueVar\":\"effectiveDate66\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:4848461d-4140-4e34-843f-e4c216a10725",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Patients with Asplenia or dysfunction of the spleen",
+    "rdfs:comment" : "COVID-19 Patients with Asplenia or dysfunction of the spleen",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:4848461d-4140-4e34-843f-e4c216a10725\"},\"name\":\"COVID-19 Patients with Asplenia or dysfunction of the spleen\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:12fe3414-844b-42f0-a501-484f033a7bfe\"}},{\"description\":\"SCT Dysfunction of Spleen (Primis)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Asplenia or Dysfunction of the Spleen codes SSCT, Sago spleen, Bilateral right-sidedness sequence, Splenic infarction, Double heterozygous sickling disorder, Hyposplenism, Sickle cell-haemoglobin D disease, Homozygous beta thalassaemia, beta^0^ Thalassaemia, deletion type, Distal subtotal pancreatectomy with splenectomy and pancreaticojejunostomy..more\",\"@id\":\"urn:uuid:7e5b0405-fb33-4b9a-80ae-4c9f37c0b4ba\"}],\"id\":{\"@id\":\"urn:uuid:652c8a9e-facb-4c4f-9f1e-b220fccc57b7\"},\"valueVar\":\"concept68\"}]}"
+  }, {
+    "@id" : "urn:uuid:22f49920-0f80-4862-bf75-b05e74564b26",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Patients with CNS disease including significant learning disorder",
+    "rdfs:comment" : "COVID-19 Patients with CNS disease including significant learning disorder",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:22f49920-0f80-4862-bf75-b05e74564b26\"},\"name\":\"COVID-19 Patients with CNS disease including significant learning disorder\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:018089cd-8aac-4f89-a981-a5aed95ad692\"}},{\"description\":\"SCT Chronic Neurological Disorder Register (Influenza)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Chronic neurological disease, including Stroke/Tia, Cerebral Palsy and MS codes SSCT, Epilepsia partialis continua, Dementia associated with alcoholism, Congenital aneurysm of anterior communicating artery, Infantile hemiplegia, Cerebral hemiparesis, Paraparesis, Pigmentary pallidal degeneration, Chronic progressive non-hereditary chorea, Thrombophlebitis of torcular Herophili..more\",\"@id\":\"urn:uuid:de05b6b5-4e75-44e1-8ee1-efd400b98cc1\"}],\"id\":{\"@id\":\"urn:uuid:55811d1b-083e-40e4-bfb1-4d6b94370bc8\"},\"valueVar\":\"concept69\"}]}"
+  }, {
+    "@id" : "urn:uuid:f528f948-3886-4e74-a4a8-80ae61dbbc4f",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Patients with morbid obesity",
+    "rdfs:comment" : "COVID-19 Patients with morbid obesity",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:f528f948-3886-4e74-a4a8-80ae61dbbc4f\"},\"name\":\"COVID-19 Patients with morbid obesity\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:4ac58dac-73b3-4c3c-b2fc-e837216708f9\"}},{\"id\":{\"@id\":\"urn:uuid:ffac2bdc-c35d-4e80-800d-0683d8155f58\"},\"or\":[{\"description\":\"SCT Latest BMI is a value and =40+ (as Value only) (Primis)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"BMI measurement codes with observable entities, Baseline body mass index, Body mass index\",\"@id\":\"urn:uuid:0010b364-7745-411d-9d21-7d38c9c75f36\"}],\"valueVar\":\"concept72\"},{\"property\":{\"@id\":\"http://endhealth.info/im#numericValue\"},\"valueCompare\":{\"comparison\":\"GREATER_THAN_OR_EQUAL\",\"valueData\":\"40\"},\"valueVar\":\"numericValue73\"}]},\"id\":{\"@id\":\"urn:uuid:bfd938a9-0d1d-45cb-964b-1cbb5f65b110\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"BMI range codes, Decreased body mass index, Increased body mass index, Normal body mass index, Obese class I, Obese class I (body mass index 30.0 - 34.9), Obese class II, Obese class II (body mass index 35.0 - 39.9), Obese class III (body mass index equal to or greater than 40.0), Overweight in adulthood with body mass index of 25 or more but less than 30\",\"@id\":\"urn:uuid:680c681c-af56-4aff-966b-a6a32c759c5d\"},{\"name\":\"BMI measurement codes with observable entities, Baseline body mass index, Body mass index\",\"@id\":\"urn:uuid:4e23b0fe-bccf-4969-b1e5-7bd86ff30093\"}],\"valueVar\":\"concept70\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate71\"}]},{\"description\":\"SCT Latest SevObesity and BMI is SevObesity (Primis)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Morbid obesity range codes, Body mass index 40+ - severely obese, Obese class III (body mass index equal to or greater than 40.0)\",\"@id\":\"urn:uuid:23bb7bd0-35f4-4e94-8a8e-32f792219970\"}],\"valueVar\":\"concept76\"},\"id\":{\"@id\":\"urn:uuid:4b1f09c6-457a-46ce-9fee-e592b1d3702e\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"BMI range codes, Decreased body mass index, Increased body mass index, Normal body mass index, Obese class I, Obese class I (body mass index 30.0 - 34.9), Obese class II, Obese class II (body mass index 35.0 - 39.9), Obese class III (body mass index equal to or greater than 40.0), Overweight in adulthood with body mass index of 25 or more but less than 30\",\"@id\":\"urn:uuid:85f78399-d4d4-4539-aa2c-dcb976d967cf\"},{\"name\":\"BMI measurement codes with observable entities, Baseline body mass index, Body mass index\",\"@id\":\"urn:uuid:7415c0a2-4143-4db4-85fa-687197e33a78\"}],\"valueVar\":\"concept74\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate75\"}]}]}]}"
+  }, {
+    "@id" : "urn:uuid:4793f789-cb3b-4f1a-a027-9da0b5374110",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Severe mental illness",
+    "rdfs:comment" : "COVID-19 Underlying Health Condition (UHC) Severe Mental Illness (SMI)\n\nChecks for patients who have a severe mental illness code recorded as latest.",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:4793f789-cb3b-4f1a-a027-9da0b5374110\"},\"name\":\"COVID-19 Severe mental illness\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:f83c327a-66c8-4510-a163-89c5b011bc31\"}},{\"description\":\"SCT Diabetes Register (PRIMIS)\",\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"sort\":{\"orderBy\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"count\":1,\"direction\":\"DESCENDING\"},\"test\":{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueNotIn\":[{\"name\":\"COVID-19 Resolved severe mental health codes, Bipolar I disorder, single manic episode, in full remission, Schizophrenia in remission, Severe bipolar II disorder, most recent episode major depressive, in full remission, Depressed bipolar I disorder in full remission, Manic bipolar I disorder in full remission, Disorganised schizophrenia in remission, Mixed bipolar I disorder in remission, Severe bipolar II disorder, most recent episode major depressive, in remission, Undifferentiated schizophrenia in remission..more\",\"@id\":\"urn:uuid:5a1664d8-abed-4f64-91aa-b49080151ae1\"}],\"valueVar\":\"concept79\"},\"id\":{\"@id\":\"urn:uuid:577c35f4-8e6f-49fa-bd66-d93d32c6855c\"},\"and\":[{\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"covid-19_SEV_MENTAL_COD, Severe manic bipolar I disorder without psychotic features, Chronic bipolar II disorder, most recent episode major depressive, Bipolar I disorder, single manic episode with postpartum onset, Bipolar I disorder, single manic episode, in full remission, Severe bipolar disorder with psychotic features, Schizophrenia in remission, Brief reactive psychosis, Bipolar disorder in partial remission, Subchronic undifferentiated schizophrenia with acute exacerbations..more\",\"@id\":\"urn:uuid:635871a1-97eb-452c-a1d4-e876f4531692\"}],\"valueVar\":\"concept77\"},{\"property\":{\"@id\":\"http://endhealth.info/im#effectiveDate\"},\"valueVar\":\"effectiveDate78\"}]}]}"
+  }, {
+    "@id" : "urn:uuid:c1b5dec8-ba26-4d4b-b5cd-2c9b85d2fcb8",
+    "rdf:type" : [ {
+      "@id" : "im:Profile"
+    } ],
+    "rdfs:label" : "COVID-19 Wider learning disability",
+    "rdfs:comment" : "COVID-19 Patients with wider learning disability",
+    "im:isContainedIn" : [ {
+      "@id" : "urn:uuid:4879e488-95be-4f50-bba4-e975d2eb906e"
+    } ],
+    "im:definition" : "{\"id\":{\"@id\":\"urn:uuid:c1b5dec8-ba26-4d4b-b5cd-2c9b85d2fcb8\"},\"name\":\"COVID-19 Wider learning disability\",\"entityType\":{\"@id\":\"http://endhealth.info/im#Person\"},\"and\":[{\"name\":\"Currently Registered Patients Aged 16+\",\"property\":{\"@id\":\"http://endhealth.info/im#hasProfile\"},\"valueIn\":[{\"@id\":\"urn:uuid:5b8b8f6a-fa2c-43d3-bf61-9c01e506710b\"}],\"id\":{\"@id\":\"urn:uuid:e1eb882e-0b6d-493a-b7ec-c22283381828\"}},{\"pathTo\":{\"@id\":\"http://endhealth.info/im#isSubjectOf\"},\"entityType\":{\"@id\":\"http://endhealth.info/im#Event\"},\"property\":{\"@id\":\"http://endhealth.info/im#concept\"},\"valueIn\":[{\"name\":\"Fragile X syndrome, Bardet-Biedl syndrome, Coffin-Siris syndrome, Cross syndrome, Complete trisomy 13 syndrome, Borjeson-Forssman-Lehmann syndrome, Profound intellectual disability, Hyperphosphatasaemia with intellectual disability, Severe intellectual disability..more\",\"@id\":\"urn:uuid:ef706ddd-72f1-44b8-a46a-a7ce1147a8b3\"}],\"id\":{\"@id\":\"urn:uuid:55233f22-40d3-45f7-9d51-474ed7c3db74\"},\"valueVar\":\"concept80\"}]}"
+  } ]
+}

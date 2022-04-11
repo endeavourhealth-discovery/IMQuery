@@ -224,7 +224,7 @@ def generateDocsFromMySQL(total_rows, saveFile, updateServer, databaseName, inde
 
 if __name__ == '__main__':
     print('updating opensearch has started')
-    index = "dev-im2"
+    index = "dev-search"
     generateDocsFromMySQL(
         databaseName="im3",
         index=index,
