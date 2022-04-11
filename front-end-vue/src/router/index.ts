@@ -1,15 +1,44 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+<<<<<<< HEAD:front-end-vue/src/router/index.ts
+=======
+<<<<<<< HEAD:client/src/router/index.ts
+// import Home from "../views/temp/oldHome.vue";
+// import Dashboard from "../views/Dashboard.vue";
+// import Datamodel from "../views/Concept.vue";
+// import Workflow from "../views/Workflow.vue";
+// import UPRN from "../views/Uprn.vue";
+// import Editor from "../views/Editor.vue";
+// import Datasets from "../views/temp/Datasets.vue";
+// import DatasetBrowser from "../views/temp/DatasetBrowser.vue";
+// import DatasetWizard from "../views/temp/DatasetWizard.vue";
+>>>>>>> 2492fc015081bf4eba388ad72a212169c81fb97d:client/src/router/index.ts
 import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Datamodel from "../views/Concept.vue";
 import Workflow from "../views/Workflow.vue";
 import UPRN from "../views/Uprn.vue";
 import User from "../views/User.vue";
+<<<<<<< HEAD:front-end-vue/src/router/index.ts
 import Editor from "../views/Editor.vue";
 import Search from "../views/Search.vue";
 import Datasets from "../views/Datasets.vue";
 import DatasetBrowser from "../views/DatasetBrowser.vue";
 import DatasetWizard from "../views/DatasetWizard.vue";
+=======
+=======
+import Home from "../views/oldHome.vue";
+import Dashboard from "../views/Dashboard.vue";
+import Datamodel from "../views/Concept.vue";
+import Workflow from "../views/Workflow.vue";
+// import UPRN from "../views/Uprn.vue";
+import User from "../views/User.vue";
+import Editor from "../views/Editor.vue";
+import Home from "../views/Home.vue";
+import Datasets from "../views/Datasets.vue";
+import DatasetBrowser from "../views/DatasetBrowser.vue";
+import DatasetWizard from "../views/DatasetWizard.vue";
+>>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26:front-end-vue/src/router/index.ts
+>>>>>>> 2492fc015081bf4eba388ad72a212169c81fb97d:client/src/router/index.ts
 import Login from "../components/user/Login.vue";
 import Register from "../components/user/Register.vue";
 import UserDetails from "../components/user/UserDetails.vue";
@@ -94,12 +123,142 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
+<<<<<<< HEAD:front-end-vue/src/router/index.ts
     component: Search,
+=======
+<<<<<<< HEAD:client/src/router/index.ts
+    component: Home,
+>>>>>>> 2492fc015081bf4eba388ad72a212169c81fb97d:client/src/router/index.ts
+    // redirect: { name: "Dashboard" },
+=======
+    component: Home,
     // redirect: { name: "Dashboard" },
     meta: {
       requiresLicense: true
     }
   },
+  // {
+  //   path: "/create",
+  //   name: "Create",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+  // {
+  //   path: "/create/:iri",
+  //   name: "Create",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+  // {
+  //   path: "/explore",
+  //   name: "Explore",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+  // {
+  //   path: "/explore/:iri",
+  //   name: "Explore",
+  //   component: Home,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+  {
+    path: "/oldhome",
+    name: "oldhome",
+    component: Home,
+    redirect: { name: "Dashboard" },
+    meta: {
+      requiresLicense: true
+    },
+    children: [
+      {
+        path: "",
+        name: "Dashboard",
+        alias: ["/home", "/dashboard"],
+        component: Dashboard,
+        meta: {
+          requiresLicense: true
+        }
+      },
+      {
+        path: "/concept/:selectedIri",
+        name: "Concept",
+        component: Datamodel,
+        meta: {
+          requiresLicense: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/editor",
+    name: "Editor",
+    component: Editor,
+    children: [
+      {
+        path: "/editor",
+        name: "Create",
+        component: Editor
+      },
+      {
+        path: "/editor/:iri",
+        name: "Edit",
+        component: Editor
+      }
+    ],
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/datasets",
+    name: "Datasets",
+    component: Datasets,
+    children: [
+      {
+        path: "browser",
+        name: "DatasetBrowser",
+        component: DatasetBrowser,
+      },
+      {
+        path: "wizard",
+        name: "DatasetWizard",
+        component: DatasetWizard,
+      }
+    ]
+  },
+  {
+    path: "/search",
+    name: "Search",
+    component: Home,
+  },
+  {
+    path: "/workflow",
+    name: "Workflow",
+    component: Workflow,
+>>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26:front-end-vue/src/router/index.ts
+    meta: {
+      requiresLicense: true
+    }
+  },
+<<<<<<< HEAD:client/src/router/index.ts
+=======
+  // {
+  //   path: "/uprn",
+  //   name: "UPRN",
+  //   component: UPRN,
+  //   meta: {
+  //     requiresLicense: true
+  //   }
+  // },
+>>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26:front-end-vue/src/router/index.ts
   {
     path: "/oldhome",
     name: "oldhome",
