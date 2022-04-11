@@ -12,3 +12,4 @@ target
 coverage
 node_modules
 output-bulk
+package-lock.json

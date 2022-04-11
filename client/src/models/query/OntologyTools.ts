@@ -160,6 +160,7 @@ export default class Ontology {
 }
 
 
+<<<<<<< HEAD
 export const DataModel = [
     {
       iri: "http://endhealth.info/im#AllergyIntoleranceAndAdverseReaction",
@@ -3965,3 +3966,5 @@ export const DataModel = [
 
 
 
+=======
+>>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
