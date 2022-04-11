@@ -265,24 +265,7 @@ function phrase(phraseType: string, input: any, references = []): any {
         }
 
 
-<<<<<<< HEAD
     } 
-=======
-    } else {
-
-    }
-
-    // const _phrase = {
-    //     text: _text,
-    //     importance: "required",
-    //     meta: {
-    //         subtype: "phrase",
-    //         input: _value,
-    //         target: _targetPhrase,
-    //     }
-
-    // }
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
 
     return input;
 }
@@ -360,11 +343,6 @@ function reference(targetClause: any, propertyPath = "") {
 
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
 ////// functions
 
 
@@ -967,11 +945,6 @@ export default class Templates {
 
             const _testCriteria = (criteria: any) => {
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
                 const _f = matchFunctions[criteria.test];
                 let _args = criteria.input;
 
@@ -991,21 +964,13 @@ export default class Templates {
             // #todo: add support multiple templates matching a single clause -> generate all of them
             // #display to the user first the template with the most specificity (most matchIf requirements) or least amount of placeholders (count mutables?)
 
-<<<<<<< HEAD
             if (template?.meta?.matchIf?.all?.length) {
-=======
-            if (template.meta.matchIf.all && template.meta.matchIf.all.length) {
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
 
                 //test all criteria using "every"
                 const _criteria = template.meta.matchIf.all;
                 _shouldMatch = _criteria.every(_testCriteria)
 
-<<<<<<< HEAD
             } else if (template?.meta?.matchIf?.any?.length) {
-=======
-            } else if (template.meta.matchIf.any && template.meta.matchIf.any.length) {
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
 
 
                 //test all criteria using "every"

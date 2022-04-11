@@ -1,0 +1,58 @@
+{
+    "id": {
+        "@id": "urn:uuid:3f04bc73-fb03-4d50-bae4-49a866ad5033"
+    },
+    "name": "Priority 3b",
+    "entityType": {
+        "@id": "http://endhealth.info/im#Person"
+    },
+    "and": [{
+            "id": {
+                "@id": "urn:uuid:64bddb54-3bfa-4131-9bfc-3f78c8b2085e"
+            },
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "SMI Population",
+                "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+            }]
+        },
+        {
+            "id": {
+                "@id": "urn:uuid:864a8831-ba1e-4acf-954d-4e00633b8170"
+            },
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 1",
+                "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+            }]
+        },
+        {
+            "id": {
+                "@id": "urn:uuid:84e746b6-02ba-4542-acca-db26ec1f9109"
+            },
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 2",
+                "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+            }]
+        },
+        {
+            "id": {
+                "@id": "urn:uuid:82d7f43a-2428-4700-b3cb-cc30262e024f"
+            },
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "name": "Priority 3a",
+                "@id": "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6"
+            }]
+        }
+    ]
+}

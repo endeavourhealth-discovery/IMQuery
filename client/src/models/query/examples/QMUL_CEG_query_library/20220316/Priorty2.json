@@ -1,0 +1,87 @@
+{
+    "id": {
+        "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+    },
+    "name": "Priority 2",
+    "entityType": {
+        "@id": "http://endhealth.info/im#Person"
+    },
+    "and": [{
+            "name": "SMI Population",
+            "property": {
+                "@id": "http://endhealth.info/im#hasProfile"
+            },
+            "valueIn": [{
+                "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+            }],
+            "id": {
+                "@id": "urn:uuid:93d3c7c2-bbc1-4bf3-b883-62b12dfcdf0d"
+            }
+        },
+        {
+            "not": [{
+                    "property": {
+                        "@id": "http://endhealth.info/im#hasProfile"
+                    },
+                    "valueIn": [{
+                        "name": "Priority 1",
+                        "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                    }],
+                    "id": {
+                        "@id": "urn:uuid:f3fe55d9-dfac-422e-90f5-e4874d6eee41"
+                    }
+                },
+                {
+                    "pathTo": {
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Event"
+                    },
+                    "id": {
+                        "@id": "urn:uuid:187d074d-bc00-4fa6-a92f-f68011d1d0a6"
+                    },
+                    "and": [{
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueIn": [{
+                                "name": "SAP - Systolic arterial pressure, Systolic blood pressure, Baseline systolic blood pressure, Lying systolic blood pressure, Sitting systolic blood pressure, Standing systolic blood pressure, Systolic arterial pressure, Systolic arterial pressure, Systolic blood pressure..more",
+                                "@id": "urn:uuid:622bb171-410f-4454-b902-3b13fd8249e6"
+                            }],
+                            "valueVar": "concept86"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-18"
+                            },
+                            "valueFunction": {
+                                "id": {
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [{
+                                        "parameter": "units",
+                                        "valueData": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "valueData": "$referenceDate"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "valueData": "effectiveDate87"
+                                    }
+                                ]
+                            },
+                            "valueVar": "effectiveDate87"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

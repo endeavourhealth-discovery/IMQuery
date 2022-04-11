@@ -74,11 +74,7 @@
                 }"
                 @click="handleClick(element)"
                 :class="
-<<<<<<< HEAD
                   'clause__matchLabel ml-2 pl-3 pr-4  py-1  relative -top-3 cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
-=======
-                  'clause__matchLabel ml-2 pl-3 pr-4  py-1  relative -top-1 cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
                     [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white' : ' text-black ']
                 "
               >

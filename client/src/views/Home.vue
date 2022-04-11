@@ -48,11 +48,7 @@
           :class="'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']"
           v-model="searchString"
           :autocompleteData="autocompleteData"
-<<<<<<< HEAD
           @search="search(searchString)"
-=======
-          @search="showSearchResults(searchString)"
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
         />
 
         <!-- /Searchbox  -->
@@ -115,18 +111,8 @@
           <!-- /Brand  -->
 
           <!-- Searchbox  -->
-<<<<<<< HEAD
           <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm overflow-y-scroll">
             <Searchbox class="w-full mx-auto searchbox-main" v-model="searchString" :autocompleteData="autocompleteData" @search="search(searchString)" />
-=======
-          <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm">
-            <Searchbox
-              class="w-full mx-auto searchbox-main"
-              v-model="searchString"
-              :autocompleteData="autocompleteData"
-              @search="showSearchResults(searchString)"
-            />
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
           </div>
           <!-- /Searchbox  -->
 
@@ -141,7 +127,6 @@
         <!-- /Tab: Home -->
 
         <!-- Tab: Search -->
-<<<<<<< HEAD
         <div v-if="activeTabName == 'Find'" class="tab-content relative">
           <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0">
             <div v-for="category in searchCategories" :key="category.name" class="flex items-center" @click="category.command()">
@@ -176,66 +161,6 @@
               <div v-if="hasSearched" class="mt-10 ml-5 text-3xl font-bold text-gray-600 dark:text-white text-center">
                 No Search Results.
               </div>
-=======
-        <div v-if="activeTabName == 'Find'" class="tab-content  flex pt-5">
-          <div class="results w-full mx-auto max-w-4xl">
-            <!-- Suggestions -->
-            <div class="flex justify-center w-full my-10">
-              <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
-                <template v-if="index == 0">
-                  <CardButton
-                    @click="suggestion.command"
-                    class="w-400px"
-                    :name="suggestion.name"
-                    :description="suggestion.description"
-                    :icon="suggestion.icon"
-                    :outlined="true"
-                    nameColor="white"
-                    descriptionColor="white"
-                    iconColor="white"
-                    backgroundColor="blue-500"
-                  />
-                </template>
-                <template v-else>
-                  <CardButton
-                    @click="suggestion.command"
-                    class="w-400px"
-                    :name="suggestion.name"
-                    :description="suggestion.description"
-                    :icon="suggestion.icon"
-                    :outlined="true"
-                    nameColor="black"
-                    descriptionColor="gray-700"
-                    iconColor="blue-700"
-                    backgroundColor="white"
-                  />
-                </template>
-                <!-- <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="suggestion.icon" />
-                <div class="inline text-lg font-bold text-gray-900">
-                  {{ suggestion.name }}
-                </div>
-                <div class="inline text-lg font-bold text-gray-500">
-                  {{ suggestion.description }}
-                </div> -->
-              </template>
-            </div>
-
-            <!-- /Suggestions -->
-            <!-- <div>Filter and sort</div> -->
-            <template v-if="searchResults && searchResults.length > 0">
-              <!-- <div class="results w-full mx-auto max-w-4xl"> -->
-
-              <SearchResults class="w-full" :results="searchResults" :value="searchString" />
-              <!-- </div> -->
-            </template>
-            <template v-else>
-              <div v-if="hasSearched" class="mt-10 ml-5 text-3xl font-bold text-gray-600 text-center">
-                No Search Results.
-              </div>
-              <!-- <div class="mt-10 ml-5 text-2xl font-bold text-blue-600 text-center">
-                Enter new search terms or try out:
-              </div> -->
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
             </template>
           </div>
         </div>
@@ -253,13 +178,7 @@
             <HorizontalNavPills class="nav" v-model:items="openFiles" v-model="activeFileIri" :closable="true" />
           </div>
 
-<<<<<<< HEAD
           <!-- <button @click="testQuery()"> test</button> -->
-=======
-
-              <!-- <button @click="testQuery()"> test</button> -->
-
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
 
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
@@ -294,7 +213,6 @@
 
         <!-- Tab: Explore  -->
 
-<<<<<<< HEAD
         <div v-if="activeTabName == 'Learn'" class="tab-content flex justify-center items-start ">
           <!-- Suggestions -->
           <div class="flex justify-center w-full my-10">
@@ -332,11 +250,6 @@
 
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
-=======
-        <div v-if="activeTabName == 'Learn'" class="tab-content flex justify-center items-center">
-          <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
-          <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" />
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
           <!-- <img class="" src="animation2.gif" alt="" /> -->
         </div>
         <!-- /Tab: Explore  -->
@@ -368,7 +281,6 @@
 import { ref, onMounted, defineComponent } from "vue";
 import { mapState } from "vuex";
 
-<<<<<<< HEAD
 import DataService from "@/services/DataService";
 import ConfirmDialog from "primevue/confirmdialog";
 
@@ -385,36 +297,6 @@ import SearchClient from "@/services/SearchClient";
 
 import HorizontalNavbar from "@/components/general/HorizontalNavbar.vue";
 import HorizontalNavPills from "@/components/general/HorizontalNavPills.vue";
-=======
-import ConfirmDialog from "primevue/confirmdialog";
-// import LoggerService from "@/services/LoggerService";
-import Tooltip from "primevue/tooltip";
-
-import Chips from "primevue/chips";
-import MegaMenu from "primevue/megamenu";
-
-import OverlayPanel from "primevue/overlaypanel";
-import Dialog from "primevue/dialog";
-import QueryTable from "@/components/dataset/QueryTable.vue";
-
-import Searchbox from "@/components/search/Searchbox.vue";
-import HeroIcon from "@/components/search/HeroIcon.vue";
-import RoundButton from "@/components/dataset/RoundButton.vue";
-import UserWidget from "@/components/dataset/UserWidget.vue";
-import SearchResults from "@/components/search/SearchResults.vue";
-import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
-import CardButton from "@/components/dataset/CardButton.vue";
-import ResponsiveNav from "@/components/dataset/ResponsiveNav.vue";
-import Profile from "@/components/query/Profile.vue";
-import ProgressBar from "@/components/search/ProgressBar.vue";
-
-import SearchService from "@/services/SearchService";
-import SearchClient from "@/services/SearchClient";
-import DataStudio from "./DataStudio.vue";
-
-import OrganisationBrowser from "@/components/dataset/OrganisationBrowser.vue";
-import HorizontalNavPills from "@/components/dataset/HorizontalNavPills.vue";
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
 import { TransitionRoot } from "@headlessui/vue";
 
 // import Dataset from "@/components/dataset/Dataset.ts";
@@ -429,25 +311,12 @@ export default defineComponent({
     ConfirmDialog,
     Searchbox,
     SearchResults,
-<<<<<<< HEAD
     HeroIcon,
     ProgressBar,
     UserWidget,
     CardButton,
     HorizontalNavPills,
     HorizontalNavbar,
-=======
-    HorizontalNavbar,
-    HeroIcon,
-    ProgressBar,
-    DataStudio,
-    RoundButton,
-    OrganisationBrowser,
-    UserWidget,
-    CardButton,
-    ResponsiveNav,
-    HorizontalNavPills,
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
     Profile,
     TransitionRoot
   },
@@ -457,11 +326,7 @@ export default defineComponent({
   data() {
     return {
       isShowing: true,
-<<<<<<< HEAD
       colours: ["light", "light", "blue", "purple", "green", "orange", "pink"],
-=======
-      colours: ["light", "light",  "blue", "purple", "green", "orange", "pink"],
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
       // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
       newItems: [
         {
@@ -616,10 +481,6 @@ export default defineComponent({
       ],
       modulesData: null,
       searchData: null,
-<<<<<<< HEAD
-=======
-      searchResults: [],
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
       autocompleteData: null,
       tableHeight: 600
     };
@@ -627,7 +488,6 @@ export default defineComponent({
 
   computed: {
     ...mapState(["currentUser", "isLoggedIn"]),
-<<<<<<< HEAD
     searchData: {
       get(): any {
         return this.$store.state.searchData;
@@ -636,8 +496,6 @@ export default defineComponent({
         this.$store.commit("updateSearchData", value);
       }
     },
-=======
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
     ontology: {
       get(): any {
         return this.$store.state.ontology;
@@ -700,12 +558,9 @@ export default defineComponent({
     }
   },
   async mounted() {
-<<<<<<< HEAD
     console.log("##### Fetched ##### \n", DataService.getDefinitionBundle("http://endhealth.info/im#GPRegistration"));
     console.log("##### Fetched ##### \n", DataService.getDefinitionBundle("im:GPRegistration"));
 
-=======
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
     this.$store.dispatch("loadTheme");
     // console.log("current THeme", localStorage.getItem("themeName"));
 
@@ -720,21 +575,6 @@ export default defineComponent({
       this.userMeta.lastName = this.currentUser.lastName;
       this.userMeta.email = this.currentUser.email;
     }
-<<<<<<< HEAD
-=======
-
-    //ensures sidebar is focused on search Icon
-    this.$store.commit("updateSelectedEntityType", "Search");
-    this.$store.commit("updateSideNavHierarchyFocus", {
-      name: "Search",
-      fullName: "Search",
-      iri: "http://endhealth.info/im#Search"
-    });
-    // console.log(Dataset.definition)
-
-    //loads moduless (contains tasks),
-    // this.getInitialData();
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
   },
   methods: {
     testQuery(): any {
@@ -787,7 +627,6 @@ export default defineComponent({
           this.$toast.add(LoggerService.error("Could not load autocomplete results", err));
         });
     },
-<<<<<<< HEAD
     async search(searchString: string): Promise<any> {
       this.isLoading = true;
       this.searchData = {};
@@ -797,98 +636,16 @@ export default defineComponent({
           // this.searchResults = [];
           this.searchData = res.data;
           console.log("fetched OSS search results", res);
-=======
-    async getInitialData(): Promise<void> {
-      await SearchClient.searchMeili("Modules", "")
-        .then((res: any) => {
-          this.modulesData = res;
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load initial data", err));
-        });
-      // #todo:other fetches
-    },
-    async searchMeili(index: string, searchString: string): Promise<any> {
-      await SearchClient.searchMeili(index, searchString)
-        .then((res: any) => {
-          console.log(`fetched Meilisearch results for index: ${index}`, res);
-
-          Promise.resolve(res);
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load Meilisearch results data", err));
-        });
-    },
-    async searchMeiliFiltered(index: string, searchString: string): Promise<any> {
-      await SearchClient.searchMeiliFiltered(index, searchString)
-        .then((res: any) => {
-          console.log(`fetched Filtered Meilisearch results for index: "${index}", searchString: "${searchString}"`, res);
-          Promise.resolve(res);
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load Meilisearch results data", err));
-        });
-    },
-    async search(searchString: string): Promise<any> {
-      this.isLoading = true;
-
-      await SearchClient.search(searchString)
-        .then((res: any) => {
-          this.searchResults = [];
-          this.searchData = res;
-
-          console.log("fetched AWS Lambda search results", res);
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
           return res;
         })
         .catch((err: any) => {
           // this.isLoading = false;
           this.searchResults = [];
           this.searchData = null;
-<<<<<<< HEAD
-=======
-
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
           console.log("Could not load search results", err);
           return null;
         });
       this.isLoading = false;
-<<<<<<< HEAD
-=======
-    },
-    async showSearchResults(searchString = "sbp and hr for diabetics with htn and stroke"): Promise<void> {
-      // await SearchClient.searchMeiliFiltered("IMSearch", ""); //'filter': `rdfsLabel =""`
-      this.hasSearched = true;
-
-      // alert(this.isLoading);
-      this.searchString = searchString;
-
-      let _searchString = searchString ? searchString : this.searchString;
-
-      if (_searchString && _searchString.trim() != "") {
-        await this.search(_searchString).then((res: any) => {
-          if (this.searchData) {
-            this.searchResults = (this.searchData as any).data.searchResults;
-            // alert(this.searchResults.length);
-          }
-          this.activePageName = "Main";
-          this.activeTabName = "Find";
-        });
-      }
-    },
-    async oss_search(searchString: string, index: string, limit: number): Promise<any> {
-      this.isLoading = true;
-
-      await SearchService.oss_search(searchString, index, limit)
-        .then((res: any) => {
-          this.isLoading = false;
-          console.log("fetched opensearch results: ", res);
-        })
-        .catch((err: any) => {
-          this.isLoading = false;
-          console.log("Could not load opensearch results", err);
-        });
->>>>>>> dc3adcaf52759614e93f1196c443ca55c9d0af26
     }
   },
   watch: {

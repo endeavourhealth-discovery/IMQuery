@@ -1,0 +1,121 @@
+
+
+
+// Experimental 
+
+
+@[?"im:property"[?"@id" == `im:age`]]
+[
+   @"im:property"[?"@id" == `im:age`] 
+   && 
+   @"entityType"[?"@id" == `Demographic`]
+]
+
+[@"im:property"[?"@id"==`im:age`]&&@"entityType"[?"@id"==`Demographic`]]
+
+filter entity definition by population
+
+
+and clauses
+[*]."im:definition"[*]."im:and" | [][]
+
+just definitions
+[*]."im:definition"[*] | []
+
+
+?
+"rdf:type"[*]."@id"
+
+
+
+ascending and descending ordering
+| sort_by(@, &@id) ascending
+|  reverse(sort_by(@, &@id)) descending
+
+
+
+works
+
+[?type[?"id" == `im:Profile`]]
+
+entities[?"rdf:type"[?"@id" == `im:Profile`]]
+entities[?"rdf:type"[?"@id" == `im:Profile`]]."im:definition" | [] | {profiles: @}
+
+
+
+entities[?"rdf:type"[?"@id" == `im:Profile`] && "im:isContainedIn"[?"@id" == `urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca`]]."im:definition" | [] | {profiles: @}
+
+entities[?'rdf:type'[?'@id' == `im:Profile`] && 'im:isContainedIn'[?'@id' == `urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca`]].'im:definition' | [] | {profiles: @}
+
+
+
+entities[?
+   "rdf:type"[?"@id" == `im:Profile`] && 
+   "im:isContainedIn"[?"@id" == `urn:uuid:9eab35db-ac57-47d8-8eea-05ef06e44dca`]]
+      ."im:definition" 
+         | [] 
+         | {profiles: @}
+
+
+
+Profile / MainEntity e.g. Patient (show all within Selected Folder)
+      Include Patients if 
+         they were part of population: Significant Mental Illness (SMI)
+         and they were not part of either: 
+               population Priority 2  
+            or population Priorta 3a
+
+
+
+
+JSON Path
+
+$..["im:var"]
+
+$..["im:and"][?(@.["im:var"] && @.["im:valueIn"])]
+
+
+to get any statement
+$..[?(@.property && (@.valueIn || @.value))]
+
+
+
+First get all named clauses 
+$..[?(@.@id)]
+$..[?(@.rdfs:label)]
+
+
+
+#####
+$..[?(@.rdfs__label && (@.im__pathTo || @.im__property))]
+$..[?(@.im__var || @.im__fromLatest)]
+$..[?(@.im__c__entityType]
+
+
+This may give you a path like:
+$["im__definition"][*]["im__and"][1]["im__or"][0]["im__and"][1]
+
+Then get all properties
+$..[?(@.rdfs__label && (@.im__pathTo || @.im__property))]
+$..[?(@.rdfs__label && (@.im__valueIn || @.im__value))]
+$..[?(@.rdfs__label && (@.im__property && (@.im__valueIn || @.im__value)))]
+
+
+
+
+
+Or get all properties for a clause
+$..[?(@.rdfs__label && (@.im__var))]
+
+
+// all the variables for a specific clause
+$..[?(@.rdfs__label == "Latest systolic blood pressure in the last 18 months : If Office based and >140")]..[?(@.im__var)]
+
+
+
+experimental:
+$..[?(@.rdfs__label == "Latest systolic blood pressure in the last 18 months : If Office based and >140")][?(@.im__property && (@.im__valueIn || @.im__value))]
+$..[?(@.im__entityType)]
+$..[?(@.rdfs__label)]
+
+

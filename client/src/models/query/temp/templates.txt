@@ -1,0 +1,72 @@
+// Explanation
+template points to additional templates (e.g. that are lower in the hierarchy e.g. MainEntity -> LinkedEntities -> Function/Test 
+
+"profile" / "clause" points to:
+- a property path that points to a value in a clause  e.g. im:valueIn should return concept sets for a particular clause 
+- a function/rule applied to a path 
+(e.g. existential quantification of im:not as the clauses' parent in JSON) 
+to return a phrase e.g. INCLUDE vs EXCLUDE if im:not is absent/present respectively 
+    - these rules can be JSONPath/JMESPath expressions added to  hardcoded functions as part of queryBuilder
+
+phrase points to:
+- a function/rule applied to the sentence to create a 
+phrase consisting of one or more words 
+e.g. if (the next word's first letter is a vowel -> add a/an).
+    - these can be js/ts functions that are instantiated at runtime
+
+both clause/phrase functions should be defined as entities. 
+
+//Main Entity -> im:Person
+
+Example: 
+
+"[Include/Exlude] [a/an] [MainEntity] if they"
+
+{{clause:not}} {{phrase:indefiniteArticle}} if {{template:linkedEntities}}
+
+
+//Main Entity -> all other entities
+
+Example: 
+
+"[Include/Exlude] [a/an] [MainEntity] if it"
+
+{{clause:not}} {{phrase:indefiniteArticle}} if {{template:linkedEntities}}
+
+
+clause:not 
+comparisonTool: JMESPath
+condition: `@."im:not"`
+
+
+
+
+//Linked Entities (pathTo/entityType or none i.e. main entity itself)  
+
+Example: Event
+
+Example: GPRegistration
+
+// Property
+
+
+// Function / Test
+
+
+
+
+Example hasProfile 
+
+
+// Ideas
+- save template text as array rather than text?
+
+- imlementing tests?
+path - to entire object OR just value
+
+test - name of function only -> should return the desired phrase 
+valuemap - ojbect that maps returned values of test against phrases e.g. true = include, false = exclude  
+
+-> first use get on path
+-> then apply function
+-
