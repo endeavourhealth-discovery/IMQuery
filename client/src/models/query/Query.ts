@@ -3,6 +3,7 @@ import _ from "lodash";
 
 import Templates from "@/models/query/Templates";
 
+const debugTemplates = false;;
 
 export class QueryBuilder {
 
@@ -336,7 +337,7 @@ export class Profile extends Entity {
 
         }
 
-        console.log("UI object model (Profile.definitionTree)", _definitionTree);
+        Templates.debugTemplates && console.log("UI object model (Profile.definitionTree)", _definitionTree);
 
         this._definitionTree = _definitionTree;
 

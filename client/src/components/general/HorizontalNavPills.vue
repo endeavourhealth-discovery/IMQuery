@@ -4,18 +4,17 @@
   >
     <template v-for="item in items" :key="item.iri">
       <button
-      draggable="true"
-        @click="onClick(item.iri)"
+        draggable="true"
+        @click="onClick(item?.iri)"
         type="button"
         :class="
           'tab-button transition duration-500 ease-in-out px-2 py-2 non-selectable inline-flex items-center justify-center font-regular text-base  hover:text-gray-900  dark:hover:text-white' +
             [
-              item.isVisible
+              item?.isVisible
                 ? 'active border dark:text-white dark:border-yellow-500 border-2 border-gray-300   bg-white dark:bg-gray-900  shadow-sm'
                 : 'border border-2 border-transparent dark:border-gray-600 dark:text-gray-400 '
             ]
         "
-       
       >
         <!-- Icon -->
         <!-- <div class="inline-flex">
@@ -31,12 +30,12 @@
         </div> -->
 
         <!-- Name  -->
-        <div class="inline-flex font-medium text-2xl ml-2">
-          {{ item.name }}
+        <div class="inline-flex font-medium text-2xl ml-2 mr-2">
+          {{ item?.name }}
         </div>
         <!-- x button  -->
-        <div v-if="closable" class="button-close inline-flex">
-          <HeroIcon class="text-gray-400 hover:text-red-500" strokewidth="2" width="16" height="16" icon="x" @click="closeItem(item.id)" />
+        <div v-if="closable" class="button-close inline-flex hidden">
+          <HeroIcon class="text-gray-400 hover:text-red-500" strokewidth="2" width="16" height="16" icon="x" @click="closeItem(item?.iri)" />
         </div>
       </button>
     </template>
@@ -57,27 +56,23 @@ export default defineComponent({
   methods: {
     onClick(itemIri: string) {
       // this.$emit("update:modelValue", itemIri);
-       this.$store.commit("toggleVisibleOpenFile", itemIri);
+      this.$store.commit("toggleVisibleOpenFile", itemIri);
 
       // this.$emit("update:modelValue", itemIri);
     },
     closeItem(itemIri: string) {
-      //#todo:saveFile via api then remove from state
-
       //removes item from state
-      this.$emit(
-        "update:items",
-        this.items.filter((item: any) => item.iri != itemIri)
-      ); 
+      // this.$store.commit("closeOpenFile", itemIri);
 
-      // state.activeFileId = state.openFiles.length > 0 ? state.openFiles[0].id : "";
-
-      //sets first item as active
-      // if (this.modelValue == itemId && this.items.length > 0) {
-      //   this.$emit("update:modelValue", this.items[1].id);
-      // }
+      // this.$emit(
+      //   "update:items",
+      //   this.items.filter((item: any) => item.iri != itemIri)
+      // );
     }
-  }
+  },
+  // watch: {
+  //   modelValue(value: any) {}
+  // }
 });
 </script>
 
@@ -89,17 +84,17 @@ export default defineComponent({
   user-select: none; /* Likely future */
 }
 
- .drop-zone {
-    background-color: #eee;
-    margin-bottom: 10px;
-    padding: 10px;
-  }
+.drop-zone {
+  background-color: #eee;
+  margin-bottom: 10px;
+  padding: 10px;
+}
 
-  .drag-el {
-    background-color: #fff;
-    margin-bottom: 10px;
-    padding: 5px;
-  }
+.drag-el {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 5px;
+}
 
 .tab-button {
   /* height: 30px; */

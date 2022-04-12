@@ -19,10 +19,10 @@
       >
         <div class="result-content">
           <div class="text-lg  flex row-col items-center">
-            <div class="inline text-black dark:text-gray-300">
+            <div class="inline text-black dark:text-gray-400">
               https://im.endhealth.co.uk/query/#/
             </div>
-            <div class="inline text-gray-500 dark:text-gray-400">
+            <div class="inline text-gray-500 dark:text-gray-300">
               {{ encodeURIComponent(result.iri) }}
             </div>
           </div>

@@ -29,9 +29,9 @@
     <OverlayPanel ref="overlay-userwidget" class="overlay-userwidget">
       <div class="options">
         <!-- Personal Details  -->
-        <div class="non-selectable block px-4 py-2 text-2xl border-b">
-          <div class="text-black font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
-          <div class="text-gray-700 font-semibold">
+        <div class="non-selectable block px-4 py-2 text-2xl border-b dark:border-0">
+          <div class="text-black dark:text-white font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
+          <div class="text-gray-700 dark:text-gray-400 font-semibold">
             {{ modelValue.email }}
           </div>
         </div>
@@ -40,13 +40,18 @@
         <!-- Actions  -->
         <div
           v-if="isLoggedIn"
-          class="non-selectable rounded-md text-gray-800 block mt-2 px-4 py-2 text-2xl font-bold hover:bg-gray-200"
+          class="non-selectable rounded-md text-gray-800 dark:text-white block mt-2 px-4 py-2 text-2xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700"
           role="menuitem"
           @click="$router.push({ name: 'UserEdit' })"
         >
           View Account
         </div>
-        <div v-if="isLoggedIn" class="non-selectable rounded-md text-red-600 block px-4 py-2 text-2xl font-bold hover:bg-gray-200" role="menuitem" @click="onLogOut()">
+        <div
+          v-if="isLoggedIn"
+          class="non-selectable rounded-md text-red-600 block px-4 py-2 text-2xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700"
+          role="menuitem"
+          @click="onLogOut()"
+        >
           Log Out
         </div>
       </div>
@@ -151,15 +156,8 @@ export default defineComponent({
   font-weight: 500;
   font-size: 20px;
 }
+</style>
 
-/* .overlay-userwidget {
-  top: 50px;
-  right: -20px;
-  font-size: 16px;
-  font-weight: 500;
-  z-index: 5;
-  border-color: rgb(207, 210, 218) !important;
-  box-shadow: rgb(207, 210, 218) 0px 2px 6px !important;
-} */
+<style>
 
 </style>

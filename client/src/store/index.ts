@@ -21,8 +21,9 @@ import axios from "axios";
 export default createStore({
   // update stateType.ts when adding new state!
   state: {
+    debugTemplates: false,
     searchData: {} as any,
-    searchResults: [] as any [],
+    searchResults: [] as any[],
     historyCount: 0 as number,
     currentUser: {} as User,
     registeredUsername: "" as string,
@@ -81,7 +82,7 @@ export default createStore({
     updateUserFiles(state, entities) {
       // state.openFiles = [...state.openFiles, file];
 
-      // dont loaded if already loaded
+      // dont load if already loaded
       if (state.userFiles.length > 0) return;
 
 
@@ -106,7 +107,7 @@ export default createStore({
         if (entity["im:definition"]) {
           const _json = JSON.parse(entity["im:definition"]);
 
-          console.log("JSON definition", _json)
+         state.debugTemplates && console.log("JSON definition", _json)
           let _entityReferences = jp.paths(_json, `$..[?(@.@id)]`);
           //filters out paths that are UUIDs for clauses (and not UUID's of entities);
           _entityReferences = _entityReferences.filter((reference: any) => reference[reference.length - 1] != "id");
@@ -241,7 +242,7 @@ export default createStore({
 
           // console.log("_entityReferences", _entityReferences)
 
-          console.log("JSON definition (populated)", _json)
+          state.debugTemplates && console.log("JSON definition (populated)", _json)
 
           //for debugging
           let _entitiesWithoutData = _entityReferences.filter((entity: any) => entity.entityData == undefined);
@@ -272,8 +273,8 @@ export default createStore({
           entities[index]["entitiesWithoutData"] = _entitiesWithoutData;
 
           // console.log("entity", entity)
-          console.log("Entities References", _entityReferences)
-          console.log("Entities without data", _entitiesWithoutData)
+          state.debugTemplates && console.log("Entities References", _entityReferences)
+          state.debugTemplates && console.log("Entities without data", _entitiesWithoutData)
 
 
         }
@@ -294,7 +295,7 @@ export default createStore({
         //files after their content is fetched via service (i.e. when the user opens them)
         const _openFile = {
           ..._userFile,
-          isVisible: true,
+          isVisible: false,
           content: entity
         };
 
@@ -337,7 +338,7 @@ export default createStore({
       }
 
     },
-    
+
     updateCurrentUser(state, user) {
       state.currentUser = user;
     },
@@ -357,12 +358,30 @@ export default createStore({
       state.openFiles = openFiles;
 
     },
+    closeOpenFile(state, fileIri) {
+      // component does not update?
+      let _state = _.cloneDeep(state.openFiles);
+      _state = _state.filter((item: any) => {
+        if (item.iri == fileIri) {
+          alert("true " + fileIri);
+          alert(state.openFiles.length)
+          return false;
+        } else {
+          return true;
+        }
+      })
+      state.openFiles = _state;
+      alert(state.openFiles.length)
+    },
     toggleVisibleOpenFile(state, fileIri) {
       state.openFiles.forEach((item: any, index) => {
         if (item.iri == fileIri) {
           // console.log(item.iri)
           // console.log(fileIri)
-          state.openFiles[index].isVisible = !state.openFiles[index].isVisible
+          state.openFiles[index].isVisible = true;
+        } else {
+          state.openFiles[index].isVisible = false
+
         }
       })
     },

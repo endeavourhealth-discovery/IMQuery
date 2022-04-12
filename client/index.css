@@ -19,6 +19,17 @@
 } */
 
 
+.dark .p-overlaypanel {
+  background: #1f2937 !important;
+  border-color: rgb(207, 210, 218) !important;
+  box-shadow: rgb(207, 210, 218) 0px 0px 6px !important;
+}
+
+.p-overlaypanel {
+  background: white !important;
+}
+
+
 /* Sizes */
 
 .w-25px {

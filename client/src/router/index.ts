@@ -96,7 +96,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: "/:queryIri",
+        path: "/:fileIri",
         name: "Query",
         component: Home,
         meta: {

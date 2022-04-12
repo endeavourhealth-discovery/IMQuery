@@ -15,7 +15,7 @@
       <input
         type="text"
         class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900  dark:text-white font-medium rounded-md focus:outline-none"
-        placeholder="Type to Search for Data, Apps and Resources"
+        placeholder="Type to Search for Queries"
         :value="modelValue"
         @input="onInput($event)"
         @keyup.enter="onEnter($event)"
@@ -32,7 +32,7 @@
 
     <!-- Autocomplete  -->
     <div
-      v-if="filteredHits() && modelValue != '' && componentState == 'focus'"
+      v-if="false && filteredHits() && modelValue != '' && componentState == 'focus'"
       class="autocomplete w-full rounded-t-none rounded-b-md bg-white dark:bg-gray-800 dark:border-0  border border-gray-300 hover:border-gray-300 non-selectable shadow-lg"
       @mouseenter="autocompleteHover = true"
       @mouseleave="autocompleteHover = false"
@@ -63,20 +63,7 @@ export default defineComponent({
   },
   data() {
     return {
-      exampleAutocompleteHits: [
-        {
-          id: 0,
-          searchString: "Heart rate for diabetics"
-        },
-        {
-          id: 1,
-          searchString: "Blood pressure for patients with stroke"
-        },
-        {
-          id: 2,
-          searchString: "Patients with asthma"
-        }
-      ],
+
       initialAutocompleteData: this.autocompleteData,
       autocompleteHits: [],
       autocompleteHover: false,

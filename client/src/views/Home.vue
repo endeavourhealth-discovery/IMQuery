@@ -64,16 +64,16 @@
             <div class="relative">
               <!-- Apps -->
               <OverlayPanel ref="overlay-apps">
-                <div class="flex justify-center w-full my-10">
+                <div class="flex justify-center w-full ">
                   <a
                     :href="app.hyperlink"
                     target="_blank"
                     v-for="app in apps"
                     :key="app.name"
-                    class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200"
+                    class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200 dark:shadow-none dark:hover:bg-gray-700 dark:border-gray-500 dark:hover:border-white "
                   >
-                    <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="app.icon" />
-                    <div class="inline text-lg font-bold text-gray-900">
+                    <HeroIcon class="inline mx-2 my-3 text-blue-700 dark:text-white" strokewidth="2" width="24" height="24" :icon="app.icon" />
+                    <div class="inline text-lg font-bold text-gray-900 dark:text-gray-200">
                       {{ app.name }}
                     </div>
                   </a>
@@ -147,8 +147,8 @@
         <!-- /Tab: Home -->
 
         <!-- Tab: Search -->
-        <div v-if="activeTabName == 'Find'" class="tab-content relative">
-          <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none">
+        <div v-if="activeTabName == 'Find'" class="tab-content relative flex justify-center">
+          <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none mr-20">
             <div
               v-for="category in searchCategories"
               :key="category.name"
@@ -170,23 +170,25 @@
                 cancellationPeriod: 75
               }"
             >
-              <div :class="'inline-flex h-16 w-16 rounded-xl  bg-gradient-to-r p-2 ' + category.css.background">
-                <div class="rounded-full bg-black bg-opacity-50 w-full h-full flex justify-center items-center">
-                  <HeroIcon :class="'' + category.css.icon" strokewidth="2.5" width="20" height="20" :icon="category.icon" />
+              <template v-if="category.visible">
+                <div :class="'category-icon inline-flex h-16 w-16 rounded-xl  bg-gradient-to-r p-2 ' + category.css.background">
+                  <div class="rounded-full bg-black bg-opacity-50 w-full h-full flex justify-center items-center">
+                    <HeroIcon :class="' ' + category.css.icon" strokewidth="2.5" width="20" height="20" :icon="category.icon" />
+                  </div>
                 </div>
-              </div>
-              <div
-                :class="
-                  'inline-flex ml-8 text-3xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
-                    [activeSearchCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-700 dark:text-gray-400 ']
-                "
-              >
-                {{ category.name }}
-              </div>
+                <div
+                  :class="
+                    'inline-flex ml-8 text-3xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
+                      [activeSearchCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-700 dark:text-gray-400 ']
+                  "
+                >
+                  {{ category.name }}
+                </div>
+              </template>
             </div>
           </div>
 
-          <div class="results w-full mx-auto max-w-4xl absolute top-30 lg:top-10 left-2/4 -translate-x-2/4 ">
+          <div class="results w-full max-w-4xl mt-5 #mx-auto #absolute #top-30 #lg:top-10 #left-2/4 #-translate-x-2/4 ">
             <!-- Results -->
 
             <template v-if="searchData?.length > 0">
@@ -201,14 +203,19 @@
               <div class="mt-10 ml-5 text-2xl font-regular text-black dark:text-white text-center">
                 {{
                   hasSearched
-                    ? "This search did not return any results. Please try different search terms."
-                    : "Search for Query Definitions by name by entering your search terms into the Searchbar above."
+                    ? "This search did not return any results. Please use different search terms or try one of the following options: "
+                    : "Find Query Definitions by entering your search terms into the Searchbar above or try one of the following options:"
                 }}
                 <br />
                 <br />
-                Try "COVID-19"
+                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleTry()">1. Search for sample queries e.g. "COVID-19"</div>
+                <br />
+                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleQueryLibrary()">2. Browse the Query Library on IM Directory app</div>
               </div>
             </template>
+          </div>
+          <div class="results-filters">
+            <!-- Empty on purpose -->
           </div>
         </div>
         <!-- /Tab: Search  -->
@@ -217,49 +224,50 @@
         <DataStudio v-if="activeTabName == 'Data'" class="tab-content " />
         <!-- /Tab: Data  -->
 
-        <!-- Tab: Create  -->
+        <!-- Tab: View  -->
 
-        <div v-if="activeTabName == 'Create'" class="tab-content ">
+        <div v-show="activeTabName == 'View'" class="tab-content ">
           <!-- Tabs  -->
           <div class="flex py-5 justify-center items-center w-full">
-            <HorizontalNavPills class="nav" v-model:items="openFiles" v-model="activeFileIri" :closable="true" />
+            <HorizontalNavPills class="nav" :items="openFiles" v-model="activeFileIri" :closable="true" />
           </div>
 
           <!-- <button @click="testQuery()"> test</button> -->
 
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
-            <div class="kanban mt-8 flex justify-center space-x-6 text-white" @click="">
+            <div class="kanban flex justify-center text-white" @click="">
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
-                <div class="profile-column">
-                  <TransitionRoot
-                    appear
-                    :show="isVisible(iri)"
-                    as="div"
-                    enter="transform transition duration-[400ms]"
-                    enter-from="opacity-0 rotate-[-10deg] scale-50"
-                    enter-to="opacity-100 rotate-0 scale-100"
-                    leave="transform duration-200 transition ease-in-out"
-                    leave-from="opacity-100 rotate-0 scale-100"
-                    leave-to="opacity-0 scale-95 "
-                  >
-                    <div class="select-none text-black dark:text-white font-bold text-3xl h-10 h-max-10  overflow-hidden">{{ profile["rdfs:label"] }}</div>
+                <TransitionRoot
+                  appear
+                  :show="isVisible(iri)"
+                  as="div"
+                  enter="transform transition duration-[200ms]"
+                  enter-from="opacity-0 rotate-[-10deg] scale-50"
+                  enter-to="opacity-100 rotate-0 scale-100"
+                  leave="transform duration-200 transition ease-in-out"
+                  leave-from="opacity-100 rotate-0 scale-100"
+                  leave-to="opacity-0 scale-95 "
+                >
+                  <div class="profile-column mx-5">
+                    <!-- <div class="select-none text-black dark:text-white font-bold text-3xl h-10 h-max-10  overflow-hidden">{{ profile["rdfs:label"] }}</div>
                     <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl h-16 h-max-16 overflow-hidden">
                       {{ profile["rdfs:comment"] }}
-                    </div>
+                    </div> -->
 
                     <!-- <Profile class="mt-5" :theme="light" :modelValue="profile" :activeProfile="activeProfile" /> -->
-                    <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
-                  </TransitionRoot>
-                </div>
+                    <Profile class="mt-5 " :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
+                  </div>
+                </TransitionRoot>
               </template>
             </div>
           </div>
         </div>
-        <!-- /Tab: Create  -->
+        <!-- /Tab: View  -->
 
         <!-- Tab: Explore  -->
 
+        <div v-if="activeTabName == 'Create'" class="tab-content flex justify-center items-start "></div>
         <div v-if="activeTabName == 'Learn'" class="tab-content flex justify-center items-start ">
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
@@ -271,7 +279,7 @@
         <OrganisationBrowser v-if="activeTabName == 'Sources'" class="tab-content" />
         <!-- /Tab: Organisations  -->
 
-        <!-- Tab: Dictionary  -->Create
+        <!-- Tab: Dictionary  -->
         <div v-if="activeTabName == 'Dictionary'" class="tab-content ">
           <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe>
         </div>
@@ -372,7 +380,7 @@ export default defineComponent({
 
       searchString: "",
       activePageName: "Main",
-      activeTabName: "Find", //Options #Home #SearchResults #Create #Explore
+      activeTabName: "Find", //Options #Home #SearchResults #View #Explore
       activeSearchCategory: "Search Results",
       searchCategories: [
         {
@@ -397,7 +405,7 @@ export default defineComponent({
           command: () => {
             this.activeSearchCategory = "Query Library";
           },
-          visible: true
+          visible: false
         }
       ],
       suggestions: [
@@ -407,7 +415,7 @@ export default defineComponent({
           icon: "newspaper",
           command: () => {
             //#todo
-            this.activeTabName = "Create";
+            this.activeTabName = "Find";
           },
           visible: true
         },
@@ -424,49 +432,50 @@ export default defineComponent({
       ],
       tabs: [
         {
-          index: 0,
           name: "Home",
           icon: "home",
           visible: true
         },
         {
-          index: 1,
           name: "Find",
           icon: "search",
           visible: true
         },
         {
-          index: 2,
           name: "Data",
           icon: "newspaper",
           visible: false
         },
         {
-          index: 3,
-          name: "Create",
+          name: "View",
           icon: "newspaper",
           visible: true
         },
         {
-          index: 3,
+          name: "Create",
+          icon: "newspaper",
+          visible: true,
+          command: () => {
+            //#todo
+            alert("Coming soon! Stay tuned.");
+          }
+        },
+        {
           name: "Learn",
           icon: "academic_cap",
           visible: true
         },
         {
-          index: 3,
           name: "Explore2",
           icon: "globe",
           visible: false
         },
         {
-          index: 4,
           name: "Sources",
           icon: "office_building",
           visible: false
         },
         {
-          index: 6,
           name: "Resources",
           icon: "newspaper",
           visible: false
@@ -500,7 +509,7 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState(["currentUser", "isLoggedIn"]),
+    ...mapState(["currentUser", "isLoggedIn", "openFiles"]),
     searchData: {
       get(): any {
         return this.$store.state.searchData;
@@ -571,7 +580,7 @@ export default defineComponent({
     }
   },
   async mounted() {
-    console.log("#### Route###", this.$route);
+    console.log("URL Paramater FileIri", this.$route.params.fileIri);
     this.$store.dispatch("loadTheme");
 
     await this.$store.dispatch("authenticateCurrentUser");
@@ -586,8 +595,18 @@ export default defineComponent({
     this.$store.dispatch("loadUserData");
   },
   methods: {
+    handleHotkey(): void {
+      alert("search");
+    },
     async handleOpenItem(iri: any) {
       console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
+    },
+    handleTry(): any {
+      this.search("COVID-19");
+    },
+    handleQueryLibrary(): any {
+      const _libraryURL = "https://im.endhealth.co.uk/#/folder/http:%2F%2Fendhealth.info%2Fceg%2Fqry%23Q_CEGQueries";
+      window.open(_libraryURL, "_blank");
     },
     testQuery(): any {
       // console.log(
@@ -857,5 +876,14 @@ nav .tab-buttons {
   width: 100%;
   max-width: 350px;
   height: 40px;
+}
+
+.results-filters {
+  min-width: 250px;
+}
+
+.category-icon {
+  min-width: 40px;
+  min-height: 40px;
 }
 </style>

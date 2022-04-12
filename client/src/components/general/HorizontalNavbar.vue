@@ -12,7 +12,7 @@
                 : ' text-black dark:text-gray-400 border-b-transparent'
             ]
         ]"
-        @click="onClick(item.name, item.hyperlink ? item.hyperlink : '')"
+        @click="onClick(item.name, item.command)"
         v-wave="{
           color: 'currentColor',
           easing: 'ease-out',
@@ -49,9 +49,11 @@ export default defineComponent({
     HeroIcon
   },
   methods: {
-    onClick(itemName: string, hyperlink: string = ""): void {
-      if (hyperlink && hyperlink != "") {
-        window.open(hyperlink, "_blank");
+    onClick(itemName: string, command: any | null = null): void {
+      // if (hyperlink && hyperlink != "") {
+      //   window.open(hyperlink, "_blank");
+      if (command) {
+        command();
       } else {
         this.$emit("update:modelValue", itemName);
       }
