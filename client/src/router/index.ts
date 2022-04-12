@@ -91,10 +91,19 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: Home,
-    // redirect: { name: "Dashboard" },
     meta: {
       requiresLicense: true
-    }
+    },
+    children: [
+      {
+        path: "/:queryIri",
+        name: "Query",
+        component: Home,
+        meta: {
+          requiresLicense: true
+        }
+      }
+    ]
   },
   {
     path: "/snomedLicense",

@@ -1,1 +1,0 @@
-export { VueDraggableNext } from './vueDraggable'

@@ -3,7 +3,7 @@ import _ from "lodash";
 // import jmp from "jmp";
 import jsonpath from "jsonpath";
 import axios, { AxiosResponse } from "axios";
-import DataService from "@/services/DataService";
+import EntityService from "@/services/EntityService";
 
 export enum entityTypes {
     datamodel = 'sh:NodeShape',
@@ -81,7 +81,7 @@ export default class Ontology {
         const _filenames = ["CoreOntology.json", "AdditionalOntology.json"]; //can add your own definitions e.g. for profiles and random concept sets.
 
         _filenames.forEach(async (filename: string) => {
-            await DataService.getData(filename)
+            await EntityService.getData(filename)
                 .then(data => {
                     if (data["entities"]) {
                         this._entities = data["entities"]

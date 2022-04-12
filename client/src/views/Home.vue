@@ -44,8 +44,7 @@
 
         <!-- Searchbox  -->
         <Searchbox
-          v-if="activeTabName != 'Home'"
-          :class="'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']"
+          :class="'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 inline ' + [activeTabName == 'Home' ? ' ' : '']"
           v-model="searchString"
           :autocompleteData="autocompleteData"
           @search="search(searchString)"
@@ -54,13 +53,13 @@
         <!-- /Searchbox  -->
 
         <div class="right flex mr-7 ml-4">
-          <SplitButton
+          <!-- <SplitButton
             v-if="isLoggedIn"
             class="p-button-rounded mr-10 h-14 mt-2 #p-button-outlined"
             label="New"
             icon="pi pi-plus"
             :model="newItems"
-          ></SplitButton>
+          ></SplitButton> -->
           <!-- Apps  -->
           <div class="select-none flex mt-3" @click="onToggleApps">
             <div class="app-title ml-5 font-medium text-black dark:text-white text-3xl">
@@ -111,25 +110,64 @@
           <!-- /Brand  -->
 
           <!-- Searchbox  -->
-          <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm overflow-y-scroll">
+          <!-- <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm">
             <Searchbox class="w-full mx-auto searchbox-main" v-model="searchString" :autocompleteData="autocompleteData" @search="search(searchString)" />
-          </div>
+          </div> -->
           <!-- /Searchbox  -->
 
-          <!-- Examples  -->
-          <div id="examples" class="non-selectable max-w-3xl my-7 text-gray-900 dark:text-white text-lg" @click="showSearchResults()">
-            <a class="mr-3 font-bold">Try </a>
-            <b>sbp</b> and <b>hr</b> for <b>diabetics</b> with <b>htn</b> and
-            <b>stroke</b>
+          <!-- Suggestions -->
+          <div class="flex justify-center w-full my-10">
+            <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
+              <template v-if="index == 0">
+                <CardButton
+                  @click="suggestion.command"
+                  class="w-250px"
+                  :name="suggestion.name"
+                  :description="suggestion.description"
+                  :icon="suggestion.icon"
+                  :outlined="true"
+                  nameColor="white"
+                  descriptionColor="white"
+                  iconColor="white"
+                  backgroundColor="blue-500"
+                />
+              </template>
+              <template v-else>
+                <CardButton
+                  @click="suggestion.command"
+                  class="w-250px"
+                  :name="suggestion.name"
+                  :description="suggestion.description"
+                  :icon="suggestion.icon"
+                  :outlined="true"
+                  nameColor="black"
+                  descriptionColor="gray-700"
+                  iconColor="blue-700"
+                  backgroundColor="white"
+                />
+              </template>
+            </template>
           </div>
-          <!-- /Examples  -->
         </div>
         <!-- /Tab: Home -->
 
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Find'" class="tab-content relative">
           <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0">
-            <div v-for="category in searchCategories" :key="category.name" class="flex items-center" @click="category.command()">
+            <div
+              v-for="category in searchCategories"
+              :key="category.name"
+              class="group flex items-center rounded-lg hover:bg-black hover:bg-opacity-5  p-3"
+              @click="category.command()"
+              v-wave="{
+                color: 'currentColor',
+                easing: 'ease-out',
+                duration: 0.5,
+                initialOpacity: 0.5,
+                finalOpacity: 0.1,
+                cancellationPeriod: 75
+              }"
+            >
               <div :class="'inline-flex h-16 w-16 rounded-xl  bg-gradient-to-r p-2 ' + category.css.background">
                 <div class="rounded-full bg-black bg-opacity-50 w-full h-full flex justify-center items-center">
                   <HeroIcon :class="'' + category.css.icon" strokewidth="2.5" width="20" height="20" :icon="category.icon" />
@@ -137,7 +175,7 @@
               </div>
               <div
                 :class="
-                  'inline-flex ml-8 text-3xl font-medium hover:text-blue-700 dark:hover:text-white cursor-pointer transition ease-in-out duration-300' +
+                  'inline-flex ml-8 text-3xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
                     [activeSearchCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-800 dark:text-gray-400 ']
                 "
               >
@@ -149,17 +187,21 @@
           <div class="results w-full mx-auto max-w-4xl absolute top-30 lg:top-10 left-2/4 -translate-x-2/4 ">
             <!-- Results -->
 
-            <template v-if="searchData && searchData.hits.hits.length > 0">
-              <div class="text-center text-black dark:text-white text-xl font-medium">
-                Found {{ searchData.hits.hits.length }} results in {{ searchData.took }} ms
+            <template v-if="searchData?.length > 0">
+              <div class="text-center text-black dark:text-white text-xl font-medium mb-5">
+                {{ searchData.length }} {{ searchData.length == 1 ? "result" : "results" }} found
               </div>
               <SearchResults class="w-full" :results="searchData" :value="searchString" />
               <!-- </div> -->
             </template>
 
             <template v-else>
-              <div v-if="hasSearched" class="mt-10 ml-5 text-3xl font-bold text-gray-600 dark:text-white text-center">
-                No Search Results.
+              <div class="mt-10 ml-5 text-3xl font-bold text-gray-600 dark:text-white text-center">
+                {{
+                  hasSearched
+                    ? "This search did not return any results. Please try different search terms."
+                    : "Search for Query Definitions by name by entering your search terms into the Searchbar above."
+                }}
               </div>
             </template>
           </div>
@@ -214,40 +256,6 @@
         <!-- Tab: Explore  -->
 
         <div v-if="activeTabName == 'Learn'" class="tab-content flex justify-center items-start ">
-          <!-- Suggestions -->
-          <div class="flex justify-center w-full my-10">
-            <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
-              <template v-if="index == 0">
-                <CardButton
-                  @click="suggestion.command"
-                  class="w-400px"
-                  :name="suggestion.name"
-                  :description="suggestion.description"
-                  :icon="suggestion.icon"
-                  :outlined="true"
-                  nameColor="white"
-                  descriptionColor="white"
-                  iconColor="white"
-                  backgroundColor="blue-500"
-                />
-              </template>
-              <template v-else>
-                <CardButton
-                  @click="suggestion.command"
-                  class="w-400px"
-                  :name="suggestion.name"
-                  :description="suggestion.description"
-                  :icon="suggestion.icon"
-                  :outlined="true"
-                  nameColor="black"
-                  descriptionColor="gray-700"
-                  iconColor="blue-700"
-                  backgroundColor="white"
-                />
-              </template>
-            </template>
-          </div>
-
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
           <!-- <img class="" src="animation2.gif" alt="" /> -->
@@ -281,7 +289,7 @@
 import { ref, onMounted, defineComponent } from "vue";
 import { mapState } from "vuex";
 
-import DataService from "@/services/DataService";
+import EntityService from "@/services/EntityService";
 import ConfirmDialog from "primevue/confirmdialog";
 
 import Searchbox from "@/components/search/Searchbox.vue";
@@ -333,7 +341,6 @@ export default defineComponent({
           label: "Search Profile",
           // icon: 'pi pi-refresh',
           command: () => {
-            //#todo create new profile
             this.$toast.add({ severity: "success", summary: "Updated", detail: "Open New Query Builder file", life: 3000 });
           }
         },
@@ -389,8 +396,8 @@ export default defineComponent({
       ],
       suggestions: [
         {
-          name: "Create New Search Profile",
-          description: "Extract data in bulk data from Discovery Data Service ",
+          name: "My Query Library",
+          description: "Browse and view query definitions",
           icon: "newspaper",
           command: () => {
             //#todo
@@ -400,7 +407,7 @@ export default defineComponent({
         },
         {
           name: "Watch a 100 second Tutorial",
-          description: "Learn how to use DataStudio in less than two minutes",
+          description: "Learn how to Get Started",
           icon: "academic_cap",
           command: () => {
             //#todo
@@ -558,14 +565,10 @@ export default defineComponent({
     }
   },
   async mounted() {
-    console.log("##### Fetched ##### \n", DataService.getDefinitionBundle("http://endhealth.info/im#GPRegistration"));
-    console.log("##### Fetched ##### \n", DataService.getDefinitionBundle("im:GPRegistration"));
+    console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle("http://endhealth.info/im#GPRegistration"));
 
+    console.log("#### Route###", this.$route);
     this.$store.dispatch("loadTheme");
-    // console.log("current THeme", localStorage.getItem("themeName"));
-
-    // this.currenTheme = "dark";
-    this.$store.dispatch("loadUserData");
 
     await this.$store.dispatch("authenticateCurrentUser");
 
@@ -575,6 +578,8 @@ export default defineComponent({
       this.userMeta.lastName = this.currentUser.lastName;
       this.userMeta.email = this.currentUser.email;
     }
+
+    this.$store.dispatch("loadUserData");
   },
   methods: {
     testQuery(): any {
@@ -629,22 +634,31 @@ export default defineComponent({
     },
     async search(searchString: string): Promise<any> {
       this.isLoading = true;
-      this.searchData = {};
 
-      await SearchService.oss_search(searchString, "dev-search", 20)
+      //find queries regardless of status or scheme
+      const _requestBody = {
+        termFilter: searchString,
+        statusFilter: [],
+        typeFilter: ["http://endhealth.info/im#Query"],
+        schemeFilter: [],
+        sortBy: 0,
+        page: 1,
+        size: 20
+      };
+
+      await SearchService.advancedSearch(_requestBody)
         .then((res: any) => {
-          // this.searchResults = [];
-          this.searchData = res.data;
           console.log("fetched OSS search results", res);
+          this.hasSearched = true;
+          this.searchData = res.data;
+          this.activeTabName = "Find";
           return res;
         })
         .catch((err: any) => {
-          // this.isLoading = false;
-          this.searchResults = [];
-          this.searchData = null;
           console.log("Could not load search results", err);
           return null;
         });
+
       this.isLoading = false;
     }
   },

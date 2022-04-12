@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col space-y-3 overflow-y-auto">
     <div
-      v-for="result in searchResults"
-      :key="result._id"
+      v-for="result in results"
+      :key="result.iri"
       class="non-selectable group rounded-md transition duration-500 ease-in-out appearance-none relative block px-4 py-3 bg-white border border-gray-200 hover:border-gray-300 focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none focus:z-10 hover:shadow-md"
     >
       <!-- <div>
@@ -16,10 +16,10 @@
         </div>
       </div> -->
       <div class="text-3xl text-blue-600 group-hover:text-blue-800 font-normal">
-        {{ result._source["rdfs:label"] }}
+        {{ result.name}}
       </div>
       <div class="text-2xl text-gray-900 mt-2">
-        Search Profile
+         {{ result.scheme.name}}
       </div>
     </div>
   </div>
@@ -35,7 +35,6 @@ export default defineComponent({
   props: ["results", "searchstring"],
   data() {
     return {
-      searchResults: this.results.hits.hits,
       exampleResults: [
         {
           url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes+in+east+london",
@@ -70,20 +69,20 @@ export default defineComponent({
       ]
     };
   },
-  methods: {
-    urlDomain(url: string): string {
-      return url
-        .split("/")
-        .slice(0, 3)
-        .join("/");
-    },
-    urlParams(url: string): string {
-      return url
-        .split("/")
-        .slice(4, 100)
-        .join(" > ");
-    }
-  }
+  // methods: {
+  //   urlDomain(url: string): string {
+  //     return url
+  //       .split("/")
+  //       .slice(0, 3)
+  //       .join("/");
+  //   },
+  //   urlParams(url: string): string {
+  //     return url
+  //       .split("/")
+  //       .slice(4, 100)
+  //       .join(" > ");
+  //   }
+  // }
 });
 </script>
 

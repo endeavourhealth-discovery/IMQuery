@@ -7,7 +7,6 @@ import { CustomAlert } from "@/models/user/CustomAlert";
 import EntityService from "../services/EntityService";
 import AuthService from "@/services/AuthService";
 import LoggerService from "@/services/LoggerService";
-import DataService from "@/services/DataService";
 
 
 import { QueryBuilder } from "@/models/query/Query";
@@ -431,7 +430,7 @@ export default createStore({
 
 
       _filenames.forEach(async (filename: string) => {
-        await DataService.getData(filename)
+        await EntityService.getData(filename)
           .then(data => {
             commit("updateUserFiles", data)
             console.log("opened file:", data);

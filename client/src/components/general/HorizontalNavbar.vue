@@ -5,10 +5,10 @@
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex items-center justify-center transition duration-500 ease-in-out dark:hover:text-white ' +
+          'tab-button non-selectable inline-flex items-center justify-center transition duration-500 ease-in-out dark:hover:text-white rounded-lg ' +
             [
               modelValue == item.name
-                ? ' dark:text-white  text-blue-600 border-b border-b-2 border-b-blue-500 dark:border-b-0 '
+                ? ' dark:text-white  text-blue-600 #border-b #border-b-2 #border-b-blue-500 dark:border-b-0 '
                 : ' text-black dark:text-gray-400 border-b-transparent'
             ]
         ]"

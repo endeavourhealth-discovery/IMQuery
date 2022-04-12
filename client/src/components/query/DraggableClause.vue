@@ -272,17 +272,17 @@ export default defineComponent({
         // this.$store.commit("updateIsCardDragged", val);
       }
     },
-    queryBuilder: {
-      get(): any {
-        return this.$store.state.queryBuilder;
-      },
-      set({ action, payload }: any): void {
-        this.$store.commit("queryBuilder", {
-          action: action,
-          payload: payload
-        });
-      }
-    }
+    // queryBuilder: {
+    //   get(): any {
+    //     return this.$store.state.queryBuilder;
+    //   },
+    //   set({ action, payload }: any): void {
+    //     this.$store.commit("queryBuilder", {
+    //       action: action,
+    //       payload: payload
+    //     });
+    //   }
+    // }
   }
 });
 </script>
