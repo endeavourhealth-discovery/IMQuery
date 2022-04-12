@@ -1,4 +1,6 @@
 <template>
+  <!--  (logged in ) -->
+
   <div
     v-if="modelValue && isLoggedIn"
     class="userwidget relative inline-block text-left"
@@ -6,40 +8,56 @@
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >
-    <div class="select-none text-blue-700 font-bold dark:text-white hover:bg-blue-50 dark:hover:bg-gray-700 text-3xl border border-2 border-blue-600 dark:border-white rounded-full p-3"    v-wave="{
-          color: 'currentColor',
-          easing: 'ease-out',
-          duration: 0.7,
-          initialOpacity: 0.6,
-          finalOpacity: 0.1,
-          cancellationPeriod: 75
-        }">
+    <!-- Circle  -->
+    <button
+      @click="handleToggle"
+      class="select-none text-blue-700 font-bold dark:text-white hover:bg-blue-50 dark:hover:bg-gray-700 text-3xl border border-2 border-blue-600 dark:border-white rounded-full p-3"
+      v-wave="{
+        color: 'currentColor',
+        easing: 'ease-out',
+        duration: 0.7,
+        initialOpacity: 0.6,
+        finalOpacity: 0.1,
+        cancellationPeriod: 75
+      }"
+    >
       {{ modelValue.firstName.substring(0, 1) + modelValue.lastName.substring(0, 1) }}
-    </div>
+    </button>
+    <!-- /Circle  -->
 
+    <!-- Popover  -->
+    <OverlayPanel ref="overlay-userwidget" class="overlay-userwidget">
+      <div class="options">
+        <!-- Personal Details  -->
+        <div class="non-selectable block px-4 py-2 text-2xl border-b">
+          <div class="text-black font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
+          <div class="text-gray-700 font-semibold">
+            {{ modelValue.email }}
+          </div>
+        </div>
+        <!-- Personal Details  -->
 
-    <div v-if="modelValue && expanded" class="options origin-top-right absolute mt-1 rounded-md shadow-lg bg-white  ring-1 focus:outline-none" role="menu">
-      <div class="non-selectable block px-4 py-2 text-2xl border-b">
-        <div class="text-black font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
-        <div class="text-gray-700 font-regular">
-          {{ modelValue.email }}
+        <!-- Actions  -->
+        <div
+          v-if="isLoggedIn"
+          class="non-selectable rounded-md text-gray-800 block mt-2 px-4 py-2 text-2xl font-bold hover:bg-gray-200"
+          role="menuitem"
+          @click="$router.push({ name: 'UserEdit' })"
+        >
+          View Account
+        </div>
+        <div v-if="isLoggedIn" class="non-selectable rounded-md text-red-600 block px-4 py-2 text-2xl font-bold hover:bg-gray-200" role="menuitem" @click="onLogOut()">
+          Log Out
         </div>
       </div>
-
-      <div
-        v-if="isLoggedIn"
-        class="non-selectable text-gray-700 block px-4 py-2 text-2xl hover:bg-gray-100"
-        role="menuitem"
-        @click="$router.push({ name: 'UserEdit' })"
-      >
-        View Account
-      </div>
-      <div v-if="isLoggedIn" class="non-selectable text-red-600 block px-4 py-2 text-2xl hover:bg-gray-100" role="menuitem" @click="onLogOut()">
-        Log Out
-      </div>
-    </div>
+      <!-- Actions  -->
+    </OverlayPanel>
+    <!-- /Popover  -->
   </div>
-  <div v-else class="non-selectable relative mt-3 flex text-3xl font-semibold">
+  <!--  (logged in ) -->
+
+  <!--  (logged out ) -->
+  <div v-else class="non-selectable relative pt-1 flex text-3xl font-semibold">
     <div class="hover:underline text-blue-600 dark:text-yellow-400  " @click="$router.push({ name: 'Register' })">
       Sign Up
     </div>
@@ -47,11 +65,13 @@
       Log In
     </div>
   </div>
+  <!--  (logged out ) -->
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from "vue";
 import { mapState } from "vuex";
+
 // import HeroIcon from "@/components/general/HeroIcon.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
 import Swal from "sweetalert2";
@@ -72,6 +92,9 @@ export default defineComponent({
   },
   computed: mapState(["currentUser", "isLoggedIn"]),
   methods: {
+    handleToggle(event: any): void {
+      (this.$refs["overlay-userwidget"] as any).toggle(event);
+    },
     onLogOut(): void {
       this.$store.dispatch("logoutCurrentUser");
       this.$toast.add(LoggerService.success("Logged Out Successfully."));
@@ -129,13 +152,14 @@ export default defineComponent({
   font-size: 20px;
 }
 
-.userwidget .options {
+/* .overlay-userwidget {
   top: 50px;
   right: -20px;
   font-size: 16px;
   font-weight: 500;
   z-index: 5;
-  border-color: rgb(207, 210, 218);
-  box-shadow: rgb(207, 210, 218) 0px 2px 6px;
-}
+  border-color: rgb(207, 210, 218) !important;
+  box-shadow: rgb(207, 210, 218) 0px 2px 6px !important;
+} */
+
 </style>

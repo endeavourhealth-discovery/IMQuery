@@ -54,11 +54,13 @@
             :model="newItems"
           ></SplitButton> -->
           <!-- Apps  -->
-          <div class="select-none flex mt-3" @click="onToggleApps">
-            <div class="app-title ml-5 font-medium text-black dark:text-white text-3xl">
-              Apps
+          <div class="select-none flex" @click="onToggleApps">
+            <div :class="'flex ' + [isLoggedIn ? ' pt-2' : '']">
+              <div class="app-title pt-1 ml-5 font-medium text-black dark:text-white text-3xl">
+                Apps
+              </div>
+              <HeroIcon class="mt-2 mx-2 text-black dark:text-white" strokewidth="2" width="20" height="20" icon="chevron_down" />
             </div>
-            <HeroIcon class="mt-1 mx-2 text-black dark:text-white" strokewidth="2" width="20" height="20" icon="chevron_down" />
             <div class="relative">
               <!-- Apps -->
               <OverlayPanel ref="overlay-apps">
@@ -81,13 +83,13 @@
             <!-- /Apps -->
           </div>
 
-          <button class="theme-toggler  ml-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+          <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
             <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
             <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
           </button>
 
           <!-- User Widget -->
-          <UserWidget class="ml-10" :modelValue="userMeta" />
+          <UserWidget class="" :modelValue="userMeta" />
         </div>
         <ProgressBar class="" v-if="isLoading" />
       </header>
