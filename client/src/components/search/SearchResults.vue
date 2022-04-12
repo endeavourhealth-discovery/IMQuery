@@ -1,38 +1,71 @@
 <template>
-  <div class="flex flex-col space-y-3 overflow-y-auto">
-    <div
-      v-for="result in results"
-      :key="result.iri"
-      class="non-selectable group rounded-md transition duration-500 ease-in-out appearance-none relative block px-4 py-3 bg-white border border-gray-200 hover:border-gray-300 focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none focus:z-10 hover:shadow-md"
+  <div class="flex flex-col">
+    <TransitionRoot
+      appear
+      :show="isShown"
+      as="div"
+      enter="transform transition duration-[500ms]"
+      enter-from="opacity-0 -translate-y-5 scale-50"
+      enter-to="opacity-100  translate-y-0 scale-100"
+      leave="transform duration-[500ms] transition ease-in-out"
+      leave-from="opacity-100 rotate-0 scale-100"
+      leave-to="opacity-0 scale-50 "
     >
-      <!-- <div>
-        <div class="text-lg  flex row-col items-center">
-          <div class="inline text-black">
-            {{ urlDomain(result.url) + "/" }}
+      <div
+        v-for="result in results"
+        :key="result.iri"
+        class="result cursor-pointer relative z-20 hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
+        @click="handleView(result.iri)"
+      >
+        <div class="result-content">
+          <div class="text-lg  flex row-col items-center">
+            <div class="inline text-black dark:text-gray-300">
+              https://im.endhealth.co.uk/query/#/
+            </div>
+            <div class="inline text-gray-500 dark:text-gray-400">
+              {{ encodeURIComponent(result.iri) }}
+            </div>
           </div>
-          <div class="inline text-gray-500">
-            {{ urlParams(result.url) }}
+          <div class="text-3xl text-blue-600 dark:text-white  font-semibold">
+            {{ result.name }}
+          </div>
+          <div class="text-xl text-gray-900 dark:text-gray-200 mt-2 ">
+            {{ result.scheme.name }}
           </div>
         </div>
-      </div> -->
-      <div class="text-3xl text-blue-600 group-hover:text-blue-800 font-normal">
-        {{ result.name}}
+
+        <div class="result-actions rounded-md mt-2 flex justify-end select-none space-x-5 mr-4">
+          <div
+            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-blue-600 dark:text-white"
+            @click="handleView(result.iri)"
+          >
+            <HeroIcon class="mx-2" strokewidth="2" width="20" height="24" icon="eye" /> View
+          </div>
+          <div
+            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-green-600 dark:text-white"
+            @click="handleEdit(result.iri)"
+          >
+            <HeroIcon class="mx-2" strokewidth="2" width="20" height="24" icon="pencil" /> Edit
+          </div>
+          <div class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-purple-700 dark:text-white hidden">
+            <HeroIcon class="mx-2" strokewidth="2" width="20" height="24" icon="download" /> Download
+          </div>
+        </div>
       </div>
-      <div class="text-2xl text-gray-900 mt-2">
-         {{ result.scheme.name}}
-      </div>
-    </div>
+    </TransitionRoot>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
+import { TransitionRoot } from "@headlessui/vue";
 
 export default defineComponent({
   name: "SearchResults",
-  //components: {HeroIcon},
-  props: ["results", "searchstring"],
+  components: { TransitionRoot, HeroIcon },
+  emits: ["openItem"],
+  props: ["results", "searchstring", "isShown"],
   data() {
     return {
       exampleResults: [
@@ -69,6 +102,14 @@ export default defineComponent({
       ]
     };
   },
+  methods: {
+    handleView(iri: string) {
+      this.$emit("openItem", iri);
+    },
+    handleEdit(iri: string) {
+      alert("Coming soon. Stay tuned!");
+    }
+  }
   // methods: {
   //   urlDomain(url: string): string {
   //     return url
@@ -87,10 +128,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.non-selectable {
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none; /* Likely future */
+.result-actions {
+  /* display: none; */
+  height: 0px;
+  transition: height 0.2s ease-out;
+}
+.result:hover .result-actions {
+  /* display: flex; */
+  height: 20px;
 }
 </style>

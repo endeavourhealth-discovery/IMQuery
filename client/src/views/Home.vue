@@ -15,21 +15,14 @@
         <!-- Left Side  -->
         <div :class="'pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
           <!-- Menu Toggler  -->
-          <RoundButton
-            class="menu-toggler h-14 w-14 mr-6"
-            :rounded="false"
-            :showRing="true"
-            backgroundColor="white"
-            hoverBackgroundColor="white"
-            borderColor="white"
-            hoverTextColor="blue-600"
-            focusTextColor="blue-600"
-            focusBackgroundColor="white"
-            textColor="gray-700"
-            ringColor="blue-600"
+
+          <button
+            :class="
+              `menu-toggler h-14 w-14 mr-6 non-selectable roundbutton focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out flex items-center justify-center rounded-md border text-black dark:text-white border-gray-200 dark:border-transparent bg-transparent  hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-700  dark:hover:text-white focus:text-blue-600 dark:focus:text-white  focus:ring-blue-600 dark:focus:ring-white`
+            "
           >
             <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
-          </RoundButton>
+          </button>
           <!-- / Menu Toggler  -->
 
           <img class="app-logo h-10 w-10" src="app-icon.png" alt="" />
@@ -153,11 +146,18 @@
 
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Find'" class="tab-content relative">
-          <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0">
+          <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none">
             <div
               v-for="category in searchCategories"
               :key="category.name"
-              class="group flex items-center rounded-lg hover:bg-black hover:bg-opacity-5  p-3"
+              :class="
+                'transition duration-500 ease-in-out group flex items-center rounded-lg  px-5 py-3 border border-1 border-transparent ' +
+                  [
+                    activeSearchCategory == category.name
+                      ? ' bg-blue-50 border-blue-500 dark:border-transparent dark:bg-transparent'
+                      : ' text-gray-700 dark:text-gray-400 hover:bg-blue-50 dark:bg-transparent'
+                  ]
+              "
               @click="category.command()"
               v-wave="{
                 color: 'currentColor',
@@ -176,7 +176,7 @@
               <div
                 :class="
                   'inline-flex ml-8 text-3xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
-                    [activeSearchCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-800 dark:text-gray-400 ']
+                    [activeSearchCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-700 dark:text-gray-400 ']
                 "
               >
                 {{ category.name }}
@@ -191,17 +191,20 @@
               <div class="text-center text-black dark:text-white text-xl font-medium mb-5">
                 {{ searchData.length }} {{ searchData.length == 1 ? "result" : "results" }} found
               </div>
-              <SearchResults class="w-full" :results="searchData" :value="searchString" />
+              <SearchResults class="w-full" :results="searchData" :value="searchString" :isShown="isResultsShown" @openItem="handleOpenItem" />
               <!-- </div> -->
             </template>
 
             <template v-else>
-              <div class="mt-10 ml-5 text-3xl font-bold text-gray-600 dark:text-white text-center">
+              <div class="mt-10 ml-5 text-2xl font-regular text-black dark:text-white text-center">
                 {{
                   hasSearched
                     ? "This search did not return any results. Please try different search terms."
                     : "Search for Query Definitions by name by entering your search terms into the Searchbar above."
                 }}
+                <br />
+                <br />
+                Try "COVID-19"
               </div>
             </template>
           </div>
@@ -333,6 +336,7 @@ export default defineComponent({
   },
   data() {
     return {
+      isResultsShown: false,
       isShowing: true,
       colours: ["light", "light", "blue", "purple", "green", "orange", "pink"],
       // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
@@ -382,14 +386,14 @@ export default defineComponent({
           visible: true
         },
         {
-          name: "My Files",
-          icon: "document_duplicate",
+          name: "Query Library",
+          icon: "newspaper",
           css: {
             background: "from-cyan-600 to-green-500",
-            icon: "text-yellow-500"
+            icon: "text-yellow-300"
           },
           command: () => {
-            this.activeSearchCategory = "My Files";
+            this.activeSearchCategory = "Query Library";
           },
           visible: true
         }
@@ -565,8 +569,6 @@ export default defineComponent({
     }
   },
   async mounted() {
-    console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle("http://endhealth.info/im#GPRegistration"));
-
     console.log("#### Route###", this.$route);
     this.$store.dispatch("loadTheme");
 
@@ -582,6 +584,9 @@ export default defineComponent({
     this.$store.dispatch("loadUserData");
   },
   methods: {
+    async handleOpenItem(iri: any) {
+      console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
+    },
     testQuery(): any {
       // console.log(
       //   "ontology",
@@ -634,6 +639,7 @@ export default defineComponent({
     },
     async search(searchString: string): Promise<any> {
       this.isLoading = true;
+      this.isResultsShown = false;
 
       //find queries regardless of status or scheme
       const _requestBody = {
@@ -650,6 +656,7 @@ export default defineComponent({
         .then((res: any) => {
           console.log("fetched OSS search results", res);
           this.hasSearched = true;
+          this.isResultsShown = true;
           this.searchData = res.data;
           this.activeTabName = "Find";
           return res;
