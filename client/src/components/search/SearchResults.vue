@@ -68,6 +68,7 @@ export default defineComponent({
   props: ["results", "searchstring", "isShown"],
   data() {
     return {
+      debounce: 0,
       exampleResults: [
         {
           url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes+in+east+london",
@@ -104,9 +105,11 @@ export default defineComponent({
   },
   methods: {
     handleView(iri: string) {
-      // this.$emit("openItem", iri);
-      this.$store.commit("loadFile", iri);
-
+      //debouncing necessary to avoid loading items twice
+      clearTimeout(this.debounce);
+      this.debounce = window.setTimeout(() => {
+        this.$store.commit("loadFile", iri);
+      }, 500);
     },
     handleEdit(iri: string) {
       alert("Coming soon. Stay tuned!");

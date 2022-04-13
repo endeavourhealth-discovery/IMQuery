@@ -102,8 +102,14 @@ export default createStore({
   mutations: {
     loadFile(state, fileIri) {
 
+      if (state.openFiles.some(file => file.iri === fileIri)) {
+        alert("File already open!");
+        state.activeTabName = "View";
+        return;
+      }
 
-      //recursive delay until ontology has loaded (require for pre-population)
+
+      // recursive delay until ontology has loaded (require for pre-population)
       function delayFileLoad() {
         if (!state.ontology._entities) {
           setTimeout(delayFileLoad, 100);
@@ -112,7 +118,13 @@ export default createStore({
         }
       }
 
-      setTimeout(delayFileLoad, 100);
+      if (!state.ontology._entities) {
+        setTimeout(delayFileLoad, 100);
+      } else {
+
+        loadEntity();
+      }
+
 
 
       async function loadEntity() {
@@ -344,12 +356,17 @@ export default createStore({
 
 
           // ensures 1 item is active
+          // const _isAnyFileVisible = state.openFiles.some((file: any) => file.isVisible);
+
+
+          const toggleAllInvisible = () => state.openFiles.forEach((file: any, index: any) => state.openFiles[index].isVisible = false);
 
           //makes the latest file visible
-          if (state.openFiles.length > 0) {
+          if (state.openFiles.length > 0 ) {
+            toggleAllInvisible();
             state.openFiles[state.openFiles.length - 1].isVisible = true;
 
-          
+
           }
 
 
