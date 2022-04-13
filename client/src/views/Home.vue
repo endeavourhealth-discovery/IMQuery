@@ -208,9 +208,13 @@
                 }}
                 <br />
                 <br />
-                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleTry()">1. Search for sample queries e.g. "COVID-19"</div>
+                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleTry()">
+                  1. Search for sample queries e.g. "COVID-19"
+                </div>
                 <br />
-                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleQueryLibrary()">2. Browse the Query Library on IM Directory app</div>
+                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleQueryLibrary()">
+                  2. Browse the Query Library on IM Directory app
+                </div>
               </div>
             </template>
           </div>
@@ -236,9 +240,9 @@
 
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
-            <div class="kanban flex justify-center text-white" @click="">
+            <div class="kanban flex justify-center text-white" >
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
-                <TransitionRoot
+                <!-- <TransitionRoot
                   appear
                   :show="isVisible(iri)"
                   as="div"
@@ -248,8 +252,8 @@
                   leave="transform duration-200 transition ease-in-out"
                   leave-from="opacity-100 rotate-0 scale-100"
                   leave-to="opacity-0 scale-95 "
-                >
-                  <div class="profile-column mx-5">
+                > -->
+                  <div v-show="isVisible(iri)" class="profile-column mx-5">
                     <!-- <div class="select-none text-black dark:text-white font-bold text-3xl h-10 h-max-10  overflow-hidden">{{ profile["rdfs:label"] }}</div>
                     <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl h-16 h-max-16 overflow-hidden">
                       {{ profile["rdfs:comment"] }}
@@ -258,7 +262,7 @@
                     <!-- <Profile class="mt-5" :theme="light" :modelValue="profile" :activeProfile="activeProfile" /> -->
                     <Profile class="mt-5 " :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
                   </div>
-                </TransitionRoot>
+                <!-- </TransitionRoot> -->
               </template>
             </div>
           </div>
@@ -380,7 +384,6 @@ export default defineComponent({
 
       searchString: "",
       activePageName: "Main",
-      activeTabName: "Find", //Options #Home #SearchResults #View #Explore
       activeSearchCategory: "Search Results",
       searchCategories: [
         {
@@ -410,12 +413,12 @@ export default defineComponent({
       ],
       suggestions: [
         {
-          name: "My Query Library",
+          name: "Query Library",
           description: "Browse and view query definitions",
           icon: "newspaper",
           command: () => {
-            //#todo
-            this.activeTabName = "Find";
+            // this.activeTabName = "Find";
+            this.handleQueryLibrary();
           },
           visible: true
         },
@@ -430,57 +433,7 @@ export default defineComponent({
           visible: true
         }
       ],
-      tabs: [
-        {
-          name: "Home",
-          icon: "home",
-          visible: true
-        },
-        {
-          name: "Find",
-          icon: "search",
-          visible: true
-        },
-        {
-          name: "Data",
-          icon: "newspaper",
-          visible: false
-        },
-        {
-          name: "View",
-          icon: "newspaper",
-          visible: true
-        },
-        {
-          name: "Create",
-          icon: "newspaper",
-          visible: true,
-          command: () => {
-            //#todo
-            alert("Coming soon! Stay tuned.");
-          }
-        },
-        {
-          name: "Learn",
-          icon: "academic_cap",
-          visible: true
-        },
-        {
-          name: "Explore2",
-          icon: "globe",
-          visible: false
-        },
-        {
-          name: "Sources",
-          icon: "office_building",
-          visible: false
-        },
-        {
-          name: "Resources",
-          icon: "newspaper",
-          visible: false
-        }
-      ],
+
       apps: [
         {
           name: "Directory",
@@ -509,7 +462,15 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState(["currentUser", "isLoggedIn", "openFiles"]),
+    ...mapState(["currentUser", "isLoggedIn", "openFiles", "tabs"]),
+    activeTabName: {
+      get(): any {
+        return this.$store.state.activeTabName;
+      },
+      set(value: any): void {
+        this.$store.commit("updateActiveTabName", value);
+      }
+    },
     searchData: {
       get(): any {
         return this.$store.state.searchData;
@@ -567,6 +528,7 @@ export default defineComponent({
         return this.$store.state.activeFileIri;
       },
       set(value: any): void {
+        alert("hi")
         this.$store.commit("updateActiveFileIri", value);
       }
     },
@@ -580,7 +542,6 @@ export default defineComponent({
     }
   },
   async mounted() {
-    console.log("URL Paramater FileIri", this.$route.params.fileIri);
     this.$store.dispatch("loadTheme");
 
     await this.$store.dispatch("authenticateCurrentUser");
@@ -592,7 +553,17 @@ export default defineComponent({
       this.userMeta.email = this.currentUser.email;
     }
 
-    this.$store.dispatch("loadUserData");
+    //loading all of a user's files
+    // this.$store.dispatch("loadUserData");
+
+    const _fileIri = this.$route.params.fileIri;
+    if (_fileIri) {
+      // this.$store.dispatch("loadFile");
+      console.log("fileIri", _fileIri);
+      this.$store.commit("loadFile", _fileIri);
+    }
+
+    // console.log("URL Paramater FileIri", _fileIri);
   },
   methods: {
     handleHotkey(): void {

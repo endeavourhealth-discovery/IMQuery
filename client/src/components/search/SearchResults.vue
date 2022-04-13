@@ -104,7 +104,9 @@ export default defineComponent({
   },
   methods: {
     handleView(iri: string) {
-      this.$emit("openItem", iri);
+      // this.$emit("openItem", iri);
+      this.$store.commit("loadFile", iri);
+
     },
     handleEdit(iri: string) {
       alert("Coming soon. Stay tuned!");

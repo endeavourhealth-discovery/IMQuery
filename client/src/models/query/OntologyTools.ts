@@ -50,6 +50,7 @@ export default class Ontology {
 
         public byIri(iri: string): any {
             if (iri != "") {
+
                 const _results = this.superThis._entities.filter((entity: any) => entity["@id"] == iri);
                 // console.log("", )
                 return _results;

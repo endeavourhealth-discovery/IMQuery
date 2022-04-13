@@ -3,10 +3,9 @@ import _ from "lodash";
 
 import Templates from "@/models/query/Templates";
 
-const debugTemplates = false;;
 
 export class QueryBuilder {
-
+    
 
     //properties without getters/setters belonging to this class
     'Loaded' = false;
@@ -68,7 +67,7 @@ export class QueryBuilder {
         }
 
         // instantiate profiles
-        if (_type === "im:Profile") {
+        if (_type === "im:Profile" || _type === "im:Query" || _type === "http://endhealth.info/im#Query") {
             this._profiles.set(entity['@id'], new Profile(entity));
         }
     }
@@ -337,7 +336,7 @@ export class Profile extends Entity {
 
         }
 
-        Templates.debugTemplates && console.log("UI object model (Profile.definitionTree)", _definitionTree);
+         console.log("UI object model (Profile.definitionTree)", _definitionTree);
 
         this._definitionTree = _definitionTree;
 

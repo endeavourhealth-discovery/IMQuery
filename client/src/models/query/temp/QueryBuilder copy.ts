@@ -124,7 +124,7 @@ export default class QueryBuilder {
                 }
 
                 //profiles 
-                if (_type === "im:Profile") {
+                if (_type === "im:Profile" || _type === "im:Query" || _type === "http://endhealth.info/im#Query") {
                     this._profileEntities.set(entity['@id'], entity);
                 }
 

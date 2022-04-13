@@ -10,7 +10,7 @@ import LoggerService from "@/services/LoggerService";
 
 
 import { QueryBuilder } from "@/models/query/Query";
-import QueryUtils from "@/models/query/QueryUtils";
+import QueryUtils from "@/helpers/QueryUtils";
 import Ontology, { entityTypes } from "@/models/query/OntologyTools";
 
 import _ from "lodash";
@@ -21,7 +21,7 @@ import axios from "axios";
 export default createStore({
   // update stateType.ts when adding new state!
   state: {
-    debugTemplates: false,
+    debug: true,
     searchData: {} as any,
     searchResults: [] as any[],
     historyCount: 0 as number,
@@ -45,8 +45,330 @@ export default createStore({
     queryBuilder: new QueryBuilder(),
     ontology: new Ontology(),
     isCardDragged: false,
+    tabs: [
+      {
+        name: "Home",
+        icon: "home",
+        visible: true
+      },
+      {
+        name: "Find",
+        icon: "search",
+        visible: true
+      },
+      {
+        name: "Data",
+        icon: "newspaper",
+        visible: false
+      },
+      {
+        name: "View",
+        icon: "newspaper",
+        visible: false
+      },
+      {
+        name: "Create",
+        icon: "newspaper",
+        visible: true,
+        command: () => {
+          //#todo
+          alert("Coming soon! Stay tuned.");
+        }
+      },
+      {
+        name: "Learn",
+        icon: "academic_cap",
+        visible: true
+      },
+      {
+        name: "Explore2",
+        icon: "globe",
+        visible: false
+      },
+      {
+        name: "Sources",
+        icon: "office_building",
+        visible: false
+      },
+      {
+        name: "Resources",
+        icon: "newspaper",
+        visible: false
+      }
+    ],
+    activeTabName: "Home", //Options #Home #SearchResults #View #Explore
+
   },
   mutations: {
+    loadFile(state, fileIri) {
+
+
+      //recursive delay until ontology has loaded (require for pre-population)
+      function delayFileLoad() {
+        if (!state.ontology._entities) {
+          setTimeout(delayFileLoad, 100);
+        } else {
+          loadEntity();
+        }
+      }
+
+      setTimeout(delayFileLoad, 100);
+
+
+      async function loadEntity() {
+
+        const entity = await EntityService.getDefinitionBundle(fileIri).then(res => {
+          // this.mutations.updateUserFiles(res.data);
+          console.log("opened file:", res.data);
+          const _prefixedEntity = QueryUtils.toPrefixedIri(res.data.entity);
+          return _prefixedEntity;
+        })
+          .catch(err => {
+            console.error("Failed to load file from the server", err);
+          });
+
+        if (entity) {
+          //upon successful load make view tab visible and active
+
+
+          //populate name and entityType in JSON definition
+          if (entity["im:definition"]) {
+            const _json = JSON.parse(entity["im:definition"]);
+
+            state.debug && console.log("JSON definition", _json)
+            let _entityReferences = jp.paths(_json, `$..[?(@.@id)]`);
+            //filters out paths that are UUIDs for clauses (and not UUID's of entities);
+            _entityReferences = _entityReferences.filter((reference: any) => reference[reference.length - 1] != "id");
+
+            // populates each path with entity from ontology
+            _entityReferences = _entityReferences.map((reference: any) => {
+
+              const jpPath = jp.stringify(reference);
+              const _path = jp.stringify(reference).substring(2);
+              let _entityIri = _.get(_json, _path)["@id"];
+
+
+              // changes http//endhealth.info/im#effectiveDate to im:effectiveDate (as an example)
+              if (_entityIri.substring(0, 4) == "http") {
+                _entityIri = QueryUtils.toIri(_entityIri);
+              }
+
+
+              // console.log("_entityIri", _entityIri)
+              // alert("in")
+              // console.log("ontology", _.cloneDeep(state.ontology)) 
+              const _entity = state.ontology.entities.byIri(_entityIri)
+              // console.log("_entity", _entity)
+
+
+              let _shortEntity;
+              if (_entity && _entity.length > 0) {
+                // console.log(_entity)
+                _shortEntity = {
+                  "@id": _entity[0]["@id"],
+                  "rdf:type": _entity[0]["rdf:type"],
+                  "rdfs:label": _entity[0]["rdfs:label"],
+                  "rdfs:comment": _entity[0]["rdfs:comment"]
+                };
+
+
+                //populate range for each property based on the datamodel (entityType inside the same clause)
+                const _propertyTypes = ["owl:ObjectProperty", "owl:DatatypeProperty"];
+                // console.log("_shortEntity", _shortEntity)
+                const _isObjectProperty = _shortEntity["rdf:type"].some((rdfType: any) => _propertyTypes.includes(rdfType["@id"]));
+                if (_isObjectProperty) {
+                  // console.log("reference", reference)
+                  // console.log("_path", _path)
+
+
+                  //get datamodel entity
+                  const _pathQueue = _.cloneDeep(reference);
+                  // console.log("_pathQueue", jp.stringify(_pathQueue))
+
+
+
+                  //finds nearest parent that is datamodel entity (i.e. has entityType json path)
+                  let _parentIri = "";
+                  while (_pathQueue.length > 1) {
+
+                    const _valueAtPath = jp.query(_json, jp.stringify(_pathQueue))[0];
+                    // console.log("_valueAtPath", _valueAtPath)
+
+                    if (_valueAtPath["entityType"]) {
+                      // console.log("entityType", _valueAtPath)
+                      // console.log("entityType id", _valueAtPath["entityType"]["@id"])
+
+                      _parentIri = _valueAtPath["entityType"]["@id"];
+                      // console.log("_parentIri", _parentIri)
+
+
+                      if (_parentIri.substring(0, 4) == "http") {
+                        _parentIri = QueryUtils.toIri(_parentIri);
+                      }
+                      break;
+                    }
+
+                    _pathQueue.pop();
+                  }
+
+                  // if datamodel entity found, find the the range 
+                  if (_parentIri != "") {
+
+
+
+                    const _datamodelEntity = state.ontology.entities.byIri(_parentIri);
+
+                    // console.log("_parentIri", _parentIri)
+                    // console.log("_datamodelEntity", _datamodelEntity)
+
+                    // find the properties range
+
+                    if (_datamodelEntity.length) {
+                      const _rangeProperty = _datamodelEntity[0]["sh:property"].filter((_property: any) => {
+                        return _property["sh:path"].some((path: any) => {
+                          const _isMatch = path["@id"] == _shortEntity["@id"]
+                          // console.log("_match", _property)
+                          return _isMatch;
+                        })
+                      });
+
+                      if (_rangeProperty.length > 0) {
+
+                        _shortEntity["rdfs:range"] = _.get(_rangeProperty, "0.sh:datatype.0");
+                      }
+
+                    }
+
+                  }
+                }
+
+
+              }
+
+
+
+              return {
+                uuid: `urn:uuid:${v4()}`,
+                jpPath: jpPath,
+                path: _path,
+                iri: _entityIri,
+                entityData: _shortEntity, //state.ontology.entities.byIri(entityIri)
+                pathArray: reference,
+              }
+            })
+
+
+            //populates definition with entities
+            _entityReferences.forEach((reference: any) => {
+
+              // console.log("reference.path", reference.path)
+              // console.log("reference.path", referenc?e.path.substring(reference.path.length - 5, reference.path.length - 2))
+              // if (reference.path.substring(-10, -2) )
+              if (reference.entityData != undefined) _.set(_json, reference.path, reference.entityData);
+            });
+
+            // console.log("1", JSON.stringify(_json) )
+            entity["im:definition"] = JSON.stringify(_json);
+
+            // console.log("_entityReferences", _entityReferences)
+
+            state.debug && console.log("JSON definition (populated)", _json)
+
+            //for debugging
+            let _entitiesWithoutData = _entityReferences.filter((entity: any) => entity.entityData == undefined);
+
+            _entitiesWithoutData = _entitiesWithoutData.map((entity: any) => {
+              return {
+                "@id": entity["iri"],
+                "rdf:type": [],
+                "rdfs:label": "",
+                "rdfs:comment": ""
+              }
+            })
+
+            //removes duplicates
+            const unique = new Set()
+            _entityReferences = _entityReferences.filter((item: any) => {
+              if (unique.has(item.iri)) {
+                return false;
+              } else {
+                unique.add(item.iri)
+                return true;
+              }
+            });
+
+
+
+            entity["entityReferences"] = _entityReferences;
+            entity["entitiesWithoutData"] = _entitiesWithoutData;
+
+            // console.log("entity", entity)
+            state.debug && console.log("Entities References", _entityReferences)
+            state.debug && console.log("Entities without data", _entitiesWithoutData)
+
+
+          }
+
+
+
+
+          //any file belonging to the user
+          const _userFile = {
+            uuid: `urn:uuid:${v4()}`,
+            iri: entity["@id"],
+            name: entity["rdfs:label"],
+            comment: entity["rdfs:comment"],
+            folder: entity["im:isContainedIn"] ? entity["im:isContainedIn"] : "",
+            type: entity["rdf:type"][0]["@id"],
+          };
+
+          //files after their content is fetched via service (i.e. when the user opens them)
+          const _openFile = {
+            ..._userFile,
+            isVisible: false,
+            content: entity
+          };
+
+
+          state.userFiles.push(_userFile);
+
+          //#todo let user decide which profiles they want to open
+          //opens all profiles
+          //loads querybuilder
+          state.openFiles.push(_openFile);
+          // console.log("entity", entity)
+          state.queryBuilder.load(entity);
+
+
+
+
+
+          // ensures 1 item is active
+
+          //makes the latest file visible
+          if (state.openFiles.length > 0) {
+            state.openFiles[state.openFiles.length - 1].isVisible = true;
+
+          
+          }
+
+
+          // console.log()
+          console.log("openFiles", state.openFiles)
+
+          state.tabs[3].visible = true;
+          state.activeTabName = "View";
+
+
+
+        }
+
+      }
+
+    },
+    updateActiveTabName(state, value) {
+      state.activeTabName = value;
+    },
     updateSearchData(state, value) {
       state.searchData = value;
     },
@@ -86,20 +408,6 @@ export default createStore({
       if (state.userFiles.length > 0) return;
 
 
-      //populate name and entityType
-      // state.ontology.byIri("im:MedicationOrder")
-
-
-      // console.log(
-      //   "entities",
-      //   state.ontology.entities.byIri("im:MedicationOrder")
-      // );
-      // console.log(
-      //   "datamodels",
-      //   state.ontology.byType("im:Folder")
-      // );
-
-
       entities.forEach((entity: any, index: number) => {
 
         //populate name and entityType in JSON definition
@@ -107,7 +415,7 @@ export default createStore({
         if (entity["im:definition"]) {
           const _json = JSON.parse(entity["im:definition"]);
 
-         state.debugTemplates && console.log("JSON definition", _json)
+          state.debug && console.log("JSON definition", _json)
           let _entityReferences = jp.paths(_json, `$..[?(@.@id)]`);
           //filters out paths that are UUIDs for clauses (and not UUID's of entities);
           _entityReferences = _entityReferences.filter((reference: any) => reference[reference.length - 1] != "id");
@@ -127,6 +435,7 @@ export default createStore({
 
 
             // console.log("_entityIri", _entityIri)
+
             const _entity = state.ontology.entities.byIri(_entityIri)
             // console.log("_entity", _entity)
 
@@ -242,7 +551,7 @@ export default createStore({
 
           // console.log("_entityReferences", _entityReferences)
 
-          state.debugTemplates && console.log("JSON definition (populated)", _json)
+          state.debug && console.log("JSON definition (populated)", _json)
 
           //for debugging
           let _entitiesWithoutData = _entityReferences.filter((entity: any) => entity.entityData == undefined);
@@ -273,8 +582,8 @@ export default createStore({
           entities[index]["entitiesWithoutData"] = _entitiesWithoutData;
 
           // console.log("entity", entity)
-          state.debugTemplates && console.log("Entities References", _entityReferences)
-          state.debugTemplates && console.log("Entities without data", _entitiesWithoutData)
+          state.debug && console.log("Entities References", _entityReferences)
+          state.debug && console.log("Entities without data", _entitiesWithoutData)
 
 
         }
@@ -316,11 +625,9 @@ export default createStore({
 
 
       // ensures 1 item is active
-      if (state.openFiles.length > 0 && state.activeFileIri == "") {
+      if (state.openFiles.length > 0 && state.activeFileIri.length == 0) {
         state.activeFileIri = state.openFiles[0].iri;
       }
-
-
 
 
       // console.log()
@@ -391,6 +698,8 @@ export default createStore({
       } else {
         state.activeFileIri.push(activeFileIri)
       }
+      console.log("  state.activeFileIri", state.activeFileIri)
+
     },
     addDataModelItem(state, item) {
       state.datamodel.push(item);
@@ -431,8 +740,10 @@ export default createStore({
     updateHistoryCount(state, count) {
       state.historyCount = count;
     },
+
   },
   actions: {
+
     async loadTheme({ commit, dispatch }) {
       const _storedTheme = localStorage.getItem("themeName");
       const _defaultTheme = "dark";
