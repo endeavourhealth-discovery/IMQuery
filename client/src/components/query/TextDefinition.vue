@@ -74,6 +74,7 @@ import { defineComponent } from "vue";
 import { v4 } from "uuid";
 import EntityService from "@/services/EntityService";
 import QueryUtils from "@/helpers/QueryUtils";
+import _ from "lodash";
 
 export default defineComponent({
   name: "TextDefinition",
@@ -205,6 +206,16 @@ export default defineComponent({
       console.log(this.wordDictionary);
     },
     click(entity: any): void {
+      const _entityType = _.get(entity, "rdf:type[0].@id");
+
+      if (_entityType && _entityType == "im:Profile") {
+        this.$store.commit("updateIsLoading", true);
+        this.$store.commit("loadFile", entity["@id"]);
+        return;
+      }
+
+      console.log(entity);
+
       const _iri = entity["@id"].replace(":", "#");
       const _contextKey = _iri.split("#")[0];
       const _iriKey = _iri.split("#")[1];

@@ -75,11 +75,7 @@
                 @click="handleClick(element)"
                 :class="
                   'clause__matchLabel ml-2 pl-3 pr-4  py-1  relative -top-3 cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent outline-none' +
-                    [
-                      activeProfile == profile['@id'] && activeClausePath == element.currentPath
-                        ? ' active bg-blue-700 text-white '
-                        : '  '
-                    ]
+                    [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white ' : '  ']
                 "
               >
                 {{ matchLabel(element) }}
@@ -121,7 +117,6 @@
 import draggable from "vuedraggable";
 // import { VueDraggableNext } from './draggable/@'
 import Templates from "@/models/query/Templates";
-
 
 import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
@@ -185,6 +180,10 @@ export default defineComponent({
       }
     },
     matchLabel(clause: any): string {
+      if (_.get(clause, "json.property.@id") != undefined && clause?.json?.property["@id"] == "im:inResultSet") {
+        return "was Part of Search Results";
+      }
+
       const toName = (iri: string) => {
         const _iri3 = iri.substring(0, 4);
 
@@ -210,6 +209,8 @@ export default defineComponent({
       let _entityType = clause.json.entityType ? clause.json.entityType["rdfs:label"] : "";
       let _property = clause.json.property ? clause.json.property["rdfs:label"] : "";
 
+      if ((_entityType == "Event")) _entityType = "Health Record";
+      
       // improved matchLabel
       // let _valueData = clause.json.valueCompare.valueData ? clause.json.valueCompare.valueData : null;
       // let _valueIn = clause.json.valueIn.valueData ? clause.json.valueIn.valueData : null;
@@ -219,7 +220,7 @@ export default defineComponent({
       // let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
       // let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
 
-      return _entityType || _property || toName(clause.json.property["@id"] || toName(clause.json.entityType["@id"]));
+      return "had " + _entityType || "had " + _property || "had " + toName(clause.json.property["@id"] || "had " + toName(clause.json.entityType["@id"]));
     },
     showConnectorV(index: number, uuid: number): boolean {
       //first item at the top

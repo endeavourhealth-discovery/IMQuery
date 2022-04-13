@@ -114,7 +114,7 @@
           <!-- Suggestions -->
           <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 items-center md:items-start justify-center w-full my-10">
             <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
-              <template v-if="index == 0">
+              <template v-if="suggestion.visible && index == 0">
                 <CardButton
                   @click="suggestion.command"
                   class="w-250px"
@@ -128,7 +128,7 @@
                   backgroundColor="blue-500"
                 />
               </template>
-              <template v-else>
+              <template v-else-if="suggestion.visible && index > 0">
                 <CardButton
                   @click="suggestion.command"
                   class="w-250px"
@@ -271,10 +271,51 @@
         <!-- Tab: Explore  -->
 
         <div v-if="activeTabName == 'Create'" class="tab-content flex justify-center items-start "></div>
-        <div v-if="activeTabName == 'Learn'" class="tab-content flex justify-center items-start ">
+        <div v-if="activeTabName == 'Learn'" class="tab-content flex flex-col justify-start items-center ">
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
-          <!-- <img class="" src="animation2.gif" alt="" /> -->
+
+          <div class="flex mt-20 flex-col text-3xl font-bold text-white">
+            <div>
+              Tutorials
+            </div>
+
+            <div class="mt-10 mb-10 flex space-x-20">
+              <div
+                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 1 ? ' text-white' : ' text-gray-500']"
+                @click="activeVideo = 1"
+              >
+                1. Searching for and Opening Queries
+              </div>
+              <div
+                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 2 ? ' text-white' : ' text-gray-500']"
+                @click="activeVideo = 2"
+              >
+                2. Viewing and Interpreting Query Definitions
+              </div>
+            </div>
+          </div>
+
+          <iframe
+            v-if="activeVideo == 1"
+            width="780"
+            height="480"
+            src="https://www.youtube-nocookie.com/embed/2QJU_DeiEfQ"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          <iframe
+            v-if="activeVideo == 2"
+            width="780"
+            height="480"
+            src="https://www.youtube.com/embed/aTeqPgkfOc0"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
         <!-- /Tab: Explore  -->
 
@@ -349,6 +390,7 @@ export default defineComponent({
   },
   data() {
     return {
+      activeVideo: 1,
       isResultsShown: false,
       isShowing: true,
       colours: ["light", "light", "light", "light", "light", "light", "light", "light", "blue", "purple", "green", "orange", "pink"],
@@ -399,23 +441,23 @@ export default defineComponent({
           command: () => {
             // this.activeTabName = "Find";
             this.$store.commit("updateIsLoading", true);
+            this.$store.commit("loadFile", "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf");
 
             // clearTimeout(this.debounce);
             // this.debounce = window.setTimeout(() => {
-            this.$store.commit("loadFile", "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf");
             // }, 500);
           },
           visible: true
         },
         {
           name: "Query Library",
-          description: "Browse and view query definitions",
+          description: "Browse through a list of query definitions",
           icon: "newspaper",
           command: () => {
             // this.activeTabName = "Find";
             this.handleQueryLibrary();
           },
-          visible: true
+          visible: false
         },
         {
           name: "Watch a 100 second Tutorial",
@@ -425,7 +467,7 @@ export default defineComponent({
             //#todo
             this.activeTabName = "Learn";
           },
-          visible: false
+          visible: true
         }
       ],
 
