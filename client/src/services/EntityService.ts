@@ -19,5 +19,17 @@ export default class EntityService {
     }
   }
 
+  public static async getEntityName(iri: string): Promise<any> {
+    await EntityService.getDefinitionBundle(iri)
+      .then(res => res.data)
+      .then(res => {
+        return res.entity["http://www.w3.org/2000/01/rdf-schema#"];
+      })
+      .catch(err => {
+        console.log(err);
+        return null;
+      })
+
+  }
 
 }

@@ -346,7 +346,7 @@ export default class QueryUtils {
 
     //generates name from full iri, prefixed iri or returns originalstring (i.e. iri);
     public static toName = (iri: string) => {
-        const _iri = iri.substring(0, 3);
+        const _iri = iri.substring(0, 4);
         if (_iri == "http") {
             const _iriArray = iri.split("/");
             return _iriArray[_iriArray.length - 1]

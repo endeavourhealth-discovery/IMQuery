@@ -112,7 +112,7 @@
           <!-- /Searchbox  -->
 
           <!-- Suggestions -->
-          <div class="flex justify-center w-full my-10">
+          <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 items-center md:items-start justify-center w-full my-10">
             <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
               <template v-if="index == 0">
                 <CardButton
@@ -149,10 +149,10 @@
 
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Find'" class="tab-content relative flex justify-center">
-          <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none mr-20">
+          <div v-if="false" class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none mr-20">
             <template v-for="category in searchCategories" :key="category.name">
               <div
-                v-if="category.name == 'Search Results' ? category.visible && searchData : category.visible"
+                v-if="category.visible"
                 :class="
                   'transition duration-500 ease-in-out group flex items-center rounded-lg  px-5 py-3 border border-1 border-transparent ' +
                     [
@@ -195,7 +195,7 @@
               <div class="text-center text-black dark:text-white text-xl font-medium mb-5">
                 {{ searchData.length }} {{ searchData.length == 1 ? "result" : "results" }} found
               </div>
-              <SearchResults class="w-full" :results="searchData" :value="searchString" :isShown="isResultsShown" @openItem="handleOpenItem" />
+              <SearchResults class="w-full" :results="searchData" :value="searchString" :isShown="isResultsShown" />
               <!-- </div> -->
             </template>
 
@@ -218,9 +218,8 @@
               </div>
             </template>
           </div>
-          <div class="results-filters">
-            <!-- Empty on purpose -->
-          </div>
+          <!-- <div class="results-filters">
+          </div> -->
         </div>
         <!-- /Tab: Search  -->
 
@@ -354,25 +353,7 @@ export default defineComponent({
       isShowing: true,
       colours: ["light", "light", "light", "light", "light", "light", "light", "light", "blue", "purple", "green", "orange", "pink"],
       // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
-      newItems: [
-        {
-          label: "Search Profile",
-          // icon: 'pi pi-refresh',
-          command: () => {
-            this.$toast.add({ severity: "success", summary: "Updated", detail: "Open New Query Builder file", life: 3000 });
-          }
-        },
-        {
-          label: "Concept Set",
-          // icon: 'pi pi-external-link',
-          command: () => {
-            window.open(
-              "https://dev.endhealth.co.uk/editor/#/",
-              "_blank" // <- This is what makes it open in a new window.
-            );
-          }
-        }
-      ],
+
       hasSearched: false,
       // definition: typeof Dataset,
       userMeta: {
@@ -381,7 +362,6 @@ export default defineComponent({
         lastName: "",
         email: ""
       },
-
       searchString: "",
       activePageName: "Main",
       activeSearchCategory: "Search Results",
@@ -396,7 +376,7 @@ export default defineComponent({
           command: () => {
             this.activeSearchCategory = "Search Results";
           },
-          visible: true
+          visible: false
         },
         {
           name: "Query Library",
@@ -412,6 +392,21 @@ export default defineComponent({
         }
       ],
       suggestions: [
+        {
+          name: "Start with an Example",
+          description: 'View the Query "SMI Population"',
+          icon: "cursor_click",
+          command: () => {
+            // this.activeTabName = "Find";
+            this.$store.commit("updateIsLoading", true);
+
+            // clearTimeout(this.debounce);
+            // this.debounce = window.setTimeout(() => {
+            this.$store.commit("loadFile", "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf");
+            // }, 500);
+          },
+          visible: true
+        },
         {
           name: "Query Library",
           description: "Browse and view query definitions",
@@ -430,7 +425,7 @@ export default defineComponent({
             //#todo
             this.activeTabName = "Learn";
           },
-          visible: false 
+          visible: false
         }
       ],
 
@@ -454,10 +449,8 @@ export default defineComponent({
           hyperlink: ""
         }
       ],
-      modulesData: null,
       searchData: null,
-      autocompleteData: null,
-      tableHeight: 600
+      autocompleteData: null
     };
   },
 
@@ -566,12 +559,12 @@ export default defineComponent({
     // console.log("URL Paramater FileIri", _fileIri);
   },
   methods: {
-    handleHotkey(): void {
-      alert("search");
-    },
-    async handleOpenItem(iri: any) {
-      console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
-    },
+    // handleHotkey(): void {
+    //   alert("search");
+    // },
+    // async handleOpenItem(iri: any) {
+    //   console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
+    // },
     handleTry(): any {
       this.search("COVID-19");
     },

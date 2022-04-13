@@ -1,6 +1,7 @@
 <template>
   <div class="text-definition  text-xl text-bold ">
     <div class="flex flex-col">
+      <button class="hidden" @click="test()">test</button>
       <!-- A sentence from the template    -->
       <div v-for="(sentence, sentenceIndex) in children.data" :key="getUUID(sentence)" class="sentence flex flex-wrap">
         <!-- Words in a sentence   -->
@@ -11,7 +12,7 @@
             <!-- Array of References  -->
             <template v-if="Array.isArray(phrase.data)">
               <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex '">
-                <div v-if="entityIndex < 6" class="flex">
+                <div v-if="entityIndex < maxListSize" class="flex">
                   <div class="inline mr-4 text-orange-500 font-bold w-7">{{ entityIndex != 0 ? "or" : "" }}</div>
                   <div
                     @click="click(entity)"
@@ -21,9 +22,12 @@
                     {{ phraseText(entity) }}
                   </div>
                 </div>
-                <div v-else-if="entityIndex == 6" class="font-medium ml-12 my-2 text-blue-700">
-                      {{phrase.data.length - 6}} more items ...
-
+                <div
+                  @click="maxListSize = maxListSize + 5"
+                  v-else-if="entityIndex == maxListSize"
+                  class="font-medium ml-12 my-2 text-blue-700 cursor-pointer hover:underline"
+                >
+                  Show More ({{ phrase.data.length - maxListSize }} remaining) ...
                 </div>
               </div>
             </template>
@@ -68,12 +72,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { v4 } from "uuid";
+import EntityService from "@/services/EntityService";
+import QueryUtils from "@/helpers/QueryUtils";
 
 export default defineComponent({
   name: "TextDefinition",
   props: ["templates", "activeClausePath", "children", "theme", "themeClasses"],
   data() {
     return {
+      maxListSize: 6,
       context: {
         rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
         im: "http://endhealth.info/im#",
@@ -92,7 +99,8 @@ export default defineComponent({
         vis: "http://endhealth.info/vision#",
         orole: "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRole-1#",
         xsd: "http://www.w3.org/2001/XMLSchema#"
-      }
+      },
+      wordDictionary: {}
     };
   },
   methods: {
@@ -104,10 +112,65 @@ export default defineComponent({
         return item.uuid;
       }
     },
+
     tooltipText(entity: any): string {
       return `<span><b>${entity["@id"] || entity?.id || entity?.uuid}</b><br><br>${entity["rdfs:label"] || entity?._text}<span>`;
     },
-    phraseText(entity: any): string {
+    phraseText2(entity: any): any {
+      const toName = (iri: string) => {
+        const _iri3 = iri.substring(0, 4);
+
+        if (_iri3 == "urn:") {
+          return iri;
+        } else if (_iri3 == "http") {
+          const _iriArray = iri.split("/");
+          return _iriArray[_iriArray.length - 1]
+            .split("#")[1]
+            .match(/([A-Z]?[^A-Z]*)/g)
+            .slice(0, -1)
+            .join(" ");
+        } else if (iri.split(":").length == 2) {
+          return iri
+            .split(":")[1]
+            .match(/([A-Z]?[^A-Z]*)/g)
+            .slice(0, -1)
+            .join(" ");
+        } else {
+          return null;
+        }
+      };
+
+      const _splitIri = toName(entity["@id"]);
+
+      // const _name = await EntityService.getDefinitionBundle(entity["@id"]).then(res => {
+      //   if (res.data) {
+      //     return res.data.entity["http://www.w3.org/2000/01/rdf-schema#label"];
+      //   } else {
+      //     return toName(entity["@id"]);
+      //   }
+      // });
+
+      // console.log(_name);
+      //either shows _text (post transformation), original label, name, a name derived from its Iri or Unnamed item
+      // console.log("entity['rdfs:label']", entity)
+
+      const _handler = {
+        get(target, prop) {
+          if (prop in target) {
+            return target[prop];
+          } else {
+            return ""; // default value
+          }
+        }
+      };
+
+      const _label = entity._text || entity["rdfs:label"] || entity.name || _splitIri || `Unnamed Item: ${entity["@id"]}`;
+      this.wordDictionary[entity["@id"]] = _label;
+      // console.log(new Proxy(this.wordDictionary[entity["@id"]], _handler));
+
+      return this.wordDictionary[entity["@id"]];
+    },
+    phraseText(entity: any): any {
       const toName = (iri: string) => {
         const _iri3 = iri.substring(0, 4);
 
@@ -137,16 +200,19 @@ export default defineComponent({
       // console.log("entity['rdfs:label']", entity)
       return entity._text || entity["rdfs:label"] || entity.name || _splitIri || `Unnamed Item: ${entity["@id"]}`;
     },
+    test() {
+      this.wordDictionary["im:Person"] = "not Person";
+      console.log(this.wordDictionary);
+    },
     click(entity: any): void {
       const _iri = entity["@id"].replace(":", "#");
       const _contextKey = _iri.split("#")[0];
       const _iriKey = _iri.split("#")[1];
       const _contextUrl = this.context[_contextKey];
-
-      const _encodedIri = encodeURIComponent(_contextUrl ? _contextUrl + _iriKey : entity["@id"]);
-
-      const _url = `https://dev.endhealth.co.uk/viewer/#/concept/${_encodedIri}`;
-      window.open(_url, "_blank");
+      const _url = _contextUrl ? _contextUrl + _iriKey : entity["@id"];
+      const _encodedIri = encodeURIComponent(_url);
+      const _fullURL = `https://dev.endhealth.co.uk/viewer/#/concept/${_encodedIri}`;
+      window.open(_fullURL, "_blank");
     },
     capitalise(obj: any) {
       return typeof obj == "string" ? obj.charAt(0).toUpperCase() + obj.slice(1) : obj;

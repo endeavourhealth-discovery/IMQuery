@@ -106,10 +106,10 @@ export default defineComponent({
   methods: {
     handleView(iri: string) {
       //debouncing necessary to avoid loading items twice
+        this.$store.commit("updateIsLoading", true);
 
       clearTimeout(this.debounce);
       this.debounce = window.setTimeout(() => {
-        this.$store.commit("updateIsLoading", true);
 
         this.$store.commit("loadFile", iri);
       }, 500);

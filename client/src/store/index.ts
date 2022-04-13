@@ -105,6 +105,8 @@ export default createStore({
       if (state.openFiles.some(file => file.iri === fileIri)) {
         alert("File already open!");
         state.activeTabName = "View";
+        state.isLoading = false;
+
         return;
       }
 
@@ -382,10 +384,10 @@ export default createStore({
 
         }
 
+        state.isLoading = false;
 
 
       }
-      state.isLoading = false;
 
 
     },
