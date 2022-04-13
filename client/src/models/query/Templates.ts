@@ -584,7 +584,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         //units
         const _phraseQuantityType = _ref4 ? isSingular(_ref4.data) ? "singular" : "plural" : null;
         // console.log("_ref4", _ref4)
-        const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].valueData") : null;
+        const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].value") : null;
         // console.log("_ref5", _ref5)
         const _units = _ref5 && _phraseQuantityType ? phrase(_ref5?.data, _phraseQuantityType, [_ref5]) : null; //entry/entries //record(s)
 
@@ -602,7 +602,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         }
 
         // comparator e.g. reference date
-        const _ref6 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[1].valueData") : null;
+        const _ref6 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[1].value") : null;
         const _before = constant("before")
         const _comparator = _ref6 ? phrase("entityName", _ref6.data, [_ref6]) : null; //entry/entries //record(s)
 
@@ -882,7 +882,7 @@ const CascadingTemplates = [
                         all: [
                             {
                                 test: "pathValueIs",
-                                input: ["#currentClause", "json.property.@id", "im:hasProfile"],
+                                input: ["#currentClause", "json.property.@id", "im:inResultSet"],
                                 expect: true
                             }
                         ]

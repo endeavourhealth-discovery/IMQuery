@@ -27472,7 +27472,7 @@
 					 "sh:minCount": 1,
 					 "sh:class": [
 						{
-							 "@id": "im:VSET_EncounterTypes"
+							 "@id": "im:1741000252102"
 						}
 					]
 				}
@@ -29405,9 +29405,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "im:isContainedIn": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -31381,26 +31381,6 @@
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:InformationModel"
-				}
-			]
-		},
-		{
-			 "@id": "im:ReferenceEntities",
-			 "rdf:type": [
-				{
-					 "@id": "im:Folder"
-				}
-			],
-			 "rdfs:label": "Entities linked to health record entries",
-			 "rdfs:comment": "the data entities that support health record entries including reference data,devices, provenance",
-			 "im:status": [
-				{
-					 "@id": "im:Active"
-				}
-			],
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -49977,7 +49957,7 @@
 			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -64216,41 +64196,10 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:DiscoveryDMEntities"
+					 "@id": "im:Entry"
 				}
 			],
 			 "sh:property": [
-				{
-					 "sh:path": [
-						{
-							 "@id": "im:dataController"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:minCount": 1,
-					 "sh:class": [
-						{
-							 "@id": "im:Organisation"
-						}
-					]
-				},
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:string"
-						}
-					],
-					 "sh:path": [
-						{
-							 "@id": "im:dateRecorded"
-						}
-					]
-				},
 				{
 					 "sh:path": [
 						{
@@ -84712,7 +84661,7 @@
 			 "rdfs:comment": "Contains records of health professionals, roles or teams ",
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -85776,7 +85725,7 @@
 			 "rdfs:comment": "Folder containing shape graphs that represent source data formats",
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ModellingDataModels"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -86150,7 +86099,7 @@
 			 "rdfs:comment": "Contains communication information resources ",
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -89501,7 +89450,7 @@
 			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			],
 			 "sh:property": [
@@ -90999,6 +90948,54 @@
 			]
 		},
 		{
+			 "@id": "im:Entry",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Entry (entry type)",
+			 "rdfs:comment": "A record entry of any kind",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:DataModelEntity"
+				}
+			],
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:DiscoveryDMEntities"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:dataController"
+						}
+					],
+					 "sh:maxCount": 1,
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:Organisation"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:dateRecorded"
+						}
+					]
+				}
+			]
+		},
+		{
 			 "@id": "im:OrderLimit",
 			 "rdf:type": [
 				{
@@ -92131,14 +92128,14 @@
 			]
 		},
 		{
-			 "@id": "im:inResultSet",
+			 "@id": "im:hasProfile",
 			 "rdf:type": [
 				{
 					 "@id": "owl:ObjectProperty"
 				}
 			],
-			 "rdfs:label": "in result set of",
-			 "rdfs:comment": "Points to a profile or set of results from a query  that this entity is in the set of",
+			 "rdfs:label": "has profile",
+			 "rdfs:comment": "Points to a profile that this entity complies with e.g. a patient aged 30 has profile of patients aged >18",
 			 "rdfs:subPropertyOf": [
 				{
 					 "@id": "im:LanguagePredicates"
@@ -92446,5 +92443,6 @@
 				}
 			]
 		}
+
 	]
 }

@@ -2,7 +2,8 @@
   <div
     :class="
       'profile w-full px-5 py-5 flex  mb-12 rounded-xl overflow-hidden border-gray-200 hover:border-gray-300 hover:shadow-md trasition ease-in-out duration-500 bg-gradient-to-r ' +
-        themeClasses[theme].background
+        themeClasses[theme].background +
+        theme
     "
   >
     <!-- Left Side  -->
@@ -91,7 +92,7 @@
     <!-- Left Side  -->
 
     <!-- right side  -->
-    <div v-if="activeProfile.uuid == profile['@id']" class="pl-10 flex flex-col border-l border-l-gray-200">
+    <div v-if="activeProfile.uuid == profile['@id']" class="pl-10 flex flex-col">
       <!-- Header -->
 
       <div :class="'select-none flex space-x-5 font-semibold text-2xl mb-8 mt-1' + themeClasses[theme].text">
@@ -99,7 +100,7 @@
           v-for="tab in tabs"
           :key="tab.uuid"
           @click="activeTab = tab.name"
-          :class="'inline rounded-md px-3 py-1' + [activeTab == tab.name ? ' text-white bg-blue-700 ' : ' text-gray-400']"
+          :class="'tab-name inline rounded-md px-3 py-1' + [activeTab == tab.name ? ' text-white bg-blue-700 ' : ' ']"
         >
           {{ tab.visible ? tab.name : "" }}
         </div>
@@ -114,16 +115,16 @@
         :activeClausePath="activeProfile.activeClausePath"
         :theme="theme"
         :themeClasses="themeClasses"
-        class="sticky textdefinition w-full h-full "
+        class="sticky textdefinition w-full h-full  p-2 "
       />
       <!-- Text Templates  -->
       <!-- References  -->
       <div v-show="activeTab == 'References'" class="references flex-col pl-3">
         <div
-          @click="click(reference.entityData)"
+          @click="click(reference)"
           v-for="reference in profile.entityReferences"
           :key="reference.uuid"
-          class="reference inline text-xl text-gray-700  hover:text-blue-700 font-medium cursor-pointer hover:underline"
+          class="reference inline text-xl  hover:text-blue-700 font-medium cursor-pointer hover:underline"
           v-tooltip.left="get(reference, 'entityData.rdfs:label') || `Unnamed Item ${reference.iri}` || `Unnamed Item`"
         >
           {{ get(reference, "entityData.rdfs:label") || `Unnamed Item ${reference.iri}` || `Unnamed Item` }}
@@ -156,7 +157,9 @@ export default defineComponent({
       return _.get(object, path);
     },
     click(entity: any): void {
-      const _iri = entity["@id"].replace(":", "#");
+      //##### todo: small fix
+      const _iri = entity.entityData ? entity["@id"].replace(":", "#") : entity.iri.replace(":", "#");
+      console.log(_iri);
       const _contextKey = _iri.split("#")[0];
       const _iriKey = _iri.split("#")[1];
       const _contextUrl = this.context[_contextKey];
@@ -234,57 +237,57 @@ export default defineComponent({
       profile: this.modelValue,
       themeClasses: {
         light: {
-          phrases: { reference: "text-blue-700 font-bold hover:underline" },
-          background: " bg-white hover:shadow-md border transition duration-700 ease-in-out border-gray-200",
-          text: " text-gray-800",
-          icon: " text-blue-700 bg-gray-100",
-          bodyClasses: " text-black",
+          phrases: { reference: "text-blue-700 font-bold hover:underline " },
+          background: " bg-white hover:shadow-md border transition duration-700 ease-in-out border-gray-200 ",
+          text: " text-gray-800 ",
+          icon: " text-blue-700 bg-gray-100 ",
+          bodyClasses: " text-black ",
           bodyBackground: " ",
           connectorOutline: true
         },
         blue: {
-          phrases: { reference: "text-blue-700 font-bold hover:underline" },
-          background: " to-sky-500 from-blue-600",
-          text: " text-white",
-          icon: " bg-opacity-40 bg-black text-white",
+          phrases: { reference: "text-blue-700 font-bold hover:underline " },
+          background: " to-sky-500 from-blue-600 ",
+          text: " text-white ",
+          icon: " bg-opacity-40 bg-black text-white ",
           bodyClasses: "",
-          bodyBackground: " bg-black bg-opacity-20 hover:bg-opacity-30",
+          bodyBackground: " bg-black bg-opacity-20 hover:bg-opacity-30 ",
           connectorOutline: false
         },
         purple: {
-          phrases: { reference: "text-blue-700 font-bold hover:underline" },
-          background: " to-purple-600 via-indigo-700 from-indigo-600",
-          text: " text-white",
-          icon: " bg-opacity-40 bg-black text-white",
+          phrases: { reference: "text-blue-700 font-bold hover:underline " },
+          background: " to-purple-600 via-indigo-700 from-indigo-600 ",
+          text: " text-white ",
+          icon: " bg-opacity-40 bg-black text-white ",
           bodyClasses: "",
-          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30",
+          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30 ",
           connectorOutline: false
         },
         green: {
-          phrases: { reference: "text-blue-700 font-bold hover:underline" },
-          background: " from-cyan-600 to-green-500",
-          text: " text-white",
-          icon: " bg-opacity-40 bg-black text-white",
+          phrases: { reference: "text-blue-700 font-bold hover:underline " },
+          background: " from-cyan-600 to-green-500 ",
+          text: " text-white ",
+          icon: " bg-opacity-40 bg-black text-white ",
           bodyClasses: "",
-          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30",
+          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30 ",
           connectorOutline: false
         },
         orange: {
-          phrases: { reference: "text-blue-700 font-bold hover:underline" },
+          phrases: { reference: "text-blue-700 font-bold hover:underline " },
           background: " to-amber-400 from-orange-500",
-          text: " text-white",
-          icon: " bg-opacity-40 bg-black text-white",
+          text: " text-white ",
+          icon: " bg-opacity-40 bg-black text-white ",
           bodyClasses: "",
-          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30",
+          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30 ",
           connectorOutline: false
         },
         pink: {
-          phrases: { reference: "text-blue-700 font-bold hover:underline" },
-          background: " from-pink-500 to-rose-500",
-          text: " text-white",
-          icon: " bg-opacity-40 bg-black text-white",
+          phrases: { reference: "text-blue-700 font-bold hover:underline " },
+          background: " from-pink-500 to-rose-500 ",
+          text: " text-white ",
+          icon: " bg-opacity-40 bg-black text-white ",
           bodyClasses: "",
-          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30",
+          bodyBackground: " bg-black  bg-opacity-20 hover:bg-opacity-30 ",
           connectorOutline: false
         }
       }
@@ -296,9 +299,7 @@ export default defineComponent({
 .textdefinition,
 .references {
   max-width: 600px;
-}
 
-.references {
   overflow-y: auto;
   min-width: 300px;
   max-height: 530px;
@@ -311,8 +312,9 @@ export default defineComponent({
   -webkit-box-orient: vertical;
 }
 
+.profile .textdefinition::-webkit-scrollbar,
 .profile .profile-clause::-webkit-scrollbar,
-.references::-webkit-scrollbar {
+.profile .references::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-thumb {
@@ -324,8 +326,16 @@ export default defineComponent({
   max-height: 600px;
 }
 
+.profile.light .reference {
+  color: #000;
+}
+
+.reference {
+  color: #fff;
+}
+
 .header:after {
-	/* content: '';
+  /* content: '';
 	position: absolute;
 	bottom: -1rem;
 	left: 0rem;
@@ -333,16 +343,13 @@ export default defineComponent({
 	display: block;
 	width: 100%;
 	z-index: 97; */
-	/* background: -moz-linear-gradient(top, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
-	/* FF3.6-15 */
-	/* background: -webkit-linear-gradient(top, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
-	/* Chrome10-25,Safari5.1-6 */
-	/* background: linear-gradient(to bottom, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
-	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	/* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EDEDEE', endColorstr='#00ffffff', GradientType=0); */
-	/* IE6-9 */
-	
+  /* background: -moz-linear-gradient(top, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
+  /* FF3.6-15 */
+  /* background: -webkit-linear-gradient(top, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
+  /* Chrome10-25,Safari5.1-6 */
+  /* background: linear-gradient(to bottom, #EDEDEE 20%, rgba(255, 255, 255, 0) 100%); */
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EDEDEE', endColorstr='#00ffffff', GradientType=0); */
+  /* IE6-9 */
 }
-
-
 </style>

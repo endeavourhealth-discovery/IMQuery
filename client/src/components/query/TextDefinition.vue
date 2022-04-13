@@ -1,10 +1,10 @@
 <template>
-  <div class="text-definition text-black text-xl text-bold">
+  <div class="text-definition  text-xl text-bold ">
     <div class="flex flex-col">
       <!-- A sentence from the template    -->
-      <div v-for="(sentence, sentenceIndex) in children.data" :key="sentence.uuid" class="sentence flex flex-wrap">
+      <div v-for="(sentence, sentenceIndex) in children.data" :key="getUUID(sentence)" class="sentence flex flex-wrap">
         <!-- Words in a sentence   -->
-        <template v-for="(phrase, phraseIndex) in sentence" :key="phrase.uuid">
+        <template v-for="(phrase, phraseIndex) in sentence" :key="getUUID(phrase)">
           <!-- References  -->
 
           <div v-if="phrase.type == 'reference'" :class="'reference flex flex-col'">
@@ -42,7 +42,7 @@
             {{ phrase.text || "Unnamed Item" }}
           </div>
 
-          <div v-else class="phrase flex font-regular text-black">
+          <div v-else class="phrase regular flex font-regular ">
             {{ phrase.text || "Unnamed Item" }}
           </div>
 
@@ -53,7 +53,7 @@
 
       <!-- Child sentence - assumes only the first resulting template is used (others unmatched ones are removed)  -->
       <template v-if="children?.children?.length > 0">
-        <TextDefinition v-for="child in children.children" :key="child.uuid" :children="child" class="ml-10 flex" />
+        <TextDefinition v-for="child in children.children" :key="getUUID(child)" :children="child" class="ml-10 flex" />
       </template>
     </div>
   </div>
@@ -61,6 +61,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { v4 } from "uuid";
 
 export default defineComponent({
   name: "TextDefinition",
@@ -89,8 +90,16 @@ export default defineComponent({
     };
   },
   methods: {
+    getUUID(item: any): any {
+      if (item?.uuid == undefined) {
+        console.log("undefined UUID: ", this.children);
+        return `urn:uuid:${v4()}`;
+      } else {
+        return item.uuid;
+      }
+    },
     tooltipText(entity: any): string {
-        return `<span><b>${entity["@id"] || entity?.id || entity?.uuid}</b><br><br>${entity["rdfs:label"] || entity?._text}<span>`;
+      return `<span><b>${entity["@id"] || entity?.id || entity?.uuid}</b><br><br>${entity["rdfs:label"] || entity?._text}<span>`;
     },
     phraseText(entity: any): string {
       const toName = (iri: string) => {
@@ -115,7 +124,6 @@ export default defineComponent({
           return null;
         }
       };
-      console.log("entity", entity);
 
       const _splitIri = toName(entity["@id"]);
 
@@ -142,6 +150,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
+.profile .text-definition {
+  color: #cbd5e1;
+
+}
+
+.profile.light .text-definition {
+  color: #000;
+}
+
+
+
 .non-selectable {
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */

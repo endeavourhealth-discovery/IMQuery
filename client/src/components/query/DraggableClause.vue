@@ -52,7 +52,7 @@
               <div
                 v-if="parent(element) != null && index != siblingCount - 1"
                 v-tooltip.left="parent(element)['name'] == 'not' ? `${tooltip.notor}` : operatorLabel(element) == 'and' ? `${tooltip.and}` : `${tooltip.or}`"
-                :class="'clause-item__operatorlabel inline-block absolute rounded-sm text-lg text-gray-700 font-bold  '"
+                :class="'clause-item__operatorlabel inline-block absolute rounded-sm text-lg  font-bold  '"
               >
                 {{ operatorLabel(element) }}
               </div>
@@ -74,8 +74,12 @@
                 }"
                 @click="handleClick(element)"
                 :class="
-                  'clause__matchLabel ml-2 pl-3 pr-4  py-1  relative -top-3 cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent  outline-none' +
-                    [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white' : ' text-black ']
+                  'clause__matchLabel ml-2 pl-3 pr-4  py-1  relative -top-3 cursor-pointer font-medium text-left md:text-2xl text-xl md:my-1 my-0 block transition duration-300 ease-in-out rounded-md border border-transparent outline-none' +
+                    [
+                      activeProfile == profile['@id'] && activeClausePath == element.currentPath
+                        ? ' active bg-blue-700 text-white '
+                        : '  '
+                    ]
                 "
               >
                 {{ matchLabel(element) }}
@@ -181,12 +185,13 @@ export default defineComponent({
     },
     matchLabel(clause: any): string {
       const toName = (iri: string) => {
-        const _iri3 = iri.substring(0, 3);
+        const _iri3 = iri.substring(0, 4);
 
-        if (_iri3 == "urn") {
+        if (_iri3 == "urn:") {
           return iri;
         } else if (_iri3 == "http") {
           const _iriArray = iri.split("/");
+          console.log(_iriArray);
           return _iriArray[_iriArray.length - 1]
             .split("#")[1]
             .match(/([A-Z]?[^A-Z]*)/g)
@@ -271,7 +276,7 @@ export default defineComponent({
         return;
         // this.$store.commit("updateIsCardDragged", val);
       }
-    },
+    }
     // queryBuilder: {
     //   get(): any {
     //     return this.$store.state.queryBuilder;
@@ -393,13 +398,15 @@ export default defineComponent({
 .clause.light .clause-content:hover .clause__matchLabel:not(.clause__matchLabel.active) {
   background: #e2e8f0;
 }
+
 .clause__matchLabel:hover:not(.clause__matchLabel.active) {
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid #000;
+  border: 1px solid #e2e8f0;
 }
 
 .clause.light .clause__matchLabel:hover:not(.clause__matchLabel.active) {
   background: #e2e8f0;
+  border: 1px solid #000;
 }
 
 .ghost .line-h,

@@ -65,18 +65,19 @@
               <!-- Apps -->
               <OverlayPanel ref="overlay-apps">
                 <div class="flex justify-center w-full ">
-                  <a
-                    :href="app.hyperlink"
-                    target="_blank"
-                    v-for="app in apps"
-                    :key="app.name"
-                    class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200 dark:shadow-none dark:hover:bg-gray-700 dark:border-gray-500 dark:hover:border-white "
-                  >
-                    <HeroIcon class="inline mx-2 my-3 text-blue-700 dark:text-white" strokewidth="2" width="24" height="24" :icon="app.icon" />
-                    <div class="inline text-lg font-bold text-gray-900 dark:text-gray-200">
-                      {{ app.name }}
-                    </div>
-                  </a>
+                  <template v-for="app in apps" :key="app.name">
+                    <a
+                      v-if="app.visible"
+                      class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200 dark:shadow-none dark:hover:bg-gray-700 dark:border-gray-500 dark:hover:border-white "
+                      :href="app.hyperlink"
+                      target="_blank"
+                    >
+                      <HeroIcon class="inline mx-2 my-3 text-blue-700 dark:text-white" strokewidth="2" width="24" height="24" :icon="app.icon" />
+                      <div class="inline text-lg font-bold text-gray-900 dark:text-gray-200">
+                        {{ app.name }}
+                      </div>
+                    </a>
+                  </template>
                 </div>
               </OverlayPanel>
             </div>
@@ -149,28 +150,27 @@
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Find'" class="tab-content relative flex justify-center">
           <div class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none mr-20">
-            <div
-              v-for="category in searchCategories"
-              :key="category.name"
-              :class="
-                'transition duration-500 ease-in-out group flex items-center rounded-lg  px-5 py-3 border border-1 border-transparent ' +
-                  [
-                    activeSearchCategory == category.name
-                      ? ' bg-blue-50 border-blue-500 dark:border-transparent dark:bg-transparent'
-                      : ' text-gray-700 dark:text-gray-400 hover:bg-blue-50 dark:bg-transparent'
-                  ]
-              "
-              @click="category.command()"
-              v-wave="{
-                color: 'currentColor',
-                easing: 'ease-out',
-                duration: 0.5,
-                initialOpacity: 0.5,
-                finalOpacity: 0.1,
-                cancellationPeriod: 75
-              }"
-            >
-              <template v-if="category.visible">
+            <template v-for="category in searchCategories" :key="category.name">
+              <div
+                v-if="category.name == 'Search Results' ? category.visible && searchData : category.visible"
+                :class="
+                  'transition duration-500 ease-in-out group flex items-center rounded-lg  px-5 py-3 border border-1 border-transparent ' +
+                    [
+                      activeSearchCategory == category.name
+                        ? ' #bg-blue-50 #border-blue-500 dark:border-transparent dark:bg-transparent'
+                        : ' text-gray-700 dark:text-gray-400 hover:bg-blue-50 dark:bg-transparent'
+                    ]
+                "
+                @click="category.command()"
+                v-wave="{
+                  color: 'currentColor',
+                  easing: 'ease-out',
+                  duration: 0.5,
+                  initialOpacity: 0.5,
+                  finalOpacity: 0.1,
+                  cancellationPeriod: 75
+                }"
+              >
                 <div :class="'category-icon inline-flex h-16 w-16 rounded-xl  bg-gradient-to-r p-2 ' + category.css.background">
                   <div class="rounded-full bg-black bg-opacity-50 w-full h-full flex justify-center items-center">
                     <HeroIcon :class="' ' + category.css.icon" strokewidth="2.5" width="20" height="20" :icon="category.icon" />
@@ -184,8 +184,8 @@
                 >
                   {{ category.name }}
                 </div>
-              </template>
-            </div>
+              </div>
+            </template>
           </div>
 
           <div class="results w-full max-w-4xl mt-5 #mx-auto #absolute #top-30 #lg:top-10 #left-2/4 #-translate-x-2/4 ">
@@ -208,11 +208,11 @@
                 }}
                 <br />
                 <br />
-                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleTry()">
+                <div class="hover:underline cursor-pointer text-bold text-blue-600 dark:text-blue-400  font-bold" @click="handleTry()">
                   1. Search for sample queries e.g. "COVID-19"
                 </div>
                 <br />
-                <div class="hover:underline cursor-pointer text-bold text-blue-400 font-bold" @click="handleQueryLibrary()">
+                <div class="hover:underline cursor-pointer text-bold text-blue-600 dark:text-blue-400  font-bold" @click="handleQueryLibrary()">
                   2. Browse the Query Library on IM Directory app
                 </div>
               </div>
@@ -240,7 +240,7 @@
 
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
-            <div class="kanban flex justify-center text-white" >
+            <div class="kanban flex justify-center text-white">
               <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
                 <!-- <TransitionRoot
                   appear
@@ -253,15 +253,15 @@
                   leave-from="opacity-100 rotate-0 scale-100"
                   leave-to="opacity-0 scale-95 "
                 > -->
-                  <div v-show="isVisible(iri)" class="profile-column mx-5">
-                    <!-- <div class="select-none text-black dark:text-white font-bold text-3xl h-10 h-max-10  overflow-hidden">{{ profile["rdfs:label"] }}</div>
+                <div v-show="isVisible(iri)" class="profile-column mx-5">
+                  <!-- <div class="select-none text-black dark:text-white font-bold text-3xl h-10 h-max-10  overflow-hidden">{{ profile["rdfs:label"] }}</div>
                     <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl h-16 h-max-16 overflow-hidden">
                       {{ profile["rdfs:comment"] }}
                     </div> -->
 
-                    <!-- <Profile class="mt-5" :theme="light" :modelValue="profile" :activeProfile="activeProfile" /> -->
-                    <Profile class="mt-5 " :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
-                  </div>
+                  <!-- <Profile class="mt-5" :theme="light" :modelValue="profile" :activeProfile="activeProfile" /> -->
+                  <Profile class="mt-5 " :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
+                </div>
                 <!-- </TransitionRoot> -->
               </template>
             </div>
@@ -352,7 +352,7 @@ export default defineComponent({
     return {
       isResultsShown: false,
       isShowing: true,
-      colours: ["light", "light", "blue", "purple", "green", "orange", "pink"],
+      colours: ["light", "light", "light", "light", "light", "light", "light", "light", "blue", "purple", "green", "orange", "pink"],
       // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
       newItems: [
         {
@@ -430,7 +430,7 @@ export default defineComponent({
             //#todo
             this.activeTabName = "Learn";
           },
-          visible: true
+          visible: false 
         }
       ],
 
@@ -450,7 +450,7 @@ export default defineComponent({
         {
           name: "Data Studio",
           icon: "newspaper",
-          visible: true,
+          visible: false,
           hyperlink: ""
         }
       ],
@@ -528,7 +528,7 @@ export default defineComponent({
         return this.$store.state.activeFileIri;
       },
       set(value: any): void {
-        alert("hi")
+        alert("hi");
         this.$store.commit("updateActiveFileIri", value);
       }
     },

@@ -362,7 +362,7 @@ export class Profile extends Entity {
         // return QueryUtils.prettifyJSON(JSON.stringify(this));
     }
 
-    //#todo create json() getter to return Profile in RDF format for storage, ensure im:definition is JSONified
+    //#todo create json() getter to return Profile in RDF format for storage, ensure   is JSONified
 
 }
 
