@@ -11,13 +11,19 @@
             <!-- Array of References  -->
             <template v-if="Array.isArray(phrase.data)">
               <div v-for="(entity, entityIndex) in phrase.data" :key="entity['@id']" :class="'entity flex '">
-                <div class="inline mr-4 text-orange-500 font-bold w-7">{{ entityIndex != 0 ? "or" : "" }}</div>
-                <div
-                  @click="click(entity)"
-                  :class="'entity-text inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'"
-                  v-tooltip.bottom="tooltipText(entity)"
-                >
-                  {{ phraseText(entity) }}
+                <div v-if="entityIndex < 6" class="flex">
+                  <div class="inline mr-4 text-orange-500 font-bold w-7">{{ entityIndex != 0 ? "or" : "" }}</div>
+                  <div
+                    @click="click(entity)"
+                    :class="'entity-text inline ' + 'text-blue-700 font-medium cursor-pointer hover:underline'"
+                    v-tooltip.bottom="tooltipText(entity)"
+                  >
+                    {{ phraseText(entity) }}
+                  </div>
+                </div>
+                <div v-else-if="entityIndex == 6" class="font-medium ml-12 my-2 text-blue-700">
+                      {{phrase.data.length - 6}} more items ...
+
                 </div>
               </div>
             </template>
@@ -150,18 +156,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
-
 .profile .text-definition {
   color: #cbd5e1;
-
 }
 
 .profile.light .text-definition {
   color: #000;
 }
-
-
 
 .non-selectable {
   -webkit-user-select: none; /* Chrome all / Safari all */

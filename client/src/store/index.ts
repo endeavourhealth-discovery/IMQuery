@@ -109,6 +109,8 @@ export default createStore({
       }
 
 
+
+
       // recursive delay until ontology has loaded (require for pre-population)
       function delayFileLoad() {
         if (!state.ontology._entities) {
@@ -362,7 +364,7 @@ export default createStore({
           const toggleAllInvisible = () => state.openFiles.forEach((file: any, index: any) => state.openFiles[index].isVisible = false);
 
           //makes the latest file visible
-          if (state.openFiles.length > 0 ) {
+          if (state.openFiles.length > 0) {
             toggleAllInvisible();
             state.openFiles[state.openFiles.length - 1].isVisible = true;
 
@@ -380,7 +382,11 @@ export default createStore({
 
         }
 
+
+
       }
+      state.isLoading = false;
+
 
     },
     updateActiveTabName(state, value) {
