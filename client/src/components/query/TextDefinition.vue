@@ -128,7 +128,10 @@ export default defineComponent({
     },
 
     tooltipText(entity: any): string {
-      return `<span><b>${entity["@id"] || entity?.id || entity?.uuid}</b>` + [entity["rdfs:label"] || entity?._text ? `<br><br>${entity["rdfs:label"] || entity?._text}<span>` : ""];
+      return (
+        `<span><b>${entity["@id"] || entity?.id || entity?.uuid}</b>` +
+        [entity["rdfs:label"] || entity?._text ? `<br><br>${entity["rdfs:label"] || entity?._text}<span>` : ""]
+      );
     },
     async loadName(entity: any): any {
       // this.entityLabel[clause["@id"]] = "test";
@@ -158,11 +161,11 @@ export default defineComponent({
 
       // const _nameFromIri = toName(entity["@id"]);
 
-      const _name = await EntityService.getDefinitionBundle(entity["@id"]).then(res => {
+      this.entityLabel[entity["@id"]] = entity._text || entity["rdfs:label"] || entity.name || toName(entity["@id"]) || `Unnamed Item: ${entity["@id"]}`;
+
+      await EntityService.getDefinitionBundle(entity["@id"]).then(res => {
         if (res?.data?.entity && res.data.entity["http://www.w3.org/2000/01/rdf-schema#label"]) {
-          return res.data.entity["http://www.w3.org/2000/01/rdf-schema#label"];
-        } else {
-          return  entity._text || entity["rdfs:label"] || entity.name || toName(entity["@id"]) || `Unnamed Item: ${entity["@id"]}`;
+          this.entityLabel[entity["@id"]] = res.data.entity["http://www.w3.org/2000/01/rdf-schema#label"];
         }
       });
 
@@ -171,13 +174,13 @@ export default defineComponent({
       // console.log("entity['rdfs:label']", entity)
 
       // const _label = _name || entity._text || entity["rdfs:label"] || entity.name || `Unnamed Item: ${entity["@id"]}`;
-      this.entityLabel[entity["@id"]] = _name;
+      // this.entityLabel[entity["@id"]] = _name;
       // console.log(new Proxy(this.wordDictionary[entity["@id"]], _handler));
 
       return;
     },
     phraseText(entity: any): any {
-// console.log("log", entity)
+      // console.log("log", entity)
 
       const toName = (iri: string) => {
         const _iri3 = iri.substring(0, 4);
@@ -208,12 +211,14 @@ export default defineComponent({
       // console.log("entity['rdfs:label']", entity)
       return entity._text || entity["rdfs:label"] || entity.name || _splitIri || `Unnamed Item: ${entity["@id"]}`;
     },
-    test() {
-      this.wordDictionary["im:Person"] = "not Person";
-      console.log(this.wordDictionary);
-    },
+    // test() {
+    //   this.wordDictionary["im:Person"] = "not Person";
+    //   console.log(this.wordDictionary);
+    // },
     click(entity: any): void {
       const _entityType = _.get(entity, "rdf:type[0].@id");
+
+      console.log("entityType", _entityType);
 
       if (_entityType && _entityType == "im:Profile") {
         this.$store.commit("updateIsLoading", true);
