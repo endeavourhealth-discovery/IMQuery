@@ -25,7 +25,7 @@
           </button>
           <!-- / Menu Toggler  -->
 
-          <img class="app-logo h-10 w-10" src="app-icon.png" alt="" />
+          <img class="app-logo h-10 w-10" src="/app-icon.png" alt="" />
 
           <!-- Tab Buttons  -->
           <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
@@ -101,7 +101,7 @@
         <div v-if="activeTabName == 'Home'" class="tab-content flex flex-col items-center justify-center">
           <div class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium">
             <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
-            <img class="search-logo mb-10" src="home-icon.png" alt="" />
+            <img class="search-logo mb-10" src="/home-icon.png" alt="" />
           </div>
           <!-- /Brand  -->
 
@@ -366,7 +366,7 @@ import { TransitionRoot } from "@headlessui/vue";
 
 // import Dataset from "@/components/dataset/Dataset.ts";
 
-var _ = require("lodash");
+// var _ = require("lodash");
 
 import { MeiliSearch } from "meilisearch";
 
