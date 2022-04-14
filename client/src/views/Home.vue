@@ -275,7 +275,7 @@
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
 
-          <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:txt-white">
+          <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:text-white">
             <div>
               Tutorials
             </div>
