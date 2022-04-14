@@ -275,20 +275,20 @@
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
 
-          <div class="flex mt-20 flex-col text-3xl font-bold text-white">
+          <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:txt-white">
             <div>
               Tutorials
             </div>
 
             <div class="mt-10 mb-10 flex space-x-20">
               <div
-                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 1 ? ' text-white' : ' text-gray-500']"
+                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 1 ? ' text-black dark:text-white' : ' text-gray-500']"
                 @click="activeVideo = 1"
               >
                 1. Searching for and Opening Queries
               </div>
               <div
-                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 2 ? ' text-white' : ' text-gray-500']"
+                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 2 ? ' text-black dark:text-white' : ' text-gray-500']"
                 @click="activeVideo = 2"
               >
                 2. Viewing and Interpreting Query Definitions
