@@ -25,7 +25,7 @@
           </button>
           <!-- / Menu Toggler  -->
 
-          <img class="app-logo h-10 w-10" src="app-icon.png" alt="" />
+          <img class="app-logo h-10 w-10" src="/app-icon.png" alt="" />
 
           <!-- Tab Buttons  -->
           <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
@@ -101,7 +101,7 @@
         <div v-if="activeTabName == 'Home'" class="tab-content flex flex-col items-center justify-center">
           <div class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium">
             <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
-            <img class="search-logo mb-10" src="home-icon.png" alt="" />
+            <img class="search-logo mb-10" src="/home-icon.png" alt="" />
           </div>
           <!-- /Brand  -->
 
@@ -275,26 +275,39 @@
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
 
+<<<<<<< HEAD
           <div class="mt-20">
             <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:text-white">
+=======
+          <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:text-white">
+            <div>
+>>>>>>> 17440a65be2b6b1ed3dc35ab24078af6deeab994
               Tutorials
             </div>
 
             <div class="mt-10 mb-10 flex space-x-20">
               <div
+<<<<<<< HEAD
                 :class="
                   'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' +
                     [activeVideo == 1 ? ' text-black dark:text-white' : ' dark:text-gray-600 text-gray-500']
                 "
+=======
+                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 1 ? ' text-black dark:text-white' : ' text-gray-500']"
+>>>>>>> 17440a65be2b6b1ed3dc35ab24078af6deeab994
                 @click="activeVideo = 1"
               >
                 1. Searching for and Opening Queries
               </div>
               <div
+<<<<<<< HEAD
                 :class="
                   'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' +
                     [activeVideo == 2 ? ' text-black dark:text-white' : ' dark:text-gray-600 text-gray-500']
                 "
+=======
+                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 2 ? ' text-black dark:text-white' : ' text-gray-500']"
+>>>>>>> 17440a65be2b6b1ed3dc35ab24078af6deeab994
                 @click="activeVideo = 2"
               >
                 2. Viewing and Interpreting Query Definitions
@@ -372,7 +385,7 @@ import { TransitionRoot } from "@headlessui/vue";
 
 // import Dataset from "@/components/dataset/Dataset.ts";
 
-var _ = require("lodash");
+// var _ = require("lodash");
 
 import { MeiliSearch } from "meilisearch";
 

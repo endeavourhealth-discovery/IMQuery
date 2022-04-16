@@ -78,7 +78,7 @@
                     [activeProfile == profile['@id'] && activeClausePath == element.currentPath ? ' active bg-blue-700 text-white ' : '  ']
                 "
               >
-                {{ matchLabel(element) }}
+                {{ matchLabel(element)  }}
               </button>
             </div>
 
@@ -117,6 +117,7 @@
 import draggable from "vuedraggable";
 // import { VueDraggableNext } from './draggable/@'
 import Templates from "@/models/query/Templates";
+import EntityService from "@/services/EntityService";
 
 import { ref, onMounted, defineComponent } from "vue";
 import _ from "lodash";
@@ -158,6 +159,7 @@ export default defineComponent({
     };
   },
   methods: {
+
     handleClick(clause: any): any {
       const _currentClausePath = clause.currentPath;
       this.$store.commit("updateActiveProfile", { uuid: this.profile["@id"], activeClausePath: _currentClausePath });
@@ -180,6 +182,8 @@ export default defineComponent({
       }
     },
     matchLabel(clause: any): string {
+      // this.matchLabel[clause.uuid] = "test";
+      // console.log("clause", clause);
       if (_.get(clause, "json.property.@id") != undefined && clause?.json?.property["@id"] == "im:inResultSet") {
         return "was Part of Search Results";
       }
@@ -209,18 +213,24 @@ export default defineComponent({
       let _entityType = clause.json.entityType ? clause.json.entityType["rdfs:label"] : "";
       let _property = clause.json.property ? clause.json.property["rdfs:label"] : "";
 
-      if ((_entityType == "Event")) _entityType = "Health Record";
-      
-      // improved matchLabel
-      // let _valueData = clause.json.valueCompare.valueData ? clause.json.valueCompare.valueData : null;
-      // let _valueIn = clause.json.valueIn.valueData ? clause.json.valueIn.valueData : null;
-      // let _valueNotIn = clause.json.valueNotIn ? clause.json.valueNotIn : null;
+      //###todo remove this temporary code and use template's functions here also
+      if (_entityType == "Event") _entityType = "Health Record";
 
-      // let _valueTest = clause.json.test ? clause.json.test.valueIn[0]
-      // let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
-      // let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
+      //   // improved matchLabel
+      //   // let _valueData = clause.json.valueCompare.valueData ? clause.json.valueCompare.valueData : null;
+      //   // let _valueIn = clause.json.valueIn.valueData ? clause.json.valueIn.valueData : null;
+      //   // let _valueNotIn = clause.json.valueNotIn ? clause.json.valueNotIn : null;
 
-      return "had " + _entityType || "had " + _property || "had " + toName(clause.json.property["@id"] || "had " + toName(clause.json.entityType["@id"]));
+      //   // let _valueTest = clause.json.test ? clause.json.test.valueIn[0]
+      //   // let _entityType = clause.json.entityType ? clause.json.entityType["@id"].split("#")[1] : "";
+      //   // let _property = clause.json.property ? clause.json.property["@id"].split("#")[1] : "";
+
+      const _label =
+        "had " + _entityType || "had " + _property || "had " + toName(clause.json.property["@id"] || "had " + toName(clause.json.entityType["@id"]));
+     
+     
+
+      return _label;
     },
     showConnectorV(index: number, uuid: number): boolean {
       //first item at the top
