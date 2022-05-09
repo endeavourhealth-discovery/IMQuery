@@ -236,32 +236,11 @@
           </div>
 
           <!-- <button @click="testQuery()"> test</button> -->
-
           <!-- Viewer  -->
           <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <div class="kanban flex justify-center text-white">
-              <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
-                <!-- <TransitionRoot
-                  appear
-                  :show="isVisible(iri)"
-                  as="div"
-                  enter="transform transition duration-[200ms]"
-                  enter-from="opacity-0 rotate-[-10deg] scale-50"
-                  enter-to="opacity-100 rotate-0 scale-100"
-                  leave="transform duration-200 transition ease-in-out"
-                  leave-from="opacity-100 rotate-0 scale-100"
-                  leave-to="opacity-0 scale-95 "
-                > -->
-                <div v-show="isVisible(iri)" class="profile-column mx-5">
-                  <!-- <div class="select-none text-black dark:text-white font-bold text-3xl h-10 h-max-10  overflow-hidden">{{ profile["rdfs:label"] }}</div>
-                    <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl h-16 h-max-16 overflow-hidden">
-                      {{ profile["rdfs:comment"] }}
-                    </div> -->
-
-                  <!-- <Profile class="mt-5" :theme="light" :modelValue="profile" :activeProfile="activeProfile" /> -->
-                  <Profile class="mt-5 " :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
-                </div>
-                <!-- </TransitionRoot> -->
+              <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
+               <DataSetDefinition :modelValue="dataSet"></DataSetDefinition>
               </template>
             </div>
           </div>
@@ -275,39 +254,26 @@
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
 
-<<<<<<< HEAD
           <div class="mt-20">
             <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:text-white">
-=======
-          <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:text-white">
-            <div>
->>>>>>> 17440a65be2b6b1ed3dc35ab24078af6deeab994
               Tutorials
             </div>
 
             <div class="mt-10 mb-10 flex space-x-20">
               <div
-<<<<<<< HEAD
                 :class="
                   'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' +
                     [activeVideo == 1 ? ' text-black dark:text-white' : ' dark:text-gray-600 text-gray-500']
                 "
-=======
-                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 1 ? ' text-black dark:text-white' : ' text-gray-500']"
->>>>>>> 17440a65be2b6b1ed3dc35ab24078af6deeab994
                 @click="activeVideo = 1"
               >
                 1. Searching for and Opening Queries
               </div>
               <div
-<<<<<<< HEAD
                 :class="
                   'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' +
                     [activeVideo == 2 ? ' text-black dark:text-white' : ' dark:text-gray-600 text-gray-500']
                 "
-=======
-                :class="'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' + [activeVideo == 2 ? ' text-black dark:text-white' : ' text-gray-500']"
->>>>>>> 17440a65be2b6b1ed3dc35ab24078af6deeab994
                 @click="activeVideo = 2"
               >
                 2. Viewing and Interpreting Query Definitions
@@ -373,11 +339,11 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 import UserWidget from "@/components/user/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import CardButton from "@/components/general/CardButton.vue";
-import Profile from "@/components/query/Profile.vue";
+import DataSetDefinition from "@/components/query/DataSetDefinition.vue";
 import ProgressBar from "@/components/general/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
-import SearchClient from "@/services/SearchClient";
+// import SearchClient from "@/services/SearchClient";
 
 import HorizontalNavbar from "@/components/general/HorizontalNavbar.vue";
 import HorizontalNavPills from "@/components/general/HorizontalNavPills.vue";
@@ -386,8 +352,6 @@ import { TransitionRoot } from "@headlessui/vue";
 // import Dataset from "@/components/dataset/Dataset.ts";
 
 // var _ = require("lodash");
-
-import { MeiliSearch } from "meilisearch";
 
 export default defineComponent({
   name: "Search",
@@ -401,7 +365,7 @@ export default defineComponent({
     CardButton,
     HorizontalNavPills,
     HorizontalNavbar,
-    Profile,
+    DataSetDefinition,
     TransitionRoot
   },
   $refs: {
@@ -598,6 +562,8 @@ export default defineComponent({
   async mounted() {
     this.$store.dispatch("loadTheme");
 
+    // await EntityService.test();
+
     await this.$store.dispatch("authenticateCurrentUser");
 
     if (this.currentUser && this.isLoggedIn) {
@@ -657,11 +623,9 @@ export default defineComponent({
     },
     isVisible(iri: string): boolean {
       // console.log(profile["@id"])
-
-      const _item = this.openFiles.filter((item: any, index: number) => item.iri == iri);
-      // console.log(this.openFiles)
-
-      return _item[0].isVisible;
+      const openFile = this.openFiles.filter((f: any, index: number) => f.isVisible);
+      console.log("this.openFile", this.openFile);
+      return openFile.length > 0 && openFile[0].isVisible;
     },
     test(): void {
       // console.log(this.activeFileIri);
@@ -674,31 +638,22 @@ export default defineComponent({
       console.log(event);
       (this.$refs["overlay-apps"] as any).toggle(event);
     },
-    async getAutocompleteSearch(): Promise<void> {
-      await SearchClient.fetchAutocompleteSearch(this.searchString)
-        .then((res: any) => {
-          this.autocompleteData = res;
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load autocomplete results", err));
-        });
-    },
+    // async getAutocompleteSearch(): Promise<void> {
+    //   await SearchClient.fetchAutocompleteSearch(this.searchString)
+    //     .then((res: any) => {
+    //       this.autocompleteData = res;
+    //     })
+    //     .catch((err: any) => {
+    //       this.$toast.add(LoggerService.error("Could not load autocomplete results", err));
+    //     });
+    // },
     async search(searchString: string): Promise<any> {
       this.isLoading = true;
       this.isResultsShown = false;
 
       //find queries regardless of status or scheme
-      const _requestBody = {
-        termFilter: searchString,
-        statusFilter: [],
-        typeFilter: ["http://endhealth.info/im#Query"],
-        schemeFilter: [],
-        sortBy: 0,
-        page: 1,
-        size: 20
-      };
 
-      await SearchService.advancedSearch(_requestBody)
+      await SearchService.advancedSearchQuery(searchString)
         .then((res: any) => {
           console.log("fetched OSS search results", res);
           this.hasSearched = true;
@@ -718,9 +673,10 @@ export default defineComponent({
   watch: {
     // whenever question changes, this function will run
     searchString(newSearchString: any, oldearchString: any) {
-      if (newSearchString && newSearchString.trim() != "") {
-        this.getAutocompleteSearch();
-      }
+      // if (newSearchString && newSearchString.trim() != "") {
+      //   this.getAutocompleteSearch();
+      // }
+      return;
     }
   }
 });

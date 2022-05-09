@@ -125,8 +125,9 @@ class Entity {
 
 // Profile\\\\\
 export class Profile extends Entity {
+
     public 'im:definition'?: any | null;
-    public 'entityReferences' = [];
+    private 'entityReferences' = [];
     public 'entitiesWithoutData' = [];
 
 
@@ -141,7 +142,7 @@ export class Profile extends Entity {
             this["entityReferences"] = entity?.entityReferences;
             this["im:definition"] = _definition;
             // populate definitionTree (this is the UI's object model and maps 1 to 1 onto Profiles written in RDF) 
-            this.convertToDefinitionTree(_definition);
+            // this.convertToDefinitionTree(_definition);
 
         }
 

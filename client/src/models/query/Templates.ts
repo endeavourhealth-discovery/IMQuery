@@ -347,61 +347,7 @@ function reference(targetClause: any, propertyPath = "") {
 
 
 
-// checks if a path exists - e.g. for template matching
-function pathExists(testObject: any, testPath: string): boolean {
-    return (typeof (_.get(testObject, testPath)) != "undefined");
-};
 
-function pathValueIs(testObject: any, testPath: string, comparatorObject: string): boolean {
-    const _value = _.get(testObject, testPath);
-    return (_value && _value == comparatorObject);
-};
-
-function fromPath(testObject: any, testPath: string): boolean {
-    return (_.get(testObject, testPath));
-};
-
-function isSingular(testObject: any): boolean {
-    if (typeof (testObject) == "number") {
-        if (testObject == 1 || testObject == -1) return true
-    } else if (typeof (testObject) == "string") {
-        // #todo compare testObject against an array of strings that represent signular, all else is plural
-    }
-    return false
-}
-
-// (case-insensitive) tests the first letter for a string against an array of letters - e.g. indefiniteArticle
-function firstLetterIsVowel(testString: string): boolean {
-    return ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == testString.substring(0, 1).toLowerCase());
-}
-
-// compares the value of a string (testString) against an array (of strings for comparison) - e.g. useful for valueIn
-function includes(testString: string, stringArray: string[]): boolean {
-    return stringArray.includes(testString);
-}
-
-function isObjectAnimate(testObjectName: string): boolean {
-    return ["person", "persons", "patient", "patients", "people"]
-        .includes(testObjectName.toLowerCase()) ? true : false;
-}
-
-function isTrue(...args): boolean {
-    return args.every((arg, index) => arg == true);
-}
-
-function hasTransformation(phraseType, input) {
-    // console.log("hasTransformation type input isnull?", phraseType, input, valueToPhraseMap[phraseType][input] == null)
-    return valueToPhraseMap[phraseType][input] == null ? false : true;
-}
-
-function isNegative(testNumber: number): boolean {
-    const _sign = Math.sign(testNumber);
-    if (_sign == 1 || _sign == 0) {
-        return false;
-    } else {
-        return true;
-    }
-}
 
 // a phrase that is static and not mutable by user
 // #todo: populate meta with info for querybuilding  
@@ -764,26 +710,24 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
 const CascadingTemplates = [
     {
         uuid: `urn:uuid:${v4()}`,
-
         get: { function: "includeMainEntity", input: [] },
         set: null,
         meta: {
-            min: 0,
-            max: 1,
-            mutableCount: 0,
+            min: null,
+            max: null,
+            mutableCount: null,
             matchIf: null,
         },
         data: [],
         children: [
             {
                 uuid: `urn:uuid:${v4()}`,
-
                 get: { function: "linkedEntity", input: [] },
                 set: null,
                 meta: {
-                    min: 0,
-                    max: 1,
-                    mutableCount: 0,
+                    min: null,
+                    max: null,
+                    mutableCount: null,
                     matchIf: {
                         all: [
                             {
@@ -798,13 +742,12 @@ const CascadingTemplates = [
                 children: [
                     {
                         uuid: `urn:uuid:${v4()}`,
-
                         get: { function: "entityProperty", input: [{ paths: ["json", "json.and", "json.or", "json.not"] }] },
                         set: null,
                         meta: {
-                            min: 0,
-                            max: 1,
-                            mutableCount: 0,
+                            min: null,
+                            max: null,
+                            mutableCount: null,
                             matchIf: {
                                 any: [
                                     {
@@ -830,9 +773,9 @@ const CascadingTemplates = [
                         get: { function: "PropertySort", input: [] },
                         set: null,
                         meta: {
-                            min: 0,
-                            max: 1,
-                            mutableCount: 0,
+                            min: null,
+                            max: null,
+                            mutableCount: null,
                             matchIf: {
                                 all: [
                                     {
@@ -850,9 +793,9 @@ const CascadingTemplates = [
                                 get: { function: "entityProperty", input: [{ paths: ["json.test.and", "json.test.or", "json.test.not", "json.test"] }] },
                                 set: null,
                                 meta: {
-                                    min: 0,
-                                    max: 1,
-                                    mutableCount: 0,
+                                    min: null,
+                                    max: null,
+                                    mutableCount: null,
                                     matchIf: {
                                         any: [
                                             {
@@ -873,13 +816,12 @@ const CascadingTemplates = [
             },
             {
                 uuid: `urn:uuid:${v4()}`,
-
                 get: { function: 'hasProfile', input: [] },
                 set: null,
                 meta: {
-                    min: 0,
-                    max: 0,
-                    mutableCount: 0,
+                    min: null,
+                    max: null,
+                    mutableCount: null,
                     matchIf: {
                         all: [
                             {
@@ -897,6 +839,14 @@ const CascadingTemplates = [
     }
 ];
 
+
+function pathExists(testObject: string, testPath: string) {
+    return (typeof _.get(testObject, testPath) != "undefined");
+}
+function pathValueIs(testObject: string, testPath: string, comparatorObject: any) {
+    return _.get(testObject, testPath) == comparatorObject;
+}
+
 // #todo: ensure all templateFunctions return empty placeholders if functions are called without paramters -> this is to generate metadata for querybuilding
 const templateFunctions = {
     "includeMainEntity": includeMainEntity,
@@ -912,6 +862,7 @@ const matchFunctions = {
     "pathExists": pathExists,
     "pathValueIs": pathValueIs,
 }
+
 
 
 export default class Templates {

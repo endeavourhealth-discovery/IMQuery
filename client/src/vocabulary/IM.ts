@@ -48,4 +48,19 @@ export class IM {
   public static DISCOVERY_CODE = IM.NAMESPACE + "DiscoveryCodeScheme";
 
   public static STATS_REPORT_ENTRY = IM.NAMESPACE + "hasStatsReportEntry";
+
+
+  // other
+  public static DEFINITION = IM.NAMESPACE + "definition";
+
+  public static PREFIXED = new class {
+
+    constructor(public superThis: any) {
+      Object.keys(superThis).forEach(key => this[key] =  superThis[key].replace(superThis.NAMESPACE, superThis.PREFIX + ":"));
+      return this;
+    }
+
+  }(this);
+
+
 }

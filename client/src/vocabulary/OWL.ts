@@ -6,4 +6,15 @@ export class OWL {
   public static SOME_VALUES_FROM = OWL.NAMESPACE + "someValuesFrom";
   public static ON_PROPERTY = OWL.NAMESPACE + "onProperty";
   public static HAS_VALUE = OWL.NAMESPACE + "hasValue";
+
+
+  
+  public static PREFIXED = new class {
+
+    constructor(public superThis: any) {
+      Object.keys(superThis).forEach(key => this[key] =  superThis[key].replace(superThis.NAMESPACE, superThis.PREFIX + ":"));
+      return this;
+    }
+
+  }(this);
 }

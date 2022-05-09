@@ -14,7 +14,7 @@
       <div
         v-for="result in results"
         :key="result.iri"
-        class="result cursor-pointer relative z-20 hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
+        class="result cursor-pointer relative z-20 hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
         @click="handleView(result.iri)"
       >
         <div class="result-content">
@@ -29,8 +29,23 @@
           <div class="text-3xl text-blue-600 dark:text-white  font-semibold">
             {{ result.name }}
           </div>
-          <div class="text-xl text-gray-900 dark:text-gray-200 mt-2 ">
-            {{ result.scheme.name }}
+          <!-- <div class="text-xl text-gray-900 dark:text-gray-200 mt-2 flex">
+            <div>
+              {{ result.scheme.name }}
+            </div>
+          </div> -->
+          <div class="badges flex space-x-3">
+            <div
+              v-for="item in TTIriRefs(result)"
+              class="mt-3 p-2  inline-flex  text-xl text-gray-900 dark:text-gray-200 border rounded-full border-2 border-gray-200 dar:border-white hover:bg-gray-100 dark:hover:bg-blue-900"
+            >
+              <div class="inline-flex">
+                {{ item.TTIriRefs?.name ? item.TTIriRefs?.name : item.TTIriRefs[0].name }}
+              </div>
+              <div v-if="item?.TTIriRefs?.length && item?.TTIriRefs?.length > 1" class="inline-flex px-2 mx-2 border rounded-full font-bold">
+                {{ item?.TTIriRefs?.length + " +" }}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -60,6 +75,7 @@
 import { ref, onMounted, defineComponent } from "vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
 import { TransitionRoot } from "@headlessui/vue";
+import { _ } from "lodash";
 
 export default defineComponent({
   name: "SearchResults",
@@ -104,13 +120,27 @@ export default defineComponent({
     };
   },
   methods: {
+    TTIriRefs(result: any): any {
+      const TTIriRefJSONPaths = [
+        { text: "Entity Type", jsonPath: "entityType" },
+        { text: "Scheme", jsonPath: "scheme" },
+        { text: "Status", jsonPath: "status" }
+      ];
+      const TTIriRefs = TTIriRefJSONPaths.map((path: any) => {
+        const iriRefs = _.get(result, path.jsonPath);
+        return {
+          ...path,
+          TTIriRefs: iriRefs
+        };
+      });
+      return TTIriRefs;
+    },
     handleView(iri: string) {
       //debouncing necessary to avoid loading items twice
-        this.$store.commit("updateIsLoading", true);
+      this.$store.commit("updateIsLoading", true);
 
       clearTimeout(this.debounce);
       this.debounce = window.setTimeout(() => {
-
         this.$store.commit("loadFile", iri);
       }, 500);
     },

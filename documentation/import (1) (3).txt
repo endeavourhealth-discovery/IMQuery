@@ -1,0 +1,30 @@
+title Importing 3rd party Query Definitions
+
+participant User
+
+
+participantgroup #lightyellow **Controllers**
+participant query/import
+participant query/populate
+end
+
+participantgroup #lightblue **Logic**
+participant QueryWorkflow
+participant Converter
+end
+
+participantgroup #lightgreen **Data Access** 
+participant GDrive
+participant GraphDB
+participant OpenSearch
+
+end
+
+
+User->query/import: **User imports 3rd party query definition \n (e.g. EMIS EQD document )** 
+query/import->Converter:   **Document is converted to IM Query Model
+Converter->GDrive: **JSON-LD document with entity definition \n is saved on Gdrive for InformationManager**
+Converter->GraphDB: **Query is stored in organisational graph**
+Converter->OpenSearch: **Query is added to organisational index? or IM?**
+Converter->query/populate: **Populate Query with permanent metadata**
+
