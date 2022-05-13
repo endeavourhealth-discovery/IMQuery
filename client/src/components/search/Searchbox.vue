@@ -11,7 +11,7 @@
   >
     <!-- Searchbox  -->
     <div class="flex items-center w-full h-full">
-      <HeroIcon class="widget-icon text-black dark:text-white ml-3" icon="search" strokewidth="2" width="20" height="20" />
+      <HeroIcon class="widget-icon text-black dark:text-white  ml-3" icon="search" strokewidth="2" width="20" height="20" />
       <input
         type="text"
         class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900  dark:text-white font-medium rounded-md focus:outline-none"
@@ -111,6 +111,11 @@ em {
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
+}
+
+.widget-icon {
+  min-width: 20px;
+  min-height: 20px;
 }
 
 .searchbox {

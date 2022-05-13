@@ -2,7 +2,7 @@ import { TTIriRef } from './../tripletree/TTIriRef';
 import { v4 } from "uuid";
 import _ from "lodash";
 import { DataSet } from "../sets/DataSet";
-import { Match } from "../sets/Match";
+import { Match } from "../sets/Filter";
 
 // import Templates from "@/models/query/Templates";
 

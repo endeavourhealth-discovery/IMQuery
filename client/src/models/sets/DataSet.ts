@@ -1,15 +1,14 @@
 import { TTIriRef } from '../tripletree/TTIriRef';
 import { Select } from './Select';
-import { Match } from './Match';
+import { Filter } from './Filter';
 
 export class DataSet {
   public graph: TTIriRef;
-  public select: Select[];
+  public select: Select;
+  public subselect: Select[];
   public subset: DataSet[];
   public groupBy: Select[];
-  public match: Match;
+  public resultFormat: any;
 
-   entityType(): TTIriRef {
-    return this.match.entityType;
-  }
+
 }

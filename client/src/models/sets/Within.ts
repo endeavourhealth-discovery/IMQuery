@@ -1,5 +1,5 @@
 import {Compare} from './Compare';
-import {Match} from './Match';
+import {Filter} from './Filter';
 import {Range} from './Range';
 import {Function} from './Function';
 
@@ -8,5 +8,5 @@ export class Within {
   public compare: Compare;
   public of: string;
   public function: Function;
-  public targetMatch: Match;
+  public targetFilter: Filter;
 }

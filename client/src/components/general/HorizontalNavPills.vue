@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tab-buttons #drop-zone transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-white dark:bg-gray-900 "
+    class="tab-buttons #drop-zone transition duration-700 ease-in-out overflow-y-hidden overflow-x-auto flex items-center justify-center space-x-0 xl:space-x-3 group rounded-lg bg-transparent  "
   >
     <template v-for="item in items" :key="item.iri">
       <button
@@ -31,7 +31,7 @@
 
         <!-- Name  -->
         <div class="inline-flex font-medium text-2xl ml-2 mr-2">
-          {{ item?.name }}
+          {{ item?.data?.name }}
         </div>
         <!-- x button  -->
         <div v-if="closable" class="button-close inline-flex hidden">
@@ -63,13 +63,12 @@ export default defineComponent({
     closeItem(itemIri: string) {
       //removes item from state
       // this.$store.commit("closeOpenFile", itemIri);
-
       // this.$emit(
       //   "update:items",
       //   this.items.filter((item: any) => item.iri != itemIri)
       // );
     }
-  },
+  }
   // watch: {
   //   modelValue(value: any) {}
   // }
@@ -102,7 +101,7 @@ export default defineComponent({
 }
 
 .tab-buttons {
-  padding: 10px 3px;
+  /* padding: 0 3px; */
 }
 
 .tab-button.active {

@@ -11,89 +11,106 @@
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <header :class="'header  mx-auto relative flex items-center justify-between w-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
-        <!-- Left Side  -->
-        <div :class="'pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
-          <!-- Menu Toggler  -->
+      <div class="w-full bg-white dark:bg-gray-900 border-b dark:border-b-0 shadow-sm ">
+        <header :class="'header bg-white dark:bg-gray-900 mx-auto relative flex items-center justify-between w-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
+          <!-- Left Side  -->
+          <div :class="'pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
+            <!-- Menu Toggler  -->
 
-          <button
-            :class="
-              `menu-toggler h-14 w-14 mr-6 non-selectable roundbutton focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out flex items-center justify-center rounded-md border text-black dark:text-white border-gray-200 dark:border-transparent bg-transparent  hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-700  dark:hover:text-white focus:text-blue-600 dark:focus:text-white  focus:ring-blue-600 dark:focus:ring-white`
-            "
-          >
-            <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
-          </button>
-          <!-- / Menu Toggler  -->
+            <button
+              @click="onToggleTabs"
+              :class="
+                `menu-toggler h-14 w-14 mr-6 non-selectable roundbutton focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out flex items-center justify-center rounded-md border text-black dark:text-white border-gray-200 dark:border-transparent bg-transparent  hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-700  dark:hover:text-white focus:text-blue-600 dark:focus:text-white  focus:ring-blue-600 dark:focus:ring-white`
+              "
+            >
+              <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
+            </button>
+            <!-- / Menu Toggler  -->
 
-          <img class="app-logo h-10 w-10" src="/app-icon.png" alt="" />
+            <OverlayPanel class="overlay-menu-toggler" ref="overlay-menu-toggler">
+              <!-- Tab Buttons  -->
+              <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
+                <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
+              </nav>
+              <!-- /Tab Buttons -->
 
-          <!-- Tab Buttons  -->
-          <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
-            <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
-          </nav>
-          <!-- /Tab Buttons -->
-        </div>
-        <!-- / Left Side    -->
+              <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+                <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+                <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
+              </button>
+            </OverlayPanel>
 
-        <!-- Searchbox  -->
-        <Searchbox
-          :class="'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 inline ' + [activeTabName == 'Home' ? ' ' : '']"
-          v-model="searchString"
-          :autocompleteData="autocompleteData"
-          @search="search(searchString)"
-        />
+            <img class="app-logo h-10 w-10" src="/app-icon.png" alt="" />
 
-        <!-- /Searchbox  -->
+            <!-- Tab Buttons  -->
+            <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
+              <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
+            </nav>
+            <!-- /Tab Buttons -->
+          </div>
+          <!-- / Left Side    -->
 
-        <div class="right flex mr-7 ml-4">
-          <!-- <SplitButton
+          <!-- Searchbox  -->
+          <Searchbox
+            :class="'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 inline ' + [activeTabName == 'Home' ? ' ' : '']"
+            v-model="searchString"
+            :autocompleteData="autocompleteData"
+            @search="search(searchString)"
+          />
+
+          <!-- /Searchbox  -->
+
+          <div class="right flex mr-7 ml-4">
+            <!-- <SplitButton
             v-if="isLoggedIn"
             class="p-button-rounded mr-10 h-14 mt-2 #p-button-outlined"
             label="New"
             icon="pi pi-plus"
             :model="newItems"
           ></SplitButton> -->
-          <!-- Apps  -->
-          <div class="select-none flex" @click="onToggleApps">
-            <div :class="'flex ' + [isLoggedIn ? ' pt-2' : '']">
-              <div class="app-title pt-1 ml-5 font-medium text-black dark:text-white text-3xl">
-                Apps
-              </div>
-              <HeroIcon class="mt-2 mx-2 text-black dark:text-white" strokewidth="2" width="20" height="20" icon="chevron_down" />
-            </div>
-            <div class="relative">
-              <!-- Apps -->
-              <OverlayPanel ref="overlay-apps">
-                <div class="flex justify-center w-full ">
-                  <template v-for="app in apps" :key="app.name">
-                    <a
-                      v-if="app.visible"
-                      class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200 dark:shadow-none dark:hover:bg-gray-700 dark:border-gray-500 dark:hover:border-white "
-                      :href="app.hyperlink"
-                      target="_blank"
-                    >
-                      <HeroIcon class="inline mx-2 my-3 text-blue-700 dark:text-white" strokewidth="2" width="24" height="24" :icon="app.icon" />
-                      <div class="inline text-lg font-bold text-gray-900 dark:text-gray-200">
-                        {{ app.name }}
-                      </div>
-                    </a>
-                  </template>
+            <!-- Apps  -->
+            <div class="select-none flex" @click="onToggleApps">
+              <div :class="'flex ' + [isLoggedIn ? ' pt-2' : '']">
+                <div class="app-title pt-1 ml-5 font-medium text-black dark:text-white text-3xl">
+                  Apps
                 </div>
-              </OverlayPanel>
+                <HeroIcon class="mt-2 mx-2 text-black dark:text-white" strokewidth="2" width="20" height="20" icon="chevron_down" />
+              </div>
+              <div class="relative">
+                <!-- Apps -->
+                <OverlayPanel ref="overlay-apps">
+                  <div class="flex justify-center w-full ">
+                    <template v-for="app in apps" :key="app.name">
+                      <a
+                        v-if="app.visible"
+                        class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200 dark:shadow-none dark:hover:bg-gray-700 dark:border-gray-500 dark:hover:border-white "
+                        :href="app.hyperlink"
+                        target="_blank"
+                      >
+                        <HeroIcon class="inline mx-2 my-3 text-blue-700 dark:text-white" strokewidth="2" width="24" height="24" :icon="app.icon" />
+                        <div class="inline text-lg font-bold text-gray-900 dark:text-gray-200">
+                          {{ app.name }}
+                        </div>
+                      </a>
+                    </template>
+                  </div>
+                </OverlayPanel>
+              </div>
+              <!-- /Apps -->
             </div>
-            <!-- /Apps -->
+
+            <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+              <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+              <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
+            </button>
+
+            <!-- User Widget -->
+            <UserWidget class="" :modelValue="userMeta" />
           </div>
+          <ProgressBar class="" v-if="isLoading" />
+        </header>
+      </div>
 
-          <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
-            <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
-            <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
-          </button>
-
-          <!-- User Widget -->
-          <UserWidget class="" :modelValue="userMeta" />
-        </div>
-        <ProgressBar class="" v-if="isLoading" />
-      </header>
       <!-- <ResponsiveNav/> -->
       <!-- Tabs -->
       <div class="page-content">
@@ -229,7 +246,7 @@
 
         <!-- Tab: View  -->
 
-        <div v-show="activeTabName == 'View'" class="tab-content ">
+        <div v-show="activeTabName == 'View'" class="tab-content viewer ">
           <!-- Tabs  -->
           <div class="flex py-5 justify-center items-center w-full">
             <HorizontalNavPills class="nav" :items="openFiles" v-model="activeFileIri" :closable="true" />
@@ -237,10 +254,10 @@
 
           <!-- <button @click="testQuery()"> test</button> -->
           <!-- Viewer  -->
-          <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
+          <div class="w-full h-full bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <div class="kanban flex justify-center text-white">
               <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
-               <DataSetDefinition :modelValue="dataSet"></DataSetDefinition>
+                <DataSetDefinition :modelValue="dataSet"></DataSetDefinition>
               </template>
             </div>
           </div>
@@ -304,6 +321,20 @@
         </div>
         <!-- /Tab: Explore  -->
 
+        <!-- Tab: Developer  -->
+        <div v-if="activeTabName == 'Developer'" class="tab-content flex flex-col items-center ">
+          <div class="text-black dark:text-white font-bold text-lg">Text Generator</div>
+          <div class="flex space-x-5">
+            <Button @click="summariseQuery('urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf')" class="">SMI Population</Button>
+            <Button @click="summariseQuery('urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97')" class="">Priority1</Button>
+            <Button @click="summariseQuery('urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd')" class="">Priority2</Button>
+            <Button @click="summariseQuery('urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6')" class="">Priority3a</Button>
+            <Button @click="summariseQuery('urn:uuid:3f04bc73-fb03-4d50-bae4-49a866ad5033')" class="">Priority3b</Button>
+          </div>
+        </div>
+
+        <!-- /Tab: Developer  -->
+
         <!-- Tab: Organisations  -->
         <OrganisationBrowser v-if="activeTabName == 'Sources'" class="tab-content" />
         <!-- /Tab: Organisations  -->
@@ -343,6 +374,7 @@ import DataSetDefinition from "@/components/query/DataSetDefinition.vue";
 import ProgressBar from "@/components/general/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
+import QueryService from "@/services/QueryService";
 // import SearchClient from "@/services/SearchClient";
 
 import HorizontalNavbar from "@/components/general/HorizontalNavbar.vue";
@@ -378,9 +410,7 @@ export default defineComponent({
       isShowing: true,
       colours: ["light", "light", "light", "light", "light", "light", "light", "light", "blue", "purple", "green", "orange", "pink"],
       // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
-
       hasSearched: false,
-      // definition: typeof Dataset,
       userMeta: {
         username: "",
         firstName: "",
@@ -592,6 +622,16 @@ export default defineComponent({
     // async handleOpenItem(iri: any) {
     //   console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
     // },
+    async summariseQuery(queryIri: string): Promise<any> {
+      const entity = await QueryService.summariseQuery(queryIri)
+        .then(res => {
+          console.log("### Populated File", res);
+          return
+        })
+        .catch(err => {
+          console.error("Failed to load file from the server", err);
+        });
+    },
     handleTry(): any {
       this.search("COVID-19");
     },
@@ -633,6 +673,10 @@ export default defineComponent({
       for (const profile in this.queryBuilder.profiles) {
         console.log("prof", profile);
       }
+    },
+    onToggleTabs(event: any): void {
+      console.log(event);
+      (this.$refs["overlay-menu-toggler"] as any).toggle(event);
     },
     onToggleApps(event: any): void {
       console.log(event);
@@ -822,8 +866,13 @@ header nav {
   }
 
   .app-logo,
-  header nav {
+  header nav,
+  header .theme-toggler {
     display: none;
+  }
+
+  .overlay-menu-toggler .theme-toggler {
+    display: inlin-flex;
   }
 }
 

@@ -52,6 +52,7 @@ export class IM {
 
   // other
   public static DEFINITION = IM.NAMESPACE + "definition";
+  public static IN_RESULT_SET = IM.NAMESPACE + "inResultSet";
 
   public static PREFIXED = new class {
 

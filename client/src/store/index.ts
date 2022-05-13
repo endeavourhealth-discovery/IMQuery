@@ -83,6 +83,11 @@ export default createStore({
         visible: true
       },
       {
+        name: "Developer",
+        icon: "",
+        visible: true
+      },
+      {
         name: "Explore2",
         icon: "globe",
         visible: false
@@ -112,7 +117,9 @@ export default createStore({
       }
 
       try {
-        const entity = await QueryService.querySummary(fileIri).then(res => {
+        // const entity = await QueryService.querySummary(fileIri).then(res => {
+        // const entity = await QueryService.definition(fileIri).then(res => {
+        const entity = await QueryService.definition(fileIri).then(res => {
           console.log("## Query Loaded file:", res.data);
           state.queryBuilder.loadDataSet(res.data);
           return res.data

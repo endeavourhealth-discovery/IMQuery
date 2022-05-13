@@ -2,7 +2,7 @@ import axios, { AxiosResponse, CancelToken } from "axios";
 
 export default class SearchService {
 
-  static API = import.meta.env.VITE_IMAPI;
+  static API = import.meta.env.VITE_NODE_API;
 
   public static async advancedSearchDatamodel(searchString: any): Promise<AxiosResponse<any>> {
     try {

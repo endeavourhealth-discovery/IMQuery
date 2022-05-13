@@ -46,8 +46,9 @@ export class Helpers {
         }
     }
 
-    public static a(testString: string) {
-        return testString && testString != "" ? ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == testString.substring(0, 1).toLowerCase()) ? "an" : "a" : "a";
+    public static a(ref: any) {
+        const testString = ref?.name || ref;
+        return testString && testString  != "" ? ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == testString.substring(0, 1).toLowerCase()) ? "an" : "a" : "a";
     };
 
     public static pronoun(testString: string): string {

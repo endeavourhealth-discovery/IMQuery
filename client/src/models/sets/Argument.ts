@@ -1,7 +1,7 @@
 import {TTIriRef} from '../tripletree/TTIriRef';
-import {Match} from './Match';
+import {Filter} from './Filter';
 
 export class Argument {
   public parameter: string;
-  public value: string | TTIriRef | Match | boolean | number;
+  public value: string | TTIriRef | Filter | boolean | number;
 }

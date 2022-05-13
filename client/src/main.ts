@@ -56,6 +56,7 @@ import Dialog from "primevue/dialog";
 import SplitButton from "primevue/splitbutton";
 import MultiSelect from "primevue/multiselect";
 import OverlayPanel from "primevue/overlaypanel";
+import ToggleButton from "primevue/ToggleButton";
 // import Chart from "primevue/chart";
 import Menu from "primevue/menu";
 import ProgressSpinner from "primevue/progressspinner";
@@ -101,6 +102,7 @@ const app = createApp(App)
   })
   .use(VWave)
   .directive("tooltip", Tooltip)
+  .component("ToggleButton", ToggleButton)
   .component("Card", Card)
   .component("ProgressSpinner", ProgressSpinner)
   .component("TabView", TabView)

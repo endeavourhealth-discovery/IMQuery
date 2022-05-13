@@ -15,23 +15,35 @@
          "true": "Include",
          "false": "Exclude"
      },
-     "entityIri": {
+     "iri": {
          "im:PersonDetails": "Personal Details Record"
      },
-     "rdfs:label": {
+     "name": {
          "codeable expression": "clinical code",
          "$referenceDate": "the Reference Date",
          "Medication order or prescription (entry type)": "Order or Prescription",
          "DESCENDING": "descending",
          "ASCENDING": "ascending",
-         "GREATER_THAN_OR_EQUAL": "greater than or equal to",
-         "LESS_THAN_OR_EQUAL": "less than or equal to",
          "Event": "Health Record",
-         "Person Details": "Personal Details Record"
+         "Person Details": "Personal Details Record",
+         "in result set of": "part of the search results of",
+         "EQUAL": "equal to",
+         "LESS_THAN": "less than",
+         "LESS_THAN_OR_EQUAL": "less than or equal to",
+         "GREATER_THAN": "more than",
+         "GREATER_THAN_OR_EQUAL": "more than or equal to",
+         "MEMBER_OF": "member of",
+         "NOT_EQUAL": "not equal to",
+         "STARTS_WITT": "starts with"
      },
      "animatePronoun": {
          "true": "they",
          "false": "it",
+         "default": "it"
+     },
+     "a": {
+         "true": "a",
+         "false": "an",
          "default": "it"
      },
      "had": {

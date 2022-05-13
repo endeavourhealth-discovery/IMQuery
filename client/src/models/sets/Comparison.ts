@@ -5,5 +5,6 @@ export enum Comparison {
   GREATER_THAN = "more than",
   GREATER_THAN_OR_EQUAL = "more than or equal to",
   MEMBER_OF = "member of",
-  NOT_EQUAL = "not equal to"
+  NOT_EQUAL = "not equal to",
+  STARTS_WITT = "starts with",
 }

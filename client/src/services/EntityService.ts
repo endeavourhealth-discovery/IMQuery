@@ -11,7 +11,7 @@ export default class EntityService {
 
   public static async test(): Promise<any> {
     try {
-      const _res = await axios.get("http://localhost:8080/" + "api/query/public/queryIM", {
+      const _res = await axios.get(import.meta.env.VITE_API + "api/query/public/queryIM", {
         params: {
           query: {
             "name": "AsthmaSubTypesCore",

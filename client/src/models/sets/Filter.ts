@@ -6,10 +6,10 @@ import { Within } from './Within';
 import { Function } from './Function';
 
 
-export class Match extends TTIri {
-  public  and: Match[];
-  public or: Match[];
-  public may: Match[];
+export class Filter extends TTIri {
+  public and: Filter[];
+  public or: Filter[];
+  public may: Filter[];
   public sortLimit: SortLimit;
   public graph: TTIriRef;
   public entityType: TTIriRef;
@@ -22,7 +22,7 @@ export class Match extends TTIri {
   public valueNotIn: TTIriRef[];
   public range: Range;
   public valueVar: string;
-  public valueObject: Match;
+  public valueObject: Filter;
   public function: Function;
   public valueWithin: Within;
   public inverseOf: boolean;

@@ -34,22 +34,24 @@
               {{ result.scheme.name }}
             </div>
           </div> -->
-          <div class="badges flex space-x-3">
+          <div class="badges flex space-x-3 mt-4">
             <div
               v-for="item in TTIriRefs(result)"
-              class="mt-3 p-2  inline-flex  text-xl text-gray-900 dark:text-gray-200 border rounded-full border-2 border-gray-200 dar:border-white hover:bg-gray-100 dark:hover:bg-blue-900"
+              class="px-2 py-1  inline-flex  text-xl text-gray-900 dark:text-gray-200 border rounded-full border-2 border-gray-200 dar:border-white hover:bg-gray-100 dark:hover:bg-blue-900"
             >
-              <div class="inline-flex">
-                {{ item.TTIriRefs?.name ? item.TTIriRefs?.name : item.TTIriRefs[0].name }}
-              </div>
-              <div v-if="item?.TTIriRefs?.length && item?.TTIriRefs?.length > 1" class="inline-flex px-2 mx-2 border rounded-full font-bold">
-                {{ item?.TTIriRefs?.length + " +" }}
-              </div>
+              <template v-if="item.TTIriRefs?.name || item.TTIriRefs[0].name">
+                <div class="inline-flex">
+                  {{ item.TTIriRefs?.name ? item.TTIriRefs?.name : item.TTIriRefs[0].name }}
+                </div>
+                <div v-if="item?.TTIriRefs?.length && item?.TTIriRefs?.length > 1" class="inline-flex px-2 mx-2 border rounded-full font-bold">
+                  {{ item?.TTIriRefs?.length + " +" }}
+                </div>
+              </template>
             </div>
           </div>
         </div>
 
-        <div class="result-actions rounded-md mt-2 flex justify-end select-none space-x-5 mr-4">
+        <div class="result-actions rounded-md flex justify-end select-none space-x-5 mr-4">
           <div
             class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-blue-600 dark:text-white"
             @click="handleView(result.iri)"
@@ -85,38 +87,38 @@ export default defineComponent({
   data() {
     return {
       debounce: 0,
-      exampleResults: [
-        {
-          url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes+in+east+london",
-          title: "Create Dataset",
-          description: "Extract data from health records",
-          module: "data",
-          icon: {
-            id: "tables",
-            collection: "hero"
-          }
-        },
-        {
-          url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes",
-          title: "Browse Organisations",
-          description: "View organisations on a map and add them to lists to source data",
-          module: "data",
-          icon: {
-            id: "tables",
-            collection: "hero"
-          }
-        },
-        {
-          url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes",
-          title: "View Disease Profile",
-          description: "Find conditions, symptoms, observations and other health record entries associated with diabetes",
-          module: "data",
-          icon: {
-            id: "tables",
-            collection: "hero"
-          }
-        }
-      ]
+      // exampleResults: [
+      //   {
+      //     url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes+in+east+london",
+      //     title: "Create Dataset",
+      //     description: "Extract data from health records",
+      //     module: "data",
+      //     icon: {
+      //       id: "tables",
+      //       collection: "hero"
+      //     }
+      //   },
+      //   {
+      //     url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes",
+      //     title: "Browse Organisations",
+      //     description: "View organisations on a map and add them to lists to source data",
+      //     module: "data",
+      //     icon: {
+      //       id: "tables",
+      //       collection: "hero"
+      //     }
+      //   },
+      //   {
+      //     url: "https://im.endeavourhealth.net/#/search?q=comborbidities+associated+with+diabetes",
+      //     title: "View Disease Profile",
+      //     description: "Find conditions, symptoms, observations and other health record entries associated with diabetes",
+      //     module: "data",
+      //     icon: {
+      //       id: "tables",
+      //       collection: "hero"
+      //     }
+      //   }
+      // ]
     };
   },
   methods: {
@@ -138,7 +140,6 @@ export default defineComponent({
     handleView(iri: string) {
       //debouncing necessary to avoid loading items twice
       this.$store.commit("updateIsLoading", true);
-
       clearTimeout(this.debounce);
       this.debounce = window.setTimeout(() => {
         this.$store.commit("loadFile", iri);
