@@ -53,6 +53,8 @@ export class IM {
   // other
   public static DEFINITION = IM.NAMESPACE + "definition";
   public static IN_RESULT_SET = IM.NAMESPACE + "inResultSet";
+  public static EFFECTIVE_DATE = IM.NAMESPACE + "effectiveDate";
+  public static TIME_DIFFERENCE = IM.NAMESPACE + "TimeDifference";
 
   public static PREFIXED = new class {
 

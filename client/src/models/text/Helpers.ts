@@ -1,9 +1,20 @@
 
-import * as wordMap from './WordMap.json';
+import * as wordMap from './config/WordMap.json';
 import _ from "lodash";
+import * as labels from "./Config/AdditionalOntology.json"
 
 
 export class Helpers {
+
+
+    //these are silenced words or excess words that need to be trimmed off
+    public static trimUnnecessaryText(inputString: string): string {
+        return inputString
+            // .replace("Observation (entry type)", "")
+            // .replace("Event (entry type)", "")
+            .replace(" (entry type)", "")
+
+    }
 
     public static isSingular(testObject: any): boolean {
         if (typeof (testObject) == "number") {
@@ -14,8 +25,9 @@ export class Helpers {
         return false
     }
 
+
     // (case-insensitive) tests the first letter for a string against an array of letters - e.g. indefiniteArticle
-    public static firstLetterIsVowel(testString: string): boolean {
+    public static isFirstLetterVowel(testString: string): boolean {
         return ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == testString.substring(0, 1).toLowerCase());
     }
 
@@ -29,6 +41,7 @@ export class Helpers {
             .includes(testObjectName.toLowerCase()) ? true : false;
     }
 
+    //checks the list of arguments for truthness 
     public static isTrue(...args): boolean {
         return args.every((arg, index) => arg == true);
     }
@@ -48,12 +61,22 @@ export class Helpers {
 
     public static a(ref: any) {
         const testString = ref?.name || ref;
-        return testString && testString  != "" ? ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == testString.substring(0, 1).toLowerCase()) ? "an" : "a" : "a";
+        if (!testString || testString == "") return "a/an";
+        return Helpers.isFirstLetterVowel(testString) ? "an" : "a";
     };
 
-    public static pronoun(testString: string): string {
-        return Helpers.isObjectAnimate(testString) ? "they" : "it";
+    public static pronoun(ref: any): string {
+        const testString = ref?.name || ref;
+        if (!testString || testString == "") return "they/it";
+        return wordMap?.animatePronoun[Helpers.isObjectAnimate(testString)];
     }
+
+    public static getLabel(iri: string): any {
+        const label = labels.entities.filter(label => label['@id'] == iri)
+        return label.length > 0 ? label[0]["rdfs:label"] : null;
+
+    }
+
 
 
 }

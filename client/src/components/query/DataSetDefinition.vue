@@ -130,6 +130,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.definition::-webkit-scrollbar{
+  width: 8px;
+}
+.definition::-webkit-scrollbar-thumb {
+  background-color: #94a3b8; 
+  border-radius: 20px;
+}
+
 .definition,
 .references {
   max-width: 600px;

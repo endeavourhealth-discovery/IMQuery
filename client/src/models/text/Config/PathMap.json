@@ -1,0 +1,23 @@
+{
+    "or": "valueObject.or",
+    "and": "valueObject.and",
+    "property": "property",
+    "propertyId": "property.@id",
+    "comparison": "valueCompare.comparison",
+    "valueCompare": "valueCompare",
+    "valueFunction": "function",
+    "units": "function.argument[0]",
+    "firstDate": "function.argument[1]",
+    "secondDate": "function.argument[2]",
+    "valueFunctionId": "function.id.@id",
+    "valueData": "valueCompare.valueData",
+    "valueIn0": "valueIn[0]",
+    "valueNotIn0": "valueNotIn[0]",
+    "valueConcept0": "valueConcept[0]",
+    "entity": "valueObject.entityType",
+    "test": "valueObject.sortLimit.test",
+    "orderById": "valueObject.sortLimit.orderBy.@id",
+    "sortLimit": "valueObject.sortLimit",
+    "sortDirection": "valueObject.sortLimit.direction",
+    "testValueIn0": "valueObject.sortLimit.test[0].valueIn[0]"
+}

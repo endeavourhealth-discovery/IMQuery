@@ -103,7 +103,7 @@ export default createStore({
         visible: false
       }
     ],
-    activeTabName: "Home", //Options #Home #SearchResults #View #Explore
+    activeTabName: "Developer", //Options #Home #SearchResults #View #Explore
 
   },
   mutations: {
@@ -119,10 +119,11 @@ export default createStore({
       try {
         // const entity = await QueryService.querySummary(fileIri).then(res => {
         // const entity = await QueryService.definition(fileIri).then(res => {
-        const entity = await QueryService.definition(fileIri).then(res => {
-          console.log("## Query Loaded file:", res.data);
-          state.queryBuilder.loadDataSet(res.data);
-          return res.data
+        const entity = await QueryService.summariseQuery(fileIri).then(res => {
+          const data = res?.data || res
+          // console.log("## Query Loaded file:", data); //?res.data if backend
+          state.queryBuilder.loadDataSet(data);
+          return data
         })
           .catch(err => {
             console.error("Failed to load file from the server", err);

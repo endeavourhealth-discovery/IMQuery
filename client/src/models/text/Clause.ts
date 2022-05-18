@@ -1,7 +1,9 @@
 import _ from "lodash";
 import { String } from 'aws-sdk/clients/cloudsearch';
-import * as wordMap from "./WordMap.json"
+import * as wordMap from "./Config/WordMap.json"
+import * as pathMap from "./Config/PathMap.json"
 import { IM, RDF, RDFS } from "../../vocabulary"
+import { Helpers } from "./Helpers"
 
 
 export class TTIriRef {
@@ -21,65 +23,73 @@ export class Clause {
 
 
     public definition: any;
+    public path: string;
 
 
     constructor(definition: any) {
         this.definition = definition;
+
+        //maps all key-value pairs in pathMap.json to functions (key) which return a transfored string (value mapped against wordMap.json)
+        Object.keys(pathMap).forEach((key) => {
+            Object.defineProperty(this, key, {
+                get() { return this.get(pathMap[key]) },
+            })
+        })
+
         return this
     }
 
+    //ensures all properties return labels from WordMap.json (if applicable) or labels from AdditionalOntology.json where Iris match  (if applicable)
     private get(path: string): any {
-        const value = _.get(this.definition, path);
-        if (value && value?.name) {
-            // console.log("value?.name", value?.name);
-            const mappedWord = wordMap.name[value?.name] || wordMap.name[value] || value?.name || value?.name;;
-            console.log("mappedWord", mappedWord);
-            value.name = mappedWord;
-        }
-        return value;
+
+
+        let originalObject = _.cloneDeep(_.get(this.definition, path));
+        // originalObject && console.log("originalObject", originalObject)
+
+        let originalValue = originalObject?.name || originalObject?.value || originalObject
+        if (originalValue == "Unknown code set") originalValue = Helpers.getLabel(originalObject['@id']) || originalValue
+        if (typeof (originalValue) == "string") originalValue = Helpers.trimUnnecessaryText(originalValue);
+
+
+
+
+        // originalValue && console.log("originalValue", originalValue)
+
+        let mappedValue;
+        if (originalValue) mappedValue = wordMap.name.find(obj => obj.originalValue == originalValue)?.mappedValue || originalValue;
+
+        let mappedObject = _.cloneDeep(originalObject); //if you want to replace .name property of IriRef in original Definition remove _.cloneDeep
+        if (mappedObject?.name) mappedObject.name = mappedValue;
+        else if (mappedObject?.value) mappedObject.value = mappedValue;
+        else mappedObject = mappedValue
+            // ? mappedObject.name = mappedValue //e.g. TTIriRef
+            // : mappedObject = mappedValue; //e.g. raw string at JSON path
+        // mappedObject && console.log("mappedObject", mappedObject)
+
+
+        return mappedValue ? mappedObject : originalObject;
     }
 
 
-    // get property(): any { return this.get('property.name') }
-    // get inResultSet(): any { return this.get('property.id')}
-    // get comparison(): any { return this.get(('valueCompare.comparison')) }
-    // get valueCompare(): any { return this.get('valueCompare.valueData') }
-    // get valueIn(): any { return this.get('valueIn[0].name') }
-    // get valueConcept(): any { return this.get('valueConcept[0].name') }
-    // get entity(): any { return this.get('valueObject.entityType.name') }
-    // get test(): any { return this.get('valueObject.sortLimit.test') }
-    // get testValueIn(): any { return this.get('valueObject.sortLimit.test[0].valueIn[0].name') }
-    get property(): any { return new TTIriRef(this.get('property')) }
-    // get inResultSet(): any { return this.get('property.id')}
-    get comparison(): any { return this.get(('valueCompare.comparison')) }
-    get valueData(): any { return this.get('valueCompare.valueData') }
-    get valueIn(): any { return new TTIriRef(this.get('valueIn[0]')) }
-    get valueConcept(): any { return new TTIriRef(this.get('valueConcept[0]')) }
-    get entity(): any { return new TTIriRef(this.get('valueObject.entityType')) }
-    get test(): any { return this.get('valueObject.sortLimit.test') }
-    get testValueIn(): any { return new TTIriRef(this.get('valueObject.sortLimit.test[0].valueIn[0]')) }
-
-
-    path(jsonPath: string): any {
-        const obj = _.get(this.definition, jsonPath);
-        this._value = obj
-        return this;
-    }
-
-
-    private _value: any;
-
-    get value(): any {
-        return _.cloneDeep(this._value);
-    }
-
+    //special getters that are not defined in PathMap.json
     get exists(): boolean {
-        return (typeof this._value != "undefined");
-    };
 
-    public is(comparatorObject: any): boolean {
-        return this._value == comparatorObject;
-    };
+        const exists = this?.definition?.notExist != true && this?.definition?.valueObject?.notExist != true;
+        // console.log("exists", this?.definition?.valueObject?.notExist == true)
+        // console.log("exists", this.definition)
+        return exists
+    }
 
+    get were(): string {
+        return wordMap["were"][this.exists];
+    }
+
+    // private _had;
+    get had(): string {
+        return wordMap["had"][this.exists];
+    }
+    // set had(val: string): string {
+    //     return this._had = val;
+    // }
 
 }

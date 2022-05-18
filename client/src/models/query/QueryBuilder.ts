@@ -23,6 +23,7 @@ export class QueryBuilder {
 
     // loads JSON file 
     loadDataSet(dataSet: any): void {
+        // console.log("dataset", dataSet)
         try {
             if (typeof (dataSet) == "string") dataSet = JSON.parse(dataSet)  //if json string -> parse
             if (Array.isArray(dataSet)) {
@@ -33,7 +34,7 @@ export class QueryBuilder {
                 this.dataSet.set(dataSet["@id"], dataSet as DataSet);  // single dataset
             }
 
-            console.log("this.dataSet", this.dataSet)
+            // console.log("this.dataSet", this.dataSet)
         } catch (error) {
             console.log("Error with load() method in queryBuilder:", error)
         }

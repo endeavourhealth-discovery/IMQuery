@@ -1,6 +1,5 @@
 <template>
-
-  <div class="iriref selector" @click="handleToggle">{{ modelValue.name }}</div>
+  <div class="iriref selector" @click="handleClick">{{ modelValue.name }}</div>
   <OverlayPanel ref="overlay-selector" class="notheme selector__overlay">
     <div class="action-buttons #hidden flex space-x-2 mb-5 ">
       <template v-for="option in editOptions" :key="option.id">
@@ -39,7 +38,9 @@ export default defineComponent({
   props: ["path", "modelValue", "edit"],
   components: { HeroIcon },
   methods: {
-    handleToggle(event: any): void {
+    handleClick(event: any): void {
+      console.log("modelValue", this.modelValue);
+
       if (this.edit) {
         (this.$refs["overlay-selector"] as any).toggle(event);
       } else {
@@ -121,7 +122,7 @@ export default defineComponent({
     searchString: _.debounce(function() {
       this.search();
     }, 1000)
-  },
+  }
 });
 </script>
 
