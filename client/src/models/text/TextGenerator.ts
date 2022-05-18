@@ -4,17 +4,27 @@ import { Comparison } from "../sets/Comparison"
 import { Filter } from "../sets/Filter"
 
 import { Helpers } from "./Helpers"
-const { a } = Helpers;
+const { a, isSingular } = Helpers;
 
 import { Clause } from "./Clause"
 
 import * as pathMap from "./Config/PathMap.json"
+import * as wordMap from "./Config/wordMap.json"
 
 import _ from "lodash";
+
+
 
 export class TextGenerator {
 
 
+
+    private static isEntityPersistent(clause: any): boolean {
+        clause = new Clause(clause)
+        let { objectValueIn, testValueIn0 } = clause;
+        let isPersistent = objectValueIn && testValueIn0 && objectValueIn.some(ref => ref['@id'] == testValueIn0['@id']);
+        return isPersistent;
+    }
 
 
     // public static summarise(clause: Filter | any, currentPath?: string): string {
@@ -82,59 +92,73 @@ export class TextGenerator {
     //     // return sentenceString;
     //     return sentence.join(" ");
     // }
+
+    
+
+    
+
+    //goes through a hierarchical casdcade of sentences
     public static summarise(clause: Filter | any, currentPath?: string): string {
         console.log("current clause raw input: ", clause)
 
         clause = new Clause(clause)
-        let { and, or, were, had, property, propertyId, comparison, valueData, valueIn0, valueConcept0, entity, test, orderById, sortLimit, sortDirection, testValueIn0 } = clause;  //these are function functions that are mapped to the properties in the pathMap.json file and return a transformed string
-        // console.log("clause with getters", clause)
+        let { and, or, were, had, property, propertyId, comparison, valueData, valueIn0, valueConcept0, entity, test, orderById, sortLimit, count, direction, orderBy, testValueIn, testValueIn0 } = clause;  //these are function functions that are mapped to the properties in the pathMap.json file and return a transformed string
+        console.log("clause with getters", clause)
 
 
         let sentence: any[] = [];
 
 
         // very specific sentences 
-        if (test && orderById == IM.EFFECTIVE_DATE && sortDirection == "descending" && !and && !or) {
+        if (test && orderById == IM.EFFECTIVE_DATE && direction == "descending" && !and && !or && TextGenerator.isEntityPersistent(clause.definition)) {
             console.log("### Template used: persistent",)
-
-            sentence = [had, 'persistent', testValueIn0?.name];
-            return sentence.join(" ");
+            return [had, 'persistent', testValueIn0?.name].join(" ");
         }
 
-        //generic cascade (e.g. summarise (property)  or (entity, then and, sortLimit, then test )
+       
         if (entity) {
             console.log("### Template used: entity",)
-
 
 
             sentence = [had, a(entity), entity.name]; //default sentence
 
             if (and && and?.length > 0) {
-
-                console.log("Template used: and ", and)
+                // console.log("Template used: and ", and)
 
                 sentence.push("with: ");
                 and.forEach((childClause: any) => sentence = [...sentence, TextGenerator.summarise(childClause, "valueObject.and")])
 
             } else if (or && or?.length > 0) {
-                console.log("Template used: or ", or)
+                // console.log("Template used: or ", or)
 
                 sentence.push("with: ");
                 or.forEach((childClause: any) => sentence = [...sentence, TextGenerator.summarise(childClause, "valueObject.or")])
-            }
+            } else {
+                // console.log("Template used: single property ")
 
-
-            //with a value of [] more/less than [18] months before/after [the reference date]
-
-            if (test) {
-                console.log("### Template used: test",)
-
+                sentence.push("with ");
+                sentence = [...sentence, ...TextGenerator.summariseProperty(clause.definition.valueObject, "valueObject")]
 
             }
 
-            // sentence = [had, a(entity), entity?.name, "with a", property?.name, "that is", valueIn0?.name || valueConcept0?.name];
 
-        } else if (property) sentence = TextGenerator.summariseProperty(clause.definition, currentPath)
+            // e.g. "and after sorting by ascending/descending  Property, the first # entry/ies"
+            if (sortLimit) {
+                // console.log("### Template used: test",)
+                let entry = count ? isSingular(count) ? wordMap['entry']['singular'] : wordMap['entry']['plural'] : "entry"; //### todo remove outer ternarny once count is added
+                sentence = [...sentence, "and after sorting by", direction, orderBy.name, "the first", count, entry + ""]
+
+
+                
+                if (test && test?.length > 0) {
+                    test.forEach((childClause: any) => sentence = [...sentence, TextGenerator.summarise(childClause)])
+                }
+
+            }
+
+        } else if (property) {
+            sentence = TextGenerator.summariseProperty(clause.definition, currentPath)
+        }
 
 
         // return sentenceString;
@@ -144,7 +168,7 @@ export class TextGenerator {
     public static summariseProperty(clause: any, currentPath?: string): any[] {
 
         clause = new Clause(clause)
-        let { and, or, were, had, property, propertyId, valueCompare, valueFunction, valueFunctionId, comparison, valueData, valueIn0, valueNotIn0, valueConcept0, entity, test, orderById, sortLimit, sortDirection, testValueIn0, units, firstDate, secondDate} = clause;  //these are function functions that are mapped to the properties in the pathMap.json file and return a transformed string
+        let { and, or, were, had, property, propertyId, valueCompare, valueFunction, valueFunctionId, comparison, valueData, valueIn0, valueNotIn0, valueConcept0, entity, test, orderById, sortLimit, count, sortDirection, testValueIn0, units, firstDate, secondDate } = clause;  //these are function functions that are mapped to the properties in the pathMap.json file and return a transformed string
         let sentence: any[] = [];
 
 
@@ -157,28 +181,32 @@ export class TextGenerator {
         }
         else if (valueIn0 || valueNotIn0) {
             console.log("### Template used: valueIn0")
-
             let is = valueIn0 ? "is" : "is not";
             sentence = [had, a(property), property.name, "that", is, "in the value-set", valueIn0?.name + ","];
+
         } else if (valueConcept0) {
             console.log("### Template used: valueConcept0")
-
             sentence = [had, a(property), property.name, "that is", valueConcept0?.name + ","];
+
         } else if (valueCompare && valueFunctionId == IM.TIME_DIFFERENCE) {
             console.log("### Template used: valueData && valueFunction")
 
-            let beforeAfter = (secondDate.value == "the Reference Date") ? "before": "after"; 
+            let beforeAfter = (secondDate.value == "the Reference Date") ? "before" : "after";
+            units.value = isSingular(valueData) ? wordMap[units.value]['singular'] : wordMap[units.value]['plural']
             sentence = [had, a(property), property.name, "that is", comparison, valueData, units.value, beforeAfter, secondDate.value + ","]
+
         } else if (valueCompare) {
-            console.log("### Template used: valueData")
+            console.log("### Template used: valueCompare")
             sentence = [had, a(property), property.name, "that is", comparison, valueData + ","]
+
         }
         else if (property?.name) {
             console.log("### Template used: property?.name")
-
             sentence = [had, a(property), property.name + ","];
         }
         return sentence;
     }
 
 }
+
+

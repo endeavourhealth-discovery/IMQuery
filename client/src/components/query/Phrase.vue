@@ -19,7 +19,7 @@
       </div>
 
       <template v-else v-for="(child, childIndex) in children(entity)" :key="child.path">
-        <div v-if="isOperator(child?.path)" class="operator horizontal hover:bg-black hover:bg-opacity-10 rounded-md p-2 ">
+        <div v-if="isOperator(child?.path)" class="operator horizontal hover:bg-black hover:bg-opacity-5 rounded-md p-2 ">
           <Keyword class="operator-label ">{{ showOperator(path, index, childIndex) ? operator : "" }}</Keyword>
           <div class="operator-items">
             <Phrase

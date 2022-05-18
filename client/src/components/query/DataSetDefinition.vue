@@ -90,7 +90,7 @@ import Phrase from "./Phrase.vue";
 
 import ToggleButton from "";
 
-// import { Profile } from "@/models/query/Query";
+// import { Profile } f rom "@/models/query/Query";
 
 import _ from "lodash";
 

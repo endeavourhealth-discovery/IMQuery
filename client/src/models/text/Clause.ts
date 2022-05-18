@@ -44,16 +44,11 @@ export class Clause {
 
 
         let originalObject = _.cloneDeep(_.get(this.definition, path));
-        // originalObject && console.log("originalObject", originalObject)
 
         let originalValue = originalObject?.name || originalObject?.value || originalObject
         if (originalValue == "Unknown code set") originalValue = Helpers.getLabel(originalObject['@id']) || originalValue
         if (typeof (originalValue) == "string") originalValue = Helpers.trimUnnecessaryText(originalValue);
 
-
-
-
-        // originalValue && console.log("originalValue", originalValue)
 
         let mappedValue;
         if (originalValue) mappedValue = wordMap.name.find(obj => obj.originalValue == originalValue)?.mappedValue || originalValue;
@@ -62,9 +57,6 @@ export class Clause {
         if (mappedObject?.name) mappedObject.name = mappedValue;
         else if (mappedObject?.value) mappedObject.value = mappedValue;
         else mappedObject = mappedValue
-            // ? mappedObject.name = mappedValue //e.g. TTIriRef
-            // : mappedObject = mappedValue; //e.g. raw string at JSON path
-        // mappedObject && console.log("mappedObject", mappedObject)
 
 
         return mappedValue ? mappedObject : originalObject;
@@ -73,10 +65,7 @@ export class Clause {
 
     //special getters that are not defined in PathMap.json
     get exists(): boolean {
-
         const exists = this?.definition?.notExist != true && this?.definition?.valueObject?.notExist != true;
-        // console.log("exists", this?.definition?.valueObject?.notExist == true)
-        // console.log("exists", this.definition)
         return exists
     }
 
@@ -84,12 +73,8 @@ export class Clause {
         return wordMap["were"][this.exists];
     }
 
-    // private _had;
     get had(): string {
         return wordMap["had"][this.exists];
     }
-    // set had(val: string): string {
-    //     return this._had = val;
-    // }
 
 }
