@@ -246,7 +246,7 @@
 
         <!-- Tab: View  -->
 
-        <div v-show="activeTabName == 'View'" class="tab-content viewer ">
+        <div v-show="activeTabName == 'Edit'" class="tab-content viewer ">
           <!-- Tabs  -->
           <div class="flex py-5 justify-center items-center w-full">
             <HorizontalNavPills class="nav" :items="openFiles" v-model="activeFileIri" :closable="true" />
@@ -254,19 +254,145 @@
 
           <!-- <button @click="testQuery()"> test</button> -->
           <!-- Viewer  -->
-          <div class="w-full h-full bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
-            <div class="kanban flex justify-center text-white">
-              <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
-                <DataSetDefinition :modelValue="dataSet"></DataSetDefinition>
+          <div class="w-full h-full flex justify-between bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
+            <!-- Left -->
+            <div v-show="!editMode" class="categories ml-20 inline-flex space-x-10 lg:flex-col lg:space-y-6  lg:space-x-0 select-none ">
+              <template v-for="category in config?.query?.categories" :key="category.name">
+                <div
+                  v-if="category.visible"
+                  :class="
+                    'category transition duration-500 ease-in-out group flex items-center rounded-lg px-3 w-min-400px pr-5 border border-2 border-transparent hover:border-gray-300 rounded-full ' +
+                      [
+                        activeQueryCategory == category.name
+                          ? ' bg-slate-200 dark:bg-slate-800 #border-blue-500 dark:border-gray-300 dark:text-white'
+                          : ' text-gray-700 dark:text-gray-400 #hover:bg-blue-50 dark:bg-transparent'
+                      ]
+                  "
+                  @click="activeQueryCategory = category.name"
+                  v-wave="{
+                    color: 'currentColor',
+                    easing: 'ease-out',
+                    duration: 0.5,
+                    initialOpacity: 0.5,
+                    finalOpacity: 0.1,
+                    cancellationPeriod: 75
+                  }"
+                >
+                  <div :class="'category-icon inline-flex h-20 w-20 rounded-xl  bg-gradient-to-r p-2 '">
+                    <div class="rounded-full dark:bg-slate-700 w-full h-full flex justify-center items-center">
+                      <HeroIcon
+                        :class="' ' + [activeQueryCategory == category.name ? ' text-blue-800 dark:text-white ' : '']"
+                        strokewidth="2.5"
+                        width="20"
+                        height="20"
+                        :icon="category.icon"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    :class="
+                      'inline-flex ml-2 text-2xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
+                        [activeQueryCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-700 dark:text-gray-400 ']
+                    "
+                  >
+                    {{ category.text }}
+                  </div>
+                </div>
               </template>
             </div>
+            <!-- Left -->
+
+            <!-- Middle -->
+
+            <!-- Query Definition  -->
+            <div
+              v-show="activeQueryCategory == 'definition'"
+              :class="'definition viewer flex justify-center space-x-5' + [editMode ? ' edit-mode w-full' : '']"
+            >
+              <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
+                <QueryDefinition v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"></QueryDefinition>
+              </template>
+            </div>
+            <!-- Main Data Type  -->
+
+            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity flex flex-col w-full max-w-4xl">
+              <InputDescription class="w-full max-w-2xl" :description="inputMeta.mainEntity" />
+              <InputRadioButtons
+                class="w-full max-w-xl mt-7"
+                v-model="selectedMainEntity"
+                :items="radioButtonItems.mainEntity"
+                :multiselect="false"
+                :checkbox="true"
+              />
+            </div>
+
+            <div v-show="activeQueryCategory == 'output'" class="definition viewer flex justify-center text-white"></div>
+            <div v-show="activeQueryCategory == 'sources'" class="sources flex flex-col w-full max-w-4xl ">
+              <InputDescription class="w-full max-w-2xl" :description="inputMeta.sources" />
+              <!-- Button: New List  -->
+              <InputRadioButtons
+                class="w-full max-w-xl mt-7"
+                v-model="selectedOrganisations"
+                :items="radioButtonItems.sources"
+                :multiselect="false"
+                :checkbox="true"
+              />
+              <MultiSelect
+                v-if="selectedOrganisations.includes('other')"
+                class="w-full max-w-lg multi-large"
+                v-model="selectedOrganisationLists"
+                :options="organisationLists"
+                optionLabel="label"
+                :placeholder="inputMeta.selectedLists.placeholder"
+              />
+            </div>
+            <div v-show="activeQueryCategory == 'export'" class="definition viewer flex justify-center space-x-5 text-white">
+              Show JSON representation here -> download
+            </div>
+            <div v-show="activeQueryCategory == 'sql'" class="definition viewer flex justify-center space-x-5 text-white"></div>
+
+            <!-- Middle -->
+            <!-- Right -->
+            <div v-show="!editMode" class="invisible md:visible flex flex-col mt-20  mr-20 space-y-10">
+              <template v-for="(item, index) in getActions(activeQueryCategory)" :key="item.name">
+                <template v-if="item.visible && index == 0">
+                  <CardButton
+                    @click="item.command"
+                    class="w-250px"
+                    :name="item.name"
+                    :description="item.text"
+                    :icon="item.icon"
+                    :outlined="true"
+                    nameColor="white"
+                    descriptionColor="white"
+                    iconColor="white"
+                    backgroundColor="blue-500"
+                  />
+                </template>
+                <template v-else-if="item.visible && index > 0">
+                  <CardButton
+                    @click="item.command"
+                    class="w-250px"
+                    :name="item.name"
+                    :description="item.text"
+                    :icon="item.icon"
+                    :outlined="true"
+                    nameColor="black"
+                    descriptionColor="gray-700"
+                    iconColor="blue-700"
+                    backgroundColor="white"
+                  />
+                </template>
+              </template>
+            </div>
+            <!-- Right -->
           </div>
         </div>
         <!-- /Tab: View  -->
 
         <!-- Tab: Explore  -->
 
-        <div v-if="activeTabName == 'Create'" class="tab-content flex justify-center items-start "></div>
+        <div v-if="activeTabName == 'Schedule'" class="tab-content flex justify-center items-start "></div>
         <div v-if="activeTabName == 'Learn'" class="tab-content flex flex-col justify-start items-center ">
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
           <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
@@ -340,6 +466,7 @@
         <!-- /Tab: Organisations  -->
 
         <!-- Tab: Dictionary  -->
+
         <div v-if="activeTabName == 'Dictionary'" class="tab-content ">
           <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe>
         </div>
@@ -370,7 +497,7 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 import UserWidget from "@/components/user/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import CardButton from "@/components/general/CardButton.vue";
-import DataSetDefinition from "@/components/query/DataSetDefinition.vue";
+import QueryDefinition from "@/components/query/QueryDefinition.vue";
 import ProgressBar from "@/components/general/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
@@ -380,7 +507,8 @@ import QueryService from "@/services/QueryService";
 import HorizontalNavbar from "@/components/general/HorizontalNavbar.vue";
 import HorizontalNavPills from "@/components/general/HorizontalNavPills.vue";
 import { TransitionRoot } from "@headlessui/vue";
-
+import InputDescription from "@/components/general/InputDescription.vue";
+import InputRadioButtons from "@/components/general/InputRadioButtons.vue";
 // import Dataset from "@/components/dataset/Dataset.ts";
 
 // var _ = require("lodash");
@@ -397,14 +525,235 @@ export default defineComponent({
     CardButton,
     HorizontalNavPills,
     HorizontalNavbar,
-    DataSetDefinition,
-    TransitionRoot
+    QueryDefinition,
+    TransitionRoot,
+    InputDescription,
+    InputRadioButtons
   },
   $refs: {
     OverlayPanel: HTMLElement
   },
   data() {
     return {
+      editMode: false,
+      selectedOrganisations: ["all"],
+      selectedOrganisationLists: [] as any,
+      organisationLists: [
+        {
+          value: "b4a9a163-9ab8-4306-a7c0-8b17205983bc",
+          label: "All GP practices commissioned by NEL CCG"
+        },
+        {
+          value: "b4a9a163-9ab8-4306-a7c0-8b17205983bc",
+          label: "All GP practices commissioned by NEL CCG"
+        }
+      ],
+      selectedMainEntity: "1",
+      radioButtonItems: {
+        mainEntity: [
+          {
+            id: 1,
+            iri: "im:Person",
+            name: "Person",
+            explanation:
+              "<b>Tip</b><br>This option will select health records related to Person. <br><br> <b>Example</b><br> A Person is a person who has previously received care at an organisation that has documented that interaction in their electronic health record."
+          },
+          {
+            id: 2,
+            iri: "im:Property",
+            name: "Property",
+            explanation:
+              "<b>Tip</b><br>This option will sele ct health records for a group of people who usually live at a single place of residence (a property). <br><br><b>Example</b><br>A family of 4 people may be living in a household i.e. parents and two kids."
+          },
+          {
+            id: 3,
+            iri: "im:Organisation",
+            name: "Organisation",
+            explanation:
+              "<b>Tip</b><br>This option will select health records generated by a legal entity, service or group  with a common purpose (such as providing care). <br><br> <b>Example</b><br> • GP Practice <br> • Hospital <br>  • Out of Hours Clinic  <br> • Community Mental Health Service "
+          },
+          {
+            id: 4,
+            iri: "im:Appointment",
+            name: "Appointment",
+            explanation:
+              "<b>Tip</b><br>This option will select health records associated with appointments that have taken places across and within organisations. <br><br> <b>Example</b><br> • A&E attendances <br> • GP visits <br> • Outpatient Clinic Appointments"
+          }
+        ],
+        sources: [
+          {
+            id: "all",
+            iri: "im:VSET_OrgAllAllowable",
+            name: "All Allowable Organisations",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all organisation you are authorised to view data for.<br><br> <b>Example</b><br> Members of staff at an organisation can view: <br> • Sensitive data for their organisation only, and <br> • Anonymised data for any other organisation."
+          },
+          {
+            id: "gp",
+            iri: "im:VSET_OrgAllAllowableGPs",
+            name: "All GP practices",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all GP practices you are authorised to view data for.<br><br> <b>Example</b><br> A clinician working at a primary care network may wish to see anonymous data for other GP practices in their network."
+          },
+          {
+            id: "hospital",
+            iri: "im:VSET_OrgAllAllowableHospitals",
+            name: "All Hospitals",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all Hospitals you are authorised to view data for.<br><br> <b>Example</b><br> A CIO at a hospital may wish to see data for all of the hospitals they manage."
+          },
+          {
+            id: "other",
+            iri: "im:VSET_OrgList1",
+            name: "Other - Select Below",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all organisation in one of the custom lists of organisations you can select below or create yourself. <br><br> <b>Example</b><br> 'All organisations commissioned by the North East London CCG except for GP practices in Tower Hamlets'"
+          }
+        ]
+      },
+      inputMeta: {
+        name: {
+          title: "Name",
+          explanation:
+            "<b>Purpose</b><br>Label your dataset with a short name that is memorable and helps you recognise it later. <br><br> <b>Example</b><br> • QOF BP002 2021 <br>• ABG Audit 2019",
+          placeholder: "Enter a Name"
+        },
+        description: {
+          title: "Description",
+          explanation:
+            "<b>Purpose</b><br>Add a detailed summary that describes your dataset. <br><br> <b>Example</b><br> 'Patients registered at primary care practices commissioned by Tower Hamlets CCG with a diagnosis of diabetes type 2' ",
+          placeholder: "Enter a Description"
+        },
+        // organisations: {
+        //   title: "Organisations",
+        //   explanation:
+        //     "<b>Purpose</b><br>Create a list of organisations that host/publish their health records as sources of data for your dataset. <br><br> <b>Example</b><br> A dataset can extract data from multiple list of multiple organisations where health records are stored.",
+        //   placeholder: "",
+        // },
+        sources: {
+          title: "Sources",
+          explanation:
+            "<b>Tip</b><br>Select a lists of organisations that publish the health records you want data from. <br><br> <b>Example</b><br> A list describes a group of organisations that share similar characteristics such as a Postcode, Commissioner, Organisation Type and more. ",
+          placeholder: ""
+        },
+        mainEntity: {
+          title: "Main Data Type",
+          explanation:
+            "<b>Tip</b><br>Select the main health record that is directly related to all the data in your dataset. <br><br><b>Example</b><br> Think of this like your 'main table' of data that is linked to all the other tables in your dataset.",
+          placeholder: ""
+        },
+        steps_data: {
+          title: "Steps",
+          explanation:
+            '<b>Tip</b><br>Copy existing data from a dataservice or dataset by selecting sources. Then transform the data by applying inclusion and exclusion criteria in a series of steps.  <br><br> To see an example in action, copy a template from the library. <br><br><b>Example 1</b><br> The following research question is a product of three steps <br> 1. "Patients registered at GP practices <br> 2. with a diagnosis of Coronary Heart Disease <br> 3. taking any anti-coagulant or anti-platelet medication"',
+          placeholder: ""
+        },
+        selectedLists: {
+          title: "Select Lists",
+          explanation: "",
+          placeholder: "Select Lists from the Dropdown"
+        }
+      },
+      activeQueryCategory: "definition",
+      config: {
+        query: {
+          categories: [
+            {
+              name: "mainEntity",
+              text: "Main Data Type",
+              icon: "collection",
+              visible: true
+            },
+            {
+              name: "definition",
+              text: "Query Definition",
+              icon: "menu_alt_1",
+              visible: true
+            },
+            {
+              name: "output",
+              text: "Output Format",
+              icon: "cube",
+              visible: true
+            },
+
+            {
+              name: "sql",
+              text: "SQL Output",
+              icon: "cube_transparent",
+              visible: true
+            },
+            {
+              name: "export",
+              text: "Export",
+              icon: "download",
+              visible: true
+            }
+          ],
+          actions: {
+            definition: [
+              {
+                name: "Edit",
+                text: "Edit the criteria inside your Query",
+                icon: "pencil",
+                css: {
+                  background: "to-sky-500 from-blue-600",
+                  icon: "text-teal-400"
+                },
+                command: () => {
+                  this.editMode = true;
+                },
+                visible: true
+              },
+              {
+                name: "Compare",
+                text: "Compare two Queries side-by-side",
+                icon: "view_boards",
+                css: {
+                  background: "from-cyan-600 to-green-500",
+                  icon: "text-yellow-300"
+                },
+                command: () => {},
+                visible: true
+              }
+            ],
+            sources: [
+              {
+                name: "Create",
+                text: "Create a new list sources",
+                icon: "plus",
+                css: {
+                  background: "to-sky-500 from-blue-600",
+                  icon: "text-teal-400"
+                },
+                command: () => {},
+                visible: true
+              },
+              {
+                name: "Explore",
+                text: "Explore the Sources on a map",
+                icon: "map",
+                css: {
+                  background: "from-cyan-600 to-green-500",
+                  icon: "text-yellow-300"
+                },
+                command: () => {},
+                visible: true
+              }
+            ]
+          }
+        },
+        sources: {
+          schedule: [
+            {
+              name: "sources",
+              text: "Sources",
+              icon: "office_building",
+              visible: true
+            }
+          ]
+        }
+      },
       activeVideo: 1,
       isResultsShown: false,
       isShowing: true,
@@ -505,12 +854,48 @@ export default defineComponent({
         }
       ],
       searchData: null,
-      autocompleteData: null
+      autocompleteData: null,
+      mainEntity: [
+        {
+          id: "8beb8591-8b7b-4055-82c2-9da166df674f",
+          iri: "im:Patient",
+          name: "Patient",
+          explanation:
+            "<b>Tip</b><br>This option will select health records related to patients. <br><br> <b>Example</b><br> A patient is a person who has previously received care at an organisation that has documented that interaction in their electronic health record."
+        },
+        {
+          id: "952f4842-ffb6-4775-ae5f-58b7bb239896",
+          iri: "im:Property",
+          name: "Property",
+          explanation:
+            "<b>Tip</b><br>This option will select health records for a group of people who usually live at a single place of residence (a property). <br><br><b>Example</b><br>A family of 4 people may be living in a household i.e. parents and two kids."
+        },
+        {
+          id: "c0674833-dfeb-46e5-b465-cb0bd676c486",
+          iri: "im:Organisation",
+          name: "Organisation",
+          explanation:
+            "<b>Tip</b><br>This option will select health records generated by a legal entity, service or group  with a common purpose (such as providing care). <br><br> <b>Example</b><br> • GP Practice <br> • Hospital <br>  • Out of Hours Clinic  <br> • Community Mental Health Service "
+        },
+        {
+          id: "716bfd97-a461-4134-beb0-ad0b64a97da3",
+          iri: "im:Appointment",
+          name: "Appointment",
+          explanation:
+            "<b>Tip</b><br>This option will select health records associated with appointments that have taken places across and within organisations. <br><br> <b>Example</b><br> • A&E attendances <br> • GP visits <br> • Outpatient Clinic Appointments"
+        }
+      ]
     };
   },
 
   computed: {
     ...mapState(["currentUser", "isLoggedIn", "openFiles", "tabs"]),
+    // actions: {
+    //   get(): any {
+    //     return this.config?.query?.actions[this.activeQueryCategory]
+    //   },
+    //   set(value: any): void {}
+    // },
     activeTabName: {
       get(): any {
         return this.$store.state.activeTabName;
@@ -622,11 +1007,14 @@ export default defineComponent({
     // async handleOpenItem(iri: any) {
     //   console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
     // },
+    getActions(activeQueryCategory: string) {
+      return this.config?.query?.actions[activeQueryCategory];
+    },
     async summariseQuery(queryIri: string): Promise<any> {
       const entity = await QueryService.summariseQuery(queryIri)
         .then(res => {
           console.log("### Populated File", res);
-          return
+          return;
         })
         .catch(err => {
           console.error("Failed to load file from the server", err);
@@ -663,9 +1051,8 @@ export default defineComponent({
     },
     isVisible(iri: string): boolean {
       // console.log(profile["@id"])
-      const openFile = this.openFiles.filter((f: any, index: number) => f.isVisible);
-      console.log("this.openFile", this.openFile);
-      return openFile.length > 0 && openFile[0].isVisible;
+      const openFiles = this.openFiles.filter((f: any, index: number) => f.iri == iri);
+      return openFiles.length > 0 && openFiles[0].isVisible;
     },
     test(): void {
       // console.log(this.activeFileIri);
@@ -736,7 +1123,8 @@ export default defineComponent({
 }
 
 .search-logo {
-  width: 350px;
+  width: 100%;
+  max-width: 300px;
   height: auto;
 }
 

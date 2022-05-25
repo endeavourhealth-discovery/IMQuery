@@ -1,33 +1,29 @@
 <template>
-  <div class="iriref selector" @click="handleClick">{{ modelValue.name }}</div>
+  <!-- Formatted TTIriRef name  -->
+  <pre class="iriref selector" @click="handleClick">{{ label() }} </pre>
+  <!-- Formatted TTIriRef name  -->
+
+  <!-- Overlay Panel for rename/replace  -->
   <OverlayPanel ref="overlay-selector" class="notheme selector__overlay">
-    <div class="action-buttons #hidden flex space-x-2 mb-5 ">
-      <template v-for="option in editOptions" :key="option.id">
-        <Button v-if="option.visible" label="Submit" :icon="'pi pi-' + option.icon" iconPos="left" :class="'action-button p-button-text ' + option.classes">
-          <HeroIcon :icon="option.icon" strokewidth="3" class=" h-8 w-8 mr-3 "></HeroIcon>
-          <span class="font-bold text-2xl"> {{ option.name }}</span>
-        </Button>
-      </template>
-    </div>
     <InputText placeholder="Type to Replace or Rename" class="selector__input " type="text" v-model="searchString" />
     <div class="suggestions">
       <template v-if="searchData?.length" v-for="(suggestion, suggestionIndex) in searchData" :key="suggestion.iri">
-        <div v-if="suggestionIndex < maxSuggestions" class="suggestion flex items-center justify-between">
-          <div class="inline-flex">{{ suggestion.name }}</div>
-          <div class="action change inline-flex">CHANGE</div>
+        <div v-if="suggestionIndex < maxSuggestions" class="suggestion">
+          <div class="suggestion-label">{{ suggestion.name }}</div>
+          <div class="suggestion-action change">CHANGE</div>
         </div>
       </template>
-      <div v-if="modelValue.name != searchString && searchString != ''" class="suggestion flex items-center justify-between">
-        <div class="inline-flex">{{ searchString }}</div>
-        <div class="action rename inline-flex ">RENAME</div>
+      <div v-if="modelValue.name != searchString && searchString != ''" class="suggestion">
+        <div class="suggestion-label">{{ searchString }}</div>
+        <div class="suggestion-action rename ">RENAME</div>
       </div>
     </div>
   </OverlayPanel>
+  <!-- Overlay Panel for rename/replace  -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import LoggerService from "@/services/LoggerService";
 import SearchService from "@/services/SearchService";
 
 import _ from "lodash";
@@ -38,14 +34,19 @@ export default defineComponent({
   props: ["path", "modelValue", "edit"],
   components: { HeroIcon },
   methods: {
+    label(): any {
+      let label: string = this.modelValue.name;
+      if (label && label != "") label = label.replaceAll("--", "\n    •");
+      return label;
+    },
     handleClick(event: any): void {
-      console.log("modelValue", this.modelValue);
-
       if (this.edit) {
         (this.$refs["overlay-selector"] as any).toggle(event);
       } else {
-        this.$toast.add(LoggerService.error("Please enable edit mode in the top-right corner."));
+        // #todo: open query in IM Viewer or New IM Query windowF
       }
+      console.log("modelValue", this.modelValue);
+      console.log("path", this.path);
     },
     async search(): Promise<any> {
       this.searchData = {};
@@ -65,50 +66,6 @@ export default defineComponent({
   },
   data() {
     return {
-      editOptions: [
-        {
-          id: "abc89209-fcc5-4770-9a4b-bb1655104258",
-          name: "Add",
-          icon: "plus",
-          classes: "",
-          visible: true
-        },
-        {
-          id: "afcd1608-3d79-4e10-90b6-1e9d354b9283",
-          name: "Copy",
-          icon: "document_duplicate",
-          classes: "p-button-secondary",
-          visible: true
-        },
-        {
-          id: "23cdb75120e0ee94-b1d4-4c63-865f-e1c16f60d464",
-          name: "Paste",
-          icon: "clipboard_copy",
-          classes: "p-button-secondary",
-          visible: true
-        },
-        {
-          id: "23cdb751b04edc4a-79ad-41da-a44c-7e871902a8a9",
-          name: "Cut",
-          icon: "scissors",
-          classes: "p-button-warning",
-          visible: true
-        },
-        {
-          id: "23cdb75120e0ee94-b1d4-4c63-865f-e1c16f60d464",
-          name: "Move",
-          icon: "arrow_right",
-          classes: "p-button-warning",
-          visible: true
-        },
-        {
-          id: "bf34d743-35b2-4e3c-b50f-5989b0bd3174",
-          name: "Delete",
-          icon: "x",
-          classes: "p-button-danger",
-          visible: true
-        }
-      ],
       maxSuggestions: 6,
       hasSearched: false,
       searchString: "",
@@ -127,12 +84,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.selector {
+  font-family: inherit;
+  /* word-break: break-all; */
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 .selector__overlay {
   background-color: #fff;
-}
-
-.action-button {
-  /* color: #fff !important; */
 }
 
 .selector__input {
@@ -154,19 +116,21 @@ export default defineComponent({
 }
 
 .suggestions .suggestion {
-  /* margin-bottom: 10px; */
   color: #000;
   font-weight: 600;
   font-size: 14px;
   padding: 5px 5px 5px 10px;
   border-radius: 3px;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .suggestions .suggestion:hover {
   background-color: #e5e7eb;
 }
-.suggestions .action {
+.suggestions .suggestion-action {
   color: #fff;
   /* margin-bottom: 10px; */
   margin-right: 10px;
@@ -176,18 +140,24 @@ export default defineComponent({
   cursor: pointer;
 }
 
-.action.rename {
+.suggestion-action.rename {
+  display: inline-flex;
   background-color: #fbbf24;
 }
 
-.action.rename:hover {
+.suggestion-action.rename:hover {
   background-color: #d97706;
 }
-.action.change {
+.suggestion-action.change {
+  display: inline-flex;
   background-color: #64748b;
 }
 
-.action.change:hover {
+.suggestion-action.change:hover {
   background-color: #1f2937;
+}
+
+.suggestion-label {
+  display: inline-flex;
 }
 </style>

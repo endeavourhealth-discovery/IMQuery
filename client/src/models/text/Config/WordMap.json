@@ -66,6 +66,10 @@
          {
              "originalValue": "STARTS_WITH",
              "mappedValue": "starts with"
+         },
+         {
+             "originalValue": "STARTS_WITH",
+             "mappedValue": "starts with"
          }
      ],
      "GREATER_THAN_OR_EQUAL": {
@@ -94,15 +98,15 @@
          "false": "an",
          "default": "it"
      },
-     "had": {
-         "true": "had",
-         "false": "didn't have",
-         "default": "had"
+     "have": {
+         "true": "has",
+         "false": "don't have",
+         "default": "have"
      },
-     "were": {
-         "true": "were",
-         "false": "were not",
-         "default": "were"
+     "are": {
+         "true": "is",
+         "false": "isn't",
+         "default": "are"
      },
      "was": {
          "true": "was",
@@ -110,8 +114,9 @@
          "default": "was"
      },
      "entry": {
-         "singular": "entry",
-         "plural": "entries"
+         "true": "entry has",
+         "false": "entries have",
+         "default": "entry has"
      },
      "records": {
          "singular": "record",

@@ -46,7 +46,7 @@ export class Clause {
         let originalObject = _.cloneDeep(_.get(this.definition, path));
 
         let originalValue = originalObject?.name || originalObject?.value || originalObject
-        if (originalValue == "Unknown code set") originalValue = Helpers.getLabel(originalObject['@id']) || originalValue
+        if ( originalValue == "Unknown code set") originalValue = Helpers.getLabel(originalObject['@id']) || originalValue
         if (typeof (originalValue) == "string") originalValue = Helpers.trimUnnecessaryText(originalValue);
 
 
@@ -69,12 +69,12 @@ export class Clause {
         return exists
     }
 
-    get were(): string {
-        return wordMap["were"][this.exists];
+    get are(): string {
+        return wordMap["are"][this.exists.toString()];
     }
 
-    get had(): string {
-        return wordMap["had"][this.exists];
+    get have(): string {
+        return wordMap["have"][this.exists.toString()];
     }
 
 }

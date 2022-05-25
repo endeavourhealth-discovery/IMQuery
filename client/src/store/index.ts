@@ -64,12 +64,12 @@ export default createStore({
         visible: false
       },
       {
-        name: "View",
+        name: "Edit",
         icon: "newspaper",
         visible: false
       },
       {
-        name: "Create",
+        name: "Schedule",
         icon: "newspaper",
         visible: true,
         command: () => {
@@ -110,8 +110,7 @@ export default createStore({
     async loadFile(state, fileIri) {
 
       if (state.openFiles.some(file => file.iri === fileIri)) {
-        alert("File already open!");
-        state.activeTabName = "View";
+        state.activeTabName = "Edit";
         state.isLoading = false;
         return;
       }
@@ -119,7 +118,7 @@ export default createStore({
       try {
         // const entity = await QueryService.querySummary(fileIri).then(res => {
         // const entity = await QueryService.definition(fileIri).then(res => {
-        const entity = await QueryService.summariseQuery(fileIri).then(res => {
+        const entity = await QueryService.querySummary(fileIri).then(res => {
           const data = res?.data || res
           // console.log("## Query Loaded file:", data); //?res.data if backend
           state.queryBuilder.loadDataSet(data);
@@ -128,9 +127,10 @@ export default createStore({
           .catch(err => {
             console.error("Failed to load file from the server", err);
           });
-        state.openFiles.push({ iri: entity["@id"], isVisible: true, data: entity });
-        state.tabs.find(tab => tab.name === "View").visible = true;
-        state.activeTabName = "View";
+        state.openFiles.forEach((file: any, index: number) => state.openFiles[index].isVisible = false);
+        state.openFiles.push({ iri: entity["@id"], isVisible: true, state: "view", data: entity }); //alternative states are: loading, edit
+        state.tabs.find(tab => tab.name === "Edit").visible = true;
+        state.activeTabName = "Edit";
       } catch (error) {
         console.log("error occurred in loadEntity", error)
       }

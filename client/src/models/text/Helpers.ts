@@ -1,5 +1,5 @@
 
-import * as wordMap from './config/WordMap.json';
+import * as wordMap from './Config/WordMap.json';
 import _ from "lodash";
 import * as labels from "./Config/AdditionalOntology.json"
 
@@ -68,7 +68,7 @@ export class Helpers {
     public static pronoun(ref: any): string {
         const testString = ref?.name || ref;
         if (!testString || testString == "") return "they/it";
-        return wordMap?.animatePronoun[Helpers.isObjectAnimate(testString)];
+        return wordMap?.animatePronoun[Helpers.isObjectAnimate(testString).toString()];
     }
 
     public static getLabel(iri: string): any {

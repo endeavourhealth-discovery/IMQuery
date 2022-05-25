@@ -9,13 +9,13 @@
         ref="radioButton"
       />
       <label
-        :class="'radio-button__label p-d-flex p-jc-between'
+        :class="'radio-button__label flex justify-between'
         + [ checkbox ? ' checkbox' : '']"
         @click="$emit('update:modelValue', getSelectedItems(item.id));"
         ref="radioLabel"
       >
         {{ item.name }}
-        <div v-if="item.explanation" style="margin-left: 5px" v-tooltip="item.explanation">
+        <div v-if="item.explanation" class="inline-flex" style="margin-left: 5px" v-tooltip="item.explanation">
           <font-awesome-icon icon="question-circle" />
         </div>
       </label>
