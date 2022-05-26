@@ -17,9 +17,9 @@
 ### Ensure you have the following environment variables
 
 `
-VITE_OSS_URL=""
-VITE_OSS_AUTH_BASICTOKEN=""
-VITE_INDEX_IM="dev-im"
+VITE_IMAPI="http://localhost:8080/"
+VITE_NODE_API="http://localhost:3000/"
+VITE_ONTOLOGY_URL="https://ds0esjp1tzujt.cloudfront.net/CoreOntology.json"
 `
 
 <br>
