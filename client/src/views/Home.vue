@@ -249,7 +249,7 @@
         <div v-show="activeTabName == 'Edit'" class="tab-content viewer ">
           <!-- Tabs  -->
           <div class="flex py-5 justify-center items-center w-full">
-            <HorizontalNavPills class="nav" :items="openFiles" v-model="activeFileIri" :closable="true" />
+            <HorizontalNavPills class="nav" :items="openFiles" v-model="activeProfile" :closable="true" />
           </div>
 
           <!-- <button @click="testQuery()"> test</button> -->
@@ -310,7 +310,8 @@
               :class="'definition viewer flex justify-center space-x-5' + [editMode ? ' edit-mode w-full' : '']"
             >
               <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
-                <QueryDefinition v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"></QueryDefinition>
+                <!-- <QueryDefinition v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"></QueryDefinition> -->
+                <QueryEditor v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"/>
               </template>
             </div>
             <!-- Main Data Type  -->
@@ -325,6 +326,13 @@
                 :checkbox="true"
               />
             </div>
+
+            <!-- Tab: SQL  -->
+            <div v-if="activeQueryCategory == 'sql'" class="tab-content ">
+              SQL
+              <!-- <pre>{{ sql }}</pre> -->
+            </div>
+            <!-- /Tab: SQL  -->
 
             <div v-show="activeQueryCategory == 'output'" class="definition viewer flex justify-center text-white"></div>
             <div v-show="activeQueryCategory == 'sources'" class="sources flex flex-col w-full max-w-4xl ">
@@ -497,7 +505,6 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 import UserWidget from "@/components/user/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import CardButton from "@/components/general/CardButton.vue";
-import QueryDefinition from "@/components/query/QueryDefinition.vue";
 import ProgressBar from "@/components/general/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
@@ -509,9 +516,9 @@ import HorizontalNavPills from "@/components/general/HorizontalNavPills.vue";
 import { TransitionRoot } from "@headlessui/vue";
 import InputDescription from "@/components/general/InputDescription.vue";
 import InputRadioButtons from "@/components/general/InputRadioButtons.vue";
-// import Dataset from "@/components/dataset/Dataset.ts";
 
-// var _ = require("lodash");
+// import { QueryDefinition } from "im-library";
+import QueryEditor from "@/components/query/QueryEditor.vue";
 
 export default defineComponent({
   name: "Search",
@@ -525,7 +532,7 @@ export default defineComponent({
     CardButton,
     HorizontalNavPills,
     HorizontalNavbar,
-    QueryDefinition,
+    QueryEditor,
     TransitionRoot,
     InputDescription,
     InputRadioButtons
@@ -801,13 +808,10 @@ export default defineComponent({
           description: 'View the Query "SMI Population"',
           icon: "cursor_click",
           command: () => {
-            // this.activeTabName = "Find";
-            this.$store.commit("updateIsLoading", true);
+            this.$store.commit("updateIsLoading", true)
+            this.activeTabName = "Find";
             this.$store.commit("loadFile", "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf");
-
-            // clearTimeout(this.debounce);
-            // this.debounce = window.setTimeout(() => {
-            // }, 500);
+            // this.$router.replace({ path: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf" });
           },
           visible: true
         },
@@ -889,10 +893,16 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState(["currentUser", "isLoggedIn", "openFiles", "tabs"]),
+    ...mapState(["activeClausePath", "currentUser", "isLoggedIn", "openFiles", "tabs"]),
     // actions: {
     //   get(): any {
     //     return this.config?.query?.actions[this.activeQueryCategory]
+    //   },
+    //   set(value: any): void {}
+    // },
+    // sql: {
+    //   async get(): Promise<any> {
+    //     return await this.getSQL(this.activeProfile);
     //   },
     //   set(value: any): void {}
     // },
@@ -956,13 +966,13 @@ export default defineComponent({
         //sets an active file if A. there are openfiles left and B. there there is no longer an active file
       }
     },
-    activeFileIri: {
+    activeProfile: {
       get(): string {
-        return this.$store.state.activeFileIri;
+        return this.$store.state.activeProfile;
       },
       set(value: any): void {
         alert("hi");
-        this.$store.commit("updateActiveFileIri", value);
+        this.$store.commit("updateactiveProfile", value);
       }
     },
     currentTheme: {
@@ -1010,6 +1020,16 @@ export default defineComponent({
     getActions(activeQueryCategory: string) {
       return this.config?.query?.actions[activeQueryCategory];
     },
+    async getSQL(queryIri: string): Promise<any> {
+      const entity = await QueryService.getSQL(queryIri)
+        .then(res => {
+          console.log("### SQL", res);
+          return;
+        })
+        .catch(err => {
+          console.error("Failed to load SQL from the server", err);
+        });
+    },
     async summariseQuery(queryIri: string): Promise<any> {
       const entity = await QueryService.summariseQuery(queryIri)
         .then(res => {
@@ -1055,8 +1075,8 @@ export default defineComponent({
       return openFiles.length > 0 && openFiles[0].isVisible;
     },
     test(): void {
-      // console.log(this.activeFileIri);
-      // console.log(this.queryBuilder.profiles.get(this.activeFileIri));
+      // console.log(this.activeProfile);
+      // console.log(this.queryBuilder.profiles.get(this.activeProfile));
       for (const profile in this.queryBuilder.profiles) {
         console.log("prof", profile);
       }
@@ -1271,7 +1291,7 @@ header nav {
 }
 
 header {
-  max-width: 1300px;
+  /* max-width: 1300px; */
 }
 
 header,

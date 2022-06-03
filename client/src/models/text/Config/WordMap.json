@@ -29,11 +29,11 @@
          },
          {
              "originalValue": "subset of",
-             "mappedValue": "part of the search results of"
+             "mappedValue": "part of the results of the search"
          },
          {
              "originalValue": "in result set of",
-             "mappedValue": "part of the search results of"
+             "mappedValue": "part of the results of the search"
          },
          {
              "originalValue": "EQUAL",

@@ -10,14 +10,18 @@
 import { defineComponent } from "vue";
 // import { DataSet } from "../../models/sets/DataSet";
 import Phrase from "./Phrase.vue";
-import HeroIcon from "../general/HeroIcon.vue";
+import { mapState } from "vuex";
+
 import _ from "lodash";
 
 export default defineComponent({
   name: "QueryDefinition",
   props: ["modelValue", "edit"],
   emits: ["stopEditing"],
-  components: { Phrase, HeroIcon },
+  components: { Phrase },
+  computed: {
+    ...mapState(["activeClausePath"])
+  },
   watch: {
     modelValue(value: any) {
       this.query = value;
@@ -26,8 +30,7 @@ export default defineComponent({
   data() {
     return {
       activePath: "",
-      query: this.modelValue,
-
+      query: this.modelValue
     };
   }
 });
@@ -44,8 +47,8 @@ export default defineComponent({
 
 .query-definition {
   width: 600px;
-  min-width: 300px;
-  max-width: 600px;
+  /* min-width: 300px; */
+  min-width: 600px;
 
   height: 100%;
   max-height: 600px;
@@ -53,7 +56,6 @@ export default defineComponent({
   transition: all 0.2s ease-in;
   display: flex;
   overflow-y: auto;
-  overflow: hidden;
   padding: 1.5rem;
   margin-bottom: 3rem;
   background-color: #ffffff;
@@ -66,9 +68,13 @@ export default defineComponent({
   border-color: #d1d5db;
 }
 
+.query-definition.edit {
+  border-width: 0;
+  box-shadow: none;
+}
 
-.query-definition:hover {
-  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+.query-definition:not(.edit):hover {
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 </style>

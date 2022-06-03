@@ -3,8 +3,8 @@
     <!-- Custom Sentences - add new ones here  -->
     <div v-if="template == 'IncludeEntity' && entity" class="horizontal">
       <Keyword> Include</Keyword>
-      <Static> {{a}}</Static>
-      <Selector :path="path" :modelValue="entity" :edit="edit"></Selector>
+      <Static> {{ a }}</Static>
+      <Selector type="clause" :path="path" :modelValue="entity" :edit="edit"></Selector>
       <Static> who</Static>
     </div>
     <!-- /Custom Sentences - add new ones here -->
@@ -13,14 +13,14 @@
     <template v-else-if="valueType == 'filter' && entity">
       <!-- Match Clause -->
       <div v-if="hasKey(entity, 'property')" :class="'property horizontal' + [index > 0 ? ' ' : '']">
-        <Keyword v-if="index > 0" :class="'operator-label'"> {{ operator }}</Keyword>
-        <Selector v-if="entity" class=" " :path="path" :modelValue="entity" :edit="edit"></Selector>
+        <Keyword v-if="index > 0 || (cghilw == 0 && operator == 'or')" :class="'operator-label'"> {{ operator }}</Keyword>
+        <Selector v-if="entity" class=" " type="clause" :path="path" :modelValue="entity" :edit="edit"></Selector>
       </div>
       <!-- Match Clause -->
 
       <!-- Operator Clause  -->
       <template v-else v-for="(child, childIndex) in children(entity)" :key="child.path">
-        <div v-if="isOperator(child?.path)" class="operator horizontal ">
+        <div v-if="isOperator(child?.path)" class="operator horizontal">
           <Keyword class="operator-label">{{ showOperator(path, index, childIndex) ? operator : "" }}</Keyword>
           <div class="operator-items">
             <Phrase
@@ -48,7 +48,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Helpers } from "../../models/text/Helpers";
 
 import Static from "./Static.vue";
 import Selector from "./Selector.vue";
@@ -61,10 +60,16 @@ export default defineComponent({
   props: ["template", "modelValue", "object", "path", "valueType", "keys", "excludedKeys", "operator", "highlighted", "index", "edit"],
   emits: ["selectedClauseUpdated"],
   methods: {
-    showOperator(path: string, index: number, childIndex): boolean {
+    showOperator(path: string, index: number, childIndex: number): boolean {
       // console.log("path", path);
-      // console.log("index", index);
+      // console.log("childIndex", index);
+      // console.log("operator", this.operator == "or" );
+      if ((index == 0 || childIndex == 0) && this.operator == "or") {
+        // this.operator = "either";
+        return true;
+      }
       if (index > 0 || childIndex > 0) return true;
+
       return false;
     },
     isOperator(testString: any): boolean {
@@ -79,10 +84,6 @@ export default defineComponent({
         const isIncludedKey = ["and", "or", "property"].includes(key);
         const isExcludedKey = ["entityType"].includes(key);
         const isNumber = typeof parseInt(key) == "number";
-        // console.log("hasIncludedKeys", hasIncludedKeys);
-        // console.log("hasExcludedKeys", hasExcludedKeys);
-        // console.log("parseInt(key)", parseInt(key));
-        // console.log("isNumber", isNumber);
 
         if ((isIncludedKey || isNumber) && !isExcludedKey) {
           return { path: key, value: testObject[key] };
@@ -103,14 +104,16 @@ export default defineComponent({
   computed: {
     a: {
       get() {
-        return Helpers.a(this.entity.name);
+        const testString = this?.entity?.name;
+        if (!testString || testString == "") return "a";
+        return ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == testString.substring(0, 1).toLowerCase()) ? "an" : "a";
       },
       set() {}
     }
   },
   watch: {
-    edit(newValue: any) {
-      this.editMode = this.newValue;
+    edit(newValue: boolean) {
+      this.editMode = newValue;
     }
   }
 });

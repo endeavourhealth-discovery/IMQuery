@@ -33,15 +33,17 @@ export default createStore({
     snomedLicenseAccepted: localStorage.getItem(
       "snomedLicenseAccepted"
     ) as string,
-    activeProfile: { uuid: "", activeClausePath: "" },
     JSONContent: "",
     LabelContent: [] as any[],
     isLoading: false,
     theme: "",
+    activeProfile: "",
     activeFileIri: [] as any[],
+    activeQueryId: "",
+    activeClausePath: {},
     openFiles: [] as any[],
     userFiles: [] as any[],
-    activeQueryId: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+    // activeQueryIdId: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
     datamodel: [] as any[],
     datamodelIris: [] as any[],
     queryBuilder: new QueryBuilder(),
@@ -85,7 +87,7 @@ export default createStore({
       {
         name: "Developer",
         icon: "",
-        visible: true
+        visible: false
       },
       {
         name: "Explore2",
@@ -103,10 +105,17 @@ export default createStore({
         visible: false
       }
     ],
-    activeTabName: "Developer", //Options #Home #SearchResults #View #Explore
+    activeTabName: "Home", //Options #Home #SearchResults #View #Explore
 
   },
   mutations: {
+    updateActiveClausePath(state, path) {
+      console.log("click")
+      state.activeClausePath[state.activeQueryId] = path;
+    },
+    startEdit(state, fileIri) {
+      state.openFiles.find(file => file.iri == fileIri).state = "edit";
+    },
     async loadFile(state, fileIri) {
 
       if (state.openFiles.some(file => file.iri === fileIri)) {
@@ -118,7 +127,7 @@ export default createStore({
       try {
         // const entity = await QueryService.querySummary(fileIri).then(res => {
         // const entity = await QueryService.definition(fileIri).then(res => {
-        const entity = await QueryService.querySummary(fileIri).then(res => {
+        const entity = await QueryService.summariseQuery(fileIri).then(res => {
           const data = res?.data || res
           // console.log("## Query Loaded file:", data); //?res.data if backend
           state.queryBuilder.loadDataSet(data);
@@ -128,7 +137,8 @@ export default createStore({
             console.error("Failed to load file from the server", err);
           });
         state.openFiles.forEach((file: any, index: number) => state.openFiles[index].isVisible = false);
-        state.openFiles.push({ iri: entity["@id"], isVisible: true, state: "view", data: entity }); //alternative states are: loading, edit
+        state.openFiles.push({ iri: entity["@id"], activeClausePath: "", isVisible: true, state: "view", data: entity }); //alternative states are: loading, edit
+        state.activeQueryId = entity["@id"];
         state.tabs.find(tab => tab.name === "Edit").visible = true;
         state.activeTabName = "Edit";
       } catch (error) {
@@ -465,6 +475,7 @@ export default createStore({
 
         }
       })
+      state.activeQueryId = fileIri;
     },
     updateActiveFileIri(state, activeFileIri) {
       if (state.activeFileIri.includes(activeFileIri)) {
