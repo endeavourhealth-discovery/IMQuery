@@ -7,7 +7,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import QueryDefinition from "@/components/query/QueryDefinition.vue";
+
+import { QueryDefinition } from "im-library";
+// import QueryDefinition from "@/components/query/QueryDefinition.vue";
 import Criteria from "@/components/query/Criteria.vue";
 
 export default defineComponent({

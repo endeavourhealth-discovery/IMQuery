@@ -11,6 +11,12 @@ const { onlyUnique, excludedPaths, entitiesFromPredicates, isTTIriRef } = Manipu
 export default class QueryService {
 
 
+
+  public static async getLocalData(filename: string): Promise<any> {
+    return fetch(`local/${filename}`).then(res => res.json());
+  }
+
+
   public static async querySummary(iri: string): Promise<any> {
     try {
       const _res = await axios.get(import.meta.env.VITE_NODE_API + "node_api/query/public/querySummary", {
@@ -61,7 +67,7 @@ export default class QueryService {
           iri: iri
         }
       });
-      // console.log("api response", _.cloneDeep(_res))
+      console.log("api response", _.cloneDeep(_res))
       return _res;
     } catch (error) {
       return {} as any;
@@ -81,7 +87,7 @@ export default class QueryService {
 
     //matchClause = an object with "property" key
     const jsonQuery = `$..[?(@.property)]`;    // const jsonQuery = `$..[? (@.@id)]`
-    let matchClauses = jp.nodes(definition?.select?.filter, jsonQuery);
+    let matchClauses = jp.nodes(definition?.select?.match, jsonQuery);
     matchClauses = matchClauses.filter(excludedPaths);
     // console.log(`2. matchClauses`, matchClauses);
 
@@ -89,11 +95,39 @@ export default class QueryService {
     // add summary to match clauses
     matchClauses.forEach(item => {
       const summary = TextGenerator.summarise(item.value) || "";
-      const path = jp.stringify(item.path).substring(2) + "name";
-      summary ? _.set(definition?.select?.filter, path, summary) : null;
+      const path = jp.stringify(item.path).substring(2) + ".name";
+      summary ? _.set(definition?.select?.match, path, summary) : null;
       console.log(`### summary of clause(${path}): `, summary);
     })
 
+    return definition;
+
+  }
+  public static async summariseLocalQuery(queryIri: string): Promise<any> {
+
+    // const definition: DataSet =
+    const definition: any = await QueryService.getLocalData("queries.json").then(res => {
+      let query = res?.entities.filter(item => item['@id'] === queryIri)[0];
+      query = JSON.parse(query["im:definition"]);
+      console.log("query", query);
+      return query
+    });
+    console.log(`1. raw definition`, _.cloneDeep(definition));
+
+    //matchClause = an object with "property" key
+    const jsonQuery = `$..[?(@.property)]`;    // const jsonQuery = `$..[? (@.@id)]`
+    let matchClauses = jp.nodes(definition?.select?.match, jsonQuery);
+    matchClauses = matchClauses.filter(excludedPaths);
+
+
+    // add summary to match clauses
+    matchClauses.forEach(item => {
+      const summary = TextGenerator.summarise(item.value) || "";
+      const path = jp.stringify(item.path).substring(2) + ".name";
+      summary ? _.set(definition?.select?.match, path, summary) : null;
+      console.log(`### summary of clause(${path}): `, summary);
+    })
+    console.log(`2. definition`, _.cloneDeep(definition));
     return definition;
 
   }

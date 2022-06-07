@@ -1,5 +1,4 @@
-import _ from "lodash";
-import { String } from 'aws-sdk/clients/cloudsearch';
+import { _ } from "lodash";
 import * as wordMap from "./Config/WordMap.json"
 import * as pathMap from "./Config/PathMap.json"
 import { IM, RDF, RDFS } from "../../vocabulary"
@@ -46,7 +45,7 @@ export class Clause {
         let originalObject = _.cloneDeep(_.get(this.definition, path));
 
         let originalValue = originalObject?.name || originalObject?.value || originalObject
-        if ( originalValue == "Unknown code set") originalValue = Helpers.getLabel(originalObject['@id']) || originalValue
+        if (originalValue == "Unknown code set") originalValue = Helpers.getLabel(originalObject['@id']) || originalValue
         if (typeof (originalValue) == "string") originalValue = Helpers.trimUnnecessaryText(originalValue);
 
 
@@ -65,7 +64,7 @@ export class Clause {
 
     //special getters that are not defined in PathMap.json
     get exists(): boolean {
-        const exists = this?.definition?.notExist != true && this?.definition?.valueObject?.notExist != true;
+        const exists = this?.definition?.notExist != true && this?.definition?.match?.notExist != true;
         return exists
     }
 
@@ -73,8 +72,8 @@ export class Clause {
         return wordMap["are"][this.exists.toString()];
     }
 
-    get have(): string {
-        return wordMap["have"][this.exists.toString()];
+    get has(): string {
+        return wordMap["has"][this.exists.toString()];
     }
 
 }

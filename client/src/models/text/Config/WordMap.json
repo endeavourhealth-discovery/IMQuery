@@ -29,11 +29,11 @@
          },
          {
              "originalValue": "subset of",
-             "mappedValue": "part of the results of the search"
+             "mappedValue": "part of the search results of"
          },
          {
              "originalValue": "in result set of",
-             "mappedValue": "part of the results of the search"
+             "mappedValue": "part of the search results of"
          },
          {
              "originalValue": "EQUAL",
@@ -98,9 +98,9 @@
          "false": "an",
          "default": "it"
      },
-     "have": {
+     "has": {
          "true": "has",
-         "false": "don't have",
+         "false": "doesn't have",
          "default": "have"
      },
      "are": {
@@ -125,7 +125,7 @@
      "DAY": {
          "singular": "day",
          "plural": "days"
-     },
+    },
      "WEEK": {
          "singular": "week",
          "plural": "weeks"

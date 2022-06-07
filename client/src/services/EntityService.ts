@@ -6,7 +6,7 @@ export default class EntityService {
 
 
   public static async getData(filename: string): Promise<any> {
-    return fetch(`demo/${filename}`).then(res => res.json());
+    return fetch(`local/${filename}`).then(res => res.json());
   }
 
   public static async test(): Promise<any> {

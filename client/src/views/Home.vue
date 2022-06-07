@@ -311,7 +311,7 @@
             >
               <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
                 <!-- <QueryDefinition v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"></QueryDefinition> -->
-                <QueryEditor v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"/>
+                <QueryEditor v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false" />
               </template>
             </div>
             <!-- Main Data Type  -->
@@ -517,7 +517,6 @@ import { TransitionRoot } from "@headlessui/vue";
 import InputDescription from "@/components/general/InputDescription.vue";
 import InputRadioButtons from "@/components/general/InputRadioButtons.vue";
 
-// import { QueryDefinition } from "im-library";
 import QueryEditor from "@/components/query/QueryEditor.vue";
 
 export default defineComponent({
@@ -808,10 +807,16 @@ export default defineComponent({
           description: 'View the Query "SMI Population"',
           icon: "cursor_click",
           command: () => {
-            this.$store.commit("updateIsLoading", true)
+            // this.$store.commit("updateIsLoading", true);
             this.activeTabName = "Find";
-            this.$store.commit("loadFile", "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf");
-            // this.$router.replace({ path: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf" });
+            let queryIri = "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf";
+            // let queryIri = "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97";
+            // let queryIri = "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd";
+            // let queryIri = "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6";
+            // let queryIri = "urn:uuid:3f04bc73-fb03-4d50-bae4-49a866ad5033";
+            this.$store.commit("loadFile", queryIri);
+
+            this.$router.replace({ path: queryIri });
           },
           visible: true
         },

@@ -124,26 +124,28 @@ export default createStore({
         return;
       }
 
-      try {
-        // const entity = await QueryService.querySummary(fileIri).then(res => {
-        // const entity = await QueryService.definition(fileIri).then(res => {
-        const entity = await QueryService.summariseQuery(fileIri).then(res => {
-          const data = res?.data || res
-          // console.log("## Query Loaded file:", data); //?res.data if backend
-          state.queryBuilder.loadDataSet(data);
-          return data
-        })
-          .catch(err => {
-            console.error("Failed to load file from the server", err);
-          });
-        state.openFiles.forEach((file: any, index: number) => state.openFiles[index].isVisible = false);
-        state.openFiles.push({ iri: entity["@id"], activeClausePath: "", isVisible: true, state: "view", data: entity }); //alternative states are: loading, edit
-        state.activeQueryId = entity["@id"];
-        state.tabs.find(tab => tab.name === "Edit").visible = true;
-        state.activeTabName = "Edit";
-      } catch (error) {
-        console.log("error occurred in loadEntity", error)
-      }
+      // try {
+      // const entity = await QueryService.querySummary(fileIri).then(res => {
+      // const entity = await QueryService.definition(fileIri).then(res => {
+      const entity = await QueryService.querySummary(fileIri).then(res => {
+        console.log("## res:", res); //?res.data if backend
+        const data = res?.data || res
+        state.queryBuilder.loadDataSet(data);
+        return data
+      })
+        .catch(err => {
+          console.error("Failed to load file from the server", err);
+        });
+      console.log("## entity:", entity); //?res.data if backend
+
+      state.openFiles.forEach((file: any, index: number) => state.openFiles[index].isVisible = false);
+      state.openFiles.push({ iri: entity["@id"], activeClausePath: "", isVisible: true, state: "view", data: entity }); //alternative states are: loading, edit
+      state.activeQueryId = entity["@id"];
+      state.tabs.find(tab => tab.name === "Edit").visible = true;
+      state.activeTabName = "Edit";
+      // } catch (error) {
+      //   console.log("error occurred in loadEntity", error)
+      // }
       state.isLoading = false;
 
 

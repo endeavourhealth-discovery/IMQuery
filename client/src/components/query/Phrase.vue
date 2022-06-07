@@ -7,14 +7,18 @@
       <Selector type="clause" :path="path" :modelValue="entity" :edit="edit"></Selector>
       <Static> who</Static>
     </div>
+    <template v-else-if="template == 'entityInSet' && valueType == 'TTIriRef'">
+      <Keyword> were part of the final results of query </Keyword>
+      <Selector class="ml" type="clause" :path="path" :modelValue="entity"></Selector>
+    </template>
     <!-- /Custom Sentences - add new ones here -->
 
     <!-- Operator and Match Clauses-->
-    <template v-else-if="valueType == 'filter' && entity">
+    <template v-else-if="valueType == 'match' && entity">
       <!-- Match Clause -->
       <div v-if="hasKey(entity, 'property')" :class="'property horizontal' + [index > 0 ? ' ' : '']">
-        <Keyword v-if="index > 0 || (cghilw == 0 && operator == 'or')" :class="'operator-label'"> {{ operator }}</Keyword>
-        <Selector v-if="entity" class=" " type="clause" :path="path" :modelValue="entity" :edit="edit"></Selector>
+        <Keyword v-if="index > 0 || operator == 'or'" :class="'operator-label'"> {{ operator }}</Keyword>
+        <Selector v-if="entity" class="" type="clause" :path="path" :modelValue="entity" :edit="edit"></Selector>
       </div>
       <!-- Match Clause -->
 
@@ -27,13 +31,25 @@
               v-for="(grandChild, grandChildIndex) in children(child.value)"
               :object="object"
               :path="`${path}.${child?.path}[${grandChildIndex}]`"
-              valueType="filter"
+              valueType="match"
               :operator="grandChildIndex > 0 ? child.path : ''"
               :index="grandChildIndex"
               :edit="edit"
             >
             </Phrase>
           </div>
+        </div>
+        <div v-else-if="child.path == 'entityInSet'" class="inline-flex">
+          <div class="operator-label">{{ childIndex > 0 ? operator : "" }}</div>
+          <Phrase
+            v-for="(grandChild, grandChildIndex) in child.value"
+            :object="object"
+            :path="`${path}.${child.path}[${grandChildIndex}]`"
+            template="entityInSet"
+            valueType="TTIriRef"
+            :index="grandChildIndex"
+          >
+          </Phrase>
         </div>
       </template>
       <!-- Operator Clause  -->
@@ -120,6 +136,11 @@ export default defineComponent({
 </script>
 
 <style>
+
+.ml {
+  margin-left: 20px;
+}
+
 .phrase,
 .phrase .static {
   font-size: 14px !important;

@@ -1,7 +1,7 @@
 <template>
   <div :class="'query-definition ' + [edit ? 'edit ' : '']">
     <Phrase template="IncludeEntity" :object="query" path="select.entityType" valueType="TTIriRef" :highlighted="true" :edit="edit">
-      <Phrase :object="query" path="select.filter" valueType="filter" operator="and" :highlighted="true" :edit="edit"> </Phrase>
+      <Phrase :object="query" path="select.match" valueType="match" operator="and" :highlighted="true" :edit="edit"> </Phrase>
     </Phrase>
   </div>
 </template>
