@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HeroIcon from "@/components/search/HeroIcon.vue";
+import HeroIcon from "@/components/general/HeroIcon.vue";
 
 export default defineComponent({
   name: "ButtonBar",

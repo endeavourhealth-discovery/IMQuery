@@ -1,190 +1,98 @@
 <template>
-  <Card class="p-d-flex p-flex-column p-jc-sm-around p-ai-center register-card">
-    <template #header>
-      <avatar-with-selector
-        :selectedAvatar="selectedAvatar"
-        @avatarSelected="updateAvatar"
-      />
-    </template>
-    <template #title>
-      Register
-    </template>
-    <template #content>
-      <div class="p-fluid register-form">
-        <div class="p-field">
-          <label for="fieldUsername">Username</label>
+  <div class="bg-whited dark:bg-gray-900 h-full w-full">
+    <div class="p-fluid register-form">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Register</h2>
+      <div class="text-center mb-5">
+        <span class="text-gray-600 dark:text-gray-400 text-xl font-semibold">
+          Already have an account?
+        </span>
+          <a id="login-link" class="footer-link text-blue-700 dark:text-white font-semibold text-xl hover:underline" @click="$router.push({ name: 'Login' })">Login here</a>
+      </div>
+
+      <div class="p-field">
+        <label class="text-2xl font-semibold text-black dark:text-white" for="fieldUsername">Username</label>
+        <InputText id="fieldUsername" type="text" maxlength="50" v-model="username" v-on:blur="setShowUsernameNotice" />
+        <InlineMessage v-if="showUsernameNotice" severity="error">
+          Username contains unexpected characters. A-Z, 0-9 and hyphen/underscore(-_) only allowed e.g."John-Doe2"
+        </InlineMessage>
+      </div>
+      <div class="p-field">
+        <label class="text-2xl font-semibold text-black dark:text-white" for="fieldEmail1">Email address</label>
+        <div class="p-d-flex p-flex-row p-ai-center">
           <InputText
-            id="fieldUsername"
+            id="fieldEmail1"
             type="text"
             maxlength="50"
-            v-model="username"
-            v-on:blur="setShowUsernameNotice"
+            v-model="email1"
+            v-on:focus="setShowEmail1Notice(true)"
+            v-on:blur="setShowEmail1Notice(false)"
           />
-          <InlineMessage v-if="showUsernameNotice" severity="error">
-            Username contains unexpected characters. A-Z, 0-9 and
-            hyphen/underscore(-_) only allowed e.g."John-Doe2"
-          </InlineMessage>
-        </div>
-        <div class="p-field">
-          <label for="fieldEmail1">Email address</label>
-          <div class="p-d-flex p-flex-row p-ai-center">
-            <InputText
-              id="fieldEmail1"
-              type="text"
-              maxlength="50"
-              v-model="email1"
-              v-on:focus="setShowEmail1Notice(true)"
-              v-on:blur="setShowEmail1Notice(false)"
-            />
-            <i
-              v-if="showEmail1Notice && email1Verified"
-              class="pi pi-check-circle email-check"
-              aria-hidden="true"
-            />
-            <i
-              v-if="showEmail1Notice && !email1Verified"
-              class="pi pi-times-circle email-times"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-        <div class="p-field">
-          <label for="fieldEmail2">Confirm email address</label>
-          <InputText
-            id="fieldEmail2"
-            type="text"
-            maxlength="50"
-            v-model="email2"
-            v-on:blur="setShowEmail2Notice"
-          />
-          <InlineMessage v-if="showEmail2Notice" severity="error">
-            Email addresses do not match!
-          </InlineMessage>
-        </div>
-        <div class="p-field">
-          <label for="fieldFirstName">First name</label>
-          <InputText
-            id="fieldFirstName"
-            type="text"
-            maxlength="50"
-            v-model="firstName"
-            v-on:blur="setShowFirstNameNotice"
-          />
-          <InlineMessage v-if="showFirstNameNotice" severity="error">
-            First name contains unexpected characters. A-Z and hyphens only
-            allowed e.g."Mary-Anne"
-          </InlineMessage>
-        </div>
-        <div class="p-field">
-          <label for="fieldLastName">Last name</label>
-          <InputText
-            id="fieldLastName"
-            type="text"
-            maxlength="50"
-            v-model="lastName"
-            v-on:blur="setShowLastNameNotice"
-          />
-          <InlineMessage v-if="showLastNameNotice" severity="error">
-            Last name contains unexpected characters. A-Z, apostropies and
-            hyphens only allowed e.g."O'Keith-Smith"
-          </InlineMessage>
-        </div>
-        <div class="p-field">
-          <label for="fieldPassword1">Password</label>
-          <InputText
-            id="fieldPassword1"
-            type="password"
-            maxlength="50"
-            aria-describedby="password-help"
-            v-model="password1"
-          />
-          <InlineMessage
-            v-if="passwordStrength === 'strong'"
-            severity="success"
-          >
-            Password strength: Strong
-          </InlineMessage>
-          <InlineMessage
-            v-if="passwordStrength === 'medium'"
-            severity="success"
-          >
-            Password strength: Medium
-          </InlineMessage>
-          <InlineMessage v-if="passwordStrength === 'weak'" severity="warn">
-            Password strength: Weak
-          </InlineMessage>
-          <InlineMessage
-            v-if="passwordStrength === 'fail' && password1 !== ''"
-            severity="error"
-          >
-            Invalid password
-          </InlineMessage>
-          <small id="password-help">
-            Password must be a minimum length of 8 characters. Improve password
-            strength with a mixture of UPPERCASE, lowercase, numbers and special
-            characters [!@#$%^&*].
-          </small>
-        </div>
-        <div class="p-field">
-          <label for="fieldPassword2">Confirm password</label>
-          <InputText
-            id="fieldPassword2"
-            type="password"
-            maxlength="50"
-            v-model="password2"
-            v-on:blur="setShowPassword2Notice"
-            @keyup="checkKey"
-          />
-          <InlineMessage v-if="showPassword2Notice" severity="error">
-            Passwords do not match!
-          </InlineMessage>
-        </div>
-        <div class="p-d-flex p-flex-row p-jc-center">
-          <!-- <ConfirmDialogue></ConfirmDialogue> -->
-          <Button
-            v-if="!allVerified()"
-            class="user-submit"
-            type="submit"
-            label="Register"
-            disabled
-            v-on:click.prevent="handleSubmit"
-          />
-          <Button
-            v-else
-            class="user-submit"
-            type="submit"
-            label="Register"
-            v-on:click.prevent="handleSubmit"
-          />
+          <i v-if="showEmail1Notice && email1Verified" class="pi pi-check-circle email-check" aria-hidden="true" />
+          <i v-if="showEmail1Notice && !email1Verified" class="pi pi-times-circle email-times" aria-hidden="true" />
         </div>
       </div>
-    </template>
-    <template #footer>
-      <span>
-        Already have an account?
-        <a
-          id="login-link"
-          class="footer-link"
-          @click="$router.push({ name: 'Login' })"
-          >Login here</a
-        >
-      </span>
-    </template>
-  </Card>
+      <div class="p-field">
+        <label class="text-2xl font-semibold text-black dark:text-white" for="fieldEmail2">Confirm email address</label>
+        <InputText id="fieldEmail2" type="text" maxlength="50" v-model="email2" v-on:blur="setShowEmail2Notice" />
+        <InlineMessage v-if="showEmail2Notice" severity="error">
+          Email addresses do not match!
+        </InlineMessage>
+      </div>
+      <div class="p-field">
+        <label class="text-2xl font-semibold text-black dark:text-white" for="fieldFirstName">First name</label>
+        <InputText id="fieldFirstName" type="text" maxlength="50" v-model="firstName" v-on:blur="setShowFirstNameNotice" />
+        <InlineMessage v-if="showFirstNameNotice" severity="error">
+          First name contains unexpected characters. A-Z and hyphens only allowed e.g."Mary-Anne"
+        </InlineMessage>
+      </div>
+      <div class="p-field">
+        <label class="text-2xl font-semibold text-black dark:text-white" for="fieldLastName">Last name</label>
+        <InputText id="fieldLastName" type="text" maxlength="50" v-model="lastName" v-on:blur="setShowLastNameNotice" />
+        <InlineMessage v-if="showLastNameNotice" severity="error">
+          Last name contains unexpected characters. A-Z, apostropies and hyphens only allowed e.g."O'Keith-Smith"
+        </InlineMessage>
+      </div>
+      <div class="p-field">
+        <label class="text-2xl font-semibold text-black dark:text-white" for="fieldPassword1">Password</label>
+        <InputText id="fieldPassword1" type="password" maxlength="50" aria-describedby="password-help" v-model="password1" />
+        <InlineMessage v-if="passwordStrength === 'strong'" severity="success">
+          Password strength: Strong
+        </InlineMessage>
+        <InlineMessage v-if="passwordStrength === 'medium'" severity="success">
+          Password strength: Medium
+        </InlineMessage>
+        <InlineMessage v-if="passwordStrength === 'weak'" severity="warn">
+          Password strength: Weak
+        </InlineMessage>
+        <InlineMessage v-if="passwordStrength === 'fail' && password1 !== ''" severity="error">
+          Invalid password
+        </InlineMessage>
+        <small id="password-help" class="text-black dark:text-red-400 text-xl">
+          Password must be a minimum length of 8 characters. Improve password strength with a mixture of UPPERCASE, lowercase, numbers and special characters
+          [!@#$%^&*].
+        </small>
+      </div>
+      <div class="p-field mt-3">
+        <label class="text-2xl font-semibold text-black dark:text-white" for="fieldPassword2">Confirm password</label>
+        <InputText id="fieldPassword2" type="password" maxlength="50" v-model="password2" v-on:blur="setShowPassword2Notice" @keyup="checkKey" />
+        <InlineMessage v-if="showPassword2Notice" severity="error">
+          Passwords do not match!
+        </InlineMessage>
+      </div>
+      <div class="flex justify-center mt-5">
+        <!-- <ConfirmDialogue></ConfirmDialogue> -->
+        <Button v-if="!allVerified()" class="user-submit p-button-rounded p-button-lg" type="submit" label="Register" disabled v-on:click.prevent="handleSubmit" />
+        <Button v-else class="user-submit p-button-rounded p-button-lg" type="submit" label="Register" v-on:click.prevent="handleSubmit" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { User } from "@/models/user/User";
 import { PasswordStrength } from "@/models/user/PasswordStrength";
 import Swal from "sweetalert2";
-import {
-  verifyIsUsername,
-  verifyIsEmail,
-  verifyPasswordsMatch,
-  verifyEmailsMatch,
-  verifyIsName,
-  checkPasswordStrength
-} from "@/helpers/UserMethods";
+import { verifyIsUsername, verifyIsEmail, verifyPasswordsMatch, verifyEmailsMatch, verifyIsName, checkPasswordStrength } from "@/helpers/UserMethods";
 import AuthService from "@/services/AuthService";
 import { avatars } from "@/models/user/Avatars";
 import AvatarWithSelector from "./AvatarWithSelector.vue";
@@ -273,14 +181,7 @@ export default defineComponent({
 
     handleSubmit(): void {
       if (this.allVerified()) {
-        const user = new User(
-          this.username,
-          this.firstName,
-          this.lastName,
-          this.email1.toLowerCase(),
-          this.password1,
-          this.selectedAvatar
-        );
+        const user = new User(this.username, this.firstName, this.lastName, this.email1.toLowerCase(), this.password1, this.selectedAvatar);
         AuthService.register(user)
           .then(res => {
             if (res.status === 201) {
@@ -403,16 +304,20 @@ export default defineComponent({
 }
 
 .register-card {
-  padding: 0 2em;
+  height: 100%;
+  width: 100%;
 }
 
 .register-form {
   max-width: 32em;
+  margin: 0 auto;
+  padding-top: 100px;
 }
 
 .footer-link:hover {
   cursor: pointer;
 }
+
 .email-check {
   color: #439446;
   font-size: 2em;

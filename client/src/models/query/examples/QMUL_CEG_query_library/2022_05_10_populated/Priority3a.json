@@ -1,0 +1,274 @@
+{
+    "@id": "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6",
+    "name": "Priority 3a",
+    "description": "",
+    "select": {
+        "entityType": {
+            "name": "Person",
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "filter": {
+            "and": [
+                {
+                    "property": {
+                        "name": "in result set of",
+                        "@id": "http://endhealth.info/im#inResultSet"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "SMI Population",
+                            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                        }
+                    ]
+                }
+            ],
+            "or": [
+                {
+                    "notExist": true,
+                    "property": {
+                        "name": "subset of",
+                        "@id": "http://endhealth.info/im#inResultSet"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Priority 1",
+                            "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                        }
+                    ]
+                },
+                {
+                    "notExist": true,
+                    "property": {
+                        "name": "subset of",
+                        "@id": "http://endhealth.info/im#inResultSet"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Priority 2",
+                            "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd"
+                        }
+                    ]
+                },
+                {
+                    "or": [
+                        {
+                            "@id": "urn:uuid:9aa3ca5c-b724-4a13-900f-8f41f24621af",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Hypertension (not resolved)",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Hypertension",
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    },
+                                    {
+                                        "name": "Hypertension (not resolved)",
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                    }
+                                ],
+                                "valueVar": "concept70",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Hypertension",
+                                                    "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                                }
+                                            ],
+                                            "valueVar": "concept71"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:cc94257d-661b-48dc-bd73-3c0714c0089d",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Diabetes",
+                                        "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                                    },
+                                    {
+                                        "name": "Diabetes (resovled)",
+                                        "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
+                                    }
+                                ],
+                                "valueVar": "concept72",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Diabetes",
+                                                    "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                                                }
+                                            ],
+                                            "valueVar": "concept73"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:07c87645-0fc7-4ac4-acce-1ac901e33dd4",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
+                                    }
+                                ],
+                                "valueVar": "concept74"
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:701ef455-8f18-4402-81a7-90d3acfd30a4",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:15bd20c8-c92f-496c-8560-896299a632e5"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:c97f55a2-fe6e-4da2-8865-a95b7cc80f4f"
+                                    }
+                                ],
+                                "valueVar": "concept75"
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:19d4a778-740c-4106-95c7-efda9bb38c33",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Body mass index",
+                                        "@id": "urn:uuid:6b261f27-5a7a-43f5-8ab9-cd83ddae2c96"
+                                    }
+                                ],
+                                "valueVar": "concept76",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "value",
+                                                "@id": "http://endhealth.info/im#value"
+                                            },
+                                            "valueCompare": {
+                                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                                "valueData": "35"
+                                            },
+                                            "valueVar": "value77"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainEntity": {
+        "@id": "http://endhealth.info/im#Person"
+    }
+}

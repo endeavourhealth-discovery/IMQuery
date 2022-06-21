@@ -48,4 +48,23 @@ export class IM {
   public static DISCOVERY_CODE = IM.NAMESPACE + "DiscoveryCodeScheme";
 
   public static STATS_REPORT_ENTRY = IM.NAMESPACE + "hasStatsReportEntry";
+
+
+  // other
+  public static DEFINITION = IM.NAMESPACE + "definition";
+  public static IN_RESULT_SET = IM.NAMESPACE + "inResultSet";
+  public static EFFECTIVE_DATE = IM.NAMESPACE + "effectiveDate";
+  public static TIME_DIFFERENCE = IM.NAMESPACE + "TimeDifference";
+  public static OBSERVATION = IM.NAMESPACE + "Observation";
+
+  public static PREFIXED = new class {
+
+    constructor(public superThis: any) {
+      Object.keys(superThis).forEach(key => this[key] =  superThis[key].replace(superThis.NAMESPACE, superThis.PREFIX + ":"));
+      return this;
+    }
+
+  }(this);
+
+
 }

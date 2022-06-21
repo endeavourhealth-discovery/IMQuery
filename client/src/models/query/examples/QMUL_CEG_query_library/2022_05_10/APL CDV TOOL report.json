@@ -1,0 +1,3472 @@
+{
+    "@id": "urn:uuid:95db42f9-9538-4472-b617-49f29392af02",
+    "name": "APL CVD HT v1-0 Report [PID]",
+    "description": "Patient breakdown of currently registered with HT.",
+    "subset": [
+        {
+            "name": "Patient Details",
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#fullName",
+                    "name": "Full Name",
+                    "alias": "patient_name"
+                },
+                {
+                    "@id": "http://endhealth.info/im#id",
+                    "name": "EMIS Number",
+                    "alias": "patient"
+                },
+                {
+                    "@id": "http://endhealth.info/im#usualGP",
+                    "name": "Usual GP's Mnemonic",
+                    "alias": "usual_gp"
+                },
+                {
+                    "@id": "http://endhealth.info/im#usualGPMnemonic",
+                    "name": "Usual GP's Mnemonic",
+                    "alias": "mnemonic"
+                },
+                {
+                    "@id": "http://endhealth.info/im#age",
+                    "name": "Age",
+                    "alias": "age",
+                    "function": {
+                        "id": {
+                            "@id": "http://endhealth.info/im#AgeFunction"
+                        },
+                        "argument": [
+                            {
+                                "parameter": "units",
+                                "value": "YEARS"
+                            },
+                            {
+                                "parameter": "fromDate",
+                                "value": "dateOfBirth117"
+                            },
+                            {
+                                "parameter": "referenceDate",
+                                "value": "$referenceDate"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "@id": "http://endhealth.info/im#statedGender",
+                    "name": "Gender",
+                    "alias": "sex"
+                }
+            ]
+        },
+        {
+            "name": "Ethnicity",
+            "filter": {
+                "@id": "urn:uuid:3172641f-8336-492a-a451-a1ffe84b9353",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Ethnic category - 2001 census.. and more ...",
+                            "@id": "urn:uuid:820d80c8-f004-4778-9cbd-05d87f9bb9bb"
+                        }
+                    ],
+                    "valueVar": "concept118",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "IHD",
+            "filter": {
+                "@id": "urn:uuid:6c7ca480-c54c-46cc-bf36-c038ebe20280",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Ischaemic heart disease.. and more ...",
+                            "@id": "urn:uuid:c646824d-984c-4dfc-b14d-c35846d0f90e"
+                        }
+                    ],
+                    "valueVar": "concept119",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Stroke/TIA",
+            "filter": {
+                "@id": "urn:uuid:4399db6c-3fff-4eaf-bb5b-b23d4f964551",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Cerebral arterial occlusion.. and more ...",
+                            "@id": "urn:uuid:e2f4a4be-ff39-4142-9b39-09d4cd8d1e01"
+                        }
+                    ],
+                    "valueVar": "concept120",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Haem Stroke",
+            "filter": {
+                "@id": "urn:uuid:1e8b7590-17c0-48c9-b8c9-0c0caa034720",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueVar": "concept121",
+                    "valueConcept": [
+                        {
+                            "name": "Cerebral hemorrhage (disorder)",
+                            "includeSubtypes": true,
+                            "@id": "http://snomed.info/sct#274100004"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Peripheral Arterial Disease",
+            "filter": {
+                "@id": "urn:uuid:2d2a9ad9-64a3-412a-bfec-f6cb9a9eb877",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Other peripheral vascular disease.. and more ...",
+                            "@id": "urn:uuid:94cf38cb-6112-4014-aeff-3ba9fc7202b0"
+                        }
+                    ],
+                    "valueVar": "concept122",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "AF",
+            "filter": {
+                "@id": "urn:uuid:8c0ab8ed-af57-4aca-8d4b-230d9cc73cf2",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Atrial fibrillation and flutter.. and more ...",
+                            "@id": "urn:uuid:a95f24fb-e9f2-4fe8-88e9-868dead8df69"
+                        }
+                    ],
+                    "valueVar": "concept123",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING",
+                        "test": [
+                            {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueVar": "concept124",
+                                "valueConcept": [
+                                    {
+                                        "name": "Atrial fibrillation and flutter (disorder)",
+                                        "includeSubtypes": true,
+                                        "@id": "http://snomed.info/sct#195080001"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "HF",
+            "filter": {
+                "@id": "urn:uuid:2da26a36-a45e-4ffe-b2a8-aadc4251d5f0",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Heart failure.. and more ...",
+                            "@id": "urn:uuid:ece231d5-dcbc-4b41-8043-201ecfe29a7d"
+                        }
+                    ],
+                    "valueVar": "concept125",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Hypertension",
+            "filter": {
+                "@id": "urn:uuid:2c9288c0-1ad8-41ef-8a8c-b6fdd55b5764",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Hypertensive disease.. and more ...",
+                            "@id": "urn:uuid:4073cd6f-cb3b-4cac-8979-2b0fae1dc206"
+                        }
+                    ],
+                    "valueVar": "concept126",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING",
+                        "test": [
+                            {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Hypertensive disease.. and more ...",
+                                        "@id": "urn:uuid:20fa9202-4115-439a-b317-a9261cf0b6ad"
+                                    }
+                                ],
+                                "valueVar": "concept127"
+                            }
+                        ]
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "CKD 3-5",
+            "filter": {
+                "@id": "urn:uuid:a0fbd30c-88c1-44de-aa49-336f98ca3b5b",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Chronic kidney disease stage 3.. and more ...",
+                            "@id": "urn:uuid:a757f2e5-960d-44a4-90a6-cd42c799e5e7"
+                        }
+                    ],
+                    "valueVar": "concept128",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING",
+                        "test": [
+                            {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Chronic kidney disease stage 3.. and more ...",
+                                        "@id": "urn:uuid:84d3b1df-45b8-497f-87dd-16ef6772772e"
+                                    }
+                                ],
+                                "valueVar": "concept129"
+                            }
+                        ]
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "COPD",
+            "filter": {
+                "@id": "urn:uuid:d1573480-fc05-44d8-b1d6-a3cdde587809",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Chronic obstructive pulmonary disease.. and more ...",
+                            "@id": "urn:uuid:26034030-cd91-4029-a970-c3ffa79bbd5f"
+                        }
+                    ],
+                    "valueVar": "concept130",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "SMI",
+            "filter": {
+                "@id": "urn:uuid:ebf4f563-2126-442c-a0aa-b372f75ec98f",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Schizophrenic disorders.. and more ...",
+                            "@id": "urn:uuid:c0e109df-e979-4881-aff2-9b48ca3bc3a9"
+                        }
+                    ],
+                    "valueVar": "concept131",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Cancer",
+            "filter": {
+                "@id": "urn:uuid:da03ed94-4c7f-4b86-a488-6a96489fb11a",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Malignant neoplasm of lip, oral cavity and pharynx.. and more ...",
+                            "@id": "urn:uuid:b909f7f2-f8ab-4f05-9b1d-7fb59e79e228"
+                        }
+                    ],
+                    "valueVar": "concept132",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Dementia",
+            "filter": {
+                "@id": "urn:uuid:0bbadeaf-935f-41aa-bdae-95f5e461ece6",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "[X]Vascular dementia.. and more ...",
+                            "@id": "urn:uuid:69825484-c37c-410f-ae29-03fd2e9f7c60"
+                        }
+                    ],
+                    "valueVar": "concept133",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Diabetes",
+            "filter": {
+                "@id": "urn:uuid:229dd519-ef43-47bf-a861-d6d8ac2e4667",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Diabetes mellitus.. and more ...",
+                            "@id": "urn:uuid:809cfb34-faac-4f8f-bc5b-38f4d510b309"
+                        }
+                    ],
+                    "valueVar": "concept134",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING",
+                        "test": [
+                            {
+                                "property": {
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Diabetes mellitus.. and more ...",
+                                        "@id": "urn:uuid:538028c5-b45e-47e6-b25c-98a1a7323f03"
+                                    }
+                                ],
+                                "valueVar": "concept135"
+                            }
+                        ]
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Housebound",
+            "filter": {
+                "@id": "urn:uuid:82bef22d-be65-47f8-8b73-e36fd9e7096d",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueVar": "concept136",
+                    "valueConcept": [
+                        {
+                            "name": "Housebound (finding)",
+                            "includeSubtypes": true,
+                            "@id": "http://snomed.info/sct#160689007"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Frailty Score",
+            "filter": {
+                "@id": "urn:uuid:8425b390-bed8-42e1-8f29-3363cad1fb86",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "FI - Frailty Index.. and more ...",
+                            "@id": "urn:uuid:531884bb-87e3-4f49-aeff-c18178ebc0d7"
+                        }
+                    ],
+                    "valueVar": "concept137",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Palliative Care",
+            "filter": {
+                "@id": "urn:uuid:116f4a55-1306-4825-9cc6-c8c3deccdd1b",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Specialist palliative care.. and more ...",
+                            "@id": "urn:uuid:d4ae88ad-ea7a-4057-8ba6-7f385bc20cc7"
+                        }
+                    ],
+                    "valueVar": "concept138",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Learning Difficulties",
+            "filter": {
+                "@id": "urn:uuid:5f08e366-8675-439e-9fb2-4edb81b11ff2",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Mental retardation.. and more ...",
+                            "@id": "urn:uuid:82b8bec8-8691-4f62-ae71-1ec7015a4cf4"
+                        }
+                    ],
+                    "valueVar": "concept139",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Alcohol Units",
+            "filter": {
+                "@id": "urn:uuid:f9301fba-e01f-46ee-a503-100886b382e6",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept140",
+                            "valueConcept": [
+                                {
+                                    "name": "Alcohol intake (observable entity)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#160573003"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-5"
+                            },
+                            "valueVar": "effectiveDate141",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "YEAR"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate141"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Smoking",
+            "filter": {
+                "@id": "urn:uuid:00b03d47-a6bb-4c59-bb5b-b04430b93569",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueVar": "concept142",
+                    "valueConcept": [
+                        {
+                            "name": "Tobacco smoking consumption (observable entity)",
+                            "includeSubtypes": true,
+                            "@id": "http://snomed.info/sct#266918002"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Systolic BP",
+            "filter": {
+                "@id": "urn:uuid:ae27657e-977f-47ad-b037-a3b2869992f2",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept143",
+                            "valueConcept": [
+                                {
+                                    "name": "Systolic arterial pressure (observable entity)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#72313002"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "40"
+                            },
+                            "valueVar": "numericValue144"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Diastolic BP",
+            "filter": {
+                "@id": "urn:uuid:a1c62473-b5ea-48eb-a50f-8f5b4da3e708",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept145",
+                            "valueConcept": [
+                                {
+                                    "name": "Diastolic arterial pressure (observable entity)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#1091811000000102"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "20"
+                            },
+                            "valueVar": "numericValue146"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Serum Na",
+            "filter": {
+                "@id": "urn:uuid:fc7d7c8d-4cfc-4a52-81a5-ffab22ff5379",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept147",
+                            "valueConcept": [
+                                {
+                                    "name": "Sodium measurement, serum (procedure)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#104934005"
+                                },
+                                {
+                                    "name": "Serum sodium level (observable entity)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#1000661000000107"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueRange": {
+                                "from": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "100"
+                                },
+                                "to": {
+                                    "comparison": "LESS_THAN",
+                                    "valueData": "200"
+                                }
+                            },
+                            "valueVar": "numericValue148"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Serum K",
+            "filter": {
+                "@id": "urn:uuid:2353f6f5-2987-4562-b045-66ee34ea57f0",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept149",
+                            "valueConcept": [
+                                {
+                                    "name": "Serum potassium level (observable entity)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#1000651000000109"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueRange": {
+                                "from": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "2"
+                                },
+                                "to": {
+                                    "comparison": "LESS_THAN",
+                                    "valueData": "10"
+                                }
+                            },
+                            "valueVar": "numericValue150"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Creatinine",
+            "filter": {
+                "@id": "urn:uuid:2c9f0392-b786-476d-915f-2ed72a641209",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept151",
+                            "valueConcept": [
+                                {
+                                    "name": "Serum creatinine level (observable entity)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#1000731000000107"
+                                },
+                                {
+                                    "name": "Creatinine measurement, serum (procedure)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#113075003"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueRange": {
+                                "from": {
+                                    "comparison": "GREATER_THAN_OR_EQUAL",
+                                    "valueData": "20"
+                                },
+                                "to": {
+                                    "comparison": "LESS_THAN",
+                                    "valueData": "2000"
+                                }
+                            },
+                            "valueVar": "numericValue152"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "eGFR",
+            "filter": {
+                "@id": "urn:uuid:83a55d22-7977-4e83-be6e-7f5556975233",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept153",
+                            "valueConcept": [
+                                {
+                                    "name": "Glomerular filtration rate calculated by abbreviated Modification of Diet in Renal Disease Study Group calculation (observable entity)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#1020291000000106"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#numericValue"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "1"
+                            },
+                            "valueVar": "numericValue154"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-15"
+                            },
+                            "valueVar": "effectiveDate155",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate155"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Pulse",
+            "filter": {
+                "@id": "urn:uuid:48f55b3e-4492-40dd-9310-fab764a6a085",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "O/E - pulse rhythm regular.. and more ...",
+                                    "@id": "urn:uuid:1c418a7d-775d-4203-8014-81dbb1cea1da"
+                                }
+                            ],
+                            "valueVar": "concept156"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-15"
+                            },
+                            "valueVar": "effectiveDate157",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate157"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Flu Imms",
+            "filter": {
+                "@id": "urn:uuid:3a7a1cd2-53ce-45e2-af79-e37c57c1d8e1",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept158",
+                            "valueConcept": [
+                                {
+                                    "name": "Seasonal influenza vaccination (procedure)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#822851000000102"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-15"
+                            },
+                            "valueVar": "effectiveDate159",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate159"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Pneumo Imms",
+            "filter": {
+                "@id": "urn:uuid:4b925c7f-7339-457f-9867-e62cd643dcb4",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#concept"
+                            },
+                            "valueVar": "concept160",
+                            "valueConcept": [
+                                {
+                                    "name": "Administration of vaccine product containing only Streptococcus pneumoniae antigen (procedure)",
+                                    "includeSubtypes": true,
+                                    "@id": "http://snomed.info/sct#12866006"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-10"
+                            },
+                            "valueVar": "effectiveDate161",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "YEAR"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate161"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Qrisk",
+            "filter": {
+                "@id": "urn:uuid:73f18339-be94-4a63-9ce9-bf431b565c72",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueVar": "concept162",
+                    "valueConcept": [
+                        {
+                            "name": "QRISK cardiovascular disease 10 year risk calculator score (observable entity)",
+                            "includeSubtypes": true,
+                            "@id": "http://snomed.info/sct#763244005"
+                        },
+                        {
+                            "name": "QRISK cardiovascular disease 10 year risk score (assessment scale)",
+                            "includeSubtypes": true,
+                            "@id": "http://snomed.info/sct#353641000000105"
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#numericValue",
+                                "name": "Value"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Statins",
+            "filter": {
+                "@id": "urn:uuid:67d331b0-9316-49db-899b-6d8ca26cd56e",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Atorvastatin.. and more ...",
+                                    "@id": "urn:uuid:c980303b-0709-43f4-ac79-4e22586db2a7"
+                                }
+                            ],
+                            "valueVar": "code163"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate164",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate164"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ACEi/ARB",
+            "filter": {
+                "@id": "urn:uuid:9dca7a63-be38-485b-993f-3063da0ad7e8",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Angiotensin-Converting Enzyme Inhibitors.. and more ...",
+                                    "@id": "urn:uuid:d588c5d5-3cd2-441d-878a-69559c8f8750"
+                                }
+                            ],
+                            "valueVar": "code165"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate166",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate166"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Beta Blocker",
+            "filter": {
+                "@id": "urn:uuid:7cedec8c-38d7-49ed-9c44-0763fb1efb6f",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueVar": "code167",
+                            "valueConcept": [
+                                {
+                                    "name": "Beta-Adrenoceptor Blocking Drugs",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/emis#DRGG2_4"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate168",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate168"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "K-Sparing",
+            "filter": {
+                "@id": "urn:uuid:d5bdc8b7-e193-41be-b891-062efa1e707b",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Potassium Sparing Diuretics.. and more ...",
+                                    "@id": "urn:uuid:145a6f83-2ce7-4418-a098-7a024292f561"
+                                }
+                            ],
+                            "valueVar": "code169"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate170",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate170"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "CCBs",
+            "filter": {
+                "@id": "urn:uuid:83158f76-8701-478d-9fd9-818be21ac750",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueVar": "code171",
+                            "valueConcept": [
+                                {
+                                    "name": "Calcium Channel Blockers",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/emis#DRGG2_6_2"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate172",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate172"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Thiazide Diuretic",
+            "filter": {
+                "@id": "urn:uuid:d0c941bf-ede8-4ce3-9f88-856d0f5bd328",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueVar": "code173",
+                            "valueConcept": [
+                                {
+                                    "name": "Thiazides And Related Diuretics",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/emis#DRGG2_2_1"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate174",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate174"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Centrally Acting HTs",
+            "filter": {
+                "@id": "urn:uuid:88330806-d21f-4ee4-87f8-8eaacd8a6d25",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueVar": "code175",
+                            "valueConcept": [
+                                {
+                                    "name": "Centrally Acting Antihypertensive Drugs",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/emis#DRGG2_5_2"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate176",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate176"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Alpha Blockers",
+            "filter": {
+                "@id": "urn:uuid:64dd90e7-81e3-4101-b531-810106932042",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueVar": "code177",
+                            "valueConcept": [
+                                {
+                                    "name": "Alpha-Adrenoceptor Blocking Drugs",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/emis#DRGG2_5_4"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate178",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate178"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Loop Diuretic",
+            "filter": {
+                "@id": "urn:uuid:117b1657-568b-4479-8c32-9bfb94cbb7e9",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueVar": "code179",
+                            "valueConcept": [
+                                {
+                                    "name": "Loop Diuretics",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/emis#DRGG2_2_2"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate180",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate180"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Adverse Meds",
+            "filter": {
+                "@id": "urn:uuid:a09402ba-648d-43ab-93e8-29ed61c5a9f9",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Amiodarone.. and more ...",
+                                    "@id": "urn:uuid:627cdd00-f6f6-403b-b786-4d326eab4eb2"
+                                }
+                            ],
+                            "valueVar": "code181"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate182",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate182"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Oral Steroids",
+            "filter": {
+                "@id": "urn:uuid:05e31aa3-8f11-4b04-bf66-9ca3c1c9d13c",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueIn": [
+                                {
+                                    "name": "Betamethasone.. and more ...",
+                                    "@id": "urn:uuid:ba3dfd21-cd67-4689-ac8c-3573713a9f0f"
+                                }
+                            ],
+                            "valueVar": "code183"
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate184",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate184"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "NSAIDs",
+            "filter": {
+                "@id": "urn:uuid:a89512a0-5157-45d6-b50b-506d116eb7a7",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#MedicationRequest"
+                    },
+                    "and": [
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#code"
+                            },
+                            "valueVar": "code185",
+                            "valueConcept": [
+                                {
+                                    "name": "Non-Steroidal Anti-Inflammatory Drugs",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/emis#DRGG10_1_1"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "@id": "http://endhealth.info/im#effectiveDate"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "-6"
+                            },
+                            "valueVar": "effectiveDate186",
+                            "function": {
+                                "id": {
+                                    "name": "Time Difference",
+                                    "@id": "http://endhealth.info/im#TimeDifference"
+                                },
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "value": "MONTH"
+                                    },
+                                    {
+                                        "parameter": "firstDate",
+                                        "value": "effectiveDate186"
+                                    },
+                                    {
+                                        "parameter": "secondDate",
+                                        "value": "$referenceDate"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#medication",
+                                "name": "Name, Dosage and Quantity",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#label"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date of Issue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Medication Review",
+            "filter": {
+                "@id": "urn:uuid:d5860c86-bd15-42b6-bcce-965b8c5f52ea",
+                "property": {
+                    "@id": "http://endhealth.info/im#isSubjectOf"
+                },
+                "valueObject": {
+                    "entityType": {
+                        "@id": "http://endhealth.info/im#Observation"
+                    },
+                    "property": {
+                        "@id": "http://endhealth.info/im#concept"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "Medication review done by medicines management pharmacist.. and more ...",
+                            "@id": "urn:uuid:1774d28f-fb33-4d51-bf2f-1cba81c2b7ba"
+                        }
+                    ],
+                    "valueVar": "concept187",
+                    "sortLimit": {
+                        "orderBy": {
+                            "name": "effective `date",
+                            "@id": "http://endhealth.info/im#effectiveDate"
+                        },
+                        "direction": "DESCENDING"
+                    }
+                }
+            },
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#isSubjectOf",
+                    "object": {
+                        "property": [
+                            {
+                                "@id": "http://endhealth.info/im#concept",
+                                "name": "Legacy Clinical Code",
+                                "object": {
+                                    "property": [
+                                        {
+                                            "@id": "http://endhealth.info/im#Concept",
+                                            "object": {
+                                                "property": [
+                                                    {
+                                                        "@id": "http://endhealth.info/im#code"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "@id": "http://endhealth.info/im#effectiveDate",
+                                "name": "Date"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "select": {
+        "entityType": {
+            "name": "Person",
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "filter": {
+            "and": [
+                {
+                    "property": {
+                        "@id": "http://endhealth.info/im#inResultSet"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "APL CVD HT v1-0 Search [PID]",
+                            "@id": "urn:uuid:951b62db-4e81-4fcd-8cf7-0e71c28d30e9"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

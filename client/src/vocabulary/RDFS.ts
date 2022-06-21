@@ -4,4 +4,14 @@ export class RDFS {
   public static LABEL = RDFS.NAMESPACE + "label";
   public static COMMENT = RDFS.NAMESPACE + "comment";
   public static SUBCLASS = RDFS.NAMESPACE + "subClassOf";
+
+
+  public static PREFIXED = new class {
+
+    constructor(public superThis: any) {
+      Object.keys(superThis).forEach(key => this[key] =  superThis[key].replace(superThis.NAMESPACE, superThis.PREFIX + ":"));
+      return this;
+    }
+
+  }(this);
 }

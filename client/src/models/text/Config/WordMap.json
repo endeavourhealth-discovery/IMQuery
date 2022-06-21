@@ -1,0 +1,150 @@
+ {
+     "name": [{
+             "originalValue": "codeable expression",
+             "mappedValue": "clinical code"
+         },
+         {
+             "originalValue": "$referenceDate",
+             "mappedValue": "the Reference Date"
+         },
+         {
+             "originalValue": "Medication order or prescription (entry type)",
+             "mappedValue": "Order or Prescription"
+         },
+         {
+             "originalValue": "DESCENDING",
+             "mappedValue": "descending"
+         },
+         {
+             "originalValue": "ASCENDING",
+             "mappedValue": "ascending"
+         },
+         {
+             "originalValue": "Event",
+             "mappedValue": "Health Record"
+         },
+         {
+             "originalValue": "Person Details",
+             "mappedValue": "Personal Details Record"
+         },
+         {
+             "originalValue": "subset of",
+             "mappedValue": "part of the search results of"
+         },
+         {
+             "originalValue": "in result set of",
+             "mappedValue": "part of the search results of"
+         },
+         {
+             "originalValue": "EQUAL",
+             "mappedValue": "equal to"
+         },
+         {
+             "originalValue": "LESS_THAN",
+             "mappedValue": "less than"
+         },
+         {
+             "originalValue": "LESS_THAN_OR_EQUAL",
+             "mappedValue": "less than or equal to"
+         },
+         {
+             "originalValue": "GREATER_THAN",
+             "mappedValue": "more than"
+         },
+         {
+             "originalValue": "GREATER_THAN_OR_EQUAL",
+             "mappedValue": "more than or equal to"
+         },
+         {
+             "originalValue": "MEMBER_OF",
+             "mappedValue": "member of"
+         },
+         {
+             "originalValue": "NOT_EQUAL",
+             "mappedValue": "not equal to"
+         },
+         {
+             "originalValue": "STARTS_WITH",
+             "mappedValue": "starts with"
+         },
+         {
+             "originalValue": "STARTS_WITH",
+             "mappedValue": "starts with"
+         }
+     ],
+     "GREATER_THAN_OR_EQUAL": {
+         "false": "more than",
+         "true": "less than"
+     },
+     "LESS_THAN_OR_EQUAL": {
+         "true": "more than",
+         "false": "less than"
+     },
+     "firstLetterVowel": {
+         "true": "an",
+         "false": "a"
+     },
+     "include": {
+         "true": "Include",
+         "false": "Exclude"
+     },
+     "animatePronoun": {
+         "true": "they",
+         "false": "it",
+         "default": "it"
+     },
+     "a": {
+         "true": "a",
+         "false": "an",
+         "default": "it"
+     },
+     "has": {
+         "true": "has",
+         "false": "doesn't have",
+         "default": "have"
+     },
+     "are": {
+         "true": "is",
+         "false": "isn't",
+         "default": "are"
+     },
+     "was": {
+         "true": "was",
+         "false": "was not",
+         "default": "was"
+     },
+     "entry": {
+         "true": "entry has",
+         "false": "entries have",
+         "default": "entry has"
+     },
+     "records": {
+         "singular": "record",
+         "plural": "records"
+     },
+     "DAY": {
+         "singular": "day",
+         "plural": "days"
+    },
+     "WEEK": {
+         "singular": "week",
+         "plural": "weeks"
+     },
+     "MONTH": {
+         "singular": "month",
+         "plural": "months"
+     },
+     "YEAR": {
+         "singular": "year",
+         "plural": "years"
+     },
+     "DESCENDING": {
+         "im:DateTime": "latest"
+
+     },
+     "ASCENDING": {
+         "im:DateTime": "earliest"
+     },
+     "and[0]": ""
+
+ }

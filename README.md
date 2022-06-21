@@ -1,24 +1,18 @@
 # IM Query
 
+## Run Frontend
 
-
-## Run Frontend 
-
-### Setup (you only have to do this once) 
+### Setup (you only have to do this once)
 
 `cd frontend-vue`
 
-`npm install` 
+`npm install`
 
 <br>
 
 ### Ensure you have the following environment variables
 
-`
-VITE_IMAPI="http://localhost:8080/"
-VITE_NODE_API="http://localhost:3000/"
-VITE_ONTOLOGY_URL="https://ds0esjp1tzujt.cloudfront.net/CoreOntology.json"
-`
+`VUE_APP_OSS_URL="" VUE_APP_OSS_AUTH_BASICTOKEN="" VUE_APP_INDEX_IM="dev-im"`
 
 <br>
 

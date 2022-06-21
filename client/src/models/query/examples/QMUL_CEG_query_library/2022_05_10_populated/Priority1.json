@@ -1,0 +1,1712 @@
+{
+    "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97",
+    "name": "Priority 1",
+    "description": "",
+    "select": {
+        "entityType": {
+            "name": "Person",
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "filter": {
+            "and": [
+                {
+                    "property": {
+                        "name": "in result set of",
+                        "@id": "http://endhealth.info/im#inResultSet"
+                    },
+                    "valueIn": [
+                        {
+                            "name": "SMI Population",
+                            "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                        }
+                    ]
+                }
+            ],
+            "or": [
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:b46ee284-fbb2-4d0e-b766-25cb5e7e32a9",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Hypertension",
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    },
+                                    {
+                                        "name": "Hypertension (not resolved)",
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                    }
+                                ],
+                                "valueVar": "concept5",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Hypertension",
+                                                    "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                                }
+                                            ],
+                                            "valueVar": "concept6"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest systolic blood pressure in the last 18 months : If Office based and >140",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "codeable expression",
+                                            "@id": "http://endhealth.info/im#concept"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Office-based Systolic Arterial Pressure measurements ",
+                                                "@id": "urn:uuid:d62e7bce-5623-41da-8a8f-96d3188e09c5"
+                                            }
+                                        ],
+                                        "valueVar": "concept7"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-18"
+                                        },
+                                        "valueVar": "effectiveDate8",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "and": [
+                                                {
+                                                    "property": {
+                                                        "name": "codeable expression",
+                                                        "@id": "http://endhealth.info/im#concept"
+                                                    },
+                                                    "valueIn": [
+                                                        {
+                                                            "name": "Office-based Systolic Arterial Pressure measurements ",
+                                                            "@id": "urn:uuid:94446fd2-96b3-4500-82a3-aa65352e8962"
+                                                        }
+                                                    ],
+                                                    "valueVar": "concept9"
+                                                },
+                                                {
+                                                    "property": {
+                                                        "name": "value",
+                                                        "@id": "http://endhealth.info/im#value"
+                                                    },
+                                                    "valueCompare": {
+                                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                                        "valueData": "140"
+                                                    },
+                                                    "valueVar": "value10"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:3bc2d33f-778a-465e-9c50-68fea6dd7317",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Hypertension",
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    },
+                                    {
+                                        "name": "Hypertension (not resolved)",
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                    }
+                                ],
+                                "valueVar": "concept11",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Hypertension",
+                                                    "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                                }
+                                            ],
+                                            "valueVar": "concept12"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:bbdaa84b-ffef-43e4-b54c-12dd71dae6cd",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest diastolic blood pressure in the last 18 months : if Office based and >90",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "codeable expression",
+                                            "@id": "http://endhealth.info/im#concept"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Office-based Systolic Diastolic Pressure measurements",
+                                                "@id": "urn:uuid:75fc7421-4fe5-4bab-8a89-7a3b08a66d8e"
+                                            }
+                                        ],
+                                        "valueVar": "concept13"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-18"
+                                        },
+                                        "valueVar": "effectiveDate14",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "and": [
+                                                {
+                                                    "property": {
+                                                        "name": "codeable expression",
+                                                        "@id": "http://endhealth.info/im#concept"
+                                                    },
+                                                    "valueIn": [
+                                                        {
+                                                            "name": "Office-based Systolic Diastolic Pressure measurements",
+                                                            "@id": "urn:uuid:35cb9ad9-66d1-4b2a-a2d6-e42fbfde87ff"
+                                                        }
+                                                    ],
+                                                    "valueVar": "concept15"
+                                                },
+                                                {
+                                                    "property": {
+                                                        "name": "value",
+                                                        "@id": "http://endhealth.info/im#value"
+                                                    },
+                                                    "valueCompare": {
+                                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                                        "valueData": "90"
+                                                    },
+                                                    "valueVar": "value16"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:5cf4ba51-6e57-4672-9c49-4b8a1c2d7d87",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Hypertension (not resolved)",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Hypertension",
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    },
+                                    {
+                                        "name": "Hypertension (not resolved)",
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                    }
+                                ],
+                                "valueVar": "concept17",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Hypertension",
+                                                    "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                                }
+                                            ],
+                                            "valueVar": "concept18"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:12847f67-d2bb-4646-9de9-bfd77a9eb821",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest systolic blood pressure in the last 18 monthsm : if home based >135",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "codeable expression",
+                                            "@id": "http://endhealth.info/im#concept"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "SAP - Systolic arterial pressure",
+                                                "@id": "urn:uuid:f0af11a2-e524-4842-b75d-175e8d7cdeea"
+                                            }
+                                        ],
+                                        "valueVar": "concept19"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-18"
+                                        },
+                                        "valueVar": "effectiveDate20",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "and": [
+                                                {
+                                                    "property": {
+                                                        "name": "codeable expression",
+                                                        "@id": "http://endhealth.info/im#concept"
+                                                    },
+                                                    "valueIn": [
+                                                        {
+                                                            "name": "Average home systolic blood pressure",
+                                                            "@id": "urn:uuid:8ea62af8-2c89-4df6-aff6-fa5f696755e5"
+                                                        }
+                                                    ],
+                                                    "valueVar": "concept21"
+                                                },
+                                                {
+                                                    "property": {
+                                                        "name": "value",
+                                                        "@id": "http://endhealth.info/im#value"
+                                                    },
+                                                    "valueCompare": {
+                                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                                        "valueData": "135"
+                                                    },
+                                                    "valueVar": "value22"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:82f4fbfe-dece-464d-976a-89191e39dac0",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Hypertension (not resolved)",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Hypertension",
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    },
+                                    {
+                                        "name": "Hypertension (not resolved)",
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                    }
+                                ],
+                                "valueVar": "concept23",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Hypertension",
+                                                    "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                                }
+                                            ],
+                                            "valueVar": "concept24"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:556f28a3-8c42-42d5-99d1-30f8acb604e6",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest diastolic blood pressure in the last 18 months a: if home based and >85",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "codeable expression",
+                                            "@id": "http://endhealth.info/im#concept"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "DAP - Diastolic arterial pressure",
+                                                "@id": "urn:uuid:d9e0d52c-f4ea-4fa7-b130-ea05aaae190b"
+                                            }
+                                        ],
+                                        "valueVar": "concept25"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-18"
+                                        },
+                                        "valueVar": "effectiveDate26",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "and": [
+                                                {
+                                                    "property": {
+                                                        "name": "codeable expression",
+                                                        "@id": "http://endhealth.info/im#concept"
+                                                    },
+                                                    "valueIn": [
+                                                        {
+                                                            "name": "Average home diastolic blood pressure",
+                                                            "@id": "urn:uuid:dd0c58f6-5284-45aa-909c-f7fbfec9c27e"
+                                                        }
+                                                    ],
+                                                    "valueVar": "concept27"
+                                                },
+                                                {
+                                                    "property": {
+                                                        "name": "value",
+                                                        "@id": "http://endhealth.info/im#value"
+                                                    },
+                                                    "valueCompare": {
+                                                        "comparison": "GREATER_THAN_OR_EQUAL",
+                                                        "valueData": "85"
+                                                    },
+                                                    "valueVar": "value28"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:55d78b69-1f74-4c7c-af11-cacc4da4c8f3",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Diabetes (not resolved)",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Diabetes",
+                                        "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                                    },
+                                    {
+                                        "name": "Diabetes (resovled)",
+                                        "@id": "urn:uuid:bd8458fb-abb7-469b-91e5-ce888b5b0f3d"
+                                    }
+                                ],
+                                "valueVar": "concept29",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Diabetes",
+                                                    "@id": "urn:uuid:4ecec7ee-f42f-4418-acc3-ba4f16264c95"
+                                                }
+                                            ],
+                                            "valueVar": "concept30"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:6fabf76c-4078-4ee1-8788-34614722df83",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest HBA1C in the last 18 months : if >59",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Haemoglobin A1c level - International Federation of Clinical Chemistry and Laboratory Medicine standardised",
+                                        "@id": "urn:uuid:226b6486-09f6-47c4-aad0-51a6a0e845c9"
+                                    }
+                                ],
+                                "valueVar": "concept31",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "value",
+                                                "@id": "http://endhealth.info/im#value"
+                                            },
+                                            "valueCompare": {
+                                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                                "valueData": "59"
+                                            },
+                                            "valueVar": "value32"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:310ffb9c-2013-47a9-9c4d-1945133e1132",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest QRisk2 or Qrisk 3, : if >10",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "QRISK2 cardiovascular disease 10 year risk score",
+                                        "@id": "urn:uuid:77b8d09a-e753-48d2-8c22-81f25b544ee6"
+                                    }
+                                ],
+                                "valueVar": "concept33",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "value",
+                                                "@id": "http://endhealth.info/im#value"
+                                            },
+                                            "valueCompare": {
+                                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                                "valueData": "10"
+                                            },
+                                            "valueVar": "value34"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:d5398de3-a724-4da1-9cc9-9d8f8577ef06",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Not on statins in the last 6 months",
+                                "notExist": true,
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#MedicationRequest",
+                                    "name": "Medication request or prescription (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "code",
+                                            "@id": "http://endhealth.info/im#code"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Atorvastatin 20mg chewable tablets sugar free",
+                                                "@id": "urn:uuid:b1f894de-ae97-43a9-b0a8-ab2f87086183"
+                                            }
+                                        ],
+                                        "valueVar": "code35"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-6"
+                                        },
+                                        "valueVar": "effectiveDate36",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:deaf1a83-9c5f-414c-83eb-18ff7e9656db",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "? What are these clinical concepts",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:22575230-a13e-431d-983c-3fee668bf452"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:8aa2198a-efca-4d1a-9bcf-1fd6117ef87d"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:1ee3788a-0e92-4a69-890a-0b5daff494b4"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:8a030be6-be7a-49eb-b187-6575dfdd32c0"
+                                    }
+                                ],
+                                "valueVar": "concept37"
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:e6786a04-e856-47c6-8130-f632633f9e41",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "notExist": true,
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#MedicationRequest",
+                                    "name": "Medication request or prescription (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "code",
+                                            "@id": "http://endhealth.info/im#code"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Atorvastatin 40mg tablets",
+                                                "@id": "urn:uuid:d858d929-50d3-4b7b-a760-402e7fa21e80"
+                                            }
+                                        ],
+                                        "valueVar": "code38"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-6"
+                                        },
+                                        "valueVar": "effectiveDate39",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:e4ab0abb-d248-48f7-945b-8a1712f5243a",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Cardiovascular disease (not resolved)",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:b8e618ac-9a75-40d7-a3f9-698c94c6591c"
+                                    },
+                                    {
+                                        "name": "Unknown code set",
+                                        "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                                    }
+                                ],
+                                "valueVar": "concept40",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Unknown code set",
+                                                    "@id": "urn:uuid:8717d642-5703-444d-8985-de8e5d1a3a06"
+                                                }
+                                            ],
+                                            "valueVar": "concept41"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:53849fc3-0b25-44c6-84ba-5ef42eea179b",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest CHA2DS2-VASc and if >2",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueVar": "concept42",
+                                "valueConcept": [
+                                    {
+                                        "includeSubtypes": true,
+                                        "@id": "http://snomed.info/sct#735259005",
+                                        "name": "Congestive heart failure, hypertension, age 2, diabetes mellitus, stroke 2, vascular disease, age, sex category stroke risk score (observable entity)"
+                                    }
+                                ],
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "value",
+                                                "@id": "http://endhealth.info/im#value"
+                                            },
+                                            "valueCompare": {
+                                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                                "valueData": "2"
+                                            },
+                                            "valueVar": "value43"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:eb34618b-c421-4033-8efa-084a8500466c",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Not on Warfarin,Edoxaban,Dabigatranm Apixaban,Rivaroxaban,Phenindione,Acenocoumarol, in the last 6 months",
+                                "notExist": true,
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#MedicationRequest",
+                                    "name": "Medication request or prescription (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "code",
+                                            "@id": "http://endhealth.info/im#code"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Warfarin",
+                                                "@id": "urn:uuid:b051aa24-0fc5-4e78-ad76-959518dbaf9c"
+                                            }
+                                        ],
+                                        "valueVar": "code44"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-6"
+                                        },
+                                        "valueVar": "effectiveDate45",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:3be8ae58-e020-43d1-bd60-966da838be32",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest BMI : if >30",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Body mass index",
+                                        "@id": "urn:uuid:6b261f27-5a7a-43f5-8ab9-cd83ddae2c96"
+                                    }
+                                ],
+                                "valueVar": "concept46",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "value",
+                                                "@id": "http://endhealth.info/im#value"
+                                            },
+                                            "valueCompare": {
+                                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                                "valueData": "30"
+                                            },
+                                            "valueVar": "value47"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:6b56f2da-a542-40a7-9172-4d21ef663527",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "On Olanzapine, Clozapine in the last 6 months",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#MedicationRequest",
+                                    "name": "Medication request or prescription (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "code",
+                                            "@id": "http://endhealth.info/im#code"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Olanzapine",
+                                                "@id": "urn:uuid:a5be12bb-c175-4a90-815e-1007ef77f8de"
+                                            }
+                                        ],
+                                        "valueVar": "code48"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-6"
+                                        },
+                                        "valueVar": "effectiveDate49",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:150b48a3-4f93-4e1c-9c62-dbca8ea4cb6b",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest BMI : if >27.5",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Body mass index",
+                                        "@id": "urn:uuid:6b261f27-5a7a-43f5-8ab9-cd83ddae2c96"
+                                    }
+                                ],
+                                "valueVar": "concept50",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "value",
+                                                "@id": "http://endhealth.info/im#value"
+                                            },
+                                            "valueCompare": {
+                                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                                "valueData": "27.5"
+                                            },
+                                            "valueVar": "value51"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:a61e833d-4515-40ec-84e8-7cc7326f9629",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "On Olanzapine, Clozapine in the last 6 months",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#MedicationRequest",
+                                    "name": "Medication request or prescription (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "code",
+                                            "@id": "http://endhealth.info/im#code"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Olanzapine",
+                                                "@id": "urn:uuid:a5be12bb-c175-4a90-815e-1007ef77f8de"
+                                            }
+                                        ],
+                                        "valueVar": "code52"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-6"
+                                        },
+                                        "valueVar": "effectiveDate53",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:c1e45cbf-11cd-4f7a-a6df-d8435211aa05",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Asian or chinese",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Indians (Hindi-speaking)",
+                                        "@id": "urn:uuid:78584c05-0941-4a54-a655-9b9982a8ff23"
+                                    }
+                                ],
+                                "valueVar": "concept54"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:bc852b08-1c52-4f49-85bb-0bdb88ccf5a2",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Type 1 Diabetes",
+                                        "@id": "urn:uuid:5a0192fd-27ea-4b30-8f8d-db17ab89284a"
+                                    }
+                                ],
+                                "valueVar": "concept55"
+                            }
+                        },
+                        {
+                            "name": "Age years >18",
+                            "@id": "urn:uuid:daaa2db1-a973-40d7-a573-65178c5b7c7c",
+                            "property": {
+                                "name": "age",
+                                "@id": "http://endhealth.info/im#age"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "18"
+                            },
+                            "valueVar": "age56"
+                        },
+                        {
+                            "@id": "urn:uuid:3912027d-bffe-44f0-91a4-d1151b9e4abc",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#MedicationRequest",
+                                    "name": "Medication request or prescription (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "code",
+                                            "@id": "http://endhealth.info/im#code"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Atorvastatin",
+                                                "@id": "urn:uuid:95756d4f-49ff-4009-a88f-ba1e8f2ccc83"
+                                            }
+                                        ],
+                                        "valueVar": "code57"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-6"
+                                        },
+                                        "valueVar": "effectiveDate58",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:bebe5d71-9f40-440e-9f39-6f0c6e6fbc76",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Latest various Diabetes illnesses and if a subset of these",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Diabetes mellitus without complication",
+                                        "@id": "urn:uuid:aa9016fc-3966-44b3-9cc2-071f8992f731"
+                                    }
+                                ],
+                                "valueVar": "concept59",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Diabetes mellitus without complication",
+                                                    "@id": "urn:uuid:27b196f6-4a9f-478a-835c-ee58aaee52a9"
+                                                }
+                                            ],
+                                            "valueVar": "concept60"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Age years >40",
+                            "@id": "urn:uuid:cb998aed-97d6-475d-b09c-15ce4fa90f47",
+                            "property": {
+                                "name": "age",
+                                "@id": "http://endhealth.info/im#age"
+                            },
+                            "valueCompare": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "40"
+                            },
+                            "valueVar": "age61"
+                        },
+                        {
+                            "@id": "urn:uuid:5c301847-c448-4b4c-849b-2e8d90ed279f",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "On Atorvastin, Rosuvastin, Pravastin,Fluvastin,Simvastin in the last 6 months",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#MedicationRequest",
+                                    "name": "Medication request or prescription (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "code",
+                                            "@id": "http://endhealth.info/im#code"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "Atorvastatin",
+                                                "@id": "urn:uuid:95756d4f-49ff-4009-a88f-ba1e8f2ccc83"
+                                            }
+                                        ],
+                                        "valueVar": "code62"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-6"
+                                        },
+                                        "valueVar": "effectiveDate63",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            "@id": "urn:uuid:ba740b88-1614-4aa5-b749-79f43545ce77",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "Hypertension (not resolved)",
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "property": {
+                                    "name": "codeable expression",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "valueIn": [
+                                    {
+                                        "name": "Hypertension",
+                                        "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                    },
+                                    {
+                                        "name": "Hypertension (not resolved)",
+                                        "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                                    }
+                                ],
+                                "valueVar": "concept64",
+                                "sortLimit": {
+                                    "orderBy": {
+                                        "name": "effective `date",
+                                        "@id": "http://endhealth.info/im#effectiveDate"
+                                    },
+                                    "count": 1,
+                                    "direction": "DESCENDING",
+                                    "test": [
+                                        {
+                                            "property": {
+                                                "name": "codeable expression",
+                                                "@id": "http://endhealth.info/im#concept"
+                                            },
+                                            "valueIn": [
+                                                {
+                                                    "name": "Hypertension",
+                                                    "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                                                }
+                                            ],
+                                            "valueVar": "concept65"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "@id": "urn:uuid:01e73690-c5ce-4f21-b8fb-5222172e8645",
+                            "property": {
+                                "name": "is subject of ",
+                                "@id": "http://endhealth.info/im#isSubjectOf"
+                            },
+                            "valueObject": {
+                                "name": "No blood pressure in the last 18 months",
+                                "notExist": true,
+                                "entityType": {
+                                    "@id": "http://endhealth.info/im#Observation",
+                                    "name": "Observation (entry type)"
+                                },
+                                "and": [
+                                    {
+                                        "property": {
+                                            "name": "codeable expression",
+                                            "@id": "http://endhealth.info/im#concept"
+                                        },
+                                        "valueIn": [
+                                            {
+                                                "name": "SAP - Systolic arterial pressure",
+                                                "@id": "urn:uuid:baecab97-5d13-495d-b807-63c0901ec469"
+                                            }
+                                        ],
+                                        "valueVar": "concept66"
+                                    },
+                                    {
+                                        "property": {
+                                            "name": "effective `date",
+                                            "@id": "http://endhealth.info/im#effectiveDate"
+                                        },
+                                        "valueCompare": {
+                                            "comparison": "GREATER_THAN_OR_EQUAL",
+                                            "valueData": "-18"
+                                        },
+                                        "valueVar": "effectiveDate67",
+                                        "function": {
+                                            "id": {
+                                                "name": "Time Difference",
+                                                "@id": "http://endhealth.info/im#TimeDifference"
+                                            },
+                                            "argument": [
+                                                {
+                                                    "parameter": "units",
+                                                    "value": "MONTH"
+                                                },
+                                                {
+                                                    "parameter": "firstDate",
+                                                    "value": "$this"
+                                                },
+                                                {
+                                                    "parameter": "secondDate",
+                                                    "value": "$referenceDate"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainEntity": {
+        "@id": "http://endhealth.info/im#Person"
+    }
+}

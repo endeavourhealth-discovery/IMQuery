@@ -5,6 +5,7 @@ import store from "./store";
 import PrimeVue from "primevue/config";
 import VueClipboard from "vue3-clipboard";
 import '../index.css';
+import "im-library/dist/style.css";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -26,7 +27,7 @@ import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 // import "primeflex/primeflex.css";
 import "./assets/layout/layout.scss";
-import "./assets/layout/flags/flags.css";
+// import "./assets/layout/flags/flags.css";
 
 // PrimeVue Components
 import Card from "primevue/card";
@@ -56,6 +57,7 @@ import Dialog from "primevue/dialog";
 import SplitButton from "primevue/splitbutton";
 import MultiSelect from "primevue/multiselect";
 import OverlayPanel from "primevue/overlaypanel";
+import ToggleButton from "primevue/ToggleButton";
 // import Chart from "primevue/chart";
 import Menu from "primevue/menu";
 import ProgressSpinner from "primevue/progressspinner";
@@ -101,6 +103,7 @@ const app = createApp(App)
   })
   .use(VWave)
   .directive("tooltip", Tooltip)
+  .component("ToggleButton", ToggleButton)
   .component("Card", Card)
   .component("ProgressSpinner", ProgressSpinner)
   .component("TabView", TabView)

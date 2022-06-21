@@ -8,4 +8,13 @@ export class SHACL {
   public static MINCOUNT = SHACL.NAMESPACE + "minCount";
   public static MAXCOUNT = SHACL.NAMESPACE + "maxCount";
   public static NODESHAPE = SHACL.NAMESPACE + "NodeShape";
+
+  public static PREFIXED = new class {
+
+    constructor(public superThis: any) {
+      Object.keys(superThis).forEach(key => this[key] =  superThis[key].replace(superThis.NAMESPACE, superThis.PREFIX + ":"));
+      return this;
+    }
+
+  }(this);
 }

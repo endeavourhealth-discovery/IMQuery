@@ -11,94 +11,106 @@
 
     <!-- Page: Results -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <header :class="'header  mx-auto relative flex items-center justify-between w-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
-        <!-- Left Side  -->
-        <div :class="'pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
-          <!-- Menu Toggler  -->
-          <RoundButton
-            class="menu-toggler h-14 w-14 mr-6"
-            :rounded="false"
-            :showRing="true"
-            backgroundColor="white"
-            hoverBackgroundColor="white"
-            borderColor="white"
-            hoverTextColor="blue-600"
-            focusTextColor="blue-600"
-            focusBackgroundColor="white"
-            textColor="gray-700"
-            ringColor="blue-600"
-          >
-            <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
-          </RoundButton>
-          <!-- / Menu Toggler  -->
+      <div class="w-full bg-white dark:bg-gray-900 border-b dark:border-b-0 shadow-sm ">
+        <header :class="'header bg-white dark:bg-gray-900 mx-auto relative flex items-center justify-between w-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
+          <!-- Left Side  -->
+          <div :class="'pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
+            <!-- Menu Toggler  -->
 
-          <img class="app-logo h-10 w-10" src="app-icon.png" alt="" />
+            <button
+              @click="onToggleTabs"
+              :class="
+                `menu-toggler h-14 w-14 mr-6 non-selectable roundbutton focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out flex items-center justify-center rounded-md border text-black dark:text-white border-gray-200 dark:border-transparent bg-transparent  hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-700  dark:hover:text-white focus:text-blue-600 dark:focus:text-white  focus:ring-blue-600 dark:focus:ring-white`
+              "
+            >
+              <HeroIcon class="mx-2" strokewidth="2" width="24" height="24" icon="menu" />
+            </button>
+            <!-- / Menu Toggler  -->
 
-          <!-- Tab Buttons  -->
-          <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
-            <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
-          </nav>
-          <!-- /Tab Buttons -->
-        </div>
-        <!-- / Left Side    -->
+            <OverlayPanel class="overlay-menu-toggler" ref="overlay-menu-toggler">
+              <!-- Tab Buttons  -->
+              <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
+                <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
+              </nav>
+              <!-- /Tab Buttons -->
 
-        <!-- Searchbox  -->
-        <Searchbox
-          v-if="activeTabName != 'Home'"
-          :class="'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 inline ' + [activeTabName == 'Home' ? ' invisible' : '']"
-          v-model="searchString"
-          :autocompleteData="autocompleteData"
-          @search="showSearchResults(searchString)"
-        />
+              <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+                <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+                <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
+              </button>
+            </OverlayPanel>
 
-        <!-- /Searchbox  -->
+            <img class="app-logo h-10 w-10" src="/app-icon.png" alt="" />
 
-        <div class="right flex mr-7 ml-4">
-          <SplitButton
+            <!-- Tab Buttons  -->
+            <nav :class="'ml-10 h-full flex-col justify-center inline-flex' + [activeTabName == 'Home' ? ' ' : ' ']">
+              <HorizontalNavbar class="h-full" v-model="activeTabName" :items="tabs" />
+            </nav>
+            <!-- /Tab Buttons -->
+          </div>
+          <!-- / Left Side    -->
+
+          <!-- Searchbox  -->
+          <Searchbox
+            :class="'searchbox-top ml-4 2xl:absolute 2xl:left-2/4 2xl:-translate-x-2/4 2xl:z-100 inline ' + [activeTabName == 'Home' ? ' ' : '']"
+            v-model="searchString"
+            :autocompleteData="autocompleteData"
+            @search="search(searchString)"
+          />
+
+          <!-- /Searchbox  -->
+
+          <div class="right flex mr-7 ml-4">
+            <!-- <SplitButton
             v-if="isLoggedIn"
             class="p-button-rounded mr-10 h-14 mt-2 #p-button-outlined"
             label="New"
             icon="pi pi-plus"
             :model="newItems"
-          ></SplitButton>
-          <!-- Apps  -->
-          <div class="select-none flex mt-3" @click="onToggleApps">
-            <div class="app-title ml-5 font-medium text-black dark:text-white text-3xl">
-              Apps
-            </div>
-            <HeroIcon class="mt-1 mx-2 text-black dark:text-white" strokewidth="2" width="20" height="20" icon="chevron_down" />
-            <div class="relative">
-              <!-- Apps -->
-              <OverlayPanel ref="overlay-apps">
-                <div class="flex justify-center w-full my-10">
-                  <a
-                    :href="app.hyperlink"
-                    target="_blank"
-                    v-for="app in apps"
-                    :key="app.name"
-                    class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200"
-                  >
-                    <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="app.icon" />
-                    <div class="inline text-lg font-bold text-gray-900">
-                      {{ app.name }}
-                    </div>
-                  </a>
+          ></SplitButton> -->
+            <!-- Apps  -->
+            <div class="select-none flex" @click="onToggleApps">
+              <div :class="'flex ' + [isLoggedIn ? ' pt-2' : '']">
+                <div class="app-title pt-1 ml-5 font-medium text-black dark:text-white text-3xl">
+                  Apps
                 </div>
-              </OverlayPanel>
+                <HeroIcon class="mt-2 mx-2 text-black dark:text-white" strokewidth="2" width="20" height="20" icon="chevron_down" />
+              </div>
+              <div class="relative">
+                <!-- Apps -->
+                <OverlayPanel ref="overlay-apps">
+                  <div class="flex justify-center w-full ">
+                    <template v-for="app in apps" :key="app.name">
+                      <a
+                        v-if="app.visible"
+                        class="cursor-pointer shadow-md flex flex-col items-center rounded-md mx-3 px-6 py-2 border border-gray-300 hover:bg-blue-50 hover:border-blue-500 max-w-200 dark:shadow-none dark:hover:bg-gray-700 dark:border-gray-500 dark:hover:border-white "
+                        :href="app.hyperlink"
+                        target="_blank"
+                      >
+                        <HeroIcon class="inline mx-2 my-3 text-blue-700 dark:text-white" strokewidth="2" width="24" height="24" :icon="app.icon" />
+                        <div class="inline text-lg font-bold text-gray-900 dark:text-gray-200">
+                          {{ app.name }}
+                        </div>
+                      </a>
+                    </template>
+                  </div>
+                </OverlayPanel>
+              </div>
+              <!-- /Apps -->
             </div>
-            <!-- /Apps -->
+
+            <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+              <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+              <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
+            </button>
+
+            <!-- User Widget -->
+            <UserWidget class="" :modelValue="userMeta" />
           </div>
+          <ProgressBar class="" v-if="isLoading" />
+        </header>
+      </div>
 
-          <button class="theme-toggler  ml-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
-            <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
-            <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
-          </button>
-
-          <!-- User Widget -->
-          <UserWidget class="ml-10" :modelValue="userMeta" />
-        </div>
-        <ProgressBar class="" v-if="isLoading" />
-      </header>
       <!-- <ResponsiveNav/> -->
       <!-- Tabs -->
       <div class="page-content">
@@ -106,92 +118,125 @@
         <div v-if="activeTabName == 'Home'" class="tab-content flex flex-col items-center justify-center">
           <div class="non-selectable flex items-center justify-center mb-10 text-gray-700 text-5xl font-medium">
             <!-- <img class="im-logo mr-5" src="/img/Logo-object-empty.27c03592.png" alt="IM logo" data-v-098ea5e8=""> -->
-            <img class="search-logo mb-10" src="home-icon.png" alt="" />
+            <img class="search-logo mb-10" src="/home-icon.png" alt="" />
           </div>
           <!-- /Brand  -->
 
           <!-- Searchbox  -->
-          <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm">
-            <Searchbox
-              class="w-full mx-auto searchbox-main"
-              v-model="searchString"
-              :autocompleteData="autocompleteData"
-              @search="showSearchResults(searchString)"
-            />
-          </div>
+          <!-- <div id="searchbox-main" class="mx-auto w-full max-w-3xl flex px-5-sm">
+            <Searchbox class="w-full mx-auto searchbox-main" v-model="searchString" :autocompleteData="autocompleteData" @search="search(searchString)" />
+          </div> -->
           <!-- /Searchbox  -->
 
-          <!-- Examples  -->
-          <div id="examples" class="non-selectable max-w-3xl my-7 text-gray-900 dark:text-white text-lg" @click="showSearchResults()">
-            <a class="mr-3 font-bold">Try </a>
-            <b>sbp</b> and <b>hr</b> for <b>diabetics</b> with <b>htn</b> and
-            <b>stroke</b>
+          <!-- Suggestions -->
+          <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 items-center md:items-start justify-center w-full my-10">
+            <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
+              <template v-if="suggestion.visible && index == 0">
+                <CardButton
+                  @click="suggestion.command"
+                  class="w-250px"
+                  :name="suggestion.name"
+                  :description="suggestion.description"
+                  :icon="suggestion.icon"
+                  :outlined="true"
+                  nameColor="white"
+                  descriptionColor="white"
+                  iconColor="white"
+                  backgroundColor="blue-500"
+                />
+              </template>
+              <template v-else-if="suggestion.visible && index > 0">
+                <CardButton
+                  @click="suggestion.command"
+                  class="w-250px"
+                  :name="suggestion.name"
+                  :description="suggestion.description"
+                  :icon="suggestion.icon"
+                  :outlined="true"
+                  nameColor="black"
+                  descriptionColor="gray-700"
+                  iconColor="blue-700"
+                  backgroundColor="white"
+                />
+              </template>
+            </template>
           </div>
-          <!-- /Examples  -->
         </div>
         <!-- /Tab: Home -->
 
         <!-- Tab: Search -->
-        <div v-if="activeTabName == 'Find'" class="tab-content  flex pt-5">
-          <div class="results w-full mx-auto max-w-4xl">
-            <!-- Suggestions -->
-            <div class="flex justify-center w-full my-10">
-              <template v-for="(suggestion, index) in suggestions" :key="suggestion.name">
-                <template v-if="index == 0">
-                  <CardButton
-                    @click="suggestion.command"
-                    class="w-400px"
-                    :name="suggestion.name"
-                    :description="suggestion.description"
-                    :icon="suggestion.icon"
-                    :outlined="true"
-                    nameColor="white"
-                    descriptionColor="white"
-                    iconColor="white"
-                    backgroundColor="blue-500"
-                  />
-                </template>
-                <template v-else>
-                  <CardButton
-                    @click="suggestion.command"
-                    class="w-400px"
-                    :name="suggestion.name"
-                    :description="suggestion.description"
-                    :icon="suggestion.icon"
-                    :outlined="true"
-                    nameColor="black"
-                    descriptionColor="gray-700"
-                    iconColor="blue-700"
-                    backgroundColor="white"
-                  />
-                </template>
-                <!-- <HeroIcon class="inline mx-2 my-3 text-blue-700" strokewidth="2" width="24" height="24" :icon="suggestion.icon" />
-                <div class="inline text-lg font-bold text-gray-900">
-                  {{ suggestion.name }}
+        <div v-if="activeTabName == 'Find'" class="tab-content relative flex justify-center">
+          <div v-if="false" class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none mr-20">
+            <template v-for="category in searchCategories" :key="category.name">
+              <div
+                v-if="category.visible"
+                :class="
+                  'transition duration-500 ease-in-out group flex items-center rounded-lg  px-5 py-3 border border-1 border-transparent ' +
+                    [
+                      activeSearchCategory == category.name
+                        ? ' #bg-blue-50 #border-blue-500 dark:border-transparent dark:bg-transparent'
+                        : ' text-gray-700 dark:text-gray-400 hover:bg-blue-50 dark:bg-transparent'
+                    ]
+                "
+                @click="category.command()"
+                v-wave="{
+                  color: 'currentColor',
+                  easing: 'ease-out',
+                  duration: 0.5,
+                  initialOpacity: 0.5,
+                  finalOpacity: 0.1,
+                  cancellationPeriod: 75
+                }"
+              >
+                <div :class="'category-icon inline-flex h-16 w-16 rounded-xl  bg-gradient-to-r p-2 ' + category.css.background">
+                  <div class="rounded-full bg-black bg-opacity-50 w-full h-full flex justify-center items-center">
+                    <HeroIcon :class="' ' + category.css.icon" strokewidth="2.5" width="20" height="20" :icon="category.icon" />
+                  </div>
                 </div>
-                <div class="inline text-lg font-bold text-gray-500">
-                  {{ suggestion.description }}
-                </div> -->
-              </template>
-            </div>
-
-            <!-- /Suggestions -->
-            <!-- <div>Filter and sort</div> -->
-            <template v-if="searchResults && searchResults.length > 0">
-              <!-- <div class="results w-full mx-auto max-w-4xl"> -->
-
-              <SearchResults class="w-full" :results="searchResults" :value="searchString" />
-              <!-- </div> -->
-            </template>
-            <template v-else>
-              <div v-if="hasSearched" class="mt-10 ml-5 text-3xl font-bold text-gray-600 text-center">
-                No Search Results.
+                <div
+                  :class="
+                    'inline-flex ml-8 text-3xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
+                      [activeSearchCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-700 dark:text-gray-400 ']
+                  "
+                >
+                  {{ category.name }}
+                </div>
               </div>
-              <!-- <div class="mt-10 ml-5 text-2xl font-bold text-blue-600 text-center">
-                Enter new search terms or try out:
-              </div> -->
             </template>
           </div>
+
+          <div class="results w-full max-w-4xl mt-5 #mx-auto #absolute #top-30 #lg:top-10 #left-2/4 #-translate-x-2/4 ">
+            <!-- Results -->
+
+            <template v-if="searchData?.length > 0">
+              <div class="text-center text-black dark:text-white text-xl font-medium mb-5">
+                {{ searchData.length }} {{ searchData.length == 1 ? "result" : "results" }} found
+              </div>
+              <SearchResults class="w-full" :results="searchData" :value="searchString" :isShown="isResultsShown" />
+              <!-- </div> -->
+            </template>
+
+            <template v-else>
+              <div class="mt-10 ml-5 text-2xl font-regular text-black dark:text-white text-center">
+                {{
+                  hasSearched
+                    ? "This search did not return any results. Please use different search terms or try one of the following options: "
+                    : "Find Query Definitions by entering your search terms into the Searchbar above or try one of the following options:"
+                }}
+                <br />
+                <br />
+                <div class="hover:underline cursor-pointer text-bold text-blue-600 dark:text-blue-400  font-bold" @click="handleTry()">
+                  1. Search for sample queries e.g. "COVID-19"
+                </div>
+                <br />
+                <div class="hover:underline cursor-pointer text-bold text-blue-600 dark:text-blue-400  font-bold" @click="handleQueryLibrary()">
+                  2. Browse the Query Library on IM Directory app
+                </div>
+              </div>
+            </template>
+          </div>
+          <!-- <div class="results-filters">
+          </div> -->
         </div>
         <!-- /Tab: Search  -->
 
@@ -199,63 +244,237 @@
         <DataStudio v-if="activeTabName == 'Data'" class="tab-content " />
         <!-- /Tab: Data  -->
 
-        <!-- Tab: Create  -->
+        <!-- Tab: View  -->
 
-        <div v-if="activeTabName == 'Create'" class="tab-content ">
+        <div v-show="activeTabName == 'Edit'" class="tab-content viewer ">
           <!-- Tabs  -->
           <div class="flex py-5 justify-center items-center w-full">
-            <HorizontalNavPills class="nav" v-model:items="openFiles" v-model="activeFileIri" :closable="true" />
+            <HorizontalNavPills class="nav" :items="openFiles" v-model="activeProfile" :closable="true" />
           </div>
 
-
-              <!-- <button @click="testQuery()"> test</button> -->
-
-
+          <!-- <button @click="testQuery()"> test</button> -->
           <!-- Viewer  -->
-          <div class="viewer w-full h-full bg-white dark:bg-gray-900 overflow-y-auto overflow-x-auto">
-            <div class="kanban mt-8 flex justify-center space-x-6 text-white" @click="">
-              <template v-for="([iri, profile], index) in queryBuilder.profiles" :key="profile['@id']">
-                <div class="profile-column">
-                  <TransitionRoot
-                    appear
-                    :show="isVisible(iri)"
-                    as="div"
-                    enter="transform transition duration-[400ms]"
-                    enter-from="opacity-0 rotate-[-10deg] scale-50"
-                    enter-to="opacity-100 rotate-0 scale-100"
-                    leave="transform duration-200 transition ease-in-out"
-                    leave-from="opacity-100 rotate-0 scale-100"
-                    leave-to="opacity-0 scale-95 "
-                  >
-                    <div class="select-none text-black dark:text-white font-bold text-3xl h-10 h-max-10  overflow-hidden">{{ profile["rdfs:label"] }}</div>
-                    <div class="select-none text-black dark:text-gray-400 font-semibold  text-xl h-16 h-max-16 overflow-hidden">
-                      {{ profile["rdfs:comment"] }}
+          <div class="w-full h-full flex justify-between bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
+            <!-- Left -->
+            <div v-show="!editMode" class="categories ml-20 inline-flex space-x-10 lg:flex-col lg:space-y-6  lg:space-x-0 select-none ">
+              <template v-for="category in config?.query?.categories" :key="category.name">
+                <div
+                  v-if="category.visible"
+                  :class="
+                    'category transition duration-500 ease-in-out group flex items-center rounded-lg px-3 w-min-400px pr-5 border border-2 border-transparent hover:border-gray-300 rounded-full ' +
+                      [
+                        activeQueryCategory == category.name
+                          ? ' bg-slate-200 dark:bg-slate-800 #border-blue-500 dark:border-gray-300 dark:text-white'
+                          : ' text-gray-700 dark:text-gray-400 #hover:bg-blue-50 dark:bg-transparent'
+                      ]
+                  "
+                  @click="activeQueryCategory = category.name"
+                  v-wave="{
+                    color: 'currentColor',
+                    easing: 'ease-out',
+                    duration: 0.5,
+                    initialOpacity: 0.5,
+                    finalOpacity: 0.1,
+                    cancellationPeriod: 75
+                  }"
+                >
+                  <div :class="'category-icon inline-flex h-20 w-20 rounded-xl  bg-gradient-to-r p-2 '">
+                    <div class="rounded-full dark:bg-slate-700 w-full h-full flex justify-center items-center">
+                      <HeroIcon
+                        :class="' ' + [activeQueryCategory == category.name ? ' text-blue-800 dark:text-white ' : '']"
+                        strokewidth="2.5"
+                        width="20"
+                        height="20"
+                        :icon="category.icon"
+                      />
                     </div>
-
-                    <!-- <Profile class="mt-5" :theme="light" :modelValue="profile" :activeProfile="activeProfile" /> -->
-                    <Profile class="mt-5" :theme="colours[index]" :modelValue="profile" :activeProfile="activeProfile" />
-                  </TransitionRoot>
+                  </div>
+                  <div
+                    :class="
+                      'inline-flex ml-2 text-2xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
+                        [activeQueryCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-700 dark:text-gray-400 ']
+                    "
+                  >
+                    {{ category.text }}
+                  </div>
                 </div>
               </template>
             </div>
+            <!-- Left -->
+
+            <!-- Middle -->
+
+            <!-- Query Definition  -->
+            <div
+              v-show="activeQueryCategory == 'definition'"
+              :class="'definition viewer flex justify-center space-x-5' + [editMode ? ' edit-mode w-full' : '']"
+            >
+              <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
+                <!-- <QueryDefinition v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"></QueryDefinition> -->
+                <QueryEditor v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false" />
+              </template>
+            </div>
+            <!-- Main Data Type  -->
+
+            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity flex flex-col w-full max-w-4xl">
+              <InputDescription class="w-full max-w-2xl" :description="inputMeta.mainEntity" />
+              <InputRadioButtons
+                class="w-full max-w-xl mt-7"
+                v-model="selectedMainEntity"
+                :items="radioButtonItems.mainEntity"
+                :multiselect="false"
+                :checkbox="true"
+              />
+            </div>
+
+            <!-- Tab: SQL  -->
+            <div v-if="activeQueryCategory == 'sql'" class="tab-content ">
+              SQL
+              <!-- <pre>{{ sql }}</pre> -->
+            </div>
+            <!-- /Tab: SQL  -->
+
+            <div v-show="activeQueryCategory == 'output'" class="definition viewer flex justify-center text-white"></div>
+            <div v-show="activeQueryCategory == 'sources'" class="sources flex flex-col w-full max-w-4xl ">
+              <InputDescription class="w-full max-w-2xl" :description="inputMeta.sources" />
+              <!-- Button: New List  -->
+              <InputRadioButtons
+                class="w-full max-w-xl mt-7"
+                v-model="selectedOrganisations"
+                :items="radioButtonItems.sources"
+                :multiselect="false"
+                :checkbox="true"
+              />
+              <MultiSelect
+                v-if="selectedOrganisations.includes('other')"
+                class="w-full max-w-lg multi-large"
+                v-model="selectedOrganisationLists"
+                :options="organisationLists"
+                optionLabel="label"
+                :placeholder="inputMeta.selectedLists.placeholder"
+              />
+            </div>
+            <div v-show="activeQueryCategory == 'export'" class="definition viewer flex justify-center space-x-5 text-white">
+              Show JSON representation here -> download
+            </div>
+            <div v-show="activeQueryCategory == 'sql'" class="definition viewer flex justify-center space-x-5 text-white"></div>
+
+            <!-- Middle -->
+            <!-- Right -->
+            <div v-show="!editMode" class="invisible md:visible flex flex-col mt-20  mr-20 space-y-10">
+              <template v-for="(item, index) in getActions(activeQueryCategory)" :key="item.name">
+                <template v-if="item.visible && index == 0">
+                  <CardButton
+                    @click="item.command"
+                    class="w-250px"
+                    :name="item.name"
+                    :description="item.text"
+                    :icon="item.icon"
+                    :outlined="true"
+                    nameColor="white"
+                    descriptionColor="white"
+                    iconColor="white"
+                    backgroundColor="blue-500"
+                  />
+                </template>
+                <template v-else-if="item.visible && index > 0">
+                  <CardButton
+                    @click="item.command"
+                    class="w-250px"
+                    :name="item.name"
+                    :description="item.text"
+                    :icon="item.icon"
+                    :outlined="true"
+                    nameColor="black"
+                    descriptionColor="gray-700"
+                    iconColor="blue-700"
+                    backgroundColor="white"
+                  />
+                </template>
+              </template>
+            </div>
+            <!-- Right -->
           </div>
         </div>
-        <!-- /Tab: Create  -->
+        <!-- /Tab: View  -->
 
         <!-- Tab: Explore  -->
 
-        <div v-if="activeTabName == 'Learn'" class="tab-content flex justify-center items-center">
+        <div v-if="activeTabName == 'Schedule'" class="tab-content flex justify-center items-start "></div>
+        <div v-if="activeTabName == 'Learn'" class="tab-content flex flex-col justify-start items-center ">
           <!-- <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe> -->
-          <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" />
-          <!-- <img class="" src="animation2.gif" alt="" /> -->
+          <!-- <img class="dark:rounded-xl shadow-md dark:bg-white ring-1 focus:outline-none" src="animation1.gif" alt="" /> -->
+
+          <div class="mt-20">
+            <div class="flex mt-20 flex-col text-3xl font-bold text-black dark:text-white">
+              Tutorials
+            </div>
+
+            <div class="mt-10 mb-10 flex space-x-20">
+              <div
+                :class="
+                  'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' +
+                    [activeVideo == 1 ? ' text-black dark:text-white' : ' dark:text-gray-600 text-gray-500']
+                "
+                @click="activeVideo = 1"
+              >
+                1. Searching for and Opening Queries
+              </div>
+              <div
+                :class="
+                  'inline-flex  text-2xl font-bold hover:underline cursor-pointer ' +
+                    [activeVideo == 2 ? ' text-black dark:text-white' : ' dark:text-gray-600 text-gray-500']
+                "
+                @click="activeVideo = 2"
+              >
+                2. Viewing and Interpreting Query Definitions
+              </div>
+            </div>
+          </div>
+
+          <iframe
+            v-if="activeVideo == 1"
+            width="780"
+            height="480"
+            src="https://www.youtube-nocookie.com/embed/2QJU_DeiEfQ"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          <iframe
+            v-if="activeVideo == 2"
+            width="780"
+            height="480"
+            src="https://www.youtube.com/embed/aTeqPgkfOc0"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
         <!-- /Tab: Explore  -->
+
+        <!-- Tab: Developer  -->
+        <div v-if="activeTabName == 'Developer'" class="tab-content flex flex-col items-center ">
+          <div class="text-black dark:text-white font-bold text-lg">Text Generator</div>
+          <div class="flex space-x-5">
+            <Button @click="summariseQuery('urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf')" class="">SMI Population</Button>
+            <Button @click="summariseQuery('urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97')" class="">Priority1</Button>
+            <Button @click="summariseQuery('urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd')" class="">Priority2</Button>
+            <Button @click="summariseQuery('urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6')" class="">Priority3a</Button>
+            <Button @click="summariseQuery('urn:uuid:3f04bc73-fb03-4d50-bae4-49a866ad5033')" class="">Priority3b</Button>
+          </div>
+        </div>
+
+        <!-- /Tab: Developer  -->
 
         <!-- Tab: Organisations  -->
         <OrganisationBrowser v-if="activeTabName == 'Sources'" class="tab-content" />
         <!-- /Tab: Organisations  -->
 
-        <!-- Tab: Dictionary  -->Create
+        <!-- Tab: Dictionary  -->
+
         <div v-if="activeTabName == 'Dictionary'" class="tab-content ">
           <iframe class="iframe-learn" src="https://embednotion.com/embed/4dscvv7v"></iframe>
         </div>
@@ -278,41 +497,27 @@
 import { ref, onMounted, defineComponent } from "vue";
 import { mapState } from "vuex";
 
+import EntityService from "@/services/EntityService";
 import ConfirmDialog from "primevue/confirmdialog";
-// import LoggerService from "@/services/LoggerService";
-import Tooltip from "primevue/tooltip";
-
-import Chips from "primevue/chips";
-import MegaMenu from "primevue/megamenu";
-
-import OverlayPanel from "primevue/overlaypanel";
-import Dialog from "primevue/dialog";
-import QueryTable from "@/components/dataset/QueryTable.vue";
 
 import Searchbox from "@/components/search/Searchbox.vue";
-import HeroIcon from "@/components/search/HeroIcon.vue";
-import RoundButton from "@/components/dataset/RoundButton.vue";
-import UserWidget from "@/components/dataset/UserWidget.vue";
+import HeroIcon from "@/components/general/HeroIcon.vue";
+import UserWidget from "@/components/user/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
-import HorizontalNavbar from "@/components/dataset/HorizontalNavbar.vue";
-import CardButton from "@/components/dataset/CardButton.vue";
-import ResponsiveNav from "@/components/dataset/ResponsiveNav.vue";
-import Profile from "@/components/query/Profile.vue";
-import ProgressBar from "@/components/search/ProgressBar.vue";
+import CardButton from "@/components/general/CardButton.vue";
+import ProgressBar from "@/components/general/ProgressBar.vue";
 
 import SearchService from "@/services/SearchService";
-import SearchClient from "@/services/SearchClient";
-import DataStudio from "./DataStudio.vue";
+import QueryService from "@/services/QueryService";
+// import SearchClient from "@/services/SearchClient";
 
-import OrganisationBrowser from "@/components/dataset/OrganisationBrowser.vue";
-import HorizontalNavPills from "@/components/dataset/HorizontalNavPills.vue";
+import HorizontalNavbar from "@/components/general/HorizontalNavbar.vue";
+import HorizontalNavPills from "@/components/general/HorizontalNavPills.vue";
 import { TransitionRoot } from "@headlessui/vue";
+import InputDescription from "@/components/general/InputDescription.vue";
+import InputRadioButtons from "@/components/general/InputRadioButtons.vue";
 
-// import Dataset from "@/components/dataset/Dataset.ts";
-
-var _ = require("lodash");
-
-import { MeiliSearch } from "meilisearch";
+import QueryEditor from "@/components/query/QueryEditor.vue";
 
 export default defineComponent({
   name: "Search",
@@ -320,49 +525,247 @@ export default defineComponent({
     ConfirmDialog,
     Searchbox,
     SearchResults,
-    HorizontalNavbar,
     HeroIcon,
     ProgressBar,
-    DataStudio,
-    RoundButton,
-    OrganisationBrowser,
     UserWidget,
     CardButton,
-    ResponsiveNav,
     HorizontalNavPills,
-    Profile,
-    TransitionRoot
+    HorizontalNavbar,
+    QueryEditor,
+    TransitionRoot,
+    InputDescription,
+    InputRadioButtons
   },
   $refs: {
     OverlayPanel: HTMLElement
   },
   data() {
     return {
-      isShowing: true,
-      colours: ["light", "light",  "blue", "purple", "green", "orange", "pink"],
-      // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
-      newItems: [
+      editMode: false,
+      selectedOrganisations: ["all"],
+      selectedOrganisationLists: [] as any,
+      organisationLists: [
         {
-          label: "Search Profile",
-          // icon: 'pi pi-refresh',
-          command: () => {
-            //#todo create new profile
-            this.$toast.add({ severity: "success", summary: "Updated", detail: "Open New Query Builder file", life: 3000 });
-          }
+          value: "b4a9a163-9ab8-4306-a7c0-8b17205983bc",
+          label: "All GP practices commissioned by NEL CCG"
         },
         {
-          label: "Concept Set",
-          // icon: 'pi pi-external-link',
-          command: () => {
-            window.open(
-              "https://dev.endhealth.co.uk/editor/#/",
-              "_blank" // <- This is what makes it open in a new window.
-            );
-          }
+          value: "b4a9a163-9ab8-4306-a7c0-8b17205983bc",
+          label: "All GP practices commissioned by NEL CCG"
         }
       ],
+      selectedMainEntity: "1",
+      radioButtonItems: {
+        mainEntity: [
+          {
+            id: 1,
+            iri: "im:Person",
+            name: "Person",
+            explanation:
+              "<b>Tip</b><br>This option will select health records related to Person. <br><br> <b>Example</b><br> A Person is a person who has previously received care at an organisation that has documented that interaction in their electronic health record."
+          },
+          {
+            id: 2,
+            iri: "im:Property",
+            name: "Property",
+            explanation:
+              "<b>Tip</b><br>This option will sele ct health records for a group of people who usually live at a single place of residence (a property). <br><br><b>Example</b><br>A family of 4 people may be living in a household i.e. parents and two kids."
+          },
+          {
+            id: 3,
+            iri: "im:Organisation",
+            name: "Organisation",
+            explanation:
+              "<b>Tip</b><br>This option will select health records generated by a legal entity, service or group  with a common purpose (such as providing care). <br><br> <b>Example</b><br> • GP Practice <br> • Hospital <br>  • Out of Hours Clinic  <br> • Community Mental Health Service "
+          },
+          {
+            id: 4,
+            iri: "im:Appointment",
+            name: "Appointment",
+            explanation:
+              "<b>Tip</b><br>This option will select health records associated with appointments that have taken places across and within organisations. <br><br> <b>Example</b><br> • A&E attendances <br> • GP visits <br> • Outpatient Clinic Appointments"
+          }
+        ],
+        sources: [
+          {
+            id: "all",
+            iri: "im:VSET_OrgAllAllowable",
+            name: "All Allowable Organisations",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all organisation you are authorised to view data for.<br><br> <b>Example</b><br> Members of staff at an organisation can view: <br> • Sensitive data for their organisation only, and <br> • Anonymised data for any other organisation."
+          },
+          {
+            id: "gp",
+            iri: "im:VSET_OrgAllAllowableGPs",
+            name: "All GP practices",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all GP practices you are authorised to view data for.<br><br> <b>Example</b><br> A clinician working at a primary care network may wish to see anonymous data for other GP practices in their network."
+          },
+          {
+            id: "hospital",
+            iri: "im:VSET_OrgAllAllowableHospitals",
+            name: "All Hospitals",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all Hospitals you are authorised to view data for.<br><br> <b>Example</b><br> A CIO at a hospital may wish to see data for all of the hospitals they manage."
+          },
+          {
+            id: "other",
+            iri: "im:VSET_OrgList1",
+            name: "Other - Select Below",
+            explanation:
+              "<b>Tip</b><br>This option selects data for all organisation in one of the custom lists of organisations you can select below or create yourself. <br><br> <b>Example</b><br> 'All organisations commissioned by the North East London CCG except for GP practices in Tower Hamlets'"
+          }
+        ]
+      },
+      inputMeta: {
+        name: {
+          title: "Name",
+          explanation:
+            "<b>Purpose</b><br>Label your dataset with a short name that is memorable and helps you recognise it later. <br><br> <b>Example</b><br> • QOF BP002 2021 <br>• ABG Audit 2019",
+          placeholder: "Enter a Name"
+        },
+        description: {
+          title: "Description",
+          explanation:
+            "<b>Purpose</b><br>Add a detailed summary that describes your dataset. <br><br> <b>Example</b><br> 'Patients registered at primary care practices commissioned by Tower Hamlets CCG with a diagnosis of diabetes type 2' ",
+          placeholder: "Enter a Description"
+        },
+        // organisations: {
+        //   title: "Organisations",
+        //   explanation:
+        //     "<b>Purpose</b><br>Create a list of organisations that host/publish their health records as sources of data for your dataset. <br><br> <b>Example</b><br> A dataset can extract data from multiple list of multiple organisations where health records are stored.",
+        //   placeholder: "",
+        // },
+        sources: {
+          title: "Sources",
+          explanation:
+            "<b>Tip</b><br>Select a lists of organisations that publish the health records you want data from. <br><br> <b>Example</b><br> A list describes a group of organisations that share similar characteristics such as a Postcode, Commissioner, Organisation Type and more. ",
+          placeholder: ""
+        },
+        mainEntity: {
+          title: "Main Data Type",
+          explanation:
+            "<b>Tip</b><br>Select the main health record that is directly related to all the data in your dataset. <br><br><b>Example</b><br> Think of this like your 'main table' of data that is linked to all the other tables in your dataset.",
+          placeholder: ""
+        },
+        steps_data: {
+          title: "Steps",
+          explanation:
+            '<b>Tip</b><br>Copy existing data from a dataservice or dataset by selecting sources. Then transform the data by applying inclusion and exclusion criteria in a series of steps.  <br><br> To see an example in action, copy a template from the library. <br><br><b>Example 1</b><br> The following research question is a product of three steps <br> 1. "Patients registered at GP practices <br> 2. with a diagnosis of Coronary Heart Disease <br> 3. taking any anti-coagulant or anti-platelet medication"',
+          placeholder: ""
+        },
+        selectedLists: {
+          title: "Select Lists",
+          explanation: "",
+          placeholder: "Select Lists from the Dropdown"
+        }
+      },
+      activeQueryCategory: "definition",
+      config: {
+        query: {
+          categories: [
+            {
+              name: "mainEntity",
+              text: "Main Data Type",
+              icon: "collection",
+              visible: true
+            },
+            {
+              name: "definition",
+              text: "Query Definition",
+              icon: "menu_alt_1",
+              visible: true
+            },
+            {
+              name: "output",
+              text: "Output Format",
+              icon: "cube",
+              visible: true
+            },
+
+            {
+              name: "sql",
+              text: "SQL Output",
+              icon: "cube_transparent",
+              visible: true
+            },
+            {
+              name: "export",
+              text: "Export",
+              icon: "download",
+              visible: true
+            }
+          ],
+          actions: {
+            definition: [
+              {
+                name: "Edit",
+                text: "Edit the criteria inside your Query",
+                icon: "pencil",
+                css: {
+                  background: "to-sky-500 from-blue-600",
+                  icon: "text-teal-400"
+                },
+                command: () => {
+                  this.editMode = true;
+                },
+                visible: true
+              },
+              {
+                name: "Compare",
+                text: "Compare two Queries side-by-side",
+                icon: "view_boards",
+                css: {
+                  background: "from-cyan-600 to-green-500",
+                  icon: "text-yellow-300"
+                },
+                command: () => {},
+                visible: true
+              }
+            ],
+            sources: [
+              {
+                name: "Create",
+                text: "Create a new list sources",
+                icon: "plus",
+                css: {
+                  background: "to-sky-500 from-blue-600",
+                  icon: "text-teal-400"
+                },
+                command: () => {},
+                visible: true
+              },
+              {
+                name: "Explore",
+                text: "Explore the Sources on a map",
+                icon: "map",
+                css: {
+                  background: "from-cyan-600 to-green-500",
+                  icon: "text-yellow-300"
+                },
+                command: () => {},
+                visible: true
+              }
+            ]
+          }
+        },
+        sources: {
+          schedule: [
+            {
+              name: "sources",
+              text: "Sources",
+              icon: "office_building",
+              visible: true
+            }
+          ]
+        }
+      },
+      activeVideo: 1,
+      isResultsShown: false,
+      isShowing: true,
+      colours: ["light", "light", "light", "light", "light", "light", "light", "light", "blue", "purple", "green", "orange", "pink"],
+      // colours: ["light", "blue", "purple", "green", "orange", "pink", "blue", "purple", "green", "orange", "pink"],
       hasSearched: false,
-      // definition: typeof Dataset,
       userMeta: {
         username: "",
         firstName: "",
@@ -371,21 +774,65 @@ export default defineComponent({
       },
       searchString: "",
       activePageName: "Main",
-      activeTabName: "Create", //Options #Home #SearchResults #Create #Explore
+      activeSearchCategory: "Search Results",
+      searchCategories: [
+        {
+          name: "Search Results",
+          icon: "search",
+          css: {
+            background: "to-sky-500 from-blue-600",
+            icon: "text-teal-400"
+          },
+          command: () => {
+            this.activeSearchCategory = "Search Results";
+          },
+          visible: false
+        },
+        {
+          name: "Query Library",
+          icon: "newspaper",
+          css: {
+            background: "from-cyan-600 to-green-500",
+            icon: "text-yellow-300"
+          },
+          command: () => {
+            this.activeSearchCategory = "Query Library";
+          },
+          visible: false
+        }
+      ],
       suggestions: [
         {
-          name: "Create New Search Profile",
-          description: "Extract data in bulk data from Discovery Data Service ",
-          icon: "newspaper",
+          name: "Start with an Example",
+          description: 'View the Query "SMI Population"',
+          icon: "cursor_click",
           command: () => {
-            //#todo
-            this.activeTabName = "Create";
+            // this.$store.commit("updateIsLoading", true);
+            this.activeTabName = "Find";
+            let queryIri = "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf";
+            // let queryIri = "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97";
+            // let queryIri = "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd";
+            // let queryIri = "urn:uuid:6d4abdbb-d278-4675-a98d-c340967daee6";
+            // let queryIri = "urn:uuid:3f04bc73-fb03-4d50-bae4-49a866ad5033";
+            this.$store.commit("loadFile", queryIri);
+
+            this.$router.replace({ path: queryIri });
           },
           visible: true
         },
         {
+          name: "Query Library",
+          description: "Browse through a list of query definitions",
+          icon: "newspaper",
+          command: () => {
+            // this.activeTabName = "Find";
+            this.handleQueryLibrary();
+          },
+          visible: false
+        },
+        {
           name: "Watch a 100 second Tutorial",
-          description: "Learn how to use DataStudio in less than two minutes",
+          description: "Learn how to Get Started",
           icon: "academic_cap",
           command: () => {
             //#todo
@@ -394,56 +841,7 @@ export default defineComponent({
           visible: true
         }
       ],
-      tabs: [
-        {
-          index: 0,
-          name: "Home",
-          icon: "home",
-          visible: true
-        },
-        {
-          index: 1,
-          name: "Find",
-          icon: "search",
-          visible: true
-        },
-        {
-          index: 2,
-          name: "Data",
-          icon: "newspaper",
-          visible: false
-        },
-        {
-          index: 3,
-          name: "Create",
-          icon: "newspaper",
-          visible: true
-        },
-        {
-          index: 3,
-          name: "Learn",
-          icon: "academic_cap",
-          visible: true
-        },
-        {
-          index: 3,
-          name: "Explore2",
-          icon: "globe",
-          visible: false
-        },
-        {
-          index: 4,
-          name: "Sources",
-          icon: "office_building",
-          visible: false
-        },
-        {
-          index: 6,
-          name: "Resources",
-          icon: "newspaper",
-          visible: false
-        }
-      ],
+
       apps: [
         {
           name: "Directory",
@@ -460,20 +858,75 @@ export default defineComponent({
         {
           name: "Data Studio",
           icon: "newspaper",
-          visible: true,
+          visible: false,
           hyperlink: ""
         }
       ],
-      modulesData: null,
       searchData: null,
-      searchResults: [],
       autocompleteData: null,
-      tableHeight: 600
+      mainEntity: [
+        {
+          id: "8beb8591-8b7b-4055-82c2-9da166df674f",
+          iri: "im:Patient",
+          name: "Patient",
+          explanation:
+            "<b>Tip</b><br>This option will select health records related to patients. <br><br> <b>Example</b><br> A patient is a person who has previously received care at an organisation that has documented that interaction in their electronic health record."
+        },
+        {
+          id: "952f4842-ffb6-4775-ae5f-58b7bb239896",
+          iri: "im:Property",
+          name: "Property",
+          explanation:
+            "<b>Tip</b><br>This option will select health records for a group of people who usually live at a single place of residence (a property). <br><br><b>Example</b><br>A family of 4 people may be living in a household i.e. parents and two kids."
+        },
+        {
+          id: "c0674833-dfeb-46e5-b465-cb0bd676c486",
+          iri: "im:Organisation",
+          name: "Organisation",
+          explanation:
+            "<b>Tip</b><br>This option will select health records generated by a legal entity, service or group  with a common purpose (such as providing care). <br><br> <b>Example</b><br> • GP Practice <br> • Hospital <br>  • Out of Hours Clinic  <br> • Community Mental Health Service "
+        },
+        {
+          id: "716bfd97-a461-4134-beb0-ad0b64a97da3",
+          iri: "im:Appointment",
+          name: "Appointment",
+          explanation:
+            "<b>Tip</b><br>This option will select health records associated with appointments that have taken places across and within organisations. <br><br> <b>Example</b><br> • A&E attendances <br> • GP visits <br> • Outpatient Clinic Appointments"
+        }
+      ]
     };
   },
 
   computed: {
-    ...mapState(["currentUser", "isLoggedIn"]),
+    ...mapState(["activeClausePath", "currentUser", "isLoggedIn", "openFiles", "tabs"]),
+    // actions: {
+    //   get(): any {
+    //     return this.config?.query?.actions[this.activeQueryCategory]
+    //   },
+    //   set(value: any): void {}
+    // },
+    // sql: {
+    //   async get(): Promise<any> {
+    //     return await this.getSQL(this.activeProfile);
+    //   },
+    //   set(value: any): void {}
+    // },
+    activeTabName: {
+      get(): any {
+        return this.$store.state.activeTabName;
+      },
+      set(value: any): void {
+        this.$store.commit("updateActiveTabName", value);
+      }
+    },
+    searchData: {
+      get(): any {
+        return this.$store.state.searchData;
+      },
+      set(value: any): void {
+        this.$store.commit("updateSearchData", value);
+      }
+    },
     ontology: {
       get(): any {
         return this.$store.state.ontology;
@@ -518,12 +971,13 @@ export default defineComponent({
         //sets an active file if A. there are openfiles left and B. there there is no longer an active file
       }
     },
-    activeFileIri: {
+    activeProfile: {
       get(): string {
-        return this.$store.state.activeFileIri;
+        return this.$store.state.activeProfile;
       },
       set(value: any): void {
-        this.$store.commit("updateActiveFileIri", value);
+        alert("hi");
+        this.$store.commit("updateactiveProfile", value);
       }
     },
     currentTheme: {
@@ -537,10 +991,8 @@ export default defineComponent({
   },
   async mounted() {
     this.$store.dispatch("loadTheme");
-    // console.log("current THeme", localStorage.getItem("themeName"));
 
-    // this.currenTheme = "dark";
-    this.$store.dispatch("loadUserData");
+    // await EntityService.test();
 
     await this.$store.dispatch("authenticateCurrentUser");
 
@@ -551,19 +1003,55 @@ export default defineComponent({
       this.userMeta.email = this.currentUser.email;
     }
 
-    //ensures sidebar is focused on search Icon
-    this.$store.commit("updateSelectedEntityType", "Search");
-    this.$store.commit("updateSideNavHierarchyFocus", {
-      name: "Search",
-      fullName: "Search",
-      iri: "http://endhealth.info/im#Search"
-    });
-    // console.log(Dataset.definition)
+    //loading all of a user's files
+    // this.$store.dispatch("loadUserData");
 
-    //loads moduless (contains tasks),
-    // this.getInitialData();
+    const _fileIri = this.$route.params.fileIri;
+    if (_fileIri) {
+      // this.$store.dispatch("loadFile");
+      console.log("fileIri", _fileIri);
+      this.$store.commit("loadFile", _fileIri);
+    }
+
+    // console.log("URL Paramater FileIri", _fileIri);
   },
   methods: {
+    // handleHotkey(): void {
+    //   alert("search");
+    // },
+    // async handleOpenItem(iri: any) {
+    //   console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
+    // },
+    getActions(activeQueryCategory: string) {
+      return this.config?.query?.actions[activeQueryCategory];
+    },
+    async getSQL(queryIri: string): Promise<any> {
+      const entity = await QueryService.getSQL(queryIri)
+        .then(res => {
+          console.log("### SQL", res);
+          return;
+        })
+        .catch(err => {
+          console.error("Failed to load SQL from the server", err);
+        });
+    },
+    async summariseQuery(queryIri: string): Promise<any> {
+      const entity = await QueryService.summariseQuery(queryIri)
+        .then(res => {
+          console.log("### Populated File", res);
+          return;
+        })
+        .catch(err => {
+          console.error("Failed to load file from the server", err);
+        });
+    },
+    handleTry(): any {
+      this.search("COVID-19");
+    },
+    handleQueryLibrary(): any {
+      const _libraryURL = "https://im.endhealth.co.uk/#/folder/http:%2F%2Fendhealth.info%2Fceg%2Fqry%23Q_CEGQueries";
+      window.open(_libraryURL, "_blank");
+    },
     testQuery(): any {
       // console.log(
       //   "ontology",
@@ -588,124 +1076,63 @@ export default defineComponent({
     },
     isVisible(iri: string): boolean {
       // console.log(profile["@id"])
-
-      const _item = this.openFiles.filter((item: any, index: number) => item.iri == iri);
-      // console.log(this.openFiles)
-
-      return _item[0].isVisible;
+      const openFiles = this.openFiles.filter((f: any, index: number) => f.iri == iri);
+      return openFiles.length > 0 && openFiles[0].isVisible;
     },
     test(): void {
-      // console.log(this.activeFileIri);
-      // console.log(this.queryBuilder.profiles.get(this.activeFileIri));
+      // console.log(this.activeProfile);
+      // console.log(this.queryBuilder.profiles.get(this.activeProfile));
       for (const profile in this.queryBuilder.profiles) {
         console.log("prof", profile);
       }
+    },
+    onToggleTabs(event: any): void {
+      console.log(event);
+      (this.$refs["overlay-menu-toggler"] as any).toggle(event);
     },
     onToggleApps(event: any): void {
       console.log(event);
       (this.$refs["overlay-apps"] as any).toggle(event);
     },
-    async getAutocompleteSearch(): Promise<void> {
-      await SearchClient.fetchAutocompleteSearch(this.searchString)
-        .then((res: any) => {
-          this.autocompleteData = res;
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load autocomplete results", err));
-        });
-    },
-    async getInitialData(): Promise<void> {
-      await SearchClient.searchMeili("Modules", "")
-        .then((res: any) => {
-          this.modulesData = res;
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load initial data", err));
-        });
-      // #todo:other fetches
-    },
-    async searchMeili(index: string, searchString: string): Promise<any> {
-      await SearchClient.searchMeili(index, searchString)
-        .then((res: any) => {
-          console.log(`fetched Meilisearch results for index: ${index}`, res);
-
-          Promise.resolve(res);
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load Meilisearch results data", err));
-        });
-    },
-    async searchMeiliFiltered(index: string, searchString: string): Promise<any> {
-      await SearchClient.searchMeiliFiltered(index, searchString)
-        .then((res: any) => {
-          console.log(`fetched Filtered Meilisearch results for index: "${index}", searchString: "${searchString}"`, res);
-          Promise.resolve(res);
-        })
-        .catch((err: any) => {
-          this.$toast.add(LoggerService.error("Could not load Meilisearch results data", err));
-        });
-    },
+    // async getAutocompleteSearch(): Promise<void> {
+    //   await SearchClient.fetchAutocompleteSearch(this.searchString)
+    //     .then((res: any) => {
+    //       this.autocompleteData = res;
+    //     })
+    //     .catch((err: any) => {
+    //       this.$toast.add(LoggerService.error("Could not load autocomplete results", err));
+    //     });
+    // },
     async search(searchString: string): Promise<any> {
       this.isLoading = true;
+      this.isResultsShown = false;
 
-      await SearchClient.search(searchString)
+      //find queries regardless of status or scheme
+
+      await SearchService.advancedSearchQuery(searchString)
         .then((res: any) => {
-          this.searchResults = [];
-          this.searchData = res;
-
-          console.log("fetched AWS Lambda search results", res);
+          console.log("fetched OSS search results", res);
+          this.hasSearched = true;
+          this.isResultsShown = true;
+          this.searchData = res.data;
+          this.activeTabName = "Find";
           return res;
         })
         .catch((err: any) => {
-          // this.isLoading = false;
-          this.searchResults = [];
-          this.searchData = null;
-
           console.log("Could not load search results", err);
           return null;
         });
+
       this.isLoading = false;
-    },
-    async showSearchResults(searchString = "sbp and hr for diabetics with htn and stroke"): Promise<void> {
-      // await SearchClient.searchMeiliFiltered("IMSearch", ""); //'filter': `rdfsLabel =""`
-      this.hasSearched = true;
-
-      // alert(this.isLoading);
-      this.searchString = searchString;
-
-      let _searchString = searchString ? searchString : this.searchString;
-
-      if (_searchString && _searchString.trim() != "") {
-        await this.search(_searchString).then((res: any) => {
-          if (this.searchData) {
-            this.searchResults = (this.searchData as any).data.searchResults;
-            // alert(this.searchResults.length);
-          }
-          this.activePageName = "Main";
-          this.activeTabName = "Find";
-        });
-      }
-    },
-    async oss_search(searchString: string, index: string, limit: number): Promise<any> {
-      this.isLoading = true;
-
-      await SearchService.oss_search(searchString, index, limit)
-        .then((res: any) => {
-          this.isLoading = false;
-          console.log("fetched opensearch results: ", res);
-        })
-        .catch((err: any) => {
-          this.isLoading = false;
-          console.log("Could not load opensearch results", err);
-        });
     }
   },
   watch: {
     // whenever question changes, this function will run
     searchString(newSearchString: any, oldearchString: any) {
-      if (newSearchString && newSearchString.trim() != "") {
-        this.getAutocompleteSearch();
-      }
+      // if (newSearchString && newSearchString.trim() != "") {
+      //   this.getAutocompleteSearch();
+      // }
+      return;
     }
   }
 });
@@ -721,7 +1148,8 @@ export default defineComponent({
 }
 
 .search-logo {
-  width: 350px;
+  width: 100%;
+  max-width: 300px;
   height: auto;
 }
 
@@ -851,8 +1279,13 @@ header nav {
   }
 
   .app-logo,
-  header nav {
+  header nav,
+  header .theme-toggler {
     display: none;
+  }
+
+  .overlay-menu-toggler .theme-toggler {
+    display: inlin-flex;
   }
 }
 
@@ -863,7 +1296,7 @@ header nav {
 }
 
 header {
-  max-width: 1300px;
+  /* max-width: 1300px; */
 }
 
 header,
@@ -886,5 +1319,14 @@ nav .tab-buttons {
   width: 100%;
   max-width: 350px;
   height: 40px;
+}
+
+.results-filters {
+  min-width: 250px;
+}
+
+.category-icon {
+  min-width: 40px;
+  min-height: 40px;
 }
 </style>

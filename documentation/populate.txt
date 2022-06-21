@@ -1,0 +1,28 @@
+title Populating Queries with labels
+
+participantgroup #lightyellow **Controllers**
+participant query/import
+participant query/populate
+participant entity/create
+participant query/summary
+participant provenance/create
+participant entity/updatePredicate
+end
+
+participantgroup #lightblue **Logic**
+participant QueryWorkflow
+participant Converter
+end
+
+
+
+
+query/import->query/populate: ** New third party query \n converted to Query Model
+query/populate->QueryWorkflow: ** Populate and dissect Query Model **
+QueryWorkflow->query/summary: ** Generate text summary for each match Clause**
+query/summary->QueryWorkflow: ** returns rdfs:label**
+QueryWorkflow->entity/updatePredicate: ** Update im:definition for populated Query **
+QueryWorkflow->entity/create: ** Save matchClause as new entity on Graph DB, OSS, Gdrive**
+QueryWorkflow->provenance/create: ** Generate Provanence Acitivty +/- Agent**
+
+

@@ -2,26 +2,82 @@ import axios, { AxiosResponse, CancelToken } from "axios";
 
 export default class SearchService {
 
-  //env variables not working for some reason?
-  static oss_url = import.meta.env.VITE_OSS_URL;
-  static graphdb_url = import.meta.env.VITE_GRAPHDB_URL;
+  static API = import.meta.env.VITE_NODE_API;
+
+  public static async advancedSearchDatamodel(searchString: any): Promise<AxiosResponse<any>> {
+    try {
+      console.log("api", this.API)
+      const _requestBody = {
+        termFilter: searchString,
+        statusFilter: [],
+        typeFilter: ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class"],
+        schemeFilter: [],
+        sortBy: 0,
+        page: 1,
+        size: 20
+      };
+      return await axios.post(this.API + "api/entity/public/search", _requestBody);
+    } catch (error) {
+      console.log("error in advanced search:" + error);
+      return null;
+    }
+  }
+
+  public static async advancedSearchQuery(searchString: any): Promise<AxiosResponse<any>> {
+    try {
+      console.log("api", this.API)
+      const _requestBody = {
+        termFilter: searchString,
+        statusFilter: [],
+        typeFilter: ["http://endhealth.info/im#Profile", "http://endhealth.info/im#Query", "http://endhealth.info/im#DataSet"],
+        schemeFilter: [],
+        sortBy: 0,
+        page: 1,
+        size: 20
+      };
+      return await axios.post(this.API + "api/entity/public/search", _requestBody);
+    } catch (error) {
+      console.log("error in advanced search:" + error);
+      return null;
+    }
+  }
+
+
+
+  /// developmental
+  static VITE_OSS_URL = import.meta.env.VITE_OSS_URL_DEV;
 
   static oss_headers = {
     'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
     'Content-Type': 'application/json'
   }
 
-  static graphdb_headers = {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
-
-  public static async oss_search(queryString: string, index: string, limit: number): Promise<AxiosResponse<any>> {
-    return axios.post(`${this.oss_url}/${index}/_search`,
+  //search inside name or definition
+  public static async oss_search(searchString: string, index: string, limit: number): Promise<AxiosResponse<any>> {
+    return axios.post(`${this.VITE_OSS_URL}/${index}/_search`,
       {
         size: limit,
         query: {
-          query_string: {
-            query: queryString
+          bool: {
+            filter: [
+              {
+                bool: {
+                  should: [
+                    {
+                      match_phrase: {
+                        "rdfs:label": searchString
+                      }
+                    },
+                    {
+                      match_phrase: {
+                        "im:definition": searchString
+                      }
+                    }
+                  ],
+                  minimum_should_match: 1
+                }
+              }
+            ]
           }
         }
       }
@@ -30,174 +86,6 @@ export default class SearchService {
         headers: this.oss_headers
       });
   }
-
-  public static async oss_search_templates(query: any, limit: number): Promise<AxiosResponse<any>> {
-
-    return axios.post(`${this.oss_url}/${import.meta.env.VITE_INDEX_TEMPLATES}/_search`,
-      {
-        size: limit,
-        query: query
-      }
-      ,
-      {
-        headers: this.oss_headers
-      });
-
-  };
-  public static async oss_search_im(queryString: string, limit: number, entityType?: string): Promise<AxiosResponse<any>> {
-    const q = {
-      bool: {
-        must: [{
-          match: {
-            name: queryString
-          }
-        }],
-        filter: [{
-          bool: {
-            should: [{
-              match_phrase: {
-                "scheme.@id": "http://snomed.info/sct#"
-              }
-            }, {
-              match_phrase: {
-                "scheme.@id": "http://endhealth.info/im#"
-              }
-            }],
-            minimum_should_match: 1
-          }
-        }, {
-          bool: {
-            should: [{
-              match_phrase: {
-                "status.@id": "http://endhealth.info/im#Active"
-              }
-            }, {
-              match_phrase: {
-                "status.@id": "http://endhealth.info/im#Draft"
-              }
-            }],
-            minimum_should_match: 1
-          }
-        }, {
-          bool: {
-            should: [{
-              match_phrase: entityType ? {
-                "entityType.@id": entityType
-              } : null
-            }],
-            minimum_should_match: 1
-          }
-        }]
-      }
-    }
-    return axios.post(`${this.oss_url}/${import.meta.env.VITE_INDEX_IM}/_search`,
-      {
-        size: limit,
-        query: q
-      }
-      ,
-      {
-        headers: this.oss_headers
-      });
-
-  };
-
-  public static async oss_getDataModelAll(): Promise<AxiosResponse<any>> {
-    const q = {
-      bool: {
-        filter: [{
-          bool: {
-            should: [{
-              match_phrase: {
-                "scheme.@id": "http://snomed.info/sct#"
-              }
-            }, {
-              match_phrase: {
-                "scheme.@id": "http://endhealth.info/im#"
-              }
-            }],
-            minimum_should_match: 1
-          }
-        }, {
-          bool: {
-            should: [{
-              match_phrase: {
-                "status.@id": "http://endhealth.info/im#Active"
-              }
-            }, {
-              match_phrase: {
-                "status.@id": "http://endhealth.info/im#Draft"
-              }
-            }],
-            minimum_should_match: 1
-          }
-        }, {
-          bool: {
-            should: [{
-              match_phrase: {
-                "entityType.@id": "http://www.w3.org/ns/shacl#NodeShape"
-              }
-            }],
-            minimum_should_match: 1
-          }
-        }]
-      }
-    }
-
-    return axios.post(`${this.oss_url}/${import.meta.env.VITE_INDEX_IM}/_search`,
-      {
-        size: 100,
-        query: q
-      }
-      ,
-      {
-        headers: this.oss_headers
-      });
-
-  };
-
-
-  
-
-
-  // public static async graphdb_search(sparqlQueryString: string): Promise<AxiosResponse<any>> {
-
-  //   // const queryParams = SearchService.toFormURLEncoded({ 'query': sparqlQueryString });
-
-
-  //   console.log("queryParams is: ", this.toFormURLEncoded(sparqlQueryString));
-  //   return axios.get(`${this.graphdb_url}/repositories/${import.meta.env.VITE_GRAPHDB_REPOSITORY}?q=${this.toFormURLEncoded(sparqlQueryString)}`,
-  //     {
-  //       headers: this.graphdb_headers
-  //     });
-
-  // }
-
-  // public static toFormURLEncoded(sparqlQueryString: any): string {
-
-  //   let qry = sparqlQueryString;
-  //   qry = qry.replaceAll(" ", "+");
-  //   qry = qry.replaceAll("{", "%7B");
-  //   qry = qry.replaceAll("}", "%7D");
-  //   qry = qry.replaceAll("?", "%3F");
-  //   return qry;
-
-  // var details = {
-  //   'userName': 'test@gmail.com',
-  //   'password': 'Password!',
-  //   'grant_type': 'password'
-  // };
-
-  // const formBody = [];
-  // for (const property in form) {
-  //   const encodedKey = encodeURIComponent(property);
-  //   const encodedValue = encodeURIComponent(form[property]);
-  //   formBody.push(encodedKey + "=" + encodedValue);
-  // }
-  // return formBody.join("&");
-
-  // }
-
 
 
 }

@@ -1,15 +1,15 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/oldHome.vue";
-import Dashboard from "../views/Dashboard.vue";
-import Datamodel from "../views/Concept.vue";
-import Workflow from "../views/Workflow.vue";
+// import Home from "../views/temp/oldHome.vue";
+// import Dashboard from "../views/Dashboard.vue";
+// import Datamodel from "../views/Concept.vue";
+// import Workflow from "../views/Workflow.vue";
 // import UPRN from "../views/Uprn.vue";
-import User from "../views/User.vue";
-import Editor from "../views/Editor.vue";
+// import Editor from "../views/Editor.vue";
+// import Datasets from "../views/temp/Datasets.vue";
+// import DatasetBrowser from "../views/temp/DatasetBrowser.vue";
+// import DatasetWizard from "../views/temp/DatasetWizard.vue";
 import Home from "../views/Home.vue";
-import Datasets from "../views/Datasets.vue";
-import DatasetBrowser from "../views/DatasetBrowser.vue";
-import DatasetWizard from "../views/DatasetWizard.vue";
+import User from "../views/User.vue";
 import Login from "../components/user/Login.vue";
 import Register from "../components/user/Register.vue";
 import UserDetails from "../components/user/UserDetails.vue";
@@ -26,10 +26,6 @@ import { nextTick } from "vue";
 const APP_TITLE = "IM Query";
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/concept/http%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23Thing",
-    redirect: "/"
-  },
   {
     path: "/user",
     name: "User",
@@ -95,129 +91,20 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: Home,
-    // redirect: { name: "Dashboard" },
-    meta: {
-      requiresLicense: true
-    }
-  },
-  // {
-  //   path: "/create",
-  //   name: "Create",
-  //   component: Home,
-  //   meta: {
-  //     requiresLicense: true
-  //   }
-  // },
-  // {
-  //   path: "/create/:iri",
-  //   name: "Create",
-  //   component: Home,
-  //   meta: {
-  //     requiresLicense: true
-  //   }
-  // },
-  // {
-  //   path: "/explore",
-  //   name: "Explore",
-  //   component: Home,
-  //   meta: {
-  //     requiresLicense: true
-  //   }
-  // },
-  // {
-  //   path: "/explore/:iri",
-  //   name: "Explore",
-  //   component: Home,
-  //   meta: {
-  //     requiresLicense: true
-  //   }
-  // },
-  {
-    path: "/oldhome",
-    name: "oldhome",
-    component: Home,
-    redirect: { name: "Dashboard" },
     meta: {
       requiresLicense: true
     },
     children: [
       {
-        path: "",
-        name: "Dashboard",
-        alias: ["/home", "/dashboard"],
-        component: Dashboard,
-        meta: {
-          requiresLicense: true
-        }
-      },
-      {
-        path: "/concept/:selectedIri",
-        name: "Concept",
-        component: Datamodel,
+        path: "/:fileIri",
+        name: "Query",
+        component: Home,
         meta: {
           requiresLicense: true
         }
       }
     ]
   },
-  {
-    path: "/editor",
-    name: "Editor",
-    component: Editor,
-    children: [
-      {
-        path: "/editor",
-        name: "Create",
-        component: Editor
-      },
-      {
-        path: "/editor/:iri",
-        name: "Edit",
-        component: Editor
-      }
-    ],
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: "/datasets",
-    name: "Datasets",
-    component: Datasets,
-    children: [
-      {
-        path: "browser",
-        name: "DatasetBrowser",
-        component: DatasetBrowser,
-      },
-      {
-        path: "wizard",
-        name: "DatasetWizard",
-        component: DatasetWizard,
-      }
-    ]
-  },
-  {
-    path: "/search",
-    name: "Search",
-    component: Home,
-  },
-  {
-    path: "/workflow",
-    name: "Workflow",
-    component: Workflow,
-    meta: {
-      requiresLicense: true
-    }
-  },
-  // {
-  //   path: "/uprn",
-  //   name: "UPRN",
-  //   component: UPRN,
-  //   meta: {
-  //     requiresLicense: true
-  //   }
-  // },
   {
     path: "/snomedLicense",
     name: "License",

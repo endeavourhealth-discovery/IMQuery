@@ -3,4 +3,13 @@ export class RDF {
   public static PREFIX = "rdf";
   public static TYPE = RDF.NAMESPACE + "type";
   public static PROPERTY = RDF.NAMESPACE + "Property";
+
+  public static PREFIXED = new class {
+
+    constructor(public superThis: any) {
+      Object.keys(superThis).forEach(key => this[key] =  superThis[key].replace(superThis.NAMESPACE, superThis.PREFIX + ":"));
+      return this;
+    }
+
+  }(this);
 }

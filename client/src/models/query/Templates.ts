@@ -172,7 +172,7 @@ function phrase(phraseType: string, input: any, references = []): any {
 
     // [1-2]
     if (input?.type == "reference") {
-     //   console.log("0")
+        //   console.log("0")
 
 
         // _input = input.data;
@@ -187,7 +187,7 @@ function phrase(phraseType: string, input: any, references = []): any {
         // const _isValueReference = _valuePaths.includes(input?.meta?.args?.propertyPath)
 
         if (Array.isArray(input.data)) {
-         //   console.log("1")
+            //   console.log("1")
             input.data.forEach((entity: any, index: any) => {
                 //adds new "text" key to entity reference
                 // console.log("input", input)
@@ -195,20 +195,20 @@ function phrase(phraseType: string, input: any, references = []): any {
                 input.data[index]["_text"] = transform("entityName", entity["rdfs:label"])
             })
         } else if (input.data) {
-         //   console.log("2")
+            //   console.log("2")
             //adds new "text" key to value at path
             const _text = transform("entityName", input.data["rdfs:label"]);
             input.data["_text"] = _text;
         } else {
 
-         //   console.log("phrase not found: [type] [input]", phraseType, input)
+            //   console.log("phrase not found: [type] [input]", phraseType, input)
             return null;
         }
 
 
         // transforming 1 existing phrase [5-> 6]
     } else if (typeof (input == "string")) {
-     //   console.log("3")
+        //   console.log("3")
 
         // console.log("phraseType input", phraseType, input)
 
@@ -219,7 +219,7 @@ function phrase(phraseType: string, input: any, references = []): any {
         if (references.length > 0) {
 
             const _text = transform(phraseType, input);
-         //   console.log("_text transform(phraseType, input)", _text, phraseType, input)
+            //   console.log("_text transform(phraseType, input)", _text, phraseType, input)
             const _transformedReferences = {
                 text: _text,
                 type: "transformedReferences",
@@ -239,7 +239,7 @@ function phrase(phraseType: string, input: any, references = []): any {
             return _transformedReferences;
 
         } else {
-         //   console.log("4")
+            //   console.log("4")
 
             //if it doesnt have references it most likely isnt mutable, but some other variable 
             const _text = transform(phraseType, input)
@@ -265,20 +265,7 @@ function phrase(phraseType: string, input: any, references = []): any {
         }
 
 
-    } else {
-
     }
-
-    // const _phrase = {
-    //     text: _text,
-    //     importance: "required",
-    //     meta: {
-    //         subtype: "phrase",
-    //         input: _value,
-    //         target: _targetPhrase,
-    //     }
-
-    // }
 
     return input;
 }
@@ -292,11 +279,11 @@ function reference(targetClause: any, propertyPath = "") {
 
     //generaetes an empty reference if none were found
     if (!_values) {
-     //   console.log("reference did not return any entity or value")
+        //   console.log("reference did not return any entity or value")
         return;
     }
 
- //   console.log("_values", _values)
+    //   console.log("_values", _values)
 
 
     //generates empty entities so not references are not completely empty
@@ -356,67 +343,11 @@ function reference(targetClause: any, propertyPath = "") {
 
 
 
-
-
 ////// functions
 
 
 
-// checks if a path exists - e.g. for template matching
-function pathExists(testObject: any, testPath: string): boolean {
-    return (typeof (_.get(testObject, testPath)) != "undefined");
-};
 
-function pathValueIs(testObject: any, testPath: string, comparatorObject: string): boolean {
-    const _value = _.get(testObject, testPath);
-    return (_value && _value == comparatorObject);
-};
-
-function fromPath(testObject: any, testPath: string): boolean {
-    return (_.get(testObject, testPath));
-};
-
-function isSingular(testObject: any): boolean {
-    if (typeof (testObject) == "number") {
-        if (testObject == 1 || testObject == -1) return true
-    } else if (typeof (testObject) == "string") {
-        // #todo compare testObject against an array of strings that represent signular, all else is plural
-    }
-    return false
-}
-
-// (case-insensitive) tests the first letter for a string against an array of letters - e.g. indefiniteArticle
-function firstLetterIsVowel(testString: string): boolean {
-    return ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == testString.substring(0, 1).toLowerCase());
-}
-
-// compares the value of a string (testString) against an array (of strings for comparison) - e.g. useful for valueIn
-function includes(testString: string, stringArray: string[]): boolean {
-    return stringArray.includes(testString);
-}
-
-function isObjectAnimate(testObjectName: string): boolean {
-    return ["person", "persons", "patient", "patients", "people"]
-        .includes(testObjectName.toLowerCase()) ? true : false;
-}
-
-function isTrue(...args): boolean {
-    return args.every((arg, index) => arg == true);
-}
-
-function hasTransformation(phraseType, input) {
-    // console.log("hasTransformation type input isnull?", phraseType, input, valueToPhraseMap[phraseType][input] == null)
-    return valueToPhraseMap[phraseType][input] == null ? false : true;
-}
-
-function isNegative(testNumber: number): boolean {
-    const _sign = Math.sign(testNumber);
-    if (_sign == 1 || _sign == 0) {
-        return false;
-    } else {
-        return true;
-    }
-}
 
 // a phrase that is static and not mutable by user
 // #todo: populate meta with info for querybuilding  
@@ -485,7 +416,9 @@ const includeMainEntity = (mainEntity: any, parentClause: any, currentClause: an
     const _a = phrase("firstLetterVowel", firstLetterIsVowel(_mainEntity?.data?._text));
 
 
-    const _inFinalResults = optional(constant("in the final results of this search"))
+    const _inFinalResults = isTrue(_ref1?.data, _ref2?.data)
+        ? optional(constant("in the final results of this search"))
+        : optional(constant("from the final results of this search"));
 
     const _if = constant("if");
 
@@ -550,7 +483,7 @@ const hasProfile = (mainEntity: any, parentClause: any, currentClause: any, args
     // console.log("_profiles", _profiles)
 
     const _sentence = [_were, _partOf, _resultsOf, _profiles];
- //   console.log("_sentence", _sentence)
+    //   console.log("_sentence", _sentence)
 
     return _sentence;
 };
@@ -562,7 +495,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
     //a function that returns an array of objects that represents a single sentence (i.e. the description one property)
     const _sentence = (currentClause: any): any => {
         // console.log("#####################################################")
-     //   console.log("_sentence currentClause", currentClause)
+        //   console.log("_sentence currentClause", currentClause)
 
         const _ref1 = reference(currentClause, "property");
         const _property = mutable(phrase("entityName", _ref1));
@@ -599,7 +532,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         //units
         const _phraseQuantityType = _ref4 ? isSingular(_ref4.data) ? "singular" : "plural" : null;
         // console.log("_ref4", _ref4)
-        const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].valueData") : null;
+        const _ref5 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[0].value") : null;
         // console.log("_ref5", _ref5)
         const _units = _ref5 && _phraseQuantityType ? phrase(_ref5?.data, _phraseQuantityType, [_ref5]) : null; //entry/entries //record(s)
 
@@ -607,7 +540,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         // simplified comparison for dates if rdfs is date-time AND the _valueData is negative (e.g. greater than -18 months before turns into "less than 18 months before")
         // requires rdfs:range in order to work e.g. only applies this function to DateTime!
         const _isDateTime = _.get(_ref1, "data.rdfs:range.@id") != undefined && _ref1?.data["rdfs:range"]["@id"] == "im:DateTime";
-        if (_isDateTime && _valueData?.text ) {
+        if (_isDateTime && _valueData?.text) {
             //turns greater than into less than and vice versa
             const _isNegative = isNegative(parseInt(_valueData?.text));
             _comparison = _ref3 ? mutable(phrase(_ref3?.data, _isNegative, [_ref3])) : null;
@@ -617,7 +550,7 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
         }
 
         // comparator e.g. reference date
-        const _ref6 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[1].valueData") : null;
+        const _ref6 = currentClause?.valueFunction ? reference(currentClause, "valueFunction.argument[1].value") : null;
         const _before = constant("before")
         const _comparator = _ref6 ? phrase("entityName", _ref6.data, [_ref6]) : null; //entry/entries //record(s)
 
@@ -687,12 +620,12 @@ const entityProperty = (mainEntity: any, parentClause: any, currentClause: any, 
                 // console.log("one clause", _clauses)
                 _sentences.push(_sentence(_clauses));
             } else {
-             //   console.log("clause not recognised for transformation using entityProperty template")
+                //   console.log("clause not recognised for transformation using entityProperty template")
 
             }
         })
     } else {
-     //   console.log("no argument specified for entityProperty template function inside the cascade")
+        //   console.log("no argument specified for entityProperty template function inside the cascade")
         return null;
     }
     return _sentences;
@@ -759,7 +692,7 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
 
     }
 
- //   console.log("_sentence", _sentence)
+    //   console.log("_sentence", _sentence)
     return _sentence;
 
 };
@@ -777,26 +710,24 @@ const PropertySort = (mainEntity: any, parentClause: any, currentClause: any, ar
 const CascadingTemplates = [
     {
         uuid: `urn:uuid:${v4()}`,
-
         get: { function: "includeMainEntity", input: [] },
         set: null,
         meta: {
-            min: 0,
-            max: 1,
-            mutableCount: 0,
+            min: null,
+            max: null,
+            mutableCount: null,
             matchIf: null,
         },
         data: [],
         children: [
             {
                 uuid: `urn:uuid:${v4()}`,
-
                 get: { function: "linkedEntity", input: [] },
                 set: null,
                 meta: {
-                    min: 0,
-                    max: 1,
-                    mutableCount: 0,
+                    min: null,
+                    max: null,
+                    mutableCount: null,
                     matchIf: {
                         all: [
                             {
@@ -811,13 +742,12 @@ const CascadingTemplates = [
                 children: [
                     {
                         uuid: `urn:uuid:${v4()}`,
-
                         get: { function: "entityProperty", input: [{ paths: ["json", "json.and", "json.or", "json.not"] }] },
                         set: null,
                         meta: {
-                            min: 0,
-                            max: 1,
-                            mutableCount: 0,
+                            min: null,
+                            max: null,
+                            mutableCount: null,
                             matchIf: {
                                 any: [
                                     {
@@ -843,9 +773,9 @@ const CascadingTemplates = [
                         get: { function: "PropertySort", input: [] },
                         set: null,
                         meta: {
-                            min: 0,
-                            max: 1,
-                            mutableCount: 0,
+                            min: null,
+                            max: null,
+                            mutableCount: null,
                             matchIf: {
                                 all: [
                                     {
@@ -863,9 +793,9 @@ const CascadingTemplates = [
                                 get: { function: "entityProperty", input: [{ paths: ["json.test.and", "json.test.or", "json.test.not", "json.test"] }] },
                                 set: null,
                                 meta: {
-                                    min: 0,
-                                    max: 1,
-                                    mutableCount: 0,
+                                    min: null,
+                                    max: null,
+                                    mutableCount: null,
                                     matchIf: {
                                         any: [
                                             {
@@ -886,18 +816,17 @@ const CascadingTemplates = [
             },
             {
                 uuid: `urn:uuid:${v4()}`,
-
                 get: { function: 'hasProfile', input: [] },
                 set: null,
                 meta: {
-                    min: 0,
-                    max: 0,
-                    mutableCount: 0,
+                    min: null,
+                    max: null,
+                    mutableCount: null,
                     matchIf: {
                         all: [
                             {
                                 test: "pathValueIs",
-                                input: ["#currentClause", "json.property.@id", "im:hasProfile"],
+                                input: ["#currentClause", "json.property.@id", "im:inResultSet"],
                                 expect: true
                             }
                         ]
@@ -909,6 +838,14 @@ const CascadingTemplates = [
         ]
     }
 ];
+
+
+function pathExists(testObject: string, testPath: string) {
+    return (typeof _.get(testObject, testPath) != "undefined");
+}
+function pathValueIs(testObject: string, testPath: string, comparatorObject: any) {
+    return _.get(testObject, testPath) == comparatorObject;
+}
 
 // #todo: ensure all templateFunctions return empty placeholders if functions are called without paramters -> this is to generate metadata for querybuilding
 const templateFunctions = {
@@ -925,6 +862,7 @@ const matchFunctions = {
     "pathExists": pathExists,
     "pathValueIs": pathValueIs,
 }
+
 
 
 export default class Templates {
@@ -960,8 +898,6 @@ export default class Templates {
 
             const _testCriteria = (criteria: any) => {
 
-
-
                 const _f = matchFunctions[criteria.test];
                 let _args = criteria.input;
 
@@ -981,13 +917,13 @@ export default class Templates {
             // #todo: add support multiple templates matching a single clause -> generate all of them
             // #display to the user first the template with the most specificity (most matchIf requirements) or least amount of placeholders (count mutables?)
 
-            if (template.meta.matchIf.all && template.meta.matchIf.all.length) {
+            if (template?.meta?.matchIf?.all?.length) {
 
                 //test all criteria using "every"
                 const _criteria = template.meta.matchIf.all;
                 _shouldMatch = _criteria.every(_testCriteria)
 
-            } else if (template.meta.matchIf.any && template.meta.matchIf.any.length) {
+            } else if (template?.meta?.matchIf?.any?.length) {
 
 
                 //test all criteria using "every"
@@ -1000,7 +936,7 @@ export default class Templates {
 
 
             //#todo: select multiple compatible phrases templates and pick the shortest one (currently it only picks one
-         //   console.log("template ", template.get.function, " should match: ", _shouldMatch)
+            //   console.log("template ", template.get.function, " should match: ", _shouldMatch)
             return _shouldMatch;
         }
 

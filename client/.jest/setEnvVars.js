@@ -1,1 +1,1 @@
-import.meta.env.VITE_API = "/test/"
+import.meta.env.VITE_NODE_API = "/test/"
