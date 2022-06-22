@@ -1,26 +1,18 @@
 # IM Query
-![Version](https://s3.eu-west-2.amazonaws.com/endeavour-codebuild-output/badges/front-end-vue/version.svg)
-![Build Status](https://s3.eu-west-2.amazonaws.com/endeavour-codebuild-output/badges/front-end-vue/build.svg)
-![Unit Tests](https://s3.eu-west-2.amazonaws.com/endeavour-codebuild-output/badges/front-end-vue/unit-test.svg)
 
+## Run Frontend
 
-## Run Frontend 
-
-### Setup (you only have to do this once) 
+### Setup (you only have to do this once)
 
 `cd frontend-vue`
 
-`npm install` 
+`npm install`
 
 <br>
 
 ### Ensure you have the following environment variables
 
-`
-VUE_APP_OSS_URL=""
-VUE_APP_OSS_AUTH_BASICTOKEN=""
-VUE_APP_INDEX_IM="dev-im"
-`
+`VUE_APP_OSS_URL="" VUE_APP_OSS_AUTH_BASICTOKEN="" VUE_APP_INDEX_IM="dev-im"`
 
 <br>
 
