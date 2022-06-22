@@ -1,22 +1,15 @@
 <template>
   <ul class="radio-button-list non-selectable">
     <li v-for="item in items" :key="item.id" class="radio-button-list__item hover:shadow-base">
-      <input
-        type="radio"
-        :value="item.id"
-        class="radio-button"
-        :checked="modelValue.includes(item.id)"
-        ref="radioButton"
-      />
+      <input type="radio" :value="item.id" class="radio-button" :checked="modelValue.includes(item.id)" ref="radioButton" />
       <label
-        :class="'radio-button__label flex justify-between'
-        + [ checkbox ? ' checkbox' : '']"
-        @click="$emit('update:modelValue', getSelectedItems(item.id));"
+        :class="'radio-button__label flex justify-between' + [checkbox ? ' checkbox' : '']"
+        @click="$emit('update:modelValue', getSelectedItems(item.id))"
         ref="radioLabel"
       >
         {{ item.name }}
         <div v-if="item.explanation" class="inline-flex" style="margin-left: 5px" v-tooltip="item.explanation">
-          <font-awesome-icon icon="question-circle" />
+          <i class="fa-solid question-circle"></i>
         </div>
       </label>
     </li>
@@ -32,11 +25,11 @@ export default defineComponent({
   props: ["items", "multiselect", "modelValue", "checkbox"],
   $refs: {
     input: HTMLElement,
-    label: HTMLElement,
+    label: HTMLElement
   },
   data() {
     return {
-      selectedItems: [0],
+      selectedItems: [0]
     };
   },
   methods: {
@@ -48,19 +41,18 @@ export default defineComponent({
           this.selectedItems = this.selectedItems.filter(function(value: any) {
             return value !== id;
           });
-           return this.selectedItems;
+          return this.selectedItems;
         } else {
           this.selectedItems = [...this.selectedItems, id];
-           return this.selectedItems;
+          return this.selectedItems;
         }
       } else {
         //if multiselection disabled
         this.selectedItems = [id];
         return this.selectedItems;
       }
-     
-    },
-  },
+    }
+  }
 });
 </script>
 
@@ -114,14 +106,13 @@ ul {
   box-sizing: border-box;
   background-color: #fff;
   display: block;
-  transition: al
-  l 0.2s ease-in-out;
+  transition: al l 0.2s ease-in-out;
 }
 .radio-button__label {
   font-size: 16px;
   font-weight: 500;
   padding: 16px 16px 16px 16px;
-   border: 1px solid transparent;/* light #ced4da;  purple #9b6fb6 */
+  border: 1px solid transparent; /* light #ced4da;  purple #9b6fb6 */
 
   border-radius: 4px;
   color: #374151; /* darker: 112950 ligher black #554565 */

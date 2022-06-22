@@ -4,16 +4,14 @@ import router from "./router";
 import store from "./store";
 import PrimeVue from "primevue/config";
 import VueClipboard from "vue3-clipboard";
-import '../index.css';
+import "../index.css";
 import "im-library/dist/style.css";
 
 // Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-
 
 dom.watch();
 
@@ -81,8 +79,7 @@ import Calendar from "primevue/calendar";
 import InputNumber from "primevue/inputnumber";
 
 //other components
-import VWave from 'v-wave'
-
+import VWave from "v-wave";
 
 //aws
 import { Amplify, Auth } from "aws-amplify";
@@ -132,7 +129,6 @@ const app = createApp(App)
   .component("OverlayPanel", OverlayPanel)
   .component("Menu", Menu)
   // .component("Chart", Chart)
-  .component("font-awesome-icon", FontAwesomeIcon)
   .component("Menubar", Menubar)
   .component("InlineMessage", InlineMessage)
   .component("Message", Message)

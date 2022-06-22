@@ -15,6 +15,9 @@ export default defineConfig({
   server: {
     port: 8082
   },
+  optimizeDeps: {
+    exclude: ["im-library"]
+  },
   test: {
     globals: true,
     environment: "jsdom",
@@ -23,8 +26,8 @@ export default defineConfig({
         url: "http://localhost"
       }
     }
-  },
-  
+  }
+
   // optimizeDeps: {
   //   exclude: ['/query/']
   // },
