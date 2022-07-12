@@ -1,0 +1,91 @@
+{
+    "@id": "urn:uuid:fe469cf2-84f3-4b03-a2f5-96223ae78dfd",
+    "name": "Priority 2",
+    "description": "",
+    "mainEntity": {
+        "@id": "http://endhealth.info/im#Person"
+    },
+    "select": {
+        "entityType": {
+            "name": "Person",
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "match": {
+            "entityInSet": [
+                {
+                    "name": "SMI Population",
+                    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf"
+                }
+            ],
+            "or": [
+                {
+                    "notExist": true,
+                    "entityInSet": [
+                        {
+                            "name": "Priority 1",
+                            "@id": "urn:uuid:40a4a1f1-b768-4db8-a8a6-6df744935d97"
+                        }
+                    ]
+                },
+                {
+                    "@id": "urn:uuid:187d074d-bc00-4fa6-a92f-f68011d1d0a6",
+                    "notExist": true,
+                    "property": {
+                        "name": "is subject of ",
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "match": {
+                        "name": "No blood pressure in the last 18 months",
+                        "entityType": {
+                            "name": "Observation (entry type)",
+                            "@id": "http://endhealth.info/im#Observation"
+                        },
+                        "and": [
+                            {
+                                "property": {
+                                    "name": "codeable expression",
+                                    "alias": "concept94",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "inSet": [
+                                    {
+                                        "name": "SAP - Systolic arterial pressure",
+                                        "@id": "urn:uuid:baecab97-5d13-495d-b807-63c0901ec469"
+                                    }
+                                ]
+                            },
+                            {
+                                "property": {
+                                    "name": "effective date",
+                                    "alias": "effectiveDate95",
+                                    "@id": "http://endhealth.info/im#effectiveDate"
+                                },
+                                "value": {
+                                    "comparison": "LESS_THAN_OR_EQUAL",
+                                    "valueData": "18"
+                                },
+                                "function": {
+                                    "@id": "http://endhealth.info/im#TimeDifference",
+                                    "argument": [
+                                        {
+                                            "parameter": "units",
+                                            "valueData": "MONTH"
+                                        },
+                                        {
+                                            "parameter": "firstDate",
+                                            "valueVariable": "$this"
+                                        },
+                                        {
+                                            "parameter": "secondDate",
+                                            "valueVariable": "$referenceDate"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

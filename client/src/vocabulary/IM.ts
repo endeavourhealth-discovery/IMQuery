@@ -56,6 +56,9 @@ export class IM {
   public static EFFECTIVE_DATE = IM.NAMESPACE + "effectiveDate";
   public static TIME_DIFFERENCE = IM.NAMESPACE + "TimeDifference";
   public static OBSERVATION = IM.NAMESPACE + "Observation";
+  public static CONCEPT = IM.NAMESPACE + "concept";
+  public static VALUE = IM.NAMESPACE + "value";
+  
 
   public static PREFIXED = new class {
 

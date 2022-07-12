@@ -16,18 +16,7 @@
             ]
         "
       >
-        <!-- Icon -->
-        <!-- <div class="inline-flex">
-          <HeroIcon
-            :class="[
-              modelValue == item.id ? ' text-yellow-500' : ' text-gray-500',
-            ]"
-            icon="database"
-            strokewidth="2"
-            width="24"
-            height="24"
-          />
-        </div> -->
+
 
         <!-- Name  -->
         <div class="inline-flex font-medium text-2xl ml-2 mr-2">

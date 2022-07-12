@@ -2,10 +2,72 @@
 import * as wordMap from './Config/WordMap.json';
 import _ from "lodash";
 import * as labels from "./Config/AdditionalOntology.json"
+import { Clause } from "./Clause"
+import { IM, RDF, RDFS } from "../../vocabulary"
+import jp from 'jsonpath';
 
+// import * as Templates from "./Config/Templates.json"
 
 export class Helpers {
 
+
+    // public static getText(templateIri: string): string {
+    //     const template = Helpers.isTemplateMatch(templateIri, true);
+    
+    // }
+
+
+    // public static isTemplateMatch(templateIri: string, isMatch: boolean): any {
+    //     // console.log("arguments", arguments)
+    //     // console.log("Templates", Templates.default.find((template: any) => template?.iri == templateIri))
+    //     if (isMatch) {
+    //         return Templates.default.find((template: any) => template?.iri == templateIri)
+    //     } else {
+    //         return null
+    //     }
+    // };
+
+
+    public static href = (iri: string) => "https://dev.endhealth.co.uk/viewer/#/concept/" + encodeURIComponent(iri);
+
+
+    public static html(tagName: string, innerHTML: string, attributes?: any | null,): string {
+        let html = `<${tagName}`;
+        Object.keys(attributes).forEach((attribute: any) => {
+            const value = attributes[attribute];
+            html = html + ` ${attribute}="${value}"`
+        })
+        html = html + ">" + innerHTML + ` </${tagName}>`;
+        return html;
+    }
+
+    public static isDateAliasCompared(matchClause: any): boolean {
+
+        const andClause = new Clause(matchClause);
+        // console.log("isDateAliasCompared clause getters", andClause)
+
+        function isDateAliasInPrecedingClause(matchClause: any, testAlias: string, currentClauseIndex: number): boolean {
+            // console.log("args", arguments)
+            return matchClause?.definition.some((property: any, index: number) => {
+                const aliases = jp.nodes(property, `$..[?(@.alias)]`);
+                const result = index < currentClauseIndex && aliases.some((alias: any) => alias?.value?.alias == testAlias);
+                return result;
+            })
+
+        }
+
+        const aliasIndexMap = new Map();
+        for (let i = 1; i < andClause.definition.length; i++) {
+            const propertyClause = andClause.definition[i];
+            return propertyClause?.property.some((property: any) => {
+                if (property['@id'] == IM.EFFECTIVE_DATE && isDateAliasInPrecedingClause(andClause, property?.value?.valueVariable, i)) {
+                    return true;
+                }
+            })
+        }
+
+        return false;
+    }
 
     //these are silenced words or excess words that need to be trimmed off
     public static trimUnnecessaryText(inputString: string): string {

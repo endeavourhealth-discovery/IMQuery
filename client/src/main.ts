@@ -5,7 +5,7 @@ import store from "./store";
 import PrimeVue from "primevue/config";
 import VueClipboard from "vue3-clipboard";
 import '../index.css';
-import "im-library/dist/style.css";
+// import "im-library/dist/style.css";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";

@@ -125,9 +125,10 @@ export default createStore({
       }
 
       // try {
-      // const entity = await QueryService.querySummary(fileIri).then(res => {
-      // const entity = await QueryService.definition(fileIri).then(res => {
-      const entity = await QueryService.querySummary(fileIri).then(res => {
+        // const entity = await QueryService.querySummary(fileIri).then(res => {
+          // const entity = await QueryService.definition(fileIri).then(res => {
+            // const entity = await QueryService.summariseLocalQuery(fileIri).then(res => {
+        const entity = await QueryService.summariseQuery(fileIri).then(res => {
         console.log("## res:", res); //?res.data if backend
         const data = res?.data || res
         state.queryBuilder.loadDataSet(data);

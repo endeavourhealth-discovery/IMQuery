@@ -1,0 +1,130 @@
+{
+    "@id": "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
+    "name": "SMI Population",
+    "description": "Adults 18+ with SMI",
+    "mainEntity": {
+        "@id": "http://endhealth.info/im#Person"
+    },
+    "select": {
+        "entityType": {
+            "name": "Person",
+            "@id": "http://endhealth.info/im#Person"
+        },
+        "match": {
+            "entityInSet": [
+                {
+                    "name": "Registered with GP for GMS services on the reference date",
+                    "@id": "http://endhealth.info/im#Q_RegisteredGMS"
+                }
+            ],
+            "and": [
+                {
+                    "@id": "urn:uuid:cebe3297-5f54-4556-81f0-0ca14f27922e",
+                    "and": [
+                        {
+                            "property": {
+                                "name": "GP patient type",
+                                "alias": "gpPatientType1",
+                                "@id": "http://endhealth.info/im#gpPatientType"
+                            },
+                            "isConcept": [
+                                {
+                                    "name": "Regular GMS patient",
+                                    "includeSubtypes": true,
+                                    "@id": "http://endhealth.info/im#2751000252106"
+                                }
+                            ]
+                        },
+                        {
+                            "property": {
+                                "name": "Age",
+                                "alias": "age2",
+                                "@id": "http://endhealth.info/im#age"
+                            },
+                            "value": {
+                                "comparison": "GREATER_THAN_OR_EQUAL",
+                                "valueData": "18"
+                            },
+                            "function": {
+                                "argument": [
+                                    {
+                                        "parameter": "units",
+                                        "valueData": "YEAR"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "@id": "urn:uuid:36817d95-6552-43f1-9c7a-85c46b1a77b5",
+                    "property": {
+                        "name": "is subject of ",
+                        "@id": "http://endhealth.info/im#isSubjectOf"
+                    },
+                    "match": {
+                        "subselect": {
+                            "property": [
+                                {
+                                    "@id": "http://endhealth.info/im#effectiveDate",
+                                    "alias": "effectiveDate4"
+                                }
+                            ],
+                            "match": {
+                                "property": {
+                                    "name": "codeable expression",
+                                    "alias": "concept3",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "inSet": [
+                                    {
+                                        "name": "Serious mental illness",
+                                        "@id": "urn:uuid:8ab86afb-94e0-45fc-9875-3d16705cf41c"
+                                    }
+                                ]
+                            },
+                            "orderLimit": {
+                                "orderBy": {
+                                    "@id": "http://endhealth.info/im#effectiveDate",
+                                    "alias": "effectiveDate4"
+                                },
+                                "direction": "DESCENDING",
+                                "count": 1
+                            }
+                        },
+                        "notExist": true,
+                        "entityType": {
+                            "name": "Observation (entry type)",
+                            "@id": "http://endhealth.info/im#Observation"
+                        },
+                        "and": [
+                            {
+                                "property": {
+                                    "name": "codeable expression",
+                                    "alias": "concept5",
+                                    "@id": "http://endhealth.info/im#concept"
+                                },
+                                "isConcept": [
+                                    {
+                                        "name": "Serious mental illness resolved",
+                                        "@id": "urn:uuid:837c474c-f6af-4a05-83ad-7c4ee7557e11"
+                                    }
+                                ]
+                            },
+                            {
+                                "property": {
+                                    "alias": "effectiveDate6",
+                                    "@id": "http://endhealth.info/im#effectiveDate"
+                                },
+                                "value": {
+                                    "comparison": "GREATER_THAN",
+                                    "valueVariable": "effectiveDate4"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

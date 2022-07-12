@@ -1,8 +1,12 @@
+import { Helpers } from "./Helpers"
+// const { a, isSingular, html, isDateAliasCompared, href, isTemplateMatch } = Helpers;
+
 import { _ } from "lodash";
 import * as wordMap from "./Config/WordMap.json"
 import * as pathMap from "./Config/PathMap.json"
 import { IM, RDF, RDFS } from "../../vocabulary"
-import { Helpers } from "./Helpers"
+// import { Helpers } from "./Helpers"
+// const { a, isSingular, html, isDateAliasCompared, href, isTemplateMatch } = Helpers;
 
 
 export class TTIriRef {
@@ -11,6 +15,8 @@ export class TTIriRef {
 
 
     constructor(obj?: any) {
+
+
         if (obj && obj["@id"] && obj?.name) {
             this["@id"] = obj["@id"] ? obj["@id"] : null;
             this.name = obj?.name;
@@ -75,5 +81,15 @@ export class Clause {
     get has(): string {
         return wordMap["has"][this.exists.toString()];
     }
+
+
+    templates(): any {
+
+        let result = {};
+        if (this["and"] && Array.isArray(this["and"]) && this["and"].length > 1 && Helpers.isDateAliasCompared(this["and"])) {
+
+        }
+    }
+
 
 }

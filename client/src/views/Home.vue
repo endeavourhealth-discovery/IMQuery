@@ -256,7 +256,7 @@
           <!-- Viewer  -->
           <div class="w-full h-full flex justify-between bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <!-- Left -->
-            <div v-show="!editMode" class="categories ml-20 inline-flex space-x-10 lg:flex-col lg:space-y-6  lg:space-x-0 select-none ">
+            <div v-show="!editMode" class="categories ml-20 #inline-flex #space-x-10 #lg: flex-col #lg: space-y-6  lg:space-x-0 select-none ">
               <template v-for="category in config?.query?.categories" :key="category.name">
                 <div
                   v-if="category.visible"
