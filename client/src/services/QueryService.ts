@@ -12,6 +12,9 @@ const { onlyUnique, excludedPaths, entitiesFromPredicates, isTTIriRef } = Manipu
 export default class QueryService {
 
 
+  
+
+
 
   public static async getLocalDefinition(filename: string): Promise<any> {
     try {

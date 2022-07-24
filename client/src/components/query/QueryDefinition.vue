@@ -17,7 +17,8 @@ export default defineComponent({
   emits: ["stopEditing"],
   components: { Node },
   computed: {
-    ...mapState(["activeClausePath"])
+    ...mapState(["activeClausePath"]),
+    
   },
   watch: {
     modelValue(value: any) {
@@ -53,8 +54,8 @@ export default defineComponent({
   padding: 1.5rem;
   margin-bottom: 3rem;
   background-color: #ffffff;
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  /* background-image: linear-gradient(to right, var(--tw-gradient-stops)); */
+  /* transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; */
   transition-duration: 700ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0.75rem;

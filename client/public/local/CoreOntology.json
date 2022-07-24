@@ -451,7 +451,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -772,7 +772,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -1380,7 +1380,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -1523,7 +1523,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dateTimeProperty"
 				}
@@ -1982,7 +1982,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -2097,7 +2097,7 @@
 				}
 			],
 			 "im:code": 903621000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903431000252107"
 				}
@@ -2261,7 +2261,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -2281,7 +2281,7 @@
 				}
 			],
 			 "im:code": 903601000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -2842,7 +2842,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -2862,7 +2862,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -2928,7 +2928,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -2994,7 +2994,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -3156,7 +3156,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -3900,7 +3900,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -3920,7 +3920,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -3986,7 +3986,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -4239,7 +4239,7 @@
 				}
 			],
 			 "im:code": 903341000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:904081000252101"
 				}
@@ -4262,43 +4262,6 @@
 			 "rdfs:range": [
 				{
 					 "@id": "sn:125676002"
-				}
-			]
-		},
-		{
-			 "@id": "im:DateTimeObservation",
-			 "rdf:type": [
-				{
-					 "@id": "sh:NodeShape"
-				},
-				{
-					 "@id": "rdfs:Class"
-				}
-			],
-			 "rdfs:label": "Date time observation",
-			 "rdfs:comment": "A less common observation is one where the result value is a date.",
-			 "im:status": [
-				{
-					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:Observation"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:string"
-						}
-					],
-					 "sh:path": [
-						{
-							 "@id": "im:resultDate"
-						}
-					]
 				}
 			]
 		},
@@ -4521,7 +4484,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -4590,11 +4553,6 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:IndividualsAndTeams"
@@ -4640,7 +4598,7 @@
 			]
 		},
 		{
-			 "@id": "im:MedicationAuthorisationsOrCourses",
+			 "@id": "im:MedicationAuthorisation",
 			 "rdf:type": [
 				{
 					 "@id": "sh:NodeShape"
@@ -4649,8 +4607,8 @@
 					 "@id": "rdfs:Class"
 				}
 			],
-			 "rdfs:label": "Medication authorisations or courses (entry type)",
-			 "rdfs:comment": "Also referred as Medication statement entries, these are entries for describing and authorising a course of medication or an intention to prescribe. Medication entries are precursors to the prescribing of a drug (medication order), dispensing of a drug (e.g.... chemist) or the administration of a drug (e.g.... medicine administration by nurse)</span><p>In General practice, acute prescriptions are based on medication entries with a single authorisation and repeat medications are based on medication entries with multiple authorisations. In hospital, the drug chart contains the medications.",
+			 "rdfs:label": "Medication authorisation (entry type)",
+			 "rdfs:comment": "Also referred as Medication statement entries, this entry is  for describing and authorising a course of medication or an intention to prescribe. Medication entries are precursors to the prescribing of a drug (medication order), dispensing of a drug (e.g.... chemist) or the administration of a drug (e.g.... medicine administration by nurse)</span><p>In General practice, acute prescriptions are based on medication entries with a single authorisation and repeat medications are based on medication entries with multiple authorisations. In hospital, the drug chart contains the medications.",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
@@ -4671,6 +4629,18 @@
 					 "sh:class": [
 						{
 							 "@id": "im:Concept"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:courseStatus"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Status"
 						}
 					]
 				},
@@ -5203,7 +5173,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -5530,7 +5500,7 @@
 				}
 			],
 			 "im:code": 904031000252102,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -5601,7 +5571,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -5667,7 +5637,7 @@
 				}
 			],
 			 "im:code": 903681000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903711000252107"
 				}
@@ -5971,7 +5941,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -6165,9 +6135,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "owl:languagePredicate"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -6185,9 +6155,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "owl:languagePredicate"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -6205,7 +6175,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -6225,7 +6195,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -6631,7 +6601,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -6769,7 +6739,27 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:valueVariable",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "value variable",
+			 "rdfs:comment": "name of a variable to hold a value",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -7035,30 +7025,42 @@
 			 "@id": "im:Person",
 			 "rdf:type": [
 				{
-					 "@id": "rdfs:Class"
+					 "@id": "sh:NodeShape"
 				},
 				{
-					 "@id": "sh:NodeShape"
+					 "@id": "rdfs:Class"
 				}
 			],
-			 "rdfs:label": "Person",
-			 "rdfs:comment": "An id of a person to which entries refer. A person identifier may not be 1:1 with an actual person as each organisation has there own id for example a patient id",
+			 "rdfs:label": "Person (entry type)",
+			 "rdfs:comment": "Record of the core details of  a person client patient or service linking to core properties of the person such as demographics or states",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
+				{
+					 "@id": "im:PersonalHealthRecords"
+				},
 				{
 					 "@id": "im:IndividualsAndTeams"
 				}
 			],
 			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:dataController"
+						}
+					],
+					 "sh:maxCount": 1,
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:Organisation"
+						}
+					]
+				},
 				{
 					 "sh:path": [
 						{
@@ -7070,32 +7072,7 @@
 							 "@id": "im:Person"
 						}
 					]
-				}
-			]
-		},
-		{
-			 "@id": "im:PersonDetails",
-			 "rdf:type": [
-				{
-					 "@id": "sh:NodeShape"
 				},
-				{
-					 "@id": "rdfs:Class"
-				}
-			],
-			 "rdfs:label": "Person details",
-			 "rdfs:comment": "Record of the core details of  a person client patient or service covering the 'who' data and demographics",
-			 "im:status": [
-				{
-					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:HealthRecordEntry"
-				}
-			],
-			 "sh:property": [
 				{
 					 "sh:path": [
 						{
@@ -7251,6 +7228,77 @@
 							 "@id": "im:nhsNumber"
 						}
 					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:integer"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:age"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:gpPatientType"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:1861000252107"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:gpRegisteredStatus"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:1012561000252102"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "im:DateTime"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:gpGMSRegistrationDate"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:gpGMSRegisteredPractice"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Organisation"
+						}
+					]
+				}
+			],
+			 "im:hasTermCode": [
+				{
+					 "rdfs:label": "Patient"
+				},
+				{
+					 "rdfs:label": "Client"
+				},
+				{
+					 "rdfs:label": "Service user"
 				}
 			]
 		},
@@ -7360,7 +7408,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -8150,7 +8198,7 @@
 				}
 			],
 			 "im:code": 903901000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903991000252101"
 				}
@@ -8201,7 +8249,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -8268,7 +8316,7 @@
 				}
 			],
 			 "im:code": 511000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -8339,7 +8387,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -8522,7 +8570,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -8542,7 +8590,7 @@
 				}
 			],
 			 "im:code": 903881000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:904081000252101"
 				}
@@ -8582,7 +8630,7 @@
 				}
 			],
 			 "im:code": 903691000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903881000252105"
 				}
@@ -8630,7 +8678,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -8650,7 +8698,7 @@
 				}
 			],
 			 "im:code": 904011000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -8767,7 +8815,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -8787,7 +8835,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -8807,7 +8855,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -8878,7 +8926,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -9015,7 +9063,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -9527,7 +9575,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -9736,7 +9784,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -9976,7 +10024,12 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:WorkflowEvent"
+					 "@id": "im:Event"
+				}
+			],
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:WorkflowEntries"
 				}
 			],
 			 "sh:property": [
@@ -10456,7 +10509,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -10501,7 +10554,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -10874,7 +10927,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -10989,7 +11042,7 @@
 				}
 			],
 			 "im:code": 903811000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -11241,14 +11294,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -11412,7 +11460,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -11642,7 +11690,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -11768,7 +11816,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -12302,7 +12350,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -12578,7 +12626,7 @@
 				}
 			],
 			 "im:code": 903801000252102,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:904001000252109"
 				}
@@ -12738,7 +12786,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -12761,7 +12809,7 @@
 				}
 			],
 			 "im:code": 904081000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -12963,7 +13011,7 @@
 				}
 			],
 			 "im:code": 903471000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903731000252102"
 				}
@@ -13411,7 +13459,7 @@
 				}
 			],
 			 "im:code": 903671000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:904081000252101"
 				}
@@ -13446,7 +13494,7 @@
 				}
 			],
 			 "im:code": 903791000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -13767,7 +13815,7 @@
 				}
 			],
 			 "im:code": 301000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -14444,7 +14492,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -14464,7 +14512,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -14668,7 +14716,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -15009,7 +15057,7 @@
 			 "@id": "im:Status",
 			 "rdf:type": [
 				{
-					 "@id": "im:Concept"
+					 "@id": "rdfs:Class"
 				}
 			],
 			 "rdfs:label": "Activity status",
@@ -15045,7 +15093,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -15068,14 +15116,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -15085,7 +15128,7 @@
 							 "@id": "im:address"
 						}
 					],
-					 "sh:class": [
+					 "sh:node": [
 						{
 							 "@id": "im:Address"
 						}
@@ -15430,7 +15473,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -15847,7 +15890,7 @@
 				}
 			],
 			 "im:code": 903741000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903811000252104"
 				}
@@ -15939,7 +15982,7 @@
 				}
 			],
 			 "im:code": 903861000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -15964,7 +16007,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -16185,7 +16228,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -16525,7 +16568,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -16545,7 +16588,7 @@
 				}
 			],
 			 "im:code": 903361000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903711000252107"
 				}
@@ -16694,7 +16737,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -17446,7 +17489,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -17537,7 +17580,7 @@
 				}
 			],
 			 "im:code": 903721000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903991000252101"
 				}
@@ -17809,7 +17852,7 @@
 			]
 		},
 		{
-			 "@id": "im:NumericObservation",
+			 "@id": "im:NumericValue",
 			 "rdf:type": [
 				{
 					 "@id": "sh:NodeShape"
@@ -17818,16 +17861,16 @@
 					 "@id": "rdfs:Class"
 				}
 			],
-			 "rdfs:label": "Numeric observation",
-			 "rdfs:comment": "One of the commonest observations are pathology results and they often have numeric values as results. They extend simple observations",
+			 "rdfs:label": "Numeric value",
+			 "rdfs:comment": "One of the commonest observations are pathology results and they often have numeric values as results",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
+			 "im:isContainedIn": [
 				{
-					 "@id": "im:Observation"
+					 "@id": "im:QualifierStructure"
 				}
 			],
 			 "sh:property": [
@@ -18523,7 +18566,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -18825,7 +18868,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -18845,7 +18888,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -18890,7 +18933,27 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:isSubsetOf",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "is subset of",
+			 "rdfs:comment": "points to a set that this set is a subset of",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -18956,7 +19019,7 @@
 				}
 			],
 			 "im:code": 903701000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -19295,7 +19358,7 @@
 			]
 		},
 		{
-			 "@id": "im:581000252100",
+			 "@id": "http://endhealth.info/hc#",
 			 "rdf:type": [
 				{
 					 "@id": "im:Concept"
@@ -19310,10 +19373,9 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:CodeScheme"
+					 "@id": "im:Graph"
 				}
 			],
-			 "im:code": 581000252100,
 			 "im:scheme": [
 				{
 					 "@id": "im:"
@@ -19452,7 +19514,7 @@
 				}
 			],
 			 "im:code": 903641000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -19615,7 +19677,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -19640,7 +19702,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -19865,7 +19927,7 @@
 				}
 			],
 			 "im:code": 903781000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -19911,7 +19973,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -20355,7 +20417,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -20538,7 +20600,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -20696,14 +20758,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:responsibleAgent"
-				}
-			],
-			 "rdfs:domain": [
-				{
-					 "@id": "im:HealthRecordEntry"
 				}
 			]
 		},
@@ -20768,7 +20825,7 @@
 				}
 			],
 			 "im:code": 3551000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -20885,7 +20942,7 @@
 				}
 			],
 			 "im:code": 903911000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -21187,7 +21244,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dateTimeProperty"
 				}
@@ -21696,7 +21753,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -21854,7 +21911,7 @@
 				}
 			],
 			 "im:code": 903581000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903441000252103"
 				}
@@ -22056,7 +22113,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -22214,7 +22271,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -22306,7 +22363,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -22502,6 +22559,43 @@
 			]
 		},
 		{
+			 "@id": "im:FamilyHistory",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				},
+				{
+					 "@id": "rdfs:Class"
+				}
+			],
+			 "rdfs:label": "Family history (entry type)",
+			 "rdfs:comment": "Observations relating to family history of conditions",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:Event"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:concept"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:VSET_FamilyHistory"
+						}
+					]
+				}
+			]
+		},
+		{
 			 "@id": "im:31151000252111",
 			 "rdf:type": [
 				{
@@ -22656,7 +22750,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -23666,7 +23760,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -23757,7 +23851,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -23915,7 +24009,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -23935,7 +24029,7 @@
 				}
 			],
 			 "im:code": 903941000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -24079,7 +24173,7 @@
 				}
 			],
 			 "im:code": 441000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -24151,7 +24245,7 @@
 				}
 			],
 			 "im:code": 3421000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -24548,7 +24642,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -24673,7 +24767,7 @@
 			]
 		},
 		{
-			 "@id": "im:component",
+			 "@id": "im:componentType",
 			 "rdf:type": [
 				{
 					 "@id": "owl:ObjectProperty"
@@ -24686,9 +24780,49 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:Label",
+			 "rdf:type": [
+				{
+					 "@id": "im:Component"
+				}
+			],
+			 "rdfs:label": "Label component",
+			 "rdfs:comment": "A label for display",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:Component"
+				}
+			]
+		},
+		{
+			 "@id": "im:Component",
+			 "rdf:type": [
+				{
+					 "@id": "rdfs:Class"
+				}
+			],
+			 "rdfs:label": "Component type",
+			 "rdfs:comment": "A type of component used in a form or screen display",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -24967,7 +25101,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -24997,7 +25131,7 @@
 				}
 			],
 			 "im:code": 904071000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -25117,7 +25251,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -25188,7 +25322,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -25204,21 +25338,16 @@
 					 "@id": "rdfs:Class"
 				}
 			],
-			 "rdfs:label": "Organisation  (entry type)",
+			 "rdfs:label": "Organisation (entry type)",
 			 "rdfs:comment": "A record of an organisation and its relationships. Named collections of people that have come together to achieve an objective",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -25228,7 +25357,7 @@
 							 "@id": "im:address"
 						}
 					],
-					 "sh:class": [
+					 "sh:node": [
 						{
 							 "@id": "im:Address"
 						}
@@ -25243,18 +25372,6 @@
 					 "sh:class": [
 						{
 							 "@id": "im:ContactInformation"
-						}
-					]
-				},
-				{
-					 "sh:path": [
-						{
-							 "@id": "im:address"
-						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "im:Address"
 						}
 					]
 				},
@@ -25759,7 +25876,7 @@
 				}
 			],
 			 "im:code": 903711000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903811000252104"
 				}
@@ -26411,7 +26528,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -26700,7 +26817,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -26851,6 +26968,310 @@
 			 "im:scheme": [
 				{
 					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:FormGenerator",
+			 "rdf:type": [
+				{
+					 "@id": "owl:Class"
+				}
+			],
+			 "rdfs:label": "Form generator",
+			 "rdfs:comment": "Provides information for generating a form from a shape",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "rdfs:Class"
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:Function",
+			 "rdf:type": [
+				{
+					 "@id": "owl:Class"
+				}
+			],
+			 "rdfs:label": "Function",
+			 "rdfs:comment": "A named function",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:DiscoveryVocabulary"
+				}
+			]
+		},
+		{
+			 "@id": "im:CountFunction",
+			 "rdf:type": [
+				{
+					 "@id": "sh:Function"
+				}
+			],
+			 "rdfs:label": "Count function",
+			 "rdfs:comment": " Function that counts from the values of a property in a match clause. The parameter is ",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "sh:functionProperty"
+				}
+			],
+			 "sh:parameter": [
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:description": "the name of the value variable from a match clause i.e. the set of field values bond to the property map",
+					 "sh:path": [
+						{
+							 "@id": "im:valueVar"
+						}
+					]
+				}
+			],
+			 "rdfs:range": [
+				{
+					 "@id": "xsd:decimal"
+				}
+			]
+		},
+		{
+			 "@id": "im:age",
+			 "rdf:type": [
+				{
+					 "@id": "sh:Function"
+				},
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "Age",
+			 "rdfs:comment": "A function that calculates age at the reference date",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:functionProperty"
+				}
+			],
+			 "sh:parameter": [
+				{
+					 "rdfs:label": "FirstDate",
+					 "sh:datatype": [
+						{
+							 "@id": "im:DateTime"
+						}
+					],
+					 "im:select": "{\r\n  \"entityType\" : {\r\n    \"@id\" : \"http://endhealth.info/im#Person\"\r\n  },\r\n  \"property\" : [ {\r\n    \"@id\" : \"http://endhealth.info/im#dateOfBirth\",\r\n    \"alias\" : \"dateOfBirth\"\r\n  } ]\r\n}"
+				},
+				{
+					 "rdfs:label": "referenceDate",
+					 "sh:datatype": [
+						{
+							 "@id": "im:DateTime"
+						}
+					],
+					 "sh:hasValue": "$referenceDate"
+				},
+				{
+					 "rdfs:label": "units"
+				}
+			],
+			 "im:function": "{\r\n  \"@id\" : \"http://endhealth.info/im#TimeDifference\"\r\n}",
+			 "rdfs:range": [
+				{
+					 "@id": "xsd:double"
+				}
+			]
+		},
+		{
+			 "@id": "im:gpPatientType",
+			 "rdf:type": [
+				{
+					 "@id": "sh:Function"
+				},
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "GP patient type",
+			 "rdfs:comment": "A function that calculates the patient GP registered patient type on a reference dae",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:functionProperty"
+				}
+			],
+			 "sh:parameter": [
+				{
+					 "rdfs:label": "patientType",
+					 "im:select": "{\r\n  \"name\" : \"Latest gp patient type\",\r\n  \"entityType\" : {\r\n    \"@id\" : \"http://endhealth.info/im#Person\"\r\n  },\r\n  \"property\" : [ {\r\n    \"alias\" : \"patientType\"\r\n  } ],\r\n  \"match\" : [ {\r\n    \"name\" : \"start of registration is before the reference date\",\r\n    \"pathTo\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#isSubjectOf\"\r\n    } ],\r\n    \"entityType\" : {\r\n      \"@id\" : \"http://endhealth.info/im#GPRegistration\"\r\n    },\r\n    \"property\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#effectiveDate\",\r\n      \"alias\" : \"effectiveDate\",\r\n      \"value\" : {\r\n        \"comparison\" : \"LESS_THAN\",\r\n        \"valueData\" : \"$ReferenceDate\"\r\n      }\r\n    } ],\r\n    \"orderLimit\" : {\r\n      \"orderBy\" : {\r\n        \"alias\" : \"effectiveDate\"\r\n      },\r\n      \"direction\" : \"DESCENDING\",\r\n      \"count\" : 1\r\n    },\r\n    \"testProperty\" : [ {\r\n      \"name\" : \"patient type\",\r\n      \"@id\" : \"http://endhealth.info/im#patientType\",\r\n      \"alias\" : \"patientType\",\r\n      \"isConcept\" : [ {\r\n        \"name\" : \"GP patient type\",\r\n        \"@id\" : \"http://endhealth.info/im#1861000252107\"\r\n      } ]\r\n    }, {\r\n      \"name\" : \"the registration has not ended \",\r\n      \"@id\" : \"http://endhealth.info/im#endDate\",\r\n      \"notExist\" : true\r\n    } ]\r\n  } ]\r\n}",
+					 "sh:class": [
+						{
+							 "@id": "im:Concept"
+						}
+					]
+				}
+			],
+			 "rdfs:range": [
+				{
+					 "@id": "im:Concept"
+				}
+			]
+		},
+		{
+			 "@id": "im:gpRegisteredStatus",
+			 "rdf:type": [
+				{
+					 "@id": "sh:Function"
+				},
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "GP registered status",
+			 "rdfs:comment": "A function that calculates the patient GP registration status on a reference date either registered or not",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "sh:returnType": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:functionProperty"
+				}
+			],
+			 "sh:parameter": [
+				{
+					 "rdfs:label": "patientType",
+					 "im:select": "{\r\n  \"name\" : \"Latest gp patient type\",\r\n  \"property\" : [ {\r\n    \"alias\" : \"patientType\"\r\n  } ],\r\n  \"match\" : [ {\r\n    \"pathTo\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#isSubjectOf\"\r\n    } ],\r\n    \"entityType\" : {\r\n      \"@id\" : \"http://endhealth.info/im#GPRegistration\"\r\n    },\r\n    \"property\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#effectiveDate\",\r\n      \"alias\" : \"effectiveDate\",\r\n      \"value\" : {\r\n        \"comparison\" : \"LESS_THAN\",\r\n        \"valueVariable\" : \"$referenceDate\"\r\n      }\r\n    }, {\r\n      \"@id\" : \"http://endhealth.info/im#patientType\",\r\n      \"alias\" : \"patientType\"\r\n    } ],\r\n    \"orderLimit\" : {\r\n      \"orderBy\" : {\r\n        \"alias\" : \"effectiveDate\"\r\n      },\r\n      \"direction\" : \"DESCENDING\",\r\n      \"count\" : 1\r\n    }\r\n  } ]\r\n}",
+					 "sh:class": [
+						{
+							 "@id": "im:Concept"
+						}
+					]
+				}
+			],
+			 "im:function": "{\r\n  \"conceptMap\" : {\r\n    \"http://endhealth.info/im#2751000252106\" : \"http://endhealth.info/im#1012571000252108\"\r\n  },\r\n  \"defaultConcept\" : \"http://endhealth.info/im#1012581000252106\"\r\n}"
+		},
+		{
+			 "@id": "im:gpGMSRegisteredPractice",
+			 "rdf:type": [
+				{
+					 "@id": "sh:Function"
+				},
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "GP patient registered practice",
+			 "rdfs:comment": "A function that calculates the patient GMS GP registered practice on a reference date. If the patient is not registered or is registered as a regular patient it returns null",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "sh:returnType": [
+				{
+					 "@id": "im:Organisation"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "sh:functionProperty"
+				}
+			],
+			 "sh:parameter": [
+				{
+					 "rdfs:label": "organisation",
+					 "im:select": "{\r\n  \"name\" : \"GMS registered practice on reference date\",\r\n  \"entityType\" : {\r\n    \"@id\" : \"http://endhealth.info/im#Person\"\r\n  },\r\n  \"property\" : [ {\r\n    \"@id\" : \"http://endhealth.info/im#Organisation\",\r\n    \"alias\" : \"organisation\"\r\n  } ],\r\n  \"match\" : [ {\r\n    \"name\" : \"start of registration is before the reference date\",\r\n    \"pathTo\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#isSubjectOf\"\r\n    } ],\r\n    \"property\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#effectiveDate\",\r\n      \"alias\" : \"effectiveDate\",\r\n      \"value\" : {\r\n        \"comparison\" : \"LESS_THAN\",\r\n        \"valueData\" : \"$ReferenceDate\"\r\n      }\r\n    }, {\r\n      \"@id\" : \"http://endhealth.info/im#Organisation\",\r\n      \"alias\" : \"organisation\",\r\n      \"optional\" : true\r\n    } ],\r\n    \"orderLimit\" : {\r\n      \"orderBy\" : {\r\n        \"alias\" : \"effectiveDate\"\r\n      },\r\n      \"direction\" : \"DESCENDING\",\r\n      \"count\" : 1\r\n    },\r\n    \"testProperty\" : [ {\r\n      \"name\" : \"patient type\",\r\n      \"@id\" : \"http://endhealth.info/im#patientType\",\r\n      \"isConcept\" : [ {\r\n        \"name\" : \"GP GMS Regular patient type\",\r\n        \"@id\" : \"http://endhealth.info/im#2751000252106\"\r\n      } ]\r\n    }, {\r\n      \"name\" : \"not end date\",\r\n      \"@id\" : \"http://endhealth.info/im#endDate\",\r\n      \"notExist\" : true\r\n    } ]\r\n  } ]\r\n}",
+					 "sh:class": [
+						{
+							 "@id": "im:Organisation"
+						}
+					]
+				}
+			]
+		},
+		{
+			 "@id": "im:gpGMSRegistrationDate",
+			 "rdf:type": [
+				{
+					 "@id": "sh:Function"
+				},
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "GP patient registration date function",
+			 "rdfs:comment": "A function that calculates the patient GP registration date if registgered as a gms regular patient, on a reference dae",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "sh:functionProperty"
+				}
+			],
+			 "sh:parameter": [
+				{
+					 "rdfs:label": "registrationDate",
+					 "sh:datatype": [
+						{
+							 "@id": "im:DateTime"
+						}
+					],
+					 "im:select": "{\r\n  \"name\" : \"Latest registration date if registered regular\",\r\n  \"entityType\" : {\r\n    \"@id\" : \"http://endhealth.info/im#Person\"\r\n  },\r\n  \"property\" : [ {\r\n    \"alias\" : \"registrationDate\"\r\n  } ],\r\n  \"match\" : [ {\r\n    \"pathTo\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#isSubjectOf\"\r\n    } ],\r\n    \"entityType\" : {\r\n      \"@id\" : \"http://endhealth.info/im#GPRegistration\"\r\n    },\r\n    \"property\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#effectiveDate\",\r\n      \"alias\" : \"effectiveDate\",\r\n      \"value\" : {\r\n        \"comparison\" : \"LESS_THAN\",\r\n        \"valueData\" : \"$ReferenceDate\"\r\n      }\r\n    } ],\r\n    \"orderLimit\" : {\r\n      \"orderBy\" : {\r\n        \"alias\" : \"registrationDate\"\r\n      },\r\n      \"direction\" : \"DESCENDING\",\r\n      \"count\" : 1\r\n    },\r\n    \"testProperty\" : [ {\r\n      \"@id\" : \"http://endhealth.info/im#patientType\",\r\n      \"isConcept\" : [ {\r\n        \"name\" : \"GP GMS Regular patient type\",\r\n        \"@id\" : \"http://endhealth.info/im#2751000252106\"\r\n      } ]\r\n    }, {\r\n      \"name\" : \"the registration has not ended \",\r\n      \"@id\" : \"http://endhealth.info/im#endDate\",\r\n      \"notExist\" : true\r\n    } ]\r\n  } ]\r\n}"
+				}
+			],
+			 "rdfs:range": [
+				{
+					 "@id": "xsd:string"
+				}
+			]
+		},
+		{
+			 "@id": "im:gpRegisteredPractice",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "GP registered practice",
+			 "rdfs:comment": "The organisation (practice) that the patient is registered with on the reference date",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
 				}
 			]
 		},
@@ -27276,7 +27697,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -27465,7 +27886,7 @@
 				{
 					 "sh:path": [
 						{
-							 "@id": "im:concept"
+							 "@id": "im:typeOfEncounter"
 						}
 					],
 					 "sh:maxCount": 1,
@@ -27677,7 +28098,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -28091,7 +28512,7 @@
 				}
 			],
 			 "im:code": 903931000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903731000252102"
 				}
@@ -28180,7 +28601,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -28226,7 +28647,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -28297,7 +28718,12 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:WorkflowEvent"
+					 "@id": "im:Event"
+				}
+			],
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:WorkflowEntries"
 				}
 			],
 			 "sh:property": [
@@ -28595,7 +29021,7 @@
 				}
 			],
 			 "im:code": 903761000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903671000252108"
 				}
@@ -28704,7 +29130,7 @@
 			]
 		},
 		{
-			 "@id": "im:EncounterTermsCodeScheme",
+			 "@id": "http://endhealth.info/enc#",
 			 "rdf:type": [
 				{
 					 "@id": "im:Concept"
@@ -28719,7 +29145,7 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:CodeScheme"
+					 "@id": "im:Graph"
 				}
 			]
 		},
@@ -28737,7 +29163,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -29202,7 +29628,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -29360,7 +29786,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -29392,13 +29818,13 @@
 			]
 		},
 		{
-			 "@id": "im:PhysicalEntities",
+			 "@id": "im:PhysicalBusinessEntities",
 			 "rdf:type": [
 				{
 					 "@id": "im:Folder"
 				}
 			],
-			 "rdfs:label": "Records of physical (non human) entities",
+			 "rdfs:label": "Records of physical (non human) and business entities",
 			 "rdfs:comment": "A folder containing models for records of things like organisations, locations and devices and other non person entities",
 			 "im:status": [
 				{
@@ -29407,7 +29833,7 @@
 			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -29635,7 +30061,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -29701,7 +30127,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -29721,7 +30147,7 @@
 				}
 			],
 			 "im:code": 903731000252102,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -29792,7 +30218,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -29904,7 +30330,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -30197,7 +30623,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -30359,7 +30785,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -30564,7 +30990,7 @@
 				}
 			],
 			 "im:code": 903891000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -30635,7 +31061,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -30747,7 +31173,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -30859,7 +31285,7 @@
 				}
 			],
 			 "im:code": 903421000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -30919,7 +31345,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -31382,27 +31808,8 @@
 				{
 					 "@id": "im:InformationModel"
 				}
-			]
-		},
-		{
-			 "@id": "im:ReferenceEntities",
-			 "rdf:type": [
-				{
-					 "@id": "im:Folder"
-				}
 			],
-			 "rdfs:label": "Entities linked to health record entries",
-			 "rdfs:comment": "the data entities that support health record entries including reference data,devices, provenance",
-			 "im:status": [
-				{
-					 "@id": "im:Active"
-				}
-			],
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:DiscoveryDMEntities"
-				}
-			]
+			 "im:order": 2
 		},
 		{
 			 "@id": "im:status",
@@ -31418,7 +31825,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -31715,7 +32122,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -31806,7 +32213,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -31989,7 +32396,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -32316,7 +32723,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:numericProperty"
 				}
@@ -32336,12 +32743,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:DiscoveryDMProperties"
-				}
-			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelProperty"
 				}
@@ -32734,26 +33136,71 @@
 							 "@id": "im:841000252107"
 						}
 					]
-				}
-			]
-		},
-		{
-			 "@id": "im:BartsCernerCodeScheme",
-			 "rdf:type": [
+				},
 				{
-					 "@id": "im:Concept"
-				}
-			],
-			 "rdfs:label": "Barts Cerner code",
-			 "rdfs:comment": "A cerner code as used in Barts NHS Trust Cerner Millenium system",
-			 "im:status": [
+					 "sh:path": [
+						{
+							 "@id": "im:criticalCareDischargeDest"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:1012001000252105"
+						}
+					]
+				},
 				{
-					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subClassOf": [
+					 "sh:path": [
+						{
+							 "@id": "im:criticalCareDischargeLocation"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:VSET_CriticalCareDischargeLocation"
+						}
+					]
+				},
 				{
-					 "@id": "im:CodeScheme"
+					 "sh:path": [
+						{
+							 "@id": "im:criticalCareDischargeStatus"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:VSET_CriticalCareDischargeStatus"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:criticalCareSourceLocation"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:VSET_CriticalCareSourceLocation"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:criticalCareType"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:VSET_CriticalCareType"
+						}
+					]
 				}
 			]
 		},
@@ -32889,7 +33336,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -32915,7 +33362,7 @@
 				}
 			],
 			 "im:code": 281000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -32940,7 +33387,7 @@
 				}
 			],
 			 "im:code": 903851000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903511000252101"
 				}
@@ -33552,7 +33999,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -33920,7 +34367,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -34078,7 +34525,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -34144,7 +34591,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dateTimeProperty"
 				}
@@ -34700,7 +35147,7 @@
 				}
 			],
 			 "im:code": 3191000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -34792,7 +35239,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -34812,7 +35259,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -34878,7 +35325,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -35062,7 +35509,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -35154,7 +35601,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -35174,7 +35621,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -35268,14 +35715,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -35360,6 +35802,43 @@
 					 "sh:path": [
 						{
 							 "@id": "im:udiMachineReadable"
+						}
+					]
+				}
+			]
+		},
+		{
+			 "@id": "im:ComputerSystem",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				},
+				{
+					 "@id": "rdfs:Class"
+				}
+			],
+			 "rdfs:label": "Computer system (entry type)",
+			 "rdfs:comment": "A named computer system considered a type of device",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:Device"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:version"
 						}
 					]
 				}
@@ -36897,7 +37376,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -37638,7 +38117,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:hasIdentifier"
 				}
@@ -37704,7 +38183,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -37917,7 +38396,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -37937,7 +38416,7 @@
 				}
 			],
 			 "im:code": 903501000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -38013,7 +38492,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -38059,7 +38538,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -38104,7 +38583,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -38196,7 +38675,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -38246,7 +38725,7 @@
 				}
 			],
 			 "im:code": 903481000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903611000252100"
 				}
@@ -38690,7 +39169,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -38946,7 +39425,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -38966,7 +39445,7 @@
 				}
 			],
 			 "im:code": 903971000252102,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -39316,7 +39795,7 @@
 				}
 			],
 			 "im:code": "isSubEncounterOf",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -39366,7 +39845,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -39474,7 +39953,7 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -39709,7 +40188,7 @@
 			]
 		},
 		{
-			 "@id": "im:MedicationOrder",
+			 "@id": "im:MedicationRequest",
 			 "rdf:type": [
 				{
 					 "@id": "sh:NodeShape"
@@ -39718,7 +40197,7 @@
 					 "@id": "rdfs:Class"
 				}
 			],
-			 "rdfs:label": "Medication order or prescription (entry type)",
+			 "rdfs:label": "Medication request or prescription (entry type)",
 			 "rdfs:comment": "A medication order is the actual prescription for a medication item. It represents the instance of the order derived from the medication statement. It inherits MOST fields from medication and has some additional items. However, field values for the order may be different from the field values of the medication statement so they are repeated for clarity",
 			 "im:status": [
 				{
@@ -39734,6 +40213,18 @@
 				{
 					 "sh:path": [
 						{
+							 "@id": "im:authorisation"
+						}
+					],
+					 "sh:node": [
+						{
+							 "@id": "im:MedicationAuthorisation"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
 							 "@id": "im:courseType"
 						}
 					],
@@ -39746,7 +40237,7 @@
 				{
 					 "sh:path": [
 						{
-							 "@id": "im:concept"
+							 "@id": "im:medication"
 						}
 					],
 					 "sh:class": [
@@ -39864,6 +40355,18 @@
 					 "sh:path": [
 						{
 							 "@id": "im:pharmacyInstructions"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:authorisationStatus"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Status"
 						}
 					]
 				}
@@ -40067,7 +40570,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -40087,7 +40590,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -40506,7 +41009,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -40623,7 +41126,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -40948,7 +41451,7 @@
 				}
 			],
 			 "im:code": 903301000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:904081000252101"
 				}
@@ -41176,7 +41679,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -41339,7 +41842,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -41509,32 +42012,6 @@
 			]
 		},
 		{
-			 "@id": "im:991000252106",
-			 "rdf:type": [
-				{
-					 "@id": "im:Concept"
-				}
-			],
-			 "rdfs:label": "Model document information",
-			 "rdfs:comment": "Information about model documents",
-			 "im:status": [
-				{
-					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingClass"
-				}
-			],
-			 "im:code": 991000252106,
-			 "im:scheme": [
-				{
-					 "@id": "im:"
-				}
-			]
-		},
-		{
 			 "@id": "im:linkedCareEpisode",
 			 "rdf:type": [
 				{
@@ -41548,7 +42025,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -41890,7 +42367,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -42077,7 +42554,7 @@
 				}
 			],
 			 "im:code": 903521000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -42545,7 +43022,7 @@
 				}
 			],
 			 "im:code": 903771000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -42913,7 +43390,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -42933,7 +43410,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -42999,7 +43476,7 @@
 				}
 			],
 			 "im:code": 903371000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903511000252101"
 				}
@@ -43190,7 +43667,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -43373,7 +43850,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -43393,7 +43870,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -43485,7 +43962,7 @@
 				}
 			],
 			 "im:code": 904041000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -43582,7 +44059,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -43791,7 +44268,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -43883,7 +44360,7 @@
 				}
 			],
 			 "im:code": 903551000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903291000252107"
 				}
@@ -43969,9 +44446,29 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:usedIn",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "used in",
+			 "rdfs:comment": "points to the sets that a concept is used in",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -44205,7 +44702,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -44363,7 +44860,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -44478,7 +44975,7 @@
 				}
 			],
 			 "im:code": 903461000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -44513,7 +45010,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -44950,7 +45447,7 @@
 				}
 			],
 			 "im:code": 903401000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903671000252108"
 				},
@@ -45110,47 +45607,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
-				}
-			]
-		},
-		{
-			 "@id": "im:hasSubject",
-			 "rdf:type": [
-				{
-					 "@id": "owl:ObjectProperty"
-				},
-				{
-					 "@id": "owl:FunctionalProperty"
-				}
-			],
-			 "rdfs:label": "has subject",
-			 "rdfs:comment": "references the person for which the event is related to",
-			 "im:status": [
-				{
-					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subPropertyOf": [
-				{
-					 "@id": "im:dataModelObjectProperty"
-				}
-			],
-			 "rdfs:domain": [
-				{
-					 "@id": "im:Event"
-				}
-			],
-			 "owl:inverseOf": [
-				{
-					 "@id": "im:isSubjectOf"
-				}
-			],
-			 "rdfs:range": [
-				{
-					 "@id": "im:Person"
 				}
 			]
 		},
@@ -45168,7 +45627,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -45176,11 +45635,6 @@
 			 "rdfs:domain": [
 				{
 					 "@id": "im:Person"
-				}
-			],
-			 "owl:inverseOf": [
-				{
-					 "@id": "im:hasSubject"
 				}
 			],
 			 "rdfs:range": [
@@ -45249,7 +45703,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -45315,7 +45769,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -45759,7 +46213,7 @@
 				}
 			],
 			 "im:code": 903511000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:904081000252101"
 				}
@@ -45962,7 +46416,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -46319,7 +46773,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -46456,7 +46910,47 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:courseStatus",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "course status",
+			 "rdfs:comment": "Whether the status of the authorisation is active or inactive (past)",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:authorisation",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "authorisation",
+			 "rdfs:comment": "Points to the authorisation entry associated with this entry",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -46614,7 +47108,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -46959,7 +47453,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -47562,7 +48056,7 @@
 				}
 			],
 			 "im:code": 903331000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -47664,7 +48158,7 @@
 				}
 			],
 			 "im:code": 903311000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -47697,7 +48191,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -47768,7 +48262,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -48069,7 +48563,7 @@
 				}
 			],
 			 "im:code": 1241000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -48186,7 +48680,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -48359,7 +48853,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -48428,7 +48922,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dependentRelationship"
 				}
@@ -48841,7 +49335,7 @@
 				}
 			],
 			 "im:code": 903571000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903611000252100"
 				}
@@ -49781,7 +50275,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -49801,7 +50295,7 @@
 				}
 			],
 			 "im:code": 903431000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -49859,7 +50353,7 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingClass"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			],
 			 "im:code": 1261000252108,
@@ -49977,7 +50471,7 @@
 			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -50068,11 +50562,6 @@
 			 "im:status": [
 				{
 					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
 				}
 			],
 			 "im:isContainedIn": [
@@ -50258,7 +50747,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -50288,7 +50777,12 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:WorkflowEvent"
+					 "@id": "im:Event"
+				}
+			],
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:WorkflowEntries"
 				}
 			],
 			 "sh:property": [
@@ -50397,6 +50891,13 @@
 					 "sh:path": [
 						{
 							 "@id": "im:endDate_Time"
+						},
+						{
+							 "sh:datatype": [
+								{
+									 "@id": "xsd:string"
+								}
+							]
 						}
 					]
 				}
@@ -50416,7 +50917,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -50574,7 +51075,7 @@
 				}
 			],
 			 "im:code": 903541000252102,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -51007,13 +51508,13 @@
 				}
 			],
 			 "rdfs:label": "patient type",
-			 "rdfs:comment": "Type of patient from the perspective of administration e.g.... GMS patient, temporary resident",
+			 "rdfs:comment": "Type of patient from the perspective of administration",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -51125,7 +51626,7 @@
 				}
 			],
 			 "im:code": 903871000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903291000252107"
 				}
@@ -51532,7 +52033,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -51736,7 +52237,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -51849,11 +52350,6 @@
 			 "im:status": [
 				{
 					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
 				}
 			],
 			 "sh:property": [
@@ -52361,7 +52857,7 @@
 				}
 			],
 			 "im:code": 903981000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -52389,7 +52885,7 @@
 				}
 			],
 			 "im:code": 903991000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903711000252107"
 				}
@@ -52868,7 +53364,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -53144,7 +53640,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -53425,7 +53921,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -53796,6 +54292,18 @@
 				{
 					 "sh:path": [
 						{
+							 "@id": "im:numericValue"
+						}
+					],
+					 "sh:node": [
+						{
+							 "@id": "im:NumericValue"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
 							 "@id": "im:problemEpisode"
 						}
 					],
@@ -54106,7 +54614,7 @@
 				}
 			],
 			 "im:code": 903491000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -54459,7 +54967,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -54507,7 +55015,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -54674,14 +55182,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
-				}
-			],
-			 "rdfs:domain": [
-				{
-					 "@id": "im:HealthRecordEntry"
 				}
 			]
 		},
@@ -54699,7 +55202,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -55294,7 +55797,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -55361,7 +55864,7 @@
 				}
 			],
 			 "im:code": "fullName",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -55386,7 +55889,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -55498,7 +56001,7 @@
 				}
 			],
 			 "im:code": 904001000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -55839,7 +56342,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -55859,7 +56362,7 @@
 				}
 			],
 			 "im:code": 903831000252109,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:904001000252109"
 				}
@@ -55951,7 +56454,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -56022,7 +56525,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -56042,7 +56545,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -56114,7 +56617,7 @@
 				}
 			],
 			 "im:code": 51000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:1001951000252101"
 				}
@@ -56374,7 +56877,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -57132,7 +57635,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -57155,7 +57658,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -57344,7 +57847,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -57410,7 +57913,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -57593,7 +58096,7 @@
 				}
 			],
 			 "im:code": 903391000252102,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -58042,7 +58545,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -58180,7 +58683,7 @@
 				}
 			],
 			 "im:code": 903821000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -58208,7 +58711,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -58481,7 +58984,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -58501,7 +59004,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -58659,7 +59162,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -58927,14 +59430,14 @@
 					 "@id": "owl:DatatypeProperty"
 				}
 			],
-			 "rdfs:label": "effective `date",
+			 "rdfs:label": "effective date",
 			 "rdfs:comment": "The effective date (with or without a time) that is relevant to the event being described (and not related to the entry date into the system). For events that last a period of time, the date is the start date",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dateTimeProperty"
 				}
@@ -59118,7 +59621,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -59184,7 +59687,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -59602,7 +60105,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -59622,7 +60125,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -60085,7 +60588,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -60261,7 +60764,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dateTimeProperty"
 				}
@@ -60491,7 +60994,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -61163,7 +61666,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -61275,7 +61778,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -61602,7 +62105,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -61622,7 +62125,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:datamodeDataProperty"
 				}
@@ -62087,9 +62590,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:dataModelDataProperty"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -62107,7 +62610,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -62521,7 +63024,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -63158,7 +63661,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -63224,7 +63727,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -63520,7 +64023,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -63758,14 +64261,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -64145,7 +64643,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -64198,70 +64696,22 @@
 			]
 		},
 		{
-			 "@id": "im:HealthRecordEntry",
+			 "@id": "im:PersonalHealthRecords",
 			 "rdf:type": [
 				{
-					 "@id": "sh:NodeShape"
-				},
-				{
-					 "@id": "rdfs:Class"
+					 "@id": "im:Folder"
 				}
 			],
-			 "rdfs:label": "Health record entry (entry type)",
-			 "rdfs:comment": "An abstract class used by all person related health record entries which has a patient identifier and the organisation that is the data controller of the entry",
+			 "rdfs:label": "Personal health record entries",
+			 "rdfs:comment": "Contains types of entries one would expect in a persons health record i.e. those things that the person is a subject of ",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:DiscoveryDMEntities"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:path": [
-						{
-							 "@id": "im:dataController"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:minCount": 1,
-					 "sh:class": [
-						{
-							 "@id": "im:Organisation"
-						}
-					]
-				},
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:string"
-						}
-					],
-					 "sh:path": [
-						{
-							 "@id": "im:dateRecorded"
-						}
-					]
-				},
-				{
-					 "sh:path": [
-						{
-							 "@id": "im:hasSubject"
-						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "im:Person"
-						}
-					]
 				}
 			]
 		},
@@ -64524,7 +64974,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -64682,7 +65132,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -65343,7 +65793,7 @@
 				}
 			],
 			 "im:code": 903531000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903671000252108"
 				}
@@ -65843,7 +66293,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -66004,7 +66454,7 @@
 				}
 			],
 			 "im:code": 903631000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -66047,7 +66497,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -66353,7 +66803,7 @@
 				}
 			],
 			 "im:code": 903921000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -66775,7 +67225,7 @@
 				}
 			],
 			 "im:code": 903381000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903431000252107"
 				}
@@ -67043,21 +67493,6 @@
 			]
 		},
 		{
-			 "@id": "im:ModellingClass",
-			 "rdf:type": [
-				{
-					 "@id": "rdfs:Class"
-				}
-			],
-			 "rdfs:label": "Modelling class",
-			 "rdfs:comment": "Set of high level types that form the basis of the classes and vocabulary,  including W3C language classes used in the model itself i.e. the things that model the model",
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:DiscoveryOntology"
-				}
-			]
-		},
-		{
 			 "@id": "im:ModelComponentStatus",
 			 "rdf:type": [
 				{
@@ -67073,7 +67508,7 @@
 			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingClass"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -67807,7 +68242,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -67945,7 +68380,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -68014,14 +68449,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -68241,7 +68671,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -68608,7 +69038,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -69093,11 +69523,6 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:Provenance"
@@ -69284,7 +69709,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -69422,7 +69847,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -69539,7 +69964,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -69790,12 +70215,12 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "sn:609096000"
 				},
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -69998,7 +70423,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -71367,7 +71792,7 @@
 				}
 			],
 			 "im:code": 903611000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903711000252107"
 				}
@@ -71770,7 +72195,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -72494,7 +72919,7 @@
 				}
 			],
 			 "im:code": 903351000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903441000252103"
 				}
@@ -72628,7 +73053,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -72743,7 +73168,7 @@
 				}
 			],
 			 "im:code": 903651000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903671000252108"
 				},
@@ -73220,7 +73645,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -73337,7 +73762,7 @@
 				}
 			],
 			 "im:code": 903841000252100,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903711000252107"
 				}
@@ -73435,7 +73860,7 @@
 				}
 			],
 			 "im:code": 904051000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -73485,7 +73910,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -73551,7 +73976,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -74039,7 +74464,7 @@
 				}
 			],
 			 "im:code": 903441000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903771000252104"
 				}
@@ -74120,7 +74545,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -74487,7 +74912,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -74520,6 +74945,32 @@
 			 "im:scheme": [
 				{
 					 "@id": "ods:"
+				}
+			]
+		},
+		{
+			 "@id": "im:2121000252104",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "consultation group",
+			 "rdfs:comment": "points to the type of consultation grouping involved in this encounter type e.g. patient and healthcare professional",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "im:code": 2121000252104,
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
 				}
 			]
 		},
@@ -74730,7 +75181,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -74842,7 +75293,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -74862,7 +75313,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -75004,7 +75455,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -75259,7 +75710,7 @@
 				}
 			],
 			 "im:code": 903291000252107,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -75621,7 +76072,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -76081,7 +76532,7 @@
 				}
 			],
 			 "im:code": 903591000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -76142,7 +76593,7 @@
 				}
 			],
 			 "im:code": 903961000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -76259,7 +76710,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -76472,7 +76923,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -76640,7 +77091,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -76660,7 +77111,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -76890,7 +77341,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -77087,7 +77538,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -77107,7 +77558,7 @@
 				}
 			],
 			 "im:code": 903751000252108,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -77178,7 +77629,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -77440,26 +77891,6 @@
 			]
 		},
 		{
-			 "@id": "im:hasNhsNumber",
-			 "rdf:type": [
-				{
-					 "@id": "owl:DatatypeProperty"
-				}
-			],
-			 "rdfs:label": "has NHS number",
-			 "rdfs:comment": "property that points to the NHS number and has an NHS scheme annotation property",
-			 "im:status": [
-				{
-					 "@id": "im:Active"
-				}
-			],
-			 "rdfs:subPropertyOf": [
-				{
-					 "@id": "im:hasIdentifier"
-				}
-			]
-		},
-		{
 			 "@id": "im:32431000252117",
 			 "rdf:type": [
 				{
@@ -77591,7 +78022,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -77669,22 +78100,22 @@
 			]
 		},
 		{
-			 "@id": "im:sourceOrganisation",
+			 "@id": "im:sourcePublisher",
 			 "rdf:type": [
 				{
-					 "@id": "owl:ObjectProperty"
+					 "@id": "owl:DatatypeProperty"
 				}
 			],
-			 "rdfs:label": "source organisation",
-			 "rdfs:comment": "Sender service or organisation",
+			 "rdfs:label": "source publisher",
+			 "rdfs:comment": "Points to the source organisation that published this concept",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:dataModelObjectProperty"
+					 "@id": "im:dataModelDataProperty"
 				}
 			]
 		},
@@ -77865,7 +78296,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -77885,7 +78316,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -77930,7 +78361,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -78068,7 +78499,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -78424,7 +78855,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -78874,9 +79305,9 @@
 				}
 			],
 			 "im:code": 3301000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "im:scheme": [
@@ -79272,7 +79703,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -79430,7 +79861,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -79685,7 +80116,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -79797,7 +80228,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -80305,7 +80736,7 @@
 				}
 			],
 			 "im:code": 903951000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903741000252106"
 				}
@@ -80397,7 +80828,7 @@
 				}
 			],
 			 "im:code": 903561000252103,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -80476,7 +80907,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -80685,7 +81116,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -80843,7 +81274,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -80909,7 +81340,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -81113,7 +81544,7 @@
 				}
 			],
 			 "im:code": 903661000252102,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903881000252105"
 				}
@@ -81182,7 +81613,7 @@
 				}
 			],
 			 "im:code": 904061000252105,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -81351,7 +81782,7 @@
 				}
 			],
 			 "im:code": 903321000252104,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topObjectProperty"
 				}
@@ -81612,7 +82043,7 @@
 				}
 			],
 			 "im:code": "hasSubencounter",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -82501,12 +82932,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:DiscoveryDMProperties"
-				}
-			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelProperty"
 				}
@@ -82572,7 +82998,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -82763,7 +83189,7 @@
 			]
 		},
 		{
-			 "@id": "im:2121000252104",
+			 "@id": "im:hasParticipants",
 			 "rdf:type": [
 				{
 					 "@id": "owl:ObjectProperty"
@@ -82776,9 +83202,9 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:1001951000252101"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			]
 		},
@@ -82796,9 +83222,109 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:provenanceActivityType",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "provemnance activity type",
+			 "rdfs:comment": "points to the activity as part of provenance",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:activityType"
+				}
+			]
+		},
+		{
+			 "@id": "im:im1Id",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "im1 id",
+			 "rdfs:comment": "the old identifier from im1",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:placeHolder",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "place holder",
+			 "rdfs:comment": "A string containing place holders for query templates",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:privacyLevel",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "privacy level",
+			 "rdfs:comment": "the level of privacy for a set of triples e.g. level 0 = public level 1 organisational",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:im1Scheme",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "im1 scheme",
+			 "rdfs:comment": "the old scheme identifier from im1",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -82815,7 +83341,8 @@
 				{
 					 "@id": "im:InformationModel"
 				}
-			]
+			],
+			 "im:order": 1
 		},
 		{
 			 "@id": "im:Q_Queries",
@@ -82830,7 +83357,8 @@
 				{
 					 "@id": "im:InformationModel"
 				}
-			]
+			],
+			 "im:order": 4
 		},
 		{
 			 "@id": "im:Q_StandardCohorts",
@@ -82860,7 +83388,8 @@
 				{
 					 "@id": "im:InformationModel"
 				}
-			]
+			],
+			 "im:order": 3
 		},
 		{
 			 "@id": "im:hasMap",
@@ -82871,9 +83400,9 @@
 			],
 			 "rdfs:label": "has map",
 			 "rdfs:comment": "points to one or more maps that matches this concept to another concept",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -82886,9 +83415,9 @@
 			],
 			 "rdfs:label": "has replaced",
 			 "rdfs:comment": "inverse property of replaced by",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "owl:inverseOf": [
@@ -82906,9 +83435,9 @@
 			],
 			 "rdfs:label": "assurance level",
 			 "rdfs:comment": "points to the type of level of assurance for this construct e.g. national UK or supplier",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -82984,7 +83513,7 @@
 			],
 			 "rdfs:label": "computer system",
 			 "rdfs:comment": "An application of applications referred to as a system",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -83014,7 +83543,7 @@
 			],
 			 "rdfs:label": "data set (property)",
 			 "rdfs:comment": "the type of data set associated with this item",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -83029,7 +83558,7 @@
 			],
 			 "rdfs:label": "resource name (property)",
 			 "rdfs:comment": "holds the name of the table or message type for a context",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -83043,14 +83572,34 @@
 				}
 			],
 			 "rdfs:label": "scheme",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
 				{
 					 "@id": "rdfs:Resource"
+				}
+			]
+		},
+		{
+			 "@id": "im:definitionalStatus",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "definitional status",
+			 "rdfs:comment": "Points to the definitional status of this entity e.g. full defined as an equivalent class",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			],
+			 "rdfs:range": [
+				{
+					 "@id": "im:1261000252108"
 				}
 			]
 		},
@@ -83062,9 +83611,9 @@
 				}
 			],
 			 "rdfs:label": "has Definition",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83077,9 +83626,9 @@
 			],
 			 "rdfs:label": "is member of",
 			 "rdfs:comment": "points to the set object, of which the subject is a member of",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "owl:inverseOf": [
@@ -83096,9 +83645,9 @@
 				}
 			],
 			 "rdfs:label": "synonym",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83116,7 +83665,7 @@
 					 "@id": "owl:Class"
 				},
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -83129,11 +83678,6 @@
 			],
 			 "rdfs:label": "Text maps",
 			 "rdfs:comment": "A Collection of simple map between two pieces of text, used in various mapping utilities such as XML parsing",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:ModellingDataModel"
@@ -83165,7 +83709,7 @@
 			 "rdfs:comment": "A simple map between two pieces of text, used in various mapping utilities such as XML parsing",
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			],
 			 "sh:property": [
@@ -83204,7 +83748,7 @@
 			],
 			 "rdfs:label": "source Text",
 			 "rdfs:comment": "the source text for a text map",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -83219,7 +83763,7 @@
 			],
 			 "rdfs:label": "target Text",
 			 "rdfs:comment": "the target text for a text map",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -83239,7 +83783,7 @@
 					 "@id": "owl:Class"
 				},
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -83257,7 +83801,7 @@
 					 "@id": "owl:Class"
 				},
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -83275,7 +83819,7 @@
 					 "@id": "owl:Class"
 				},
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -83293,7 +83837,7 @@
 					 "@id": "owl:Class"
 				},
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -83305,9 +83849,9 @@
 				}
 			],
 			 "rdfs:label": "not Members",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83319,9 +83863,9 @@
 				}
 			],
 			 "rdfs:label": "is Contained In",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83333,9 +83877,9 @@
 				}
 			],
 			 "rdfs:label": "is Child Of",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83347,9 +83891,9 @@
 				}
 			],
 			 "rdfs:label": "property Group",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83361,9 +83905,9 @@
 				}
 			],
 			 "rdfs:label": "inherited From",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83375,9 +83919,9 @@
 				}
 			],
 			 "rdfs:label": "group Number",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83389,9 +83933,9 @@
 				}
 			],
 			 "rdfs:label": "role",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83399,7 +83943,7 @@
 			 "@id": "im:Draft",
 			 "rdf:type": [
 				{
-					 "@id": "im:Concept"
+					 "@id": "rdfs:Class"
 				}
 			],
 			 "rdfs:label": "Draft",
@@ -83413,7 +83957,7 @@
 			 "@id": "im:Active",
 			 "rdf:type": [
 				{
-					 "@id": "im:Concept"
+					 "@id": "rdfs:Class"
 				}
 			],
 			 "rdfs:label": "Active",
@@ -83427,7 +83971,7 @@
 			 "@id": "im:Unassigned",
 			 "rdf:type": [
 				{
-					 "@id": "im:Concept"
+					 "@id": "rdfs:Class"
 				}
 			],
 			 "rdfs:label": "Unassigned",
@@ -83439,122 +83983,102 @@
 			]
 		},
 		{
-			 "@id": "http://endhealth.info/im#DeleteAll",
-			 "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+			 "@id": "im:DeleteAll",
+			 "rdf:type": [
 				{
-					 "@id": "http://www.w3.org/2000/01/rdf-schema#Class"
+					 "@id": "rdfs:Class"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#label": "Delete entity triples",
-			 "http://www.w3.org/2000/01/rdf-schema#comment": "for this graph deletes all triples with this entity as a subject",
-			 "http://endhealth.info/im#status": [
+			 "rdfs:label": "Delete entity triples",
+			 "rdfs:comment": "for this graph deletes all triples with this entity as a subject",
+			 "im:status": [
 				{
-					 "@id": "http://endhealth.info/im#Active"
+					 "@id": "im:Active"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "http://endhealth.info/im#CrudOperation"
+					 "@id": "im:CrudOperation"
 				}
 			]
 		},
 		{
-			 "@id": "http://endhealth.info/im#CrudOperation",
-			 "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+			 "@id": "im:CrudOperation",
+			 "rdf:type": [
 				{
-					 "@id": "http://www.w3.org/2000/01/rdf-schema#Class"
+					 "@id": "rdfs:Class"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#label": "CRUD operation",
-			 "http://www.w3.org/2000/01/rdf-schema#comment": "Operations that Update delete and and triples",
-			 "http://endhealth.info/im#status": [
+			 "rdfs:label": "CRUD operation",
+			 "rdfs:comment": "Operations that Update delete and and triples",
+			 "im:status": [
 				{
-					 "@id": "http://endhealth.info/im#Active"
+					 "@id": "im:Active"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+			 "im:isContainedIn": [
 				{
-					 "@id": "http://endhealth.info/im#ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
 		{
-			 "@id": "http://endhealth.info/im#CrudOperation",
-			 "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+			 "@id": "im:UpdateAll",
+			 "rdf:type": [
 				{
-					 "@id": "http://www.w3.org/2000/01/rdf-schema#Class"
+					 "@id": "rdfs:Class"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#label": "CRUD operation",
-			 "http://www.w3.org/2000/01/rdf-schema#comment": "Operations that Update delete and and triples",
-			 "http://endhealth.info/im#status": [
+			 "rdfs:label": "Update all predicates",
+			 "rdfs:comment": "For this named graph, deletes all triples and inserts these triples. If no triples it is in effect a deletion of triples for this graph",
+			 "im:status": [
 				{
-					 "@id": "http://endhealth.info/im#Active"
+					 "@id": "im:Active"
 				}
 			],
-			 "http://endhealth.info/im#isContainedIn": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "http://endhealth.info/im#ModellingEntityType"
+					 "@id": "im:CrudOperation"
 				}
 			]
 		},
 		{
-			 "@id": "http://endhealth.info/im#UpdateAll",
-			 "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+			 "@id": "im:UpdatePredicates",
+			 "rdf:type": [
 				{
-					 "@id": "http://www.w3.org/2000/01/rdf-schema#Class"
+					 "@id": "rdfs:Class"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#label": "Update all predicates",
-			 "http://www.w3.org/2000/01/rdf-schema#comment": "For this named graph, deletes all triples and inserts these triples. If no triples it is in effect a deletion of triples for this graph",
-			 "http://endhealth.info/im#status": [
+			 "rdfs:label": "Update predicates",
+			 "rdfs:comment": "For this graph, deletes the triples with the predicates listed here,  and addes in the triples. i.e. the previous objects removed. Other prwdicate/objects are left untouched",
+			 "im:status": [
 				{
-					 "@id": "http://endhealth.info/im#Active"
+					 "@id": "im:Active"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "http://endhealth.info/im#CrudOperation"
+					 "@id": "im:CrudOperation"
 				}
 			]
 		},
 		{
-			 "@id": "http://endhealth.info/im#UpdatePredicates",
-			 "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+			 "@id": "im:AddQuads",
+			 "rdf:type": [
 				{
-					 "@id": "http://www.w3.org/2000/01/rdf-schema#Class"
+					 "@id": "rdfs:Class"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#label": "Update predicates",
-			 "http://www.w3.org/2000/01/rdf-schema#comment": "For this graph, deletes the triples with the predicates listed here,  and addes in the triples. i.e. the previous objects removed. Other prwdicate/objects are left untouched",
-			 "http://endhealth.info/im#status": [
+			 "rdfs:label": "Add triples",
+			 "rdfs:comment": "Adds subject predicate object triples to this graph",
+			 "im:status": [
 				{
-					 "@id": "http://endhealth.info/im#Active"
+					 "@id": "im:Active"
 				}
 			],
-			 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "http://endhealth.info/im#CrudOperation"
-				}
-			]
-		},
-		{
-			 "@id": "http://endhealth.info/im#AddQuads",
-			 "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
-				{
-					 "@id": "http://www.w3.org/2000/01/rdf-schema#Class"
-				}
-			],
-			 "http://www.w3.org/2000/01/rdf-schema#label": "Add triples",
-			 "http://www.w3.org/2000/01/rdf-schema#comment": "Adds subject predicate object triples to this graph",
-			 "http://endhealth.info/im#status": [
-				{
-					 "@id": "http://endhealth.info/im#Active"
-				}
-			],
-			 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
-				{
-					 "@id": "http://endhealth.info/im#CrudOperation"
+					 "@id": "im:CrudOperation"
 				}
 			]
 		},
@@ -83562,7 +84086,7 @@
 			 "@id": "im:Inactive",
 			 "rdf:type": [
 				{
-					 "@id": "im:Concept"
+					 "@id": "rdfs:Class"
 				}
 			],
 			 "rdfs:label": "Inactive",
@@ -83581,9 +84105,9 @@
 			],
 			 "rdfs:label": "alternative code",
 			 "rdfs:comment": "An alternative code for this concept in this scheme",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83596,9 +84120,9 @@
 			],
 			 "rdfs:label": "description id",
 			 "rdfs:comment": "A code for a synonym",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83611,9 +84135,9 @@
 			],
 			 "rdfs:label": "code id",
 			 "rdfs:comment": "A specialised code id for internal use (by emis)",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83626,9 +84150,9 @@
 			],
 			 "rdfs:label": "matched To",
 			 "rdfs:comment": "Points to a match between the concept and a legacy concept as part of a map",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83641,9 +84165,9 @@
 			],
 			 "rdfs:label": "matched from",
 			 "rdfs:comment": "Points to a reverse mapping i.e. points to a thing which is matched to the concept as part of a map",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "owl:inverseOf": [
@@ -83660,9 +84184,9 @@
 				}
 			],
 			 "rdfs:label": "matched Term Code",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83674,9 +84198,9 @@
 				}
 			],
 			 "rdfs:label": "similar To",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83688,9 +84212,9 @@
 				}
 			],
 			 "rdfs:label": "matched As Subclass Of",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83702,9 +84226,9 @@
 				}
 			],
 			 "rdfs:label": "query Variable",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83716,9 +84240,9 @@
 				}
 			],
 			 "rdfs:label": "call Query",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83730,9 +84254,9 @@
 				}
 			],
 			 "rdfs:label": "counter",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83744,9 +84268,9 @@
 				}
 			],
 			 "rdfs:label": "has Context",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83759,7 +84283,7 @@
 			],
 			 "rdfs:label": "points to the religous affiliation of the patient",
 			 "rdfs:comment": "A state property of a persom indicating the current religion as stated by a person",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -83774,9 +84298,9 @@
 			],
 			 "rdfs:label": "some of",
 			 "rdfs:comment": "Points to a list of optional objects, of which one or more may be selected. Similar to owl:someValuesFrom but cannot be used in inference. Similar to shacl:one but not used for validation ",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83789,9 +84313,9 @@
 			],
 			 "rdfs:label": "combination of",
 			 "rdfs:comment": "Indicates that the object consists of a combination of two or objects (usually a match of one from each group such as a complex map) , similar concept to owl:Intersection but is not a semantic property, and similar to sh:and but is not for the purposes of validation.",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -83804,7 +84328,7 @@
 			],
 			 "rdfs:label": "mapping advice",
 			 "rdfs:comment": "Indicates advice provided to users when selecting a map",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:DatatypeProperty"
 				}
@@ -83819,7 +84343,7 @@
 			],
 			 "rdfs:label": "mapPriority",
 			 "rdfs:comment": "Indicates the order in which a user would be expected to be presented with the mapping options at run time",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:DatatypeProperty"
 				}
@@ -83834,9 +84358,9 @@
 			],
 			 "rdfs:label": "has term code",
 			 "rdfs:comment": "links a an alternative term code to a concept",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:domain": [
@@ -83859,7 +84383,7 @@
 			],
 			 "rdfs:label": "CRUD operation",
 			 "rdfs:comment": "Create update or delete operation, specialised for triples",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -83896,24 +84420,6 @@
 			]
 		},
 		{
-			 "@id": "sn:359993007",
-			 "rdf:type": [
-				{
-					 "@id": "im:Concept"
-				}
-			],
-			 "im:crud": [
-				{
-					 "@id": "im:Add"
-				}
-			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:71000252102"
-				}
-			]
-		},
-		{
 			 "@id": "im:shortName",
 			 "rdf:type": [
 				{
@@ -83922,7 +84428,7 @@
 			],
 			 "rdfs:label": "short name",
 			 "rdfs:comment": "A short version of the name",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -84009,7 +84515,7 @@
 			],
 			 "rdfs:label": "background",
 			 "rdfs:comment": "A narrative providing background context to a concept or other object",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topDataProperty"
 				}
@@ -84027,14 +84533,9 @@
 			],
 			 "rdfs:label": "Census output area",
 			 "rdfs:comment": "A geopgraphical area used in a census",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -84088,7 +84589,7 @@
 			],
 			 "rdfs:label": "lower Layer Super Output Area LSOA",
 			 "rdfs:comment": "Points to a census area code with a population of 1000-3000",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -84103,7 +84604,7 @@
 			],
 			 "rdfs:label": "middle Layer Super Output Area MSOA",
 			 "rdfs:comment": "Points to a census area code with a population of 5000-15000 ",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -84118,7 +84619,7 @@
 			],
 			 "rdfs:label": "census ward",
 			 "rdfs:comment": "Points to A census area which is at ward level",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -84133,7 +84634,7 @@
 			],
 			 "rdfs:label": "postcode",
 			 "rdfs:comment": "holds the post code for a location",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -84155,20 +84656,63 @@
 			]
 		},
 		{
-			 "@id": "im:SnomedCounter",
+			 "@id": "im:Function_SnomedConceptGenerator",
 			 "rdf:type": [
 				{
-					 "@id": "owl:NamedIndividual"
+					 "@id": "im:Function"
 				}
 			],
-			 "rdfs:label": "Snomed counter object",
-			 "rdfs:comment": "Individual bject that holds a snomed concept local extension incremental number",
+			 "rdfs:label": "Snomed concept generator",
+			 "rdfs:comment": "Function that generates a snomed concept local extension concept. Holds the last known increment in an hasIncrementalFrom property",
 			 "im:status": [
 				{
 					 "@id": "im:Active"
 				}
 			],
-			 "im:hasIncrementalFrom": 101195
+			 "im:hasIncrementalFrom": 101258,
+			 "sh:parameter": [
+				{
+					 "rdfs:label": "namespace",
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					]
+				},
+				{
+					 "rdfs:label": "incrementalFrom",
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:long"
+						}
+					]
+				}
+			]
+		},
+		{
+			 "@id": "im:Function_LocalNameRetriever",
+			 "rdf:type": [
+				{
+					 "@id": "im:Function"
+				}
+			],
+			 "rdfs:label": "Local name retriever",
+			 "rdfs:comment": "Function that retrieves a local name from an iri",
+			 "im:status": [
+				{
+					 "@id": "im:Active"
+				}
+			],
+			 "sh:parameter": [
+				{
+					 "rdfs:label": "iri",
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					]
+				}
+			]
 		},
 		{
 			 "@id": "im:EthnicitySets",
@@ -84194,7 +84738,7 @@
 			],
 			 "rdfs:label": "use predicates",
 			 "rdfs:comment": "Points to one or more  predicates used in a form or template based use case",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -84209,7 +84753,7 @@
 			],
 			 "rdfs:label": "one of",
 			 "rdfs:comment": "advisory to select one of in combination with another code",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -84262,32 +84806,34 @@
 			]
 		},
 		{
-			 "@id": "im:ObjectPropertyShape",
+			 "@id": "im:PropertyShape",
 			 "rdf:type": [
 				{
 					 "@id": "sh:NodeShape"
-				},
-				{
-					 "@id": "rdfs:Class"
 				}
 			],
-			 "rdfs:label": "Object property shape",
-			 "rdfs:comment": "The schema for the definition of an object property",
+			 "rdfs:label": "Property shape",
+			 "rdfs:comment": "data model for properties",
+			 "sh:targetClass": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ConceptShape"
+					 "@id": "im:ResourceShape"
 				}
 			],
 			 "sh:property": [
 				{
 					 "sh:path": [
 						{
-							 "@id": "rdfs:subPropertyOf"
+							 "@id": "rdfs:subClassOf"
 						}
 					],
-					 "sh:nodeKind": [
+					 "sh:class": [
 						{
-							 "@id": "sh:IRI"
+							 "@id": "im:Concept"
 						}
 					]
 				},
@@ -84297,9 +84843,9 @@
 							 "@id": "owl:inverseOf"
 						}
 					],
-					 "sh:nodeKind": [
+					 "sh:class": [
 						{
-							 "@id": "sh:IRI"
+							 "@id": "rdf:Property"
 						}
 					]
 				},
@@ -84309,9 +84855,9 @@
 							 "@id": "rdfs:domain"
 						}
 					],
-					 "sh:node": [
+					 "sh:class": [
 						{
-							 "@id": "im:ClassExpressionShape"
+							 "@id": "rdfs:Class"
 						}
 					]
 				},
@@ -84323,44 +84869,46 @@
 					],
 					 "sh:node": [
 						{
-							 "@id": "im:ClassExpressionShape"
+							 "@id": "rdfs:Class"
+						}
+					]
+				},
+				{
+					 "sh:inversePath": [
+						{
+							 "@id": "sh:path"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "rdf:Property"
 						}
 					]
 				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
 			]
 		},
 		{
-			 "@id": "im:DataPropertyShape",
+			 "@id": "im:ModelVocabulary",
 			 "rdf:type": [
 				{
-					 "@id": "im:Concept"
+					 "@id": "im:Folder"
 				}
 			],
-			 "rdfs:label": "Data property shape",
-			 "rdfs:comment": "The schema for the definition of a data property",
-			 "rdfs:subClassOf": [
+			 "rdfs:label": "Modelling vocabulary",
+			 "rdfs:comment": "Folder containing the terms used to build the models themselves, including the semantic web languages and the Discovery extensions",
+			 "im:isContainedIn": [
 				{
-					 "@id": "im:ConceptShape"
+					 "@id": "im:ModellingEntities"
 				}
 			]
 		},
 		{
-			 "@id": "im:ModellingEntityType",
-			 "rdf:type": [
-				{
-					 "@id": "im:Concept"
-				}
-			],
-			 "rdfs:label": "Modelling entity type",
-			 "rdfs:comment": "Classifies  types of entities used in the information model",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingClass"
-				}
-			]
-		},
-		{
-			 "@id": "im:LanguagePredicates",
+			 "@id": "im:LanguagePredicate",
 			 "rdf:type": [
 				{
 					 "@id": "rdf:Property"
@@ -84370,7 +84918,7 @@
 			 "rdfs:comment": "A property used in the information modelling language (meta model)",
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingClass"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -84413,7 +84961,7 @@
 			],
 			 "rdfs:label": "has im1 dbid",
 			 "rdfs:comment": "legacy im1 fixed datbase id",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "owl:topDataProperty"
 				}
@@ -84712,22 +85260,7 @@
 			 "rdfs:comment": "Contains records of health professionals, roles or teams ",
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
-				}
-			]
-		},
-		{
-			 "@id": "im:DiscoveryDMProperties",
-			 "rdf:type": [
-				{
-					 "@id": "im:Folder"
-				}
-			],
-			 "rdfs:label": "Discovery data model fields",
-			 "rdfs:comment": "Properties that form part of the data models",
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:DiscoveryDataModel"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -84743,9 +85276,9 @@
 			],
 			 "rdfs:label": "Event",
 			 "rdfs:comment": "An entry for something that has happened or will happen at a point in time and may have a duration",
-			 "rdfs:subClassOf": [
+			 "im:isContainedIn": [
 				{
-					 "@id": "im:HealthRecordEntry"
+					 "@id": "im:PersonalHealthRecords"
 				}
 			],
 			 "sh:property": [
@@ -84788,46 +85321,17 @@
 			]
 		},
 		{
-			 "@id": "im:WorkflowEvent",
+			 "@id": "im:WorkflowEntries",
 			 "rdf:type": [
 				{
-					 "@id": "sh:NodeShape"
-				},
-				{
-					 "@id": "rdfs:Class"
+					 "@id": "im:Folder"
 				}
 			],
-			 "rdfs:label": "Workflow or scheduled event",
+			 "rdfs:label": "Workflow or scheduled activities",
 			 "rdfs:comment": "Workflow related appointments or tasks which may be related to patients but exist independently",
-			 "rdfs:subClassOf": [
+			 "im:isContainedIn": [
 				{
-					 "@id": "im:HealthRecordEntry"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:dateTime"
-						}
-					],
-					 "sh:path": [
-						{
-							 "@id": "im:startDateTime"
-						}
-					]
-				},
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:dateTime"
-						}
-					],
-					 "sh:path": [
-						{
-							 "@id": "im:endDateTime"
-						}
-					]
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -84840,7 +85344,7 @@
 			],
 			 "rdfs:label": "start date and time",
 			 "rdfs:comment": "points to the actual exact start date and optional time of an event (not including effective date times)",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -84860,7 +85364,7 @@
 			],
 			 "rdfs:label": "end date and time",
 			 "rdfs:comment": "points to the actual end date and optional time of an event (does not support approximate end dates)",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -85751,47 +86255,17 @@
 			]
 		},
 		{
-			 "@id": "im:ModellingDataModels",
+			 "@id": "im:ModelDataModels",
 			 "rdf:type": [
 				{
 					 "@id": "im:Folder"
 				}
 			],
-			 "rdfs:label": "Modelling related data models",
+			 "rdfs:label": "Data models for IM itself",
 			 "rdfs:comment": "Folder containing shapes that are used for modelling purposes",
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:DiscoveryDMEntities"
-				}
-			]
-		},
-		{
-			 "@id": "im:SourceDataModels",
-			 "rdf:type": [
-				{
-					 "@id": "im:Folder"
-				}
-			],
-			 "rdfs:label": "Source data models",
-			 "rdfs:comment": "Folder containing shape graphs that represent source data formats",
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:ModellingDataModels"
-				}
-			]
-		},
-		{
-			 "@id": "im:TrudODSSourceXMLDataModels",
-			 "rdf:type": [
-				{
-					 "@id": "im:Folder"
-				}
-			],
-			 "rdfs:label": "TRUD ODS Source data models",
-			 "rdfs:comment": "Folder containing shapes graphs that represent the TRUD ODS reference data model",
-			 "im:isContainedIn": [
-				{
-					 "@id": "im:SourceDataModels"
+					 "@id": "im:ModellingEntities"
 				}
 			]
 		},
@@ -85812,26 +86286,21 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:PhysicalEntities"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:poBox"
-						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
 						}
 					]
 				},
@@ -85848,86 +86317,86 @@
 					]
 				},
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:addressLine1"
 						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
-						}
 					]
 				},
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:addressLine2"
 						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
-						}
 					]
 				},
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:addressLine3"
 						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
-						}
 					]
 				},
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:locality"
 						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
-						}
 					]
 				},
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:region"
 						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
-						}
 					]
 				},
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:country"
 						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
-						}
 					]
 				},
 				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
 					 "sh:path": [
 						{
 							 "@id": "im:postCode"
-						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "xsd:string"
 						}
 					]
 				},
@@ -85956,6 +86425,18 @@
 						}
 					],
 					 "sh:maxCount": 1
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:location"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Location"
+						}
+					]
 				}
 			]
 		},
@@ -85973,7 +86454,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -85993,7 +86474,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86013,7 +86494,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86033,7 +86514,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86053,7 +86534,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86073,7 +86554,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86093,7 +86574,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86113,7 +86594,7 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86133,24 +86614,24 @@
 					 "@id": "im:Active"
 				}
 			],
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
 			]
 		},
 		{
-			 "@id": "im:Communication",
+			 "@id": "im:QualifierStructure",
 			 "rdf:type": [
 				{
 					 "@id": "im:Folder"
 				}
 			],
-			 "rdfs:label": "Communication related information",
-			 "rdfs:comment": "Contains communication information resources ",
+			 "rdfs:label": "Qualifier structure",
+			 "rdfs:comment": "Contains data models for shapes that qualify entries in records such as numeric values",
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:ReferenceEntities"
+					 "@id": "im:DiscoveryDMEntities"
 				}
 			]
 		},
@@ -86163,14 +86644,14 @@
 			],
 			 "rdfs:label": "telephone number",
 			 "rdfs:comment": "holds a telephone number",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
 			],
 			 "rdfs:range": [
 				{
-					 "@id": "xsd:string"
+					 "@id": "im:ContactPoint"
 				}
 			]
 		},
@@ -86183,7 +86664,7 @@
 			],
 			 "rdfs:label": "email",
 			 "rdfs:comment": "holds one or more email addresses",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86203,26 +86684,21 @@
 			],
 			 "rdfs:label": "Contact information for an organisation or service",
 			 "rdfs:comment": "Data model for contact details such as email and telephone or person ",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
-					 "@id": "im:Communication"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
 				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:string"
-						}
-					],
 					 "sh:path": [
 						{
 							 "@id": "im:telephoneNumber"
+						}
+					],
+					 "sh:node": [
+						{
+							 "@id": "im:ContactPoint"
 						}
 					]
 				},
@@ -86241,6 +86717,55 @@
 			]
 		},
 		{
+			 "@id": "im:ContactPoint",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Contact point structure",
+			 "rdfs:comment": "Data model for contact details such as email and telephone or person ",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:QualifierStructure"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:communicationMethod"
+						}
+					],
+					 "sh:Class": "im:VSET_CommunicationDevice"
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:value"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:use"
+						}
+					],
+					 "sh:Class": [
+						{
+							 "@id": "im:1011961000252101"
+						}
+					]
+				}
+			]
+		},
+		{
 			 "@id": "im:addressUse",
 			 "rdf:type": [
 				{
@@ -86249,7 +86774,7 @@
 			],
 			 "rdfs:label": "address use",
 			 "rdfs:comment": "points to the purpose of the address",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -86264,7 +86789,7 @@
 			],
 			 "rdfs:label": "operational start date",
 			 "rdfs:comment": "the date that an organisation or service started operating",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -86279,7 +86804,7 @@
 			],
 			 "rdfs:label": "operational end date",
 			 "rdfs:comment": "the date that an organisation or service stopped operating",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -86294,7 +86819,7 @@
 			],
 			 "rdfs:label": "legal start date",
 			 "rdfs:comment": "the date that an organisation or service started from a legal perspective",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -86309,7 +86834,7 @@
 			],
 			 "rdfs:label": "legalend date",
 			 "rdfs:comment": "the date that an organisation or service stopped from a legal perspective",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -86324,7 +86849,7 @@
 			],
 			 "rdfs:label": "main location",
 			 "rdfs:comment": "the main location e.g. headquarters for an organisation",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:location"
 				}
@@ -86344,7 +86869,7 @@
 			],
 			 "rdfs:label": "ods site code",
 			 "rdfs:comment": "the ods code for a named location",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:odsCode"
 				}
@@ -86364,7 +86889,7 @@
 			],
 			 "rdfs:label": "longitude",
 			 "rdfs:comment": "the longitude of a location",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -86379,7 +86904,7 @@
 			],
 			 "rdfs:label": "latitude",
 			 "rdfs:comment": "the latitide of a location",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelDataProperty"
 				}
@@ -89294,9 +89819,9 @@
 			],
 			 "rdfs:label": "is operated by",
 			 "rdfs:comment": "ODS based organisational relationship code: 6",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89319,9 +89844,9 @@
 			],
 			 "rdfs:label": "is located in the geography of",
 			 "rdfs:comment": "ODS based organisational relationship code: 5",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89344,9 +89869,9 @@
 			],
 			 "rdfs:label": "is commissioned by",
 			 "rdfs:comment": "ODS based organisational relationship code: 4",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89369,9 +89894,9 @@
 			],
 			 "rdfs:label": "is directed by",
 			 "rdfs:comment": "ODS based organisational relationship code: 3",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89394,9 +89919,9 @@
 			],
 			 "rdfs:label": "is partner to",
 			 "rdfs:comment": "ODS based organisational relationship code: 8",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89419,9 +89944,9 @@
 			],
 			 "rdfs:label": "is nominated payee for",
 			 "rdfs:comment": "ODS based organisational relationship code: 9",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89444,9 +89969,9 @@
 			],
 			 "rdfs:label": "is covid nominated payee for",
 			 "rdfs:comment": "ODS based organisational relationship code: 10",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89469,9 +89994,9 @@
 			],
 			 "rdfs:label": "is a subdivision of",
 			 "rdfs:comment": "ODS based organisational relationship code: 2",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89486,72 +90011,22 @@
 			]
 		},
 		{
-			 "@id": "im:Activity",
+			 "@id": "im:typeOfEncounter",
 			 "rdf:type": [
 				{
-					 "@id": "sh:NodeShape"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
-			 "rdfs:label": "Activity (entry type)",
-			 "rdfs:comment": "Processes or procedures that occur over time",
+			 "rdfs:label": "type of encounter",
+			 "rdfs:comment": " points to the overall nature of this encounter",
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelEntity"
+					 "@id": "im:concept"
 				}
 			],
-			 "im:isContainedIn": [
+			 "rdfs:domain": [
 				{
-					 "@id": "im:ReferenceEntities"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:path": [
-						{
-							 "@id": "im:status"
-						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "im:Status"
-						}
-					]
-				},
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "im:DateTime"
-						}
-					],
-					 "sh:path": [
-						{
-							 "@id": "im:startDateTime"
-						}
-					]
-				},
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "im:DateTime"
-						}
-					],
-					 "sh:path": [
-						{
-							 "@id": "im:endDateTime"
-						}
-					]
-				},
-				{
-					 "sh:path": [
-						{
-							 "@id": "im:activityType"
-						}
-					],
-					 "sh:class": [
-						{
-							 "@id": "im:1361000252104"
-						}
-					]
+					 "@id": "im:Encounter"
 				}
 			]
 		},
@@ -89564,9 +90039,9 @@
 			],
 			 "rdfs:label": "codeable expression",
 			 "rdfs:comment": "Points to the expression concept that a particular instance entry is generally about e.g. the type of entry such as Angina, Systolic bp, or GP consultation, or allergy to pencicillin Sub properties of the entru may point to more specialised value sets",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:DataModelObjectProperty"
+					 "@id": "im:dataModelObjectProperty"
 				}
 			],
 			 "rdfs:domain": [
@@ -89581,15 +90056,15 @@
 			]
 		},
 		{
-			 "@id": "im:registrationStatus",
+			 "@id": "im:gpStatus",
 			 "rdf:type": [
 				{
 					 "@id": "owl:ObjectProperty"
 				}
 			],
-			 "rdfs:label": "registration status",
+			 "rdfs:label": "registration administrative status",
 			 "rdfs:comment": "Points to the codeable concept that is the registration status set in this entry",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:concept"
 				}
@@ -89668,7 +90143,7 @@
 			 "rdfs:label": "relationship provenance",
 			 "rdfs:comment": "points to the provenance of the relationship e.g. whether legal or operational",
 			 "im:code": 1001641000252106,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "sn:1001611000252107"
 				}
@@ -89746,7 +90221,7 @@
 			],
 			 "rdfs:label": "succeed by",
 			 "rdfs:comment": "A relationship whereby the the entity is succeeded by another entity e.g. an organisational change",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -89782,9 +90257,9 @@
 			],
 			 "rdfs:label": "Business relationship (entry type)",
 			 "rdfs:comment": "A relationship between organisations or people for business purposes e.g. Commissioning",
-			 "rdfs:subClassOf": [
+			 "im:isContainedIn": [
 				{
-					 "@id": "im:Activity"
+					 "@id": "im:PhysicalBusinessEntities"
 				}
 			],
 			 "sh:property": [
@@ -89823,7 +90298,7 @@
 			],
 			 "rdfs:label": "target",
 			 "rdfs:comment": "points to the target entity in a relationship",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectPropertu"
 				}
@@ -89838,7 +90313,7 @@
 			],
 			 "rdfs:label": "source",
 			 "rdfs:comment": "points to the source entity in a relationship",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectPropertu"
 				}
@@ -90518,11 +90993,6 @@
 			],
 			 "rdfs:label": "Agent",
 			 "rdfs:comment": "A person or organisation acting as a particular role within an organisation",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:IndividualsAndTeams"
@@ -90564,6 +91034,11 @@
 			],
 			 "rdfs:label": "has role in organisation",
 			 "rdfs:comment": "Points to the organisation in which this person operates this role",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			],
 			 "rdfs:range": [
 				{
 					 "@id": "im:Organisation"
@@ -90571,7 +91046,22 @@
 			]
 		},
 		{
-			 "@id": "im:GPRegistrationStatusHistory",
+			 "@id": "im:gpRegistration",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "gp registration",
+			 "rdfs:comment": "Points to the registration episode to which this status belongs",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:GPAdminRegistrationStatus",
 			 "rdf:type": [
 				{
 					 "@id": "sh:NodeShape"
@@ -90580,8 +91070,8 @@
 					 "@id": "owl:Class"
 				}
 			],
-			 "rdfs:label": "GP Registration status history (entry type)",
-			 "rdfs:comment": "The history of a registration status with a general practice",
+			 "rdfs:label": "GP Registration administration status history (entry type)",
+			 "rdfs:comment": "The set of gp registration statuses associated with a registration period with general practices",
 			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:Event"
@@ -90591,7 +91081,7 @@
 				{
 					 "sh:path": [
 						{
-							 "@id": "im:registrationStatus"
+							 "@id": "im:gpStatus"
 						}
 					],
 					 "sh:class": [
@@ -90603,14 +91093,16 @@
 				{
 					 "sh:path": [
 						{
-							 "@id": "im:patientType"
+							 "@id": "im:gpRegistration"
 						}
 					],
-					 "sh:class": [
+					 "sh:maxCount": 1,
+					 "sh:node": [
 						{
-							 "@id": "im:186100025210"
+							 "@id": "im:GPRegistration"
 						}
-					]
+					],
+					 "sh:minCount": 1
 				}
 			]
 		},
@@ -90624,7 +91116,7 @@
 					 "@id": "owl:Class"
 				}
 			],
-			 "rdfs:label": "GP Registration(entry type)",
+			 "rdfs:label": "GP Registration (entry type)",
 			 "rdfs:comment": "The set of registration periods with general practices",
 			 "rdfs:subClassOf": [
 				{
@@ -90632,6 +91124,20 @@
 				}
 			],
 			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:organisation"
+						}
+					],
+					 "sh:maxCount": 1,
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:Organisation"
+						}
+					]
+				},
 				{
 					 "sh:path": [
 						{
@@ -90654,10 +91160,55 @@
 				}
 			],
 			 "rdfs:label": "match",
-			 "rdfs:comment": "holds a triple for matching as part of a query step",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:comment": "points to a definition of a match clause pattern, used in query",
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "owl:topObjectProperty"
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:ask",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "ask",
+			 "rdfs:comment": "points to a definition of a boolean true or false ASK query with a match clause pattern, used in query",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:component",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "component type",
+			 "rdfs:comment": "the type of component used in a form",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:targetShape",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "target shape",
+			 "rdfs:comment": "points to shape which an editor is planning to confom to",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -90670,14 +91221,14 @@
 			],
 			 "rdfs:label": "definition",
 			 "rdfs:comment": "Points to something that defines the entity content",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
 		{
-			 "@id": "im:queryDefinition",
+			 "@id": "im:query",
 			 "rdf:type": [
 				{
 					 "@id": "owl:ObjectProperty"
@@ -90685,9 +91236,9 @@
 			],
 			 "rdfs:label": " query definition",
 			 "rdfs:comment": "Points to definition of the query",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:definition"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -90721,7 +91272,7 @@
 			],
 			 "rdfs:label": "provenance target entity",
 			 "rdfs:comment": "points to the entity created or updated by the activity ",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -90736,7 +91287,7 @@
 			],
 			 "rdfs:label": "provenance agent",
 			 "rdfs:comment": "points to the agent associated with the provenance activity",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -90751,7 +91302,7 @@
 			],
 			 "rdfs:label": "participation type",
 			 "rdfs:comment": "The participitation role an agent took in the context of the provenance activity. This is specific to the activity and different from the persons role in the organisation",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -90766,7 +91317,7 @@
 			],
 			 "rdfs:label": "person in role",
 			 "rdfs:comment": "points to the person who has a role in an organisation",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -90786,7 +91337,7 @@
 			],
 			 "rdfs:label": "derivation type",
 			 "rdfs:comment": "points to the type of activity related to the preceding entity from which the target entity is created",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -90885,11 +91436,6 @@
 			],
 			 "rdfs:label": "Provenance agent (entry type)",
 			 "rdfs:comment": "The agent associated with a provenance activity",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:Provenance"
@@ -90931,11 +91477,6 @@
 			],
 			 "rdfs:label": "Provenance source entity",
 			 "rdfs:comment": "Information about the source entity used in a provenance activity",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:DataModelEntity"
-				}
-			],
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:Provenance"
@@ -90977,7 +91518,7 @@
 			],
 			 "rdfs:label": "activity type",
 			 "rdfs:comment": "points to an activity type for this activity",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -90992,7 +91533,7 @@
 			],
 			 "rdfs:label": "date recorded",
 			 "rdfs:comment": "the date the entry was recorded in the source system (according to the source)",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -91073,7 +91614,7 @@
 			 "rdfs:label": "Discovery attribute",
 			 "rdfs:comment": "Attributes used in the Discovery London Snomed CT extension",
 			 "im:code": 1001951000252101,
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:903031000252104"
 				}
@@ -91093,72 +91634,9 @@
 			],
 			 "rdfs:label": "usage stats",
 			 "rdfs:comment": "points to the usage statistics of a concept",
-			 "rdfs:subPropertyOf": [
-				{
-					 "@id": "im:LanguagePredicates"
-				}
-			]
-		},
-		{
-			 "@id": "im:Profile",
-			 "rdf:type": [
-				{
-					 "@id": "owl:Class"
-				},
-				{
-					 "@id": "sh:NodeShape"
-				}
-			],
-			 "rdfs:label": "Profile",
-			 "rdfs:comment": "Characteristics or features of an entity such as a patient using filters and functions on properties of the entity",
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:EntityShape"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:order": 1,
-					 "sh:path": [
-						{
-							 "@id": "im:entityType"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:class": [
-						{
-							 "@id": "im:Concept"
-						}
-					]
-				},
-				{
-					 "sh:order": 2,
-					 "sh:path": [
-						{
-							 "@id": "im:definition"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:node": [
-						{
-							 "@id": "im:MatchClause"
-						}
-					]
-				}
-			]
-		},
-		{
-			 "@id": "im:Config",
-			 "rdf:type": [
-				{
-					 "@id": "owl:Class"
-				}
-			],
-			 "rdfs:label": "Config",
-			 "rdfs:comment": "Configuration entity holding configuration properties",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91176,7 +91654,7 @@
 			 "rdfs:comment": "A clause that matches a path to entity, its properties and its values or intersections unions or negation. Equivalent to a sparql wheew filter clause",
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			],
 			 "sh:property": [
@@ -91429,238 +91907,6 @@
 			]
 		},
 		{
-			 "@id": "im:CompareClause",
-			 "rdf:type": [
-				{
-					 "@id": "owl:Class"
-				},
-				{
-					 "@id": "sh:NodeShape"
-				}
-			],
-			 "rdfs:label": "Compare clause",
-			 "rdfs:comment": "A clause that tests a value as equal greater or less using the results of a function to compare with the value e.g. f(age) >85",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingEntityType"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:string"
-						}
-					],
-					 "sh:order": 1,
-					 "sh:path": [
-						{
-							 "@id": "im:comparison"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:minCount": 1
-				},
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:string"
-						}
-					],
-					 "sh:order": 3,
-					 "sh:path": [
-						{
-							 "@id": "im:valueData"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:minCount": 1
-				},
-				{
-					 "sh:order": 2,
-					 "sh:path": [
-						{
-							 "@id": "im:function"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:node": [
-						{
-							 "@id": "im:FunctionClause"
-						}
-					]
-				}
-			]
-		},
-		{
-			 "@id": "im:ArgumentClause",
-			 "rdf:type": [
-				{
-					 "@id": "owl:Class"
-				},
-				{
-					 "@id": "sh:NodeShape"
-				}
-			],
-			 "rdfs:label": "Argument clause",
-			 "rdfs:comment": "An argument to pass into a function including the name of the parameter and the value, the value being a constant, a variable, or a match clause",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingEntityType"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:order": 1,
-					 "sh:path": [
-						{
-							 "@id": "im:parameter"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:nodeKind": [
-						{
-							 "@id": "sh:IRI"
-						}
-					]
-				},
-				{
-					 "sh:datatype": [
-						{
-							 "@id": "xsd:string"
-						}
-					],
-					 "sh:order": 2,
-					 "sh:path": [
-						{
-							 "@id": "im:valueData"
-						}
-					]
-				},
-				{
-					 "sh:order": 3,
-					 "sh:path": [
-						{
-							 "@id": "im:valueMatch"
-						}
-					],
-					 "sh:node": [
-						{
-							 "@id": "im:MatchClause"
-						}
-					]
-				},
-				{
-					 "sh:order": 4,
-					 "sh:path": [
-						{
-							 "@id": "im:valueIrI"
-						}
-					],
-					 "sh:nodeKind": [
-						{
-							 "@id": "sh:IRI"
-						}
-					]
-				}
-			]
-		},
-		{
-			 "@id": "im:RangeClause",
-			 "rdf:type": [
-				{
-					 "@id": "owl:Class"
-				},
-				{
-					 "@id": "sh:NodeShape"
-				}
-			],
-			 "rdfs:label": "Range clause",
-			 "rdfs:comment": "Tests a value as being within a range",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingEntityType"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:order": 1,
-					 "sh:path": [
-						{
-							 "@id": "im:from"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:node": [
-						{
-							 "@id": "im:CompareClause"
-						}
-					]
-				},
-				{
-					 "sh:order": 2,
-					 "sh:path": [
-						{
-							 "@id": "im:to"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:node": [
-						{
-							 "@id": "im:CompareClause"
-						}
-					]
-				}
-			]
-		},
-		{
-			 "@id": "im:FunctionClause",
-			 "rdf:type": [
-				{
-					 "@id": "owl:Class"
-				},
-				{
-					 "@id": "sh:NodeShape"
-				}
-			],
-			 "rdfs:label": "Function clause",
-			 "rdfs:comment": "Clause that calls afunction passing in arguments and returning a result",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingEntityType"
-				}
-			],
-			 "sh:property": [
-				{
-					 "sh:order": 1,
-					 "sh:path": [
-						{
-							 "@id": "im:functionIri"
-						}
-					],
-					 "sh:maxCount": 1,
-					 "sh:nodeKind": [
-						{
-							 "@id": "sh:IRI"
-						}
-					]
-				},
-				{
-					 "sh:order": 2,
-					 "sh:path": [
-						{
-							 "@id": "im:argument"
-						}
-					],
-					 "sh:node": [
-						{
-							 "@id": "im:ArgumentClause"
-						}
-					]
-				}
-			]
-		},
-		{
 			 "@id": "im:hasChildren",
 			 "rdf:type": [
 				{
@@ -91669,9 +91915,69 @@
 			],
 			 "rdfs:label": "has children",
 			 "rdfs:comment": "Whether a concept has child concepts as subclass, subproperty, child of, contained in",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:isIri",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "is function",
+			 "rdfs:comment": "property has a fixed value that is an iri of a function",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:isTextValue",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "is text value ",
+			 "rdfs:comment": "property has a fixed value that is text",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:isNumericValue",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "is numeric value ",
+			 "rdfs:comment": "property has a fixed value that is numeric",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:isFunction",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "is Iri",
+			 "rdfs:comment": "property has a fixed value that is a function iri",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91684,9 +91990,9 @@
 			],
 			 "rdfs:label": "is a",
 			 "rdfs:comment": "Ubiquitous ransitive subclass/sub property as used in a transitive closure, that is concept A -> is a > all of its ancestors",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91699,9 +92005,9 @@
 			],
 			 "rdfs:label": "has config",
 			 "rdfs:comment": "points to the configuration of something",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91714,9 +92020,9 @@
 			],
 			 "rdfs:label": "mapped to",
 			 "rdfs:comment": "a complex map between a source and a target being less definite than a match to",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91729,9 +92035,9 @@
 			],
 			 "rdfs:label": "and",
 			 "rdfs:comment": "The and operator (intersection) in the context of query or profiling",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
@@ -91749,9 +92055,9 @@
 			],
 			 "rdfs:label": "or",
 			 "rdfs:comment": "",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
@@ -91769,9 +92075,9 @@
 			],
 			 "rdfs:label": "not",
 			 "rdfs:comment": "the NOT operator in the context of query or profiling",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
@@ -91789,9 +92095,9 @@
 			],
 			 "rdfs:label": "path to",
 			 "rdfs:comment": "The relationship linking a parent entity to a child entity as part of a profile or query , for example 'is subject of' links a patient with an event",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91804,9 +92110,9 @@
 			],
 			 "rdfs:label": "entity type",
 			 "rdfs:comment": "points to the entity type or subject used in a match clause",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91819,9 +92125,9 @@
 			],
 			 "rdfs:label": "property",
 			 "rdfs:comment": "Points to the iri of a data model property/field (which may be a data property or relationship, used in a match clause",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91834,9 +92140,9 @@
 			],
 			 "rdfs:label": "not exist",
 			 "rdfs:comment": "a boolean flag negating the presence of a triple as part of a query, may apply to a property or a property value",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91849,9 +92155,9 @@
 			],
 			 "rdfs:label": "value in",
 			 "rdfs:comment": "points to a array of concepts which may be a class or a set, used as a value filter in a match clause",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91864,9 +92170,9 @@
 			],
 			 "rdfs:label": "value not in",
 			 "rdfs:comment": "points to an array of concepts which may be a class or set, used as a negation value filter in a match clause",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91879,9 +92185,9 @@
 			],
 			 "rdfs:label": "from",
 			 "rdfs:comment": "the lower value in a range, the value having a comparison operator (<=,=,<,=> etc) and an actual value",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91894,9 +92200,9 @@
 			],
 			 "rdfs:label": "to",
 			 "rdfs:comment": "the upper value in a range, the value having a comparison operator (<=,=,<,=> etc) and an actual value",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91909,9 +92215,9 @@
 			],
 			 "rdfs:label": "value range",
 			 "rdfs:comment": "tests the range of a value as part of a match filter i.e. from to",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
@@ -91929,9 +92235,9 @@
 			],
 			 "rdfs:label": "value function",
 			 "rdfs:comment": "points to a function that operates on a set of arguments to return a result, for example an age with a paramter of age units eg. YEAR",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91944,9 +92250,9 @@
 			],
 			 "rdfs:label": "comparison",
 			 "rdfs:comment": "points to the comparison operator when testing a value .e. greater than or equal. The operators are IRIs",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91959,9 +92265,9 @@
 			],
 			 "rdfs:label": "function IRI",
 			 "rdfs:comment": "The IRI of the function (which will have a plain language name)",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -91974,9 +92280,9 @@
 			],
 			 "rdfs:label": "argument",
 			 "rdfs:comment": "holds the name of a parameter and its value when passed to a function the value may be a literal or a complex bject such as a match clause",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
@@ -91994,9 +92300,9 @@
 			],
 			 "rdfs:label": "parameter",
 			 "rdfs:comment": "the name of a parameter to pass into a function as part of an argument, differentiated from a shacl parameter used to define the function",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92009,9 +92315,9 @@
 			],
 			 "rdfs:label": "limit",
 			 "rdfs:comment": "The number of records to keep from a sort order function",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92024,9 +92330,9 @@
 			],
 			 "rdfs:label": "sort field",
 			 "rdfs:comment": "Points to the iri of the property in a data mode when sorting and ordering e.g. im:effectiveDate when ordering by date",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92039,9 +92345,9 @@
 			],
 			 "rdfs:label": "test",
 			 "rdfs:comment": "A match clause that tests the output graph from another match clause created from a function, for example from latest X, 'test' whether value > Y",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
@@ -92059,9 +92365,9 @@
 			],
 			 "rdfs:label": "value var",
 			 "rdfs:comment": "The name of the variable used to hold a value in a query potentially for later use in another match clause",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92072,11 +92378,16 @@
 					 "@id": "owl:ObjectProperty"
 				}
 			],
-			 "rdfs:label": "function",
-			 "rdfs:comment": "points to a function to apply in a match clause. The function is applied to the match triple as a whole i.e. is different from the calueFunction which applies only to the value matched",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:label": "function definition",
+			 "rdfs:comment": "defines the logic of a function",
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
 				}
 			],
 			 "rdfs:range": [
@@ -92096,7 +92407,7 @@
 			 "rdfs:comment": "I ascending order e.g. earliest date or lowest value first",
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -92111,7 +92422,7 @@
 			 "rdfs:comment": "In descending order e.g. latest date or highest value first",
 			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "im:DiscoveryVocabulary"
 				}
 			]
 		},
@@ -92124,9 +92435,9 @@
 			],
 			 "rdfs:label": "sort order",
 			 "rdfs:comment": "the order in which a graph is ordered (e.g. ascending or descending) used alongside the sortField",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92139,9 +92450,9 @@
 			],
 			 "rdfs:label": "in result set of",
 			 "rdfs:comment": "Points to a profile or set of results from a query  that this entity is in the set of",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92154,7 +92465,7 @@
 			],
 			 "rdfs:label": "same person as",
 			 "rdfs:comment": "points to another person being the same actual person enabling a master person register if required or a cross organisational record extract",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
 					 "@id": "im:dataModelObjectProperty"
 				}
@@ -92171,20 +92482,22 @@
 			]
 		},
 		{
-			 "@id": "im:EntityShape",
+			 "@id": "im:ResourceShape",
 			 "rdf:type": [
 				{
 					 "@id": "sh:NodeShape"
-				},
-				{
-					 "@id": "rdfs:Class"
 				}
 			],
-			 "rdfs:label": "Entity shape",
-			 "rdfs:comment": "The shape of any class or property identified by an IRI with a name and optional description. Includes all types",
-			 "rdfs:subClassOf": [
+			 "rdfs:label": "Resource shape",
+			 "rdfs:comment": "The abstract data model for all resources with IRIs in the model i.e. the data model of the entities that are labelled with iri ",
+			 "sh:targetClass": [
 				{
-					 "@id": "im:ModellingEntityType"
+					 "@id": "rdfs:Resource"
+				}
+			],
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:ModelDataModels"
 				}
 			],
 			 "sh:property": [
@@ -92194,7 +92507,7 @@
 							 "@id": "xsd:string"
 						}
 					],
-					 "sh:order": 2,
+					 "sh:order": 1,
 					 "sh:path": [
 						{
 							 "@id": "rdfs:label"
@@ -92209,7 +92522,7 @@
 							 "@id": "xsd:string"
 						}
 					],
-					 "sh:order": 3,
+					 "sh:order": 2,
 					 "sh:path": [
 						{
 							 "@id": "rdfs:comment"
@@ -92219,7 +92532,7 @@
 					 "sh:minCount": 1
 				},
 				{
-					 "sh:order": 1,
+					 "sh:order": 3,
 					 "sh:path": [
 						{
 							 "@id": "rdf:type"
@@ -92228,6 +92541,34 @@
 					 "owl:Class": [
 						{
 							 "@id": "rdfs:Resource"
+						}
+					]
+				},
+				{
+					 "sh:order": 4,
+					 "sh:path": [
+						{
+							 "@id": "im:status"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:Status"
+						}
+					]
+				},
+				{
+					 "sh:order": 5,
+					 "sh:path": [
+						{
+							 "@id": "im:scheme"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:Graph"
 						}
 					]
 				}
@@ -92242,9 +92583,9 @@
 			],
 			 "rdfs:label": "value compare",
 			 "rdfs:comment": "tests equality greater or less than the value as part of filter",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:range": [
@@ -92262,9 +92603,9 @@
 			],
 			 "rdfs:label": "value match",
 			 "rdfs:comment": "points to a match clause when passed as a value argument in a function",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92277,9 +92618,9 @@
 			],
 			 "rdfs:label": "value iri",
 			 "rdfs:comment": "the value o be tested as an iri",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92292,9 +92633,9 @@
 			],
 			 "rdfs:label": "value data",
 			 "rdfs:comment": "value to be tested as a literal",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92307,9 +92648,9 @@
 			],
 			 "rdfs:label": "usage total",
 			 "rdfs:comment": "usage total for a stats report",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			]
 		},
@@ -92322,9 +92663,9 @@
 			],
 			 "rdfs:label": "has member",
 			 "rdfs:comment": "points to a member of the set",
-			 "rdfs:subPropertyOf": [
+			 "rdfs:subClassOf": [
 				{
-					 "@id": "im:LanguagePredicates"
+					 "@id": "im:LanguagePredicate"
 				}
 			],
 			 "rdfs:domain": [
@@ -92342,21 +92683,6 @@
 			]
 		},
 		{
-			 "@id": "im:DataModelEntity",
-			 "rdf:type": [
-				{
-					 "@id": "rdfs:Class"
-				}
-			],
-			 "rdfs:label": "Data model entity",
-			 "rdfs:comment": "A super class of all data model classes and properties",
-			 "rdfs:subClassOf": [
-				{
-					 "@id": "im:ModellingEntityType"
-				}
-			]
-		},
-		{
 			 "@id": "im:dataModelProperty",
 			 "rdf:type": [
 				{
@@ -92365,9 +92691,9 @@
 			],
 			 "rdfs:label": "data model property",
 			 "rdfs:comment": "A super type for all data model properties",
-			 "rdfs:subPropertyOf": [
+			 "im:isContainedIn": [
 				{
-					 "@id": "im:ModellingClass"
+					 "@id": "im:DiscoveryDataModel"
 				}
 			]
 		},
@@ -92443,6 +92769,1096 @@
 			 "im:isContainedIn": [
 				{
 					 "@id": "im:VSET_FHIR_Discovery"
+				}
+			]
+		},
+		{
+			 "@id": "im:medication",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "medication",
+			 "rdfs:comment": "Points to the medication concept for this entry",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:concept"
+				}
+			]
+		},
+		{
+			 "@id": "im:authorisationStatus",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "authorisation status",
+			 "rdfs:comment": "A function property that calculates whether the drug is active or past on the reference date",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceContext",
+			 "rdf:type": [
+				{
+					 "@id": "owl:ObjectProperty"
+				}
+			],
+			 "rdfs:label": "source context",
+			 "rdfs:comment": "Points to the context object holding information about the source of this concept",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceSystem",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source system",
+			 "rdfs:comment": "Points to the source system that published this concept",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceSchema",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source extract",
+			 "rdfs:comment": "Points to the source extract or message type that published this concept",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceHeading",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source heading",
+			 "rdfs:comment": "the source code or term that acts as the heading for a text qualifier such as negative or positive",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceRegex",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source regex",
+			 "rdfs:comment": "Points to the source regex or other pattern match used when creating the concept from a mix of code and term",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceTable",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source table",
+			 "rdfs:comment": "Points to the source table or resource or message segment that published this concept",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceValue",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source value",
+			 "rdfs:comment": "The orignal field value used to create the concept",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceField",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source field",
+			 "rdfs:comment": "Points to the source field, element or message field that published this concept",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:sourceCodeScheme",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source code scheme",
+			 "rdfs:comment": "Points to the source code scheme that published this concept",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelDataProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:SourceContext",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Source context",
+			 "rdfs:comment": "A record of information about the source context of a concept",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:ModelDataModels"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceOrganisation"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceSystem"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceSchema"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceTable"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceField"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceCodeScheme"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceOrganisation"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceSystem"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceSchema"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceTable"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceField"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceCodeScheme"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:targetProperty"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "rdf:Property"
+						}
+					]
+				}
+			]
+		},
+		{
+			 "@id": "im:targetProperty",
+			 "rdf:type": [
+				{
+					 "@id": "owl:DatatypeProperty"
+				}
+			],
+			 "rdfs:label": "source property",
+			 "rdfs:comment": "Points to the concept of the source property (field) which has this as a value",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:ModellingEntities",
+			 "rdf:type": [
+				{
+					 "@id": "im:Folder"
+				}
+			],
+			 "rdfs:label": "Modelling languages",
+			 "rdfs:comment": "Folder containing the model of the models i.e. the language vocabularies and RDF structures from which the models are made",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:InformationModel"
+				}
+			],
+			 "im:order": 5
+		},
+		{
+			 "@id": "im:DiscoveryVocabulary",
+			 "rdf:type": [
+				{
+					 "@id": "rdfs:Class"
+				}
+			],
+			 "rdfs:label": "Discovery vocabulary",
+			 "rdfs:comment": "Super class for classes and properties used in addition to the semantic web vocabularies",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:ModelVocabulary"
+				}
+			]
+		},
+		{
+			 "@id": "im:QueryVariable",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "Query variable",
+			 "rdfs:comment": "a variable passed into a query at run time such as the reference date",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:DiscoveryVocabulary"
+				}
+			]
+		},
+		{
+			 "@id": "im:referenceDate",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "reference date",
+			 "rdfs:comment": "the reference date for a query used to compare relative date ranges e.g., for a query run for a registered population on 1-1-2000 the reference date would be 1-1-2000",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:QueryVariable"
+				}
+			]
+		},
+		{
+			 "@id": "im:baselineDate",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "baseline date",
+			 "rdfs:comment": "a cut off date for entries in a record such that events with effective dates after this date are ignored",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:QueryVariable"
+				}
+			]
+		},
+		{
+			 "@id": "im:functionProperty",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				},
+				{
+					 "@id": "sh:Function"
+				}
+			],
+			 "rdfs:label": "function Property",
+			 "rdfs:comment": "a property whose value is the result of a function when queried",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelProperty"
+				}
+			]
+		},
+		{
+			 "@id": "im:IMQueries",
+			 "rdf:type": [
+				{
+					 "@id": "im:Folder"
+				}
+			],
+			 "rdfs:label": "Information model queries",
+			 "rdfs:comment": "Folder containing standard queries of the information model used internally",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:Q_Queries"
+				}
+			]
+		},
+		{
+			 "@id": "im:IMFormValidationQueries",
+			 "rdf:type": [
+				{
+					 "@id": "im:Folder"
+				}
+			],
+			 "rdfs:label": "Form validation queries",
+			 "rdfs:comment": "Folder containing standard queries for validation of property values in form building",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:IMQueries"
+				}
+			]
+		},
+		{
+			 "@id": "im:select",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "select",
+			 "rdfs:comment": "points to a select clause",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:LanguagePredicate"
+				}
+			]
+		},
+		{
+			 "@id": "im:ConceptShape",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Concept shape",
+			 "rdfs:comment": "data model for terminology concepts",
+			 "sh:targetClass": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:ResourceShape"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "rdfs:subClassOf"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Concept"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "rdfs:subClassOf"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Concept"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:code"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:hasTermCode"
+						}
+					],
+					 "sh:node": [
+						{
+							 "@id": "im:TermCodeShape"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:integer"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:weighting"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:roleGroup"
+						}
+					],
+					 "sh:node": [
+						{
+							 "@id": "im:RoleGroupShape"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:definitionalStatus"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:1261000252108"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:hasMap"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:integer"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:usageTotal"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:im1Id"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:matchedTo"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Concept"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:sourceContext"
+						}
+					],
+					 "sh:node": [
+						{
+							 "@id": "im:SourceContextShape"
+						}
+					]
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:NodeShapeShape",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Node shape shape",
+			 "rdfs:comment": "data model for a node shape itself",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:ResourceShape"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "sh:property"
+						}
+					],
+					 "sh:node": [
+						{
+							 "@id": "im:PropertyShape"
+						}
+					]
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:TermCodeShape",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Term code shape",
+			 "rdfs:comment": "data model for a term code",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:ModelDataModels"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "rdfs:label"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:code"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:status"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Status"
+						}
+					]
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:RoleGroupShape",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Role group shape",
+			 "rdfs:comment": "data model for a role group",
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:ModelDataModels"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "rdf:Property"
+						}
+					],
+					 "sh:class": [
+						{
+							 "@id": "im:Concept"
+						}
+					]
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:1011961000252101",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "Contact point use qualifier",
+			 "rdfs:comment": "qualification for the use of a contact method e.g. home",
+			 "im:code": 1011961000252101,
+			 "im:isContainedIn": [
+				{
+					 "@id": "im:PhysicalBusinessEntities"
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:1011971000252107",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "Home (contact point qualifier",
+			 "rdfs:comment": "contact point represents home e.g. home telephone",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:1011961000252101"
+				}
+			],
+			 "im:code": 1011971000252107,
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:1011981000252105",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "Work (contact point qualifier",
+			 "rdfs:comment": "contact point represents work e.g. work telephone",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:1011961000252101"
+				}
+			],
+			 "im:code": 1011981000252105,
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:1011991000252108",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "Mobile (contact point qualifier",
+			 "rdfs:comment": "contact point represents mobile e.g. mobile telephone",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:1011961000252101"
+				}
+			],
+			 "im:code": 1011991000252108,
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:use",
+			 "rdf:type": [
+				{
+					 "@id": "rdf:Property"
+				}
+			],
+			 "rdfs:label": "use",
+			 "rdfs:comment": "use qualification for the item e.g. home or work for a telephone number",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:dataModelObjectProperty"
+				}
+			],
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:SourceContextShape",
+			 "rdf:type": [
+				{
+					 "@id": "sh:NodeShape"
+				}
+			],
+			 "rdfs:label": "Source context shape",
+			 "rdfs:comment": "Data model for source context for a concept e.g. source system, field etc",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:ResourceShape"
+				}
+			],
+			 "sh:property": [
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:sourceSystem"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:ComputerSystem"
+						}
+					]
+				},
+				{
+					 "sh:path": [
+						{
+							 "@id": "im:sourcePublisher"
+						}
+					],
+					 "sh:minCount": 1,
+					 "sh:class": [
+						{
+							 "@id": "im:Organisation"
+						}
+					]
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceSchema"
+						}
+					],
+					 "sh:minCount": 1
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceTable"
+						}
+					],
+					 "sh:minCount": 1
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceField"
+						}
+					],
+					 "sh:minCount": 1
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceRegex"
+						}
+					],
+					 "sh:minCount": 1
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceHeading"
+						}
+					],
+					 "sh:minCount": 1
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceText"
+						}
+					],
+					 "sh:minCount": 1
+				},
+				{
+					 "sh:datatype": [
+						{
+							 "@id": "xsd:string"
+						}
+					],
+					 "sh:path": [
+						{
+							 "@id": "im:sourceValue"
+						}
+					],
+					 "sh:minCount": 1
+				}
+			]
+		},
+		{
+			 "@id": "im:1012561000252102",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "Registered status",
+			 "rdfs:comment": "whether registered or not",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:871000252100"
+				}
+			],
+			 "im:code": 1012561000252102,
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:1012571000252108",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": "Registered",
+			 "rdfs:comment": "registered as a gms regular patient or on case load",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:1012561000252102"
+				}
+			],
+			 "im:code": 1012571000252108,
+			 "im:scheme": [
+				{
+					 "@id": "im:"
+				}
+			]
+		},
+		{
+			 "@id": "im:1012581000252106",
+			 "rdf:type": [
+				{
+					 "@id": "im:Concept"
+				}
+			],
+			 "rdfs:label": " Not registered",
+			 "rdfs:comment": "not registered as regular GMS patient",
+			 "rdfs:subClassOf": [
+				{
+					 "@id": "im:1012561000252102"
+				}
+			],
+			 "im:code": 1012581000252106,
+			 "im:scheme": [
+				{
+					 "@id": "im:"
 				}
 			]
 		}

@@ -19,10 +19,12 @@ import { v4 } from "uuid";
 import jp from 'jsonpath';
 
 import axios from "axios";
+import Graph from "@/logic/Graph";
 
 export default createStore({
   // update stateType.ts when adding new state!
   state: {
+    datamodelGraph: new Graph(),
     debug: true,
     searchData: {} as any,
     searchResults: [] as any[],

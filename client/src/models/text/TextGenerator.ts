@@ -110,18 +110,12 @@ export class TextGenerator {
             text = [
                 ...TextGenerator.template(and[0], "orderLimit"),
                 ...TextGenerator.template(and[0].property[0], "inSet", ["of"]),
-                ...TextGenerator.template(and[1].property[0], "followedBy", and[1]?.notExist),
+                ...TextGenerator.template(and[1].property[0], "followedBy", [], and[1]?.notExist),
                 ...TextGenerator.template(and[1], "orderLimit"),
                 ...TextGenerator.template(and[1].property[0], "inSet", ["of"]),
             ]
 
         } else {
-            // summarise any clause in a specific order (oderLimit, then properties: concept, then value, then date, then other properties)
-            // text = TextGenerator.template(and[0], "orderLimit");
-
-            //todo: improve concept matching / create external function
-
-
             let mustBe = clause.definition?.testProperty ? "must be" : "";
 
             text = [
@@ -129,11 +123,6 @@ export class TextGenerator {
                 ...TextGenerator.summarisePropertiesInOrder(clause.definition.property, ["of"]),
                 mustBe,
                 ...TextGenerator.summarisePropertiesInOrder(clause.definition?.testProperty, ["must be"]),
-                // ...TextGenerator.template(clause.definition.property[0], conceptTemplate)
-                // ...TextGenerator.template(clause.definition.property[0], conceptTemplate)
-                // ...TextGenerator.template(and[1].property[0], "followedBy", and[1]?.notExist),
-                // ...TextGenerator.template(and[1], "orderLimit"),
-                // ...TextGenerator.template(and[1].property[0], "ofInSet"),
             ]
 
         }
@@ -228,10 +217,9 @@ export class TextGenerator {
         }
         else if (templateName == "followedBy") {
             TextGenerator.showConsole && console.log("### TemplateName followedBy")
+
             let is = parentNotExist || notInSet ? "is not" : "is";
             text = [is, "followed by"];
-
-
             //direct properties of main entity
         } else if (templateName == "orderLimit") {
             //any/latest/earliest/highest/lowest

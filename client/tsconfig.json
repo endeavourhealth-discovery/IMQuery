@@ -18,8 +18,9 @@
       "paths": {
         "@/*": ["src/*"]
       },
-      "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+      "lib": ["esnext", "dom", "dom.iterable", "scripthost", "ES2021"]
     },
+    "downlevelIteration": true,      
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx", "tests/**/*.js", "*.d.ts"],
     "exclude": ["node_modules"]
   },

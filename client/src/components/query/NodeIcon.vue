@@ -1,5 +1,5 @@
 <template>
-  <svg class="node-icon" :width="width" :height="height" :fill="active && active == true ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
+  <svg  :width="width" :height="height" :fill="active && active == true ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
     <template v-if="active && active == true">
       <path fill-rule="evenodd" :d="icons[icon + '_active']" clip-rule="evenodd" />
     </template>
@@ -7,6 +7,7 @@
       <path stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :d="icons[icon + '_default']"></path>
     </template>
   </svg>
+  
 </template>
 
 <script lang="ts">
@@ -140,7 +141,7 @@ export default defineComponent({
         exclamation_circle_default: "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
         exclamation_circle_active: "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
         chevron_left_default: "M15 19l-7-7 7-7",
-        chevron_left_leftactive: "M15 19l-7-7 7-7",
+        chevron_left_active: "M15 19l-7-7 7-7",
         chevron_right_default: "M9 5l7 7-7 7",
         chevron_right_active: "M9 5l7 7-7 7",
         chevron_up_default: "M5 15l7-7 7 7",
@@ -218,11 +219,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped>
-.node-icon {
-  color: #2563eb;
-  min-height: 20px;
-  min-width: 20px;
-}
-</style>

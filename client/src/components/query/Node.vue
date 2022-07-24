@@ -2,8 +2,9 @@
   <div :class="'node ' + [highlighted ? 'highlighted ' : ''] + [connector ? ' connector' : '']">
     <!-- Custom Sentences - add new ones here  -->
     <template v-if="template == 'MainEntity' && entity">
-      <NodeCard icon="user" :title="entity.name" :object="entity"> </NodeCard>
-      <Node class="mt-2 pl-5" :object="data" path="select.match" operator="and" :highlighted="true" :edit="edit"> </Node>
+      <NodeCard icon="user" :title="entity.name" :definition="entity" :allowExpansion="false"> </NodeCard>
+      <div class="linked-line"></div>
+      <Node class="linked-entities" :object="data" path="select.match" operator="and" :highlighted="true" :edit="edit"> </Node>
     </template>
 
     <div v-else-if="template == 'leafEntity'">
@@ -11,11 +12,21 @@
         v-if="hasKey(entity, 'entityInSet')"
         icon="search"
         :title="'is ' + [entity?.notExist ? 'not ' : ''] + 'part of the results of the search ' + entity?.entityInSet[0].name"
-        :object="entity"
+        :definition="entity"
       >
       </NodeCard>
       <template v-else-if="isOperator(entity)"> </template>
-      <NodeCard v-else icon="document_text" :title="entity.displayText || 'Undefined Criteria'" :object="entity"> </NodeCard>
+
+      <NodeCard
+        :data="data"
+        :path="path"
+        v-else-if="entity?.displayText"
+        icon="document_text"
+        :title="entity.displayText"
+        :definition="entity"
+        :allowExpansion="true"
+      ></NodeCard>
+      <NodeCard v-else icon="question_mark_circle" title="Undefined Criteria" :definition="entity"> </NodeCard>
     </div>
     <!-- /Custom Sentences - add new ones here -->
 
@@ -219,6 +230,10 @@ export default defineComponent({
 </script>
 
 <style>
+.linked-entities {
+  margin-left: 14px;
+}
+
 .operator-item {
   display: flex;
 }
@@ -239,6 +254,15 @@ export default defineComponent({
   width: 15px;
   margin: 9px 1px 0 0;
   border-top: 2px solid #cbd5e1;
+}
+
+.linked-line {
+  min-width: 10px;
+  margin-left: 20px;
+  margin-top: -8px;
+  margin-bottom: 2px;
+  min-height: 15px;
+  border-left: 2px solid #cbd5e1;
 }
 
 .line-v {

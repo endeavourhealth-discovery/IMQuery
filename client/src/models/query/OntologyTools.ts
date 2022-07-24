@@ -161,6 +161,11 @@ export default class Ontology {
 }
 
 
+//extract datamodel from ontology: https://jsoneditoronline.org/
+// function query (data) {
+//   return data.filter((item) => item["rdf:type"].some((type) => type['@id'] == "sh:NodeShape"))
+// }
+
 export const DataModel = [
     {
       iri: "http://endhealth.info/im#AllergyIntoleranceAndAdverseReaction",

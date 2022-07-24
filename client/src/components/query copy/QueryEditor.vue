@@ -1,7 +1,8 @@
 <template>
   <div :class="'query-editor flex justify-between' + [edit ? ' w-full border border-gray-300' : '']">
-    <Criteria v-show="edit"></Criteria>
     <QueryDefinition :modelValue="modelValue" :edit="edit" @stopEditing="stopEditing"></QueryDefinition>
+    <!-- <Criteria v-show="edit"></Criteria> -->
+    <SearchInput v-model="searchString"> </SearchInput>
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 import { defineComponent } from "vue";
 
 // import { QueryDefinition } from "im-library";
+import SearchInput from "@/components/query/SearchInput.vue";
 import QueryDefinition from "@/components/query/QueryDefinition.vue";
 import Criteria from "@/components/query/Criteria.vue";
 
@@ -17,6 +19,11 @@ export default defineComponent({
   components: {
     QueryDefinition,
     Criteria
+  },
+  data() {
+    return {
+      searchString: ""
+    };
   },
   props: ["modelValue", "edit", "stopEditing"],
   emits: ["stopEditing"],
