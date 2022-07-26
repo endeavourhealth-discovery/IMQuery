@@ -1,13 +1,55 @@
 <template>
-  <svg  :width="width" :height="height" :fill="active && active == true ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
-    <template v-if="active && active == true">
-      <path fill-rule="evenodd" :d="icons[icon + '_active']" clip-rule="evenodd" />
-    </template>
-    <template v-else>
-      <path stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :d="icons[icon + '_default']"></path>
-    </template>
-  </svg>
-  
+  <template v-if="icon == 'first_child'">
+    <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M3.5 2L3.5 0.5L0.5 0.5L0.5 2L3.5 2ZM2 12.0625L0.5 12.0625L0.5 13.5625H2V12.0625ZM7.09091 10.5625H5.59091V13.5625H7.09091V10.5625ZM7.8673 10.5625H6.3673V13.5625H7.8673V10.5625ZM3.8979 10.5625L2.39791 10.5589L2.39063 13.5589L3.89063 13.5625L3.8979 10.5625ZM11.8969 12.0819L13.1252 12.9429L13.7653 12.0297L13.0752 11.1537L11.8969 12.0819ZM9.07772 13.4906L8.21674 14.7189L10.6733 16.4408L11.5343 15.2125L9.07772 13.4906ZM11.4843 9.13424L10.556 7.95597L8.19948 9.81248L9.12774 10.9908L11.4843 9.13424ZM0.5 2L0.5 12.0625L3.5 12.0625L3.5 2L0.5 2ZM5.78853 13.5625H9V10.5625H5.78853V13.5625ZM9 10.5625H7.09091V13.5625H9V10.5625ZM9 10.5625H7.8673V13.5625H9V10.5625ZM2 13.5625H5.78853V10.5625H2V13.5625ZM3.89063 13.5625L11.8933 13.5819L11.9006 10.5819L3.8979 10.5625L3.89063 13.5625ZM10.6686 11.2209L9.07772 13.4906L11.5343 15.2125L13.1252 12.9429L10.6686 11.2209ZM13.0752 11.1537L11.4843 9.13424L9.12774 10.9908L10.7186 13.0102L13.0752 11.1537Z"
+        fill="currentColor"
+      />
+    </svg>
+  </template>
+  <template v-else-if="icon == 'arrow_right_small'">
+    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M3.89427 3.5H2.39427V6.5H3.89427V3.5ZM7.10573 6.5H8.60573V3.5H7.10573V6.5ZM2.00364 3.5L0.503644 3.49636L0.496365 6.49636L1.99636 6.5L2.00364 3.5ZM10.0027 5.01942L11.231 5.88039L11.8711 4.96718L11.1809 4.09116L10.0027 5.01942ZM7.18345 6.42809L6.32248 7.65639L8.77908 9.37834L9.64005 8.15004L7.18345 6.42809ZM9.59003 2.07174L8.66178 0.893465L6.30522 2.74998L7.23347 3.92826L9.59003 2.07174ZM3.89427 6.5H5.19664V3.5H3.89427V6.5ZM5.19664 6.5H5.97303V3.5H5.19664V6.5ZM5.97303 6.5H7.10573V3.5H5.97303V6.5ZM1.99636 6.5L9.99902 6.51941L10.0063 3.51942L2.00364 3.5L1.99636 6.5ZM8.77436 4.15844L7.18345 6.42809L9.64005 8.15004L11.231 5.88039L8.77436 4.15844ZM11.1809 4.09116L9.59003 2.07174L7.23347 3.92826L8.82438 5.94767L11.1809 4.09116Z"
+        fill="currentColor"
+      />
+    </svg>
+  </template>
+  <template v-else-if="icon == 'square_toggle_open'">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 7.5H10" stroke="currentColor" stroke-width="2" />
+      <path d="M7.5 10V5" stroke="currentColor" stroke-width="2" />
+      <rect x="1" y="1" width="13" height="13" stroke="currentColor" stroke-width="2" />
+    </svg>
+  </template>
+  <template v-else-if="icon == 'property_first'">
+    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M3.5 2L3.5 0.5L0.5 0.5L0.5 2L3.5 2ZM2 12.0625L0.5 12.0625L0.5 13.5625H2V12.0625ZM5.78853 13.5625H7.28853V10.5625H5.78853V13.5625ZM0.5 2L0.5 12.0625L3.5 12.0625L3.5 2L0.5 2ZM2 13.5625H5.78853V10.5625H2V13.5625Z"
+        fill="currentColor"
+      />
+    </svg>
+  </template>
+  <template v-else-if="icon == 'square_toggle_closed'">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 7.5H10" stroke="#1D4ED8" stroke-width="2" />
+      <path d="M5 7.5H10" stroke="#1D4ED8" stroke-width="3" />
+      <rect x="1" y="1" width="13" height="13" stroke="currentColor" stroke-width="2" />
+      <path d="M5 7.5H10" stroke="#1D4ED8" stroke-width="2" />
+      <path d="M5 7.5H10" stroke="#1D4ED8" stroke-width="3" />
+      <rect x="1" y="1" width="13" height="13" stroke="currentColor" stroke-width="2" />
+    </svg>
+  </template>
+  <template v-else>
+    <svg :width="width" :height="height" :fill="active && active == true ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
+      <template v-if="active && active == true">
+        <path fill-rule="evenodd" :d="icons[icon + '_active']" clip-rule="evenodd" />
+      </template>
+      <template v-else>
+        <path stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :d="icons[icon + '_default']"></path>
+      </template>
+    </svg>
+  </template>
 </template>
 
 <script lang="ts">
@@ -21,6 +63,11 @@ export default defineComponent({
       icons: {
         _active: "",
         _default: "",
+        color_swatch_active:
+          "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+        color_swatch_default:
+          "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+
         view_boards_active:
           "M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2",
         view_boards_default:
@@ -219,3 +266,5 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped></style>

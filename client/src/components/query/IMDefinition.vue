@@ -1,49 +1,43 @@
 <template>
+  <!-- Linked Datamodel entities  -->
   <template v-if="type == 'clause'">
-    <div class="pathTo mb10">
-      <span class="ml10"> {{ data?.select?.entityType?.name }} </span>
-      <NodeIcon class="ml10 arrow-right" strokewidth="3" width="14" height="14" icon="arrow_right"></NodeIcon>
-      <span class="ml10"> {{ definition?.pathTo[0]?.name }} </span>
-      <NodeIcon class="ml10 arrow-right" strokewidth="3" width="14" height="14" icon="arrow_right"></NodeIcon>
-      <div class="ml10">{{ definition?.entityType?.name }}</div>
-    </div>
-    <div class="mb10" v-if="definition?.property">
-      <span class="ml10"> Any entry:</span>
-      <div class="properties ml10">
-        <Property class="ml10" v-for="prop in definition?.property" :key="prop['@id']" :modelValue="prop"> </Property>
-      </div>
-    </div>
-    <div v-if="definition?.orderLimit && definition?.testProperty">
-      <span class="ml10">
-        First {{ definition?.orderLimit?.count == 1 ? "" : definition?.orderLimit?.count }} {{ definition?.orderLimit?.count > 1 ? "entries" : "entry" }} after
-        sorting by {{ definition?.orderLimit?.direction?.toLowerCase() }} {{ definition?.orderLimit?.orderBy?.name }}:
-      </span>
-      <div class="properties ml10">
-        <Property class="ml10" v-for="prop in definition?.testProperty" :key="prop['@id']" :modelValue="prop"> </Property>
+    <div class="im-definition">
+      <div class="im-definition-body">
+        <div v-if="definition?.pathTo.length == 0">
+          <SearchInput v-model="searchString" @updateActiveClause="updateActiveClause"> </SearchInput>
+        </div>
+        <TreeItem v-else type="linkedEntity" :data="data" :path="path" :showDetails="showDetails"> </TreeItem>
       </div>
     </div>
   </template>
+  <!-- /Linked Datamodel entities  -->
+
+  <!-- Direct Property of Main Entity  -->
   <template v-if="type == 'property'">
     <div class="pathTo ">
       <span class="ml10"> {{ data?.select?.entityType?.name }} </span>
       <Property class="ml10" :modelValue="definition"> </Property>
     </div>
   </template>
+  <!-- /Direct Property of Main Entity  -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import TreeItem from "./TreeItem.vue";
 import NodeIcon from "./NodeIcon.vue";
 import Property from "./Property.vue";
 import _ from "lodash";
+import SearchInput from "@/components/query/SearchInput.vue";
 
 export default defineComponent({
   name: "IMDefinition",
-  props: ["type", "data", "path"],
-  components: { NodeIcon, Property },
-
+  props: ["type", "data", "path", "showDetails", "updateActiveClause"],
+  SearchInput,
+  components: { NodeIcon, Property, TreeItem, SearchInput },
   data() {
     return {
+      searchString: "",
       definition: _.get(this.data, this.path)
     };
   }
@@ -53,6 +47,27 @@ export default defineComponent({
 <style scoped></style>
 
 <style>
+.im-definition {
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  /* padding: 6px; */
+}
+
+.im-definition-header {
+  border-bottom: 1px solid #cbd5e1;
+  padding: 5px 0 5px 5px;
+}
+
+.im-definition-body {
+  background-color: #fff;
+  padding-top: 5px;
+  padding-left: 10px;
+  /* border: 1px solid #cbd5e1; */
+  /* border-radius: 5px; */
+  /* padding: 6px; */
+}
+
 .pathTo {
   display: flex;
 }
@@ -65,6 +80,9 @@ export default defineComponent({
   display: flex;
 }
 
+.ml10 {
+  margin-left: 10px;
+}
 .ml20 {
   margin-left: 20px;
 }
@@ -75,10 +93,12 @@ export default defineComponent({
   margin-left: 10px;
 }
 .arrow-right {
-  margin-top: 4px;
+  position: relative;
+  top: 3px;
   margin-left: 5px;
   min-width: 14px;
   min-height: 14px;
-  color: #1d4ed8;
+  color: #000;
+  /* color: #1d4ed8; */
 }
 </style>

@@ -5,11 +5,7 @@
 
   <!-- Content Wrapper -->
   <main class="main-container bg-white dark:bg-gray-900">
-    <!-- Page: Home -->
-    <div v-if="activePageName == 'PageName'" class="page flex flex-col items-center justify-center"></div>
-    <!-- /Page: Home -->
-
-    <!-- Page: Results -->
+    <!-- Page: Main -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
       <div class="w-full bg-white dark:bg-gray-900 border-b dark:border-b-0 shadow-sm ">
         <header :class="'header bg-white dark:bg-gray-900 mx-auto relative flex items-center justify-between w-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
@@ -61,13 +57,13 @@
           <!-- /Searchbox  -->
 
           <div class="right flex mr-7 ml-4">
-            <!-- <SplitButton
-            v-if="isLoggedIn"
-            class="p-button-rounded mr-10 h-14 mt-2 #p-button-outlined"
-            label="New"
-            icon="pi pi-plus"
-            :model="newItems"
-          ></SplitButton> -->
+            <div
+              @click="createNew()"
+              class="flex relative top-1 rounded-xl px-2 pr-4 h-14 items-center font-bold text-white bg-blue-600 hover:bg-blue-800 transition duration-500 ease-in-out cursor-pointer text-2xl"
+            >
+              <HeroIcon class="mx-2 text-white dark:text-white" strokewidth="2" width="24" height="24" icon="folder_add" />
+              Create
+            </div>
             <!-- Apps  -->
             <div class="select-none flex" @click="onToggleApps">
               <div :class="'flex ' + [isLoggedIn ? ' pt-2' : '']">
@@ -325,6 +321,16 @@
                 :multiselect="false"
                 :checkbox="true"
               />
+              <div class="flex justify-between space-x-4 pt-10  w-[400px] ">
+                <Button
+                  @click="previousQueryCategory()"
+                  icon="pi pi-chevron-left"
+                  iconPos="left"
+                  label="Previous"
+                  class="p-button-lg p-button-secondary p-button-outlined"
+                />
+                <Button @click="nextQueryCategory()" icon="pi pi-chevron-right" label="Next" class="p-button-lg p-button-l" />
+              </div>
             </div>
 
             <!-- Tab: SQL  -->
@@ -361,7 +367,7 @@
 
             <!-- Middle -->
             <!-- Right -->
-            <div v-show="!editMode" class="invisible md:visible flex flex-col mt-20  mr-20 space-y-10">
+            <div v-show="!editMode" class="invisible md:visible flex flex-col space-y-10 mr-20">
               <template v-for="(item, index) in getActions(activeQueryCategory)" :key="item.name">
                 <template v-if="item.visible && index == 0">
                   <CardButton
@@ -393,6 +399,7 @@
                 </template>
               </template>
             </div>
+
             <!-- Right -->
           </div>
         </div>
@@ -488,7 +495,7 @@
       </div>
       <!-- /Tabs -->
     </div>
-    <!-- /Page: SearchResults-->
+    <!-- /Page: Main-->
   </main>
   <!-- /Content Wrapper -->
 </template>
@@ -643,9 +650,9 @@ export default defineComponent({
           placeholder: ""
         },
         mainEntity: {
-          title: "Main Data Type",
+          title: "Who/what do you want to find data for?",
           explanation:
-            "<b>Tip</b><br>Select the main health record that is directly related to all the data in your dataset. <br><br><b>Example</b><br> Think of this like your 'main table' of data that is linked to all the other tables in your dataset.",
+            "<b>Tip</b><br>Select the main health record (or 'database table') that is directly related to all the data in your dataset. <br><br><b>Example</b><br> A person (data type) is related to their healthrecords (data type) or the organisations (data type) and healthcare professionals (data type) responsible for their health care.",
           placeholder: ""
         },
         steps_data: {
@@ -660,7 +667,6 @@ export default defineComponent({
           placeholder: "Select Lists from the Dropdown"
         }
       },
-      activeQueryCategory: "definition",
       config: {
         query: {
           categories: [
@@ -911,7 +917,14 @@ export default defineComponent({
     //   },
     //   set(value: any): void {}
     // },
-   
+    activeQueryCategory: {
+      get(): any {
+        return this.$store.state.activeQueryCategory;
+      },
+      set(value: any): void {
+        this.$store.commit("updateActiveQueryCategory", value);
+      }
+    },
     activeTabName: {
       get(): any {
         return this.$store.state.activeTabName;
@@ -1023,6 +1036,15 @@ export default defineComponent({
     // async handleOpenItem(iri: any) {
     //   console.log("##### Fetched ##### \n", await EntityService.getDefinitionBundle(iri));
     // },
+    nextQueryCategory(): void {
+      this.$store.commit("nextQueryCategory");
+    },
+    previousQueryCategory(): void {
+      this.$store.commit("previousQueryCategory");
+    },
+    createNew(): void {
+      this.$store.commit("createNew");
+    },
     getActions(activeQueryCategory: string) {
       return this.config?.query?.actions[activeQueryCategory];
     },
@@ -1053,21 +1075,7 @@ export default defineComponent({
       const _libraryURL = "https://im.endhealth.co.uk/#/folder/http:%2F%2Fendhealth.info%2Fceg%2Fqry%23Q_CEGQueries";
       window.open(_libraryURL, "_blank");
     },
-    testQuery(): any {
-      // console.log(
-      //   "ontology",
-      //   this.ontology
-      // );
-      // console.log(
-      //   "all",
-      //   this.ontology.entities
-      // );
-      // console.log("entities", this.ontology.byIri("im:MedicationOrder"));
-      // console.log(
-      //   "datamodels",
-      //   this.ontology.entities.byType(entityTypes.datamodel)
-      // );
-    },
+
     toggleTheme(): void {
       if (this.currentTheme == "dark") {
         this.currentTheme = "light";
@@ -1080,13 +1088,7 @@ export default defineComponent({
       const openFiles = this.openFiles.filter((f: any, index: number) => f.iri == iri);
       return openFiles.length > 0 && openFiles[0].isVisible;
     },
-    test(): void {
-      // console.log(this.activeProfile);
-      // console.log(this.queryBuilder.profiles.get(this.activeProfile));
-      for (const profile in this.queryBuilder.profiles) {
-        console.log("prof", profile);
-      }
-    },
+
     onToggleTabs(event: any): void {
       console.log(event);
       (this.$refs["overlay-menu-toggler"] as any).toggle(event);

@@ -1,7 +1,9 @@
+import EntityService from '@/services/EntityService';
 
 
 import Datamodel from "./Datamodel"
 import _ from "lodash";
+// import QueryService from "@/services/QueryService";
 
 
 export default class Graph {
@@ -23,26 +25,74 @@ export default class Graph {
     this.populateGraph();
   }
 
-  populateGraph() {
+  async populateGraph() {
     let map;
     switch (this._mainEntity) {
       case "im:Person":
         map = [
           {
-            "im:Person": ["im:isSubjectOf"]
+            "key": "im:Person",
+            "values": ["im:isSubjectOf", "im:dataController", "im:gpGMSRegisteredPractice"]
           },
           {
-            "im:isSubjectOf": _.cloneDeep(Datamodel["im:Event"])
-          }
+            "key": "im:isSubjectOf",
+            "values": _.cloneDeep(Datamodel["im:Event"])
+          },
+          {
+            "key": "im:gpGMSRegisteredPractice",
+            "values": ["im:Organisation"]
+          },
+          {
+            "key": "im:dataController",
+            "values": ["im:Organisation"]
+          },
+     
+          {
+            "key": _.cloneDeep(Datamodel["im:Event"]),
+            "values": ["im:hasPractitioner"]
+          },
+          {
+            "key": "im:hasPractitioner",
+            "values": ["im:PractitionerInRole"]
+          },
+          {
+            "key": "im:Organisation",
+            "values": ["im:mainLocation", "im:address"]
+          },
+          {
+            "key": "im:mainLocation",
+            "values": ["im:Location"]
+          },
+          {
+            "key": "im:address",
+            "values": ["im:Address"]
+          },
         ];
-        //convert triples object
+        //convert map tp graph
         map.forEach((mapItem: any) => {
-          const key = Object.keys(mapItem)[0];
-          let items = mapItem[key];
-          this.setNeigbours(key, items);
+
+          // const key = Object.keys(mapItem)[0];
+          // let items = mapItem[key];
+          if (Array.isArray(mapItem?.key)) {
+            mapItem?.key?.forEach((key: any) => {
+              this.setNeigbours(key, mapItem.values);
+            }
+            );
+          } else {
+            this.setNeigbours(mapItem.key, mapItem.values);
+
+          }
         })
+
+        //iterate trough DataModel to go 2 entities deep for the main entity ()
+        //add properties
+        const properties = await EntityService.getDatamodelProperties("im:Person").then(res => res.data);
+        console.log("properties", properties);
+
+
+
+
         return this.graph;
-        //iterate trough DataModel go 5 entities deep for the map's relationship ()
 
         break;
       default:
@@ -54,8 +104,8 @@ export default class Graph {
 
 
   getNeighbours(iri: string) {
-    console.log("getNeighbours", this.graph[iri]);
-    return this.graph[iri];
+    console.log("getNeighbours", _.get(this.graph, iri));
+    return _.get(this.graph, iri);
   }
 
 
@@ -77,7 +127,7 @@ export default class Graph {
 
     function* findPath(list, start, end, visited = new Set()) {
       // console.log("list,", list);
-      console.log("_.get(list, start)", _.get(list, start));
+      // console.log("_.get(list, start)", _.get(list, start));
       if (start === end) return yield [...visited, end];
       if (start == "" || !_.get(list, start)) return null;
       visited.add(start);
@@ -97,7 +147,7 @@ export default class Graph {
       return a.length - b.length; // ASC  -> a.length - b.length // DESC -> b.length - a.length
     });
 
-    console.log(`paths for (${start})s ->`, paths);
+    // console.log(`paths for (${start})s ->`, paths);
     return paths;
   }
 

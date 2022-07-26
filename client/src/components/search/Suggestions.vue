@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="suggestions flex flex-col">
     <TransitionRoot
       appear
       :show="isShown"
@@ -18,6 +18,7 @@
         class="result cursor-pointer relative z-20 hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
         :pathFilter="pathFilter"
         :showDetails="showDetails"
+        @updateActiveClause="updateActiveClause"
       >
       </Suggestion>
     </TransitionRoot>
@@ -38,7 +39,7 @@ import Graph from "@/logic/Graph";
 export default defineComponent({
   name: "SearchResults",
   components: { TransitionRoot, HeroIcon, Suggestion },
-  emits: ["openItem"],
+  emits: ["openItem", "updateActiveClause"],
   props: ["results", "searchstring", "isShown", "pathFilter", "showDetails"],
   data() {
     return {
@@ -47,6 +48,9 @@ export default defineComponent({
     };
   },
   methods: {
+    updateActiveClause(value: any) {
+      this.$emit("updateActiveClause", value);
+    },
     findPaths(iri: string): any {
       Graph.findPaths(iri);
     },
@@ -109,5 +113,13 @@ export default defineComponent({
 .result:hover .result-actions {
   /* display: flex; */
   height: 20px;
+}
+
+.suggestions::-webkit-scrollbar {
+  width: 8px;
+}
+.suggestions::-webkit-scrollbar-thumb {
+  background-color: #94a3b8;
+  border-radius: 20px;
 }
 </style>

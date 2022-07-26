@@ -108,12 +108,143 @@ export default createStore({
       }
     ],
     activeTabName: "Home", //Options #Home #SearchResults #View #Explore
+    activeQueryCategory: "definition", //#mainEntity #definition  #output #sources #sql 
 
   },
   mutations: {
-    updateActiveClausePath(state, path) {
+    createClause(state, payload) {
+      // console.log("payload", payload)
+      //if activePath is empty -> create new item at path first!  //OR you can do this upon pressing "back";
+      const newClause = {
+        "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87",
+        "pathTo": [
+          // {
+          //   "name": "is subject of ",
+          //   "@id": "http://endhealth.info/im#isSubjectOf"
+          // }
+        ],
+        "entityType": {
+          // "name": "Observation (entry type)",
+          // "@id": "http://Fendhealth.info/im#Observation"
+        },
+        "property": [
+
+        ],
+
+        "displayText": "Untitled Filter Criteria"
+      }
+      const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+      const cloneQuery = _.cloneDeep(activeQuery);
+      let parentClause = _.get(cloneQuery, payload.path);
+      // console.log("parentClause", _.cloneDeep(parentClause))
+      parentClause.splice(payload.index, 0, newClause);
+      // console.log("parentClause", _.cloneDeep(parentClause))
+
+      _.set(cloneQuery, payload.path, parentClause);
+      // console.log("cloneQuery", _.cloneDeep(parentClause))
+
+      state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
+      // console.log("cloneQuery", cloneQuery)
+
+      // state.activeClausePath[state.activeQueryId] = payload.path + `[${payload.index}]`;
+    },
+    updateActiveClausePath(state, payload) {
       console.log("click")
-      state.activeClausePath[state.activeQueryId] = path;
+      switch (payload.action) {
+        case "view":
+          state.activeClausePath[state.activeQueryId] = payload.path;
+
+          break;
+
+        case "update":
+          // console.log("payload", payload)
+          //if activePath is empty -> create new item at path first!  //OR you can do this upon pressing "back";
+          const newClause = {
+            "@id": "urn:uuid:b46ee284-fbb2-4d0e-b766-25cb5e7e32a9",
+            "displayText": "Untitled Filter Criteria",
+            "property": {
+              "name": "is subject of ",
+              "@id": "http://endhealth.info/im#isSubjectOf"
+            },
+            "match": {
+              "subselect": {
+                "property": [
+                  {
+                    "@id": "http://endhealth.info/im#effectiveDate",
+                    "alias": "effectiveDate8"
+                  }
+                ],
+                "match": {
+                  "property": {
+                    "name": "codeable expression",
+                    "alias": "concept7",
+                    "@id": "http://endhealth.info/im#concept"
+                  },
+                  "inSet": [
+                    {
+                      "name": "Hypertension",
+                      "@id": "urn:uuid:be880ad6-5dab-48c2-8e94-d5c5219afb4f"
+                    }
+                  ]
+                },
+                "orderLimit": {
+                  "orderBy": {
+                    "@id": "http://endhealth.info/im#effectiveDate",
+                    "alias": "effectiveDate8"
+                  },
+                  "direction": "DESCENDING",
+                  "count": 1
+                }
+              },
+              "notExist": true,
+              "entityType": {
+                "name": "Observation (entry type)",
+                "@id": "http://endhealth.info/im#Observation"
+              },
+              "and": [
+                {
+                  "property": {
+                    "name": "codeable expression",
+                    "alias": "concept9",
+                    "@id": "http://endhealth.info/im#concept"
+                  },
+                  "isConcept": [
+                    {
+                      "name": "Hypertension (not resolved)",
+                      "@id": "urn:uuid:aafda1f0-02fc-45bc-bd6f-b899efe9547d"
+                    }
+                  ]
+                },
+                {
+                  "property": {
+                    "alias": "effectiveDate87",
+                    "@id": "http://endhealth.info/im#effectiveDate"
+                  },
+                  "value": {
+                    "comparison": "GREATER_THAN",
+                    "valueVariable": "effectiveDate8"
+                  }
+                }
+              ]
+            }
+          };
+          const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+          const cloneQuery = _.cloneDeep(activeQuery);
+          let parentClause = _.get(cloneQuery, payload.path);
+          // console.log("parentClause", _.cloneDeep(parentClause))
+          parentClause.splice(payload.index, 0, newClause);
+          // console.log("parentClause", _.cloneDeep(parentClause))
+
+          _.set(cloneQuery, payload.path, parentClause);
+          // console.log("cloneQuery", _.cloneDeep(parentClause))
+
+          state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
+          // console.log("cloneQuery", cloneQuery)
+
+          state.activeClausePath[state.activeQueryId] = payload.path + `[${payload.index}]`;
+          break;
+      }
+
     },
     startEdit(state, fileIri) {
       state.openFiles.find(file => file.iri == fileIri).state = "edit";
@@ -127,10 +258,10 @@ export default createStore({
       }
 
       // try {
-        // const entity = await QueryService.querySummary(fileIri).then(res => {
-          // const entity = await QueryService.definition(fileIri).then(res => {
-            // const entity = await QueryService.summariseLocalQuery(fileIri).then(res => {
-        const entity = await QueryService.summariseQuery(fileIri).then(res => {
+      // const entity = await QueryService.querySummary(fileIri).then(res => {
+      // const entity = await QueryService.definition(fileIri).then(res => {
+      // const entity = await QueryService.summariseLocalQuery(fileIri).then(res => {
+      const entity = await QueryService.summariseQuery(fileIri).then(res => {
         console.log("## res:", res); //?res.data if backend
         const data = res?.data || res
         state.queryBuilder.loadDataSet(data);
@@ -155,8 +286,95 @@ export default createStore({
 
 
     },
+    createNew(state, entityType) {
+
+      let data = {};
+      // function createMatchClause() { }
+      function createQuery() {
+        data = {
+          "@id": `urn:uuid:${v4()}`,
+          "name": "Untitled Query",
+          "description": "",
+          "mainEntity": {
+            "@id": "http://endhealth.info/im#Person"
+          },
+          "select": {
+            "entityType": {
+              "name": "Person",
+              "@id": "http://endhealth.info/im#Person"
+            },
+            "match": {}
+          }
+        };
+      }
+      switch (entityType) {
+
+        case "im:MatchClause":
+          break;
+        case "im:Query":
+          createQuery();
+          break;
+        default:
+          createQuery();
+          break;
+      }
+
+
+      state.queryBuilder.loadDataSet(data);
+
+
+      console.log("## loadDataSet(data);:", data); //?res.data if backend
+
+      state.openFiles.forEach((file: any, index: number) => state.openFiles[index].isVisible = false);
+      state.openFiles.push({ iri: data["@id"], activeClausePath: "", isVisible: true, state: "view", data: data }); //alternative states are: loading, edit
+      state.activeQueryId = data["@id"];
+      state.tabs.find(tab => tab.name === "Edit").visible = true;
+      state.activeTabName = "Edit";
+      state.activeQueryCategory = "mainEntity";
+
+
+    },
+    nextQueryCategory(state): void {
+      switch (state.activeQueryCategory) {
+        case "mainEntity":
+          state.activeQueryCategory = "definition";
+          break;
+        case "definition":
+          state.activeQueryCategory = "output";
+          break;
+        case "output":
+          state.activeQueryCategory = "sources";
+          break;
+        case "sources":
+          state.activeQueryCategory = "sql";
+          break;
+        default:
+          break;
+      }
+    },
+    previousQueryCategory(state): void {
+      switch (state.activeQueryCategory) {
+        case "definition":
+          state.activeQueryCategory = "mainEntity";
+          break;
+        case "output":
+          state.activeQueryCategory = "definition";
+          break;
+        case "sources":
+          state.activeQueryCategory = "output";
+          break;
+        case "sql":
+          state.activeQueryCategory = "sources";
+          break;
+        default:
+          break;
+      }
+    },
     updateActiveTabName(state, value) {
       state.activeTabName = value;
+    },
+    updateActiveQueryCategory(state, value) {
+      state.activeQueryCategory = value;
     },
     updateSearchData(state, value) {
       state.searchData = value;

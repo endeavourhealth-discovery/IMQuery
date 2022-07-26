@@ -6181,6 +6181,15 @@ export default class Datamodel {
         "im:ComputerSystem"
     ];
 
-
+    public static isEntity(iri: string): boolean {
+        const entity = Datamodel.withIri(iri);
+        const entityTypes = entity["rdf:type"]
+        const entry = ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class"];
+        if (entityTypes.some((entity: any) => entry.includes(entity["@id"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

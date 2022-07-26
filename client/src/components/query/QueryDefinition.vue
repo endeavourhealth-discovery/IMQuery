@@ -1,8 +1,25 @@
 <template>
   <div :class="'query-definition ' + [edit ? 'edit ' : '']">
-    <Node template="MainEntity" :object="query" path="select.entityType" valueType="TTIriRef" :highlighted="true" operator="and" :edit="edit">
-      <!-- <Node :object="query" path="select.match" valueType="match" operator="and" :highlighted="true" :edit="edit"> </Node> -->
-    </Node>
+    <!-- <div class="toggle-button">
+      <span> Show Details</span>
+      <InputSwitch class="ml10" v-model="showDetails" />
+    </div> -->
+    <!-- <ToggleButton v-model="showDetails" onLabel="Show Details" offLabel="Hide Details" onIcon="pi pi-check" offIcon="pi pi-times" class="toggle-button" /> -->
+    <div>
+      <Node
+        template="MainEntity"
+        :object="query"
+        path="select.entityType"
+        valueType="TTIriRef"
+        :highlighted="true"
+        operator="and"
+        :edit="edit"
+        :showDetails="showDetails"
+        @updateActiveClause="updateActiveClause"
+      >
+        <!-- <Node :object="query" path="select.match" valueType="match" operator="and" :highlighted="true" :edit="edit"> </Node> -->
+      </Node>
+  </div>
   </div>
 </template>
 
@@ -14,11 +31,15 @@ import { mapState } from "vuex";
 export default defineComponent({
   name: "QueryDefinition",
   props: ["modelValue", "edit"],
-  emits: ["stopEditing"],
+  emits: ["stopEditing", "updateActiveClause"],
   components: { Node },
   computed: {
-    ...mapState(["activeClausePath"]),
-    
+    ...mapState(["activeClausePath"])
+  },
+  methods: {
+    updateActiveClause(value: any) {
+      this.$emit("updateActiveClause", value);
+    }
   },
   watch: {
     modelValue(value: any) {
@@ -28,7 +49,8 @@ export default defineComponent({
   data() {
     return {
       activePath: "",
-      query: this.modelValue
+      query: this.modelValue,
+      showDetails: false
     };
   }
 });
@@ -44,12 +66,16 @@ export default defineComponent({
 }
 
 .query-definition {
-  width: 600px;
-  min-width: 600px;
+  position: relative;
+  /* width: 800px; */
+  min-width: 700px;
+  max-width: 700px;
+  width: 100%;
   height: 100%;
-  max-height: 600px;
+  max-height: 750px;
   transition: all 0.2s ease-in;
   display: flex;
+  flex-direction: column;
   overflow-y: auto;
   padding: 1.5rem;
   margin-bottom: 3rem;
@@ -66,6 +92,20 @@ export default defineComponent({
 .query-definition.edit {
   border-width: 0;
   box-shadow: none;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #64748b;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
 
 /* .query-definition:not(.edit):hover {

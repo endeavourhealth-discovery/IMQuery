@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-buttons font-medium h-full flex justify-center">
+  <div class="tab-buttons font-medium flex justify-center space-x-6">
     <template v-for="item in items">
       <div
         v-if="item.visible"
@@ -23,7 +23,7 @@
         }"
       >
         <!-- Icon -->
-        <div v-if="showicon" class="inline-flex mr-2">
+        <div v-if="showIcon" class="inline-flex mr-2">
           <HeroIcon strokewidth="2" width="24" height="24" :icon="item.icon" />
         </div>
 
@@ -43,7 +43,7 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 
 export default defineComponent({
   name: "HorizontalNavbar",
-  props: ["items", "modelValue", "showicon"],
+  props: ["items", "modelValue", "showIcon"],
   emits: ["update:modelValue"],
   components: {
     HeroIcon

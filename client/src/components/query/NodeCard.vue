@@ -1,22 +1,50 @@
 <template>
-  <div :class="'node-card '">
-    <div :class="'node-card-header ' + [expanded ? 'expanded' : '']" @click="onClick">
-      <NodeIcon :class="`node-icon`" strokewidth="2" width="20" height="20" :icon="icon" />
-      <div class="node-card-title" v-html="richTitle()"></div>
-      <div v-if="allowExpansion" class="node-chevron">
+  <div class="node-section">
+    <div :class="'node-card group'">
+      <div :class="'node-card-header  ' + [expanded ? 'expanded' : '']" @click="onClick">
+        <NodeIcon :class="`node-icon`" strokewidth="2" width="20" height="20" :icon="icon" />
+        <div class="node-card-title" v-html="richTitle()"></div>
+        <!-- <div v-if="allowExpansion" class="node-chevron">
         <NodeIcon class="icon" strokewidth="2" width="20" height="20" :icon="expanded ? 'chevron_up' : 'chevron_down'" />
+      </div> -->
+      </div>
+      <div v-if="true || expanded" class="node-card-body">
+        <div v-if="activeTab == 'Prettified' && definition?.pathTo" class=" prettified">
+          <!-- <IMDefinition type="clause" :data="data" :path="path" :showDetails="showDetails"> </IMDefinition> -->
+        </div>
+        <div v-else-if="activeTab == 'Prettified' && definition?.alias" class="prettified">
+          <!-- <IMDefinition type="property" :data="data" :path="path" :showDetails="showDetails"> </IMDefinition> -->
+        </div>
+        <div v-if="activeTab == 'Raw JSON'" class="tab-content json">
+          {{ definition }}
+        </div>
+
+        <div v-if="allowExpansion" class="actions rounded-md flex justify-end items-end select-none space-x-5  transition duration-500 ease-in-out mr-4 ">
+          <div
+            @click="onCopy()"
+            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-purple-700 dark:text-white"
+          >
+            <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="document_duplicate" /> Copy JSON
+          </div>
+          <!-- <div class="inline-flex items-center text-2xl hover:underline font-semibold text-blue-600 dark:text-white">
+          <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="eye" /> View
+        </div> -->
+          <div
+            @click="onEdit()"
+            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-green-600 dark:text-white"
+          >
+            <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="eye" /> View Definition
+          </div>
+        </div>
       </div>
     </div>
-    <div v-if="expanded" class="node-card-body">
-      <div v-if="activeTab == 'Prettified' && definition?.pathTo" class="tab-content prettified">
-        <IMDefinition type="clause" :data="data" :path="path"> </IMDefinition>
-      </div>
-      <div v-else-if="activeTab == 'Prettified' && definition?.alias" class="tab-content prettified">
-        <IMDefinition type="property" :data="data" :path="path"> </IMDefinition>
-      </div>
-      <div v-if="activeTab == 'Raw JSON'" class="tab-content json">
-        {{ definition }}
-      </div>
+    <div
+      v-if="!added"
+      @click="onAdd()"
+      class="node-add flex max-w-[100px] rounded-md text-2xl font-semibold text-white bg-blue-600 hover:bg-blue-800 transition duration-500 ease-in-out dark:text-white pl-2 pr-5 py-2 mb-6 cursor-pointer  "
+    >
+      <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="plus" />
+      <div>Add</div>
     </div>
   </div>
 </template>
@@ -26,16 +54,19 @@ import { defineComponent } from "vue";
 import IMDefinition from "./IMDefinition.vue";
 import NodeIcon from "./NodeIcon.vue";
 import jp from "jsonpath";
+import LoggerService from "@/services/LoggerService";
 
 export default defineComponent({
   name: "NodeCard",
-  props: ["icon", "title", "definition", "allowExpansion", "data", "path"],
+  props: ["icon", "title", "definition", "allowExpansion", "data", "path", "showDetails"],
+  emits: ["updateActiveClause"],
   components: { NodeIcon, IMDefinition },
   data() {
     return {
       activeTab: "Prettified",
       tabs: [{ label: "Prettified" }, { label: "Raw JSON" }],
-      expanded: false
+      expanded: false,
+      added: false
     };
   },
   methods: {
@@ -53,19 +84,74 @@ export default defineComponent({
     },
     onClick() {
       this.expanded = !this.expanded;
+      console.log(this.path);
       console.log(this.definition);
+    },
+    onCopy() {
+      navigator.clipboard.writeText(JSON.stringify(this.definition, null, 2)).then(
+        function() {
+          this.$toast.add(LoggerService.success("Copied to clipboard"));
+        },
+        function() {
+          this.$toast.add(LoggerService.error("Failed to copy to clipboard"));
+        }
+      );
+    },
+    onEdit() {
+      this.$emit("updateActiveClause", { action: "view", path: this.path, index: 0 });
+    },
+    onAdd() {
+      //improves animation
+      this.added = true;
+      setTimeout(() => {
+        this.added = false;
+      }, 500);
+      //gets the next path
+      const currentPath = this.path; //curent path
+      const pathArray = currentPath.split(".");
+      const lastItem = pathArray[pathArray.length - 1];
+      const currentIndex = lastItem.match(/(?<=\[).+?(?=\])/)[0];
+      const newIndex = parseInt(currentIndex) + 1;
+      const newLastItem = lastItem.replace(/\[\d+\]/, ``);
+      pathArray[pathArray.length - 1] = newLastItem;
+      // const newPathArray = pathArray.slice(0, pathArray.length - 1);
+
+      const newPath = pathArray.join(".");
+      console.log("newPath", newPath);
+      console.log("newLastItem", newIndex);
+
+      // path to be added
+      this.$emit("updateActiveClause", { action: "create", path: newPath, index: newIndex });
+
+      //if active clause doesn't exist, it is created AND a special first-time window is show?!
     }
   }
 });
 </script>
 
 <style scoped>
-.tab-content {
+.node-add {
+  display: none;
+}
+
+.node-section:hover .node-add {
+  display: inline-flex;
+}
+/* .tab-content {
   background-color: #f8fafc;
-  /* background-color: #F9FAFB; */
   border: 1px solid #cbd5e1;
   border-radius: 5px;
   padding: 6px;
+} */
+
+.actions {
+  /* display: none; */
+  height: 0;
+  transition: height 0.3s ease-out;
+}
+.node-card:hover .actions {
+  /* display: flex; */
+  height: 30px;
 }
 
 .node-card-body .tabs {

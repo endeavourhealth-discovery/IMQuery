@@ -2,31 +2,65 @@
   <div :class="'node ' + [highlighted ? 'highlighted ' : ''] + [connector ? ' connector' : '']">
     <!-- Custom Sentences - add new ones here  -->
     <template v-if="template == 'MainEntity' && entity">
-      <NodeCard icon="user" :title="entity.name" :definition="entity" :allowExpansion="false"> </NodeCard>
+      <NodeCard
+        @updateActiveClause="updateActiveClause"
+        :showDetails="showDetails"
+        icon="user"
+        :title="entity.name"
+        :definition="entity"
+        :allowExpansion="false"
+      >
+      </NodeCard>
       <div class="linked-line"></div>
-      <Node class="linked-entities" :object="data" path="select.match" operator="and" :highlighted="true" :edit="edit"> </Node>
+      <Node
+        @updateActiveClause="updateActiveClause"
+        :showDetails="showDetails"
+        class="linked-entities"
+        :object="data"
+        path="select.match"
+        operator="and"
+        :highlighted="true"
+        :edit="edit"
+      >
+      </Node>
     </template>
 
     <div v-else-if="template == 'leafEntity'">
       <NodeCard
         v-if="hasKey(entity, 'entityInSet')"
+        @updateActiveClause="updateActiveClause"
+        :showDetails="showDetails"
         icon="search"
+        :path="path"
         :title="'is ' + [entity?.notExist ? 'not ' : ''] + 'part of the results of the search ' + entity?.entityInSet[0].name"
         :definition="entity"
+        :allowExpansion="true"
       >
       </NodeCard>
       <template v-else-if="isOperator(entity)"> </template>
 
       <NodeCard
+        v-else-if="entity?.displayText"
+        @updateActiveClause="updateActiveClause"
+        :showDetails="showDetails"
         :data="data"
         :path="path"
-        v-else-if="entity?.displayText"
         icon="document_text"
         :title="entity.displayText"
         :definition="entity"
         :allowExpansion="true"
-      ></NodeCard>
-      <NodeCard v-else icon="question_mark_circle" title="Undefined Criteria" :definition="entity"> </NodeCard>
+      >
+      </NodeCard>
+
+      <NodeCard
+        v-else
+        @updateActiveClause="updateActiveClause"
+        :showDetails="showDetails"
+        icon="question_mark_circle"
+        title="Undefined Criteria"
+        :definition="entity"
+      >
+      </NodeCard>
     </div>
     <!-- /Custom Sentences - add new ones here -->
 
@@ -60,6 +94,8 @@
             </div>
 
             <Node
+              @updateActiveClause="updateActiveClause"
+              :showDetails="showDetails"
               :object="data"
               :path="`${path}[${child?.path}].${grandChild?.path}`"
               :operator="grandChildIndex > 0 ? child.path : ''"
@@ -76,7 +112,15 @@
 
         <!-- Leaf Child -->
         <template v-else>
-          <Node :object="data" :path="`${path}[${child?.path}]`" :edit="edit" template="leafEntity"> </Node>
+          <Node
+            @updateActiveClause="updateActiveClause"
+            :showDetails="showDetails"
+            :object="data"
+            :path="`${path}.${child?.path}`"
+            :edit="edit"
+            template="leafEntity"
+          >
+          </Node>
         </template>
         <!-- /Leaf Child  -->
       </div>
@@ -96,10 +140,10 @@ import { defineComponent } from "vue";
 import NodeCard from "./NodeCard.vue";
 import NodeIcon from "./NodeIcon.vue";
 import _ from "lodash";
-
 export default defineComponent({
   name: "Node",
   components: { NodeIcon, NodeCard },
+  emits: ["updateActiveClause"],
   props: [
     "indexCount",
     "index",
@@ -114,9 +158,9 @@ export default defineComponent({
     "excludedKeys",
     "operator",
     "highlighted",
-    "edit"
+    "edit",
+    "showDetails"
   ],
-  emits: ["selectedClauseUpdated"],
   methods: {
     showLineV(index: number, indexCount: number, childIndex: number, childIndexCount: number): boolean {
       if (childIndexCount > 0 && childIndex < childIndexCount - 1) {
@@ -175,6 +219,15 @@ export default defineComponent({
         return "and";
       }
     },
+    updateActiveClause(value: any) {
+      this.$emit("updateActiveClause", value);
+
+      // clearTimeout(this.debounce);
+      // this.debounce = window.setTimeout(() => {
+      //   alert("lol ");
+      //   this.$emit("updateActiveClause", value);
+      // }, 600);
+    },
     children(testObject: any): any {
       // console.log("keys", Object.keys(testObject));
       if (Array.isArray(testObject)) {
@@ -188,7 +241,7 @@ export default defineComponent({
         const includedKey = Object.keys(testObject).find((key: string) => includedKeys.includes(key));
         const excludedKey = Object.keys(testObject).find((key: string) => excludedKeys.includes(key));
 
-        if (includedKey && !excludedKey) {
+        if (includedKey && !excludedKey && Array.isArray(testObject[includedKey])) {
           return testObject[includedKey].map((child: string, index: number) => {
             return { path: `${includedKey}[${index}]`, value: child };
           });
@@ -200,6 +253,7 @@ export default defineComponent({
   },
   data() {
     return {
+      debounce: 0,
       data: this.object,
       editMode: this.edit,
       entity: this.path ? _.get(this.object, this.path) : this.object,

@@ -58,6 +58,7 @@ import SplitButton from "primevue/splitbutton";
 import MultiSelect from "primevue/multiselect";
 import OverlayPanel from "primevue/overlaypanel";
 import ToggleButton from "primevue/ToggleButton";
+import InputSwitch from "primevue/InputSwitch";
 // import Chart from "primevue/chart";
 import Menu from "primevue/menu";
 import ProgressSpinner from "primevue/progressspinner";
@@ -150,6 +151,7 @@ const app = createApp(App)
   .component("RadioButton", RadioButton)
   .component("ConfirmPopup", ConfirmPopup)
   .component("Calendar", Calendar)
-  .component("InputNumber", InputNumber);
+  .component("InputNumber", InputNumber)
+  .component("InputSwitch", InputSwitch);
 
 app.mount("#app");

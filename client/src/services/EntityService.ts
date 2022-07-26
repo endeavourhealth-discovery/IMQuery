@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, CancelToken } from "axios";
 import _ from "lodash"
+import QueryUtils from "@/helpers/QueryUtils";
 
 
 export default class EntityService {
@@ -80,6 +81,23 @@ export default class EntityService {
   //   }
   // }
 
+
+  public static async getDatamodelProperties(iri: string): Promise<any> {
+    try {
+      if (!iri.startsWith("http")) {
+        iri = QueryUtils.toUrl(iri);
+      }
+      const _res = await axios.get(import.meta.env.VITE_API + "api/entity/public/dataModelProperties", {
+        params: {
+          iri: iri
+        }
+      });
+      // console.log("api response", _.cloneDeep(_res))
+      return _res;
+    } catch (error) {
+      return {} as any;
+    }
+  }
 
 
 
