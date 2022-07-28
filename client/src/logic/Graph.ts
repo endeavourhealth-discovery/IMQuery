@@ -86,8 +86,8 @@ export default class Graph {
 
         //iterate trough DataModel to go 2 entities deep for the main entity ()
         //add properties
-        const properties = await EntityService.getDatamodelProperties("im:Person").then(res => res.data);
-        console.log("properties", properties);
+        // const properties = await EntityService.getDatamodelProperties("im:Person").then(res => res.data);
+        // console.log("properties", properties);
 
 
 

@@ -116,7 +116,7 @@ export default createStore({
       // console.log("payload", payload)
       //if activePath is empty -> create new item at path first!  //OR you can do this upon pressing "back";
       const newClause = {
-        "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87",
+        "@id": `urn:uuid:${v4()}`,
         "pathTo": [
           // {
           //   "name": "is subject of ",
@@ -131,7 +131,7 @@ export default createStore({
 
         ],
 
-        "displayText": "Untitled Filter Criteria"
+        "displayText": "Untitled"
       }
       const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
       const cloneQuery = _.cloneDeep(activeQuery);
@@ -161,7 +161,8 @@ export default createStore({
           //if activePath is empty -> create new item at path first!  //OR you can do this upon pressing "back";
           const newClause = {
             "@id": "urn:uuid:b46ee284-fbb2-4d0e-b766-25cb5e7e32a9",
-            "displayText": "Untitled Filter Criteria",
+            "displayText": "Untitled",
+            // "displayText": "",
             "property": {
               "name": "is subject of ",
               "@id": "http://endhealth.info/im#isSubjectOf"
@@ -293,7 +294,7 @@ export default createStore({
       function createQuery() {
         data = {
           "@id": `urn:uuid:${v4()}`,
-          "name": "Untitled Query",
+          "name": "New Query",
           "description": "",
           "mainEntity": {
             "@id": "http://endhealth.info/im#Person"

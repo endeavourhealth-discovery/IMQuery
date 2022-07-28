@@ -11,16 +11,24 @@
       leave-from="opacity-100 rotate-0 scale-100"
       leave-to="opacity-0 scale-50 "
     >
-      <Suggestion
-        v-for="result in results"
-        :key="result.iri"
-        :result="result"
-        class="result cursor-pointer relative z-20 hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
-        :pathFilter="pathFilter"
-        :showDetails="showDetails"
-        @updateActiveClause="updateActiveClause"
-      >
-      </Suggestion>
+      <template v-if="showPreview && preview">
+        <div class="text-gray-700 text-lg font-semibold">Preview</div>
+        <IMDefinition class="clause-definition" type="clause" :modelValue="preview" :showDetails="true"> </IMDefinition>
+      </template>
+      <div class="text-gray-700 text-lg font-semibold">Suggestions</div>
+
+      <template v-for="(result, resultIndex) in results" :key="result.iri">
+        <Suggestion
+          v-if="!maxResults || resultIndex < maxResults"
+          :result="result"
+          class="result cursor-pointer relative  hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400  focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
+          :pathFilter="pathFilter"
+          :showDetails="showDetails"
+          @updatePreview="updatePreview"
+          @updateActiveClause="updateActiveClause"
+        >
+        </Suggestion>
+      </template>
     </TransitionRoot>
   </div>
 </template>
@@ -31,6 +39,7 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 import QueryUtils from "@/helpers/QueryUtils";
 import { TransitionRoot } from "@headlessui/vue";
 import { _ } from "lodash";
+import IMDefinition from "@/components/query/IMDefinition.vue";
 
 import Suggestion from "./Suggestion.vue";
 
@@ -38,16 +47,21 @@ import Graph from "@/logic/Graph";
 
 export default defineComponent({
   name: "SearchResults",
-  components: { TransitionRoot, HeroIcon, Suggestion },
+  components: { TransitionRoot, HeroIcon, Suggestion, IMDefinition },
   emits: ["openItem", "updateActiveClause"],
-  props: ["results", "searchstring", "isShown", "pathFilter", "showDetails"],
+  props: ["results", "searchstring", "isShown", "pathFilter", "showDetails", "maxResults", "showPreview"],
   data() {
     return {
       debounce: 0,
-      pathData: []
+      pathData: [],
+      preview: null
     };
   },
   methods: {
+    updatePreview(value: any): any {
+      console.log("preview", value);
+      this.preview = value.data;
+    },
     updateActiveClause(value: any) {
       this.$emit("updateActiveClause", value);
     },

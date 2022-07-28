@@ -1,44 +1,59 @@
 <template>
-  <div :class="'query-editor flex relative ' + [edit ? ' w-full #border #border-gray-300' : '']">
-    <div :class="' ' + [edit ? ' border-r' : '']">
-      <div class="min-w-[700px]">
-        <div v-if="edit" class="flex justify-center border-y pt-2">
-          <div class="flex justify-between text-2xl font-semibold text-blue-700 pl-10 border-b relative z-0">
-            <span class="mx-auto border-b-2 border-b-blue-700 px-3 pb-2">{{ activeViewerTab }}</span>
+  <div :class="'query-editor flex  justify-center relative w-full ' + [edit ? ' w-full #border #border-gray-300' : '']">
+    <div :class="'w-full flex' + [edit ? ' ' : '']">
+      <div class="#ml-[100px] min-w-[700px]">
+        <!-- title  -->
+        <!-- <div class="flex text-2xl font-semibold text-blue-700 #border-b relative z-0">
+            <span class="text-3xl font-bold text-black ml-10">{{ activeViewerTab }}</span>
+          </div> -->
+        <div class="flex max-w-[700px]">
+          <div v-if="activeViewerTab == 'Filter Criteria'" class="pt-4 mr-10 ">
+            <button
+              class="border border-gray-500 w-full max-w-[60px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-gray-500 hover:text-white transition duration-500 ease-in-out"
+              label="Back"
+              @click.prevent="activeViewerTab = 'Query Definition'"
+            >
+              {{ "Back" }}
+            </button>
+          </div>
+          <InputDescription class="" :description="activeViewerTab == 'Query Definition' ? inputMeta.definition : inputMeta.filterCriteria" />
+          <!-- <slot name="buttons"></slot> -->
+          <div class="toggle-button">
+            <span> Edit Mode</span>
+            <InputSwitch class="ml10" v-model="edit" />
           </div>
         </div>
-        <div class="border-r">
+
+        <!-- body  -->
+        <div class="">
           <QueryDefinition
-            v-if="activeViewerTab == 'Query'"
+            v-if="activeViewerTab == 'Query Definition'"
             :modelValue="modelValue"
             :edit="edit"
             @stopEditing="stopEditing"
             @updateActiveClause="updateActiveClause"
           ></QueryDefinition>
         </div>
-      </div>
-      <div v-if="activeViewerTab == 'Filter Criteria'" class="pt-4">
-        <div class="pl-8 -mr-20 mb-4 flex items-center">
-          <button
-            class="border border-gray-500 w-full max-w-[60px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-gray-500 hover:text-white transition duration-500 ease-in-out"
-            label="Back"
-            icon="pi pi-arrow-circle-left"
-            iconPos="left"
-            @click.prevent="activeViewerTab = 'Query'"
-          >
-            {{ "Back" }}
-          </button>
-          <div class="text-gray-900 text-2xl font-semibold ml-6 break-words max-w-[550px]">
+        <div v-if="activeViewerTab == 'Filter Criteria'" class="">
+          <div class="text-gray-900 text-2xl font-semibold ml-6 break-words w-full max-w-[650px] mb-6">
             {{ clauseDefinition?.displayText }}
           </div>
+          <IMDefinition
+            class="clause-definition"
+            type="clause"
+            :data="modelValue"
+            :path="activeClausePath"
+            :showDetails="true"
+            @updateActiveClause="updateActiveClause"
+          >
+          </IMDefinition>
         </div>
-        <IMDefinition class="clause-definition" type="clause" :data="modelValue" :path="activeClausePath" :showDetails="true" @updateActiveClause="updateActiveClause"> </IMDefinition>
       </div>
     </div>
-    <!-- <Criteria v-show="edit"></Criteria> -->
+  
 
-    <div v-if="edit" class="w-full">
-      <HorizontalNavbar :showIcon="true" class="border-y pt-2" v-if="edit" v-model="activeEditorTab" :items="editorTabs" />
+    <!-- <div v-if="edit" class="w-full">
+      <HorizontalNavbar :underlined="true" :showIcon="true" class="border-y pt-2" v-if="edit" v-model="activeEditorTab" :items="editorTabs" />
       <div class="flex flex-col border-l pl-4 pt-4">
         <SearchInput v-if="activeEditorTab == 'Search'" v-show="edit" v-model="searchString" @update="updateActiveClause"> </SearchInput>
       </div>
@@ -48,7 +63,7 @@
       <div v-if="activeEditorTab == 'Template'">
         Template
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -63,6 +78,8 @@ import IMDefinition from "@/components/query/IMDefinition.vue";
 import Criteria from "@/components/query/Criteria.vue";
 import _ from "lodash";
 
+import InputDescription from "@/components/general/InputDescription.vue";
+
 export default defineComponent({
   name: "QueryEditor",
   components: {
@@ -70,12 +87,14 @@ export default defineComponent({
     Criteria,
     SearchInput,
     HorizontalNavbar,
-    IMDefinition
+    IMDefinition,
+    InputDescription
   },
   data() {
     return {
+      edit: this?.modelValue?.select?.match?.length > 0 ? false : true,
       searchString: "",
-      activeViewerTab: "Query",
+      activeViewerTab: "Query Definition",
       activeEditorTab: "Search",
       activeClausePath: "",
       clauseDefinition: {},
@@ -123,11 +142,24 @@ export default defineComponent({
           icon: "search",
           visible: true
         }
-      ]
+      ],
+      inputMeta: {
+        definition: {
+          title: `Define the features of the ${this?.modelValue?.select?.entityType.name} you are looking for                                                                                                                                                                                                                                                                                                                                                                                                                                        `,
+          explanation: "Describe a criteria, property or health record ",
+          placeholder: "Search for a criteria, property or health record"
+        },
+        filterCriteria: {
+          title: "Criteria",
+          explanation: "Define the criteria that your main data type must match in order to be filtered into your dataset",
+          placeholder: ""
+        }
+      }
     };
   },
-  props: ["modelValue", "edit", "stopEditing"],
+  props: ["modelValue", "stopEditing"],
   emits: ["stopEditing"],
+
   methods: {
     updateActiveClause(payload: any): void {
       console.log("payload", payload);
@@ -142,8 +174,8 @@ export default defineComponent({
 
         this.$store.commit("updateActiveClausePath", payload);
       } else {
-        this.activeClausePath = payload.path;
         this.clauseDefinition = _.get(this.modelValue, payload.path);
+        this.activeClausePath = payload.path;
         this.activeViewerTab = "Filter Criteria";
       }
     },
@@ -163,6 +195,20 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   max-height: 750px;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #64748b;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
 
 /* .clause-definition.edit {

@@ -134,6 +134,7 @@ import Property from "./Property.vue";
 export default defineComponent({
   name: "TreeItem",
   props: [
+    "modelValue",
     "mainEntity",
     "pathTo",
     "linkedEntity",
@@ -194,8 +195,13 @@ export default defineComponent({
   data() {
     return {
       index: this.currentIndex || 0,
-      definition: _.get(this.data, this.path)
+      definition: this.modelValue ? this.modelValue : _.get(this.data, this.path)
     };
+  },
+  watch: {
+    modelValue(newValue) {
+      this.definition = newValue;
+    }
   }
 });
 </script>

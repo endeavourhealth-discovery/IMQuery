@@ -1,12 +1,20 @@
 <template>
-  <div class="search-input">
-    <div class="flex justify-between items-center mt-4 relative">
-      <div class="searchbox flex flex-col">
-        <span class="font-bold text-md text-gray-700 mb-2">Property or Health Record Entry</span>
-        <input type="text" class="min-w-[400px] outline-none text-3xl text-blue-600 font-semibold border-b-2 border-b-blue-700 pb-2"  :value="modelValue" @input="onInput($event)" placeholder="Search (type here)" />
+  <div :class="'search-input'">
+    <div class="w-full flex justify-between items-center mt-4 relative">
+      <div :class="'w-full border-b-2 border-b-blue-700 pb-2 px-2 rounded-md searchbox flex flex-col' + [focus ? ' bg-gray-100 ' : '']">
+        <span class="font-bold text-md text-gray-700 mb-2">{{ label }}</span>
+        <input
+          type="text"
+          class="bg-transparent min-w-[250px] w-full outline-none text-3xl text-blue-600 font-semibold "
+          :value="modelValue"
+          @input="onInput($event)"
+          @focus="onFocus"
+          @blur="onBlur"
+          placeholder="Search (type here)"
+        />
         <!-- <InputText type="text" class="p-inputtext-lg"  :modelValue="modelValue" @input="onInput($event)" placeholder="Search (type here)" /> -->
       </div>
-      <div class="toggle-button">
+      <div v-if="allowShowDetails" class="toggle-button">
         <span> Show Details</span>
         <InputSwitch class="ml10" v-model="showDetails" />
       </div>
@@ -15,18 +23,21 @@
         <ToggleButton v-model="showDetails" onLabel="Show Details" offLabel="Hide Details" onIcon="pi pi-check" offIcon="pi pi-times" class="h-10 w-40 pt-2" />
       </div> -->
     </div>
-
-    <div clas="results">
-      <Suggestions
-        v-if="searchData.length"
-        :results="searchData"
-        :value="searchString"
-        :isShown="true"
-        pathFilter="im:Person"
-        :showDetails="showDetails"
-        @updateActiveClause="updateActiveClause"
-      />
-    </div>
+    <OverlayPanel class="suggestions" ref="overlay-suggestions">
+      <div class="">
+        <Suggestions
+          v-if="searchData.length"
+          :maxResults="maxResults"
+          :results="searchData"
+          :value="searchString"
+          :isShown="true"
+          pathFilter="im:Person"
+          :showDetails="showDetails"
+          @updateActiveClause="updateActiveClause"
+          :showPreview="allow.includes('preview')"
+        />
+      </div>
+    </OverlayPanel>
   </div>
 </template>
 
@@ -38,7 +49,7 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 
 export default defineComponent({
   name: "SearchInput",
-  props: ["modelValue"],
+  props: ["modelValue", "allowShowDetails", "label", "maxResults", "allow"],
   emits: ["update:modelValue", "updateActiveClause"],
   components: {
     Suggestions,
@@ -63,10 +74,24 @@ export default defineComponent({
           console.log("Could not load search results", err);
           return null;
         });
+    },
+    onFocus(event: any): void {
+      this.focus = true;
+      (this.$refs["overlay-suggestions"] as any).toggle(event); //show();
+    },
+    onBlur(event: any): void {
+      this.focus = false;
+      (this.$refs["overlay-suggestions"] as any).toggle(event); //hide();
     }
+    //  onKeyDown(event: any): void {
+    //createClause with name
+    // if (event.key === "Enter") {
+    //   this.updateActiveClause(this.searchString);
+    // }
   },
   data() {
     return {
+      focus: false,
       searchData: {},
       showDetails: false
     };
@@ -78,6 +103,8 @@ export default defineComponent({
 .search-input {
   width: 600px;
 }
+
+
 
 .toggle-button {
   display: flex;

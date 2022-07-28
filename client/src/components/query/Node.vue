@@ -307,7 +307,8 @@ export default defineComponent({
   min-width: 15px;
   width: 15px;
   margin: 9px 1px 0 0;
-  border-top: 2px solid #cbd5e1;
+  /* border-top: 2px solid #cbd5e1; */
+  border-top: 2px solid #000;
 }
 
 .linked-line {
@@ -316,7 +317,8 @@ export default defineComponent({
   margin-top: -8px;
   margin-bottom: 2px;
   min-height: 15px;
-  border-left: 2px solid #cbd5e1;
+  /* border-left: 2px solid #cbd5e1; */
+  border-left: 2px solid #000;
 }
 
 .line-v {
@@ -324,7 +326,7 @@ export default defineComponent({
   min-width: 10px;
   margin-left: 5px;
   min-height: calc(100% - 25px);
-  border-left: 2px solid #cbd5e1;
+  border-left: 2px solid #000;
 }
 
 .operatorlabel {
@@ -333,13 +335,14 @@ export default defineComponent({
 }
 
 .circle {
-  margin: 3px 3px 5px 0px;
+  margin: 3px 3px 5px 2px;
   /* background-color: #94a3b8; */
-  border: 2px solid #475569;
-  min-width: 13px;
-  min-height: 13px;
-  width: 13px;
-  height: 13px;
+  /* border: 2px solid #475569; */
+  border: 2px solid #1d4ed8;
+  min-width: 10px;
+  min-height: 10px;
+  width: 10px;
+  height: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;

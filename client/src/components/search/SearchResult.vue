@@ -31,9 +31,9 @@
         <template v-for="(item, index) in TTIriRefs(result)">
           <div
             v-if="index > 0 && (item.TTIriRefs?.name || item.TTIriRefs[0].name)"
-            class="px-1 py-1  inline-flex  text-xl text-gray-900 dark:text-gray-200 #border rounded-full #border-2 #border-gray-200 dar:border-white #bg-gray-100 dark:hover:bg-blue-900"
+            class="px-3 py-1  inline-flex  text-xl text-gray-900 dark:text-gray-200 #border rounded-full mt-2 border border-gray-300 dark:border-white bg-gray-100 dark:hover:bg-blue-900"
           >
-            <div class="mr-1">•</div>
+            <!-- <div class="mr-1">•</div> -->
             <div class="inline-flex">
               {{ item.TTIriRefs?.name ? item.TTIriRefs?.name : item.TTIriRefs[0].name }}
             </div>

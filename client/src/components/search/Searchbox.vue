@@ -4,17 +4,17 @@
   <!-- "searchbox','w-full','transition','duration-500','ease-in-out','appearance-none','rounded-none','border','border-gray-300','rounded-md','focus:z-10" -->
   <div
     :class="
-      'searchbox bg-gray-100 dark:bg-gray-800 relative w-full h-full transition duration-500 ease-in-out appearance-none border border-gray-200 hover:border-gray-300 dark:border-0 rounded-md focus:z-10' +
-        [componentState == 'hover' ? ' hover' : ''] +
-        [componentState == 'focus' ? ' focus' : '']
+      'searchbox   relative w-full min-h-[50px] transition duration-500 ease-in-out dark:text-white appearance-none  border-2    #hover:border-blue-700   #border-gray-300  dark:border-0 rounded-full min-h-80 focus:z-10 ' +
+        [componentState == 'hover' ? ' hover ' : ' hover:shadow-md '] +
+        [componentState == 'focus' ? ' focus    ' : ' bg placeholder-gray-700 text-black    hover:shadow-md']
     "
   >
     <!-- Searchbox  -->
     <div class="flex items-center w-full h-full">
-      <HeroIcon class="widget-icon text-black dark:text-white  ml-3" icon="search" strokewidth="2" width="20" height="20" />
+      <HeroIcon class="rounded-full min-h-[34px] min-w-[34px] border-2 border-blue-700  text-blue-700 p-3  ml-3" icon="search" strokewidth="3" width="10" height="10" />
       <input
         type="text"
-        class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4 placeholder-gray-500 text-gray-900  dark:text-white font-medium rounded-md focus:outline-none"
+        class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4  font-medium rounded-md focus:outline-none"
         placeholder="Type to Search for Queries"
         :value="modelValue"
         @input="onInput($event)"
@@ -24,9 +24,9 @@
         @mouseenter="componentState == 'focus' ? (componentState = 'focus') : (componentState = 'hover')"
         @mouseleave="componentState == 'focus' ? (componentState = 'focus') : (componentState = 'default')"
       />
-      <div v-if="modelValue && modelValue != ''" @click="$emit('update:modelValue', '')">
+      <!-- <div v-if="modelValue && modelValue != ''" @click="$emit('update:modelValue', '')" >
         <HeroIcon class="text-gray-600 hover:text-red-500 mr-3" strokewidth="2" width="24" height="24" icon="x" />
-      </div>
+      </div> -->
     </div>
     <!-- / Searchbox  -->
 
@@ -63,7 +63,6 @@ export default defineComponent({
   },
   data() {
     return {
-
       initialAutocompleteData: this.autocompleteData,
       autocompleteHits: [],
       autocompleteHover: false,
@@ -119,8 +118,12 @@ em {
 }
 
 .searchbox {
-  min-height: 40px;
-  max-height: 40px;
+  /* min-height: 40px; */
+  /* max-height: 40px; */
+}
+
+.searchbox.bg {
+  background-color: #f3f4f6;
 }
 
 .searchbox,
@@ -132,7 +135,7 @@ em {
 .autocomplete {
   margin-left: -1px;
   width: calc(100% + 2px);
-    position: absolute;
+  position: absolute;
   /* background: #fff; */
   margin-top: -3px;
   cursor: default;
@@ -142,16 +145,14 @@ em {
 }
 
 .dark .autocomplete {
-
-    margin-left: 0;
-  width: calc(100% );
-
+  margin-left: 0;
+  width: calc(100%);
 }
 
 .hover,
 .focus {
   /* background: #fff; */
-  border-color: rgb(207, 210, 218);
+  /* border-color: rgb(207, 210, 218); */
   box-shadow: rgb(207, 210, 218) 0px 0px 6px;
 }
 

@@ -19,7 +19,17 @@
       >
         <!-- <Node :object="query" path="select.match" valueType="match" operator="and" :highlighted="true" :edit="edit"> </Node> -->
       </Node>
-  </div>
+      <div v-if="edit && !query?.match?.length > 0">
+        <SearchInput
+          :maxResults="2"
+          :allow="['preview', 'create', 'insert', '']"
+          label="Property or Health Record Entry"
+          v-model="searchString"
+          @updateActiveClause="updateActiveClause"
+        >
+        </SearchInput>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,12 +37,13 @@
 import { defineComponent } from "vue";
 import Node from "./Node.vue";
 import { mapState } from "vuex";
+import SearchInput from "@/components/query/SearchInput.vue";
 
 export default defineComponent({
   name: "QueryDefinition",
   props: ["modelValue", "edit"],
   emits: ["stopEditing", "updateActiveClause"],
-  components: { Node },
+  components: { Node, SearchInput },
   computed: {
     ...mapState(["activeClausePath"])
   },
@@ -50,7 +61,8 @@ export default defineComponent({
     return {
       activePath: "",
       query: this.modelValue,
-      showDetails: false
+      showDetails: false,
+      searchString: ""
     };
   }
 });

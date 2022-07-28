@@ -1,14 +1,14 @@
 <template>
-  <div class="node-section">
+  <div class="node-section flex-col">
     <div :class="'node-card group'">
-      <div :class="'node-card-header  ' + [expanded ? 'expanded' : '']" @click="onClick">
+      <div :class="'node-card-header  ' + [expanded ? ' #expanded' : '']" @click="onClick">
         <NodeIcon :class="`node-icon`" strokewidth="2" width="20" height="20" :icon="icon" />
         <div class="node-card-title" v-html="richTitle()"></div>
         <!-- <div v-if="allowExpansion" class="node-chevron">
         <NodeIcon class="icon" strokewidth="2" width="20" height="20" :icon="expanded ? 'chevron_up' : 'chevron_down'" />
       </div> -->
       </div>
-      <div v-if="true || expanded" class="node-card-body">
+      <div class="node-card-body">
         <div v-if="activeTab == 'Prettified' && definition?.pathTo" class=" prettified">
           <!-- <IMDefinition type="clause" :data="data" :path="path" :showDetails="showDetails"> </IMDefinition> -->
         </div>
@@ -19,32 +19,45 @@
           {{ definition }}
         </div>
 
-        <div v-if="allowExpansion" class="actions rounded-md flex justify-end items-end select-none space-x-5  transition duration-500 ease-in-out mr-4 ">
-          <div
-            @click="onCopy()"
-            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-purple-700 dark:text-white"
-          >
-            <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="document_duplicate" /> Copy JSON
-          </div>
+        <div
+        v-if="allowExpansion"
+          class="actions rounded-md flex invisible group-hover:visible border-t-2 mt-4 pt-2 transparent  group-hover:border-t-gray-100 justify-between items-end select-none space-x-5  transition duration-500 ease-in-out mr-4 "
+        >
           <!-- <div class="inline-flex items-center text-2xl hover:underline font-semibold text-blue-600 dark:text-white">
           <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="eye" /> View
         </div> -->
           <div
             @click="onEdit()"
-            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-green-600 dark:text-white"
+            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-gray-800 dark:text-white"
           >
-            <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="eye" /> View Definition
+            <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="eye" /> View
+          </div>
+          <div
+            @click="onCopy()"
+            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-purple-700 dark:text-white"
+          >
+            <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="document_duplicate" /> Copy
           </div>
         </div>
       </div>
     </div>
-    <div
-      v-if="!added"
-      @click="onAdd()"
-      class="node-add flex max-w-[100px] rounded-md text-2xl font-semibold text-white bg-blue-600 hover:bg-blue-800 transition duration-500 ease-in-out dark:text-white pl-2 pr-5 py-2 mb-6 cursor-pointer  "
-    >
-      <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="plus" />
-      <div>Add</div>
+    <div  v-if="allowExpansion" class="ml-4 flex space-x-10">
+      <div
+        v-if="!added"
+        @click="onAdd()"
+        class="node-add flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
+      >
+        <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="plus" />
+        <div>New</div>
+      </div>
+      <div
+        @click="true"
+        class="node-add invisible flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
+      >
+        <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="document_add" />
+        <div>Paste</div>
+      </div>
+      <input class="node-add  outline-none placeholder-gray-500 text-blue-700 font-bold text-2xl w-full max-h-[30px] border-b-2 border-b-transparent focus:border-b-blue-700" placeholder="Search (type here)" />
     </div>
   </div>
 </template>
@@ -71,6 +84,8 @@ export default defineComponent({
   },
   methods: {
     richTitle() {
+  
+
       //populates title with hyperlinks to IM Viewer
       let html: string = `<div>${this.title}</div>`;
       const jsonQuery = `$..[?(@.name && @.@id)]`;
@@ -135,7 +150,8 @@ export default defineComponent({
 }
 
 .node-section:hover .node-add {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
 }
 /* .tab-content {
   background-color: #f8fafc;
@@ -196,7 +212,7 @@ export default defineComponent({
   display: inline-flex;
   flex-direction: column;
   background: #fff;
-  border: 1px solid #d1d5db;
+  border: 1px solid transparent;
   top: -5px;
   margin-bottom: 7px;
   border-radius: 7px;
@@ -223,6 +239,7 @@ export default defineComponent({
 
 .node-card:hover {
   cursor: pointer;
+  border: 1px solid #d1d5db;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.13);
 }
 </style>

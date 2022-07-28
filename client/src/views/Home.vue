@@ -7,7 +7,7 @@
   <main class="main-container bg-white dark:bg-gray-900">
     <!-- Page: Main -->
     <div id="page-main" v-if="activePageName == 'Main'" class="page">
-      <div class="w-full bg-white dark:bg-gray-900 border-b dark:border-b-0 shadow-sm ">
+      <div class="w-full bg-white dark:bg-gray-900 #border-b dark:border-b-0 #shadow-sm ">
         <header :class="'header bg-white dark:bg-gray-900 mx-auto relative flex items-center justify-between w-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
           <!-- Left Side  -->
           <div :class="'pl-7 inline-flex items-center non-selectable h-full ' + [activeTabName == 'Home' ? ' ' : ' ']">
@@ -162,7 +162,7 @@
 
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Find'" class="tab-content relative flex justify-center">
-          <div v-if="false" class="categories mt-20 ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none mr-20">
+          <div v-if="false" class="categories mt-20 #ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none #mr-20">
             <template v-for="category in searchCategories" :key="category.name">
               <div
                 v-if="category.visible"
@@ -250,18 +250,39 @@
 
           <!-- <button @click="testQuery()"> test</button> -->
           <!-- Viewer  -->
-          <div class="w-full h-full flex justify-between bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
+          <div class="h-full flex justify-start bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <!-- Left -->
-            <div v-show="!editMode" class="categories ml-20 #inline-flex #space-x-10 #lg: flex-col #lg: space-y-6  lg:space-x-0 select-none ">
+            <div class="categories min-w-[250px] mr-20 #inline-flex #space-x-10 flex-col  space-y-2  lg:space-x-0 select-none ">
+              <div class="text-3xl font-bold text-black ml-12">Query</div>
+              <div :class="'inline-flex py-6 pl-10  pb-6' + [activeQueryCategory == 'mainEntity' ? ' ' : ' space-x-10']">
+                <button
+                  @click="previousQueryCategory()"
+                  icon="pi pi-chevron-left"
+                  iconPos="left"
+                  :class="
+                    'border border-blue-500 w-full min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-blue-600 text-blue-600 hover:text-white   transition duration-500 ease-in-out' +
+                      [activeQueryCategory == 'mainEntity' ? ' hidden' : ' ']
+                  "
+                >
+                  Previous
+                </button>
+                <button
+                  @click="nextQueryCategory()"
+                  icon="pi pi-chevron-right"
+                  class="border border-blue-500 min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold bg-blue-600 text-white hover:bg-blue-800 hover:text-white   transition duration-500 ease-in-out"
+                >
+                  Next
+                </button>
+              </div>
               <template v-for="category in config?.query?.categories" :key="category.name">
                 <div
                   v-if="category.visible"
                   :class="
-                    'category transition duration-500 ease-in-out group flex items-center rounded-lg px-3 w-min-400px pr-5 border border-2 border-transparent hover:border-gray-300 rounded-full ' +
+                    'category relative transition text-gray-400 duration-500 ease-in-out group flex items-center pl-5 w-min-400px border-2 border-transparent  #hover:border-gray-300 rounded-xl' +
                       [
                         activeQueryCategory == category.name
-                          ? ' bg-slate-200 dark:bg-slate-800 #border-blue-500 dark:border-gray-300 dark:text-white'
-                          : ' text-gray-700 dark:text-gray-400 #hover:bg-blue-50 dark:bg-transparent'
+                          ? '  #dark:bg-slate-800 #border-blue-500 #dark:border-gray-300 dark:text-white'
+                          : '  dark:text-gray-400 #hover:bg-blue-50 dark:bg-transparent'
                       ]
                   "
                   @click="activeQueryCategory = category.name"
@@ -274,10 +295,15 @@
                     cancellationPeriod: 75
                   }"
                 >
-                  <div :class="'category-icon inline-flex h-20 w-20 rounded-xl  bg-gradient-to-r p-2 '">
-                    <div class="rounded-full dark:bg-slate-700 w-full h-full flex justify-center items-center">
+                  <div
+                    :class="
+                      'category-icon inline-flex h-20 w-20 rounded-full  bg-gradient-to-r p-2 ' +
+                        [activeQueryCategory == category.name ? '   dark:bg-slate-700 ' : '']
+                    "
+                  >
+                    <div class="rounded-full  w-full h-full flex justify-center items-center">
                       <HeroIcon
-                        :class="' ' + [activeQueryCategory == category.name ? ' text-blue-800 dark:text-white ' : '']"
+                        :class="' ' + [activeQueryCategory == category.name ? '  text-blue-800  dark:text-white ' : '']"
                         strokewidth="2.5"
                         width="20"
                         height="20"
@@ -287,12 +313,20 @@
                   </div>
                   <div
                     :class="
-                      'inline-flex ml-2 text-2xl font-medium  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
-                        [activeQueryCategory == category.name ? ' text-blue-700 dark:text-white' : ' text-gray-700 dark:text-gray-400 ']
+                      'inline-flex ml-2 text-2xl  dark:group-hover:text-white cursor-pointer transition ease-in-out duration-300' +
+                        [activeQueryCategory == category.name ? ' text-blue-700 dark:text-white font-bold' : ' text-gray-700 font-medium  dark:text-gray-400 ']
                     "
                   >
                     {{ category.text }}
                   </div>
+                  <HeroIcon
+                    v-if="activeQueryCategory == category.name"
+                    :class="'absolute right-10 ' + [activeQueryCategory == category.name ? '  text-blue-800  dark:text-white ' : '']"
+                    strokewidth="2.5"
+                    width="20"
+                    height="20"
+                    :icon="'chevron_right'"
+                  />
                 </div>
               </template>
             </div>
@@ -300,42 +334,71 @@
 
             <!-- Middle -->
 
-            <!-- Query Definition  -->
-            <div
-              v-show="activeQueryCategory == 'definition'"
-              :class="'definition viewer flex justify-center space-x-5' + [editMode ? ' edit-mode w-full' : '']"
-            >
+            <!-- Query Definitsion  -->
+            <!-- <div v-show="activeQueryCategory == 'definition'" :class="'definitionviewer flex' + [editMode ? ' edit-mode w-full' : '']"> -->
+            <div v-show="activeQueryCategory == 'definition'" :class="'definitionviewer flex'">
               <template v-for="([id, dataSet], index) in queryBuilder.dataSet" :key="id">
                 <!-- <QueryDefinition v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false"></QueryDefinition> -->
-                <QueryEditor v-show="isVisible(id)" :modelValue="dataSet" :edit="editMode" @stopEditing="editMode = false" />
+                <QueryEditor v-show="isVisible(id)" :modelValue="dataSet">
+                  <template #buttons>
+                    <!-- <div class="inline-flex py-6 ml-10 space-x-10">
+                      <button
+                        @click="previousQueryCategory()"
+                        icon="pi pi-chevron-left"
+                        iconPos="left"
+                        class="border border-blue-500 w-full min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-blue-600 text-blue-600 hover:text-white   transition duration-500 ease-in-out"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        @click="nextQueryCategory()"
+                        icon="pi pi-chevron-right"
+                        class="border border-blue-500 min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold bg-blue-600 text-white hover:bg-blue-800 hover:text-white   transition duration-500 ease-in-out"
+                      >
+                        Next
+                      </button>
+                    </div> -->
+                  </template>
+                </QueryEditor>
               </template>
             </div>
             <!-- Main Data Type  -->
 
-            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity flex flex-col w-full max-w-4xl">
-              <InputDescription class="w-full max-w-2xl" :description="inputMeta.mainEntity" />
-              <InputRadioButtons
-                class="w-full max-w-xl mt-7"
-                v-model="selectedMainEntity"
-                :items="radioButtonItems.mainEntity"
-                :multiselect="false"
-                :checkbox="true"
-              />
-              <div class="flex justify-between space-x-4 pt-10  w-[400px] ">
-                <Button
-                  @click="previousQueryCategory()"
-                  icon="pi pi-chevron-left"
-                  iconPos="left"
-                  label="Previous"
-                  class="p-button-lg p-button-secondary p-button-outlined"
+            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity  w-full max-w-[1000px]">
+              <div class="flex">
+                <InputDescription class="max-w-[600px]" :description="inputMeta.mainEntity" />
+                <!-- <div class="flex justify-between space-x-4 pt-10  w-[400px] "> -->
+                <!-- <div class="inline-flex py-6 ml-10 space-x-10">
+                  <button
+                    @click="previousQueryCategory()"
+                    icon="pi pi-chevron-left"
+                    iconPos="left"
+                    class="border border-blue-500 min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-blue-600 text-blue-600 hover:text-white   transition duration-500 ease-in-out"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    @click="nextQueryCategory()"
+                    icon="pi pi-chevron-right"
+                    class="border border-blue-500 w-full min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold bg-blue-600 text-white hover:bg-blue-800 hover:text-white   transition duration-500 ease-in-out"
+                  >
+                    Next
+                  </button>
+                </div> -->
+              </div>
+              <div>
+                <InputRadioButtons
+                  class="w-full max-w-xl mt-7"
+                  v-model="selectedMainEntity"
+                  :items="radioButtonItems.mainEntity"
+                  :multiselect="false"
+                  :checkbox="true"
                 />
-                <Button @click="nextQueryCategory()" icon="pi pi-chevron-right" label="Next" class="p-button-lg p-button-l" />
               </div>
             </div>
 
             <!-- Tab: SQL  -->
             <div v-if="activeQueryCategory == 'sql'" class="tab-content ">
-              SQL
               <!-- <pre>{{ sql }}</pre> -->
             </div>
             <!-- /Tab: SQL  -->
@@ -367,7 +430,7 @@
 
             <!-- Middle -->
             <!-- Right -->
-            <div v-show="!editMode" class="invisible md:visible flex flex-col space-y-10 mr-20">
+            <!-- <div v-show="!editMode" class="invisible md:visible flex flex-col space-y-10 mr-20">
               <template v-for="(item, index) in getActions(activeQueryCategory)" :key="item.name">
                 <template v-if="item.visible && index == 0">
                   <CardButton
@@ -398,7 +461,7 @@
                   />
                 </template>
               </template>
-            </div>
+            </div> -->
 
             <!-- Right -->
           </div>
@@ -570,28 +633,28 @@ export default defineComponent({
             name: "Person",
             explanation:
               "<b>Tip</b><br>This option will select health records related to Person. <br><br> <b>Example</b><br> A Person is a person who has previously received care at an organisation that has documented that interaction in their electronic health record."
-          },
-          {
-            id: 2,
-            iri: "im:Property",
-            name: "Property",
-            explanation:
-              "<b>Tip</b><br>This option will sele ct health records for a group of people who usually live at a single place of residence (a property). <br><br><b>Example</b><br>A family of 4 people may be living in a household i.e. parents and two kids."
-          },
-          {
-            id: 3,
-            iri: "im:Organisation",
-            name: "Organisation",
-            explanation:
-              "<b>Tip</b><br>This option will select health records generated by a legal entity, service or group  with a common purpose (such as providing care). <br><br> <b>Example</b><br> • GP Practice <br> • Hospital <br>  • Out of Hours Clinic  <br> • Community Mental Health Service "
-          },
-          {
-            id: 4,
-            iri: "im:Appointment",
-            name: "Appointment",
-            explanation:
-              "<b>Tip</b><br>This option will select health records associated with appointments that have taken places across and within organisations. <br><br> <b>Example</b><br> • A&E attendances <br> • GP visits <br> • Outpatient Clinic Appointments"
           }
+          // {
+          //   id: 2,
+          //   iri: "im:Location",
+          //   name: "Location",
+          //   explanation:
+          //     "<b>Tip</b><br>This option will select health records for a group of people who usually live at a single location (which is usually uniquely identified with a UPRN). <br><br><b>Example</b><br>A family of 4 people may be living at a location i.e. parents and two kids."
+          // },
+          // {
+          //   id: 3,
+          //   iri: "im:Organisation",
+          //   name: "Organisation",
+          //   explanation:
+          //     "<b>Tip</b><br>This option will select health records generated by a legal entity, service or group  with a common purpose (such as providing care). <br><br> <b>Example</b><br> • GP Practice <br> • Hospital <br>  • Out of Hours Clinic  <br> • Community Mental Health Service "
+          // },
+          // {
+          //   id: 4,
+          //   iri: "im:Appointment",
+          //   name: "Appointment",
+          //   explanation:
+          //     "<b>Tip</b><br>This option will select health records associated with appointments that have taken places across and within organisations. <br><br> <b>Example</b><br> • A&E attendances <br> • GP visits <br> • Outpatient Clinic Appointments"
+          // }
         ],
         sources: [
           {
@@ -678,7 +741,7 @@ export default defineComponent({
             },
             {
               name: "definition",
-              text: "Query Definition",
+              text: "Definition",
               icon: "menu_alt_1",
               visible: true
             },

@@ -1,6 +1,10 @@
 <template>
-  <div
+  <!-- <div
     class="result cursor-pointer relative z-20 hover:z-30 hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
+  > -->
+  <div
+    v-if="pathData.length"
+    class="result cursor-pointer relative  hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
   >
     <div class="result-content relative">
       <div class="invisible group-hover:visible text-lg  flex row-col items-center">
@@ -39,7 +43,7 @@
 
     <div v-if="pathFilter" class="#result-actions #invisible #group-hover:visible  ">
       <div v-if="pathData.length" class="mt-2">
-        <div v-for="path in pathData" :key="path" class="flex hover:bg-blue-100 pl-2 relative -left-2 rounded-md ">
+        <div v-for="path in pathData" :key="path" @mouseenter="onHover(path)" class="flex hover:bg-blue-100 pl-2 relative -left-2 rounded-md ">
           <div class="flex w-full  py-1">
             <div v-for="(pathItem, index) in path" :key="pathItem" class="group flex-wrap">
               <div :class="'flex  text-xl hover:underline' + [index < path.length - 1 ? ' text-gray-600 font-semibold' : 'text-black font-bold']">
@@ -88,7 +92,7 @@ import Graph from "@/logic/Graph";
 export default defineComponent({
   name: "SearchResult",
   components: { TransitionRoot, HeroIcon },
-  emits: ["openItem"],
+  emits: ["openItem", "updatePreview"],
   props: ["result", "pathFilter", "showDetails", "updateActiveClause"],
   data() {
     return {
@@ -111,33 +115,51 @@ export default defineComponent({
   // },
   methods: {
     nameFromIri(iri: string): string {
-      return iri
-        .split(":")[1]
-        .split(/(?=[A-Z])/)
-        .join(" ");
+      return iri != ""
+        ? iri
+            .split(":")[1]
+            .split(/(?=[A-Z])/)
+            .join(" ")
+        : "";
     },
     onAdd(paths: string[]): void {
+      this.$emit("updateActiveClause", { action: "new", data: this.getClause(paths) });
+    },
+    getClause(path: any): any {
+      if (!path || path?.length == 0) {
+        return {};
+      }
       // this.$emit("openItem", path);
-      const newPaths = paths.map((item: string) => {
+      let newPaths = path.map((item: string) => {
         return {
           "@id": item,
           name: this.nameFromIri(item)
         };
       });
-      console.log("paths", newPaths);
 
-      const properties = this.isEntity() ? [] : [this.result];
+      newPaths = newPaths.splice(1, path.length - 1);
+
+      // console.log("paths", path);
+
+      const prop = {
+        "@id": this.result.iri,
+        name: this.result.name
+      };
+
+      const properties = this.isEntity() ? [] : [];
+
+      const entity = newPaths.splice(newPaths.length - 1, 1)[0];
+      console.log("entity",  entity);
 
       const newClause = {
         "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87",
+        entityType: this.isEntity() ? this.result : entity,
         pathTo: newPaths,
-        entityType: this.isEntity() ? this.result : Datamodel.withProperty(this.result.iri),
-        property: properties,
-        displayText: "Untitled Filter Criteria"
+        property: this.isEntity() ? null : _.cloneDeep([prop]),
+        displayText: ""
       };
       console.log("newClause", newClause);
-
-      this.$emit("updateActiveClause", { action: "new", data: newClause });
+      return newClause;
     },
     getToolTip(path: string): string {
       return `<span style="margin-top: 100px; font-size: 14px; font-weight: bold; ">${path}</span>`;
@@ -147,6 +169,9 @@ export default defineComponent({
     //   console.log("url", url);
     //   return Datamodel.isEntity(url);
     // },
+    onHover(path: any): void {
+      this.$emit("updatePreview", { data: this.getClause(path) });
+    },
     getPaths(): any {
       const iris = this.datamodelIri();
       let paths = [];
@@ -160,7 +185,7 @@ export default defineComponent({
         paths = this.findPaths(iris);
       }
       // console.log("paths", paths);
-
+      this.$emit("updatePreview", { data: this.getClause(paths[0]) });
       return paths;
     },
     datamodelIri(): string {

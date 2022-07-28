@@ -1,26 +1,23 @@
 <template>
-  <div class="tab-buttons font-medium flex justify-center space-x-6">
+  <div class="tab-buttons font-medium flex justify-center space-x-4">
     <template v-for="item in items">
       <div
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex items-center justify-center transition duration-500 ease-in-out dark:hover:text-white #rounded-t-lg ' +
+          'tab-button non-selectable inline-flex rounded-xl my-4  items-center justify-center transition duration-500 ease-in-out dark:hover:text-white #rounded-t-lg ' +
             [
-              modelValue == item.name
+              underlined && modelValue == item.name
                 ? ' dark:text-white relative top-0.5 text-blue-600 border-b-2 border-b-blue-500 dark:border-b-0 '
                 : ' text-black dark:text-gray-400 border-b-transparent'
+            ] +
+            [
+              modelValue == item.name
+                ? ' dark:text-white text-white relative  bg-blue-600 dark:bg-slate-700 dark:border-b-0 '
+                : ' text-black dark:text-gray-400 hover:text-blue-700 my-4 border-b-transparent'
             ]
         ]"
         @click="onClick(item.name, item.command)"
-        v-wave="{
-          color: 'currentColor',
-          easing: 'ease-out',
-          duration: 0.3,
-          initialOpacity: 0.2,
-          finalOpacity: 0.1,
-          cancellationPeriod: 75
-        }"
       >
         <!-- Icon -->
         <div v-if="showIcon" class="inline-flex mr-2">
@@ -43,7 +40,7 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 
 export default defineComponent({
   name: "HorizontalNavbar",
-  props: ["items", "modelValue", "showIcon"],
+  props: ["items", "modelValue", "showIcon", "underlined", "rounded"],
   emits: ["update:modelValue"],
   components: {
     HeroIcon
