@@ -46,7 +46,7 @@ export default class Graph {
             "key": "im:dataController",
             "values": ["im:Organisation"]
           },
-     
+    
           {
             "key": _.cloneDeep(Datamodel["im:Event"]),
             "values": ["im:hasPractitioner"]
@@ -86,8 +86,8 @@ export default class Graph {
 
         //iterate trough DataModel to go 2 entities deep for the main entity ()
         //add properties
-        // const properties = await EntityService.getDatamodelProperties("im:Person").then(res => res.data);
-        // console.log("properties", properties);
+        const properties = await EntityService.getDatamodelProperties("im:Person").then(res => res.data);
+        console.log("properties", properties);
 
 
 
@@ -99,8 +99,6 @@ export default class Graph {
         break;
     }
   }
-
-
 
 
   getNeighbours(iri: string) {
@@ -126,12 +124,9 @@ export default class Graph {
   findPaths(start: string, end: string): any {
 
     function* findPath(list, start, end, visited = new Set()) {
-      // console.log("list,", list);
-      // console.log("_.get(list, start)", _.get(list, start));
       if (start === end) return yield [...visited, end];
       if (start == "" || !_.get(list, start)) return null;
       visited.add(start);
-      // console.log("start", start);
       for (let neighbor of _.get(list, start)) {
         if (!visited.has(neighbor)) {
           yield* findPath(list, neighbor, end, visited);
@@ -140,14 +135,11 @@ export default class Graph {
       visited.delete(start);
     }
 
-    // let paths = [...findPath(entities, start, end)];
     let paths = [...findPath(this.graph, start, end)];
-    //sport ascending or descending length of path
+    //sort ascending or descending length of path
     paths = paths.sort(function (a, b) {
       return a.length - b.length; // ASC  -> a.length - b.length // DESC -> b.length - a.length
     });
-
-    // console.log(`paths for (${start})s ->`, paths);
     return paths;
   }
 
