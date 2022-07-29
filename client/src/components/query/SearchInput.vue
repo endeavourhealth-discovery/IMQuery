@@ -23,7 +23,7 @@
         <ToggleButton v-model="showDetails" onLabel="Show Details" offLabel="Hide Details" onIcon="pi pi-check" offIcon="pi pi-times" class="h-10 w-40 pt-2" />
       </div> -->
     </div>
-    <OverlayPanel class="suggestions" ref="overlay-suggestions">
+    <OverlayPanel class="panel-suggestions" ref="overlay-suggestions">
       <div class="">
         <Suggestions
           v-if="searchData.length"
@@ -119,4 +119,12 @@ export default defineComponent({
   margin-right: 1rem;
   margin-top: 1rem;
 }
+</style>
+
+<style >
+.panel-suggestions {
+  background-color: gray;
+  
+}
+
 </style>
