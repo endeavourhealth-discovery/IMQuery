@@ -25,7 +25,7 @@
       </Node>
     </template>
 
-    <div v-else-if="template == 'leafEntity'">
+    <template v-else-if="template == 'leafEntity'">
       <NodeCard
         v-if="hasKey(entity, 'entityInSet')"
         @updateActiveClause="updateActiveClause"
@@ -61,7 +61,7 @@
         :definition="entity"
       >
       </NodeCard>
-    </div>
+    </template>
     <!-- /Custom Sentences - add new ones here -->
 
     <!--  Clause  -->

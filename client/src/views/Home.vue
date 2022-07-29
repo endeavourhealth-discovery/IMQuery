@@ -1086,7 +1086,7 @@ export default defineComponent({
     const _fileIri = this.$route.params.fileIri;
     if (_fileIri) {
       // this.$store.dispatch("loadFile");
-      console.log("fileIri", _fileIri);
+      // console.log("fileIri", _fileIri);
       this.$store.commit("loadFile", _fileIri);
     }
 

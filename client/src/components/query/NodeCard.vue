@@ -1,9 +1,27 @@
 <template>
-  <div class="node-section flex-col">
-    <div :class="'node-card group'">
-      <div :class="'node-card-header  ' + [expanded ? ' #expanded' : '']" @click="onClick">
+  <div class="w-full node-section flex-col">
+    <div :class="'w-full node-card group'">
+      <div :class="'w-full node-card-header  ' + [expanded ? ' #expanded' : '']" @click="onClick">
         <NodeIcon :class="`node-icon`" strokewidth="2" width="20" height="20" :icon="icon" />
-        <div class="node-card-title" v-html="richTitle()"></div>
+
+        <SearchInput
+          class="w-full"
+          v-if="showTextArea"
+          @blur="onBlur"
+          @close="onBlur"
+          :maxResults="2"
+          :allow="['preview', 'create', 'insert', '']"
+          label="Property or Health Record Entry"
+          v-model="text"
+          :path="path"
+          type="textarea"
+        >
+        </SearchInput>
+
+        <template v-else>
+          <div class="node-card-title " v-html="richTitle()"></div>
+        </template>
+        <!-- <div v-else @click="showTextArea = true" class="node-card-title " v-html="richTitle()"></div> -->
         <!-- <div v-if="allowExpansion" class="node-chevron">
         <NodeIcon class="icon" strokewidth="2" width="20" height="20" :icon="expanded ? 'chevron_up' : 'chevron_down'" />
       </div> -->
@@ -20,7 +38,7 @@
         </div>
 
         <div
-        v-if="allowExpansion"
+          v-if="allowExpansion"
           class="actions rounded-md flex invisible group-hover:visible border-t-2 mt-4 pt-2 transparent  group-hover:border-t-gray-100 justify-between items-end select-none space-x-5  transition duration-500 ease-in-out mr-4 "
         >
           <!-- <div class="inline-flex items-center text-2xl hover:underline font-semibold text-blue-600 dark:text-white">
@@ -41,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div  v-if="allowExpansion" class="ml-4 flex space-x-10">
+    <div v-if="allowExpansion" class="node-add ml-4 flex #border-t-gray-300 #border-t-2 pt-2 ">
       <div
         v-if="!added"
         @click="onAdd()"
@@ -50,14 +68,26 @@
         <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="plus" />
         <div>New</div>
       </div>
-      <div
-        @click="true"
-        class="node-add invisible flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
+
+      <!-- ###todo replace with SearchInput and add this as a variant -->
+      <SearchInput
+        class="node-add mt-2 ml-4"
+        @close="onBlur"
+        :maxResults="2"
+        :allow="['preview', 'create', 'insert', '']"
+        label="Property or Health Record Entry"
+        v-model="searchString"
+        :path="path"
+        type="underline"
       >
-        <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="document_add" />
-        <div>Paste</div>
-      </div>
-      <input class="node-add  outline-none placeholder-gray-500 text-blue-700 font-bold text-2xl w-full max-h-[30px] border-b-2 border-b-transparent focus:border-b-blue-700" placeholder="Search (type here)" />
+      </SearchInput>
+    </div>
+    <div
+      @click="true"
+      class="node-add invisible flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
+    >
+      <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="document_add" />
+      <div>Paste</div>
     </div>
   </div>
 </template>
@@ -68,28 +98,42 @@ import IMDefinition from "./IMDefinition.vue";
 import NodeIcon from "./NodeIcon.vue";
 import jp from "jsonpath";
 import LoggerService from "@/services/LoggerService";
+import SearchInput from "@/components/query/SearchInput.vue";
 
 export default defineComponent({
   name: "NodeCard",
   props: ["icon", "title", "definition", "allowExpansion", "data", "path", "showDetails"],
   emits: ["updateActiveClause"],
-  components: { NodeIcon, IMDefinition },
+  components: { NodeIcon, IMDefinition, SearchInput },
   data() {
     return {
+      text: this.title,
       activeTab: "Prettified",
       tabs: [{ label: "Prettified" }, { label: "Raw JSON" }],
       expanded: false,
-      added: false
+      added: false,
+      showTextArea: false
     };
   },
   methods: {
-    richTitle() {
-  
 
+    onBlur(event: any): void {
+      this.showTextArea = false
+    },
+    onInput(event: any): void {
+      this.$store.commit("updateSearchString", event.target.value);
+      //todo on enter -> onAdd(data);
+      // this.$emit("update:modelValue", event.target.value);
+    },
+    richTitle() {
       //populates title with hyperlinks to IM Viewer
-      let html: string = `<div>${this.title}</div>`;
+      let html: string = `<div>${this.text}</div>`;
       const jsonQuery = `$..[?(@.name && @.@id)]`;
-      const names = jp.nodes(this.definition, jsonQuery);
+
+      let names = jp.nodes(this.definition, jsonQuery);
+      names = names.sort(function(a, b) {
+        return b.value?.name?.length - a.value?.name?.length; // ASC  -> a.length - b.length // DESC -> b.length - a.length
+      });
       names.forEach((item: any) => {
         const url = `https://dev.endhealth.co.uk/viewer/#/concept/${encodeURIComponent(item?.value["@id"])}`;
         const name = item?.value?.name;
@@ -101,6 +145,8 @@ export default defineComponent({
       this.expanded = !this.expanded;
       console.log(this.path);
       console.log(this.definition);
+      this.showTextArea = true;
+      this.$store.commit("setActiveClausePath", this.path);
     },
     onCopy() {
       navigator.clipboard.writeText(JSON.stringify(this.definition, null, 2)).then(
@@ -115,7 +161,7 @@ export default defineComponent({
     onEdit() {
       this.$emit("updateActiveClause", { action: "view", path: this.path, index: 0 });
     },
-    onAdd() {
+    onAdd(data?: any) {
       //improves animation
       this.added = true;
       setTimeout(() => {
@@ -136,7 +182,7 @@ export default defineComponent({
       console.log("newLastItem", newIndex);
 
       // path to be added
-      this.$emit("updateActiveClause", { action: "create", path: newPath, index: newIndex });
+      this.$emit("updateActiveClause", { action: "create", path: newPath, index: newIndex, data: data });
 
       //if active clause doesn't exist, it is created AND a special first-time window is show?!
     }
@@ -153,6 +199,11 @@ export default defineComponent({
   display: flex;
   justify-content: center;
 }
+
+/* .node-add {
+  display: flex;
+  justify-content: center;
+} */
 /* .tab-content {
   background-color: #f8fafc;
   border: 1px solid #cbd5e1;
@@ -163,7 +214,7 @@ export default defineComponent({
 .actions {
   /* display: none; */
   height: 0;
-  transition: height 0.3s ease-out;
+  /* transition: height 0.3s ease-out; */
 }
 .node-card:hover .actions {
   /* display: flex; */
@@ -240,7 +291,7 @@ export default defineComponent({
 .node-card:hover {
   cursor: pointer;
   border: 1px solid #d1d5db;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.13);
+  /* box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.13); */
 }
 </style>
 

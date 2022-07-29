@@ -1,20 +1,20 @@
 <template>
-  <div class="tab-buttons font-medium flex justify-center space-x-4">
+  <div class="tab-buttons font-medium flex justify-center pt-4 space-x-4">
     <template v-for="item in items">
       <div
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex rounded-xl my-4  items-center justify-center transition duration-500 ease-in-out dark:hover:text-white #rounded-t-lg ' +
-            [
-              underlined && modelValue == item.name
-                ? ' dark:text-white relative top-0.5 text-blue-600 border-b-2 border-b-blue-500 dark:border-b-0 '
-                : ' text-black dark:text-gray-400 border-b-transparent'
-            ] +
+          'tab-button non-selectable inline-flex rounded-full max-h-[40px] items-center justify-center transition duration-500 ease-in-out dark:hover:text-white #rounded-t-lg ' +
+            // [
+            //   underlined && modelValue == item.name
+            //     ? ' dark:text-white relative top-0.5 text-blue-600 border-b-2 border-b-blue-500 dark:border-b-0 '
+            //     : ' text-black dark:text-gray-400 border-b-transparent'
+            // ] +
             [
               modelValue == item.name
                 ? ' dark:text-white text-white relative  bg-blue-600 dark:bg-slate-700 dark:border-b-0 '
-                : ' text-black dark:text-gray-400 hover:text-blue-700 my-4 border-b-transparent'
+                : ' text-black dark:text-gray-400 hover:text-blue-700  border-b-transparent'
             ]
         ]"
         @click="onClick(item.name, item.command)"
@@ -26,7 +26,7 @@
 
         <!-- / Icon -->
 
-        <div class="inline-flex text-2xl">
+        <div class="inline-flex text-2xl ml-2 mr-2">
           <div>{{ item.name }}</div>
         </div>
       </div>

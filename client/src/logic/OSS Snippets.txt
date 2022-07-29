@@ -19,12 +19,22 @@ curl --location --request POST 'https://search-imq-pux4ncd5iohdm7d3si3qlyjakq.eu
 --header 'Content-Type: application/json' \
 --data-binary @-
 
+curl --location --request POST 'https://search-imq-yzrzqafw4x3wiwfljo2jz55tfy.us-east-1.es.amazonaws.com/dev-im1/_bulk' \
+--header 'Authorization: Basic {{token}}' \
+--header 'Content-Type: application/json' \
+--data-binary @output.json
+
+
+$ curl --location --request POST 'https://search-imq-yzrzqafw4x3wiwfljo2jz55tfy.us-east-1.es.amazonaws.com/dev-im1/_bulk' --header 'Authorization: Basic {{token}}' --header 'Content-Type: application/json' --data-binary @output.json
+
+
+
 // Example 2:
 //  convert .json file ready for bulk filing on opensearch (without posting)
 
-cat Entities.json | \
+cat queries.json | \
 jq-win64 -c '.[]  | {"index": {"_index": "dev-imquery",}}, .' |\
-jq-win64 > CoreOntology.json 
+jq-win64 > Output.json 
 
 
 

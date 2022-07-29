@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :type="type" :class="['w-100', (hasUserInteracted && !validateMinLength ? 'p-invalid' : '')]" :placeholder="placeholder" @blur="handleBlur" :value="modelValue" :maxlength="maxlength"  @input="$emit('update:modelValue', $event.target.value)"/>
+    <input type="text" :class="['w-100', (hasUserInteracted && !validateMinLength ? 'p-invalid' : '')]" :placeholder="placeholder" @blur="handleBlur" :value="modelValue" :maxlength="maxlength"  @input="$emit('update:modelValue', $event.target.value)"/>
     <div class="message">
       <Message v-if="hasUserInteracted && !validateMinLength" severity="error" :closable="false"
         >The minimum characters required is {{ minlength }}</Message

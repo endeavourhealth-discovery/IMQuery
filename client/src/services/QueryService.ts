@@ -12,7 +12,93 @@ const { onlyUnique, excludedPaths, entitiesFromPredicates, isTTIriRef } = Manipu
 export default class QueryService {
 
 
-  
+
+  static INDEX_IM = import.meta.env.VITE_INDEX_IM;
+  static OSS_URL = import.meta.env.VITE_OSS_URL;
+  static API = import.meta.env.VITE_API;
+  static TOKEN = import.meta.env.VITE_OSS_AUTH_BASICTOKEN
+
+
+  static HEADERS = {
+    'Authorization': `Basic ${this.TOKEN}`,
+    'Content-Type': 'application/json'
+  }
+
+
+
+  // public static async clauseAutoComplete(searchString: string): Promise<any> {
+  //   try {
+
+  //     const queries = await this.searchQueries(searchString, 2);
+  //     console.log("queries", queries);
+
+  //     let clauses = await this.searchClauses(searchString, 2);//.then(res => res.data);
+  //     console.log("clauses", clauses);
+
+
+  //     return {} as any;
+  //   } catch (error) {
+  //     return {} as any;
+  //   }
+
+  // }
+
+
+
+
+  //
+  public static async searchClauses(searchString: string, limit: number): Promise<AxiosResponse<any>> {
+    var data = JSON.stringify({
+      "query": {
+        "match_phrase": {
+          "name": searchString
+        }
+      }
+    });
+
+    var config = {
+      method: 'post',
+      url: `${this.OSS_URL}/${this.INDEX_IM}/_search`,
+      headers: {
+        'Authorization': `Basic ${this.TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    const res = await axios(config as any)
+      .then(function (response) {
+
+        const clauses = response.data?.hits?.hits.map(hit => hit._source);
+        return clauses;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // console.log("axios response", res);
+    return res;
+
+  }
+  //search inside name or definition
+  public static async searchQueries(searchString: string, limit: number): Promise<AxiosResponse<any>> {
+    try {
+      const _requestBody = {
+        termFilter: searchString,
+        statusFilter: [],
+        typeFilter: ["http://endhealth.info/im#Query"],
+        schemeFilter: [],
+        sortBy: 0,
+        page: 1,
+        size: limit
+      };
+      return await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody).then(res => res.data);
+    } catch (error) {
+      console.log("error in advanced search:" + error);
+      return null;
+    }
+  }
+
 
 
 
@@ -23,19 +109,13 @@ export default class QueryService {
           iri: filename
         }
       });
-      // console.log("api response", _.cloneDeep(_res))
       return _res;
     } catch (error) {
       return {} as any;
     }
 
   }
-  // public static async getLocalData(filename: string): Promise<any> {
-  //   const queries: any[] = await fetch(`local/queries.json`).then(res => res.json());
-  //   const query = queries.find(item => item["@id"] == filename)
-  //   return query;
 
-  // }
 
 
   public static async querySummary(iri: string): Promise<any> {
@@ -45,7 +125,6 @@ export default class QueryService {
           iri: iri
         }
       });
-      // console.log("api response", _.cloneDeep(_res))
       return _res;
     } catch (error) {
       return {} as any;
@@ -88,7 +167,7 @@ export default class QueryService {
           iri: iri
         }
       });
-      console.log("api response", _.cloneDeep(_res))
+      // console.log("api response", _.cloneDeep(_res))
       return _res;
     } catch (error) {
       return {} as any;
@@ -100,12 +179,12 @@ export default class QueryService {
 
   public static async summariseQuery(queryIri: string): Promise<any> {
 
-     const definition: any = await QueryService.getRichDefinition(queryIri).then(res => res.data);
+    const definition: any = await QueryService.getRichDefinition(queryIri).then(res => res.data);
 
     //matchClause = an object with "property" key
     const jsonQuery = `$..[?(@.property || @.pathTo)]`;    // const jsonQuery = `$..[? (@.@id)]`
     let clauses = QueryService.findClauses(definition?.select?.match);
-    console.log("clauses", clauses)
+    // console.log("clauses", clauses)
 
     // add summary to match clauses
     clauses.forEach(item => {
@@ -115,11 +194,11 @@ export default class QueryService {
       // const htmlSummary = TextGenerator.htmlSummary(item.value) || "";
       text ? _.set(definition?.select?.match, textPath, text) : null;
       // htmlSummary ? _.set(definition?.select?.match, htmlPath, htmlSummary) : null;
-      console.log(`### summary of clause(${textPath}): `, text);
+      // console.log(`### summary of clause(${textPath}): `, text);
       // console.log(`### summary of clause(${htmlPath}): `, htmlSummary);
       // const path = jp.stringify(item.path).substring(2) + ".displayText";
     })
-    console.log(`### Definition with displayText + HTML: \n`, _.cloneDeep(definition));
+    // console.log(`### Definition with displayText + HTML: \n`, _.cloneDeep(definition));
     return definition;
 
   }
@@ -129,7 +208,7 @@ export default class QueryService {
     //matchClause = an object with "property" key
     const jsonQuery = `$..[?(@.property || @.pathTo)]`;    // const jsonQuery = `$..[? (@.@id)]`
     let clauses = QueryService.findClauses(definition?.select?.match);
-    console.log("clauses", clauses)
+    // console.log("clauses", clauses)
 
     // add summary to match clauses
     clauses.forEach(item => {
@@ -242,6 +321,13 @@ export default class QueryService {
   //   })
   //   console.log(`2. definition`, _.cloneDeep(definition));
   //   return definition;
+
+  // }
+
+  // public static async getLocalData(filename: string): Promise<any> {
+  //   const queries: any[] = await fetch(`local/queries.json`).then(res => res.json());
+  //   const query = queries.find(item => item["@id"] == filename)
+  //   return query;
 
   // }
 

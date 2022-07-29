@@ -8,6 +8,52 @@ export default class QueryUtils {
 
     public static debug = false;
 
+
+    public static isQuery(entity: any): boolean {
+        const entityType = entity["entityType"];
+        let iris = ["im:Query"];
+        iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
+        
+        if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static isClause(entity: any): boolean {
+        const entityType = entity["entityType"];
+        let iris = ["im:MatchClause"];
+        iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
+        
+        if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static isEntity(entity: any): boolean {
+        const entityType = entity["entityType"];
+        let iris = ["sh:NodeShape", "rdfs:Class"];
+        iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
+        
+        if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static isProperty(entity: any): boolean {
+        const entityType = entity["entityType"];
+        let iris = ["owl:ObjectProperty", "im:dataModelProperty", "im:dataModelObjectProperty", "im:dataModelDataProperty", "rdf:Property"];
+        iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
+        
+        if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
     public static findPlaceholders(text: string): any {
 
@@ -114,7 +160,7 @@ export default class QueryUtils {
         const _iri = iri.replace(":", "#");
         const _contextKey = _iri.split("#")[0];
         const _iriKey = _iri.split("#")[1];
-        const _url = QueryUtils.prefixes.filter(prefix => prefix[_contextKey] !== undefined)[0] + _iriKey;
+        const _url = QueryUtils.prefixes.filter(prefix => prefix[_contextKey] !== undefined)[0][_contextKey] + _iriKey;
         return _url;
 
     }

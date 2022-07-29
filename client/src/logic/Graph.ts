@@ -1,4 +1,5 @@
 import EntityService from '@/services/EntityService';
+import QueryService from '@/services/QueryService';
 
 
 import Datamodel from "./Datamodel"
@@ -46,7 +47,6 @@ export default class Graph {
             "key": "im:dataController",
             "values": ["im:Organisation"]
           },
-    
           {
             "key": _.cloneDeep(Datamodel["im:Event"]),
             "values": ["im:hasPractitioner"]
@@ -70,7 +70,6 @@ export default class Graph {
         ];
         //convert map tp graph
         map.forEach((mapItem: any) => {
-
           // const key = Object.keys(mapItem)[0];
           // let items = mapItem[key];
           if (Array.isArray(mapItem?.key)) {
@@ -84,16 +83,15 @@ export default class Graph {
           }
         })
 
+
         //iterate trough DataModel to go 2 entities deep for the main entity ()
         //add properties
-        const properties = await EntityService.getDatamodelProperties("im:Person").then(res => res.data);
-        console.log("properties", properties);
-
+        // const clauses = await QueryService.clauseAutoComplete("age");
+        // console.log("clauses", clauses);
 
 
 
         return this.graph;
-
         break;
       default:
         break;

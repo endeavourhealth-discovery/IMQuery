@@ -18,22 +18,20 @@
           </div>
           <InputDescription class="" :description="activeViewerTab == 'Query Definition' ? inputMeta.definition : inputMeta.filterCriteria" />
           <!-- <slot name="buttons"></slot> -->
-          <div class="toggle-button">
+          <!-- <div class="toggle-button">
             <span> Edit Mode</span>
-            <InputSwitch class="ml10" v-model="edit" />
-          </div>
+            <InputSwitch class=" ml10" v-model="edit" />
+          </div> -->
         </div>
 
         <!-- body  -->
-        <div class="">
-          <QueryDefinition
-            v-if="activeViewerTab == 'Query Definition'"
-            :modelValue="modelValue"
-            :edit="edit"
-            @stopEditing="stopEditing"
-            @updateActiveClause="updateActiveClause"
-          ></QueryDefinition>
-        </div>
+        <QueryDefinition
+          v-if="activeViewerTab == 'Query Definition'"
+          :modelValue="modelValue"
+          :edit="edit"
+          @stopEditing="stopEditing"
+          @updateActiveClause="updateActiveClause"
+        ></QueryDefinition>
         <div v-if="activeViewerTab == 'Filter Criteria'" class="">
           <div class="text-gray-900 text-2xl font-semibold ml-6 break-words w-full max-w-[650px] mb-6">
             {{ clauseDefinition?.displayText }}
@@ -50,20 +48,10 @@
         </div>
       </div>
     </div>
-  
 
-    <!-- <div v-if="edit" class="w-full">
-      <HorizontalNavbar :underlined="true" :showIcon="true" class="border-y pt-2" v-if="edit" v-model="activeEditorTab" :items="editorTabs" />
-      <div class="flex flex-col border-l pl-4 pt-4">
-        <SearchInput v-if="activeEditorTab == 'Search'" v-show="edit" v-model="searchString" @update="updateActiveClause"> </SearchInput>
-      </div>
-      <div v-if="activeEditorTab == 'Editor'">
-        Editor
-      </div>
-      <div v-if="activeEditorTab == 'Template'">
-        Template
-      </div>
-    </div> -->
+    <div class="w-full pl-20">
+      <QueryBuilder :modelValue="modelValue"></QueryBuilder>
+    </div>
   </div>
 </template>
 
@@ -79,6 +67,7 @@ import Criteria from "@/components/query/Criteria.vue";
 import _ from "lodash";
 
 import InputDescription from "@/components/general/InputDescription.vue";
+import QueryBuilder from "@/components/query/QueryBuilder.vue";
 
 export default defineComponent({
   name: "QueryEditor",
@@ -88,7 +77,8 @@ export default defineComponent({
     SearchInput,
     HorizontalNavbar,
     IMDefinition,
-    InputDescription
+    InputDescription,
+    QueryBuilder
   },
   data() {
     return {
@@ -169,14 +159,18 @@ export default defineComponent({
         this.$store.commit("createClause", payload);
         this.activeClausePath = payload.path + `.[${payload.index}]`;
         this.clauseDefinition = _.get(this.modelValue, payload.path + `.[${payload.index}]`);
-      } else if (payload.action == "update") {
-        alert("hi");
 
+        // this.$store.commit("updateActiveClausePath", this.activeClausePath);
+      } else if (payload.action == "update") {
         this.$store.commit("updateActiveClausePath", payload);
       } else {
         this.clauseDefinition = _.get(this.modelValue, payload.path);
         this.activeClausePath = payload.path;
         this.activeViewerTab = "Filter Criteria";
+        // console.log("payload", payload);
+        this.$store.commit("updateActiveClausePath", payload);
+
+        // this.$store.commit("updateActiveClausePath", this.activeClausePath);
       }
     },
     updateValue(name: string): void {

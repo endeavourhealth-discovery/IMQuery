@@ -20,14 +20,14 @@
         <!-- <Node :object="query" path="select.match" valueType="match" operator="and" :highlighted="true" :edit="edit"> </Node> -->
       </Node>
       <div v-if="edit && !query?.match?.length > 0">
-        <SearchInput
+        <!-- <SearchInput
           :maxResults="2"
           :allow="['preview', 'create', 'insert', '']"
           label="Property or Health Record Entry"
           v-model="searchString"
           @updateActiveClause="updateActiveClause"
         >
-        </SearchInput>
+        </SearchInput> -->
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@ export default defineComponent({
   max-width: 700px;
   width: 100%;
   height: 100%;
-  max-height: 750px;
+  max-height: 725px;
   transition: all 0.2s ease-in;
   display: flex;
   flex-direction: column;

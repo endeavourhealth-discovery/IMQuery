@@ -5,55 +5,56 @@ import QueryUtils from "@/helpers/QueryUtils";
 
 export default class EntityService {
 
-
+  static API = import.meta.env.VITE_API;
+  QueryUtils
   public static async getData(filename: string): Promise<any> {
     return fetch(`local/${filename}`).then(res => res.json());
   }
 
   public static async test(): Promise<any> {
-    try {
-      const _res = await axios.get(import.meta.env.VITE_API + "api/query/public/queryIM", {
-        params: {
-          query: {
-            "name": "AsthmaSubTypesCore",
-            "select": [
-              {
-                "binding": "label",
-                "alias": "term"
-              },
-              {
-                "binding": "code",
-                "alias": "code"
-              }
-            ],
-            "match": {
-              "entityId": {
-                "@id": "http://snomed.info/sct#195967001"
-              },
-              "includeSubEntities": true,
-              "optional": [
-                {
-                  "property": {
-                    "@id": "http://www.w3.org/2000/01/rdf-schema#label"
-                  },
-                  "valueVar": "label"
-                },
-                {
-                  "property": {
-                    "@id": "http://endhealth.info/im#code"
-                  },
-                  "valueVar": "code"
-                }
-              ]
-            }
-          }
-        }
-      });
-      console.log("api response", _.cloneDeep(_res))
-      return _res;
-    } catch (error) {
-      return {} as any;
-    }
+    // try {
+    //   const _res = await axios.get(import.meta.env.VITE_API + "api/query/public/queryIM", {
+    //     params: {
+    //       query: {
+    //         "name": "AsthmaSubTypesCore",
+    //         "select": [
+    //           {
+    //             "binding": "label",
+    //             "alias": "term"
+    //           },
+    //           {
+    //             "binding": "code",
+    //             "alias": "code"
+    //           }
+    //         ],
+    //         "match": {
+    //           "entityId": {
+    //             "@id": "http://snomed.info/sct#195967001"
+    //           },
+    //           "includeSubEntities": true,
+    //           "optional": [
+    //             {
+    //               "property": {
+    //                 "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+    //               },
+    //               "valueVar": "label"
+    //             },
+    //             {
+    //               "property": {
+    //                 "@id": "http://endhealth.info/im#code"
+    //               },
+    //               "valueVar": "code"
+    //             }
+    //           ]
+    //         }
+    //       }
+    //     }
+    //   });
+    //   console.log("api response", _.cloneDeep(_res))
+    //   return _res;
+    // } catch (error) {
+    //   return {} as any;
+    // }
 
   }
 
@@ -82,11 +83,127 @@ export default class EntityService {
   // }
 
 
+
+  public static async getDatamodelEntities(): Promise<any> {
+    try {
+      var data = JSON.stringify({
+        "query": {
+          "name": "",
+          "description": "",
+          "mainEntity": {
+            "@id": "http://www.w3.org/ns/shacl#NodeShape"
+          },
+          "resultFormat": "OBJECT",
+          "select": {
+            "property": [
+              {
+                "@id": "http://www.w3.org/ns/shacl#property",
+                "select": {
+                  "property": [
+                    {
+                      "@id": "http://www.w3.org/ns/shacl#path",
+                      "select": {
+                        "property": [
+                          {
+                            "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+                          },
+                          {
+                            "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "@id": "http://www.w3.org/ns/shacl#datatype",
+                      "select": {
+                        "property": [
+                          {
+                            "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+                          },
+                          {
+                            "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "@id": "http://www.w3.org/ns/shacl#class",
+                      "select": {
+                        "property": [
+                          {
+                            "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+                          },
+                          {
+                            "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "@id": "http://www.w3.org/ns/shacl#nodeKind",
+                      "select": {
+                        "property": [
+                          {
+                            "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "@id": "http://www.w3.org/ns/shacl#node"
+                    },
+                    {
+                      "@id": "http://www.w3.org/ns/shacl#minCount"
+                    },
+                    {
+                      "@id": "http://www.w3.org/ns/shacl#maxCount"
+                    }
+                  ]
+                }
+              }
+            ],
+            "match": [
+              {
+                "entityType": {
+                  "@id": "http://www.w3.org/ns/shacl#NodeShape"
+                },
+                "property": []
+              }
+            ]
+          },
+          "usePrefixes": true
+        }
+      });
+
+      var config = {
+        method: 'post',
+        url: `${this.API}/api/query/public/queryIM`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
+
+      const res = await axios(config as any)
+        .then(function (response) {
+          return response.data
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      return res;
+
+    } catch (error) {
+      return {} as any;
+    }
+  }
   public static async getDatamodelProperties(iri: string): Promise<any> {
     try {
+
       if (!iri.startsWith("http")) {
         iri = QueryUtils.toUrl(iri);
       }
+
       var data = JSON.stringify({
         "query": {
           "name": "Data model for entity",
@@ -129,7 +246,7 @@ export default class EntityService {
             "match": [
               {
                 "entityId": {
-                  "@id": "http://endhealth.info/im#Observation"
+                  "@id": iri
                 }
               }
             ]
@@ -140,32 +257,22 @@ export default class EntityService {
 
       var config = {
         method: 'post',
-        url: 'http://localhost:8080/api/query/public/queryIM',
+        url: `${this.API}/api/query/public/queryIM`,
         headers: {
-          'query': '{"name":"AsthmaSubTypesCore","select":[{"binding":"label","alias":"term"},{"binding":"code","alias":"code"}],"match":{"entityId":{"@id":"http://snomed.info/sct#195967001"},"includeSubEntities":true,"optional":[{"property":{"@id":"http://www.w3.org/2000/01/rdf-schema#label"},"valueVar":"label"},{"property":{"@id":"http://endhealth.info/im#code"},"valueVar":"code"}]}}',
           'Content-Type': 'application/json'
         },
         data: data
       };
 
-      axios(config)
+      const res = await axios(config as any)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          return JSON.stringify(response.data);
-
+          return response.data
         })
         .catch(function (error) {
           console.log(error);
         });
+      return res;
 
-      // const _res = await axios.post(import.meta.env.VITE_API + "api/query/public/queryIM", data);
-      // const _res = await axios.get(import.meta.env.VITE_API + "api/entity/public/dataModelProperties", {
-      //   params: {
-      //     iri: iri
-      //   }
-      // });
-      // console.log("api response", _.cloneDeep(_res))
-      // return _res;
     } catch (error) {
       return {} as any;
     }

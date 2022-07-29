@@ -42,7 +42,8 @@ export default createStore({
     activeProfile: "",
     activeFileIri: [] as any[],
     activeQueryId: "",
-    activeClausePath: {},
+    activeClausePath: "",
+    // activeClausePath: {},
     openFiles: [] as any[],
     userFiles: [] as any[],
     // activeQueryIdId: "urn:uuid:6d517466-813b-46a8-b848-aaf5a4fbdcbf",
@@ -112,6 +113,10 @@ export default createStore({
 
   },
   mutations: {
+    updateSearchString(state, payload) {
+      console.log("updateSearchString", payload);
+
+    },
     createClause(state, payload) {
       // console.log("payload", payload)
       //if activePath is empty -> create new item at path first!  //OR you can do this upon pressing "back";
@@ -148,12 +153,16 @@ export default createStore({
 
       // state.activeClausePath[state.activeQueryId] = payload.path + `[${payload.index}]`;
     },
+    setActiveClausePath(state, payload) {
+      state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload;
+      state.activeClausePath = payload;
+    },
     updateActiveClausePath(state, payload) {
       console.log("click")
       switch (payload.action) {
         case "view":
-          state.activeClausePath[state.activeQueryId] = payload.path;
-
+          state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload.path;
+          state.activeClausePath = payload.path;
           break;
 
         case "update":
@@ -242,7 +251,7 @@ export default createStore({
           state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
           // console.log("cloneQuery", cloneQuery)
 
-          state.activeClausePath[state.activeQueryId] = payload.path + `[${payload.index}]`;
+          state.activeClausePath = payload.path + `[${payload.index}]`;
           break;
       }
 
@@ -271,10 +280,20 @@ export default createStore({
         .catch(err => {
           console.error("Failed to load file from the server", err);
         });
-      console.log("## entity:", entity); //?res.data if backend
+      // console.log("## entity:", entity); //?res.data if backend
+
+      const file = {
+        iri: entity["@id"],
+        activeClausePath: "",
+        isVisible: true,
+        state: "view",
+        data: entity,
+        searchResults: [
+        ]
+      };
 
       state.openFiles.forEach((file: any, index: number) => state.openFiles[index].isVisible = false);
-      state.openFiles.push({ iri: entity["@id"], activeClausePath: "", isVisible: true, state: "view", data: entity }); //alternative states are: loading, edit
+      state.openFiles.push(file); //alternative states are: loading, edit
       state.activeQueryId = entity["@id"];
       state.tabs.find(tab => tab.name === "Edit").visible = true;
       state.activeTabName = "Edit";
@@ -286,6 +305,50 @@ export default createStore({
 
 
 
+    },
+    setSearchData(state, payload) {
+      console.log("setSearchData", payload,)
+
+      const activeClausePath = payload.path;
+
+      //removes previous results for active path
+      let newResults = _.cloneDeep(state.openFiles.find(file => file.iri == state.activeQueryId).searchResults)
+      newResults = newResults.filter(result => result.activeClausePath != activeClausePath);
+      state.openFiles.find(file => file.iri == state.activeQueryId).searchResults = newResults;
+
+
+      // cached result for active path
+      let searchResult = {
+        activeClausePath: activeClausePath,
+        searchString: payload?.searchString,
+        results: [],
+        existingQuery: [],
+        existingClause: [],
+        nodeShape: [],
+        property: [],
+
+      };
+
+
+      function separateResults(results: any) {
+        if (Array.isArray(results) && results.length > 0) {
+          results.forEach(result => {
+            if (QueryUtils.isQuery(result)) {
+              searchResult.existingQuery.push(result);
+            } else if (QueryUtils.isClause(result)) {
+              searchResult.existingClause.push(result);
+            } else if (QueryUtils.isEntity(result)) {
+              searchResult.nodeShape.push(result);
+            } else if (QueryUtils.isProperty(result)) {
+              searchResult.property.push(result);
+            }
+          });
+        }
+      }
+      searchResult.results = payload.data;
+      separateResults(payload.data);
+
+      state.openFiles.find(file => file.iri == state.activeQueryId).searchResults.push(searchResult);
     },
     createNew(state, entityType) {
 
@@ -326,12 +389,23 @@ export default createStore({
 
       console.log("## loadDataSet(data);:", data); //?res.data if backend
 
+
+      const file = {
+        iri: data["@id"],
+        activeClausePath: "select.match[0]",
+        isVisible: true,
+        state: "view",
+        data: data,
+        searchResults: [
+        ]
+      };
       state.openFiles.forEach((file: any, index: number) => state.openFiles[index].isVisible = false);
-      state.openFiles.push({ iri: data["@id"], activeClausePath: "", isVisible: true, state: "view", data: data }); //alternative states are: loading, edit
+      state.openFiles.push(file); //alternative states are: loading, edit
       state.activeQueryId = data["@id"];
       state.tabs.find(tab => tab.name === "Edit").visible = true;
       state.activeTabName = "Edit";
       state.activeQueryCategory = "mainEntity";
+
 
 
     },
