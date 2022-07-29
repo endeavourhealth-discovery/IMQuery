@@ -1,12 +1,15 @@
 <template>
-  <div class="flex flex-col">
-    <div class="title non-selectable">
-      {{ description.title }}
+  <div class="flex">
+    <div class="flex flex-col">
+      <div class="title non-selectable">
+        {{ description.title }}
+      </div>
+      <div class="explanation non-selectable text-indigo-700 min-w-[120px]" v-tooltip.bottom="description.explanation">
+        <font-awesome-icon style="margin-right: 5px" icon="question-circle" />
+        Need help?
+      </div>
     </div>
-    <div class="explanation non-selectable text-indigo-700" v-tooltip.bottom="description.explanation">
-      <font-awesome-icon style="margin-right: 5px" icon="question-circle" />
-      Need help?
-    </div>
+    <slot></slot>
   </div>
 </template>
 

@@ -308,7 +308,7 @@ export default defineComponent({
   width: 15px;
   margin: 9px 1px 0 0;
   /* border-top: 2px solid #cbd5e1; */
-  border-top: 2px solid #000;
+  border-top: 2px solid rgba(0, 0, 0, 0.644);
 }
 
 .linked-line {
@@ -318,7 +318,7 @@ export default defineComponent({
   margin-bottom: 2px;
   min-height: 15px;
   /* border-left: 2px solid #cbd5e1; */
-  border-left: 2px solid #000;
+  border-left: 2px solid rgba(0, 0, 0, 0.644);
 }
 
 .line-v {
@@ -326,7 +326,7 @@ export default defineComponent({
   min-width: 10px;
   margin-left: 5px;
   min-height: calc(100% - 25px);
-  border-left: 2px solid #000;
+  border-left: 2px solid rgba(0, 0, 0, 0.644);
 }
 
 .operatorlabel {

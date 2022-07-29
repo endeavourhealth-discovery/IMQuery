@@ -39,35 +39,43 @@
 
         <div
           v-if="allowExpansion"
-          class="actions rounded-md flex invisible group-hover:visible border-t-2 mt-4 pt-2 transparent  group-hover:border-t-gray-100 justify-between items-end select-none space-x-5  transition duration-500 ease-in-out mr-4 "
+          class="actions rounded-md flex invisible group-hover:visible border-t-2 mt-3 transparent  group-hover:border-t-gray-100 justify-between items-end select-none space-x-5  transition duration-500 ease-in-out "
         >
           <!-- <div class="inline-flex items-center text-2xl hover:underline font-semibold text-blue-600 dark:text-white">
           <NodeIcon class="mx-2" strokewidth="2" width="20" height="24" icon="eye" /> View
         </div> -->
           <div
             @click="onEdit()"
-            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-gray-800 dark:text-white"
+            class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-gray-800 px-2  hover:bg-gray-200 dark:text-white mt-10"
           >
-            <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="eye" /> View
+            <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="eye" /> View Details
           </div>
-          <div
-            @click="onCopy()"
-            class="invisible group-hover:visible inline-flex items-center text-2xl hover:underline font-semibold text-purple-700 dark:text-white"
-          >
-            <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="document_duplicate" /> Copy
+          <div class="flex">
+            <div
+              class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-red-700 px-2   hover:bg-red-100 dark:text-white mt-10"
+            >
+              <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="trash" /> Delete
+            </div>
+            <div
+              @click="onCopy()"
+              class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-purple-700 px-2   hover:bg-purple-100 dark:text-white  mt-10"
+            >
+              <NodeIcon class="mx-3" strokewidth="2" width="20" height="24" icon="document_duplicate" /> Copy
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div v-if="allowExpansion" class="node-add ml-4 flex #border-t-gray-300 #border-t-2 pt-2 ">
-      <div
+      <!-- <div
         v-if="!added"
         @click="onAdd()"
         class="node-add flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
       >
         <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="plus" />
         <div>New</div>
-      </div>
+      </div> -->
+      <NodeIcon class="mt-1 text-blue-700 mr-2" strokewidth="3" width="20" height="24" icon="plus" />
 
       <!-- ###todo replace with SearchInput and add this as a variant -->
       <SearchInput
@@ -116,9 +124,12 @@ export default defineComponent({
     };
   },
   methods: {
-
+    // showTextArea(): void {
+    //   alert("lol");
+    //   this.showTextArea = true;
+    // },
     onBlur(event: any): void {
-      this.showTextArea = false
+      this.showTextArea = false;
     },
     onInput(event: any): void {
       this.$store.commit("updateSearchString", event.target.value);
@@ -211,11 +222,13 @@ export default defineComponent({
   padding: 6px;
 } */
 
+.on-add,
 .actions {
   /* display: none; */
   height: 0;
-  /* transition: height 0.3s ease-out; */
+  transition: height 0.3s ease-out;
 }
+.node-card:hover .on-add,
 .node-card:hover .actions {
   /* display: flex; */
   height: 30px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="suggestions flex flex-col">
+  <div class="suggestions flex flex-col max-h-[750px]">
     <TransitionRoot
       appear
       :show="isShown"
@@ -11,17 +11,15 @@
       leave-from="opacity-100 rotate-0 scale-100"
       leave-to="opacity-0 scale-50 "
     >
-      <template v-if="showPreview && preview">
-        <div class="text-gray-700 text-lg font-semibold">Preview</div>
-        <IMDefinition class="clause-definition" type="clause" :modelValue="preview" :showDetails="true"> </IMDefinition>
-      </template>
-      <div class="text-gray-700 text-lg font-semibold">Suggestions</div>
+
+      <!-- <div class="text-gray-700 text-lg font-semibold">Suggestions</div> -->
 
       <template v-for="(result, resultIndex) in results" :key="result.iri">
         <Suggestion
           v-if="!maxResults || resultIndex < maxResults"
+          :mainEntity="mainEntity"
           :result="result"
-          class="result cursor-pointer relative  hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400  focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
+          class="result  cursor-pointer relative  hover:scale-105  hover:mb-10 group rounded-md transition duration-300 ease-in-out appearance-none  py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400  focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
           :pathFilter="pathFilter"
           :showDetails="showDetails"
           @updatePreview="updatePreview"
@@ -49,7 +47,7 @@ export default defineComponent({
   name: "SearchResults",
   components: { TransitionRoot, HeroIcon, Suggestion, IMDefinition },
   emits: ["openItem", "updateActiveClause"],
-  props: ["results", "searchstring", "isShown", "pathFilter", "showDetails", "maxResults", "showPreview"],
+  props: ["results", "searchstring", "isShown", "pathFilter", "showDetails", "maxResults", "showPreview", "mainEntity"],
   data() {
     return {
       debounce: 0,

@@ -69,6 +69,7 @@ import { defineComponent } from "vue";
 import SearchService from "@/services/SearchService";
 import Suggestions from "@/components/search/Suggestions.vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
+import QueryService from "../../services/QueryService";
 
 export default defineComponent({
   name: "SearchInput",
@@ -99,11 +100,12 @@ export default defineComponent({
       this.$emit("update:modelValue", event.target.value);
     },
     async search(searchString: string): Promise<any> {
-      await SearchService.searchAll(searchString)
+      await QueryService.searchAll(searchString)
+        // await SearchService.searchAll(searchString)
         .then((res: any) => {
           console.log("fetched OSS search results", res);
-          this.searchData = res.data;
-          this.$store.commit("setSearchData", { searchString: searchString, data: res.data, path: this.path });
+          this.searchData = res;
+          this.$store.commit("setSearchData", { searchString: searchString, data: res, path: this.path });
           return res;
         })
         .catch((err: any) => {

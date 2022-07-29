@@ -162,7 +162,7 @@
 
         <!-- Tab: Search -->
         <div v-if="activeTabName == 'Find'" class="tab-content relative flex justify-center">
-          <div v-if="false" class="categories mt-20 #ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none #mr-20">
+          <div v-if="false" class="categories #ml-20 inline-flex lg:flex-col lg:space-y-10 space-x-10 lg:space-x-0 select-none #mr-20">
             <template v-for="category in searchCategories" :key="category.name">
               <div
                 v-if="category.visible"
@@ -253,27 +253,8 @@
           <div class="h-full flex justify-start bg-transparent dark:bg-gray-900 overflow-y-auto overflow-x-auto">
             <!-- Left -->
             <div class="categories min-w-[250px] mr-20 #inline-flex #space-x-10 flex-col  space-y-2  lg:space-x-0 select-none ">
-              <div class="text-3xl font-bold text-black ml-12">Query</div>
-              <div :class="'inline-flex py-6 pl-10  pb-6' + [activeQueryCategory == 'mainEntity' ? ' ' : ' space-x-10']">
-                <button
-                  @click="previousQueryCategory()"
-                  icon="pi pi-chevron-left"
-                  iconPos="left"
-                  :class="
-                    'border border-blue-500 w-full min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-blue-600 text-blue-600 hover:text-white   transition duration-500 ease-in-out' +
-                      [activeQueryCategory == 'mainEntity' ? ' hidden' : ' ']
-                  "
-                >
-                  Previous
-                </button>
-                <button
-                  @click="nextQueryCategory()"
-                  icon="pi pi-chevron-right"
-                  class="border border-blue-500 min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold bg-blue-600 text-white hover:bg-blue-800 hover:text-white   transition duration-500 ease-in-out"
-                >
-                  Next
-                </button>
-              </div>
+              <div class="text-3xl font-bold text-black ml-12 mb-10">Query</div>
+              <!-- <div :class="'inline-flex py-6 pl-10  pb-6' + [activeQueryCategory == 'mainEntity' ? ' ' : ' space-x-10']"></div> -->
               <template v-for="category in config?.query?.categories" :key="category.name">
                 <div
                   v-if="category.visible"
@@ -364,11 +345,11 @@
             </div>
             <!-- Main Data Type  -->
 
-            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity  w-full max-w-[1000px]">
-              <div class="flex">
+            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity  w-full max-w-[700px]">
+              <div class="flex justify-between">
                 <InputDescription class="max-w-[600px]" :description="inputMeta.mainEntity" />
                 <!-- <div class="flex justify-between space-x-4 pt-10  w-[400px] "> -->
-                <!-- <div class="inline-flex py-6 ml-10 space-x-10">
+                <div class="inline-flex mt-3 pb-10 ml-10   space-x-10">
                   <button
                     @click="previousQueryCategory()"
                     icon="pi pi-chevron-left"
@@ -380,11 +361,11 @@
                   <button
                     @click="nextQueryCategory()"
                     icon="pi pi-chevron-right"
-                    class="border border-blue-500 w-full min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold bg-blue-600 text-white hover:bg-blue-800 hover:text-white   transition duration-500 ease-in-out"
+                    class="border border-blue-600 w-full min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold  hover:bg-blue-600 text-blue-600 hover:text-white     transition duration-500 ease-in-out"
                   >
                     Next
                   </button>
-                </div> -->
+                </div>
               </div>
               <div>
                 <InputRadioButtons

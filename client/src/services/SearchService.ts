@@ -44,14 +44,14 @@ export default class SearchService {
     try {
       const _requestBody = {
         termFilter: searchString,
-        statusFilter: ["http://endhealth.info/im#Active"],
-        typeFilter: ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class", "http://endhealth.info/im#dataModelProperty", "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"],
-        schemeFilter: ["http://endhealth.info/im#"],
+        statusFilter: [],
+        typeFilter: ["http://endhealth.info/im#Query", "http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class", "http://endhealth.info/im#dataModelProperty", "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"],
+        schemeFilter: [],
         sortBy: 0,
         page: 1,
         size: 20
       };
-      return await axios.post(this.API + "api/entity/public/search", _requestBody);
+      return await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody);
     } catch (error) {
       console.log("error in advanced search:" + error);
       return null;

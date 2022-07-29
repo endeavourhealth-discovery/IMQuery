@@ -2,81 +2,127 @@
   <!-- <div
     class="result cursor-pointer relative z-20 hover:z-30 hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
   > -->
-  <div
-    v-if="pathData.length"
-    class="result cursor-pointer relative  hover:scale-105  my-4 group rounded-md transition duration-300 ease-in-out appearance-none  px-4 py-3 bg-white border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent dark:from-blue-700 dark:to-sky-600 "
-  >
-    <div class="result-content relative">
-      <div class="invisible group-hover:visible text-lg  flex row-col items-center">
-        <div v-tooltip.bottom="result.iri" class="inline text-gray-500 dark:text-gray-300">
-          <!-- {{ encodeURIComponent(result.iri) }} -->
-          {{ result.iri }}
-        </div>
-      </div>
-      <div class="text-3xl text-blue-600 dark:text-white  font-semibold">
-        {{ result.name }}
-        <div
-          v-if="getTypeLabel(result.entityType)"
-          class="inline mr-2 text-xl text-gray-700 dark:text-gray-400 font-semibold border border-gray-400 px-2 rounded-md"
-        >
-          {{ getTypeLabel(result.entityType) }}
-        </div>
-      </div>
-
-      <div v-if="false && showDetails" class="badges inline-flex space-x-3 mt-4 relative -left-1 -top-4">
-        <template v-for="(item, index) in TTIriRefs(result)">
-          <div
-            v-if="index > 0 && (item.TTIriRefs?.name || item.TTIriRefs[0].name)"
-            class="px-1 py-1  inline-flex  text-xl text-gray-900 dark:text-gray-200 #border rounded-full #border-2 #border-gray-200 dar:border-white #bg-gray-100 dark:hover:bg-blue-900"
-          >
-            <div class="mr-1">•</div>
-            <div class="inline-flex">
-              {{ item.TTIriRefs?.name ? item.TTIriRefs?.name : item.TTIriRefs[0].name }}
-            </div>
-            <div v-if="item?.TTIriRefs?.length && item?.TTIriRefs?.length > 1" class="inline-flex px-2 mx-2 border rounded-full font-bold">
-              {{ item?.TTIriRefs?.length }}
-            </div>
+  <!-- <div v-if="isEntity(result.entityType) || isProperty(result.entityType)"> -->
+  <template v-if="isEntity(result) || isProperty(result)">
+    <div
+      v-if="pathData.length"
+      class="result cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105  group transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
+      @mouseenter="onEnter()"
+      @mouseleave="onLeave()"
+    >
+      <div class="result-content relative">
+        <div class="invisible group-hover:visible text-lg  flex row-col items-center">
+          <div v-tooltip.bottom="result.iri" class="inline text-gray-500 dark:text-gray-300">
+            <!-- {{ encodeURIComponent(result.iri) }} -->
+            {{ result.iri }}
           </div>
-        </template>
+        </div>
+        <div class="text-3xl text-blue-600 dark:text-white  font-semibold">
+          {{ result.name }}
+          <div v-if="getTypeLabel(result)" class="inline mr-2 text-xl text-gray-700 dark:text-gray-400 font-semibold border border-gray-400 px-2 rounded-md">
+            {{ getTypeLabel(result) }}
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div v-if="pathFilter" class="#result-actions #invisible #group-hover:visible  ">
-      <div v-if="pathData.length" class="mt-2">
-        <div v-for="path in pathData" :key="path" @mouseenter="onHover(path)" class="flex hover:bg-blue-100 pl-2 relative -left-2 rounded-md ">
-          <div class="flex w-full  py-1">
-            <div v-for="(pathItem, index) in path" :key="pathItem" class="group flex-wrap">
-              <div :class="'flex  text-xl hover:underline' + [index < path.length - 1 ? ' text-gray-600 font-semibold' : 'text-black font-bold']">
-                <div v-if="showDetails || index % 2 == 0">
-                  {{ pathItem.split(":").length ? nameFromIri(pathItem) : "" }}
-                </div>
-                <div v-tooltip.bottom="getToolTip(path[index])">
-                  <HeroIcon
-                    v-if="showDetails | (index < path.length - 1 && index % 2 == 1)"
-                    class="text-blue-600 mx-2 mt-1"
-                    strokewidth="3"
-                    width="12"
-                    height="12"
-                    icon="arrow_right"
-                  />
+      <!-- Paths  -->
+      <div v-if="pathFilter" class="#result-actions #invisible #group-hover:visible  ">
+        <div v-if="pathData.length" class="mt-2">
+          <div v-for="path in pathData" :key="path" @mouseenter="onPreview(path)" class="flex hover:bg-blue-100 pl-2 relative -left-2 rounded-md ">
+            <div class="flex w-full  py-1">
+              <div v-for="(pathItem, index) in path" :key="pathItem" class="group flex-wrap">
+                <div :class="'flex  text-xl #hover:underline' + [index < path.length - 1 ? ' text-gray-600 font-semibold' : 'text-black font-bold']">
+                  <div v-if="showDetails || index % 2 == 0">
+                    {{ pathItem.split(":").length ? nameFromIri(pathItem) : "" }}
+                  </div>
+                  <div v-tooltip.bottom="getToolTip(path[index])">
+                    <HeroIcon
+                      v-if="showDetails | (index < path.length - 1 && index % 2 == 1)"
+                      class="text-blue-600 mx-2 mt-1"
+                      strokewidth="3"
+                      width="12"
+                      height="12"
+                      icon="arrow_right"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+            <div
+              @click="onAdd(path)"
+              class="#bg-blue-600 group-hover:visible invisible text-blue-600 inline-flex  rounded-full relative  ml-2 h-9 pl-1 pr-4 pt-1  text-xl font-semibold"
+            >
+              <HeroIcon class="mx-2 mt-1" strokewidth="3" width="12" height="12" icon="plus" />
+              Add
+            </div>
           </div>
-          <div
-            @click="onAdd(path)"
-            class="#bg-blue-600 group-hover:visible invisible text-blue-600 inline-flex  rounded-full relative  ml-2 h-9 pl-1 pr-4 pt-1  text-xl font-semibold"
-          >
-            <HeroIcon class="mx-2 mt-1" strokewidth="3" width="12" height="12" icon="plus" />
-            Add
+        </div>
+        <div v-else class="mt-2 text-red-700 text-2xl">
+          Not related to main data type
+        </div>
+      </div>
+      <!-- Paths  -->
+
+      <!-- Preview  -->
+      <div v-if="preview.pathTo && isHover" class="mt-4 relative ">
+        <div class="text-gray-500 text-xl mt-4 mb-2 font-semibold #absolute top-0 right-4">Preview</div>
+        <IMDefinition class="clause-definition" type="clause" :modelValue="preview" :showDetails="true"> </IMDefinition>
+      </div>
+      <!-- Preview  -->
+    </div>
+  </template>
+  <template v-else-if="isQuery(result) || isClause(result)">
+    <div
+      class="result cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105  my-4 group transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
+      @mouseenter="onEnter()"
+      @mouseleave="onLeave()"
+    >
+      <div class="result-content relative">
+        <div class="invisible group-hover:visible text-lg  flex row-col items-center">
+          <div v-tooltip.bottom="result.iri" class="inline text-gray-500 dark:text-gray-300">
+            <!-- {{ encodeURIComponent(result.iri) }} -->
+            {{ result.iri }}
+          </div>
+        </div>
+        <div class="text-3xl text-blue-600 dark:text-white  font-semibold">
+          {{ result.name }}
+          <div v-if="getTypeLabel(result)" class="inline mr-2 text-xl text-gray-700 dark:text-gray-400 font-semibold border border-gray-400 px-2 rounded-md">
+            {{ getTypeLabel(result) }}
           </div>
         </div>
       </div>
-      <div v-else class="mt-2 text-red-700 text-2xl">
-        Not related to main data type
+
+      <!-- Preview  -->
+      <div v-if="isClause(result) && isHover" class="mt-4 relative ">
+        <div class="text-gray-500 text-xl mt-4 mb-2 font-semibold #absolute top-0 right-4">Preview</div>
+        <IMDefinition class="clause-definition" type="clause" :modelValue="result.matchClause" :showDetails="true"> </IMDefinition>
+      </div>
+      <!-- Preview  -->
+
+      <div v-else-if="isQuery(result)">
+        <div class="flex #hover:bg-blue-100 pl-2 relative -left-2 rounded-md mt-5 ">
+          <div
+            class="#bg-blue-600 group-hover:visible invisible text-green-600  hover:bg-green-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+          >
+            <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
+            Include
+          </div>
+          <div
+            class="#bg-blue-600 group-hover:visible invisible text-red-600  hover:bg-red-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+          >
+            <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="x" />
+            Exclude
+          </div>
+
+          <div class="group-hover:visible invisible text-gray-700 font-bold text-xl ml-2 mt-2">
+            {{ indefiniteArticle(mainEntity.name) }}
+            {{ mainEntity.name }}
+            {{ "if they were part of the results of this Query" }}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </template>
 </template>
 
 <script lang="ts">
@@ -87,15 +133,19 @@ import QueryUtils from "@/helpers/QueryUtils";
 import { TransitionRoot } from "@headlessui/vue";
 import { _ } from "lodash";
 
+import IMDefinition from "../query/IMDefinition.vue";
+
 import Graph from "@/logic/Graph";
 
 export default defineComponent({
   name: "SearchResult",
-  components: { TransitionRoot, HeroIcon },
+  components: { TransitionRoot, HeroIcon, IMDefinition },
   emits: ["openItem", "updatePreview"],
-  props: ["result", "pathFilter", "showDetails", "updateActiveClause"],
+  props: ["result", "pathFilter", "showDetails", "updateActiveClause", "mainEntity"],
   data() {
     return {
+      isHover: false,
+      preview: {},
       debounce: 0,
       pathData: this.getPaths()
     };
@@ -114,6 +164,23 @@ export default defineComponent({
   //   }
   // },
   methods: {
+    indefiniteArticle(text: any) {
+      if (!text || text == "") return "a";
+      return ["a", "e", "i", "o", "u"].some((letter: string) => letter.toLowerCase() == text.substring(0, 1).toLowerCase()) ? "an" : "a";
+    },
+    isQuery(entity: any): boolean {
+      return QueryUtils.isQuery(entity);
+    },
+    isClause(entity: any): boolean {
+      return QueryUtils.isClause(entity);
+    },
+    isEntity(entity: any): boolean {
+      return QueryUtils.isEntity(entity);
+    },
+    isProperty(entity: any): boolean {
+      return QueryUtils.isProperty(entity);
+    },
+
     nameFromIri(iri: string): string {
       return iri != ""
         ? iri
@@ -146,16 +213,16 @@ export default defineComponent({
         name: this.result.name
       };
 
-      const properties = this.isEntity() ? [] : [];
+      const properties = this.isEntity(this.result) ? [] : [];
 
       const entity = newPaths.splice(newPaths.length - 1, 1)[0];
-      console.log("entity",  entity);
+      // console.log("entity", entity);
 
       const newClause = {
         "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87",
-        entityType: this.isEntity() ? this.result : entity,
+        entityType: this.isEntity(this.result) ? this.result : entity,
         pathTo: newPaths,
-        property: this.isEntity() ? null : _.cloneDeep([prop]),
+        property: this.isEntity(this.result) ? null : _.cloneDeep([prop]),
         displayText: ""
       };
       console.log("newClause", newClause);
@@ -164,14 +231,18 @@ export default defineComponent({
     getToolTip(path: string): string {
       return `<span style="margin-top: 100px; font-size: 14px; font-weight: bold; ">${path}</span>`;
     },
-    // isEntity(iri: string): boolean {
-    //   const url = QueryUtils.toUrl(iri);
-    //   console.log("url", url);
-    //   return Datamodel.isEntity(url);
-    // },
-    onHover(path: any): void {
-      this.$emit("updatePreview", { data: this.getClause(path) });
+
+    onPreview(path: any): void {
+      this.isHover = true;
+      this.preview = this.getClause(path);
     },
+    onEnter(): void {
+      this.isHover = true;
+    },
+    onLeave(): void {
+      this.isHover = false;
+    },
+
     getPaths(): any {
       const iris = this.datamodelIri();
       let paths = [];
@@ -192,7 +263,7 @@ export default defineComponent({
       console.log("this.result.iri", this.result.iri);
       console.log("this.toPrefixedIri(this.result.iri)", this.toPrefixedIri(this.result.iri));
       const iri = this.toPrefixedIri(this.result.iri);
-      if (this.isEntity()) {
+      if (this.isEntity(this.result)) {
         return iri;
       } else {
         return Datamodel.withProperty(iri).map(item => item["@id"]);
@@ -227,25 +298,20 @@ export default defineComponent({
     handleEdit(iri: string) {
       alert("Coming soon. Stay tuned!");
     },
-    isEntity(): boolean {
-      const entityTypes = this.result.entityType;
-      const entry = ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class"];
-      if (entityTypes.some((entity: any) => entry.includes(entity["@id"]))) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    getTypeLabel(entityTypes: any): string | null {
-      const entry = ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class"];
-      const property = ["http://www.w3.org/ns/shacl#NodeShape", "http://endhealth.info/im#dataModelProperty"];
-      const query = ["http://endhealth.info/im#Query"];
 
-      if (entityTypes.some((entity: any) => entry.includes(entity["@id"]))) {
+    getTypeLabel(entity: any): string | null {
+      // const entry = ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class"];
+      // const property = ["http://www.w3.org/ns/shacl#NodeShape", "http://endhealth.info/im#dataModelProperty"];
+      // const query = ["http://endhealth.info/im#Query"];
+      console.log("entity", entity);
+
+      if (QueryUtils.isEntity(entity)) {
         return "Health Record Entry";
-      } else if (entityTypes.some((entity: any) => property.includes(entity["@id"]))) {
+      } else if (QueryUtils.isClause(entity)) {
+        return "Criteria";
+      } else if (QueryUtils.isProperty(entity)) {
         return "Property";
-      } else if (entityTypes.some((entity: any) => query.includes(entity["@id"]))) {
+      } else if (QueryUtils.isQuery(entity)) {
         return "Query";
       } else {
         return null;

@@ -53,7 +53,7 @@ export default defineComponent({
 
 <style>
 .im-definition {
-  background-color: #f8fafc;
+  /* background-color: #f8fafc; */
   border-radius: 5px;
   /* padding: 6px; */
 }

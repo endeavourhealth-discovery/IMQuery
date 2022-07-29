@@ -1,22 +1,40 @@
 <template>
-  <div :class="'query-editor flex  justify-center relative w-full ' + [edit ? ' w-full #border #border-gray-300' : '']">
-    <div :class="'w-full flex' + [edit ? ' ' : '']">
-      <div class="#ml-[100px] min-w-[700px]">
+  <div :class="'query-editor w-full flex  justify-center relative ' + [edit ? ' w-full #border #border-gray-300' : '']">
+    <div :class="'w-full min-w-[700px]  flex' + [edit ? ' ' : '']">
+      <div class="w-full  ">
         <!-- title  -->
         <!-- <div class="flex text-2xl font-semibold text-blue-700 #border-b relative z-0">
             <span class="text-3xl font-bold text-black ml-10">{{ activeViewerTab }}</span>
           </div> -->
-        <div class="flex max-w-[700px]">
-          <div v-if="activeViewerTab == 'Filter Criteria'" class="pt-4 mr-10 ">
+        <div class="flex w-full justify-between">
+          <div class=" mr-10 flex">
             <button
-              class="border border-gray-500 w-full max-w-[60px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-gray-500 hover:text-white transition duration-500 ease-in-out"
+              v-if="activeViewerTab == 'Filter Criteria'"
+              class=" border-gray-500 w-full max-w-[60px] max-h-[40px]  px-4 py-2 mt-4  rounded-full text-2xl font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out"
               label="Back"
               @click.prevent="activeViewerTab = 'Query Definition'"
             >
               {{ "Back" }}
             </button>
+            <InputDescription class="ml-10" :description="activeViewerTab == 'Query Definition' ? inputMeta.definition : inputMeta.filterCriteria" />
           </div>
-          <InputDescription class="" :description="activeViewerTab == 'Query Definition' ? inputMeta.definition : inputMeta.filterCriteria" />
+          <div v-if="activeViewerTab == 'Query Definition'" class="inline-flex max-h-[70px] mt-3 pb-10  space-x-10">
+            <button
+              @click="previousQueryCategory()"
+              icon="pi pi-chevron-left"
+              iconPos="left"
+              class="border border-blue-500 min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold hover:bg-blue-600 text-blue-600 hover:text-white   transition duration-500 ease-in-out"
+            >
+              Previous
+            </button>
+            <button
+              @click="nextQueryCategory()"
+              icon="pi pi-chevron-right"
+              class="border border-blue-600 w-full min-w-[100px] px-4 py-2  rounded-full text-2xl font-bold  hover:bg-blue-600 text-blue-600 hover:text-white     transition duration-500 ease-in-out"
+            >
+              Next
+            </button>
+          </div>
           <!-- <slot name="buttons"></slot> -->
           <!-- <div class="toggle-button">
             <span> Edit Mode</span>
@@ -32,10 +50,10 @@
           @stopEditing="stopEditing"
           @updateActiveClause="updateActiveClause"
         ></QueryDefinition>
-        <div v-if="activeViewerTab == 'Filter Criteria'" class="">
-          <div class="text-gray-900 text-2xl font-semibold ml-6 break-words w-full max-w-[650px] mb-6">
+        <div v-if="activeViewerTab == 'Filter Criteria'">
+          <!-- <div class="text-gray-900 text-2xl font-semibold ml-6 break-words w-full  mt-4 mb-4">
             {{ clauseDefinition?.displayText }}
-          </div>
+          </div> -->
           <IMDefinition
             class="clause-definition"
             type="clause"
@@ -49,7 +67,7 @@
       </div>
     </div>
 
-    <div class="w-full pl-20">
+    <div class="w-full ml-[50px]">
       <QueryBuilder :modelValue="modelValue"></QueryBuilder>
     </div>
   </div>
@@ -135,7 +153,7 @@ export default defineComponent({
       ],
       inputMeta: {
         definition: {
-          title: `Define the features of the ${this?.modelValue?.select?.entityType.name} you are looking for                                                                                                                                                                                                                                                                                                                                                                                                                                        `,
+          title: "Define inclusion and exclusion criteria",
           explanation: "Describe a criteria, property or health record ",
           placeholder: "Search for a criteria, property or health record"
         },
@@ -151,6 +169,12 @@ export default defineComponent({
   emits: ["stopEditing"],
 
   methods: {
+    nextQueryCategory(): void {
+      this.$store.commit("nextQueryCategory");
+    },
+    previousQueryCategory(): void {
+      this.$store.commit("previousQueryCategory");
+    },
     updateActiveClause(payload: any): void {
       console.log("payload", payload);
       // this.tabs[1].visible = true;

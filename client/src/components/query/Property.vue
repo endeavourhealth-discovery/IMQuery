@@ -1,6 +1,12 @@
 <template>
   <div class="property">
-    <NodeIcon :class="'ml10 min-w-[10px]' + [notExist ? ' text-red-700' : ' text-green-700']" strokewidth="3" width="14" height="14" icon="property_first"></NodeIcon>
+    <NodeIcon
+      :class="'ml10 min-w-[10px]' + [notExist ? ' text-red-700' : ' text-green-700']"
+      strokewidth="3"
+      width="14"
+      height="14"
+      icon="property_first"
+    ></NodeIcon>
     <span class="property-name font-normal"> {{ modelValue?.name }} </span>
     <div v-if="modelValue?.inSet" class="horizontal">
       <NodeIcon
@@ -10,7 +16,7 @@
         height="14"
         icon="arrow_right_small"
       ></NodeIcon>
-      <div class="ml10 inSet-item" v-for="set in modelValue?.inSet">{{ set?.name }}{{ "," }}</div>
+      <div class="ml10 inSet-item hover:underline" @click="viewEntity(set)" v-for="set in modelValue?.inSet">{{ set?.name }}{{ "," }}</div>
     </div>
     <div v-else-if="modelValue?.notInSet" :class="'horizontal'">
       <NodeIcon
@@ -20,7 +26,7 @@
         height="14"
         icon="arrow_right_small"
       ></NodeIcon>
-      <div class="ml10 inSet-item" v-for="set in modelValue?.notInSet">{{ set?.name }}{{ "," }}</div>
+      <div class="ml10 inSet-item hover:underline" @click="viewEntity(set)" v-for="set in modelValue?.notInSet">{{ set?.name }}{{ "," }}</div>
     </div>
     <div v-else-if="modelValue?.value" :class="'horizontal'">
       <NodeIcon
@@ -34,6 +40,11 @@
         {{ comparison(modelValue?.value?.comparison) + " " }} {{ modelValue?.value?.valueData + " " }}
         {{ modelValue?.function?.argument[0].valueData?.toLowerCase()
 
+
+
+
+
+
         }}{{modelValue?.function?.argument[0].valueData && modelValue?.value?.valueData > 1 ? "s" : "" }}
       </div>
     </div>
@@ -45,7 +56,7 @@
         height="14"
         icon="arrow_right_small"
       ></NodeIcon>
-      <div class="ml10 inSet-item" v-for="concept in modelValue?.isConcept">{{ concept?.name }}{{ "," }}</div>
+      <div class="ml10 inSet-item hover:underline" @click="viewEntity(set)" v-for="concept in modelValue?.isConcept">{{ concept?.name }}{{ "," }}</div>
     </div>
   </div>
 </template>
@@ -72,6 +83,10 @@ export default defineComponent({
         default:
           return comparison;
       }
+    },
+    viewEntity(entity: any): void {
+      const url = `https://dev.endhealth.co.uk/viewer/#/concept/${encodeURIComponent(entity['@id'])}`;
+      window.open(url, "_blank").focus();
     }
   }
 });

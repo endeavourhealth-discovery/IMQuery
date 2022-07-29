@@ -1,20 +1,42 @@
 <template>
-  <div :class="'query-builder'">
+  <div :class="'query-builder '">
     <!-- header   -->
-    <div class="w-full flex space-x-10 text-3xl  font-bold">
+    <div class="w-full flex space-x-10 text-3xl mb-3 rounded-md font-bold">
       <template v-for="tab in tabs" :key="tab.name">
         <div
           v-if="tab.visible"
           @click="activeTab = tab.name"
-          :class="'transition duration-500 ease-in-out cursor-pointer' + [activeTab == tab.name ? ' text-black' : ' text-gray-500 ']"
+          :class="'transition duration-500 ease-in-out cursor-pointer  pb-2 ' + [activeTab == tab.name ? ' text-black ' : ' text-gray-500']"
         >
           {{ tab.name }}
         </div>
       </template>
     </div>
+    <div class="w-full flex space-x-10 text-xl mb-6 rounded-md font-bold border-b-2 border-b--gray-700">
+      <template v-for="tab in searchTabs" :key="tab.name">
+        <div
+          v-if="tab.visible"
+          @click="searchActiveTab = tab.name"
+          :class="
+            'transition duration-500 ease-in-out cursor-pointer border-b-2  pb-3 relative top-1 ' +
+              [searchActiveTab == tab.name ? ' text-gray-900 border-b-blue-600 ' : ' text-gray-500 border-b-0']
+          "
+        >
+          {{ tab.name }}
+        </div>
+      </template>
+    </div>
+
     <!-- header   -->
-    <div v-if="activeTab == 'Search Results'">
-      <Suggestions v-if="searchResult?.results?.length > 0" :results="searchResult?.results" :isShown="true" pathFilter="im:Person" :showPreview="true" />
+    <div v-if="activeTab == 'Search Results'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
+      <Suggestions
+        v-if="searchResult?.results?.length > 0"
+        :results="getFilteredResults(searchResult)"
+        :isShown="true"
+        pathFilter="im:Person"
+        :showPreview="true"
+        :mainEntity="modelValue?.select?.entityType"
+      />
     </div>
   </div>
 </template>
@@ -54,6 +76,12 @@ export default defineComponent({
     }
   },
   methods: {
+    getFilteredResults(searchResult: any): any {
+      // console.log("searchResult", searchResult);
+      const resultKey = this.searchTabs.find(tab => tab.name == this.searchActiveTab).searchResultKey;
+      // console.log("resultKey", resultKey);
+      return searchResult[resultKey];
+    },
     updateActiveClause(value: any) {
       this.$emit("updateActiveClause", value);
     },
@@ -67,21 +95,49 @@ export default defineComponent({
       focus: false,
       searchData: {},
       showDetails: false,
-      activeTab: "Search Results",
-      tabs: [
+      searchActiveTab: "All",
+      searchTabs: [
         {
-          name: "Search Results",
-          icon: "search",
+          name: "All",
+          searchResultKey: "results",
           visible: true
         },
         {
+          name: "Existing Criteria",
+          searchResultKey: "existingClause",
+          visible: true
+        },
+        {
+          name: "Query based Criteria",
+          searchResultKey: "existingQuery",
+          visible: true
+        },
+        {
+          name: "Health Record Entry",
+          searchResultKey: "nodeShape",
+          visible: true
+        },
+        {
+          name: "Property",
+          searchResultKey: "property",
+          visible: true
+        }
+      ],
+      activeTab: "Search Results",
+      tabs: [
+        {
           name: "Browse",
-          icon: "pencil",
+          visible: true
+        },
+        {
+          name: "Search Results",
           visible: true
           // command: () => {
-          //   if (this.activeClausePath.length > 0) {
-          //     this.activeEditorTab = "Filter Criteria";
+          //   if (this.searchResult?.results?.length > 0) {
+          //     this.tabs[0].visible = true;
           //   } else {
+          //     this.tabs[0].visible = false;
+
           //     alert("Select a Filter Criteria in the Query to edit!");
           //   }
           // }

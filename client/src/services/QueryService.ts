@@ -26,22 +26,24 @@ export default class QueryService {
 
 
 
-  // public static async clauseAutoComplete(searchString: string): Promise<any> {
-  //   try {
+  public static async searchAll(searchString: string): Promise<any> {
+    try {
 
-  //     const queries = await this.searchQueries(searchString, 2);
-  //     console.log("queries", queries);
+      const searchIM = await this.searchIM(searchString, 10);
+      console.log("searchIM", searchIM);
 
-  //     let clauses = await this.searchClauses(searchString, 2);//.then(res => res.data);
-  //     console.log("clauses", clauses);
+      let clauses = await this.searchClauses(searchString, 10);
+      console.log("clauses", clauses);
+
+      const allResults = [...searchIM.data, ...clauses]
 
 
-  //     return {} as any;
-  //   } catch (error) {
-  //     return {} as any;
-  //   }
+      return allResults;
+    } catch (error) {
+      return {} as any;
+    }
 
-  // }
+  }
 
 
 
@@ -98,6 +100,25 @@ export default class QueryService {
       return null;
     }
   }
+
+  public static async searchIM(searchString: any, limit: number): Promise<AxiosResponse<any>> {
+    try {
+      const _requestBody = {
+        termFilter: searchString,
+        statusFilter: [],
+        typeFilter: ["http://endhealth.info/im#Query", "http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class", "http://endhealth.info/im#dataModelProperty", "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"],
+        schemeFilter: [],
+        sortBy: 0,
+        page: 1,
+        size: limit
+      };
+      return await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody);
+    } catch (error) {
+      console.log("error in advanced search:" + error);
+      return null;
+    }
+  }
+
 
 
 
