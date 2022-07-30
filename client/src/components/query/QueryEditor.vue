@@ -68,7 +68,7 @@
     </div>
 
     <div class="w-full ml-[90px]">
-      <QueryBuilder :modelValue="modelValue"></QueryBuilder>
+      <QueryBuilder :modelValue="modelValue" @updateActiveClause="updateActiveClause"></QueryBuilder>
     </div>
   </div>
 </template>
@@ -83,6 +83,7 @@ import QueryDefinition from "@/components/query/QueryDefinition.vue";
 import IMDefinition from "@/components/query/IMDefinition.vue";
 import Criteria from "@/components/query/Criteria.vue";
 import _ from "lodash";
+import { nextTick } from "vue";
 
 import InputDescription from "@/components/general/InputDescription.vue";
 import QueryBuilder from "@/components/query/QueryBuilder.vue";
@@ -104,7 +105,7 @@ export default defineComponent({
       searchString: "",
       activeViewerTab: "Query Definition",
       activeEditorTab: "Search",
-      activeClausePath: "",
+      activeClausePath: null,
       clauseDefinition: {},
       editorTabs: [
         {
@@ -167,7 +168,6 @@ export default defineComponent({
   },
   props: ["modelValue", "stopEditing"],
   emits: ["stopEditing"],
-
   methods: {
     nextQueryCategory(): void {
       this.$store.commit("nextQueryCategory");
@@ -176,10 +176,21 @@ export default defineComponent({
       this.$store.commit("previousQueryCategory");
     },
     updateActiveClause(payload: any): void {
-      console.log("payload", payload);
+      console.log("updateActiveClause payload:", payload);
       // this.tabs[1].visible = true;
+      if (payload.action == "new") {
+        alert("new");
+        this.$store.commit("updateActiveClause", payload);
+        this.activeClausePath = this.$store.state.activeClausePath; //match[0]"; //###todo: replace with path from sugestion
+        // this.activeClausePath = "select.match[0]"; //###todo: replace with path from sugestion
+        this.activeViewerTab = "Filter Criteria";
 
-      if (payload.action == "create") {
+        nextTick(() => {
+          this.activeViewerTab = "Filter Criteria";
+        });
+      } else if (payload.action == "delete") {
+        this.$store.commit("updateActiveClausePath", payload);
+      } else if (payload.action == "create") {
         this.$store.commit("createClause", payload);
         this.activeClausePath = payload.path + `.[${payload.index}]`;
         this.clauseDefinition = _.get(this.modelValue, payload.path + `.[${payload.index}]`);

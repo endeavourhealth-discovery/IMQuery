@@ -190,7 +190,8 @@ export default defineComponent({
         : "";
     },
     onAdd(paths: string[]): void {
-      this.$emit("updateActiveClause", { action: "new", data: this.getClause(paths) });
+      // this.$store.commit("updateActiveClause", { action: "new", path: this.path, data: this.getClause(paths) });
+      this.$emit("updateActiveClause", { action: "new", path: this.path, data: this.getClause(paths) });
     },
     getClause(path: any): any {
       if (!path || path?.length == 0) {
@@ -222,8 +223,7 @@ export default defineComponent({
         "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87",
         entityType: this.isEntity(this.result) ? this.result : entity,
         pathTo: newPaths,
-        property: this.isEntity(this.result) ? null : _.cloneDeep([prop]),
-        displayText: ""
+        property: this.isEntity(this.result) ? [] : _.cloneDeep([prop]),
       };
       console.log("newClause", newClause);
       return newClause;
@@ -303,7 +303,7 @@ export default defineComponent({
       // const entry = ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class"];
       // const property = ["http://www.w3.org/ns/shacl#NodeShape", "http://endhealth.info/im#dataModelProperty"];
       // const query = ["http://endhealth.info/im#Query"];
-      console.log("entity", entity);
+      // console.log("entity", entity);
 
       if (QueryUtils.isEntity(entity)) {
         return "Health Record Entry";

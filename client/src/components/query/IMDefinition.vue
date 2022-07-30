@@ -42,9 +42,20 @@ export default defineComponent({
   },
   data() {
     return {
-      searchString: "",
-      definition: _.get(this.data, this.path)
+      searchString: ""
+      // definition: _.get(this.data, this.path)
     };
+  },
+  watch: {
+    // data() {
+    //   this.definition = _.get(this.data, this.path);
+    // },
+    // modelValue() {
+    //   this.definition = _.get(this.data, this.path);
+    // }
+    // path() {
+    //   this.definition = _.get(this.data, this.path);
+    // }
   }
 });
 </script>

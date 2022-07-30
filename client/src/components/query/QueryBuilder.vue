@@ -36,6 +36,7 @@
         pathFilter="im:Person"
         :showPreview="true"
         :mainEntity="modelValue?.select?.entityType"
+        @updateActiveClause="updateActiveClause"
       />
     </div>
   </div>
@@ -50,7 +51,8 @@ import HeroIcon from "@/components/general/HeroIcon.vue";
 export default defineComponent({
   name: "QueryBuilder",
   props: ["mainEntity", "searchResults", "searchString", "target", "modelValue"],
-  emits: ["update:modelValue"],
+  emits: ["openItem", "updateActiveClause"],
+
   components: {
     Suggestions,
     HeroIcon
@@ -76,6 +78,9 @@ export default defineComponent({
     }
   },
   methods: {
+    updateActiveClause(value: any) {
+      this.$emit("updateActiveClause", value);
+    },
     getFilteredResults(searchResult: any): any {
       // console.log("searchResult", searchResult);
       const resultKey = this.searchTabs.find(tab => tab.name == this.searchActiveTab).searchResultKey;

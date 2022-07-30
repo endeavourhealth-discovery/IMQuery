@@ -199,8 +199,11 @@ export default defineComponent({
     };
   },
   watch: {
-    modelValue(newValue) {
-      this.definition = newValue;
+    modelValue() {
+      this.definition = this.modelValue ? this.modelValue : _.get(this.data, this.path);
+    },
+    path() {
+      this.definition = this.modelValue ? this.modelValue : _.get(this.data, this.path);
     }
   }
 });

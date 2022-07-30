@@ -32,6 +32,7 @@
         :showDetails="showDetails"
         icon="search"
         :path="path"
+        :parentPath="parentPath"
         :title="'is ' + [entity?.notExist ? 'not ' : ''] + 'part of the results of the search ' + entity?.entityInSet[0].name"
         :definition="entity"
         :allowExpansion="true"
@@ -45,6 +46,7 @@
         :showDetails="showDetails"
         :data="data"
         :path="path"
+        :parentPath="parentPath"
         icon="document_text"
         :title="entity.displayText"
         :definition="entity"
@@ -54,11 +56,12 @@
 
       <NodeCard
         v-else
+        :startFocussed="true"
         @updateActiveClause="updateActiveClause"
         :showDetails="showDetails"
-        icon="question_mark_circle"
-        title="Undefined Criteria"
         :definition="entity"
+        :path="path"
+        :allowExpansion="true"
       >
       </NodeCard>
     </template>
@@ -116,7 +119,7 @@
             @updateActiveClause="updateActiveClause"
             :showDetails="showDetails"
             :object="data"
-            :path="`${path}.${child?.path}`"
+            :path="`${path}${parseText(child?.path)}`"
             :edit="edit"
             template="leafEntity"
           >
@@ -125,7 +128,6 @@
         <!-- /Leaf Child  -->
       </div>
     </template>
-
     <!--  /Clause  -->
 
     <!-- Child Nodes -->
@@ -162,6 +164,17 @@ export default defineComponent({
     "showDetails"
   ],
   methods: {
+    parseText(text: any): string {
+      // console.log("text", text);
+      if (typeof text == "number") {
+        text = text.toString();
+      }
+      if (text.startsWith("and") || text.startsWith("or") || text.startsWith("property") || text.startsWith("orProperty")) {
+        return text;
+      } else {
+        return `[${text}]`;
+      }
+    },
     showLineV(index: number, indexCount: number, childIndex: number, childIndexCount: number): boolean {
       if (childIndexCount > 0 && childIndex < childIndexCount - 1) {
         return true;

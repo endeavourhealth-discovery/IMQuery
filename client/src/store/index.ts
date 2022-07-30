@@ -157,9 +157,44 @@ export default createStore({
       state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload;
       state.activeClausePath = payload;
     },
+    updateActiveClause(state, payload) {
+      console.log("state update updateActiveClause", payload)
+      const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+      let newQuery = _.cloneDeep(activeQuery);
+      const currentFile = state.openFiles.find(file => file.iri == state.activeQueryId);
+      if (payload.action == "new") {
+        console.log("activeClausePath", currentFile.activeClausePath)
+        payload.data.displayText = currentFile.searchResults.find(result => result.activeClausePath == currentFile.activeClausePath).searchString;
+        _.set(newQuery, currentFile.activeClausePath, payload.data);
+        state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+      }
+
+
+
+
+    },
     updateActiveClausePath(state, payload) {
-      console.log("click")
+      console.log("click", payload)
       switch (payload.action) {
+
+        case "delete":
+          const activeQuery1 = state.queryBuilder.dataSet.get(state.activeQueryId);
+          const cloneQuery1 = _.cloneDeep(activeQuery1);
+          // _.set(cloneQuery1, payload.path, null);
+          let clause = _.get(cloneQuery1, payload.path)
+          clause.splice(payload.index, 1)
+          if (clause.length == 0) {
+            _.set(cloneQuery1, payload.path, null);
+
+          } else {
+            _.set(cloneQuery1, payload.path, clause);
+
+          }
+          state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery1);
+          // console.log("clause splice", clause)
+          //todo if array is empty -> delete array.
+
+          break;
         case "view":
           state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload.path;
           state.activeClausePath = payload.path;
@@ -367,7 +402,11 @@ export default createStore({
               "name": "Person",
               "@id": "http://endhealth.info/im#Person"
             },
-            "match": {}
+            "match": [
+              {
+                "@id": `urn:uuid:${v4()}`,
+              }
+            ]
           }
         };
       }

@@ -9,6 +9,7 @@
           @blur="onBlur"
           @input="onInput($event)"
           :value="modelValue"
+          placeholder="Type to create or find criteria"
           class="node-card-textarea outline-none ml-4 w-full overflow-hidden resize-none text-gray-900 font-semibold"
         ></textarea>
       </template>
@@ -80,18 +81,18 @@ export default defineComponent({
     HeroIcon
   },
   mounted() {
-    this.$nextTick(() => {
-      // const theElement = this.$refs.myRef
-      const theElement = this.$refs["textarea"] as any;
-      theElement.focus();
-      // console.log("theElement", theElement);
-
-      // setTimeout(() => {
-      //   theElement.focus();
-      // }, 500);
-    });
+    this.focusTextArea();
   },
   methods: {
+    focusTextArea() {
+      this.$nextTick(() => {
+        const theElement = this.$refs["textarea"] as any;
+        theElement.focus();
+        // setTimeout(() => {
+        //   theElement.focus();
+        // }, 500);
+      });
+    },
     updateActiveClause(value: any) {
       this.$emit("updateActiveClause", value);
     },

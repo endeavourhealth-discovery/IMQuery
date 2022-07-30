@@ -1,8 +1,8 @@
 <template>
   <div class="w-full node-section flex-col">
-    <div :class="'w-full node-card group'">
+    <div :class="'w-full node-card group '">
       <div :class="'w-full node-card-header  ' + [expanded ? ' #expanded' : '']" @click="onClick">
-        <NodeIcon :class="`node-icon`" strokewidth="2" width="20" height="20" :icon="icon" />
+        <NodeIcon :class="`node-icon `" strokewidth="2" width="20" height="20" :icon="icon || 'question_mark_circle'" />
 
         <SearchInput
           class="w-full"
@@ -46,7 +46,7 @@
         </div> -->
           <div
             @click="onEdit()"
-            class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-gray-800 px-2  hover:bg-gray-200 dark:text-white mt-10"
+            class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-gray-800 pr-2  hover:bg-gray-200 dark:text-white mt-10"
           >
             <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="eye" /> View Details
           </div>
@@ -67,16 +67,11 @@
         </div>
       </div>
     </div>
-    <div v-if="allowExpansion" class="node-add ml-4 flex #border-t-gray-300 #border-t-2 pt-2 ">
-      <!-- <div
-        v-if="!added"
-        @click="onAdd()"
-        class="node-add flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
-      >
-        <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="plus" />
-        <div>New</div>
-      </div> -->
-      <NodeIcon class="mt-1 text-blue-700 mr-2" strokewidth="3" width="20" height="24" icon="plus" />
+    <div v-if="allowExpansion" class="node-add flex #border-t-gray-300 #border-t-2 pt-2 relative ">
+      <!-- <div class="new-circle absolute -left-[42px] bg-white rounded-full"><div class="circle "></div></div> -->
+
+      <!-- <div class="new-circle border-t-2  border-t-gray-700 w-6 absolute -left-10"></div> -->
+      <NodeIcon class="ml-4 mt-1 text-blue-700 mr-2" strokewidth="3" width="20" height="24" icon="plus" />
 
       <!-- ###todo replace with SearchInput and add this as a variant -->
       <SearchInput
@@ -92,6 +87,7 @@
       </SearchInput>
     </div>
     <div
+      v-if="allowExpansion"
       @click="true"
       class="node-add invisible flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
     >
@@ -111,7 +107,7 @@ import SearchInput from "@/components/query/SearchInput.vue";
 
 export default defineComponent({
   name: "NodeCard",
-  props: ["icon", "title", "definition", "allowExpansion", "data", "path", "showDetails"],
+  props: ["icon", "title", "definition", "allowExpansion", "data", "path", "parentPath", "showDetails", "startFocussed"],
   emits: ["updateActiveClause"],
   components: { NodeIcon, IMDefinition, SearchInput },
   data() {
@@ -121,7 +117,7 @@ export default defineComponent({
       tabs: [{ label: "Prettified" }, { label: "Raw JSON" }],
       expanded: false,
       added: false,
-      showTextArea: false
+      showTextArea: this.startFocussed
     };
   },
   methods: {
@@ -130,7 +126,7 @@ export default defineComponent({
     //   this.showTextArea = true;
     // },
     onBlur(event: any): void {
-      this.showTextArea = false;
+      this.showTextArea = this.startFocussed ? true : false;
     },
     onInput(event: any): void {
       this.$store.commit("updateSearchString", event.target.value);
@@ -174,7 +170,22 @@ export default defineComponent({
       this.$emit("updateActiveClause", { action: "view", path: this.path, index: 0 });
     },
     onDelete() {
-      this.$emit("updateActiveClause", { action: "delete", path: this.path, index: 0 });
+      // console.log("delete parent", this.parentPath);
+
+      const currentPath = this.path; //curent path
+      const pathArray = currentPath.split(".");
+      const lastItem = pathArray[pathArray.length - 1];
+      const currentIndex = lastItem.match(/(?<=\[).+?(?=\])/)[0];
+      const newIndex = parseInt(currentIndex) + 1;
+
+      const newLastItem = lastItem.replace(`[${currentIndex}]`, "");
+      // const newLastItem = lastItem.replace(/\[\d+\]/, ``);
+      pathArray[pathArray.length - 1] = newLastItem;
+      const newPath = pathArray.join(".");
+      // console.log("newPath", newPath);
+      // console.log("newLastItem", newIndex);
+
+      this.$emit("updateActiveClause", { action: "delete", path: newPath, index: parseInt(currentIndex) });
     },
     onAdd(data?: any) {
       //improves animation

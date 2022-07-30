@@ -25,16 +25,20 @@ export default class QueryService {
   }
 
 
-
   public static async searchAll(searchString: string): Promise<any> {
     try {
 
       const searchIM = await this.searchIM(searchString, 10);
       console.log("searchIM", searchIM);
 
-      let clauses = await this.searchClauses(searchString, 10);
+      let clauses: any[] = await this.searchClauses(searchString, 10);
       console.log("clauses", clauses);
-
+      //removes duplicate labels
+      clauses = clauses.filter((value, index, self) =>
+        index === self.findIndex((t) => (
+          t.name === value.name
+        ))
+      )
       const allResults = [...searchIM.data, ...clauses]
 
 
