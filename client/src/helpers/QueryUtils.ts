@@ -8,12 +8,24 @@ export default class QueryUtils {
 
     public static debug = false;
 
+    public static splitPath(path: string): any {
+        const currentPath = path; //curent path
+        const pathArray = currentPath.split(".");
+        const lastItem = pathArray[pathArray.length - 1];
+        const currentIndex = lastItem.match(/(?<=\[).+?(?=\])/)[0];
+        // const newIndex = parseInt(currentIndex) + 1;
+        const newLastItem = lastItem.replace(`[${currentIndex}]`, "");
+        pathArray[pathArray.length - 1] = newLastItem;
+        const parentPath = pathArray.join(".");
+        return { path: parentPath, index: currentIndex };
+    }
+
 
     public static isQuery(entity: any): boolean {
         const entityType = entity["entityType"];
         let iris = ["im:Query"];
         iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
-        
+
         if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
             return true;
         } else {
@@ -24,7 +36,7 @@ export default class QueryUtils {
         const entityType = entity["entityType"];
         let iris = ["im:MatchClause"];
         iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
-        
+
         if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
             return true;
         } else {
@@ -35,7 +47,7 @@ export default class QueryUtils {
         const entityType = entity["entityType"];
         let iris = ["sh:NodeShape", "rdfs:Class"];
         iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
-        
+
         if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
             return true;
         } else {
@@ -46,7 +58,7 @@ export default class QueryUtils {
         const entityType = entity["entityType"];
         let iris = ["owl:ObjectProperty", "im:dataModelProperty", "im:dataModelObjectProperty", "im:dataModelDataProperty", "rdf:Property"];
         iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
-        
+
         if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
             return true;
         } else {

@@ -83,7 +83,8 @@ import InputNumber from "primevue/inputnumber";
 
 //other components
 import VWave from 'v-wave'
-
+import mitt from 'mitt';
+// const mitt = require('mitt')
 
 //aws
 import { Amplify, Auth } from "aws-amplify";
@@ -91,6 +92,7 @@ import awsconfig from "./aws-exports";
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
+
 
 const app = createApp(App)
   .use(store)
@@ -153,5 +155,8 @@ const app = createApp(App)
   .component("Calendar", Calendar)
   .component("InputNumber", InputNumber)
   .component("InputSwitch", InputSwitch);
+
+const emitter = mitt();
+app.config.globalProperties.emitter = emitter;
 
 app.mount("#app");

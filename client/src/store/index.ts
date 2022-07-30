@@ -43,6 +43,9 @@ export default createStore({
     activeFileIri: [] as any[],
     activeQueryId: "",
     activeClausePath: "",
+    activePropertyPath: "",
+    targetType: "",
+    targetAction: "",
     // activeClausePath: {},
     openFiles: [] as any[],
     userFiles: [] as any[],
@@ -113,6 +116,17 @@ export default createStore({
 
   },
   mutations: {
+    updateTarget(state, payload) {
+      console.log("updateTarget", payload);
+      state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload?.clausePath;
+      state.openFiles.find(file => file.iri == state.activeQueryId).activePropertyPath = payload?.propertyPath;
+      state.openFiles.find(file => file.iri == state.activeQueryId).targetType = payload?.targetType;
+      state.openFiles.find(file => file.iri == state.activeQueryId).targetAction = payload?.targetAction;
+      state.activeClausePath = payload?.clausePath;
+      state.activePropertyPath = payload?.propertyPath;
+      state.targetType = payload?.targetType;
+      state.targetAction = payload?.targetAction;
+    },
     updateSearchString(state, payload) {
       console.log("updateSearchString", payload);
 
@@ -170,27 +184,42 @@ export default createStore({
         }
 
 
-
+        let newItem;
         if (payload.dataType = "property") {
           console.log("###prop")
-          const currentData = _.get(newQuery, currentFile.activeClausePath);
-          const property =
+          newItem =
             (payload.data?.property && payload.data?.property.length > 0) || (payload.data?.pathTo)
               ? payload.data
               : {
                 "@id": "urn:uuid:daaa2db1-a973-40d7-a573-65178c5b7c7c",
                 "property": [payload.data],
               };
-          _.set(newQuery, currentFile.activeClausePath, property);
+        }
+        // else if (payload.dataType = "clause") {
+        //   _.set(newQuery, currentFile.activeClausePath, payload.data);
+        //   state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+        // }
+
+        if (state.targetAction == "insertNew") {
+
+          let { path, index } = QueryUtils.splitPath(state.activeClausePath);
+          console.log("path index", path, index);
+
+          let parentArray = _.get(newQuery, path);
+          parentArray.splice(index + 1, 0, newItem);
           state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
 
 
-        } else if (payload.dataType = "clause") {
-          _.set(newQuery, currentFile.activeClausePath, payload.data);
-          state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+          const newIndex = parseInt(index) + 1;
+          state.activeClausePath = path + `[${newIndex}]`;
 
+        } else if (state.targetAction = "new") {
+          _.set(newQuery, currentFile.activeClausePath, newItem);
+          state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
         }
 
+
+        // reset
 
 
       }
@@ -368,9 +397,20 @@ export default createStore({
 
       const activeClausePath = payload.path;
 
+      // const activeFile = state.openFiles.find(file => file.iri == state.activeQueryId);
+
       //removes previous results for active path
+      // ###todo (optional): remove only results if 
+      // (activeClausePath OR activePropertyPath) && targetAction are the same 
+      // targetType determines if clausePath or propertyPath is used i.e. depending on which is being edited
       let newResults = _.cloneDeep(state.openFiles.find(file => file.iri == state.activeQueryId).searchResults)
-      newResults = newResults.filter(result => result.activeClausePath != activeClausePath);
+      newResults = newResults.filter(result => {
+        if (result.activeClausePath == activeClausePath) { // see todo above
+          return false;
+        } else {
+          return true;
+        }
+      });
       state.openFiles.find(file => file.iri == state.activeQueryId).searchResults = newResults;
 
 
@@ -454,6 +494,9 @@ export default createStore({
       const file = {
         iri: data["@id"],
         activeClausePath: "select.match[0]",
+        activePropertyPath: "",
+        targetType: "",
+        targetAction: "",
         isVisible: true,
         state: "view",
         data: data,

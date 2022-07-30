@@ -21,7 +21,7 @@
             @focus="onFocus"
             @blur="onBlur"
             class="outline-none pb-4 placeholder-gray-500 text-blue-700 font-bold text-2xl w-full max-h-[30px] border-b-2 border-b-transparent focus:border-b-blue-700"
-            placeholder="Type to add"
+            :placeholder="label"
           />
         </div>
       </template>
@@ -71,6 +71,7 @@ import SearchService from "@/services/SearchService";
 import Suggestions from "@/components/search/Suggestions.vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
 import QueryService from "../../services/QueryService";
+import _ from "lodash";
 
 export default defineComponent({
   name: "SearchInput",
@@ -82,12 +83,12 @@ export default defineComponent({
   },
   mounted() {
     this.focusTextArea();
+
   },
   methods: {
     focusTextArea() {
       this.$nextTick(() => {
-        const theElement = this.$refs["textarea"] as any;
-        theElement.focus();
+        (this.$refs["textarea"] as any).focus();
         // setTimeout(() => {
         //   theElement.focus();
         // }, 500);
@@ -101,18 +102,23 @@ export default defineComponent({
       this.$emit("update:modelValue", event.target.value);
     },
     async search(searchString: string): Promise<any> {
-      await QueryService.searchAll(searchString)
-        // await SearchService.searchAll(searchString)
-        .then((res: any) => {
-          console.log("fetched OSS search results", res);
-          this.searchData = res;
-          this.$store.commit("setSearchData", { searchString: searchString, data: res, path: this.path });
-          return res;
-        })
-        .catch((err: any) => {
-          console.log("Could not load search results", err);
-          return null;
-        });
+      //###todo: instead of debounce only start searching after the user stops typing for >1s (or so) see https://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
+      const search = _.debounce(() => {
+        QueryService.searchAll(searchString)
+          // await SearchService.searchAll(searchString)
+          .then((res: any) => {
+            console.log("fetched OSS search results", res);
+            this.searchData = res;
+            this.$store.commit("setSearchData", { searchString: searchString, data: res, path: this.path });
+            return res;
+          })
+          .catch((err: any) => {
+            console.log("Could not load search results", err);
+            return null;
+          });
+      }, 500);
+
+      search();
     },
     onFocus(event: any): void {
       this.focus = true;
@@ -123,11 +129,6 @@ export default defineComponent({
       // (this.$refs["overlay-suggestions"] as any).toggle(event); //hide();
       this.$emit("blur");
     }
-    //  onKeyDown(event: any): void {
-    //createClause with name
-    // if (event.key === "Enter") {
-    //   this.updateActiveClause(this.searchString);
-    // }
   },
   data() {
     return {

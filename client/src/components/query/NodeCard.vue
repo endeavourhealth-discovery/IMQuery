@@ -63,37 +63,45 @@
             >
               <NodeIcon class="mx-3" strokewidth="2" width="20" height="24" icon="document_duplicate" /> Copy
             </div>
+
+            <div
+              @click="true"
+              class="rounded-lg  invisible group-hover:visible flex items-center text-2xl font-semibold text-purple-700  pr-3  hover:bg-purple-100 dark:text-white  mt-10"
+            >
+              <NodeIcon class="mx-3" strokewidth="2" width="20" height="24" icon="clipboard_copy" /> Paste
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="allowExpansion" class="node-add flex #border-t-gray-300 #border-t-2 pt-2 relative ">
+    <div v-if="allowExpansion" :class="'flex #border-t-gray-300 #border-t-2 relative ml-1 mb-4' + [searchString == '' ? ' node-add' : ' ']">
       <!-- <div class="new-circle absolute -left-[42px] bg-white rounded-full"><div class="circle "></div></div> -->
-
       <!-- <div class="new-circle border-t-2  border-t-gray-700 w-6 absolute -left-10"></div> -->
-      <NodeIcon class="ml-4 mt-1 text-blue-700 mr-2" strokewidth="3" width="20" height="24" icon="plus" />
-
-      <!-- ###todo replace with SearchInput and add this as a variant -->
+      <NodeIcon class="ml-4  text-blue-700 mr-2" strokewidth="3" width="20" height="24" icon="plus" />
       <SearchInput
-        class="node-add mt-2 ml-4"
-        @close="onBlur"
+        @click="updateTarget('clause', 'insertNew')"
+        class="ml-4"
+        @blur="onBlur"
         :maxResults="2"
         :allow="['preview', 'create', 'insert', '']"
-        label="Property or Health Record Entry"
+        label="New (Type Here)"
         v-model="searchString"
         :path="path"
         type="underline"
       >
       </SearchInput>
+      <div v-if="searchString != ''" @click="searchString = ''">
+        <NodeIcon class="ml-4 mt-1 text-red-500 hover:text-red-800 mr-2" strokewidth="3" width="20" height="24" icon="x" />
+      </div>
     </div>
-    <div
+    <!-- <div
       v-if="allowExpansion"
       @click="true"
       class="node-add invisible flex justify-center #w-full max-w-[100px] rounded-md text-2xl font-semibold text-blue-700 #bg-blue-600 hover:bg-white  transition duration-500 ease-in-out dark:text-white py-2 mb-6 cursor-pointer  "
     >
       <NodeIcon class="mr-2" strokewidth="2" width="20" height="24" icon="document_add" />
       <div>Paste</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -117,8 +125,15 @@ export default defineComponent({
       tabs: [{ label: "Prettified" }, { label: "Raw JSON" }],
       expanded: false,
       added: false,
-      showTextArea: this.startFocussed
+      showTextArea: this.startFocussed,
+      searchString: ""
     };
+  },
+  mounted() {
+    this.emitter.on("reset-searchinput", () => {
+      // alert("reset");
+      this.searchString = "";
+    });
   },
   methods: {
     // showTextArea(): void {
@@ -151,10 +166,22 @@ export default defineComponent({
     },
     onClick() {
       this.expanded = !this.expanded;
-      console.log(this.path);
-      console.log(this.definition);
+      // console.log(this.path);
+      // console.log(this.definition);
       this.showTextArea = true;
-      this.$store.commit("setActiveClausePath", this.path);
+      // this.$store.commit("setActiveClausePath", this.path);
+      this.$store.commit("updateTarget", { clausePath: this.path, targetType: "clause", targetAction: "new" });
+      // this.$store.commit("updateTarget", { clausePath: this.path, targetType: targetType, targetAction: targetAction });
+    },
+    updateTarget(targetType: string, targetAction: string) {
+      // console.log(this.path);
+      // console.log(this.definition);
+
+      this.$store.commit("updateTarget", {
+        clausePath: this.path,
+        targetType: targetType,
+        targetAction: targetAction
+      });
     },
     onCopy() {
       navigator.clipboard.writeText(JSON.stringify(this.definition, null, 2)).then(

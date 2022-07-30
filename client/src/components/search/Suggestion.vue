@@ -28,7 +28,13 @@
       <!-- Paths  -->
       <div v-if="pathFilter" class="#result-actions #invisible #group-hover:visible  ">
         <div v-if="pathData.length" class="mt-2">
-          <div v-for="path in pathData" :key="path" @mouseenter="onPreview(path)" class="flex hover:bg-blue-100 pl-2 relative -left-2 rounded-md ">
+          <div
+            v-for="path in pathData"
+            :key="path"
+            @mouseenter="onPreview(path)"
+            @click="onCreate(path)"
+            class="flex hover:bg-blue-100 pl-2 relative -left-2 rounded-md "
+          >
             <div class="flex w-full  py-1">
               <div v-for="(pathItem, index) in path" :key="pathItem" class="group flex-wrap">
                 <div :class="'flex  text-xl #hover:underline' + [index < path.length - 1 ? ' text-gray-600 font-semibold' : 'text-black font-bold']">
@@ -49,7 +55,6 @@
               </div>
             </div>
             <div
-              @click="onCreate(path)"
               class="#bg-blue-600 group-hover:visible invisible text-blue-600 inline-flex  rounded-full relative  ml-2 h-9 pl-1 pr-4 pt-1  text-xl font-semibold"
             >
               <HeroIcon class="mx-2 mt-1" strokewidth="3" width="12" height="12" icon="plus" />
@@ -194,6 +199,8 @@ export default defineComponent({
         : "";
     },
     onAddClause(): void {
+      this.emitter.emit("reset-searchinput", true);
+
       const data = this.result?.matchClause;
       data.displayText = this.result?.name;
       this.$emit("updateActiveClause", { action: "new", path: null, data: data });
@@ -203,6 +210,8 @@ export default defineComponent({
       // this.$emit("updateActiveClause", { action: "new", path: "", data: clause });
     },
     onCreate(paths?: string[], notExist?: boolean): void {
+      this.emitter.emit("reset-searchinput", true);
+
       console.log("paths", paths);
       console.log("result", this.result);
       // this.$store.commit("updateActiveClause", { action: "new", path: this.path, data: this.createClause(paths) });

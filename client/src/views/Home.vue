@@ -345,8 +345,8 @@
             </div>
             <!-- Main Data Type  -->
 
-            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity  w-full max-w-[700px]">
-              <div class="flex justify-between">
+            <div v-show="activeQueryCategory == 'mainEntity'" class="main-entity  w-full max-w-[700px] pl-10">
+              <div class="flex justify-between ">
                 <InputDescription class="max-w-[600px]" :description="inputMeta.mainEntity" />
                 <!-- <div class="flex justify-between space-x-4 pt-10  w-[400px] "> -->
                 <div class="inline-flex mt-3 pb-10 ml-10   space-x-10">
@@ -405,7 +405,7 @@
               />
             </div>
             <div v-show="activeQueryCategory == 'export'" class="definition viewer flex justify-center space-x-5 text-white">
-              <textarea class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 h-full max-h-[750px] min-w-[700px] text-black text-xl">{{ jsonDefinition }} </textarea>
+              <textarea  spellcheck=”false” class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 h-full max-h-[750px] min-w-[700px] text-black text-xl">{{ jsonDefinition }} </textarea>
             </div>
             <div v-show="activeQueryCategory == 'sql'" class="definition viewer flex justify-center space-x-5 text-white"></div>
 

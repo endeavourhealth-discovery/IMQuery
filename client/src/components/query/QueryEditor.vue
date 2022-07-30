@@ -10,13 +10,16 @@
           <div class=" mr-10 flex">
             <button
               v-if="activeViewerTab == 'Filter Criteria'"
-              class=" border-gray-500 w-full max-w-[60px] max-h-[40px]  px-4 py-2 mt-4  rounded-full text-2xl font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out"
+              class=" border border-blue-700 w-full max-w-[60px] max-h-[40px]  px-4 py-2 mt-4  rounded-full text-2xl font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out"
               label="Back"
               @click.prevent="activeViewerTab = 'Query Definition'"
             >
               {{ "Back" }}
             </button>
-            <InputDescription class="ml-10" :description="activeViewerTab == 'Query Definition' ? inputMeta.definition : inputMeta.filterCriteria" />
+            <InputDescription
+              class="ml-10 min-w-[300px]"
+              :description="activeViewerTab == 'Query Definition' ? inputMeta.definition : inputMeta.filterCriteria"
+            />
           </div>
           <div v-if="activeViewerTab == 'Query Definition'" class="inline-flex max-h-[70px] mt-3 pb-10  space-x-10">
             <button
@@ -55,7 +58,7 @@
             {{ clauseDefinition?.displayText }}
           </div> -->
           <IMDefinition
-          class="clause-definition"
+            class="clause-definition"
             type="clause"
             :data="modelValue"
             :path="activeClausePath"
@@ -154,12 +157,12 @@ export default defineComponent({
       ],
       inputMeta: {
         definition: {
-          title: "Define inclusion and exclusion criteria",
-          explanation: "Describe a criteria, property or health record ",
-          placeholder: "Search for a criteria, property or health record"
+          title: "Add or Create inclusion and exclusion criteria",
+          explanation: "Add existing createria or create one using existing queries, health records or properties",
+          placeholder: ""
         },
         filterCriteria: {
-          title: "Criteria",
+          title: "Edit Criteria Definition",
           explanation: "Define the criteria that your main data type must match in order to be filtered into your dataset",
           placeholder: ""
         }
@@ -176,10 +179,12 @@ export default defineComponent({
       this.$store.commit("previousQueryCategory");
     },
     updateActiveClause(payload: any): void {
-      console.log("updateActiveClause payload:", payload);
-      // this.tabs[1].visible = true;
-      if (payload.action == "new") {
-        alert("new");
+      console.log("#Query Editor updat ActiveClause payload:", payload);
+      if (payload.action == "insertNew") {
+        this.$store.commit("updateActiveClause", payload);
+        this.activeClausePath = this.$store.state.activeClausePath; //match[0]"; //###todo: replace with path from sugestion
+        this.activeViewerTab = "Filter Criteria";
+      } else if (payload.action == "new") {
         this.$store.commit("updateActiveClause", payload);
         this.activeClausePath = this.$store.state.activeClausePath; //match[0]"; //###todo: replace with path from sugestion
         // this.activeClausePath = "select.match[0]"; //###todo: replace with path from sugestion
