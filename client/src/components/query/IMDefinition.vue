@@ -6,8 +6,10 @@
         <!-- <div v-if="definition?.pathTo?.length == 0">
           <SearchInput v-model="searchString" @updateActiveClause="updateActiveClause"> </SearchInput>
         </div> -->
-        <TreeItem v-if="modelValue" type="linkedEntity" :modelValue="modelValue" :showDetails="showDetails"> </TreeItem>
-        <TreeItem v-else type="linkedEntity" :data="data" :path="path" :showDetails="showDetails"> </TreeItem>
+
+        <!-- <TreeItem v-if="modelValue" type="linkedEntity" :modelValue="modelValue"  :showDetails="showDetails"> </TreeItem>
+        <TreeItem v-else type="linkedEntity" :data="data" :path="path" :showDetails="showDetails"> </TreeItem> -->
+        <TreeItem type="linkedEntity" :modelValue="definition" :data="queryDefinition" :path="path" :showDetails="showDetails"> </TreeItem>
       </div>
     </div>
   </template>
@@ -43,21 +45,40 @@ export default defineComponent({
     TreeItem
     // SearchInput,
   },
+  mounted() {
+    this.emitter.on("update-imdefinition", () => {
+      this.setDefinition();
+    });
+  },
   data() {
     return {
       searchString: "",
-      definition: _.get(this.data, this.path)
+      definition: _.get(this.queryDefinition, this.path)
     };
   },
+  methods: {
+    setDefinition(): any {
+      // const query = this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
+      this.definition = _.get(this.queryDefinition, this.path);
+      // console.log("this defintion", this.definition);
+    }
+  },
   watch: {
-    data() {
-      this.definition = _.get(this.data, this.path);
+    modelValue() {
+      this.setDefinition();
     },
-    // modelValue() {
-    //   this.definition = _.get(this.data, this.path);
-    // }
     path() {
-      this.definition = _.get(this.data, this.path);
+      this.setDefinition();
+    }
+  },
+  computed: {
+    queryDefinition: {
+      get(): any {
+        return this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
+      },
+      set(value: any): void {
+        return;
+      }
     }
   }
 });
