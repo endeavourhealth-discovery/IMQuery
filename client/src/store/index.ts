@@ -164,8 +164,10 @@ export default createStore({
       const currentFile = state.openFiles.find(file => file.iri == state.activeQueryId);
       if (payload.action == "new") {
         // console.log("activeClausePath", currentFile.activeClausePath)
-        // console.log("display", payload.data.displayText)
-        if (payload.data.displayText == "") currentFile.searchResults.find(result => result.activeClausePath == currentFile.activeClausePath).searchString;
+        console.log("display", payload.data.displayText)
+        if (!payload.data.displayText || payload.data.displayText == "") {
+          payload.data.displayText = currentFile.searchResults.find(result => result.activeClausePath == currentFile.activeClausePath).searchString;
+        }
 
 
 
