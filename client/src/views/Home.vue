@@ -244,7 +244,7 @@
 
         <div v-show="activeTabName == 'Edit'" class="tab-content viewer ">
           <!-- Tabs  -->
-          <div class="flex py-5 justify-center items-center w-full">
+          <div class="flex py-5 justify-center items-center w-full border-b mb-6">
             <HorizontalNavPills class="nav" :items="openFiles" v-model="activeProfile" :closable="true" />
           </div>
 
@@ -405,7 +405,7 @@
               />
             </div>
             <div v-show="activeQueryCategory == 'export'" class="definition viewer flex justify-center space-x-5 text-white">
-              Show JSON representation here -> download
+              <textarea class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 h-full max-h-[750px] min-w-[700px] text-black text-xl">{{ jsonDefinition }} </textarea>
             </div>
             <div v-show="activeQueryCategory == 'sql'" class="definition viewer flex justify-center space-x-5 text-white"></div>
 
@@ -961,6 +961,15 @@ export default defineComponent({
     //   },
     //   set(value: any): void {}
     // },
+
+    jsonDefinition: {
+      get(): any {
+        return this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
+      },
+      set(value: any): void {
+        return;
+      }
+    },
     activeQueryCategory: {
       get(): any {
         return this.$store.state.activeQueryCategory;
@@ -1226,6 +1235,7 @@ export default defineComponent({
   margin-bottom: 150px;
   /* max-width: 300px; */
 }
+.json-textarea::-webkit-scrollbar,
 .main-container::-webkit-scrollbar {
   width: 10px;
 }
@@ -1234,8 +1244,10 @@ export default defineComponent({
   /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
 }
 
+.json-textarea::-webkit-scrollbar-thumb,
 .main-container::-webkit-scrollbar-thumb {
-  background-color: #f3f3f3;
+  background-color: gray;
+  border-radius: 10px;
   /* outline: 1px solid slategrey; */
 }
 

@@ -27,7 +27,7 @@
 
     <template v-else-if="template == 'leafEntity'">
       <NodeCard
-        v-if="hasKey(entity, 'entityInSet')"
+        v-if="hasKey(entity, 'entityInSet') || hasKey(entity, 'entityNotInSet')"
         @updateActiveClause="updateActiveClause"
         :showDetails="showDetails"
         icon="search"

@@ -29,7 +29,7 @@ export default class QueryService {
     try {
 
       const searchIM = await this.searchIM(searchString, 10);
-      console.log("searchIM", searchIM);
+      // console.log("searchIM", searchIM);
 
       let clauses: any[] = await this.searchClauses(searchString, 10);
       console.log("clauses", clauses);

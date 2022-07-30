@@ -11,7 +11,7 @@
   >
     <!-- Searchbox  -->
     <div class="flex items-center w-full h-full">
-      <HeroIcon class="rounded-full min-h-[34px] min-w-[34px] border-2 border-blue-700  text-blue-700 p-3  ml-3" icon="search" strokewidth="3" width="10" height="10" />
+      <HeroIcon class="rounded-full min-h-[34px] min-w-[34px] border-2 bg-blue-700  text-white p-3  ml-3" icon="search" strokewidth="3" width="10" height="10" />
       <input
         type="text"
         class="relative bg-transparent transition duration-500 ease-in-out w-full h-full px-4  font-medium rounded-md focus:outline-none"

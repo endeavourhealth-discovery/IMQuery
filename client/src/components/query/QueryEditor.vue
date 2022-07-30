@@ -44,18 +44,18 @@
 
         <!-- body  -->
         <QueryDefinition
-          v-if="activeViewerTab == 'Query Definition'"
+          v-show="activeViewerTab == 'Query Definition'"
           :modelValue="modelValue"
           :edit="edit"
           @stopEditing="stopEditing"
           @updateActiveClause="updateActiveClause"
         ></QueryDefinition>
-        <div v-if="activeViewerTab == 'Filter Criteria'">
+        <div v-show="activeViewerTab == 'Filter Criteria'">
           <!-- <div class="text-gray-900 text-2xl font-semibold ml-6 break-words w-full  mt-4 mb-4">
             {{ clauseDefinition?.displayText }}
           </div> -->
           <IMDefinition
-            class="clause-definition"
+          class="clause-definition"
             type="clause"
             :data="modelValue"
             :path="activeClausePath"

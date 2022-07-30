@@ -163,15 +163,35 @@ export default createStore({
       let newQuery = _.cloneDeep(activeQuery);
       const currentFile = state.openFiles.find(file => file.iri == state.activeQueryId);
       if (payload.action == "new") {
-        console.log("activeClausePath", currentFile.activeClausePath)
-        payload.data.displayText = currentFile.searchResults.find(result => result.activeClausePath == currentFile.activeClausePath).searchString;
-        _.set(newQuery, currentFile.activeClausePath, payload.data);
-        state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+        // console.log("activeClausePath", currentFile.activeClausePath)
+        // console.log("display", payload.data.displayText)
+        if (payload.data.displayText == "") currentFile.searchResults.find(result => result.activeClausePath == currentFile.activeClausePath).searchString;
+
+
+
+        if (payload.dataType = "property") {
+          console.log("###prop")
+          const currentData = _.get(newQuery, currentFile.activeClausePath);
+          const property =
+            (payload.data?.property && payload.data?.property.length > 0) || (payload.data?.pathTo)
+              ? payload.data
+              : {
+                "@id": "urn:uuid:daaa2db1-a973-40d7-a573-65178c5b7c7c",
+                "property": [payload.data],
+              };
+          _.set(newQuery, currentFile.activeClausePath, property);
+          state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+
+
+        } else if (payload.dataType = "clause") {
+          _.set(newQuery, currentFile.activeClausePath, payload.data);
+          state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+
+        }
+
+
+
       }
-
-
-
-
     },
     updateActiveClausePath(state, payload) {
       console.log("click", payload)
@@ -342,7 +362,7 @@ export default createStore({
 
     },
     setSearchData(state, payload) {
-      console.log("setSearchData", payload,)
+      // console.log("setSearchData", payload,)
 
       const activeClausePath = payload.path;
 

@@ -49,7 +49,7 @@
               </div>
             </div>
             <div
-              @click="onAdd(path)"
+              @click="onCreate(path)"
               class="#bg-blue-600 group-hover:visible invisible text-blue-600 inline-flex  rounded-full relative  ml-2 h-9 pl-1 pr-4 pt-1  text-xl font-semibold"
             >
               <HeroIcon class="mx-2 mt-1" strokewidth="3" width="12" height="12" icon="plus" />
@@ -76,6 +76,7 @@
       class="result cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105  my-4 group transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
       @mouseenter="onEnter()"
       @mouseleave="onLeave()"
+      @click="isClause(result) ? onAddClause() : null"
     >
       <div class="result-content relative">
         <div class="invisible group-hover:visible text-lg  flex row-col items-center">
@@ -103,12 +104,14 @@
         <div class="flex #hover:bg-blue-100 pl-2 relative -left-2 rounded-md mt-5 ">
           <div
             class="#bg-blue-600 group-hover:visible invisible text-green-600  hover:bg-green-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+            @click="onCreate([], false)"
           >
             <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
             Include
           </div>
           <div
             class="#bg-blue-600 group-hover:visible invisible text-red-600  hover:bg-red-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+            @click="onCreate([], true)"
           >
             <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="x" />
             Exclude
@@ -132,6 +135,7 @@ import Datamodel from "@/logic/Datamodel";
 import QueryUtils from "@/helpers/QueryUtils";
 import { TransitionRoot } from "@headlessui/vue";
 import { _ } from "lodash";
+import { v4 } from "uuid";
 
 import IMDefinition from "../query/IMDefinition.vue";
 
@@ -189,14 +193,59 @@ export default defineComponent({
             .join(" ")
         : "";
     },
-    onAdd(paths: string[]): void {
-      // this.$store.commit("updateActiveClause", { action: "new", path: this.path, data: this.getClause(paths) });
-      this.$emit("updateActiveClause", { action: "new", path: this.path, data: this.getClause(paths) });
+    onAddClause(): void {
+      const data = this.result?.matchClause;
+      data.displayText = this.result?.name;
+      this.$emit("updateActiveClause", { action: "new", path: null, data: data });
+      // this.$store.commit("updateActiveClause", { action: "new", path: null, data: this.result?.matchClause });
+      // const clause = this.result.matchClause;
+      // clause["@id"] = `urn:uuid:${v4()}`;
+      // this.$emit("updateActiveClause", { action: "new", path: "", data: clause });
     },
-    getClause(path: any): any {
+    onCreate(paths?: string[], notExist?: boolean): void {
+      console.log("paths", paths);
+      console.log("result", this.result);
+      // this.$store.commit("updateActiveClause", { action: "new", path: this.path, data: this.createClause(paths) });
+
+      if (this.isQuery(this.result)) {
+        this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "clause", data: this.createEntityInSet(notExist) });
+      } else if (this.isEntity(this.result)) {
+        this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "clause", data: this.createClause(paths) });
+      } else if (this.isProperty(this.result)) {
+        // direct properties (path == 1) vs datamodel properties
+        if (paths?.length == 1) {
+          this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "property", data: this.createProperty(this.result) });
+        } else {
+          this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "clause", data: this.createClause(paths) });
+        }
+      }
+    },
+    createEntityInSet(notExist?: boolean) {
+      const result = {
+        "@id": this.result?.iri,
+        name: this.result?.name
+      };
+
+      return notExist == true
+        ? {
+            notExist: true,
+            entityInSet: [result]
+          }
+        : {
+            entityInSet: [result]
+          };
+    },
+    createProperty(result: any): any {
+      return {
+        "@id": result.iri,
+        name: result.name
+      };
+    },
+    createClause(path: any): any {
       if (!path || path?.length == 0) {
         return {};
       }
+
       // this.$emit("openItem", path);
       let newPaths = path.map((item: string) => {
         return {
@@ -219,22 +268,36 @@ export default defineComponent({
       const entity = newPaths.splice(newPaths.length - 1, 1)[0];
       // console.log("entity", entity);
 
-      const newClause = {
-        "@id": "urn:uuid:07aed05b-62cc-4e62-87a2-5df95b604d87",
-        entityType: this.isEntity(this.result) ? this.result : entity,
-        pathTo: newPaths,
-        property: this.isEntity(this.result) ? [] : _.cloneDeep([prop]),
+      const result = {
+        "@id": this.result?.iri,
+        name: this.result?.name
       };
+
+      const newClause = {
+        "@id": `urn:uuid:${v4()}`,
+        entityType: this.isEntity(this.result) ? result : entity,
+        pathTo: newPaths,
+        property: this.isEntity(this.result) ? [] : _.cloneDeep([prop])
+      };
+
       console.log("newClause", newClause);
-      return newClause;
+      return _.cloneDeep(newClause);
     },
     getToolTip(path: string): string {
       return `<span style="margin-top: 100px; font-size: 14px; font-weight: bold; ">${path}</span>`;
     },
-
     onPreview(path: any): void {
       this.isHover = true;
-      this.preview = this.getClause(path);
+      const newClause = this.createClause(path);
+      console.log("newClause", newClause);
+      this.preview = newClause;
+      // if (this.isEntity(this.result)) {
+      //   console.log("preview clause", this.createClause(path));
+      //   this.preview = this.createClause(path);
+      // } else if (this.isProperty(this.result)) {
+      //   console.log("preview property", this.createProperty(this.result));
+      //   this.preview = this.createProperty(this.result);
+      // }
     },
     onEnter(): void {
       this.isHover = true;
@@ -256,7 +319,7 @@ export default defineComponent({
         paths = this.findPaths(iris);
       }
       // console.log("paths", paths);
-      this.$emit("updatePreview", { data: this.getClause(paths[0]) });
+      this.$emit("updatePreview", { data: this.createClause(paths[0]) });
       return paths;
     },
     datamodelIri(): string {

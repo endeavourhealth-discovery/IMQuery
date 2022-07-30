@@ -28,7 +28,7 @@
     </div>
 
     <!-- header   -->
-    <div v-if="activeTab == 'Search Results'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
+    <div v-if="activeTab == 'Add'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
       <Suggestions
         v-if="searchResult?.results?.length > 0"
         :results="getFilteredResults(searchResult)"
@@ -128,14 +128,14 @@ export default defineComponent({
           visible: true
         }
       ],
-      activeTab: "Search Results",
+      activeTab: "Add",
       tabs: [
         {
           name: "Browse",
           visible: true
         },
         {
-          name: "Search Results",
+          name: "Add",
           visible: true
           // command: () => {
           //   if (this.searchResult?.results?.length > 0) {

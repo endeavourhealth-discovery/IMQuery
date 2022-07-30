@@ -46,20 +46,20 @@
         </div> -->
           <div
             @click="onEdit()"
-            class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-gray-800 pr-2  hover:bg-gray-200 dark:text-white mt-10"
+            class="invisible group-hover:visible flex items-center text-2xl font-semibold text-yellow-600 pr-2 pl-2 rounded-lg  hover:bg-yellow-100 dark:text-white mt-10"
           >
-            <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="eye" /> View Details
+            <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="pencil" /> Edit Definition
           </div>
           <div class="flex">
             <div
               @click="onDelete()"
-              class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-red-700 px-2   hover:bg-red-100 dark:text-white mt-10"
+              class="rounded-lg  invisible group-hover:visible flex items-center text-2xl font-semibold text-red-700 pl-2 pr-3   hover:bg-red-100 dark:text-white mt-10"
             >
               <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="trash" /> Delete
             </div>
             <div
               @click="onCopy()"
-              class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-purple-700 px-2   hover:bg-purple-100 dark:text-white  mt-10"
+              class="rounded-lg  invisible group-hover:visible flex items-center text-2xl font-semibold text-purple-700  pr-3  hover:bg-purple-100 dark:text-white  mt-10"
             >
               <NodeIcon class="mx-3" strokewidth="2" width="20" height="24" icon="document_duplicate" /> Copy
             </div>

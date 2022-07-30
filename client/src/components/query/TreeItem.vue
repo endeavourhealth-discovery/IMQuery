@@ -57,6 +57,7 @@
   <template v-if="type == 'linkedEntity'">
     <!-- Full Tree Connection Between Main Entity and Linked Entity  -->
     <template v-if="showDetails">
+    
       <TreeItem
         type="pathTo"
         :mainEntity="data?.select?.entityType"

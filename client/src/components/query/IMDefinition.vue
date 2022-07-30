@@ -1,6 +1,6 @@
 <template>
   <!-- Linked Datamodel entities  -->
-  <template v-if="type == 'clause'">
+  <template v-if="modelValue?.pathTo?.length > 0 || definition?.pathTo?.length > 0">
     <div class="im-definition">
       <div class="im-definition-body">
         <!-- <div v-if="definition?.pathTo?.length == 0">
@@ -12,12 +12,15 @@
     </div>
   </template>
   <!-- /Linked Datamodel entities  -->
-
   <!-- Direct Property of Main Entity  -->
-  <template v-if="type == 'property'">
-    <div class="pathTo ">
-      <span class="ml10"> {{ data?.select?.entityType?.name }} </span>
-      <Property class="ml10" :modelValue="definition"> </Property>
+  <template v-else>
+    <div class="pathTo flex-col ">
+      <div class="mainEntity name flex ml-5">
+        <NodeIcon class="icon text-blue-600" strokewidth="2" width="22" height="22" icon="user"></NodeIcon>
+        <div class="text-gray-900 text-xl font-bold  mt-1 ml-4">{{ data?.select?.entityType?.name }}</div>
+      </div>
+      <!-- <TreeItem type="directProperty" :data="data" :path="path"> </TreeItem> -->
+      <Property class="ml10 mt-2" :modelValue="modelValue || definition"> </Property>
     </div>
   </template>
   <!-- /Direct Property of Main Entity  -->
@@ -42,20 +45,20 @@ export default defineComponent({
   },
   data() {
     return {
-      searchString: ""
-      // definition: _.get(this.data, this.path)
+      searchString: "",
+      definition: _.get(this.data, this.path)
     };
   },
   watch: {
-    // data() {
-    //   this.definition = _.get(this.data, this.path);
-    // },
+    data() {
+      this.definition = _.get(this.data, this.path);
+    },
     // modelValue() {
     //   this.definition = _.get(this.data, this.path);
     // }
-    // path() {
-    //   this.definition = _.get(this.data, this.path);
-    // }
+    path() {
+      this.definition = _.get(this.data, this.path);
+    }
   }
 });
 </script>
