@@ -34,14 +34,24 @@
   </template>
 
   <template v-if="type == 'entity' || type == 'section'">
-    <div class="treeitem">
+    <div class="treeitem relative">
       <!-- <div :style="{ marginLeft: margin + 'px' }" class="treeitem-section"> -->
 
-      <div :class="'treeitem-section '">
+      <div :class="'treeitem-section group'">
+        <div @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-1 -left-10 z-20">
+          <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
+        </div>
         <NodeIcon v-if="type == 'section'" class="icon first_child" strokewidth="3" width="14" height="17" icon="first_child"></NodeIcon>
         <NodeIcon v-if="type == 'entity'" class="icon" strokewidth="2" width="22" height="22" icon="document_text"></NodeIcon>
         <NodeIcon v-else-if="type == 'section'" class="icon" strokewidth="2" width="20" height="20" icon="color_swatch"></NodeIcon>
-        <div class="name">{{ name }}</div>
+        <div class="name hover:underline cursor-pointer">{{ name }}</div>
+
+        <div
+          @click="onPropertyDelete(path, propertyPath, propIndex)"
+          class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-2 -right-10 z-20"
+        >
+          <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
+        </div>
       </div>
       <div class="tree-item-relationship">
         <slot name="section"> </slot>
@@ -57,7 +67,6 @@
   <template v-if="type == 'linkedEntity'">
     <!-- Full Tree Connection Between Main Entity and Linked Entity  -->
     <template v-if="showDetails">
-    
       <TreeItem
         type="pathTo"
         :mainEntity="data?.select?.entityType"
@@ -68,17 +77,46 @@
       >
         <!-- Final Linked Entity Definition  is slotted In Here instead of below  -->
         <!-- !!! Copy any changes here to the component below-->
-        <TreeItem :name="definition?.entityType?.name" :data="data" :path="path" connector="none" type="entity">
+        <TreeItem :name="definition?.entityType?.name" :data="data" :path="path" connector="none" type="entity" propertyPath="entityType">
           <template #section>
-            <TreeItem :name="'Any Entry'" v-if="definition?.property" :data="data" :path="path" type="section">
+            <TreeItem :name="'Any Entry'" v-if="definition?.property" :data="data" :path="path" type="section" propertyPath="property">
               <template #property>
-                <Property class="ml10" v-for="prop in definition?.property" :key="prop['@id']" :modelValue="prop" notExist=""> </Property>
+                <div v-for="(prop, propIndex) in definition?.property" :key="prop['@id']" class="group ">
+                  <div @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20">
+                    <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
+                  </div>
+                  <Property class="ml10  relative z-10 rounded-md" :modelValue="prop" notExist="" :data="data" :path="path"> </Property>
+                  <div
+                    @click="onPropertyDelete(path, 'property', propIndex)"
+                    class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
+                  >
+                    <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
+                  </div>
+                </div>
               </template>
             </TreeItem>
 
-            <TreeItem :name="getOrderLimitLabel()" v-if="definition?.orderLimit && definition?.testProperty" :data="data" :path="path" type="section">
+            <TreeItem
+              :name="getOrderLimitLabel()"
+              v-if="definition?.orderLimit && definition?.testProperty"
+              :data="data"
+              :path="path"
+              propertyPath="orderLimit"
+              type="section"
+            >
               <template #property>
-                <Property class="ml10" v-for="prop in definition?.testProperty" :key="prop['@id']" :modelValue="prop" notExist=""> </Property>
+                <div v-for="(prop, propIndex) in definition?.testProperty" :key="prop['@id']" class="group">
+                  <div @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20">
+                    <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
+                  </div>
+                  <Property class="ml10  relative z-10 rounded-md" :modelValue="prop" notExist="" :data="data" :path="path"> </Property>
+                  <div
+                    @click="onPropertyDelete(path, 'testProperty', propIndex)"
+                    class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
+                  >
+                    <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
+                  </div>
+                </div>
               </template>
             </TreeItem>
           </template>
@@ -149,7 +187,8 @@ export default defineComponent({
     "showDetails",
     "name",
     "margin",
-    "connector"
+    "connector",
+    "propertyPath"
   ],
   emits: ["update:modelValue"],
   components: { NodeIcon, Property },
@@ -179,6 +218,11 @@ export default defineComponent({
           name: "main Location"
         }
       ];
+    },
+    onPropertyDelete(clausePath, propertyPath, index) {
+      let payload = { action: "deleteClause", clausePath: clausePath, propertyPath: propertyPath, index: index };
+      this.$store.commit("updateProperty", payload);
+      this.emitter.emit("update-imdefinition", payload.clausePath);
     },
     getOrderLimitLabel(): any {
       if (this.definition?.orderLimit?.orderBy["@id"] == "http://endhealth.info/im#effectiveDate") {

@@ -1,5 +1,8 @@
 <template>
-  <div class="property">
+  <div class="property group relative cursor-pointer">
+    <!-- <div @click="true" class="group-hover:inline rounded-full bg-blue-600 hover:bg-blue-800 absolute hidden -top-2 -left-10">
+      <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
+    </div> -->
     <NodeIcon
       :class="'ml10 min-w-[10px]' + [notExist || definition?.notExist ? ' text-red-700' : ' text-green-700']"
       strokewidth="3"
@@ -8,8 +11,8 @@
       icon="property_first"
     ></NodeIcon>
     <div v-if="definition?.entityInSet" class="horizontal">
-      <span class="property-name font-normal"> {{ "is" }} </span>
-      <span v-if="definition.notExist" class="property-name font-normal"> {{ `${definition.notExist ? "not " : ""}` }} </span>
+      <span class="property-name font-normal hover:underline"> {{ "is" }} </span>
+      <span v-if="definition.notExist" class="property-name font-normal hover:underline"> {{ `${definition.notExist ? "not " : ""}` }} </span>
       <span class="ml-2 font-normal"> {{ "part of the results of the search" }} </span>
       <NodeIcon
         :class="'ml10 arrow-right' + [definition.notExist ? ' text-red-700' : ' text-green-700']"
@@ -26,7 +29,7 @@
         {{ set?.name }}{{ "," }}
       </div>
     </div>
-    <span v-else class="property-name font-normal"> {{ definition?.name }} </span>
+    <span v-else class="property-name font-normal hover:underline"> {{ definition?.name }} </span>
     <div v-if="definition?.inSet" class="horizontal">
       <NodeIcon
         :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
@@ -64,6 +67,9 @@
         {{ definition?.function?.argument[0].valueData?.toLowerCase()
 
 
+
+
+
         }}{{definition?.function?.argument[0].valueData && definition?.value?.valueData > 1 ? "s" : "" }}
       </div>
     </div>
@@ -79,6 +85,9 @@
         {{ concept?.name }}{{ "," }}
       </div>
     </div>
+    <!-- <div @click="true" class="group-hover:inline absolute hidden -top-1 -right-10">
+      <NodeIcon class="ml-4 mt-1 text-red-500 hover:text-red-800 mr-2" strokewidth="3" width="20" height="24" icon="x" />
+    </div> -->
   </div>
 </template>
 

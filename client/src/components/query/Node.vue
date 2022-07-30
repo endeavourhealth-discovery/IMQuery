@@ -170,7 +170,7 @@ export default defineComponent({
         text = text.toString();
       }
       if (text.startsWith("and") || text.startsWith("or") || text.startsWith("property") || text.startsWith("orProperty")) {
-        return text;
+        return `.${text}`;
       } else {
         return `[${text}]`;
       }

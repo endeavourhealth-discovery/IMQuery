@@ -571,7 +571,7 @@ import InputRadioButtons from "@/components/general/InputRadioButtons.vue";
 import QueryEditor from "@/components/query/QueryEditor.vue";
 
 export default defineComponent({
-  name: "Search",
+  name: "Home",
   components: {
     ConfirmDialog,
     Searchbox,

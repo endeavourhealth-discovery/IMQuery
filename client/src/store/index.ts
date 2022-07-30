@@ -171,6 +171,30 @@ export default createStore({
       state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload;
       state.activeClausePath = payload;
     },
+    updateProperty(state, payload) {
+      const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+      let newQuery = _.cloneDeep(activeQuery);
+
+
+
+
+      console.log("updateProperty", payload);
+
+      if (payload.action = "deleteClause") {
+
+        if (payload?.propertyPath == "property") {
+          let currentProperty = _.get(newQuery, `${payload.clausePath}.property`)
+          console.log("currentProperty", _.cloneDeep(currentProperty)[payload.index]);
+          currentProperty.splice(payload.index, 1);
+
+        }
+
+      }
+
+      state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+      // alert("emit")
+      
+    },
     updateActiveClause(state, payload) {
       console.log("state update updateActiveClause", payload)
       const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
@@ -220,6 +244,7 @@ export default createStore({
 
 
         // reset
+        this.emitter.emit("reset-searchinput");
 
 
       }
