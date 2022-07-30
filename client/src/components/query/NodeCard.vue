@@ -52,6 +52,7 @@
           </div>
           <div class="flex">
             <div
+              @click="onDelete()"
               class="rounded-md invisible group-hover:visible flex items-center text-2xl font-semibold text-red-700 px-2   hover:bg-red-100 dark:text-white mt-10"
             >
               <NodeIcon class="mr-3" strokewidth="2" width="20" height="24" icon="trash" /> Delete
@@ -171,6 +172,9 @@ export default defineComponent({
     },
     onEdit() {
       this.$emit("updateActiveClause", { action: "view", path: this.path, index: 0 });
+    },
+    onDelete() {
+      this.$emit("updateActiveClause", { action: "delete", path: this.path, index: 0 });
     },
     onAdd(data?: any) {
       //improves animation

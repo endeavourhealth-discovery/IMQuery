@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div class="w-full ml-[50px]">
+    <div class="w-full ml-[90px]">
       <QueryBuilder :modelValue="modelValue"></QueryBuilder>
     </div>
   </div>
