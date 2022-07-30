@@ -405,7 +405,13 @@
               />
             </div>
             <div v-show="activeQueryCategory == 'export'" class="definition viewer flex justify-center space-x-5 text-white">
-              <textarea  spellcheck=”false” class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 h-full max-h-[750px] min-w-[700px] text-black text-xl">{{ jsonDefinition }} </textarea>
+              <!-- <textarea  spellcheck=”false” class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 h-full max-h-[750px] min-w-[700px] text-black text-xl">{{ jsonDefinition }} </textarea> -->
+              <div
+                spellcheck="”false”"
+                class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 mr-5 h-full max-h-[750px] min-w-[700px] text-black text-xl overflow-y-scroll"
+              >
+                <vue-json-pretty  :data="jsonDefinition"> </vue-json-pretty>
+              </div>
             </div>
             <div v-show="activeQueryCategory == 'sql'" class="definition viewer flex justify-center space-x-5 text-white"></div>
 
@@ -569,6 +575,8 @@ import InputDescription from "@/components/general/InputDescription.vue";
 import InputRadioButtons from "@/components/general/InputRadioButtons.vue";
 
 import QueryEditor from "@/components/query/QueryEditor.vue";
+import VueJsonPretty from "vue-json-pretty";
+import "vue-json-pretty/lib/styles.css";
 
 export default defineComponent({
   name: "Home",
@@ -585,7 +593,8 @@ export default defineComponent({
     QueryEditor,
     TransitionRoot,
     InputDescription,
-    InputRadioButtons
+    InputRadioButtons,
+    VueJsonPretty
   },
   $refs: {
     OverlayPanel: HTMLElement

@@ -54,6 +54,7 @@
     "vue": "^3.2.25",
     "vue-chartjs": "^3.5.1",
     "vue-class-component": "^8.0.0-0",
+    "vue-json-pretty": "^2.1.1",
     "vue-network-d3": "^0.1.2",
     "vue-router": "^4.0.9",
     "vue3-clipboard": "^1.0.0",
