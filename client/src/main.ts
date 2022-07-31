@@ -80,7 +80,7 @@ import RadioButton from "primevue/radiobutton";
 import ConfirmPopup from "primevue/confirmpopup";
 import Calendar from "primevue/calendar";
 import InputNumber from "primevue/inputnumber";
-
+import Slider from 'primevue/slider';
 //other components
 import VWave from 'v-wave'
 import mitt from 'mitt';
@@ -106,6 +106,7 @@ const app = createApp(App)
   })
   .use(VWave)
   .directive("tooltip", Tooltip)
+  .component("Slider", Slider)
   .component("ToggleButton", ToggleButton)
   .component("Card", Card)
   .component("ProgressSpinner", ProgressSpinner)

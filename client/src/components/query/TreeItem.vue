@@ -182,6 +182,7 @@ import { defineComponent } from "vue";
 import _ from "lodash";
 import NodeIcon from "./NodeIcon.vue";
 import Property from "./Property.vue";
+
 export default defineComponent({
   name: "TreeItem",
   props: [

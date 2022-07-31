@@ -38,9 +38,7 @@
         height="14"
         icon="arrow_right_small"
       ></NodeIcon>
-      <div class="ml10 inSet-item hover:underline text-black font-bold cursor-pointer" @click="viewEntity(set)" v-for="set in definition?.inSet">
-        {{ set?.name }}{{ "," }}
-      </div>
+      <div class="ml10 inSet-item hover:underline text-black font-bold cursor-pointer" v-for="set in definition?.inSet">{{ set?.name }}{{ "," }}</div>
     </div>
     <div v-else-if="definition?.notInSet" :class="'horizontal'">
       <NodeIcon
@@ -62,16 +60,15 @@
         height="14"
         icon="arrow_right_small"
       ></NodeIcon>
-      <div class="ml10 ">
+      <div class="ml10 " @click="onToggle">
         {{ comparison(definition?.value?.comparison) + " " }} {{ definition?.value?.valueData + " " }}
         {{ definition?.function?.argument[0].valueData?.toLowerCase()
 
-
-
-
-
         }}{{definition?.function?.argument[0].valueData && definition?.value?.valueData > 1 ? "s" : "" }}
       </div>
+      <OverlayPanel class="panel-selector" ref="overlay-selector">
+        <Selector type="value" :modelValue="definition"></Selector>
+      </OverlayPanel>
     </div>
     <div v-else-if="definition?.isConcept" class="horizontal">
       <NodeIcon
@@ -94,13 +91,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import NodeIcon from "./NodeIcon.vue";
+import Selector from "./Selector.vue";
 
 import _ from "lodash";
 
 export default defineComponent({
   name: "Property",
   props: ["modelValue", "notExist"],
-  components: { NodeIcon },
+  components: { NodeIcon, Selector },
   data() {
     return {
       definition: this.modelValue?.property && this.modelValue?.property?.length > 0 ? this.modelValue.property[0] : this.modelValue
@@ -112,6 +110,15 @@ export default defineComponent({
     }
   },
   methods: {
+    onToggle(event: any): void {
+      // console.log("toggle", event);
+      (this.$refs["overlay-selector"] as any).toggle(event); //show();
+    },
+    onClick(TTIriRef: any): void {
+      // console.log("ref", this.$refs["overlay-inset"] as any);
+      // (this.$refs["overlay-selector"] as any).toggle(true); //.toggle(event); //show();
+      // this.viewEntity(TTIriRef);
+    },
     setDefinition(definition: any) {
       this.definition = definition;
     },
