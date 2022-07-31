@@ -38,7 +38,7 @@
       <!-- <div :style="{ marginLeft: margin + 'px' }" class="treeitem-section"> -->
 
       <div :class="'treeitem-section group'">
-        <div @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-1 -left-10 z-20">
+        <div v-if="edit" @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-1 -left-10 z-20">
           <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
         </div>
         <NodeIcon v-if="type == 'section'" class="icon first_child" strokewidth="3" width="14" height="17" icon="first_child"></NodeIcon>
@@ -47,6 +47,7 @@
         <div class="name hover:underline cursor-pointer">{{ name }}</div>
 
         <div
+          v-if="edit"
           @click="onPropertyDelete(path, propertyPath, propIndex)"
           class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-2 -right-10 z-20"
         >
@@ -77,16 +78,21 @@
       >
         <!-- Final Linked Entity Definition  is slotted In Here instead of below  -->
         <!-- !!! Copy any changes here to the component below-->
-        <TreeItem :name="definition?.entityType?.name" :data="data" :path="path" connector="none" type="entity" propertyPath="entityType">
+        <TreeItem :name="definition?.entityType?.name" :edit="edit" :data="data" :path="path" connector="none" type="entity" propertyPath="entityType">
           <template #section>
-            <TreeItem :name="'Any Entry'" v-if="definition?.property" :data="data" :path="path" type="section" propertyPath="property">
+            <TreeItem :name="'Any Entry'" :edit="edit" v-if="definition?.property" :data="data" :path="path" type="section" propertyPath="property">
               <template #property>
                 <div v-for="(prop, propIndex) in definition?.property" :key="prop['@id']" class="group ">
-                  <div @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20">
+                  <div
+                    v-if="edit"
+                    @click="true"
+                    class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
+                  >
                     <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
                   </div>
                   <Property class="ml10  relative z-10 rounded-md" :modelValue="prop" notExist="" :data="data" :path="path"> </Property>
                   <div
+                    v-if="edit"
                     @click="onPropertyDelete(path, 'property', propIndex)"
                     class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
                   >
@@ -103,16 +109,22 @@
               :path="path"
               propertyPath="orderLimit"
               type="section"
+              :edit="edit"
             >
               <template #property>
                 <div v-for="(prop, propIndex) in definition?.testProperty" :key="prop['@id']" class="group">
-                  <div @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20">
+                  <div
+                    v-if="edit"
+                    @click="true"
+                    class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
+                  >
                     <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
                   </div>
                   <Property class="ml10  relative z-10 rounded-md" :modelValue="prop" notExist="" :data="data" :path="path"> </Property>
                   <div
+                    v-if="edit"
                     @click="onPropertyDelete(path, 'testProperty', propIndex)"
-                    class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
+                    class="roup-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
                   >
                     <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
                   </div>
@@ -188,7 +200,8 @@ export default defineComponent({
     "name",
     "margin",
     "connector",
-    "propertyPath"
+    "propertyPath",
+    "edit"
   ],
   emits: ["update:modelValue"],
   components: { NodeIcon, Property },

@@ -44,7 +44,7 @@ import Suggestion from "./Suggestion.vue";
 import Graph from "@/logic/Graph";
 
 export default defineComponent({
-  name: "SearchResults",
+  name: "Suggestions",
   components: { TransitionRoot, HeroIcon, Suggestion, IMDefinition },
   emits: ["openItem", "updateActiveClause"],
   props: ["results", "searchstring", "isShown", "pathFilter", "showDetails", "maxResults", "showPreview", "mainEntity"],

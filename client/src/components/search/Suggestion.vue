@@ -6,11 +6,11 @@
   <template v-if="isEntity(result) || isProperty(result)">
     <div
       v-if="pathData.length"
-      class="result cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105  group transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
+      class="result cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105   transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
       @mouseenter="onEnter()"
       @mouseleave="onLeave()"
     >
-      <div class="result-content relative">
+      <div class="result-content group relative">
         <div class="invisible group-hover:visible text-lg  flex row-col items-center">
           <div v-tooltip.bottom="result.iri" class="inline text-gray-500 dark:text-gray-300">
             <!-- {{ encodeURIComponent(result.iri) }} -->
@@ -71,7 +71,7 @@
       <!-- Preview  -->
       <div v-if="preview.pathTo && isHover" class="mt-4 relative ">
         <div class="text-gray-500 text-xl mt-4 mb-2 font-semibold #absolute top-0 right-4">Preview</div>
-        <IMDefinition class="clause-definition" type="clause" :modelValue="preview" :showDetails="true"> </IMDefinition>
+        <IMDefinition :edit="false" class="clause-definition" type="clause" :modelValue="preview" :showDetails="true"> </IMDefinition>
       </div>
       <!-- Preview  -->
     </div>
@@ -95,13 +95,20 @@
           <div v-if="getTypeLabel(result)" class="inline mr-2 text-xl text-gray-700 dark:text-gray-400 font-semibold border border-gray-400 px-2 rounded-md">
             {{ getTypeLabel(result) }}
           </div>
+          <div
+            v-if="isClause(result) && isHover"
+            class="#bg-blue-600 group-hover:visible invisible text-blue-600  hover:bg-blue-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+          >
+            <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
+            Add
+          </div>
         </div>
       </div>
 
       <!-- Preview  -->
       <div v-if="isClause(result) && isHover" class="mt-4 relative ">
         <div class="text-gray-500 text-xl mt-4 mb-2 font-semibold #absolute top-0 right-4">Preview</div>
-        <IMDefinition class="clause-definition" type="clause" :modelValue="result.matchClause" :showDetails="true"> </IMDefinition>
+        <IMDefinition class="clause-definition" type="clause" :modelValue="result.matchClause" path="" :showDetails="true"> </IMDefinition>
       </div>
       <!-- Preview  -->
 
@@ -147,7 +154,7 @@ import IMDefinition from "../query/IMDefinition.vue";
 import Graph from "@/logic/Graph";
 
 export default defineComponent({
-  name: "SearchResult",
+  name: "Sugggestion",
   components: { TransitionRoot, HeroIcon, IMDefinition },
   emits: ["openItem", "updatePreview"],
   props: ["result", "pathFilter", "showDetails", "updateActiveClause", "mainEntity"],

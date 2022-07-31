@@ -405,13 +405,17 @@
               />
             </div>
             <div v-show="activeQueryCategory == 'export'" class="definition viewer flex justify-center space-x-5 text-white">
-              <!-- <textarea  spellcheck=”false” class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 h-full max-h-[750px] min-w-[700px] text-black text-xl">{{ jsonDefinition }} </textarea> -->
-              <div
+              <textarea
+                spellcheck="”false”"
+                class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 h-full max-h-[750px] min-w-[700px] text-black text-xl"
+                >{{ jsonDefinition }} </textarea
+              >
+              <!-- <div
                 spellcheck="”false”"
                 class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 mr-5 h-full max-h-[750px] min-w-[700px] text-black text-xl overflow-y-scroll"
               >
                 <vue-json-pretty  :data="jsonDefinition"> </vue-json-pretty>
-              </div>
+              </div> -->
             </div>
             <div v-show="activeQueryCategory == 'sql'" class="definition viewer flex justify-center space-x-5 text-white"></div>
 

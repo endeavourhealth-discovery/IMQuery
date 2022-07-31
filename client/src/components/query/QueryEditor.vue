@@ -64,6 +64,7 @@
             :path="activeClausePath"
             :showDetails="true"
             @updateActiveClause="updateActiveClause"
+            :edit="true"
           >
           </IMDefinition>
         </div>

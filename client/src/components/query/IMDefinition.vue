@@ -1,5 +1,6 @@
 <template>
   <!-- Linked Datamodel entities  -->
+
   <template v-if="modelValue?.pathTo?.length > 0 || definition?.pathTo?.length > 0">
     <div class="im-definition">
       <div class="im-definition-body">
@@ -9,7 +10,7 @@
 
         <!-- <TreeItem v-if="modelValue" type="linkedEntity" :modelValue="modelValue"  :showDetails="showDetails"> </TreeItem>
         <TreeItem v-else type="linkedEntity" :data="data" :path="path" :showDetails="showDetails"> </TreeItem> -->
-        <TreeItem type="linkedEntity" :modelValue="definition" :data="queryDefinition" :path="path" :showDetails="showDetails"> </TreeItem>
+        <TreeItem :edit="edit" type="linkedEntity" :modelValue="definition" :data="queryDefinition" :path="path" :showDetails="showDetails"> </TreeItem>
       </div>
     </div>
   </template>
@@ -38,7 +39,7 @@ import _ from "lodash";
 
 export default defineComponent({
   name: "IMDefinition",
-  props: ["modelValue", "type", "data", "path", "showDetails", "updateActiveClause"],
+  props: ["modelValue", "type", "data", "path", "showDetails", "updateActiveClause", "preview", "edit"],
   components: {
     NodeIcon,
     Property,
@@ -53,14 +54,13 @@ export default defineComponent({
   data() {
     return {
       searchString: "",
-      definition: _.get(this.queryDefinition, this.path)
+      definition: this.modelValue ? this.modelValue : _.get(this.queryDefinition, this.path)
     };
   },
   methods: {
     setDefinition(): any {
-      // const query = this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
-      this.definition = _.get(this.queryDefinition, this.path);
-      // console.log("this defintion", this.definition);
+      // this.definition = _.get(this.queryDefinition, this.path);
+      this.definition = this.modelValue ? this.modelValue : _.get(this.queryDefinition, this.path);
     }
   },
   watch: {
