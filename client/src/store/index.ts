@@ -20,6 +20,7 @@ import jp from 'jsonpath';
 
 import axios from "axios";
 import Graph from "@/logic/Graph";
+import { active } from "d3";
 
 export default createStore({
   // update stateType.ts when adding new state!
@@ -196,56 +197,61 @@ export default createStore({
 
     },
     updateActiveClause(state, payload) {
-      console.log("state update updateActiveClause", payload)
+      // console.log("state update updateActiveClause", payload)
+      // console.log("state.activeClausePath", state.activeClausePath)
       const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+      let activeClausePath = state.activeClausePath;
       let newQuery = _.cloneDeep(activeQuery);
       const currentFile = state.openFiles.find(file => file.iri == state.activeQueryId);
+      // console.log("currentFile.activeClausePath", currentFile.activeClausePath)
       if (payload.action == "new") {
         // console.log("activeClausePath", currentFile.activeClausePath)
-        console.log("display", payload.data.displayText)
+        // console.log("display", payload.data.displayText)
         if (!payload.data.displayText || payload.data.displayText == "") {
           payload.data.displayText = currentFile.searchResults.find(result => result.activeClausePath == currentFile.activeClausePath).searchString;
         }
 
 
-        let newItem;
-        if (payload.dataType = "property") {
-          console.log("###prop")
-          newItem =
-            (payload.data?.property && payload.data?.property.length > 0) || (payload.data?.pathTo)
-              ? payload.data
-              : {
-                "@id": "urn:uuid:daaa2db1-a973-40d7-a573-65178c5b7c7c",
-                "property": [payload.data],
-              };
+        let newItem = payload.data;
+        if (payload.dataType == "directProperty") {
+          //if active clause path is a property -> encapsulate newItem in and do not change activeClausePath
+          (payload.data?.property && payload.data?.property.length > 0) || (payload.data?.pathTo)
+
+          if (!QueryUtils.isPathDirectProperty(activeClausePath)) {
+            newItem =
+            {
+              "@id": "urn:uuid:daaa2db1-a973-40d7-a573-65178c5b7c7c",
+              "property": [payload.data],
+            };
+
+          }
+          // else do not change newItem and do not change
+        } else if (payload.dataType == "clause" || payload.dataType == "entityInSet") {
+          // acitiveClausePath is a property -> change activeClausePath to parent + do not change newItem
+          if (QueryUtils.isPathDirectProperty(activeClausePath)) {
+            activeClausePath = QueryUtils.getParentPath(activeClausePath)
+            state.targetAction = "new"
+          } 
         }
-        // else if (payload.dataType = "clause") {
-        //   _.set(newQuery, currentFile.activeClausePath, payload.data);
-        //   state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
-        // }
+        // console.log("activeClausePath", activeClausePath)
 
         if (state.targetAction == "addTo") {
 
-          let { path, index } = QueryUtils.splitPath(state.activeClausePath);
+          let { path, index } = QueryUtils.splitPath(activeClausePath);
           console.log("path index", path, index);
 
           let parentArray = _.get(newQuery, path);
           parentArray.splice(index + 1, 0, newItem);
           state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
 
-
           const newIndex = parseInt(index) + 1;
           state.activeClausePath = path + `[${newIndex}]`;
 
         } else if (state.targetAction = "new") {
-          _.set(newQuery, currentFile.activeClausePath, newItem);
+          _.set(newQuery, activeClausePath, newItem);
           state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+          state.activeClausePath = activeClausePath;
         }
-
-
-        // reset
-        // this.emitter.emit("reset-searchinput");
-
 
       }
     },

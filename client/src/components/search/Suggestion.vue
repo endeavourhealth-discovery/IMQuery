@@ -232,13 +232,13 @@ export default defineComponent({
       // this.$store.commit("updateActiveClause", { action: "new", path: this.path, data: this.createClause(paths) });
 
       if (this.isQuery(this.result)) {
-        this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "clause", data: this.createEntityInSet(notExist) });
+        this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "entityInSet", data: this.createEntityInSet(notExist) });
       } else if (this.isEntity(this.result)) {
         this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "clause", data: this.createClause(paths) });
       } else if (this.isProperty(this.result)) {
         // direct properties (path == 1) vs datamodel properties
         if (paths?.length == 1) {
-          this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "property", data: this.createProperty(this.result) });
+          this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "directProperty", data: this.createProperty(this.result) });
         } else {
           this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "clause", data: this.createClause(paths) });
         }
