@@ -118,14 +118,14 @@ export default createStore({
   mutations: {
     updateTarget(state, payload) {
       console.log("updateTarget", payload);
-      state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload?.clausePath;
-      state.openFiles.find(file => file.iri == state.activeQueryId).activePropertyPath = payload?.propertyPath;
-      state.openFiles.find(file => file.iri == state.activeQueryId).targetType = payload?.targetType;
-      state.openFiles.find(file => file.iri == state.activeQueryId).targetAction = payload?.targetAction;
-      state.activeClausePath = payload?.clausePath;
-      state.activePropertyPath = payload?.propertyPath;
-      state.targetType = payload?.targetType;
-      state.targetAction = payload?.targetAction;
+      payload?.clausePath ? state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload?.clausePath : null;
+      payload?.propertyPath ? state.openFiles.find(file => file.iri == state.activeQueryId).activePropertyPath = payload?.propertyPath : null;
+      payload?.targetType ? state.openFiles.find(file => file.iri == state.activeQueryId).targetType = payload?.targetType : null;
+      payload?.targetAction ? state.openFiles.find(file => file.iri == state.activeQueryId).targetAction = payload?.targetAction : null;
+      payload?.clausePath ? state.activeClausePath = payload?.clausePath : null;
+      payload?.propertyPath ? state.activePropertyPath = payload?.propertyPath : null;
+      payload?.targetType ? state.targetType = payload?.targetType : null;
+      payload?.targetAction ? state.targetAction = payload?.targetAction : null;
     },
     updateSearchString(state, payload) {
       console.log("updateSearchString", payload);
@@ -193,7 +193,7 @@ export default createStore({
 
       state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
       // alert("emit")
-      
+
     },
     updateActiveClause(state, payload) {
       console.log("state update updateActiveClause", payload)
@@ -224,7 +224,7 @@ export default createStore({
         //   state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
         // }
 
-        if (state.targetAction == "insertNew") {
+        if (state.targetAction == "addTo") {
 
           let { path, index } = QueryUtils.splitPath(state.activeClausePath);
           console.log("path index", path, index);
@@ -244,7 +244,7 @@ export default createStore({
 
 
         // reset
-        this.emitter.emit("reset-searchinput");
+        // this.emitter.emit("reset-searchinput");
 
 
       }
@@ -513,7 +513,7 @@ export default createStore({
       state.queryBuilder.loadDataSet(data);
 
 
-      console.log("## loadDataSet(data);:", data); //?res.data if backend
+      console.log("Create new empty dataset".data); //?res.data if backend
 
 
       const file = {

@@ -82,6 +82,10 @@ export default class QueryUtils {
 
     public static toIri(url: string) {
 
+        if (url.startsWith("urn:")) {
+            return url;
+        }
+
         const _arr = url.split("/")
         const _iri = _arr[_arr.length - 1].replace("#", ":");
         return _iri;
@@ -167,7 +171,7 @@ export default class QueryUtils {
     ];
 
     public static toUrl(iri: string) {
-
+        // console.log("toUurl", iri)
         //untested after changes
         const _iri = iri.replace(":", "#");
         const _contextKey = _iri.split("#")[0];

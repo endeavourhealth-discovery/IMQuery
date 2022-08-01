@@ -39,6 +39,12 @@
         @updateActiveClause="updateActiveClause"
       />
     </div>
+    <div v-else-if="activeTab == 'Browse'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
+      <!-- <SecondaryTree :conceptIri="'http://endhealth.info/im#Observation'" class="left-hierarchy" /> -->
+    </div>
+    <div v-else-if="activeTab == 'View'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
+      View
+    </div>
   </div>
 </template>
 
@@ -47,6 +53,7 @@ import { defineComponent } from "vue";
 // import SearchService from "@/services/SearchService";
 import Suggestions from "@/components/search/Suggestions.vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
+// import SecondaryTree from "im-library";
 
 export default defineComponent({
   name: "QueryBuilder",
@@ -56,6 +63,7 @@ export default defineComponent({
   components: {
     Suggestions,
     HeroIcon
+    // SecondaryTree
   },
   computed: {
     searchResult: {
@@ -75,7 +83,20 @@ export default defineComponent({
       set(value: any): void {
         return;
       }
+    },
+    isView: {
+      get(): boolean {
+        return this.$store.state.targetAction == "View";
+      },
+      set(value: boolean): void {
+        return;
+      }
     }
+  },
+  mounted() {
+    this.emitter.on("update-searchActiveTab", (payload: any) => {
+      this.searchActiveTab = payload.data;
+    });
   },
   methods: {
     updateActiveClause(value: any) {
@@ -87,13 +108,13 @@ export default defineComponent({
       // console.log("resultKey", resultKey);
       return searchResult[resultKey];
     },
-    updateActiveClause(value: any) {
-      this.$emit("updateActiveClause", value);
-    },
     onInput(event: any): void {
       // this.search(event.target.value);
       // this.$emit("update:modelValue", event.target.value);
     }
+    // showAdd(): boolean {
+    //   return this.searchResult?.results?.length > 0 ? true : false;
+    // }
   },
   data() {
     return {
@@ -146,6 +167,10 @@ export default defineComponent({
           //     alert("Select a Filter Criteria in the Query to edit!");
           //   }
           // }
+        },
+        {
+          name: "Browse",
+          visible: false
         }
       ]
     };

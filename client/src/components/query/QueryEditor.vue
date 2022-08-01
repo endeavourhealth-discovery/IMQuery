@@ -181,7 +181,7 @@ export default defineComponent({
     },
     updateActiveClause(payload: any): void {
       console.log("#Query Editor updat ActiveClause payload:", payload);
-      if (payload.action == "insertNew") {
+      if (payload.action == "addTo") {
         this.$store.commit("updateActiveClause", payload);
         this.activeClausePath = this.$store.state.activeClausePath; //match[0]"; //###todo: replace with path from sugestion
         this.activeViewerTab = "Filter Criteria";
@@ -191,9 +191,9 @@ export default defineComponent({
         // this.activeClausePath = "select.match[0]"; //###todo: replace with path from sugestion
         this.activeViewerTab = "Filter Criteria";
 
-        nextTick(() => {
-          this.activeViewerTab = "Filter Criteria";
-        });
+        // nextTick(() => {
+        //   this.activeViewerTab = "Filter Criteria";
+        // });
       } else if (payload.action == "delete") {
         this.$store.commit("updateActiveClausePath", payload);
       } else if (payload.action == "create") {

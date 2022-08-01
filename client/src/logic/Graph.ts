@@ -1,6 +1,8 @@
 import EntityService from '@/services/EntityService';
 import QueryService from '@/services/QueryService';
 
+import QueryUtils from "@/helpers//QueryUtils";
+
 
 import Datamodel from "./Datamodel"
 import _ from "lodash";
@@ -13,9 +15,9 @@ export default class Graph {
 
   constructor(mainEntity?: string) {
     this.mainEntity = mainEntity || "im:Person";
-    this.populateGraph();
-  }
+    this.populateDatamodel();
 
+  }
 
   private _mainEntity: string;
   public get mainEntity(): string {
@@ -25,6 +27,17 @@ export default class Graph {
     this._mainEntity = mainEntity;
     this.populateGraph();
   }
+
+  private datamodel: any;
+  private async populateDatamodel(): Promise<any> {
+    await QueryService.getDatamodel().then((res: any) => {
+      this.datamodel = res.entities;
+      console.log("this.datamodel", this.datamodel);
+      this.populateGraph();
+      return res;
+    });
+  }
+
 
   async populateGraph() {
     let map;
@@ -99,6 +112,74 @@ export default class Graph {
   }
 
 
+  ///////////////// lookup
+
+
+  public byIri(iri: string): any {
+    return this.datamodel.find((entity: any) => entity['@id'] === iri);
+  }
+
+  //e.g. gets all properties of an entity that are a nodeshape
+  // public getEntityPropertyByType = (type: iri): any => {
+
+  // }
+
+
+  public getDatamodelSubtypes(iri: string): any {
+
+
+    const getChildren = (iri: string) => {
+      return this.datamodel.filter((entity: any) => {
+        return entity["rdfs:subClassOf"] && entity["rdfs:subClassOf"].some((ref: any) => ref["@id"] == iri);
+      });
+    }
+
+    const queue = [iri];
+    const results = [iri];
+
+    while (queue.length > 0) {
+      const entity = queue.shift();
+      let children = getChildren(entity);
+      children = children.map(item => QueryUtils.toIri(item["@id"]));
+
+      if (children.length > 0) {
+        queue.push(...children);
+        results.push(...children);
+      }
+    }
+    // console.log("results", results);
+    return results;
+  }
+
+  public getEntityProperty(entityIri: string, propertyIri): any {
+    const entity = this.datamodel.find((entity: any) => QueryUtils.toIri(entity["@id"]) == entityIri && entity["sh:property"]);
+
+    if (entity["sh:property"] && Array.isArray(entity["sh:property"])) {
+      const property = entity["sh:property"].find((property: any) => {
+        return _.get(property, "sh:path[0].@id") == propertyIri;
+      })
+      // console.log("property", property)
+      return property;
+    }
+
+
+    // const property =  && entity["sh:property"].some((property: any) => {
+    //   return _.get(property, "sh:path[0].@id") == propertyIri;
+    // }
+    // ));
+
+
+  }
+
+
+  public withProperty(iri: string): any {
+    return this.datamodel.filter((entity: any) => entity["sh:property"] && entity["sh:property"].some((property: any) => {
+      return _.get(property, "sh:path[0].@id") == iri;
+    }
+    ));
+  }
+
+  ///////////////// paths
   getNeighbours(iri: string) {
     console.log("getNeighbours", _.get(this.graph, iri));
     return _.get(this.graph, iri);

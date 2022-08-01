@@ -57,7 +57,7 @@ export default defineComponent({
   },
   methods: {
     updatePreview(value: any): any {
-      console.log("preview", value);
+      // console.log("preview", value);
       this.preview = value.data;
     },
     updateActiveClause(value: any) {

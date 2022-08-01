@@ -1,5 +1,5 @@
 <template>
-  <!-- Primitive Components: pathTo (and its subcommponent "path"), en   -->
+  <!-- lower level  Components: pathTo (and its subcommponent "path"), entity, section   -->
   <template v-if="type == 'pathTo'">
     <div class="mainEntity name flex">
       <NodeIcon class="icon " strokewidth="2" width="22" height="22" icon="user"></NodeIcon>
@@ -44,7 +44,7 @@
         <NodeIcon v-if="type == 'section'" class="icon first_child" strokewidth="3" width="14" height="17" icon="first_child"></NodeIcon>
         <NodeIcon v-if="type == 'entity'" class="icon" strokewidth="2" width="22" height="22" icon="document_text"></NodeIcon>
         <NodeIcon v-else-if="type == 'section'" class="icon" strokewidth="2" width="20" height="20" icon="color_swatch"></NodeIcon>
-        <div class="name hover:underline cursor-pointer">{{ name }}</div>
+        <div  @click="commitTarget(...updateTarget)" class="name hover:underline cursor-pointer">{{ name }}</div>
 
         <div
           v-if="edit"
@@ -62,119 +62,117 @@
       </div>
     </div>
   </template>
-  <!-- Primitive Components  -->
+  <!-- lower level  Components  -->
 
-  <!-- / Higher Level   -->
+  <!-- / higher Level component   -->
   <template v-if="type == 'linkedEntity'">
-    <!-- Full Tree Connection Between Main Entity and Linked Entity  -->
-    <template v-if="showDetails">
+    <TreeItem
+      type="pathTo"
+      :mainEntity="data?.select?.entityType"
+      :pathTo="getPathTo() || definition?.pathTo"
+      :linkedEntity="definition?.entityType"
+      :data="data"
+      :path="path"
+    >
+      <!-- Final Linked Entity Definition  is slotted In Here instead of below  -->
+      <!-- !!! Copy any changes here to the component below-->
+
       <TreeItem
-        type="pathTo"
-        :mainEntity="data?.select?.entityType"
-        :pathTo="getPathTo() || definition?.pathTo"
-        :linkedEntity="definition?.entityType"
+        :name="definition?.entityType?.name"
+        :edit="edit"
         :data="data"
         :path="path"
+        connector="none"
+        type="entity"
+        :propertyPath="'entityType'"
+        :updateTarget="['property', 'view', 'entityType']"
       >
-        <!-- Final Linked Entity Definition  is slotted In Here instead of below  -->
-        <!-- !!! Copy any changes here to the component below-->
-        <TreeItem :name="definition?.entityType?.name" :edit="edit" :data="data" :path="path" connector="none" type="entity" propertyPath="entityType">
-          <template #section>
-            <TreeItem :name="'Any Entry'" :edit="edit" v-if="definition?.property" :data="data" :path="path" type="section" propertyPath="property">
-              <template #property>
-                <div v-for="(prop, propIndex) in definition?.property" :key="prop['@id']" class="group ">
-                  <div
-                    v-if="edit"
-                    @click="true"
-                    class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
-                  >
-                    <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
-                  </div>
-                  <Property class="ml10  relative z-10 rounded-md" :modelValue="prop" notExist="" :data="data" :path="path"> </Property>
-                  <div
-                    v-if="edit"
-                    @click="onPropertyDelete(path, 'property', propIndex)"
-                    class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
-                  >
-                    <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
-                  </div>
-                </div>
-              </template>
-            </TreeItem>
-
-            <TreeItem
-              :name="getOrderLimitLabel()"
-              v-if="definition?.orderLimit && definition?.testProperty"
-              :data="data"
-              :path="path"
-              propertyPath="orderLimit"
-              type="section"
-              :edit="edit"
-            >
-              <template #property>
-                <div v-for="(prop, propIndex) in definition?.testProperty" :key="prop['@id']" class="group">
-                  <div
-                    v-if="edit"
-                    @click="true"
-                    class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
-                  >
-                    <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
-                  </div>
-                  <Property class="ml10  relative z-10 rounded-md" :modelValue="prop" notExist="" :data="data" :path="path"> </Property>
-                  <div
-                    v-if="edit"
-                    @click="onPropertyDelete(path, 'testProperty', propIndex)"
-                    class="roup-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
-                  >
-                    <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
-                  </div>
-                </div>
-              </template>
-            </TreeItem>
-          </template>
-        </TreeItem>
-        <!-- Final Linked Entity Definition  is slotted In Here instead of below  -->
-      </TreeItem>
-    </template>
-    <!-- Full Tree Connection Between Main Entity and Linked Entity  -->
-
-    <!-- Tree is shown as a property/entity path with arrows in between  -->
-    <template v-else>
-      <!-- path  -->
-      <div class="im-definition-header pathTo">
-        <span class="ml10"> {{ data?.select?.entityType?.name }} </span>
-        <NodeIcon class="ml10 arrow-right" strokewidth="3" width="14" height="14" icon="arrow_right"></NodeIcon>
-        <template v-if="definition?.pathTo?.length > 0" v-for="pathTo in definition?.pathTo" :key="pathTo.name">
-          <span class="ml10"> {{ pathTo.name }} </span>
-          <NodeIcon class="ml10 arrow-right" strokewidth="3" width="14" height="14" icon="arrow_right"></NodeIcon>
-        </template>
-        <div class="ml10">{{ definition?.entityType?.name }}</div>
-      </div>
-      <!-- / path  -->
-      <!-- / Tree is shown as a property/entity path with arrows in between  -->
-
-      <!-- Linked Entity Definition (when it's show below the path instead of embedded within the tree)  -->
-      <!-- !!! Copy any changes here to the component above  -->
-      <TreeItem :name="definition?.entityType?.name" :data="data" :path="path" connector="none" type="entity">
         <template #section>
-          <TreeItem :name="'Any Entry'" v-if="definition?.property" :data="data" :path="path" type="section">
+          <TreeItem
+            :name="'Any Entry'"
+            :edit="edit"
+            v-if="definition?.property"
+            :data="data"
+            :path="path"
+            type="section"
+            :propertyPath="'property'"
+            :updateTarget="['property', 'view', 'property']"
+          >
             <template #property>
-              <Property class="ml10" v-for="prop in definition?.property" :key="prop['@id']" :modelValue="prop"> </Property>
+              <div v-for="(prop, propIndex) in definition?.property" :key="prop['@id']" class="group ">
+                <div
+                  v-if="edit"
+                  @click="true"
+                  class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
+                >
+                  <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
+                </div>
+                <Property
+                  class="ml10  relative z-10 rounded-md"
+                  :modelValue="prop"
+                  notExist=""
+                  :data="data"
+                  :path="path"
+                  :propertyPath="'property'"
+                  :propertyIndex="propIndex"
+                >
+                </Property>
+                <div
+                  v-if="edit"
+                  @click="onPropertyDelete(path, 'property', propIndex)"
+                  class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
+                >
+                  <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
+                </div>
+              </div>
             </template>
           </TreeItem>
 
-          <TreeItem :name="getOrderLimitLabel()" v-if="definition?.orderLimit && definition?.testProperty" :data="data" :path="path" type="section">
+          <TreeItem
+            :name="getOrderLimitLabel()"
+            v-if="definition?.orderLimit && definition?.testProperty"
+            :data="data"
+            :path="path"
+            propertyPath="orderLimit"
+            type="section"
+            :edit="edit"
+            :updateTarget="['property', 'view', `orderLimit`]"
+          >
             <template #property>
-              <Property class="ml10" v-for="prop in definition?.testProperty" :key="prop['@id']" :modelValue="prop"> </Property>
+              <div v-for="(prop, propIndex) in definition?.testProperty" :key="prop['@id']" class="group">
+                <div
+                  v-if="edit"
+                  @click="true"
+                  class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
+                >
+                  <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
+                </div>
+                <Property
+                  class="ml10  relative z-10 rounded-md"
+                  :modelValue="prop"
+                  notExist=""
+                  :data="data"
+                  :path="path"
+                  :propertyPath="'testProperty'"
+                  :propertyIndex="propIndex"
+                >
+                </Property>
+                <div
+                  v-if="edit"
+                  @click="onPropertyDelete(path, 'testProperty', propIndex)"
+                  class="roup-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
+                >
+                  <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
+                </div>
+              </div>
             </template>
           </TreeItem>
         </template>
       </TreeItem>
-    </template>
-
-    <!-- Linked Entity Definition (when it's show below the path instead of embedded within the tree)  -->
+      <!-- Final Linked Entity Definition  is slotted In Here instead of below  -->
+    </TreeItem>
   </template>
-  <!-- / Higher Level   -->
+  <!-- / Higher Level component  -->
 </template>
 
 <script lang="ts">
@@ -202,11 +200,26 @@ export default defineComponent({
     "margin",
     "connector",
     "propertyPath",
-    "edit"
+    "edit",
+    "updateTarget"
   ],
   emits: ["update:modelValue"],
   components: { NodeIcon, Property },
   methods: {
+    commitTarget(targetType: string, targetAction: string, propertyPath: string) {
+      // console.log(this.path);
+      // console.log(this.definition);
+      const payload = {
+        clausePath: this.path,
+        propertyPath: propertyPath,
+        targetType: targetType,
+        targetAction: targetAction
+      };
+
+      // console.log("updateTarget", payload);
+
+      this.$store.commit("updateTarget", payload);
+    },
     getPathTo() {
       return null;
       //used for testing component

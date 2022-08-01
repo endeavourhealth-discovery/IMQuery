@@ -6,12 +6,12 @@
   <template v-if="isEntity(result) || isProperty(result)">
     <div
       v-if="pathData.length"
-      class="result cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105   transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
+      class="result group cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105   transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
       @mouseenter="onEnter()"
       @mouseleave="onLeave()"
     >
-      <div class="result-content group relative">
-        <div class="invisible group-hover:visible text-lg  flex row-col items-center">
+      <div class="result-content group relative ">
+        <div class="invisible group-hover:visible text-lg  flex row-col items-center ">
           <div v-tooltip.bottom="result.iri" class="inline text-gray-500 dark:text-gray-300">
             <!-- {{ encodeURIComponent(result.iri) }} -->
             {{ result.iri }}
@@ -26,7 +26,7 @@
       </div>
 
       <!-- Paths  -->
-      <div v-if="pathFilter" class="#result-actions #invisible #group-hover:visible  ">
+      <div v-if="pathFilter" class="#result-actions #invisible #group-hover:visible    ">
         <div v-if="pathData.length" class="mt-2">
           <div
             v-for="path in pathData"
@@ -42,7 +42,7 @@
                     {{ pathItem.split(":").length ? nameFromIri(pathItem) : "" }}
                   </div>
                   <div v-tooltip.bottom="getToolTip(path[index])">
-                    <HeroIcon
+                    <NodeIcon
                       v-if="showDetails | (index < path.length - 1 && index % 2 == 1)"
                       class="text-blue-600 mx-2 mt-1"
                       strokewidth="3"
@@ -57,7 +57,7 @@
             <div
               class="#bg-blue-600 group-hover:visible invisible text-blue-600 inline-flex  rounded-full relative  ml-2 h-9 pl-1 pr-4 pt-1  text-xl font-semibold"
             >
-              <HeroIcon class="mx-2 mt-1" strokewidth="3" width="12" height="12" icon="plus" />
+              <NodeIcon class="mx-2 mt-1" strokewidth="3" width="12" height="12" icon="plus" />
               Add
             </div>
           </div>
@@ -99,8 +99,16 @@
             v-if="isClause(result) && isHover"
             class="#bg-blue-600 group-hover:visible invisible text-blue-600  hover:bg-blue-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
           >
-            <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
+            <NodeIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
             Add
+          </div>
+          <div
+            v-if="isQuery(result) && isHover"
+            @click="viewEntity(result)"
+            class="#bg-blue-600 group-hover:visible invisible text-blue-600  hover:underline inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+          >
+            <NodeIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="external_link" />
+            View Definition
           </div>
         </div>
       </div>
@@ -118,14 +126,14 @@
             class="#bg-blue-600 group-hover:visible invisible text-green-600  hover:bg-green-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
             @click="onCreate([], false)"
           >
-            <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
+            <NodeIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
             Include
           </div>
           <div
             class="#bg-blue-600 group-hover:visible invisible text-red-600  hover:bg-red-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
             @click="onCreate([], true)"
           >
-            <HeroIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="x" />
+            <NodeIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="x" />
             Exclude
           </div>
 
@@ -142,7 +150,7 @@
 
 <script lang="ts">
 import { ref, onMounted, defineComponent } from "vue";
-import HeroIcon from "@/components/general/HeroIcon.vue";
+import NodeIcon from "@/components/query/NodeIcon.vue";
 import Datamodel from "@/logic/Datamodel";
 import QueryUtils from "@/helpers/QueryUtils";
 import { TransitionRoot } from "@headlessui/vue";
@@ -155,7 +163,7 @@ import Graph from "@/logic/Graph";
 
 export default defineComponent({
   name: "Sugggestion",
-  components: { TransitionRoot, HeroIcon, IMDefinition },
+  components: { TransitionRoot, NodeIcon, IMDefinition },
   emits: ["openItem", "updatePreview"],
   props: ["result", "pathFilter", "showDetails", "updateActiveClause", "mainEntity"],
   data() {
@@ -323,7 +331,16 @@ export default defineComponent({
     },
 
     getPaths(): any {
-      const iris = this.datamodelIri();
+      let iris = this.datamodelIri();
+      // console.log("iris", iris);
+
+      if (iris && Array.isArray(iris) && iris?.length > 0) {
+        iris = iris.map((iri: any) => {
+          return QueryUtils.toIri(iri);
+        });
+      }
+      // console.log("iris map", iris);
+
       let paths = [];
       if (Array.isArray(iris)) {
         // console.log("iris", iris);
@@ -334,18 +351,22 @@ export default defineComponent({
       } else {
         paths = this.findPaths(iris);
       }
+      console.log("paths", paths);
       // console.log("paths", paths);
       this.$emit("updatePreview", { data: this.createClause(paths[0]) });
       return paths;
     },
     datamodelIri(): string {
-      console.log("this.result.iri", this.result.iri);
-      console.log("this.toPrefixedIri(this.result.iri)", this.toPrefixedIri(this.result.iri));
+      // console.log("this.result.iri", this.result.iri);
+      // console.log("this.toPrefixedIri(this.result.iri)", this.toPrefixedIri(this.result.iri));
       const iri = this.toPrefixedIri(this.result.iri);
       if (this.isEntity(this.result)) {
         return iri;
       } else {
-        return Datamodel.withProperty(iri).map(item => item["@id"]);
+        // const entity = Datamodel.withProperty(iri).map(item => item["@id"]);
+        const entity = this.$store.state.datamodelGraph.withProperty(iri).map(item => item["@id"]);
+        // console.log("entity", entity);
+        return entity;
       }
     },
     findPaths(iri: string): any {
@@ -365,6 +386,10 @@ export default defineComponent({
         };
       });
       return TTIriRefs;
+    },
+    viewEntity(entity: any): void {
+      const url = `https://dev.endhealth.co.uk/viewer/#/concept/${encodeURIComponent(entity?.iri)}`;
+      window.open(url, "_blank").focus();
     },
     handleView(iri: string) {
       //debouncing necessary to avoid loading items twice

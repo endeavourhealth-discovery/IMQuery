@@ -8,6 +8,7 @@ import { select } from "d3";
 import { resourceLimits } from "worker_threads";
 const { onlyUnique, excludedPaths, entitiesFromPredicates, isTTIriRef } = ManipulationUtils;
 
+import querySnippets from "./querySnippets";
 
 export default class QueryService {
 
@@ -28,12 +29,13 @@ export default class QueryService {
   public static async searchAll(searchString: string): Promise<any> {
     try {
 
-      const searchIM = await this.searchIM(searchString, 10);
-      // console.log("searchIM", searchIM);
+      const _searchIM: any = this.searchIM(searchString, 10);
+      const _clauses: any = this.searchClauses(searchString, 10)
 
-      let clauses: any[] = await this.searchClauses(searchString, 10);
-      console.log("clauses", clauses);
-      //removes duplicate labels
+
+      let [searchIM, clauses] = await Promise.all([_searchIM, _clauses]); //.then(values => console.log(values));
+
+      //removes duplicates
       clauses = clauses.filter((value, index, self) =>
         index === self.findIndex((t) => (
           t.name === value.name
@@ -48,8 +50,6 @@ export default class QueryService {
     }
 
   }
-
-
 
 
   //
@@ -111,7 +111,7 @@ export default class QueryService {
         termFilter: searchString,
         statusFilter: [],
         typeFilter: ["http://endhealth.info/im#Query", "http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class", "http://endhealth.info/im#dataModelProperty", "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"],
-        schemeFilter: [],
+        schemeFilter: ["http://endhealth.info/im#", "http://endhealth.info/ceg/qry#"],
         sortBy: 0,
         page: 1,
         size: limit
@@ -123,6 +123,62 @@ export default class QueryService {
     }
   }
 
+
+
+
+  //get all datamodel entities
+  //
+  public static async getDatamodel(searchString: string, limit: number): Promise<AxiosResponse<any>> {
+    var data = JSON.stringify(querySnippets.datamodel_plus);
+
+    var config = {
+      method: 'post',
+      url: `${this.API}/api/query/public/queryIM`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    const res = await axios(config as any)
+      .then(function (response) {
+        const datamodel = response.data;
+        return datamodel;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // console.log("axios response", res);
+    return res;
+
+  }
+
+  // get EntityProperty(iri: string): Promise<AxiosResponse<any>> {
+  //   var data = JSON.stringify(querySnippets.property);
+
+  //   var config = {
+  //     method: 'post',
+  //     url: `${this.API}/api/query/public/queryIM`,
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     data: data
+  //   };
+
+  //   const res = await axios(config as any)
+  //     .then(function (response) {
+  //       const datamodel = response.data;
+  //       return datamodel;
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+
+  //   // console.log("axios response", res);
+  //   return res;
+
+  // }
 
 
 

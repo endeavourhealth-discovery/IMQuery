@@ -79,7 +79,7 @@
       <!-- <div class="new-circle border-t-2  border-t-gray-700 w-6 absolute -left-10"></div> -->
       <NodeIcon class="ml-4  text-blue-700 mr-2" strokewidth="3" width="20" height="24" icon="plus" />
       <SearchInput
-        @click="updateTarget('clause', 'insertNew')"
+        @click="updateTarget('clause', 'addTo')"
         class="ml-4"
         @blur="onBlur"
         :maxResults="2"
@@ -179,6 +179,7 @@ export default defineComponent({
 
       this.$store.commit("updateTarget", {
         clausePath: this.path,
+        propertyPath: null,
         targetType: targetType,
         targetAction: targetAction
       });

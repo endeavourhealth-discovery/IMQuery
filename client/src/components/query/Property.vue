@@ -10,7 +10,8 @@
       height="14"
       icon="property_first"
     ></NodeIcon>
-    <div v-if="definition?.entityInSet" class="horizontal">
+
+    <div v-if="definition?.entityInSet" class="horizontal" :updateTarget="['clause', 'view', `${propertyPath}[${propertyIndex}].entityInSet`]">
       <span class="property-name font-normal hover:underline"> {{ "is" }} </span>
       <span v-if="definition.notExist" class="property-name font-normal hover:underline"> {{ `${definition.notExist ? "not " : ""}` }} </span>
       <span class="ml-2 font-normal"> {{ "part of the results of the search" }} </span>
@@ -22,25 +23,37 @@
         icon="arrow_right_small"
       ></NodeIcon>
       <div
-        class="ml10 inSet-item hover:underline text-black font-bold cursor-pointer"
-        @click="viewEntity(set)"
-        v-for="set in definition?.entityInSet || definition?.entityNotInSet"
+        class="ml10 "
+        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].entityInSet[${setIndex}]`]"
+        v-for="(set, setIndex) in definition?.entityInSet"
       >
         {{ set?.name }}{{ "," }}
       </div>
     </div>
-    <span v-else class="property-name font-normal hover:underline"> {{ definition?.name }} </span>
-    <div v-if="definition?.inSet" class="horizontal">
-      <NodeIcon
-        :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
-        strokewidth="3"
-        width="14"
-        height="14"
-        icon="arrow_right_small"
-      ></NodeIcon>
-      <div class="ml10 inSet-item hover:underline text-black font-bold cursor-pointer" v-for="set in definition?.inSet">{{ set?.name }}{{ "," }}</div>
+    <selector v-else :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].@id`]">
+      <div class="property-name font-normal hover:underline">
+        {{ definition?.name }}
+      </div>
+    </selector>
+    <div v-if="definition?.inSet" class="flex-col">
+      <selector
+        v-for="(set, setIndex) in definition?.inSet"
+        :key="set['@id']"
+        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].inSet[${setIndex}]`]"
+      >
+        <div class="ml10 flex ">
+          <NodeIcon
+            :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
+            strokewidth="3"
+            width="14"
+            height="14"
+            icon="arrow_right_small"
+          ></NodeIcon
+          >{{ set?.name }}
+        </div>
+      </selector>
     </div>
-    <div v-else-if="definition?.notInSet" :class="'horizontal'">
+    <!-- <div v-else-if="definition?.notInSet" :class="'horizontal'">
       <NodeIcon
         :class="'ml10 arrow-right min-w-[10px]' + [notExist ? ' text-red-700' : ' text-green-700']"
         strokewidth="3"
@@ -48,27 +61,34 @@
         height="14"
         icon="arrow_right_small"
       ></NodeIcon>
-      <div class="ml10 inSet-item hover:underline text-black font-bold cursor-pointer" @click="viewEntity(set)" v-for="set in definition?.notInSet">
-        {{ set?.name }}{{ "," }}
+      <selector
+        :key="set['@id']"
+        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].notInSet[${setIndex}]`]"
+        v-for="(set, setIndex) in definition?.notInSet"
+      >
+        <div class="ml10 ">{{ set?.name }}{{ "," }}</div>
+      </selector>
+    </div> -->
+    <div v-else-if="definition?.value" :class="'flex-col'">
+      <div class="horizontal">
+        <NodeIcon
+          :class="'ml10 arrow-right min-w-[10px]' + [notExist ? ' text-red-700' : ' text-green-700']"
+          strokewidth="3"
+          width="14"
+          height="14"
+          icon="arrow_right_small"
+        ></NodeIcon>
+        <div class="ml10 horizontal" @click="onToggle">
+          <selector :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].value.comparison`]">
+            {{ comparison(definition?.value?.comparison) }}
+          </selector>
+          <selector :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].value.valueData`]">{{ definition?.value?.valueData }}</selector>
+          <selector :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].function.argument[0].valueData`]">
+            {{  definition?.function?.argument[0].valueData?.toLowerCase()}}
+          </selector>
+          <span class="relative -left-[5px]">{{ getText("s") }}</span>
+        </div>
       </div>
-    </div>
-    <div v-else-if="definition?.value" :class="'horizontal'">
-      <NodeIcon
-        :class="'ml10 arrow-right min-w-[10px]' + [notExist ? ' text-red-700' : ' text-green-700']"
-        strokewidth="3"
-        width="14"
-        height="14"
-        icon="arrow_right_small"
-      ></NodeIcon>
-      <div class="ml10 " @click="onToggle">
-        {{ comparison(definition?.value?.comparison) + " " }} {{ definition?.value?.valueData + " " }}
-        {{ definition?.function?.argument[0].valueData?.toLowerCase()
-
-        }}{{definition?.function?.argument[0].valueData && definition?.value?.valueData > 1 ? "s" : "" }}
-      </div>
-      <OverlayPanel class="panel-selector" ref="overlay-selector">
-        <Selector type="value" :modelValue="definition"></Selector>
-      </OverlayPanel>
     </div>
     <div v-else-if="definition?.isConcept" class="horizontal">
       <NodeIcon
@@ -78,9 +98,13 @@
         height="14"
         icon="arrow_right_small"
       ></NodeIcon>
-      <div class="ml10 inSet-item hover:underline text-black font-bold cursor-pointer" @click="viewEntity(set)" v-for="concept in definition?.isConcept">
-        {{ concept?.name }}{{ "," }}
-      </div>
+      <selector
+        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].isConcept[${conceptIndex}]`]"
+        :key="concept['@id']"
+        v-for="(concept, conceptIndex) in definition?.isConcept"
+      >
+        <div class="font-bold">{{ concept?.name }}</div>
+      </selector>
     </div>
     <!-- <div @click="true" class="group-hover:inline absolute hidden -top-1 -right-10">
       <NodeIcon class="ml-4 mt-1 text-red-500 hover:text-red-800 mr-2" strokewidth="3" width="20" height="24" icon="x" />
@@ -97,7 +121,7 @@ import _ from "lodash";
 
 export default defineComponent({
   name: "Property",
-  props: ["modelValue", "notExist"],
+  props: ["modelValue", "notExist", "path", "propertyPath", "propertyIndex"],
   components: { NodeIcon, Selector },
   data() {
     return {
@@ -110,6 +134,13 @@ export default defineComponent({
     }
   },
   methods: {
+    getText(type: string): string {
+      if (type == "s") {
+        return _.get(this.definition, "function.argument[0].valueData") && _.get(this.definition, "value.valueData") > 1 ? "s" : "";
+      }
+      return "";
+    },
+
     onToggle(event: any): void {
       // console.log("toggle", event);
       (this.$refs["overlay-selector"] as any).toggle(event); //show();
