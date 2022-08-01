@@ -20,6 +20,25 @@ export default class QueryUtils {
         return { path: parentPath, index: currentIndex };
     }
 
+    public static isPathDirectProperty(currentPath: string): any {
+        let { path, index } = QueryUtils.splitPath(currentPath);
+        const pathArray = path.split(".");
+        const lastItem = pathArray[pathArray?.length - 1];
+        // console.log("isPathDirectProperty", path, lastItem);
+        return lastItem == "property"
+    }
+    public static getParentPath(currentPath: string): any {
+        let { path, index } = QueryUtils.splitPath(currentPath);
+        let pathArray = path.split(".");
+        pathArray.pop();
+        let currentParentPath = pathArray.join(".")
+        console.log("currentParentPath", currentParentPath);
+        const { path: parentPath, index: parentIndex } = QueryUtils.splitPath(currentParentPath);
+        console.log("parentPath", parentPath);
+        console.log("parentIndex", parentIndex);
+        return `${parentPath}[${parseInt(parentIndex) + 1}]`;
+    }
+
 
     public static isQuery(entity: any): boolean {
         const entityType = entity["entityType"];
