@@ -23,7 +23,7 @@
         <div class="text-gray-900 text-xl font-bold  mt-1 ml-4">{{ data?.select?.entityType?.name }}</div>
       </div>
       <!-- <TreeItem type="directProperty" :data="data" :path="path"> </TreeItem> -->
-      <Property class="ml10 mt-2" :modelValue="modelValue || definition"> </Property>
+      <Property class="ml10 mt-2" :modelValue="definition" data="data" :path="path"> </Property>
     </div>
   </template>
   <!-- /Direct Property of Main Entity  -->

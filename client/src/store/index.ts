@@ -211,7 +211,7 @@ export default createStore({
         case "update":
           const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
           const cloneQuery = _.cloneDeep(activeQuery);
-          const path = state.activeClausePath + "." + state.activePropertyPath;
+          const path = state.activeClausePath + "." + payload.propertyPath;
           _.set(cloneQuery, path, payload.data);
           state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
           break;

@@ -1,8 +1,5 @@
 <template>
   <div class="property group relative cursor-pointer">
-    <!-- <div @click="true" class="group-hover:inline rounded-full bg-blue-600 hover:bg-blue-800 absolute hidden -top-2 -left-10">
-      <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
-    </div> -->
     <NodeIcon
       :class="'ml10 min-w-[10px]' + [notExist || definition?.notExist ? ' text-red-700' : ' text-green-700']"
       strokewidth="3"
@@ -30,11 +27,13 @@
         {{ set?.name }}{{ "," }}
       </div>
     </div>
+
     <selector v-else :updateTarget="['property-@id', 'view', `${propertyPath}[${propertyIndex}]`]">
       <div class="property-name font-normal hover:underline">
         {{ definition?.name }}
       </div>
     </selector>
+
     <div v-if="definition?.inSet" class="flex-col">
       <selector v-for="(set, setIndex) in definition?.inSet" :key="set['@id']" :updateTarget="['property-inSet', 'view', `${propertyPath}[${propertyIndex}]`]">
         <div class="ml10 flex ">
@@ -49,22 +48,7 @@
         </div>
       </selector>
     </div>
-    <!-- <div v-else-if="definition?.notInSet" :class="'horizontal'">
-      <NodeIcon
-        :class="'ml10 arrow-right min-w-[10px]' + [notExist ? ' text-red-700' : ' text-green-700']"
-        strokewidth="3"
-        width="14"
-        height="14"
-        icon="arrow_right_small"
-      ></NodeIcon>
-      <selector
-        :key="set['@id']"
-        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].notInSet[${setIndex}]`]"
-        v-for="(set, setIndex) in definition?.notInSet"
-      >
-        <div class="ml10 ">{{ set?.name }}{{ "," }}</div>
-      </selector>
-    </div> -->
+
     <div v-else-if="definition?.value" :class="'flex-col'">
       <div class="horizontal">
         <NodeIcon
@@ -86,6 +70,7 @@
         </div>
       </div>
     </div>
+
     <div v-else-if="definition?.isConcept" class="horizontal">
       <NodeIcon
         :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
@@ -102,9 +87,6 @@
         <div class="font-bold">{{ concept?.name }}</div>
       </selector>
     </div>
-    <!-- <div @click="true" class="group-hover:inline absolute hidden -top-1 -right-10">
-      <NodeIcon class="ml-4 mt-1 text-red-500 hover:text-red-800 mr-2" strokewidth="3" width="20" height="24" icon="x" />
-    </div> -->
   </div>
 </template>
 
@@ -166,8 +148,18 @@ export default defineComponent({
   computed: {
     definition: {
       get(): any {
-        console.log("this.activeQuery", this.activeQuery);
-        const path = `${this.path}.${this.propertyPath}[${this.propertyIndex}]`;
+        let path;
+        if (!this.path) {
+          //i.e. properties being previewed in Suggestion.vue
+          return this.modelValue;
+        } else if (this.propertyPath) {
+          //i.e. properties inside clauses
+          path = `${this.path}.${this.propertyPath}[${this.propertyIndex}]`;
+        } else {
+          //i.e. other types of direct properties
+          path = this.path;
+        }
+        // console.log("path", path);
         const def = _.get(this.activeQuery, path);
         return def;
       },
@@ -186,10 +178,7 @@ export default defineComponent({
 <style scoped>
 .property {
   display: flex;
-  /* padding: 4px 0; */
-  /* padding-top: 20px; */
   font-size: 13px;
-  /* flex-wrap: wrap; */
 }
 
 .property-name {

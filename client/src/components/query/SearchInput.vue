@@ -83,12 +83,14 @@ export default defineComponent({
   },
   mounted() {
     this.focusTextArea();
-
   },
   methods: {
     focusTextArea() {
       this.$nextTick(() => {
-        (this.$refs["textarea"] as any).focus();
+        try {
+          (this.$refs["textarea"] as any).focus();
+        } catch (error) {}
+
         // setTimeout(() => {
         //   theElement.focus();
         // }, 500);

@@ -59,8 +59,10 @@ export default defineComponent({
   methods: {
     onShow(): any {
       this.isShown = true;
+      //creates local copies
+      this.propertPath = _.cloneDeep(this.activePropertyPath);
       this.activePropertyData = _.cloneDeep(this.activeProperty);
-      // console.log("this.data", this.data);
+      console.log("active property", this.activePropertyData)
     },
     onHide(): any {
       this.isShown = false;
@@ -99,7 +101,7 @@ export default defineComponent({
     updateQuery(): void {
       if (this.hasUpdated) {
         console.log("updateQuery", this.activePropertyData);
-        this.$store.commit("updateActiveProperty", { action: "update", data: this.activePropertyData });
+        this.$store.commit("updateActiveProperty", { action: "update", propertyPath: this.propertPath, data: this.activePropertyData });
       }
     },
     updated(): void {
@@ -108,14 +110,14 @@ export default defineComponent({
       }
     },
     get(path: string): any {
-      console.log("get", path);
+      // console.log("get", path);
       console.log("get", this.activePropertyData);
       const val = _.get(this.activePropertyData, path);
-      console.log("get", val);
+      // console.log("get", val);
       return val;
     },
     set(path: string, value: any): void {
-      console.log("set", path, value);
+      // console.log("set", path, value);
       _.set(this.activePropertyData, path, value);
     }
   },
@@ -124,6 +126,7 @@ export default defineComponent({
   },
   data() {
     return {
+      propertyPath: "",
       isShown: false,
       hasUpdated: false,
       activePropertyData: {},
