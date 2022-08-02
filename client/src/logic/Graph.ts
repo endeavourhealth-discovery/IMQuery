@@ -151,24 +151,35 @@ export default class Graph {
     return results;
   }
 
-  public getEntityProperty(entityIri: string, propertyIri): any {
+
+  //find entity specific property, otherwise any property of a datamodel 
+  public getPropertyMeta(propertyIri: string, entityIri?: string): any {
     const entity = this.datamodel.find((entity: any) => QueryUtils.toIri(entity["@id"]) == entityIri && entity["sh:property"]);
+
+    let meta;
 
     if (entity["sh:property"] && Array.isArray(entity["sh:property"])) {
       const property = entity["sh:property"].find((property: any) => {
         return _.get(property, "sh:path[0].@id") == propertyIri;
       })
-      // console.log("property", property)
-      return property;
+      meta = property;
     }
 
-
-    // const property =  && entity["sh:property"].some((property: any) => {
-    //   return _.get(property, "sh:path[0].@id") == propertyIri;
-    // }
-    // ));
-
-
+    if (meta && meta?.length > 0) {
+      return meta;
+    } else {
+      this.datamodel.forEach((entity: any) => {
+        if (entity["sh:property"] && Array.isArray(entity["sh:property"])) {
+          entity["sh:property"].forEach((property: any) => {
+            const iri = _.get(property, "sh:path[0].@id");
+            if (iri == propertyIri) {
+              meta = property;
+            }
+          })
+        }
+      })
+      return meta;
+    }
   }
 
 

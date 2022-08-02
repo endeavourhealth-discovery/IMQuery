@@ -17,16 +17,7 @@ export default defineComponent({
       if (label && label != "") label = label.replaceAll("--", "\n    •");
       return label;
     },
-    handleClick(event: any): void {
-      if (this.edit) {
-        // (this.$refs["overlay-selector"] as any).toggle(event);
-      } else {
-        // #todo: open query in IM Viewer or New IM Query windowF
-      }
 
-      console.log("modelValue", this.modelValue);
-      console.log("path", this.path);
-    }
   },
   data() {
     return {

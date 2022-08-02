@@ -1,11 +1,11 @@
 <template>
-  <div class="tab-buttons font-medium flex justify-center pt-4 space-x-4">
+  <div class="tab-buttons font-medium flex justify-center pt-5 space-x-4">
     <template v-for="item in items">
       <div
         v-if="item.visible"
         :key="item.name"
         :class="[
-          'tab-button non-selectable inline-flex rounded-full max-h-[40px] items-center justify-center transition duration-500 ease-in-out dark:hover:text-white #rounded-t-lg ' +
+          'tab-button non-selectable inline-flex rounded-full max-h-[35px] items-center justify-center transition duration-500 ease-in-out dark:hover:text-white #rounded-t-lg ' +
             // [
             //   underlined && modelValue == item.name
             //     ? ' dark:text-white relative top-0.5 text-blue-600 border-b-2 border-b-blue-500 dark:border-b-0 '
@@ -74,7 +74,7 @@ export default defineComponent({
 
 .tab-button {
   font-size: 14px;
-  padding: 0 10px 5px 10px;
+  padding: 0 10px 0 10px;
   /* margin-right: 1%; */
   /* border-bottom: solid 3px transparent; */
 }

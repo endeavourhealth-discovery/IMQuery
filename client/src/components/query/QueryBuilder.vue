@@ -18,7 +18,7 @@
           v-if="tab.visible"
           @click="searchActiveTab = tab.name"
           :class="
-            'transition duration-500 ease-in-out cursor-pointer border-b-2  pb-3 relative top-1 ' +
+            'transition duration-700 ease-in-out cursor-pointer border-b-2  pb-3 relative top-1 ' +
               [searchActiveTab == tab.name ? ' text-gray-900 border-b-blue-600 ' : ' text-gray-500 border-b-0']
           "
         >

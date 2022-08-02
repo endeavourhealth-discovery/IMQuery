@@ -38,21 +38,21 @@
       <!-- <div :style="{ marginLeft: margin + 'px' }" class="treeitem-section"> -->
 
       <div :class="'treeitem-section group'">
-        <div v-if="edit" @click="true" class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-1 -left-10 z-20">
-          <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
-        </div>
+        <!-- <ButtonCRUD v-if="edit" @click="true" :type="'add'"> </ButtonCRUD> -->
+        <!-- <ButtonCRUD v-if="edit" @click="onPropertyDelete(path, propertyPath, propIndex)" :type="'delete'" class=" absolute -translate-y-2 left-0 z-40"> </ButtonCRUD> -->
+
         <NodeIcon v-if="type == 'section'" class="icon first_child" strokewidth="3" width="14" height="17" icon="first_child"></NodeIcon>
         <NodeIcon v-if="type == 'entity'" class="icon" strokewidth="2" width="22" height="22" icon="document_text"></NodeIcon>
         <NodeIcon v-else-if="type == 'section'" class="icon" strokewidth="2" width="20" height="20" icon="color_swatch"></NodeIcon>
-        <div  @click="commitTarget(...updateTarget)" class="name hover:underline cursor-pointer">{{ name }}</div>
+        <div @click="commitTarget(...updateTarget)" class="name hover:underline cursor-pointer">{{ name }}</div>
 
-        <div
+        <!-- <div
           v-if="edit"
           @click="onPropertyDelete(path, propertyPath, propIndex)"
           class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-2 -right-10 z-20"
         >
           <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
-        </div>
+        </div> -->
       </div>
       <div class="tree-item-relationship">
         <slot name="section"> </slot>
@@ -100,15 +100,10 @@
           >
             <template #property>
               <div v-for="(prop, propIndex) in definition?.property" :key="prop['@id']" class="group ">
-                <div
-                  v-if="edit"
-                  @click="true"
-                  class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
-                >
-                  <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
-                </div>
+                <!-- <ButtonCRUD v-if="edit" @click="true" :type="'add'"> </ButtonCRUD> -->
+                <!-- <ButtonCRUD v-if="edit" @click="onPropertyDelete(path, propertyPath, propIndex)" :type="'delete'"> </ButtonCRUD> -->
                 <Property
-                  class="ml10  relative z-10 rounded-md"
+                  class="pl10  relative z-10 rounded-md"
                   :modelValue="prop"
                   notExist=""
                   :data="data"
@@ -117,13 +112,13 @@
                   :propertyIndex="propIndex"
                 >
                 </Property>
-                <div
+                <!-- <div
                   v-if="edit"
                   @click="onPropertyDelete(path, 'property', propIndex)"
                   class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
                 >
                   <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
-                </div>
+                </div> -->
               </div>
             </template>
           </TreeItem>
@@ -140,15 +135,11 @@
           >
             <template #property>
               <div v-for="(prop, propIndex) in definition?.testProperty" :key="prop['@id']" class="group">
-                <div
-                  v-if="edit"
-                  @click="true"
-                  class="group-hover:inline hidden  rounded-full bg-blue-600 hover:bg-blue-800 absolute -translate-y-2 left-0 z-20"
-                >
-                  <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="plus" />
-                </div>
+                <!-- <ButtonCRUD v-if="edit" @click="true" :type="'add'"> </ButtonCRUD> -->
+                <!-- <ButtonCRUD v-if="edit" @click="onPropertyDelete(path, 'testProperty', propIndex)" :type="'delete'"> </ButtonCRUD> -->
+
                 <Property
-                  class="ml10  relative z-10 rounded-md"
+                  class="pl10 relative z-10 rounded-md"
                   :modelValue="prop"
                   notExist=""
                   :data="data"
@@ -157,13 +148,13 @@
                   :propertyIndex="propIndex"
                 >
                 </Property>
-                <div
+                <!-- <div
                   v-if="edit"
                   @click="onPropertyDelete(path, 'testProperty', propIndex)"
                   class="roup-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
                 >
                   <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
-                </div>
+                </div> -->
               </div>
             </template>
           </TreeItem>
@@ -180,6 +171,7 @@ import { defineComponent } from "vue";
 import _ from "lodash";
 import NodeIcon from "./NodeIcon.vue";
 import Property from "./Property.vue";
+// import ButtonCRUD from "./ButtonCRUD.vue";
 
 export default defineComponent({
   name: "TreeItem",
@@ -204,7 +196,11 @@ export default defineComponent({
     "updateTarget"
   ],
   emits: ["update:modelValue"],
-  components: { NodeIcon, Property },
+  components: {
+    NodeIcon,
+    Property
+    //  ButtonCRUD
+  },
   methods: {
     commitTarget(targetType: string, targetAction: string, propertyPath: string) {
       // console.log(this.path);
@@ -247,6 +243,7 @@ export default defineComponent({
       ];
     },
     onPropertyDelete(clausePath, propertyPath, index) {
+      alert("dle");
       let payload = { action: "deleteClause", clausePath: clausePath, propertyPath: propertyPath, index: index };
       this.$store.commit("updateProperty", payload);
       this.emitter.emit("update-imdefinition", payload.clausePath);
@@ -271,13 +268,17 @@ export default defineComponent({
     };
   },
   watch: {
-    modelValue() {
-      this.definition = this.modelValue ? this.modelValue : _.get(this.data, this.path);
+    data(oldValue, newValue) {
+      this.definition = this.modelValue ? this.modelValue : _.get(newValue, this.path);
     },
-    path() {
-      this.definition = this.modelValue ? this.modelValue : _.get(this.data, this.path);
+    modelValue(oldValue, newValue) {
+      this.definition = newValue ? newValue : _.get(this.data, this.path);
+    },
+    path(oldValue, newValue) {
+      this.definition = this.modelValue ? this.modelValue : _.get(this.data, newValue);
     }
-  }
+  },
+
 });
 </script>
 

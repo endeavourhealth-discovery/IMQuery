@@ -122,6 +122,12 @@ export default defineComponent({
   display: flex;
 }
 
+.pl10 {
+  padding-left: 10px;
+}
+.pl20 {
+  padding-left: 20px;
+}
 .ml10 {
   margin-left: 10px;
 }

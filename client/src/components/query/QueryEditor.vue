@@ -107,7 +107,7 @@ export default defineComponent({
     return {
       edit: this?.modelValue?.select?.match?.length > 0 ? false : true,
       searchString: "",
-      activeViewerTab: "Query Definition",
+      // activeViewerTab: "Query Definition",
       activeEditorTab: "Search",
       activeClausePath: null,
       clauseDefinition: {},
@@ -192,7 +192,7 @@ export default defineComponent({
         this.activeViewerTab = "Filter Criteria";
 
         // nextTick(() => {
-        //   this.activeViewerTab = "Filter Criteria";
+        //   this.$store.commit("updateActiveViewerTab", payload);
         // });
       } else if (payload.action == "delete") {
         this.$store.commit("updateActiveClausePath", payload);
@@ -216,6 +216,16 @@ export default defineComponent({
     },
     updateValue(name: string): void {
       this.$emit("update:modelValue", name);
+    }
+  },
+  computed: {
+    activeViewerTab: {
+      get(): any {
+        return this.$store.state.activeViewerTab;
+      },
+      set(value: any): void {
+        this.$store.commit("updateActiveViewerTab", value);
+      }
     }
   }
 });

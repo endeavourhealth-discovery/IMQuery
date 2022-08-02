@@ -1,5 +1,5 @@
 <template>
-  <div :class="'query-definition ' + [edit ? 'edit ' : '']">
+  <div :class="'query-definition  border outline-none shadow-md border-gray-300 rounded-lg py-6 px-10 ' + [edit ? 'edit ' : '']">
     <!-- <div class="toggle-button">
       <span> Show Details</span>
       <InputSwitch class="ml10" v-model="showDetails" />
@@ -84,7 +84,7 @@ export default defineComponent({
   max-width: 700px;
   width: 100%;
   height: 100%;
-  max-height: 725px;
+  max-height: 700px;
   transition: all 0.2s ease-in;
   display: flex;
   flex-direction: column;

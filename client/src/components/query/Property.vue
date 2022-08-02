@@ -24,23 +24,19 @@
       ></NodeIcon>
       <div
         class="ml10 "
-        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].entityInSet[${setIndex}]`]"
+        :updateTarget="['property-entityInSet', 'view', `${propertyPath}[${propertyIndex}]`]"
         v-for="(set, setIndex) in definition?.entityInSet"
       >
         {{ set?.name }}{{ "," }}
       </div>
     </div>
-    <selector v-else :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].@id`]">
+    <selector v-else :updateTarget="['property-@id', 'view', `${propertyPath}[${propertyIndex}]`]">
       <div class="property-name font-normal hover:underline">
         {{ definition?.name }}
       </div>
     </selector>
     <div v-if="definition?.inSet" class="flex-col">
-      <selector
-        v-for="(set, setIndex) in definition?.inSet"
-        :key="set['@id']"
-        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].inSet[${setIndex}]`]"
-      >
+      <selector v-for="(set, setIndex) in definition?.inSet" :key="set['@id']" :updateTarget="['property-inSet', 'view', `${propertyPath}[${propertyIndex}]`]">
         <div class="ml10 flex ">
           <NodeIcon
             :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
@@ -78,12 +74,12 @@
           height="14"
           icon="arrow_right_small"
         ></NodeIcon>
-        <div class="ml10 horizontal" @click="onToggle">
-          <selector :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].value.comparison`]">
+        <div class="ml10 horizontal">
+          <selector :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">
             {{ comparison(definition?.value?.comparison) }}
           </selector>
-          <selector :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].value.valueData`]">{{ definition?.value?.valueData }}</selector>
-          <selector :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].function.argument[0].valueData`]">
+          <selector :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">{{ definition?.value?.valueData }}</selector>
+          <selector :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">
             {{  definition?.function?.argument[0].valueData?.toLowerCase()}}
           </selector>
           <span class="relative -left-[5px]">{{ getText("s") }}</span>
@@ -99,7 +95,7 @@
         icon="arrow_right_small"
       ></NodeIcon>
       <selector
-        :updateTarget="['property', 'view', `${propertyPath}[${propertyIndex}].isConcept[${conceptIndex}]`]"
+        :updateTarget="['property-concept', 'view', `${propertyPath}[${propertyIndex}].isConcept[${conceptIndex}]`]"
         :key="concept['@id']"
         v-for="(concept, conceptIndex) in definition?.isConcept"
       >
@@ -125,12 +121,12 @@ export default defineComponent({
   components: { NodeIcon, Selector },
   data() {
     return {
-      definition: this.modelValue?.property && this.modelValue?.property?.length > 0 ? this.modelValue.property[0] : this.modelValue
+      // definition: this.modelValue?.property && this.modelValue?.property?.length > 0 ? this.modelValue.property[0] : this.modelValue
     };
   },
   watch: {
-    modelValue() {
-      this.definition = this.modelValue?.property && this.modelValue?.property?.length > 0 ? this.modelValue.property[0] : this.modelValue;
+    path(oldValue, newValue) {
+      this.definition = this.modelValue ? this.modelValue : _.get(this.data, newValue);
     }
   },
   methods: {
@@ -141,13 +137,8 @@ export default defineComponent({
       return "";
     },
 
-    onToggle(event: any): void {
-      // console.log("toggle", event);
-      (this.$refs["overlay-selector"] as any).toggle(event); //show();
-    },
     onClick(TTIriRef: any): void {
       // console.log("ref", this.$refs["overlay-inset"] as any);
-      // (this.$refs["overlay-selector"] as any).toggle(true); //.toggle(event); //show();
       // this.viewEntity(TTIriRef);
     },
     setDefinition(definition: any) {
@@ -170,6 +161,23 @@ export default defineComponent({
     viewEntity(entity: any): void {
       const url = `https://dev.endhealth.co.uk/viewer/#/concept/${encodeURIComponent(entity["@id"])}`;
       window.open(url, "_blank").focus();
+    }
+  },
+  computed: {
+    definition: {
+      get(): any {
+        console.log("this.activeQuery", this.activeQuery);
+        const path = `${this.path}.${this.propertyPath}[${this.propertyIndex}]`;
+        const def = _.get(this.activeQuery, path);
+        return def;
+      },
+      set(val: any): void {}
+    },
+    activeQuery: {
+      get(): any {
+        return this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
+      },
+      set(val: any): void {}
     }
   }
 });

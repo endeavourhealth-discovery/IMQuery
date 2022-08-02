@@ -25,6 +25,7 @@ import { active } from "d3";
 export default createStore({
   // update stateType.ts when adding new state!
   state: {
+    activeViewerTab: "Query Definition",
     datamodelGraph: new Graph(),
     debug: true,
     searchData: {} as any,
@@ -113,12 +114,16 @@ export default createStore({
       }
     ],
     activeTabName: "Home", //Options #Home #SearchResults #View #Explore
-    activeQueryCategory: "definition", //#mainEntity #definition  #output #sources #sql 
+    activeQueryCategory: "definition", //#mainEntity #definition  #output #sources #sql ,
 
   },
   mutations: {
+    updateActiveViewerTab(state, payload) {
+      console.log("updateSearchString", payload);
+      state.activeViewerTab = payload;
+    },
     updateTarget(state, payload) {
-      console.log("updateTarget", payload);
+      // console.log("updateTarget", payload);
       payload?.clausePath ? state.openFiles.find(file => file.iri == state.activeQueryId).activeClausePath = payload?.clausePath : null;
       payload?.propertyPath ? state.openFiles.find(file => file.iri == state.activeQueryId).activePropertyPath = payload?.propertyPath : null;
       payload?.targetType ? state.openFiles.find(file => file.iri == state.activeQueryId).targetType = payload?.targetType : null;
@@ -196,6 +201,22 @@ export default createStore({
       // alert("emit")
 
     },
+    updateActiveProperty(state, payload) {
+      switch (payload.action) {
+
+        case "delete":
+
+        case "add":
+
+        case "update":
+          const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+          const cloneQuery = _.cloneDeep(activeQuery);
+          const path = state.activeClausePath + "." + state.activePropertyPath;
+          _.set(cloneQuery, path, payload.data);
+          state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
+          break;
+      }
+    },
     updateActiveClause(state, payload) {
       // console.log("state update updateActiveClause", payload)
       // console.log("state.activeClausePath", state.activeClausePath)
@@ -215,7 +236,7 @@ export default createStore({
         let newItem = payload.data;
         if (payload.dataType == "directProperty") {
           //if active clause path is a property -> encapsulate newItem in and do not change activeClausePath
-          (payload.data?.property && payload.data?.property.length > 0) || (payload.data?.pathTo)
+          // (payload.data?.property && payload.data?.property.length > 0) || (payload.data?.pathTo)
 
           if (!QueryUtils.isPathDirectProperty(activeClausePath)) {
             newItem =
@@ -231,7 +252,7 @@ export default createStore({
           if (QueryUtils.isPathDirectProperty(activeClausePath)) {
             activeClausePath = QueryUtils.getParentPath(activeClausePath)
             state.targetAction = "new"
-          } 
+          }
         }
         // console.log("activeClausePath", activeClausePath)
 

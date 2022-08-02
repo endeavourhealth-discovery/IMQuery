@@ -156,6 +156,7 @@ import QueryUtils from "@/helpers/QueryUtils";
 import { TransitionRoot } from "@headlessui/vue";
 import { _ } from "lodash";
 import { v4 } from "uuid";
+import LoggerService from "@/services/LoggerService";
 
 import IMDefinition from "../query/IMDefinition.vue";
 
@@ -219,6 +220,8 @@ export default defineComponent({
       const data = this.result?.matchClause;
       data.displayText = this.result?.name;
       this.$emit("updateActiveClause", { action: "new", path: null, data: data });
+      this.$toast.add(LoggerService.success("Added Criteria to your definition. Now you can edit it or go back."));
+
       // this.$store.commit("updateActiveClause", { action: "new", path: null, data: this.result?.matchClause });
       // const clause = this.result.matchClause;
       // clause["@id"] = `urn:uuid:${v4()}`;
@@ -227,8 +230,8 @@ export default defineComponent({
     onCreate(paths?: string[], notExist?: boolean): void {
       this.emitter.emit("reset-searchinput", true);
 
-      console.log("paths", paths);
-      console.log("result", this.result);
+      // console.log("paths", paths);
+      // console.log("result", this.result);
       // this.$store.commit("updateActiveClause", { action: "new", path: this.path, data: this.createClause(paths) });
 
       if (this.isQuery(this.result)) {
@@ -243,6 +246,7 @@ export default defineComponent({
           this.$emit("updateActiveClause", { action: "new", path: this.path, dataType: "clause", data: this.createClause(paths) });
         }
       }
+      this.$toast.add(LoggerService.success("Added Criteria to your definition. Now you can edit it or go back."));
     },
     createEntityInSet(notExist?: boolean) {
       const result = {
