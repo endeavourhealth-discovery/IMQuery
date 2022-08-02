@@ -151,7 +151,7 @@ export default defineComponent({
         let path;
         if (!this.path) {
           //i.e. properties being previewed in Suggestion.vue
-          return this.modelValue;
+          return this.modelValue?.property && this.modelValue?.property?.length > 0 ? this.modelValue.property[0] : this.modelValue;
         } else if (this.propertyPath) {
           //i.e. properties inside clauses
           path = `${this.path}.${this.propertyPath}[${this.propertyIndex}]`;

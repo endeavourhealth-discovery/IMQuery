@@ -103,13 +103,13 @@ export default class QueryUtils {
 
         if (url.startsWith("urn:")) {
             return url;
+        } else if (url.startsWith("http")) {
+            const _arr = url.split("/")
+            const _iri = _arr[_arr.length - 1].replace("#", ":");
+            return _iri;
+        } else {
+            return url
         }
-
-        const _arr = url.split("/")
-        const _iri = _arr[_arr.length - 1].replace("#", ":");
-        return _iri;
-
-
     }
 
 

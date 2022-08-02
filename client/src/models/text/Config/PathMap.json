@@ -20,6 +20,9 @@
     "valueData": "value.valueData",
     "functionArg1": "argument[0].valueData",
     "units": "function.argument[0]",
+    "unitsData": "function.argument[0].valueData",
     "firstDate": "function.argument[1]",
-    "secondDate": "function.argument[2]"
+    "secondDate": "function.argument[2]",
+    "arg1var": "function.argument[1].valueVariable",
+    "arg2var": "function.argument[2].valueVariable"
 }

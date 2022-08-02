@@ -1,5 +1,5 @@
 import _ from "lodash";
-
+import QueryUtils from "@/helpers/QueryUtils"
 
 export default class Datamodel {
     public static withIri(iri: string): any {
@@ -12,6 +12,11 @@ export default class Datamodel {
             return _.get(property, "sh:path[0].@id") == iri;
         }
         ));
+    }
+
+    public static getFunction(iri: string): any {
+        iri = QueryUtils.toIri(iri);
+        return Datamodel.functions.find((f: any) => f["@id"] == iri);
     }
 
     public static ontology = [
@@ -6169,6 +6174,75 @@ export default class Datamodel {
         "im:HospitalAdmission",
     ]
 
+    public static functions = [
+        {
+            "@id": "im:TimeDifference",
+            "rdf:type": [
+                {
+                    "@id": "im:Function"
+                }
+            ],
+            "rdfs:label": "Time difference",
+            "rdfs:comment": "A function that calculates the difference between two date times",
+            "im:isContainedIn": [
+                {
+                    "@id": "im:ModellingFunctions"
+                }
+            ],
+            "sh:parameter": [
+                {
+                    "rdfs:label": "firstDate",
+                    "sh:datatype": [
+                        {
+                            "@id": "im:DateTime"
+                        }
+                    ]
+                },
+                {
+                    "rdfs:label": "secondDate",
+                    "sh:datatype": [
+                        {
+                            "@id": "im:DateTime"
+                        }
+                    ]
+                },
+                {
+                    "rdfs:label": "units"
+                }
+            ]
+        },
+    ];
+
+    public static units = [
+        {
+            name: "1/2day",
+            value: "1/2DAY",
+        },
+        {
+            name: "day",
+            value: "DAY",
+        },
+        {
+            name: "hour",
+            value: "HOUR",
+        },
+        {
+            name: "minute",
+            value: "MINUTE",
+        },
+        {
+            name: "month",
+            value: "MONTH",
+        },
+        {
+            name: "week",
+            value: "WEEK",
+        },
+        {
+            name: "year",
+            value: "YEAR",
+        }
+    ]
 
     public static "im:DiagnosticReport" = [
         "im:DiagnosticReport",
