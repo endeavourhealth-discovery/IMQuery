@@ -31,8 +31,14 @@
               <!-- /Tab Buttons -->
 
               <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
-                <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
-                <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
+                <div class="h-9  w-auto dark:text-white mt-2 dark:hidden">
+                  <NodeIcon class="w-10 h-10" icon="sun" strokewidth="3" width="16" height="16"></NodeIcon>
+                </div>
+                <div class="h-9  w-auto dark:text-white hidden mt-2 text-gray-800">
+                  <NodeIcon class="w-10 h-10" icon="moon" strokewidth="3" width="16" height="16"></NodeIcon>
+                </div>
+                <!-- <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+                <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i> -->
               </button>
             </OverlayPanel>
 
@@ -95,11 +101,20 @@
               <!-- /Apps -->
             </div>
 
-            <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+            <!-- <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
               <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
               <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
+            </button> -->
+            <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
+              <div class="h-9 w-auto dark:text-white  inline dark:hidden ">
+                <NodeIcon class="w-10 h-10" icon="sun" strokewidth="1" width="16" height="16"></NodeIcon>
+              </div>
+              <div class="h-9 w-auto  dark:text-white hidden dark:inline text-gray-800">
+                <NodeIcon class="w-10 h-10" icon="moon" strokewidth="1" width="16" height="16"></NodeIcon>
+              </div>
+              <!-- <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+                <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i> -->
             </button>
-
             <!-- User Widget -->
             <UserWidget class="" :modelValue="userMeta" />
           </div>
@@ -414,7 +429,7 @@
                 spellcheck="”false”"
                 class="border outline-none shadow-md border-gray-300 json-textarea rounded-lg py-6 px-10 mr-5 h-full max-h-[750px] min-w-[700px] text-black text-xl overflow-y-scroll"
               >
-                <vue-json-pretty  :data="jsonDefinition"> </vue-json-pretty>
+                <vue-json-pretty :data="jsonDefinition"> </vue-json-pretty>
               </div>
             </div>
             <div v-show="activeQueryCategory == 'sql'" class="definition viewer flex justify-center space-x-5 text-white"></div>
@@ -563,6 +578,7 @@ import ConfirmDialog from "primevue/confirmdialog";
 
 import Searchbox from "@/components/search/Searchbox.vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
+import NodeIcon from "@/components/query/NodeIcon.vue";
 import UserWidget from "@/components/user/UserWidget.vue";
 import SearchResults from "@/components/search/SearchResults.vue";
 import CardButton from "@/components/general/CardButton.vue";
@@ -589,6 +605,7 @@ export default defineComponent({
     Searchbox,
     SearchResults,
     HeroIcon,
+    NodeIcon,
     ProgressBar,
     UserWidget,
     CardButton,
