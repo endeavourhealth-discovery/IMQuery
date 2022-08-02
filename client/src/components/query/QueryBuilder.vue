@@ -1,5 +1,5 @@
 <template>
-  <div :class="'query-builder '">
+  <div  :class="'query-builder '">
     <!-- header   -->
     <div class="w-full flex space-x-10 text-3xl mb-3 rounded-md font-bold">
       <template v-for="tab in tabs" :key="tab.name">

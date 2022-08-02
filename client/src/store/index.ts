@@ -985,7 +985,7 @@ export default createStore({
 
     async loadTheme({ commit, dispatch }) {
       const _storedTheme = localStorage.getItem("themeName");
-      const _defaultTheme = "dark";
+      const _defaultTheme = "light";
       const _themeName = (_storedTheme && _storedTheme != "") ? _storedTheme : _defaultTheme;
       commit("updateTheme", _themeName);
     },

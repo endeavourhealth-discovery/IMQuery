@@ -169,6 +169,7 @@ export default defineComponent({
   props: ["result", "pathFilter", "showDetails", "updateActiveClause", "mainEntity"],
   data() {
     return {
+      showDetails: true,
       isHover: false,
       preview: {},
       debounce: 0,
