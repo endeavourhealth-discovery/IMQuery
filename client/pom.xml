@@ -4,16 +4,16 @@
 
   <parent>
     <relativePath>../pom.xml</relativePath>
-    <groupId>org.endeavourhealth.imviewer</groupId>
-    <artifactId>IMViewer</artifactId>
+    <groupId>org.endeavourhealth.imquery</groupId>
+    <artifactId>IMQuery</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>front-end-vue</artifactId>
+  <artifactId>client</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <sonar.projectKey>endeavourhealth-discovery_IMViewer::frontend</sonar.projectKey>
+    <sonar.projectKey>endeavourhealth-discovery_IMQuery::client</sonar.projectKey>
     <sonar.sources>src</sonar.sources>
     <sonar.nodejs.executable>node/node</sonar.nodejs.executable>
     <sonar.typescript.tsconfigPath>tsconfig.json</sonar.typescript.tsconfigPath>
@@ -55,7 +55,7 @@
               <goal>npm</goal>
             </goals>
           </execution>
-          <execution>
+<!--          <execution>
             <id>npm test</id>
             <goals>
               <goal>npm</goal>
@@ -63,7 +63,7 @@
             <configuration>
               <arguments>run test:unit</arguments>
             </configuration>
-          </execution>
+          </execution>-->
           <execution>
             <id>npm build</id>
             <goals>

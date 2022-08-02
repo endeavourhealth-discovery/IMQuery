@@ -13,3 +13,5 @@ coverage
 node_modules
 output-bulk
 package-lock.json
+client/dist
+client/node
