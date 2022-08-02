@@ -114,9 +114,9 @@ export default defineComponent({
         this.$store.commit("loadFile", iri);
       }, 500);
     },
-    handleEdit(iri: string) {
-      alert("Coming soon. Stay tuned!");
-    },
+    // handleEdit(iri: string) {
+      // alert("Coming soon. Stay tuned!");
+    // },
     getTypeLabel(entityTypes: any): string | null {
       const entry = ["http://www.w3.org/ns/shacl#NodeShape", "http://www.w3.org/2000/01/rdf-schema#Class"];
       const property = ["http://www.w3.org/ns/shacl#NodeShape", "http://endhealth.info/im#dataModelProperty"];

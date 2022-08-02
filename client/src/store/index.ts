@@ -81,7 +81,7 @@ export default createStore({
       {
         name: "Schedule",
         icon: "newspaper",
-        visible: true,
+        visible: false,
         command: () => {
           //#todo
           alert("Coming soon! Stay tuned.");
