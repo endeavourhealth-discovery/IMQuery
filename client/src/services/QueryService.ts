@@ -67,16 +67,19 @@ export default class QueryService {
     });
 
     console.log("import.meta.env.VITE_OSS_AUTH_BASICTOKEN", import.meta.env.VITE_OSS_AUTH_BASICTOKEN)
+    const token: any = this.TOKEN || "aW1xdXNlcjptQkJSR3djR19oTX!";
     var config = {
       method: 'post',
       url: `${this.OSS_URL}/${this.INDEX_IM}/_search`,
       headers: {
         // 'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
-        'Authorization': `Basic aW1xdXNlcjptQkJSR3djR19oTX!`,
+        'Authorization': `Basic ${token}`,
         'Content-Type': 'application/json'
       },
       data: data
     };
+    console.log("searchClauses console", console);
+
 
     const res = await axios(config as any)
       .then(function (response) {
