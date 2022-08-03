@@ -6,6 +6,7 @@ import QueryUtils from "@/helpers//QueryUtils";
 
 import Datamodel from "./Datamodel"
 import _ from "lodash";
+import { faBullhorn, faGrinTongueSquint } from '@fortawesome/free-solid-svg-icons';
 // import QueryService from "@/services/QueryService";
 
 
@@ -130,9 +131,11 @@ export default class Graph {
 
 
     const getChildren = (iri: string) => {
-      return this.datamodel.filter((entity: any) => {
-        return entity["rdfs:subClassOf"] && entity["rdfs:subClassOf"].some((ref: any) => ref["@id"] == iri);
-      });
+      return Array.isArray(this.datamodel) && this.datamodel?.length > 0
+        ? this.datamodel.filter((entity: any) => {
+          return entity["rdfs:subClassOf"] && entity["rdfs:subClassOf"].some((ref: any) => ref["@id"] == iri);
+        })
+        : null;
     }
 
     const queue = [iri];
@@ -185,10 +188,12 @@ export default class Graph {
 
 
   public withProperty(iri: string): any {
-    return this.datamodel.filter((entity: any) => entity["sh:property"] && entity["sh:property"].some((property: any) => {
-      return _.get(property, "sh:path[0].@id") == iri;
-    }
-    ));
+    return Array.isArray(this.datamodel) && this.datamodel?.length > 0
+      ? this.datamodel.filter((entity: any) => entity["sh:property"] && entity["sh:property"].some((property: any) => {
+        return _.get(property, "sh:path[0].@id") == iri;
+      }
+      ))
+      : null;
   }
 
   ///////////////// paths

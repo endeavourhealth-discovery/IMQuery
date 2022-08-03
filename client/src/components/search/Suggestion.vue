@@ -337,6 +337,10 @@ export default defineComponent({
 
     getPaths(): any {
       let iris = this.datamodelIri();
+      if (!iris || iris?.length == 0) {
+        return [];
+      }
+
       // console.log("iris", iris);
 
       if (iris && Array.isArray(iris) && iris?.length > 0) {
@@ -361,7 +365,7 @@ export default defineComponent({
       this.$emit("updatePreview", { data: this.createClause(paths[0]) });
       return paths;
     },
-    datamodelIri(): string {
+    datamodelIri(): any {
       // console.log("this.result.iri", this.result.iri);
       // console.log("this.toPrefixedIri(this.result.iri)", this.toPrefixedIri(this.result.iri));
       const iri = this.toPrefixedIri(this.result.iri);
@@ -369,9 +373,14 @@ export default defineComponent({
         return iri;
       } else {
         // const entity = Datamodel.withProperty(iri).map(item => item["@id"]);
-        const entity = this.$store.state.datamodelGraph.withProperty(iri).map(item => item["@id"]);
+        let entity = this.$store.state.datamodelGraph.withProperty(iri);
+        if (entity) {
+          entity = entity.map(item => item["@id"]);
+          return entity;
+        } else {
+          return null;
+        }
         // console.log("entity", entity);
-        return entity;
       }
     },
     findPaths(iri: string): any {

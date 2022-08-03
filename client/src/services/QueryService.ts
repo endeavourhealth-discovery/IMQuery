@@ -141,7 +141,7 @@ export default class QueryService {
     console.log("data", data)
     var config = {
       method: 'post',
-      url: `${this.API}/api/query/public/queryIM`,
+      url: `${this.API}api/query/public/queryIM`,
       headers: {
         'Content-Type': 'application/json'
       },
