@@ -31,8 +31,9 @@ export default class Graph {
   private datamodel: any;
   private async populateDatamodel(): Promise<any> {
     await QueryService.getDatamodel().then((res: any) => {
+      console.log("QueryService.getDatamodel res", res)
       this.datamodel = res.entities;
-      console.log("this.datamodel", this.datamodel);
+      // console.log("this.datamodel", this.datamodel);
       this.populateGraph();
       return res;
     });

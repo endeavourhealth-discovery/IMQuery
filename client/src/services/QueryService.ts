@@ -42,9 +42,9 @@ export default class QueryService {
         ))
       )
       const allResults = [...searchIM.data, ...clauses]
-      console.log("QuerySerivice.searchAll fetched searchIM:", _searchIM.data );
-      console.log("QuerySerivice.searchAll fetched _cllauses:", _clauses );
-      
+      console.log("QuerySerivice.searchAll fetched searchIM:", searchIM);
+      console.log("QuerySerivice.searchAll fetched _cllauses:", clauses);
+
 
 
       return allResults;
@@ -77,6 +77,8 @@ export default class QueryService {
 
     const res = await axios(config as any)
       .then(function (response) {
+        console.log("searchClauses response", response);
+
 
         const clauses = response.data?.hits?.hits.map(hit => hit._source);
         return clauses;
@@ -119,7 +121,9 @@ export default class QueryService {
         page: 1,
         size: limit
       };
-      return await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody);
+      const res = await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody);
+      console.log("searchIM res", res);
+      return res;
     } catch (error) {
       console.log("error in QueryService.searchIM:" + error);
 
@@ -134,7 +138,7 @@ export default class QueryService {
   //
   public static async getDatamodel(searchString: string, limit: number): Promise<AxiosResponse<any>> {
     var data = JSON.stringify(querySnippets.datamodel_plus);
-
+    console.log("data", data)
     var config = {
       method: 'post',
       url: `${this.API}/api/query/public/queryIM`,
@@ -143,6 +147,8 @@ export default class QueryService {
       },
       data: data
     };
+
+
 
     const res = await axios(config as any)
       .then(function (response) {
@@ -153,7 +159,7 @@ export default class QueryService {
         console.log(error);
       });
 
-    // console.log("axios response", res);
+    console.log("axios response", res);
     return res;
 
   }
@@ -261,6 +267,13 @@ export default class QueryService {
 
 
   /////////////// development only
+
+  public static async summariseClause(clause: any): string {
+    const displayText = TextGenerator.summariseClause(clause);
+    console.log("displayText", displayText);
+    return displayText;
+
+  }
 
   public static async summariseQuery(queryIri: string): Promise<any> {
 
