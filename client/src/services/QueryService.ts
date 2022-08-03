@@ -42,6 +42,9 @@ export default class QueryService {
         ))
       )
       const allResults = [...searchIM.data, ...clauses]
+      console.log("QuerySerivice.searchAll fetched searchIM:", _searchIM.data );
+      console.log("QuerySerivice.searchAll fetched _cllauses:", _clauses );
+      
 
 
       return allResults;
@@ -100,7 +103,7 @@ export default class QueryService {
       };
       return await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody).then(res => res.data);
     } catch (error) {
-      console.log("error in advanced search:" + error);
+      console.log("error in QueryService.searchQueries:" + error);
       return null;
     }
   }
@@ -118,7 +121,8 @@ export default class QueryService {
       };
       return await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody);
     } catch (error) {
-      console.log("error in advanced search:" + error);
+      console.log("error in QueryService.searchIM:" + error);
+
       return null;
     }
   }

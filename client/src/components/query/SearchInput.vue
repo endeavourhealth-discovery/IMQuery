@@ -109,7 +109,6 @@ export default defineComponent({
         QueryService.searchAll(searchString)
           // await SearchService.searchAll(searchString)
           .then((res: any) => {
-            console.log("fetched OSS search results", res);
             this.searchData = res;
             this.$store.commit("setSearchData", { searchString: searchString, data: res, path: this.path });
             return res;

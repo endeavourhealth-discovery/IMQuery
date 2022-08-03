@@ -1197,7 +1197,7 @@ export default defineComponent({
 
       await SearchService.advancedSearchQuery(searchString)
         .then((res: any) => {
-          console.log("fetched OSS search results", res);
+          console.log("Home fetched OSS search results", res);
           this.hasSearched = true;
           this.isResultsShown = true;
           this.searchData = res.data;
