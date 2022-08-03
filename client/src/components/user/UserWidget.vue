@@ -39,7 +39,30 @@
 
         <!-- Actions  -->
         <div
-          v-if="isLoggedIn"
+          class="non-selectable flex  justify-between rounded-md text-gray-500 dark:text-white  mt-2 px-4 py-2 text-2xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700"
+          role="menuitem"
+          @click="toggleTheme()"
+        >
+          Theme
+
+          <div class="text-Black-700">{{ Theme }}</div>
+          <div class="flex">
+            <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out">
+              <div class=" dark:text-white  inline dark:hidden ">
+                <NodeIcon class="w-7 h-7" icon="sun" strokewidth="1" width="16" height="16"></NodeIcon>
+              </div>
+              <div class=" dark:text-white hidden dark:inline text-blue-800">
+                <NodeIcon class="w-7 h-7" icon="moon" strokewidth="1" width="16" height="16"></NodeIcon>
+              </div>
+
+              <!-- <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
+                <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i> -->
+            </button>
+            <div class="text-black dark:text-white">{{ currentTheme }}</div>
+          </div>
+        </div>
+        <div
+          v-if="isLoggedIn && false"
           class="non-selectable rounded-md text-gray-800 dark:text-white block mt-2 px-4 py-2 text-2xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700"
           role="menuitem"
           @click="$router.push({ name: 'UserEdit' })"
@@ -62,11 +85,11 @@
   <!--  (logged in ) -->
 
   <!--  (logged out ) -->
-  <div v-else class="non-selectable relative pt-1 flex text-3xl font-semibold">
-    <div class="hover:underline text-blue-600 dark:text-yellow-400  " @click="$router.push({ name: 'Register' })">
+  <div v-else class="non-selectable mt-2 flex text-3xl font-semibold">
+    <div class="hover:underline  text-blue-600 dark:text-yellow-400  " @click="$router.push({ name: 'Register' })">
       Sign Up
     </div>
-    <div class="hover:underline text-purple-600 dark:text-blue-400 ml-7" @click="$router.push({ name: 'Login' })">
+    <div class="hover:underline  text-purple-600 dark:text-blue-400 ml-7" @click="$router.push({ name: 'Login' })">
       Log In
     </div>
   </div>
@@ -76,6 +99,7 @@
 <script lang="ts">
 import { ref, defineComponent } from "vue";
 import { mapState } from "vuex";
+import NodeIcon from "@/components/query/NodeIcon.vue";
 
 // import HeroIcon from "@/components/general/HeroIcon.vue";
 import RoundButton from "@/components/dataset/RoundButton.vue";
@@ -87,6 +111,7 @@ export default defineComponent({
   name: "UserWidget",
   props: ["modelValue"],
   components: {
+    NodeIcon
     // HeroIcon,
     // RoundButton
   },
@@ -95,8 +120,25 @@ export default defineComponent({
       expanded: false
     };
   },
-  computed: mapState(["currentUser", "isLoggedIn"]),
+  computed: {
+    ...mapState(["currentUser", "isLoggedIn"]),
+    currentTheme: {
+      get(): string {
+        return this.$store.state.theme;
+      },
+      set(value: any): void {
+        this.$store.commit("updateTheme", value);
+      }
+    }
+  },
   methods: {
+    toggleTheme(): void {
+      if (this.currentTheme == "dark") {
+        this.currentTheme = "light";
+      } else {
+        this.currentTheme = "dark";
+      }
+    },
     handleToggle(event: any): void {
       (this.$refs["overlay-userwidget"] as any).toggle(event);
     },
@@ -158,6 +200,4 @@ export default defineComponent({
 }
 </style>
 
-<style>
-
-</style>
+<style></style>

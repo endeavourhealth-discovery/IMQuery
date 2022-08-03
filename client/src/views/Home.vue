@@ -62,23 +62,23 @@
 
           <!-- /Searchbox  -->
 
-          <div class="right flex mr-7 ml-4">
+          <div class="right space-x-7 flex items-center mr-7 ml-4">
             <div
               @click="createNew()"
-              class="flex relative top-1 rounded-xl px-2 pr-4 h-14 items-center font-bold text-white bg-blue-600 hover:bg-blue-800 transition duration-500 ease-in-out cursor-pointer text-2xl"
+              class="flex relative rounded-xl px-2 pr-4 h-14 items-center font-bold text-white bg-blue-600 hover:bg-blue-800 transition duration-500 ease-in-out cursor-pointer text-2xl"
             >
               <HeroIcon class="mx-2 text-white dark:text-white" strokewidth="2" width="24" height="24" icon="folder_add" />
               Create
             </div>
             <!-- Apps  -->
             <div class="select-none flex" @click="onToggleApps">
-              <div :class="'flex ' + [isLoggedIn ? ' pt-2' : '']">
-                <div class="app-title pt-1 ml-5 font-medium text-black dark:text-white text-3xl">
+              <div :class="'flex pt-2' + [isLoggedIn ? ' ' : ' ']">
+                <div class="app-title  ml-5 font-medium text-black dark:text-white text-3xl">
                   Apps
                 </div>
                 <HeroIcon class="mt-2 mx-2 text-black dark:text-white" strokewidth="2" width="20" height="20" icon="chevron_down" />
               </div>
-              <div class="relative">
+              <div class="relative mb-">
                 <!-- Apps -->
                 <OverlayPanel ref="overlay-apps">
                   <div class="flex justify-center w-full ">
@@ -105,16 +105,7 @@
               <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
               <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i>
             </button> -->
-            <button class="theme-toggler  pt-1 mx-5 text-gray-700 dark:text-white text-xl transition duration-500 ease-in-out" @click="toggleTheme()">
-              <div class="h-9 w-auto dark:text-white  inline dark:hidden ">
-                <NodeIcon class="w-10 h-10" icon="sun" strokewidth="1" width="16" height="16"></NodeIcon>
-              </div>
-              <div class="h-9 w-auto  dark:text-white hidden dark:inline text-gray-800">
-                <NodeIcon class="w-10 h-10" icon="moon" strokewidth="1" width="16" height="16"></NodeIcon>
-              </div>
-              <!-- <i class="fa-solid fa-sun h-9 w-auto dark:text-white  inline dark:hidden"></i>
-                <i class="fa-solid fa-moon h-9 w-auto dark:text-white hidden dark:inline text-gray-800"></i> -->
-            </button>
+
             <!-- User Widget -->
             <UserWidget class="" :modelValue="userMeta" />
           </div>
@@ -933,7 +924,7 @@ export default defineComponent({
           name: "Dictionary",
           icon: "book_open",
           visible: true,
-          hyperlink: "https://dev.endhealth.co.uk/viewer"
+          hyperlink: "https://dev.endhealth.co.uk/viewer/#/concept/http:%2F%2Fendhealth.info%2Fim%23InformationModel"
         },
         {
           name: "Data Studio",
