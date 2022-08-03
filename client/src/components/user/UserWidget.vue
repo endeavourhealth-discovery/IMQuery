@@ -1,15 +1,10 @@
 <template>
   <!--  (logged in ) -->
 
-  <div
-    v-if="modelValue && isLoggedIn"
-    class="userwidget relative inline-block text-left"
-    @click="expanded = !expanded"
-    @mouseenter="isHover = true"
-    @mouseleave="isHover = false"
-  >
+  <div class="userwidget relative inline-flex text-left" @click="expanded = !expanded" @mouseenter="isHover = true" @mouseleave="isHover = false">
     <!-- Circle  -->
     <button
+      v-if="modelValue && isLoggedIn"
       @click="handleToggle"
       class="select-none text-blue-700 font-bold dark:text-white hover:bg-blue-50 dark:hover:bg-gray-700 text-3xl border border-2 border-blue-600 dark:border-white rounded-full p-3"
       v-wave="{
@@ -24,12 +19,31 @@
       {{ modelValue.firstName.substring(0, 1) + modelValue.lastName.substring(0, 1) }}
     </button>
     <!-- /Circle  -->
+    <!--  (logged out ) -->
+    <div v-else class="non-selectable mt-2 flex text-3xl font-semibold">
+      <div class="hover:underline  text-blue-600 dark:text-yellow-400  " @click="$router.push({ name: 'Register' })">
+        Sign Up
+      </div>
+      <div class="hover:underline  text-purple-600 dark:text-blue-400 ml-7 mr-5" @click="$router.push({ name: 'Login' })">
+        Log In
+      </div>
+    </div>
+    <NodeIcon
+      v-if="!isLoggedIn"
+      @click="handleToggle"
+      class="w-10 h-10 relative top-2 text-gray-800  "
+      icon="cog"
+      strokewidth="2"
+      width="24"
+      height="24"
+    ></NodeIcon>
+    <!--  (logged out ) -->
 
     <!-- Popover  -->
     <OverlayPanel ref="overlay-userwidget" class="overlay-userwidget">
       <div class="options">
         <!-- Personal Details  -->
-        <div class="non-selectable block px-4 py-2 text-2xl border-b dark:border-0">
+        <div v-if="isLoggedIn" class="non-selectable block px-4 py-2 text-2xl border-b dark:border-0">
           <div class="text-black dark:text-white font-bold">{{ modelValue.firstName + " " + modelValue.lastName }}</div>
           <div class="text-gray-700 dark:text-gray-400 font-semibold">
             {{ modelValue.email }}
@@ -83,17 +97,6 @@
     <!-- /Popover  -->
   </div>
   <!--  (logged in ) -->
-
-  <!--  (logged out ) -->
-  <div v-else class="non-selectable mt-2 flex text-3xl font-semibold">
-    <div class="hover:underline  text-blue-600 dark:text-yellow-400  " @click="$router.push({ name: 'Register' })">
-      Sign Up
-    </div>
-    <div class="hover:underline  text-purple-600 dark:text-blue-400 ml-7" @click="$router.push({ name: 'Login' })">
-      Log In
-    </div>
-  </div>
-  <!--  (logged out ) -->
 </template>
 
 <script lang="ts">
