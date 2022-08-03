@@ -9,6 +9,7 @@ import { resourceLimits } from "worker_threads";
 const { onlyUnique, excludedPaths, entitiesFromPredicates, isTTIriRef } = ManipulationUtils;
 
 import querySnippets from "./querySnippets";
+import { ConsoleErrorListener } from "antlr4ts";
 
 export default class QueryService {
 
@@ -65,11 +66,12 @@ export default class QueryService {
       }
     });
 
+    console.log("import.meta.env.VITE_OSS_AUTH_BASICTOKEN", import.meta.env.VITE_OSS_AUTH_BASICTOKEN)
     var config = {
       method: 'post',
       url: `${this.OSS_URL}/${this.INDEX_IM}/_search`,
       headers: {
-        'Authorization': `Basic ${this.TOKEN}`,
+        'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
         'Content-Type': 'application/json'
       },
       data: data
