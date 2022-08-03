@@ -44,7 +44,7 @@
         </div>
 
 
-    <Button type="submit" class=" group relative transition easy-in-out duration-500 w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium rounded-md back-button p-button-lg p-button-rounded " label="      Sign In" icon="pi pi-unlock" iconPos="left"      v-on:click.prevent="handleSubmit" 
+    <Button type="submit" class="bg-blue-500 group relative transition easy-in-out duration-500 w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium rounded-md back-button p-button-lg p-button-rounded " label="      Sign In" icon="pi pi-unlock" iconPos="left"      v-on:click.prevent="handleSubmit" 
  />
 
 

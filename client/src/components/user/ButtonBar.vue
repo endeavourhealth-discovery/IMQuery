@@ -2,7 +2,7 @@
   <div class="flex">
 
 
-    <Button class="back-button p-button-lg p-button-rounded " label="Back" icon="pi pi-arrow-circle-left" iconPos="left" v-on:click.prevent="clickedBack" />
+    <Button class="bg-blue-500 back-button p-button-lg p-button-rounded " label="Back" icon="pi pi-arrow-circle-left" iconPos="left" v-on:click.prevent="clickedBack" />
     <Button class="home-button p-button-lg p-button-rounded p-button-outlined"  icon="pi pi-home" iconPos="left" label="Home" v-on:click.prevent="$router.push({ name: 'Home' })" />
   </div>
 </template>
