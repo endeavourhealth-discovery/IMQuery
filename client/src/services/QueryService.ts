@@ -71,7 +71,8 @@ export default class QueryService {
       method: 'post',
       url: `${this.OSS_URL}/${this.INDEX_IM}/_search`,
       headers: {
-        'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
+        // 'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
+        'Authorization': `Basic aW1xdXNlcjptQkJSR3djR19oTX!`,
         'Content-Type': 'application/json'
       },
       data: data
@@ -150,10 +151,12 @@ export default class QueryService {
       data: data
     };
 
+    console.log("getDatamodel config", config)
 
 
     const res = await axios(config as any)
       .then(function (response) {
+        console.log("getDatamodel response", response);
         const datamodel = response.data;
         return datamodel;
       })
