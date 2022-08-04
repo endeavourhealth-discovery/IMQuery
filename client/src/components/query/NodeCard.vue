@@ -240,6 +240,11 @@ export default defineComponent({
 
       //if active clause doesn't exist, it is created AND a special first-time window is show?!
     }
+  },
+  watch: {
+    title(newValue: any): void {
+      this.text = newValue;
+    }
   }
 });
 </script>
