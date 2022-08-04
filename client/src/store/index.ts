@@ -201,7 +201,7 @@ export default createStore({
       // alert("emit")
 
     },
-    updateActiveProperty(state, payload) {
+    async updateActiveProperty(state, payload) {
       switch (payload.action) {
 
         case "delete":
@@ -210,25 +210,26 @@ export default createStore({
 
         case "update":
           const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
-          const activeClause = _.get(activeQuery, state.activeClausePath);
           const cloneQuery = _.cloneDeep(activeQuery);
 
           //updates property
           const propertyPath = state.activeClausePath + "." + payload.propertyPath;
           _.set(cloneQuery, propertyPath, payload.data);
+          const activeClause = _.get(cloneQuery, state.activeClausePath);
 
 
           //updates summary after proeprty is edited
           const path = state.activeClausePath + ".displayText";
-          const displayText = QueryService.summariseClause(activeClause)
+          let displayText: any = await QueryService.summariseClause(activeClause)
+          displayText = Array.isArray(displayText) ? displayText.join(" ") : displayText;
           console.log("displayText updated", displayText)
-          // _.set(cloneQuery, propertyPath, payload.data);
+          _.set(cloneQuery, path, displayText);
 
-          
-          
+
+
           state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
 
-          
+
           break;
       }
     },
