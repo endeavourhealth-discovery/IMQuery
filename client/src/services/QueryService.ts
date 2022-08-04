@@ -185,7 +185,7 @@ export default class QueryService {
     console.log("data", data)
     var config = {
       method: 'post',
-      url: `${import.meta.env.VITE_DEV_API}api/query/public/queryIM`,
+      url: `https://dev.endhealth.co.uk/imapi/api/query/public/queryIM`,
       headers: {
         'Content-Type': 'application/json'
       },
