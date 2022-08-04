@@ -103,7 +103,7 @@ export default class QueryService {
     var data = JSON.stringify({
       "query": {
         "match_phrase": {
-          "name": "hypertension"
+          "name": searchString
         }
       }
     });
