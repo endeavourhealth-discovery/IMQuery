@@ -57,46 +57,84 @@ export default class QueryService {
 
 
   //
+  // public static async searchClauses(searchString: string, limit: number): Promise<AxiosResponse<any>> {
+  //   var data = JSON.stringify({
+  //     "query": {
+  //       "match_phrase": {
+  //         "name": searchString
+  //       }
+  //     }
+  //   });
+
+  //   const token: any = this.TOKEN || "aW1xdXNlcjptQkJSR3djR19oTX!";
+  //   var config = {
+  //     method: 'post',
+  //     url: `${this.OSS_URL}/${this.INDEX_IM}/_search`,
+  //     headers: {
+  //       // 'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
+  //       'Authorization': `Basic ${token}`,
+  //       'Content-Type': 'application/json'
+  //     },
+  //     data: data
+  //   };
+  //   console.log("import.meta.env.VITE_OSS_AUTH_BASICTOKEN", import.meta.env.VITE_OSS_AUTH_BASICTOKEN)
+  //   console.log("token", token)
+  //   console.log("searchClauses config", config);
+
+
+  //   const res = await axios(config as any)
+  //     .then(function (response) {
+  //       console.log("searchClauses response", response);
+
+  //       const clauses = response.data?.hits?.hits.map(hit => hit._source);
+  //       return clauses;
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+
+  //   // console.log("axios response", res);
+  //   return res;
+
+  // }
+
+
   public static async searchClauses(searchString: string, limit: number): Promise<AxiosResponse<any>> {
     var data = JSON.stringify({
       "query": {
         "match_phrase": {
-          "name": searchString
+          "name": "hypertension"
         }
       }
     });
 
-    console.log("import.meta.env.VITE_OSS_AUTH_BASICTOKEN", import.meta.env.VITE_OSS_AUTH_BASICTOKEN)
-    const token: any = this.TOKEN || "aW1xdXNlcjptQkJSR3djR19oTX!";
     var config = {
       method: 'post',
-      url: `${this.OSS_URL}/${this.INDEX_IM}/_search`,
+      url: 'https://search-imq-yzrzqafw4x3wiwfljo2jz55tfy.us-east-1.es.amazonaws.com/dev-im1/_search',
       headers: {
-        // 'Authorization': `Basic ${import.meta.env.VITE_OSS_AUTH_BASICTOKEN}`,
-        'Authorization': `Basic ${token}`,
+        'Authorization': 'Basic aW1xdXNlcjphVzF4ZFhObGNqcHRRa0pTUjNkalIxOW9UWCE=',
         'Content-Type': 'application/json'
       },
       data: data
     };
-    console.log("searchClauses console", console);
 
-
-    const res = await axios(config as any)
+    const res = await axios(config)
       .then(function (response) {
-        console.log("searchClauses response", response);
-
-
+        console.log("response.data", response.data);
         const clauses = response.data?.hits?.hits.map(hit => hit._source);
+        console.log("response clauses", clauses);
         return clauses;
       })
       .catch(function (error) {
         console.log(error);
       });
 
-    // console.log("axios response", res);
     return res;
 
+
+
   }
+
   //search inside name or definition
   public static async searchQueries(searchString: string, limit: number): Promise<AxiosResponse<any>> {
     try {
@@ -147,7 +185,7 @@ export default class QueryService {
     console.log("data", data)
     var config = {
       method: 'post',
-      url: `${this.API}api/query/public/queryIM`,
+      url: `${import.meta.env.VITE_DEV_API}api/query/public/queryIM`,
       headers: {
         'Content-Type': 'application/json'
       },
