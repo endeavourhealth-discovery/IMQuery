@@ -586,14 +586,14 @@ export default createStore({
           state.activeQueryCategory = "definition";
           break;
         case "definition":
-          state.activeQueryCategory = "output";
+          state.activeQueryCategory = "export";
           break;
-        case "output":
-          state.activeQueryCategory = "sources";
-          break;
-        case "sources":
-          state.activeQueryCategory = "sql";
-          break;
+        // case "output":
+        //   state.activeQueryCategory = "sources";
+        //   break;
+        // case "sources":
+        //   state.activeQueryCategory = "sql";
+        //   break;
         default:
           break;
       }
@@ -603,15 +603,15 @@ export default createStore({
         case "definition":
           state.activeQueryCategory = "mainEntity";
           break;
-        case "output":
+        case "export":
           state.activeQueryCategory = "definition";
           break;
-        case "sources":
-          state.activeQueryCategory = "output";
-          break;
-        case "sql":
-          state.activeQueryCategory = "sources";
-          break;
+        // case "sources":
+        //   state.activeQueryCategory = "output";
+        //   break;
+        // case "sql":
+        //   state.activeQueryCategory = "sources";
+        //   break;
         default:
           break;
       }
