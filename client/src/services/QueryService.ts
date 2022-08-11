@@ -3,7 +3,7 @@ import _ from "lodash"
 import jp from 'jsonpath';
 import { TextGenerator } from "../models/text/TextGenerator";
 import { IM, RDF, RDFS } from "../vocabulary"
-import { OntologyUtils, ManipulationUtils, SparqlSnippets, ResponseProcessor} from '../helpers/query'
+import { OntologyUtils, ManipulationUtils, SparqlSnippets, ResponseProcessor } from '../helpers/query'
 import { select } from "d3";
 import { resourceLimits } from "worker_threads";
 const { onlyUnique, excludedPaths, entitiesFromPredicates, isTTIriRef } = ManipulationUtils;
@@ -26,6 +26,28 @@ export default class QueryService {
     'Content-Type': 'application/json'
   }
 
+
+  public static async searchConceptSet(searchString: string): Promise<any> {
+    try {
+      const _requestBody = {
+        termFilter: searchString,
+        statusFilter: [],
+        typeFilter: ["http://endhealth.info/im#ConceptSet"],
+        schemeFilter: ["http://endhealth.info/im#", "http://endhealth.info/ceg/qry#"],
+        sortBy: 0,
+        page: 1,
+        size: 20
+      };
+      const res = await axios.post(import.meta.env.VITE_NODE_API + "api/entity/public/search", _requestBody);
+      console.log("searchIM res", res);
+      return res;
+    } catch (error) {
+      console.log("error in QueryService.searchConceptSet:" + error);
+      return null;
+    }
+
+
+  }
 
   public static async searchAll(searchString: string): Promise<any> {
     try {

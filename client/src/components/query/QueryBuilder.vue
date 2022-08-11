@@ -156,8 +156,19 @@ export default defineComponent({
       get(): any {
         const currentQueryIri = this.modelValue["@id"];
         let currentFile = this.$store.state.openFiles.find(file => file.iri == currentQueryIri);
-        const activeClausePath = currentFile?.activeClausePath;
+
+        let activeClausePath = "";
+        if (currentFile?.targetType == "property-inSet") {
+          activeClausePath = `${currentFile.activeClausePath}.${currentFile?.activePropertyPath}`;
+        } else {
+          activeClausePath = currentFile?.activeClausePath;
+        }
+
+        // console.log("activeClausePath", activeClausePath);
+
         const lastResult = currentFile?.searchResults.find(result => result.activeClausePath == activeClausePath);
+        // console.log("lastResult", lastResult);
+
         return lastResult;
         //removes previous results for active path
         // let currentFile = this.$store.state.openFiles.find(file => file.iri == activeQueryId).searchResults;
@@ -193,8 +204,6 @@ export default defineComponent({
     });
   },
   methods: {
-
-
     updateActiveClause(value: any) {
       this.$emit("updateActiveClause", value);
     },
@@ -242,6 +251,11 @@ export default defineComponent({
         {
           name: "Properties",
           searchResultKey: "property",
+          visible: true
+        },
+        {
+          name: "Concept Set",
+          searchResultKey: "conceptSet",
           visible: true
         }
       ],

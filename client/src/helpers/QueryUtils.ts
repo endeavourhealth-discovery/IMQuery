@@ -124,6 +124,28 @@ export default class QueryUtils {
             return false;
         }
     }
+    public static isConceptSet(entity: any): boolean {
+        const entityType = entity["entityType"];
+        let iris = ["im:ConceptSet"];
+        iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
+
+        if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static isConcept(entity: any): boolean {
+        const entityType = entity["entityType"];
+        let iris = ["im:concept",];
+        iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
+
+        if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // https://stackoverflow.com/questions/15502629/regex-for-mustache-style-double-braces
     public static findPlaceholders(text: string): any {

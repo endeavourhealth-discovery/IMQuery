@@ -5,7 +5,7 @@
   </div>
   <!-- Inserted Component  -->
 
-  <OverlayPanel ref="overlay-selector" @show="onShow()" @hide="onHide()">
+  <OverlayPanel v-if="!hideSelector" ref="overlay-selector" @show="onShow()" @hide="onHide()">
     <!-- datatype property  -->
     <template v-if="type == 'edit-property' && lodashGet(propertyMeta, 'sh:datatype')">
       <div class="border-b ">
@@ -114,7 +114,7 @@
     <!-- concept set or concept  -->
     <!-- <template v-else-if="type == 'edit-property' && lodashGet(propertyMeta, 'sh:class')"> -->
     <template v-else-if="type == 'edit-property'">
-      {{ "members" }}
+      {{ ConceptSet }}
     </template>
     <!-- concept set or concept  -->
 
@@ -156,7 +156,7 @@ import NodeIcon from "@/components/query/NodeIcon.vue";
 
 export default defineComponent({
   name: "Selector",
-  props: ["type", "modelValue", "updateTarget"],
+  props: ["type", "modelValue", "updateTarget", "hideSelector"],
   components: {
     NodeIcon
   },
@@ -219,12 +219,11 @@ export default defineComponent({
     },
     onToggle(event: any): void {
       this.commitTarget(...this.updateTarget);
-
-      if (this.updateTarget[0] == "property-inSet") {
+      console.log(this.updateTarget[1]);
+      if (this.updateTarget[0] == "property-inSet" && this.updateTarget[1] == "view") {
         this.emitter.emit("show-infoTab");
       } else {
         this.emitter.emit("hide-infoTab");
-
       }
 
       try {

@@ -18,7 +18,7 @@
   >
     <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="pencil" />
   </button>
-  <button v-else-if="type == 'delete'" class="group-hover:inline hidden  rounded-full bg-red-600 hover:bg-red-800 absolute -translate-y-2 -right-[5px] z-40">
+  <button v-else-if="type == 'delete'" class="group-hover:inline hidden  rounded-full bg-red-600 hover:bg-red-800 absolute -translate-y-2 -left-[25px] z-40">
     <NodeIcon class="m-2  text-white  #hover:text-blue-800 mr-2" strokewidth="3" width="16" height="16" icon="trash" />
   </button>
   <!-- </template> -->

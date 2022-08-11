@@ -206,7 +206,57 @@ export default createStore({
       let newQuery = _.cloneDeep(activeQuery);
 
 
-      if (payload.action == "delete") {
+      if (payload.action == "deleteInSet") {
+        let activePath = `${state.activeClausePath}.${payload.propertyPath}`;
+        let { path, index } = QueryUtils.splitPath(activePath);
+
+        let parentArray = _.get(newQuery, path);
+        parentArray = parentArray.filter((item, i) => i != index);
+        console.log("parentArray", parentArray);
+        _.set(newQuery, path, parentArray);
+        state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+
+      }
+      else if (payload.action == "updateInSet") {
+        let activePath = `${state.activeClausePath}.${state.activePropertyPath}`;
+        let { path, index } = QueryUtils.splitPath(activePath);
+
+        const newItem = {
+          "@id": payload.data.iri,
+          "name": payload.data.name,
+        }
+        console.log("newItem", newItem);
+
+        let parentArray = _.get(newQuery, path);
+        console.log("parentArray", parentArray);
+        parentArray.splice(index, 1, newItem);
+        state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+
+
+        // const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
+        // const newIndex = parseInt(propertyIndex) + 1;
+        // state.activePropertyPath = payload.propertyPath;
+      }
+      else if (payload.action == "newInSet") {
+        let activePath = `${state.activeClausePath}.${payload.propertyPath}`;
+        let { path, index } = QueryUtils.splitPath(activePath);
+        // console.log("activePath", activePath);
+        // console.log("path index", path, index);
+
+        const newItem = {
+          "@id": `urn:uuid:${v4()}`,
+          "name": "",
+        }
+
+        let parentArray = _.get(newQuery, path);
+        console.log("parentArray", parentArray);
+        parentArray.splice(index + 1, 0, newItem);
+        state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+
+
+        // const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
+        // const newIndex = parseInt(propertyIndex) + 1;
+        state.activePropertyPath = payload.propertyPath;
       }
       else if (payload.action == "addTo") {
         let activePath = `${state.activeClausePath}.${state.activePropertyPath}`;
@@ -218,9 +268,9 @@ export default createStore({
         state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
 
 
-        const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
-        const newIndex = parseInt(propertyIndex) + 1;
-        state.activePropertyPath = propertyPath + `[${newIndex}]`;
+        // const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
+        // const newIndex = parseInt(propertyIndex) + 1;
+        state.activePropertyPath = activePath;
       }
       else if (payload.action == "update") {
         const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
@@ -472,7 +522,7 @@ export default createStore({
 
     },
     setSearchData(state, payload) {
-      // console.log("setSearchData", payload,)
+      console.log("setSearchData", payload)
 
       const activeClausePath = payload.path;
 
@@ -502,6 +552,8 @@ export default createStore({
         existingClause: [],
         nodeShape: [],
         property: [],
+        conceptSet: [],
+        concept: []
 
       };
 
@@ -517,6 +569,10 @@ export default createStore({
               searchResult.nodeShape.push(result);
             } else if (QueryUtils.isProperty(result)) {
               searchResult.property.push(result);
+            } else if (QueryUtils.isConceptSet(result)) {
+              searchResult.conceptSet.push(result);
+            } else if (QueryUtils.isConcept(result)) {
+              searchResult.concept.push(result);
             }
           });
         }
