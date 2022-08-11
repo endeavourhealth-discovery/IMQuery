@@ -30,6 +30,8 @@ import "./assets/layout/layout.scss";
 // import "./assets/layout/flags/flags.css";
 
 // PrimeVue Components
+import TreeTable from 'primevue/TreeTable';
+
 import Card from "primevue/card";
 import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
@@ -105,6 +107,7 @@ const app = createApp(App)
     appendToBody: true
   })
   .use(VWave)
+  .directive("TreeTable", Tooltip)
   .directive("tooltip", Tooltip)
   .component("Slider", Slider)
   .component("ToggleButton", ToggleButton)

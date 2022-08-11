@@ -193,6 +193,8 @@ export default class querySnippets {
         }
     }
 
+
+
     public static datamodel_plus = {
         "query": {
             "name": "get entities with property",
@@ -320,5 +322,99 @@ export default class querySnippets {
             "usePrefixes": true
         }
     };
+
+
+    public static getMembers(args: any): string {
+        let iri = args?.iri;
+
+        return `{
+    "query": {
+        "name": "",
+        "description": "",
+        "mainEntity": {
+            "@id": "http://endhealth.info/im#ConceptSet"
+        },
+        "resultFormat": "OBJECT",
+        "select": {
+            "property": [
+                {
+                    "@id": "http://endhealth.info/im#definition",
+                    "select": {
+                        "property": [
+                            {
+                                "@id": "http://www.w3.org/ns/shacl#or",
+                                 "select": {
+                                    "property": [
+                                        {
+                                            "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ],
+            "match": [
+                {
+                    "entityId": {
+                        "@id": "${iri}"
+                    }
+                }
+            ]
+        },
+        "usePrefixes": true
+    }
+}`
+    }
+    public static getSummary(args: any): string {
+        let iri = args?.iri;
+
+        return `{
+            "query": {
+                "name": "",
+                "description": "",
+                "mainEntity": {
+                    "@id": "im:ConceptSet"
+                },
+                "resultFormat": "OBJECT",
+                "select": {
+                    "property": [
+                        {
+                            "@id": "rdfs:label"
+                        },
+                        {
+                            "@id": "rdf:type",
+                            "select": {
+                                "property": [
+                                    {
+                                        "@id": "rdfs:label"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "@id": "im:isContainedIn",
+                            "select": {
+                                "property": [
+                                    {
+                                        "@id": "rdfs:label"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "match": [
+                        {
+                            "entityId": {
+                                "@id": "${iri}"
+                            }
+                        }
+                    ]
+                },
+                "usePrefixes": true
+            }
+        }`
+    }
 
 }

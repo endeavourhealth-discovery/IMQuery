@@ -3,10 +3,50 @@ import prettierBabylon from "prettier/parser-babylon";
 import _ from "lodash";
 import { v4 } from "uuid";
 import jp from 'jsonpath';
+import { IM, RDF, RDFS } from "@/vocabulary"
 
 export default class QueryUtils {
 
     public static debug = false;
+
+    public static getFriendlyLabel(inputString: string): string {
+        if (inputString == "@id") {
+            return "Iri"
+        }
+        else if (inputString == "sh:or") {
+            return "Or"
+        }
+        else if (inputString == RDFS.LABEL) {
+            return "Name"
+        } else if (inputString == RDFS.COMMENT) {
+            return "Description"
+        } else if (inputString == RDF.TYPE) {
+            return "Type"
+        } else if (inputString == IM.IS_CONTAINED_IN) {
+            return "Folders"
+        }
+
+    }
+
+    // public static getFriendlyLabel(inputString: string): string {
+    //     const newObject = {};
+    //     Object.keys(object).forEach(key => {
+    //         if (key == RDFS.LABEL) {
+    //             object = QueryUtils.renameKey(object, key, "name");
+    //         } else if (key = RDFS.COMMENT) {
+    //             object == QueryUtils.renameKey(object, key, "description");
+    //         } else if (key == RDF.TYPE) {
+    //             object = QueryUtils.renameKey(object, key, "entityType");
+    //         } else if {
+
+    //         }
+    //     });
+    //     return newObject;
+
+    // }
+    public static renameKey(object: any, oldKey: any, newKey: any): any {
+        return delete Object.assign(object, { [newKey]: object[oldKey] })[oldKey];
+    }
 
     public static splitPath(path: string): any {
         const currentPath = path; //curent path
@@ -192,11 +232,16 @@ export default class QueryUtils {
     public static toUrl(iri: string) {
         // console.log("toUurl", iri)
         //untested after changes
-        const _iri = iri.replace(":", "#");
-        const _contextKey = _iri.split("#")[0];
-        const _iriKey = _iri.split("#")[1];
-        const _url = QueryUtils.prefixes.filter(prefix => prefix[_contextKey] !== undefined)[0][_contextKey] + _iriKey;
-        return _url;
+        if (iri.includes(":")) {
+            const _iri = iri.replace(":", "#");
+            const _contextKey = _iri.split("#")[0];
+            const _iriKey = _iri.split("#")[1];
+            const _url = QueryUtils.prefixes.filter(prefix => prefix[_contextKey] !== undefined)[0][_contextKey] + _iriKey;
+            return _url;
+        } else {
+            return iri;
+        }
+
 
     }
 

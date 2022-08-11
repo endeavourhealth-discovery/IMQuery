@@ -7,7 +7,7 @@
 
   <OverlayPanel ref="overlay-selector" @show="onShow()" @hide="onHide()">
     <!-- datatype property  -->
-    <template v-if="propertyMeta['sh:datatype']">
+    <template v-if="type == 'edit-property' && lodashGet(propertyMeta, 'sh:datatype')">
       <div class="border-b ">
         <div class="selector-dropdown text-xl font-semibold text-gray-500">
           <Dropdown
@@ -112,10 +112,35 @@
     <!-- data type property  -->
 
     <!-- concept set or concept  -->
-    <template v-else-if="propertyMeta['sh:class']">
-      Set or Concept
+    <!-- <template v-else-if="type == 'edit-property' && lodashGet(propertyMeta, 'sh:class')"> -->
+    <template v-else-if="type == 'edit-property'">
+      {{ "members" }}
     </template>
     <!-- concept set or concept  -->
+
+    <!-- searchable dropdown  -->
+    <template v-else-if="type == 'add-property'">
+      <!-- <div @click="fetchMembers('urn:uuid:8ea62af8-2c89-4df6-aff6-fa5f696755e5')">Click</div> -->
+
+      <Listbox
+        v-model="newProperty"
+        @change="onAddProperty"
+        :options="getProperties(updateTarget[2])"
+        :multiple="false"
+        :filter="true"
+        optionLabel="name"
+        placeholder="Search"
+        listStyle="max-height:250px"
+        style="width:15em"
+      >
+        <template #option="slotProps">
+          <div>
+            <span>{{ slotProps.option.name }}</span>
+          </div>
+        </template>
+      </Listbox>
+    </template>
+    <!-- searchable dropdown  -->
   </OverlayPanel>
 </template>
 
@@ -136,6 +161,34 @@ export default defineComponent({
     NodeIcon
   },
   methods: {
+    lodashGet(object, path) {
+      return _.get(object, path);
+    },
+
+    getAlias(iri: string): string {
+      //todo: return alias based on existing aliases
+      return "alias1";
+    },
+    onAddProperty(event: any): any {
+      // this.onToggle();
+      console.log("event", event);
+      const path = this.updateTarget[2];
+      const currentProperties = _.get(this.activeClause, path);
+      const newValue = event?.value;
+      const newProperty = {
+        "@id": QueryUtils.toUrl(newValue?.value),
+        name: newValue?.name,
+        alias: this.getAlias(newValue?.value)
+      };
+
+      // const newPath = `${path}[${currentProperties.length}]`;
+      // console.log("newPath", newPath);
+      console.log("newProperty", newProperty);
+
+      this.$store.commit("updateActiveProperty", { action: "addTo", propertyPath: path, data: newProperty });
+
+      // this.set(newPath, newProperty);
+    },
     deleteFunction(): void {
       delete this.definition.function;
     },
@@ -166,6 +219,14 @@ export default defineComponent({
     },
     onToggle(event: any): void {
       this.commitTarget(...this.updateTarget);
+
+      if (this.updateTarget[0] == "property-inSet") {
+        this.emitter.emit("show-infoTab");
+      } else {
+        this.emitter.emit("hide-infoTab");
+
+      }
+
       try {
         (this.$refs["overlay-selector"] as any)?.toggle(event); //show();
       } catch (error) {
@@ -212,7 +273,8 @@ export default defineComponent({
       return val;
     },
     set(path: string, value: any): void {
-      // console.log("set", path, value);
+      console.log("set", path, value);
+      this.updated();
       _.set(this.definition, path, value);
     },
     getFunctions(): any {
@@ -227,13 +289,32 @@ export default defineComponent({
     },
     getUnits(): any {
       return Datamodel.units;
+    },
+    getProperties(path: string): any {
+      // console.log("##this.activeClause?.entityType", this.activeClause?.entityType);
+      const entityIri = this.activeClause?.entityType["@id"];
+      let newProperties = this.$store.state.datamodelGraph.getProperties(entityIri);
+      let newPropertiesOptions = newProperties.map((property: any) => {
+        return {
+          name: _.get(property, "sh:path[0].rdfs:label[0]"),
+          value: _.get(property, "sh:path[0].@id"),
+          data: property
+        };
+      });
+
+      const currentProperties = _.get(this.activeClause, path);
+
+      // newPropertiesOptions = newPropertiesOptions.filter((property: any) =>
+      //   currentProperties.some((prop: any) => QueryUtils.toIri(prop["@id"]) != property?.value)
+      // );
+
+      return newPropertiesOptions;
     }
   },
-  mounted() {
-    // this.setValue();
-  },
+
   data() {
     return {
+      newProperty: [],
       comparisonDate: { name: "the Reference Date", value: "$referenceDate" },
       // beforeAfter: { name: "before", value: true },
       inclusion: { name: "Include", value: true },
@@ -346,6 +427,15 @@ export default defineComponent({
       },
       set(val: any): void {}
     },
+    newPropertyOptions: {
+      get(): any {
+        console.log("##this.activeClause?.entityType", this.activeClause?.entityType);
+        const entityIri = QueryUtils.toIri(this.activeClause?.entityType["@id"]);
+        const properties = this.$store.state.datamodelGraph.getProperties(entityIri);
+        return properties;
+      },
+      set(val: any): void {}
+    },
     dataTypeId: {
       get(): any {
         return _.get(this.propertyMeta, "sh:datatype[0].@id");
@@ -374,7 +464,6 @@ export default defineComponent({
       set(val: any): void {
         // console.log("set comparison");
         this._comparison = val;
-        this.updated();
         this.set(pathMap.comparison, val.value);
       }
     },
@@ -395,7 +484,6 @@ export default defineComponent({
           this.set(pathMap.arg1var, "$referenceDate");
           this.set(pathMap.arg2var, "$this");
         }
-        this.updated();
       }
     },
     valueData: {
@@ -407,7 +495,6 @@ export default defineComponent({
       set(val: any): void {
         console.log("set valueData", val);
         this._valueData = val;
-        this.updated();
         this.set(pathMap.valueData, val);
       }
     },
@@ -424,7 +511,6 @@ export default defineComponent({
       set(val: any): void {
         // console.log("set valueData");
         this._units = val;
-        this.updated();
         this.set(pathMap.unitsData, val.value);
       }
     }

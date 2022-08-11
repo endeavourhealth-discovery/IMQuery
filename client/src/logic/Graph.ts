@@ -121,12 +121,17 @@ export default class Graph {
     return this.datamodel.find((entity: any) => entity['@id'] === iri);
   }
 
-  //e.g. gets all properties of an entity that are a nodeshape
-  // public getEntityPropertyByType = (type: iri): any => {
-
-  // }
 
 
+
+  //get all properties of an entity +/- excluded properties already use
+  public getProperties(entityIri: string, excludedProperties?: any[]): any {
+    const entity = this.byIri(entityIri);
+    return _.get(entity, "sh:property");
+  }
+
+
+  //returns subtype of a datamodel entity (e.g. event -> observation, encounter etc)
   public getDatamodelSubtypes(iri: string): any {
 
 
@@ -156,7 +161,7 @@ export default class Graph {
   }
 
 
-  //find entity specific property, otherwise any property of a datamodel 
+  //find a property that specifically belongs to an entity (fallback = any entity) 
   public getPropertyMeta(propertyIri: string, entityIri?: string): any {
     const entity = this.datamodel.find((entity: any) => QueryUtils.toIri(entity["@id"]) == entityIri && entity["sh:property"]);
 
@@ -187,6 +192,7 @@ export default class Graph {
   }
 
 
+  //returns an entity with a property
   public withProperty(iri: string): any {
     return Array.isArray(this.datamodel) && this.datamodel?.length > 0
       ? this.datamodel.filter((entity: any) => entity["sh:property"] && entity["sh:property"].some((property: any) => {

@@ -28,25 +28,28 @@
       </div>
     </div>
 
-    <selector v-else :updateTarget="['property-@id', 'view', `${propertyPath}[${propertyIndex}]`]">
+    <selector v-else type="edit-property" :updateTarget="['property-@id', 'view', `${propertyPath}[${propertyIndex}]`]">
       <div class="property-name font-normal hover:underline">
         {{ definition?.name }}
       </div>
     </selector>
 
     <div v-if="definition?.inSet" class="flex-col">
-      <selector v-for="(set, setIndex) in definition?.inSet" :key="set['@id']" :updateTarget="['property-inSet', 'view', `${propertyPath}[${propertyIndex}]`]">
-        <div class="ml10 flex ">
-          <NodeIcon
-            :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
-            strokewidth="3"
-            width="14"
-            height="14"
-            icon="arrow_right_small"
-          ></NodeIcon
-          >{{ set?.name }}
-        </div>
-      </selector>
+      <div v-for="(set, setIndex) in definition?.inSet" :key="set['@id']" class="relative">
+        <ButtonCRUD @click="onAddInSet(setIndex)" :type="'add'"> </ButtonCRUD>
+        <selector type="edit-property" :updateTarget="['property-inSet', 'view', `${propertyPath}[${propertyIndex}].inSet[${setIndex}]`]">
+          <div class="ml10 flex ">
+            <NodeIcon
+              :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
+              strokewidth="3"
+              width="14"
+              height="14"
+              icon="arrow_right_small"
+            ></NodeIcon
+            >{{ set?.name }}
+          </div>
+        </selector>
+      </div>
     </div>
 
     <div v-else-if="definition?.value" :class="'flex-col'">
@@ -59,11 +62,13 @@
           icon="arrow_right_small"
         ></NodeIcon>
         <div class="ml10 horizontal">
-          <selector :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">
+          <selector type="edit-property" :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">
             {{ comparison(definition?.value?.comparison) }}
           </selector>
-          <selector :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">{{ definition?.value?.valueData }}</selector>
-          <selector :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">
+          <selector type="edit-property" :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">{{
+            definition?.value?.valueData
+          }}</selector>
+          <selector type="edit-property" :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">
             {{  definition?.function?.argument[0].valueData?.toLowerCase()}}
           </selector>
           <span class="relative -left-[5px]">{{ getText("s") }}</span>
@@ -94,13 +99,14 @@
 import { defineComponent } from "vue";
 import NodeIcon from "./NodeIcon.vue";
 import Selector from "./Selector.vue";
+import ButtonCRUD from "./ButtonCRUD.vue";
 
 import _ from "lodash";
 
 export default defineComponent({
   name: "Property",
   props: ["modelValue", "notExist", "path", "propertyPath", "propertyIndex"],
-  components: { NodeIcon, Selector },
+  components: { NodeIcon, Selector, ButtonCRUD },
   data() {
     return {
       // definition: this.modelValue?.property && this.modelValue?.property?.length > 0 ? this.modelValue.property[0] : this.modelValue
@@ -112,6 +118,9 @@ export default defineComponent({
     }
   },
   methods: {
+    // onAddInSet(setIndex: number) {
+    //   this.$store.commit("updateActiveProperty", { action: "addNew", propertyPath: path, data: newProperty });
+    // },
     getText(type: string): string {
       if (type == "s") {
         return _.get(this.definition, "function.argument[0].valueData") && _.get(this.definition, "value.valueData") > 1 ? "s" : "";
@@ -160,16 +169,18 @@ export default defineComponent({
           path = this.path;
         }
         // console.log("path", path);
-        const def = _.get(this.activeQuery, path);
+        const def = _.get(this.queryDefinition, path);
         return def;
       },
       set(val: any): void {}
     },
-    activeQuery: {
+    queryDefinition: {
       get(): any {
         return this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
       },
-      set(val: any): void {}
+      set(value: any): void {
+        return;
+      }
     }
   }
 });

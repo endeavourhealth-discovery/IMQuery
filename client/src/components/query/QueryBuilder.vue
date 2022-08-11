@@ -1,6 +1,7 @@
 <template>
-  <div  :class="'query-builder '">
+  <div :class="'query-builder '">
     <!-- header   -->
+    <!-- Main Tabs  -->
     <div class="w-full flex space-x-10 text-3xl mb-3 rounded-md font-bold">
       <template v-for="tab in tabs" :key="tab.name">
         <div
@@ -12,7 +13,9 @@
         </div>
       </template>
     </div>
-    <div class="w-full flex space-x-10 text-xl mb-6 rounded-md font-bold border-b-2 border-b--gray-700">
+    <!-- Main Tabs  -->
+    <!-- Sub Tabs  -->
+    <div v-if="activeTab == 'Add'" class="w-full flex space-x-10 text-xl mb-6 rounded-md font-bold border-b-2 border-b--gray-700">
       <template v-for="tab in searchTabs" :key="tab.name">
         <div
           v-if="tab.visible"
@@ -26,8 +29,24 @@
         </div>
       </template>
     </div>
+    <div v-else-if="activeTab == 'Info'" class="w-full flex space-x-10 text-xl mb-6 rounded-md font-bold border-b-2 border-b--gray-700">
+      <template v-for="tab in infoTabs" :key="tab.name">
+        <div
+          v-if="tab.visible"
+          @click="infoActiveTab = tab.name"
+          :class="
+            'transition duration-700 ease-in-out cursor-pointer border-b-2  pb-3 relative top-1 ' +
+              [infoActiveTab == tab.name ? ' text-gray-900 border-b-blue-600 ' : ' text-gray-500 border-b-0']
+          "
+        >
+          {{ tab.name }}
+        </div>
+      </template>
+    </div>
+    <!-- Sub Tabs  -->
 
     <!-- header   -->
+
     <div v-if="activeTab == 'Add'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
       <Suggestions
         v-if="searchResult?.results?.length > 0"
@@ -42,8 +61,13 @@
     <div v-else-if="activeTab == 'Browse'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
       <!-- <SecondaryTree :conceptIri="'http://endhealth.info/im#Observation'" class="left-hierarchy" /> -->
     </div>
-    <div v-else-if="activeTab == 'View'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
-      View
+    <div v-else-if="activeTab == 'Info' && activePropertyInSetIri" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
+      <div v-if="infoActiveTab == 'Summary'">
+        <Summary :iri="activePropertyInSetIri"></Summary>
+      </div>
+      <div v-else-if="infoActiveTab == 'Definition'">
+        <SetDefinition :iri="activePropertyInSetIri"></SetDefinition>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +77,11 @@ import { defineComponent } from "vue";
 // import SearchService from "@/services/SearchService";
 import Suggestions from "@/components/search/Suggestions.vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
+import Summary from "@/components/query/Summary.vue";
+import SetDefinition from "@/components/query/SetDefinition.vue";
 // import SecondaryTree from "im-library";
+import QueryService from "@/services/QueryService";
+import _ from "lodash";
 
 export default defineComponent({
   name: "QueryBuilder",
@@ -62,10 +90,68 @@ export default defineComponent({
 
   components: {
     Suggestions,
-    HeroIcon
+    HeroIcon,
+    Summary,
+    SetDefinition
     // SecondaryTree
   },
   computed: {
+    activeClausePath: {
+      get(): any {
+        return this.$store.state.activeClausePath;
+      },
+      set(val: any): void {}
+    },
+    activePropertyPath: {
+      get(): any {
+        return this.$store.state.activePropertyPath;
+      },
+      set(val: any): void {}
+    },
+    targetType: {
+      get(): any {
+        return this.$store.state.targetType;
+      },
+      set(val: any): void {}
+    },
+    target: {
+      get(): boolean {
+        return this.targetType.includes("-") ? this.targetType.split("-")[1] : "none";
+      },
+      set(val: boolean): void {}
+    },
+    activeQuery: {
+      get(): any {
+        return this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
+      },
+      set(val: any): void {}
+    },
+    activeClause: {
+      get(): any {
+        const clause = _.get(this.activeQuery, this.activeClausePath);
+        // console.log("clause selected", clause);
+        return clause;
+      },
+      set(val: any): void {}
+    },
+    activeProperty: {
+      get(): any {
+        const prop = _.get(this.activeQuery, this.activeClausePath + "." + this.activePropertyPath);
+        // console.log("property selected", prop);
+        return prop;
+      },
+      set(val: any): void {}
+    },
+    activePropertyInSetIri: {
+      get(): any {
+        if (this.targetType == "property-inSet") {
+          return _.get(this.activeProperty, "@id");
+        }
+      },
+      set(value: any): void {
+        return;
+      }
+    },
     searchResult: {
       get(): any {
         const currentQueryIri = this.modelValue["@id"];
@@ -97,8 +183,18 @@ export default defineComponent({
     this.emitter.on("update-searchActiveTab", (payload: any) => {
       this.searchActiveTab = payload.data;
     });
+    this.emitter.on("show-infoTab", (payload: any) => {
+      this.tabs[2].visible = true;
+      this.activeTab = this.tabs[2].name;
+    });
+    this.emitter.on("hide-infoTab", (payload: any) => {
+      this.tabs[2].visible = false;
+      this.activeTab = this.tabs[1].name;
+    });
   },
   methods: {
+
+
     updateActiveClause(value: any) {
       this.$emit("updateActiveClause", value);
     },
@@ -129,23 +225,34 @@ export default defineComponent({
           visible: true
         },
         {
-          name: "Existing Criteria",
+          name: "Criteria",
           searchResultKey: "existingClause",
           visible: true
         },
         {
-          name: "Query based Criteria",
+          name: "Queries",
           searchResultKey: "existingQuery",
           visible: true
         },
         {
-          name: "Health Record Entry",
+          name: "Health Record Types",
           searchResultKey: "nodeShape",
           visible: true
         },
         {
-          name: "Property",
+          name: "Properties",
           searchResultKey: "property",
+          visible: true
+        }
+      ],
+      infoActiveTab: "Summary",
+      infoTabs: [
+        {
+          name: "Summary",
+          visible: true
+        },
+        {
+          name: "Definition",
           visible: true
         }
       ],
@@ -153,7 +260,7 @@ export default defineComponent({
       tabs: [
         {
           name: "Browse",
-          visible: true
+          visible: false
         },
         {
           name: "Add",
@@ -169,7 +276,7 @@ export default defineComponent({
           // }
         },
         {
-          name: "Browse",
+          name: "Info",
           visible: false
         }
       ]

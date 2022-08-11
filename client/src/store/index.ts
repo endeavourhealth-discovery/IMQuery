@@ -202,36 +202,47 @@ export default createStore({
 
     },
     async updateActiveProperty(state, payload) {
-      switch (payload.action) {
-
-        case "delete":
-
-        case "add":
-
-        case "update":
-          const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
-          const cloneQuery = _.cloneDeep(activeQuery);
-
-          //updates property
-          const propertyPath = state.activeClausePath + "." + payload.propertyPath;
-          _.set(cloneQuery, propertyPath, payload.data);
-          const activeClause = _.get(cloneQuery, state.activeClausePath);
+      const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+      let newQuery = _.cloneDeep(activeQuery);
 
 
-          //updates summary after proeprty is edited
-          const path = state.activeClausePath + ".displayText";
-          let displayText: any = await QueryService.summariseClause(activeClause)
-          displayText = Array.isArray(displayText) ? displayText.join(" ") : displayText;
-          console.log("displayText updated", displayText)
-          _.set(cloneQuery, path, displayText);
-
-
-
-          state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
-
-
-          break;
+      if (payload.action == "delete") {
       }
+      else if (payload.action == "addTo") {
+        let activePath = `${state.activeClausePath}.${state.activePropertyPath}`;
+        let { path, index } = QueryUtils.splitPath(activePath);
+        console.log("path index", path, index);
+
+        let parentArray = _.get(newQuery, path);
+        parentArray.splice(index + 1, 0, payload.data);
+        state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+
+
+        const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
+        const newIndex = parseInt(propertyIndex) + 1;
+        state.activePropertyPath = propertyPath + `[${newIndex}]`;
+      }
+      else if (payload.action == "update") {
+        const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
+        const cloneQuery = _.cloneDeep(activeQuery);
+
+        //updates property
+        const propertyPath = state.activeClausePath + "." + payload.propertyPath;
+        _.set(cloneQuery, propertyPath, payload.data);
+        const activeClause = _.get(cloneQuery, state.activeClausePath);
+
+
+        //updates summary after proeprty is edited
+        const path = state.activeClausePath + ".displayText";
+        let displayText: any = await QueryService.summariseClause(activeClause)
+        displayText = Array.isArray(displayText) ? displayText.join(" ") : displayText;
+        console.log("displayText updated", displayText)
+        _.set(cloneQuery, path, displayText);
+
+        state.queryBuilder.dataSet.set(state.activeQueryId, cloneQuery);
+
+      }
+
     },
     updateActiveClause(state, payload) {
       // console.log("state update updateActiveClause", payload)

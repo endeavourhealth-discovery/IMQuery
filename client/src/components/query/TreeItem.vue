@@ -88,40 +88,24 @@
         :updateTarget="['property', 'view', 'entityType']"
       >
         <template #section>
-          <TreeItem
-            :name="'Any Entry'"
-            :edit="edit"
-            v-if="definition?.property"
-            :data="data"
-            :path="path"
-            type="section"
-            :propertyPath="'property'"
-            :updateTarget="['property', 'view', 'property']"
-          >
-            <template #property>
-              <div v-for="(prop, propIndex) in definition?.property" :key="prop['@id']" class="group ">
-                <!-- <ButtonCRUD v-if="edit" @click="true" :type="'add'"> </ButtonCRUD> -->
-                <!-- <ButtonCRUD v-if="edit" @click="onPropertyDelete(path, propertyPath, propIndex)" :type="'delete'"> </ButtonCRUD> -->
-                <Property
-                  class="pl10  relative z-10 rounded-md"
-                  :modelValue="prop"
-                  notExist=""
-                  :data="data"
-                  :path="path"
-                  :propertyPath="'property'"
-                  :propertyIndex="propIndex"
-                >
-                </Property>
-                <!-- <div
-                  v-if="edit"
-                  @click="onPropertyDelete(path, 'property', propIndex)"
-                  class=" group-hover:inline absolute rounded-full hover:bg-red-800 text-red-500 hover:text-white hidden -translate-y-10 -right-10 z-20"
-                >
-                  <NodeIcon class="m-2" strokewidth="3" width="20" height="20" icon="x" />
-                </div> -->
-              </div>
-            </template>
-          </TreeItem>
+          <div v-for="(prop, propIndex) in definition?.property" :key="prop['@id']" class="group ">
+            <selector type="add-property" :updateTarget="['property', 'add', `property[${propIndex}]`]">
+              <ButtonCRUD v-if="edit" :type="'add'"> </ButtonCRUD>
+            </selector>
+            <!-- <ButtonCRUD v-if="edit" @click="onPropertyView(path, 'testProperty', propIndex)" :type="'view'"> </ButtonCRUD> -->
+            <!-- <ButtonCRUD v-if="edit" @click="onPropertyEdit(path, 'testProperty', propIndex)" :type="'edit'"> </ButtonCRUD> -->
+            <ButtonCRUD v-if="edit" @click="onPropertyDelete(path, 'testProperty', propIndex)" :type="'delete'"> </ButtonCRUD>
+            <Property
+              class="-left-1  relative z-10 rounded-md"
+              :modelValue="prop"
+              notExist=""
+              :data="data"
+              :path="path"
+              :propertyPath="'property'"
+              :propertyIndex="propIndex"
+            >
+            </Property>
+          </div>
 
           <TreeItem
             :name="getOrderLimitLabel()"
@@ -135,8 +119,13 @@
           >
             <template #property>
               <div v-for="(prop, propIndex) in definition?.testProperty" :key="prop['@id']" class="group">
-                <!-- <ButtonCRUD v-if="edit" @click="true" :type="'add'"> </ButtonCRUD> -->
-                <!-- <ButtonCRUD v-if="edit" @click="onPropertyDelete(path, 'testProperty', propIndex)" :type="'delete'"> </ButtonCRUD> -->
+                <selector type="add-property" :updateTarget="['property', 'add', `testProperty[${propIndex}]`]">
+                  <ButtonCRUD v-if="edit" :type="'add'"> </ButtonCRUD>
+                </selector>
+
+                <!-- <ButtonCRUD v-if="edit" @click="onPropertyView(path, 'testProperty', propIndex)" :type="'view'"> </ButtonCRUD> -->
+                <!-- <ButtonCRUD v-if="edit" @click="onPropertyEdit(path, 'testProperty', propIndex)" :type="'edit'"> </ButtonCRUD> -->
+                <ButtonCRUD v-if="edit" @click="onPropertyDelete(path, 'testProperty', propIndex)" :type="'delete'"> </ButtonCRUD>
 
                 <Property
                   class="pl10 relative z-10 rounded-md"
@@ -171,7 +160,8 @@ import { defineComponent } from "vue";
 import _ from "lodash";
 import NodeIcon from "./NodeIcon.vue";
 import Property from "./Property.vue";
-// import ButtonCRUD from "./ButtonCRUD.vue";
+import ButtonCRUD from "./ButtonCRUD.vue";
+import Selector from "./Selector.vue";
 
 export default defineComponent({
   name: "TreeItem",
@@ -198,8 +188,9 @@ export default defineComponent({
   emits: ["update:modelValue"],
   components: {
     NodeIcon,
-    Property
-    //  ButtonCRUD
+    Property,
+    ButtonCRUD,
+    Selector
   },
   methods: {
     commitTarget(targetType: string, targetAction: string, propertyPath: string) {
@@ -243,7 +234,7 @@ export default defineComponent({
       ];
     },
     onPropertyDelete(clausePath, propertyPath, index) {
-      alert("dle");
+      // alert("dle");
       let payload = { action: "deleteClause", clausePath: clausePath, propertyPath: propertyPath, index: index };
       this.$store.commit("updateProperty", payload);
       this.emitter.emit("update-imdefinition", payload.clausePath);
@@ -263,8 +254,8 @@ export default defineComponent({
   },
   data() {
     return {
-      index: this.currentIndex || 0,
-      definition: this.modelValue ? this.modelValue : _.get(this.data, this.path)
+      index: this.currentIndex || 0
+      // definition: this.modelValue ? this.modelValue : _.get(this.data, this.path)
     };
   },
   watch: {
@@ -278,7 +269,24 @@ export default defineComponent({
       this.definition = this.modelValue ? this.modelValue : _.get(this.data, newValue);
     }
   },
-
+  computed: {
+    queryDefinition: {
+      get(): any {
+        return this.$store.state.queryBuilder.dataSet.get(this.$store.state.activeQueryId);
+      },
+      set(value: any): void {
+        return;
+      }
+    },
+    definition: {
+      get(): any {
+        return this.modelValue ? this.modelValue : _.get(this.queryDefinition, this.path);
+      },
+      set(value: any): void {
+        return;
+      }
+    }
+  }
 });
 </script>
 

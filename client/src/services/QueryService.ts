@@ -3,7 +3,7 @@ import _ from "lodash"
 import jp from 'jsonpath';
 import { TextGenerator } from "../models/text/TextGenerator";
 import { IM, RDF, RDFS } from "../vocabulary"
-import { OntologyUtils, ManipulationUtils, SparqlSnippets } from '../helpers/query'
+import { OntologyUtils, ManipulationUtils, SparqlSnippets, ResponseProcessor} from '../helpers/query'
 import { select } from "d3";
 import { resourceLimits } from "worker_threads";
 const { onlyUnique, excludedPaths, entitiesFromPredicates, isTTIriRef } = ManipulationUtils;
@@ -177,7 +177,40 @@ export default class QueryService {
 
 
 
+  public static async queryIM(queryTemplate?: string, args?: any): Promise<AxiosResponse<any>> {
+    const snippetFunction = querySnippets[queryTemplate];
+    const data = snippetFunction(args);
 
+    // console.log("queryIM querySnippet", data);
+    // var data = JSON.stringify(querySnippets.datamodel_plus);   
+
+    var config = {
+      method: 'post',
+      url: `https://dev.endhealth.co.uk/imapi/api/query/public/queryIM`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    console.log("getDatamodel config", config)
+
+
+    let res = await axios(config as any)
+      .then(function (response) {
+        console.log("queryIM response", response);
+        const rs = ResponseProcessor.process(queryTemplate, response.data);
+        return rs;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+    console.log("axios response", res);
+    return res;
+
+  }
   //get all datamodel entities
   //
   public static async getDatamodel(searchString: string, limit: number): Promise<AxiosResponse<any>> {
