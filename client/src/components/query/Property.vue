@@ -29,23 +29,23 @@
     </div>
 
     <selector v-else type="edit-property" :updateTarget="['property-@id', 'view', `${propertyPath}[${propertyIndex}]`]">
-      <div class="property-name font-normal hover:underline">
+      <div class="property-name font-normal">
         {{ definition?.name }}
       </div>
     </selector>
 
-    <div v-if="definition?.inSet" class="flex-col">
-      <div v-for="(set, setIndex) in definition?.inSet" :key="set['@id']" class="relative">
-        <ButtonCRUD @click="onAddInSet(`${propertyPath}[${propertyIndex}].inSet[${setIndex}]`)" :type="'add'"> </ButtonCRUD>
-        <ButtonCRUD @click="onDeleteInSet(`${propertyPath}[${propertyIndex}].inSet[${setIndex}]`)" :type="'delete'"> </ButtonCRUD>
+    <div v-if="definition?.inSet" class="flex-col space-y-5">
+      <div v-for="(set, setIndex) in definition?.inSet" :key="set['@id']" class="relative group">
+        <ButtonCRUD v-if="edit" @click="onAddSet(`${propertyPath}[${propertyIndex}].inSet[${setIndex}]`)" :type="'add'"> </ButtonCRUD>
+        <ButtonCRUD v-if="edit" @click="onDeleteSet(`${propertyPath}[${propertyIndex}].inSet[${setIndex}]`)" :type="'delete'"> </ButtonCRUD>
         <selector
           :hideSelector="true"
           type="edit-property"
           :updateTarget="['property-inSet', set?.name == '' ? 'update' : 'view', `${propertyPath}[${propertyIndex}].inSet[${setIndex}]`]"
         >
-          <div class="ml10 flex ">
+          <div class="ml10 flex">
             <NodeIcon
-              :class="'ml10 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
+              :class="'mr-2 arrow-right' + [notExist ? ' text-red-700' : ' text-green-700']"
               strokewidth="3"
               width="14"
               height="14"
@@ -54,23 +54,12 @@
             <template v-if="set?.name == ''">
               <div class="outline-none w-full min-w-[400px] overflow-hidden resize-none">
                 <input
-                  :value="searchString"
+                  :ref="`input-concept${setIndex}`"
                   @input="onInput($event, `${propertyPath}[${propertyIndex}].inSet[${setIndex}]`)"
-                  class="outline-none pb-4 placeholder-gray-500 text-red-700 focus:text-blue-700 font-bold text-2xl w-full max-h-[30px] border-b-2 border-b-transparent focus:border-b-blue-700"
+                  class="outline-none pb-2 placeholder-gray-500 text-red-700 focus:text-blue-700 font-bold text-xl w-full max-h-[30px] border-b-2 border-b-transparent focus:border-b-blue-700"
                   :placeholder="'Type to search for Concept or Concept Set'"
                 />
               </div>
-              <!-- <SearchInput :maxResults="10" :allow="['preview', 'create', 'insert', '']" label="Concept or Concept Set" v-model="searchString" type="underline"> -->
-              <!-- </SearchInput> -->
-              <!-- <SearchInput
-                class="w-full"
-                :maxResults="2"
-                :allow="['preview', 'create', 'insert', '']"
-                label="Property or Health Record Entry"
-                v-model="searchString"
-                type="underline"
-              >
-              </SearchInput> -->
             </template>
             <template v-else>{{ set?.name }}</template>
           </div>
@@ -97,7 +86,7 @@
           <selector type="edit-property" :updateTarget="['property-value', 'view', `${propertyPath}[${propertyIndex}]`]">
             {{  definition?.function?.argument[0].valueData?.toLowerCase()}}
           </selector>
-          <span class="relative -left-[5px]">{{ getText("s") }}</span>
+          <span class="relative -left-[5px]"></span>
         </div>
       </div>
     </div>
@@ -133,15 +122,22 @@ import _ from "lodash";
 
 export default defineComponent({
   name: "Property",
-  props: ["modelValue", "notExist", "path", "propertyPath", "propertyIndex"],
+  props: ["edit", "modelValue", "notExist", "path", "propertyPath", "propertyIndex"],
   components: { NodeIcon, Selector, ButtonCRUD },
   data() {
     return {
-      searchString: "New",
+      searchString: "",
       showSearchInput: false,
       searchData: {}
       // definition: this.modelValue?.property && this.modelValue?.property?.length > 0 ? this.modelValue.property[0] : this.modelValue
     };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      try {
+        (this.$refs["input-concept"] as any).focus();
+      } catch (error) {}
+    });
   },
   watch: {
     path(oldValue, newValue) {
@@ -159,7 +155,6 @@ export default defineComponent({
       //###todo: instead of debounce only start searching after the user stops typing for >1s (or so) see https://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
       const search = _.debounce(() => {
         QueryService.searchConceptSet(searchString)
-          // await SearchService.searchAll(searchString)
           .then((res: any) => {
             console.log("### res", res);
             this.searchData = res.data;
@@ -174,22 +169,21 @@ export default defineComponent({
 
       search();
     },
-    onDeleteInSet(path: string) {
+    onDeleteSet(path: string) {
       this.$store.commit("updateActiveProperty", { action: "deleteInSet", propertyPath: path });
+      if (this?.definition?.inSet?.length == 0) {
+        this.onAddSet(path, 0);
+      }
     },
-    onAddInSet(path: string) {
+    onAddSet(path: string, setIndex: number) {
       this.$store.commit("updateActiveProperty", { action: "newInSet", propertyPath: path });
+      // (this.$refs[`input-concept${setIndex}`] as any).focus();
     },
     getText(type: string): string {
       if (type == "s") {
         return _.get(this.definition, "function.argument[0].valueData") && _.get(this.definition, "value.valueData") > 1 ? "s" : "";
       }
       return "";
-    },
-
-    onClick(TTIriRef: any): void {
-      // console.log("ref", this.$refs["overlay-inset"] as any);
-      // this.viewEntity(TTIriRef);
     },
     setDefinition(definition: any) {
       this.definition = definition;

@@ -362,8 +362,9 @@ export default defineComponent({
       console.log("newClause", newClause);
       return _.cloneDeep(newClause);
     },
-    getToolTip(path: string): string {
-      return `<span style="margin-top: 100px; font-size: 14px; font-weight: bold; ">${path}</span>`;
+    getToolTip(path: string): any {
+      return path;
+      // return `<span style="margin-top: 100px; font-size: 14px; font-weight: bold;">${path}</span>`;
     },
     onPreview(path: any): void {
       this.isHover = true;
@@ -481,6 +482,8 @@ export default defineComponent({
         return "Property";
       } else if (QueryUtils.isQuery(entity)) {
         return "Query";
+      } else if (QueryUtils.isConceptSet(entity)) {
+        return "Concept Set";
       } else {
         return null;
       }

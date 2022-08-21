@@ -187,14 +187,9 @@ export default createStore({
       console.log("updateProperty", payload);
 
       if (payload.action = "deleteClause") {
-
-        if (payload?.propertyPath == "property") {
-          let currentProperty = _.get(newQuery, `${payload.clausePath}.property`)
-          console.log("currentProperty", _.cloneDeep(currentProperty)[payload.index]);
-          currentProperty.splice(payload.index, 1);
-
-        }
-
+        let currentProperty = _.get(newQuery, `${payload.clausePath}.property`)
+        console.log("currentProperty", _.cloneDeep(currentProperty)[payload.index]);
+        currentProperty.splice(payload.index, 1);
       }
 
       state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
@@ -235,7 +230,6 @@ export default createStore({
 
         // const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
         // const newIndex = parseInt(propertyIndex) + 1;
-        // state.activePropertyPath = payload.propertyPath;
       }
       else if (payload.action == "newInSet") {
         let activePath = `${state.activeClausePath}.${payload.propertyPath}`;

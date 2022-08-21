@@ -120,8 +120,6 @@
 
     <!-- searchable dropdown  -->
     <template v-else-if="type == 'add-property'">
-      <!-- <div @click="fetchMembers('urn:uuid:8ea62af8-2c89-4df6-aff6-fa5f696755e5')">Click</div> -->
-
       <Listbox
         v-model="newProperty"
         @change="onAddProperty"
@@ -171,7 +169,7 @@ export default defineComponent({
     },
     onAddProperty(event: any): any {
       // this.onToggle();
-      console.log("event", event);
+      // console.log("event", event);
       const path = this.updateTarget[2];
       const currentProperties = _.get(this.activeClause, path);
       const newValue = event?.value;
