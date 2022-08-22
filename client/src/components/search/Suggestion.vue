@@ -189,6 +189,48 @@
       <!-- Preview  -->
     </div>
   </template>
+  <template v-else-if="isConcept(result)">
+    <div
+      class="result cursor-pointer z-10 hover:z-30 bg-white #hover:bg-white relative  hover:scale-105  my-4 group transition duration-300 ease-in-out appearance-none  px-4 py-3  border border-transparent border-gray-200 hover:border-gray-300 hover:shadow-md focus:border-gray-400 placeholder-gray-400 rounded-md focus:outline-none dark:  dark:bg-gradient-to-r dark:border-transparent #dark:from-blue-700 #dark:to-sky-600 "
+      @mouseenter="onEnter()"
+      @mouseleave="onLeave()"
+    >
+      <div class="result-content relative">
+        <div class="invisible group-hover:visible text-lg  flex row-col items-center">
+          <div class="inline text-gray-500 dark:text-gray-300">
+            {{ result.iri }}
+          </div>
+        </div>
+        <div class="text-3xl text-blue-600 dark:text-white  font-semibold">
+          {{ result.name }}
+          <div v-if="getTypeLabel(result)" class="inline mr-2 text-xl text-gray-700 dark:text-gray-400 font-semibold border border-gray-400 px-2 rounded-md">
+            {{ getTypeLabel(result) }}
+          </div>
+          <div
+            @click="onUpdateConcept(result)"
+            class="#bg-blue-600 group-hover:visible invisible text-blue-600  hover:bg-blue-200 inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+          >
+            <NodeIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="plus" />
+            Select
+          </div>
+          <div
+            @click="viewEntity(result)"
+            class="#bg-blue-600 group-hover:visible invisible text-blue-600  hover:underline inline-flex  rounded-full relative  ml-2 h-12 pl-1 pr-4 pt-1  text-2xl font-semibold"
+          >
+            <NodeIcon class="mx-2 mt-2" strokewidth="3" width="13" height="13" icon="external_link" />
+            View
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview  -->
+      <div v-if="isHover" class="mt-4 relative ">
+        <!-- <div class="text-gray-500 text-xl mt-4 mb-2 font-semibold #absolute top-0 right-4">Preview</div> -->
+        <!-- <SecondaryTree :conceptIri="'http://endhealth.info/im#Observation'" class="left-hierarchy" /> -->
+      </div>
+      <!-- Preview  -->
+    </div>
+  </template>
 </template>
 
 <script lang="ts">
@@ -205,10 +247,11 @@ import SetDefinition from "@/components/query/SetDefinition.vue";
 import IMDefinition from "../query/IMDefinition.vue";
 
 import Graph from "@/logic/Graph";
+import SecondaryTree from "im-library";
 
 export default defineComponent({
   name: "Sugggestion",
-  components: { TransitionRoot, NodeIcon, IMDefinition, SetDefinition },
+  components: { TransitionRoot, NodeIcon, IMDefinition, SetDefinition, SecondaryTree },
   emits: ["openItem", "updatePreview"],
   props: ["result", "pathFilter", "showDetails", "updateActiveClause", "mainEntity"],
   data() {
@@ -253,7 +296,9 @@ export default defineComponent({
     isConceptSet(entity: any): boolean {
       return QueryUtils.isConceptSet(entity);
     },
-
+    isConcept(entity: any): boolean {
+      return QueryUtils.isConcept(entity);
+    },
     nameFromIri(iri: string): string {
       return iri != ""
         ? iri
@@ -264,6 +309,9 @@ export default defineComponent({
     },
     onUpdateInSet(): void {
       this.$store.commit("updateActiveProperty", { action: "updateInSet", data: this.result });
+    },
+    onUpdateConcept(): void {
+      this.$store.commit("updateNewConceptSet", this.result);
     },
     onAddClause(): void {
       this.emitter.emit("reset-searchinput", true);
@@ -484,6 +532,8 @@ export default defineComponent({
         return "Query";
       } else if (QueryUtils.isConceptSet(entity)) {
         return "Concept Set";
+      } else if (QueryUtils.isConcept(entity)) {
+        return "Concept";
       } else {
         return null;
       }

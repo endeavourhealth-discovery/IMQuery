@@ -83,7 +83,7 @@
 
             <Property
               :edit="edit"
-              class="-left-1  relative z-10 rounded-md"
+              class="-left-1 relative z-10 rounded-md"
               :modelValue="prop"
               notExist=""
               :data="data"

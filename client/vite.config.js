@@ -14,7 +14,16 @@ export default defineConfig({
     alias: { "./runtimeConfig": "./runtimeConfig.browser", "@": path.resolve(__dirname, "./src") }
   },
   server: {
-    port: 8082
+    port: 8082,
+    proxy: {
+      "/imapi": {
+        target: "https://dev.endhealth.co.uk/imapi/",
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+        rewrite: p => p.replace(/^\/imapi/, "")
+      }
+    }
   },
   test: {
     globals: true,
@@ -24,8 +33,8 @@ export default defineConfig({
         url: "http://localhost"
       }
     }
-  },
-  
+  }
+
   // optimizeDeps: {
   //   exclude: ['/query/']
   // },

@@ -11,7 +11,6 @@
       leave-from="opacity-100 rotate-0 scale-100"
       leave-to="opacity-0 scale-50 "
     >
-
       <!-- <div class="text-gray-700 text-lg font-semibold">Suggestions</div> -->
 
       <template v-for="(result, resultIndex) in results" :key="result.iri">

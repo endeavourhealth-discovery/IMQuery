@@ -415,11 +415,9 @@ export default defineComponent({
     },
     propertyMeta: {
       get(): any {
-        // return "";
         const entityIri = QueryUtils.toIri(this.activeClause?.entityType["@id"]);
         const propertyIri = QueryUtils.toIri(this.activeProperty["@id"]);
         const propertyMeta = this.$store.state.datamodelGraph.getPropertyMeta(propertyIri, entityIri);
-        // console.log("propertyMeta", _.cloneDeep(propertyMeta));
         return propertyMeta;
       },
       set(val: any): void {}

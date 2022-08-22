@@ -115,7 +115,7 @@ export default createStore({
     ],
     activeTabName: "Home", //Options #Home #SearchResults #View #Explore
     activeQueryCategory: "definition", //#mainEntity #definition  #output #sources #sql ,
-
+    newConceptSet: [],
   },
   mutations: {
     updateActiveViewerTab(state, payload) {
@@ -196,6 +196,9 @@ export default createStore({
       // alert("emit")
 
     },
+    removeConcept(state, payload) {
+      state.newConceptSet = state.newConceptSet.filter(concept => concept.iri != payload.iri);
+    },
     async updateActiveProperty(state, payload) {
       const activeQuery = state.queryBuilder.dataSet.get(state.activeQueryId);
       let newQuery = _.cloneDeep(activeQuery);
@@ -227,6 +230,26 @@ export default createStore({
         parentArray.splice(index, 1, newItem);
         state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
 
+
+        // const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
+        // const newIndex = parseInt(propertyIndex) + 1;
+      }
+      else if (payload.action == "saveNewInSet") {
+        let activePath = `${state.activeClausePath}.${state.activePropertyPath}`;
+        let { path, index } = QueryUtils.splitPath(activePath);
+
+        const newItem = {
+          "@id": `urn:uuid:${v4()}`,
+          "name": payload.data,
+        }
+        console.log("newItem", newItem);
+
+        let parentArray = _.get(newQuery, path);
+        console.log("parentArray", parentArray);
+        parentArray.splice(index, 1, newItem);
+        state.queryBuilder.dataSet.set(state.activeQueryId, newQuery);
+
+        state.newConceptSet = [];
 
         // const { path: propertyPath, index: propertyIndex } = QueryUtils.splitPath(state.activePropertyPath);
         // const newIndex = parseInt(propertyIndex) + 1;
@@ -641,6 +664,9 @@ export default createStore({
 
 
 
+    },
+    updateNewConceptSet(state, payload): void {
+      state.newConceptSet.push(payload);
     },
     nextQueryCategory(state): void {
       switch (state.activeQueryCategory) {

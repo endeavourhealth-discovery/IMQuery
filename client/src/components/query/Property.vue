@@ -154,7 +154,7 @@ export default defineComponent({
     async search(searchString: string, path?: string): Promise<any> {
       //###todo: instead of debounce only start searching after the user stops typing for >1s (or so) see https://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
       const search = _.debounce(() => {
-        QueryService.searchConceptSet(searchString)
+        QueryService.searchConcepts(searchString)
           .then((res: any) => {
             console.log("### res", res);
             this.searchData = res.data;

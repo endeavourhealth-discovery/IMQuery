@@ -47,7 +47,22 @@
 
     <!-- header   -->
 
-    <div v-if="activeTab == 'Add'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
+    <div v-if="activeTab == 'Add'" class="#bg-gray-50 px-2 rounded-lg h-full w-full relative">
+      <div v-if="newConceptSet.length > 0" class="relative z-100  bg-gray-100 rounded-md">
+        <div class="mb-2 ml-2 text-gray-500 text-xl font-bold flex items-center">
+          New ConceptSet Name:
+          <input v-model="newConceptName" class="ml-10 outline-none text-xl text-black max-h-6 bg-transparent" placeholder="name" />
+          <div class="mb-2 ml-2 text-white bg-blue-600 hover:bg-blue-800 cursor-pointer p-2 rounded-md text-xl font-bold" @click="onSaveConceptSet()">
+            Save & Add
+          </div>
+        </div>
+        <div class="flex space-x-2 cursor-pointer">
+          <div v-for="concept in newConceptSet" v-tooltip.bottom="concept.name" :key="concept.iri" class="flex bg-gray-300 rounded-md p-2 text-xl font-semibold">
+            {{ concept.name }}
+            <NodeIcon @click="onRemoveConcept(concept.iri)" class=" ml-3 text-red-700" strokewidth="3" width="15" height="15" icon="x"></NodeIcon>
+          </div>
+        </div>
+      </div>
       <Suggestions
         v-if="searchResult?.results?.length > 0"
         :results="getFilteredResults(searchResult)"
@@ -59,7 +74,7 @@
       />
     </div>
     <div v-else-if="activeTab == 'Browse'" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
-      <!-- <SecondaryTree :conceptIri="'http://endhealth.info/im#Observation'" class="left-hierarchy" /> -->
+      <SecondaryTree conceptIri="http://endhealth.info/im#Observation" class="left-hierarchy" />
     </div>
     <div v-else-if="activeTab == 'Info' && activePropertyInSetIri" class="#bg-gray-50 px-2 rounded-lg h-full w-full">
       <div v-if="infoActiveTab == 'Summary'">
@@ -79,23 +94,32 @@ import Suggestions from "@/components/search/Suggestions.vue";
 import HeroIcon from "@/components/general/HeroIcon.vue";
 import Summary from "@/components/query/Summary.vue";
 import SetDefinition from "@/components/query/SetDefinition.vue";
-// import SecondaryTree from "im-library";
+import SecondaryTree from "im-library";
 import QueryService from "@/services/QueryService";
 import _ from "lodash";
+import NodeIcon from "@/components/query/NodeIcon.vue";
 
 export default defineComponent({
   name: "QueryBuilder",
   props: ["mainEntity", "searchResults", "searchString", "target", "modelValue"],
   emits: ["openItem", "updateActiveClause"],
-
   components: {
     Suggestions,
     HeroIcon,
     Summary,
-    SetDefinition
-    // SecondaryTree
+    SetDefinition,
+    SecondaryTree,
+    NodeIcon
   },
   computed: {
+    newConceptSet: {
+      get(): any {
+        return this.$store.state.newConceptSet;
+      },
+      set(val: any): void {
+        // this.$store.commit("setNewConceptSet", val);
+      }
+    },
     activeClausePath: {
       get(): any {
         return this.$store.state.activeClausePath;
@@ -204,6 +228,9 @@ export default defineComponent({
     });
   },
   methods: {
+    onRemoveConcept(iri: any): void {
+      this.$store.commit("removeConcept", { iri: iri });
+    },
     updateActiveClause(value: any) {
       this.$emit("updateActiveClause", value);
     },
@@ -216,6 +243,9 @@ export default defineComponent({
     onInput(event: any): void {
       // this.search(event.target.value);
       // this.$emit("update:modelValue", event.target.value);
+    },
+    onSaveConceptSet(): void {
+      this.$store.commit("updateActiveProperty", { action: "saveNewInSet", data: this.newConceptName });
     }
     // showAdd(): boolean {
     //   return this.searchResult?.results?.length > 0 ? true : false;
@@ -223,6 +253,7 @@ export default defineComponent({
   },
   data() {
     return {
+      newConceptName: "",
       focus: false,
       searchData: {},
       showDetails: false,
@@ -256,6 +287,11 @@ export default defineComponent({
         {
           name: "Concept Set",
           searchResultKey: "conceptSet",
+          visible: true
+        },
+        {
+          name: "Concepts",
+          searchResultKey: "concept",
           visible: true
         }
       ],

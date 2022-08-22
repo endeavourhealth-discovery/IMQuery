@@ -27,13 +27,16 @@ export default class QueryService {
   }
 
 
-  public static async searchConceptSet(searchString: string): Promise<any> {
+  public static async searchConcepts(searchString: string): Promise<any> {
     try {
       const _requestBody = {
         termFilter: searchString,
         statusFilter: [],
-        typeFilter: ["http://endhealth.info/im#ConceptSet"],
-        schemeFilter: ["http://endhealth.info/im#", "http://endhealth.info/ceg/qry#"],
+        typeFilter: ["http://endhealth.info/im#ConceptSet", "http://endhealth.info/im#Concept"],
+        schemeFilter: [
+          // "http://endhealth.info/im#",
+          // "http://endhealth.info/ceg/qry#"
+        ],
         sortBy: 0,
         page: 1,
         size: 20

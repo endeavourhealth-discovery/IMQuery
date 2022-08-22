@@ -137,7 +137,7 @@ export default class QueryUtils {
     }
     public static isConcept(entity: any): boolean {
         const entityType = entity["entityType"];
-        let iris = ["im:concept",];
+        let iris = ["im:Concept",];
         iris.forEach(shape => iris.push(QueryUtils.toUrl(shape)));
 
         if (entityType.some((entity: any) => iris.includes(entity["@id"]))) {
